@@ -13,6 +13,8 @@ export var move_time := 0.4
 
 var can_move := true
 
+var tile := 100.0
+
 func _ready():
 	pass
 
@@ -40,14 +42,14 @@ func _physics_process(delta):
 	collision_shape.shape.extents = Vector2(49, 49)
 	
 	# on floor
-	is_floor = test_move(transform, rot(Vector2(0, 100)))
+	is_floor = test_move(transform, rot(Vector2(0, tile)))
 	
 	# move
 	if !is_floor:
 		move_clock -= delta
 		if move_clock < 0:
 			move_clock = move_time
-			move_and_collide(rot(Vector2(0, 100)))
+			move_and_collide(rot(Vector2(0, tile)))
 			sprite.position -= position - last_pos
 			
 			for i in standing_area.get_overlapping_bodies():
