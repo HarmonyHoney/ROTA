@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://media/image/rect-100.png" type="Texture" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://media/image/box.png" type="Texture" id=5]
 [ext_resource path="res://src/Box.gd" type="Script" id=6]
 
-[sub_resource type="ConvexPolygonShape2D" id=5]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 
 [sub_resource type="TileSet" id=2]
@@ -21,28 +21,34 @@ points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 5 )
+0/shape = SubResource( 1 )
 0/shape_one_way = false
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 40, 40 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 50, 50 )
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 15, 15 )
 
 [sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 2, 15 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 50, 50 )
+
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 50, 60 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 60, 50 )
 
 [node name="Node2D" type="Node2D"]
@@ -96,7 +102,39 @@ scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 3 )
+
+[node name="HitArea" type="Area2D" parent="Player"]
+position = Vector2( 50, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HitArea"]
 shape = SubResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="Player/HitArea/CollisionShape2D"]
+margin_left = -15.0
+margin_top = -15.0
+margin_right = 15.0
+margin_bottom = 15.0
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PushArea" type="Area2D" parent="Player"]
+position = Vector2( 40, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PushArea"]
+shape = SubResource( 8 )
+
+[node name="ColorRect" type="ColorRect" parent="Player/PushArea/CollisionShape2D"]
+margin_left = -2.0
+margin_top = -15.0
+margin_right = 2.0
+margin_bottom = 15.0
+color = Color( 0, 1, 0.345098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Box" type="KinematicBody2D" parent="."]
 position = Vector2( 850, 150 )
@@ -107,12 +145,14 @@ scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Box"]
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="StandingArea" type="Area2D" parent="Box"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Box/StandingArea"]
-shape = SubResource( 8 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Box/StandingArea"]
-shape = SubResource( 9 )
+shape = SubResource( 6 )
+
+[connection signal="body_entered" from="Player/PushArea" to="Player" method="_on_PushArea_body_entered"]

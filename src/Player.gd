@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 var velocity := Vector2.ZERO
 var move_velocity := Vector2.ZERO
@@ -13,9 +14,12 @@ var jump_time := 0.5
 export var dir := 0
 
 onready var sprite : Sprite = $Sprite
+onready var hit_area : Area2D = $HitArea
+onready var push_area : Area2D = $PushArea
 
 var is_floor := false
 var has_jumped := true
+var dir_x := 1
 
 var label : Label
 var readout = []
@@ -38,11 +42,16 @@ func spin(right := false):
 	
 	sprite.rotation_degrees = dir * 90
 	camera.target_angle += 90 if right else -90
+	update_areas()
+
+func update_areas():
+	hit_area.position = rot(Vector2(50 * dir_x, 0))
+	push_area.position = rot(Vector2(40 * dir_x, 0))
+	push_area.rotation_degrees = dir * 90
 
 func _input(event):
 	if event.is_action_pressed("reset"):
 		get_tree().reload_current_scene()
-
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
@@ -53,6 +62,10 @@ func _physics_process(delta):
 	
 	# input
 	var joy = Vector2(btn.d("right") - btn.d("left"), btn.d("down") - btn.d("up"))
+	
+	if joy.x != 0:
+		dir_x = joy.x
+		update_areas()
 	
 	# on floor
 	is_floor = test_move(transform, rot(Vector2.DOWN))
@@ -83,10 +96,20 @@ func _physics_process(delta):
 		if test_move(transform, rot(Vector2(0, -1))):
 			jump_clock = 0
 	
+	# hit box
+	if btn.p("action"):
+		for i in hit_area.get_overlapping_bodies():
+			if i is Box:
+				i.set_dir(dir - dir_x)
+				i.move_clock = 0
+				break
 	
 	# apply movement
 	move_velocity = move_and_slide(rot(velocity))
 	velocity = rot(move_velocity, true)
+	
+	
+	
 	
 	# camera
 	camera.position = position
@@ -95,8 +118,14 @@ func _physics_process(delta):
 	readout[0] = "dir: " + str(dir)
 	readout[1] = "is_floor: " + str(is_floor)
 	readout[2] = "has_jumped: " + str(has_jumped)
+	readout[3] = "dir_x: " + str(dir_x)
 	
 	label.text = ""
 	for i in readout:
 		label.text += str(i) + "\n"
 	
+
+
+func _on_PushArea_body_entered(body):
+	if is_floor and body is Box:
+		body.push(dir_x == 1)
