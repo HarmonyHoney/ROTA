@@ -31,12 +31,12 @@ func set_dir(arg):
 	
 	sprite.rotation_degrees = dir * 90
 
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.scancode == KEY_Q:
-			set_dir(dir - 1)
-		elif event.scancode == KEY_E:
-			set_dir(dir + 1)
+#func _input(event):
+#	if event is InputEventKey and event.pressed:
+#		if event.scancode == KEY_Q:
+#			set_dir(dir - 1)
+#		elif event.scancode == KEY_E:
+#			set_dir(dir + 1)
 
 func push(right := false):
 	move(Vector2(1 if right else -1, 0))

@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Box",
 "language": "GDScript",
-"path": "res://src/Box.gd"
+"path": "res://src/actor/Box.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://src/Player.gd"
+"path": "res://src/actor/Player.gd"
 } ]
 _global_script_class_icons={
 "Box": "",
@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="gdRota"
-run/main_scene="res://src/Node2D.tscn"
+run/main_scene="res://src/map/0.tscn"
 config/icon="res://icon.png"
 
 [autoload]

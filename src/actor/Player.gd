@@ -21,16 +21,17 @@ var is_floor := false
 var has_jumped := true
 var dir_x := 1
 
-var label : Label
+onready var label : Label = $DebugCanvas/Labels/Label
 var readout = []
 
 var camera : Camera2D
 
 func _ready():
-	label = get_parent().get_node("CanvasLayer/Labels/Label")
 	readout.resize(4)
 	
-	camera = get_parent().get_node("Camera2D")
+	for i in get_tree().get_nodes_in_group("game_camera"):
+		camera = i
+		break
 
 func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
