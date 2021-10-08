@@ -96,6 +96,8 @@ func _physics_process(delta):
 		
 		if test_move(transform, rot(Vector2(0, -1))):
 			jump_clock = 0
+	else:
+		jump_clock = 0
 	
 	# hit box
 	if btn.p("action"):
@@ -109,9 +111,6 @@ func _physics_process(delta):
 	move_velocity = move_and_slide(rot(velocity))
 	velocity = rot(move_velocity, true)
 	
-	
-	
-	
 	# camera
 	camera.position = position
 	
@@ -124,8 +123,6 @@ func _physics_process(delta):
 	label.text = ""
 	for i in readout:
 		label.text += str(i) + "\n"
-	
-
 
 func _on_PushArea_body_entered(body):
 	if is_floor and body is Box:
