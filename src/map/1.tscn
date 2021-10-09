@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/scene/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scene/SolidTileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://media/image/exit.png" type="Texture" id=4]
-[ext_resource path="res://src/actor/Exit.gd" type="Script" id=5]
+[ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=4]
 
 [node name="Node2D" type="Node2D"]
 
@@ -20,12 +19,5 @@ tile_data = PoolIntArray( 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 196611, 0, 0
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 447.272, 148.671 )
 
-[node name="Exit" type="Node2D" parent="Actors" groups=[
-"exit",
-]]
+[node name="Exit" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 450, 600 )
-script = ExtResource( 5 )
-
-[node name="Sprite" type="Sprite" parent="Actors/Exit"]
-scale = Vector2( 0.333, 0.333 )
-texture = ExtResource( 4 )

@@ -16,6 +16,8 @@ export var dir := 0
 onready var sprite : Sprite = $Sprite
 onready var hit_area : Area2D = $HitArea
 onready var push_area : Area2D = $PushArea
+onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
+onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 
 var is_floor := false
 var has_jumped := true
@@ -47,6 +49,7 @@ func spin(right := false):
 
 func update_areas():
 	hit_area.position = rot(Vector2(50 * dir_x, 0))
+	hit_area.rotation_degrees = dir * 90
 	push_area.position = rot(Vector2(40 * dir_x, 0))
 	push_area.rotation_degrees = dir * 90
 
@@ -101,10 +104,15 @@ func _physics_process(delta):
 	
 	# hit box
 	if btn.p("action"):
+		audio_slap.play()
 		for i in hit_area.get_overlapping_bodies():
 			if i is Box:
-				i.set_dir(dir - dir_x)
+				if joy.y != 0:
+					i.set_dir(dir + (0 if joy.y == 1 else 2))
+				else:
+					i.set_dir(dir - dir_x)
 				i.move_clock = 0
+				audio_punch.play()
 				break
 	
 	# apply movement
@@ -125,5 +133,5 @@ func _physics_process(delta):
 		label.text += str(i) + "\n"
 
 func _on_PushArea_body_entered(body):
-	if is_floor and body is Box:
+	if is_floor and body is Box and body.is_floor and body.dir % 2 == dir % 2:
 		body.push(dir_x == 1)

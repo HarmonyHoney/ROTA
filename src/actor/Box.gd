@@ -6,6 +6,7 @@ export var dir := 0 setget set_dir
 onready var sprite : Sprite = $Sprite
 onready var collision_shape : CollisionShape2D = $CollisionShape2D
 onready var standing_area : Area2D = $StandingArea
+onready var audio_push : AudioStreamPlayer2D = $AudioPush
 
 var is_floor := false
 
@@ -40,6 +41,8 @@ func set_dir(arg):
 
 func push(right := false):
 	move(Vector2(1 if right else -1, 0))
+	if position != last_pos:
+		audio_push.play()
 
 func move(vector := Vector2.ZERO):
 	shrink_shape()

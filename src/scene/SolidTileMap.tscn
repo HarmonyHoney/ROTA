@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://media/image/rect-100.png" type="Texture" id=1]
 [ext_resource path="res://src/scene/SolidTileMap.gd" type="Script" id=2]
+[ext_resource path="res://src/scene/AutoTileMap.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
@@ -29,10 +30,10 @@ points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 } ]
 0/z_index = 0
 
-[node name="SolidTileMap" type="TileMap" groups=[
-"tilemap_solid",
-]]
+[node name="SolidTileMap" type="TileMap"]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 100, 100 )
 format = 1
 script = ExtResource( 2 )
+
+[node name="AutoTileMap" parent="." instance=ExtResource( 3 )]

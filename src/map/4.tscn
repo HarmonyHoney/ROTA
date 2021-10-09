@@ -34,4 +34,4 @@ position = Vector2( 550, 150 )
 position = Vector2( 550, 250 )
 
 [node name="Key" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 150, 250 )
+position = Vector2( 750, -250 )
