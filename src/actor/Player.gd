@@ -135,3 +135,8 @@ func _physics_process(delta):
 func _on_PushArea_body_entered(body):
 	if is_floor and body.is_in_group("box") and body.is_floor and body.dir % 2 == dir % 2:
 		body.push(dir_x == 1)
+
+func _on_BodyArea_area_entered(area):
+	if area.get_parent().is_in_group("spike"):
+		print("hit spike")
+		get_tree().reload_current_scene()
