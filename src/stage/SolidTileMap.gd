@@ -1,6 +1,6 @@
 extends TileMap
 
-const auto = preload("res://src/scene/AutoTileMap.tscn")
+const auto = preload("res://src/stage/AutoTileMap.tscn")
 
 func _ready():
 	get_parent().connect("ready", self, "parent_ready")

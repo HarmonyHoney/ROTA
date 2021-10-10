@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://media/image/rect-100.png" type="Texture" id=1]
-[ext_resource path="res://src/scene/SolidTileMap.gd" type="Script" id=2]
+[ext_resource path="res://src/stage/SolidTileMap.gd" type="Script" id=1]
+[ext_resource path="res://media/image/rect-100.png" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 
 [sub_resource type="TileSet" id=2]
 0/name = "rect-100.png 0"
-0/texture = ExtResource( 1 )
+0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 100, 100 )
@@ -33,4 +33,4 @@ points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 tile_set = SubResource( 2 )
 cell_size = Vector2( 100, 100 )
 format = 1
-script = ExtResource( 2 )
+script = ExtResource( 1 )
