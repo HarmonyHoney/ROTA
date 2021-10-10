@@ -1,12 +1,17 @@
 extends TileMap
 
-onready var map = $AutoTileMap
+const auto = preload("res://src/scene/AutoTileMap.tscn")
 
 func _ready():
-	tile_set.tile_set_modulate(0, Color(1, 1, 1, 0))
-	make_tiles()
+	get_parent().connect("ready", self, "parent_ready")
 
-func make_tiles():
+func parent_ready():
+	var map = auto.instance()
+	make_tiles(map)
+	get_parent().add_child(map)
+	visible = false
+
+func make_tiles(map : TileMap):
 	for i in get_used_cells():
 		for v in [Vector2.ZERO, Vector2.RIGHT, Vector2.DOWN, Vector2.ONE]:
 			map.set_cellv((i * 2) + v, 3)
