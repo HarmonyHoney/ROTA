@@ -105,15 +105,15 @@ func _physics_process(delta):
 	# hit box
 	if btn.p("action"):
 		audio_slap.play()
-		for i in hit_area.get_overlapping_bodies():
-			if i is Box:
-				if joy.y != 0:
-					i.set_dir(dir + (0 if joy.y == 1 else 2))
-				else:
-					i.set_dir(dir - dir_x)
-				i.move_clock = 0
+		for i in hit_area.get_overlapping_areas():
+			var o = i.owner
+			if o is Box:
+				o.set_dir(dir + (0 if joy.y == 1 else 2 if joy.y == -1 else -dir_x))
+				o.move_clock = 0
 				audio_punch.play()
 				break
+			
+			print(i.owner.name, "hit")
 	
 	# apply movement
 	move_velocity = move_and_slide(rot(velocity))
@@ -133,5 +133,5 @@ func _physics_process(delta):
 		label.text += str(i) + "\n"
 
 func _on_PushArea_body_entered(body):
-	if is_floor and body is Box and body.is_floor and body.dir % 2 == dir % 2:
+	if is_floor and body.is_in_group("box") and body.is_floor and body.dir % 2 == dir % 2:
 		body.push(dir_x == 1)

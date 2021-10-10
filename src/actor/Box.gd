@@ -3,9 +3,11 @@ class_name Box
 
 export var dir := 0 setget set_dir
 
-onready var sprite : Sprite = $Sprite
+
 onready var collision_shape : CollisionShape2D = $CollisionShape2D
 onready var standing_area : Area2D = $StandingArea
+onready var sprite : Sprite = $Sprite
+onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
 onready var audio_push : AudioStreamPlayer2D = $AudioPush
 
 var is_floor := false
@@ -46,23 +48,23 @@ func push(right := false):
 
 func move(vector := Vector2.ZERO):
 	shrink_shape()
-	move_and_collide(rot(vector) * tile)
-	
-	# keep box on grid (:
-	var step = Vector2(stepify(position.x, 50), stepify(position.y, 50)) - position
-	print("box step: ", step)
-	if step != Vector2.ZERO:
-		move_and_collide(step)
-	
-	sprite.position -= position - last_pos
+	# is space open
+	if !test_move(transform, rot(vector) * tile):
+		move_and_collide(rot(vector) * tile)
+		# keep box on grid (:
+		var step = Vector2(stepify(position.x, 50), stepify(position.y, 50)) - position
+		if step != Vector2.ZERO:
+			move_and_collide(step)
+		
+		# move sprite
+		sprite.position -= position - last_pos
+		
+		# jump player
+		for i in standing_area.get_overlapping_bodies():
+			if i.is_in_group():
+				i.has_jumped = true
+		print("box.position: ", position, " stepify: ", step)
 	shrink_shape(false)
-	
-	for i in standing_area.get_overlapping_bodies():
-		if i.is_in_group("player"):
-			i.has_jumped = true
-			break
-	
-	print("box.position: ", position)
 
 func shrink_shape(shrink := true):
 	collision_shape.shape.extents = Vector2(49, 49) if shrink else Vector2(50, 50)
@@ -85,3 +87,6 @@ func _physics_process(delta):
 	
 	# lerp sprite
 	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, delta * 5.0)
+	# update collision_sprite
+	collision_sprite.position = sprite.position
+	

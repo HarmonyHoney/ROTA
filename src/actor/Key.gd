@@ -15,6 +15,6 @@ func set_rotation(degrees):
 	area.rotation_degrees = degrees
 
 func _on_Area2D_body_entered(body):
-	if body is Player:
+	if body.is_in_group("player"):
 		emit_signal("pickup")
 		queue_free()

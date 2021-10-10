@@ -16,10 +16,10 @@ extents = Vector2( 2, 15 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
-"solid",
 ]]
 z_index = 10
 z_as_relative = false
+collision_layer = 3
 script = ExtResource( 2 )
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
@@ -52,16 +52,18 @@ shape = SubResource( 1 )
 
 [node name="HitArea" type="Area2D" parent="."]
 position = Vector2( 50, 0 )
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 shape = SubResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="HitArea/CollisionShape2D"]
 visible = false
-margin_left = -15.0
-margin_top = -15.0
-margin_right = 15.0
-margin_bottom = 15.0
+margin_left = -35.0
+margin_top = -35.0
+margin_right = 35.0
+margin_bottom = 35.0
 color = Color( 1, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -69,6 +71,8 @@ __meta__ = {
 
 [node name="PushArea" type="Area2D" parent="."]
 position = Vector2( 40, 0 )
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
 shape = SubResource( 3 )
