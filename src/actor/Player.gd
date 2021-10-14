@@ -38,14 +38,38 @@ func _ready():
 func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
-func spin(right := false):
-	dir += 1 if right else -1
-	if dir > 3: dir = 0
-	elif dir < 0: dir = 3
+func spinny(arg := 1):
+	if arg == 0: return
+	dir += arg
+	
+	pass
+
+func spin(right := false, repeat := 0):
+	for i in clamp(repeat, 0, 3) + 1:
+		dir += 1 if right else 3
+		camera.target_angle += 90 if right else -90
+	dir %= 4
 	
 	sprite.rotation_degrees = dir * 90
-	camera.target_angle += 90 if right else -90
 	update_areas()
+
+func spinner(right := false, pos := Vector2.ZERO):
+	spin(right)
+	hit_effector(pos)
+
+func arrow(arg, pos):
+	if dir == arg: return
+	elif (dir + 1) % 4 == arg: spin(true)
+	elif (dir + 3) % 4 == arg: spin(false)
+	elif (dir + 2) % 4 == arg: spin(randf() > 0.5, 1)
+	hit_effector(pos)
+
+func hit_effector(pos : Vector2):
+	move_and_collide(pos - position)
+	velocity = Vector2.ZERO
+	is_floor = false
+	has_jumped = true
+	jump_clock = 0
 
 func update_areas():
 	hit_area.position = rot(Vector2(50 * dir_x, 0))

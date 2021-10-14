@@ -34,6 +34,13 @@ func set_dir(arg):
 	
 	sprite.rotation_degrees = dir * 90
 
+func spinner(right := false):
+	set_dir(dir + (1 if right else -1))
+	pass
+
+func arrow(arg):
+	set_dir(arg)
+
 #func _input(event):
 #	if event is InputEventKey and event.pressed:
 #		if event.scancode == KEY_Q:
@@ -61,7 +68,7 @@ func move(vector := Vector2.ZERO):
 		
 		# jump player
 		for i in standing_area.get_overlapping_bodies():
-			if i.is_in_group():
+			if i.is_in_group("player"):
 				i.has_jumped = true
 		print("box.position: ", position, " stepify: ", step)
 	shrink_shape(false)

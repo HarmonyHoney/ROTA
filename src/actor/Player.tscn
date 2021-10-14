@@ -8,13 +8,13 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 40 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 40 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 35, 35 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 2, 15 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -58,7 +58,7 @@ collision_layer = 3
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="HitArea" type="Area2D" parent="."]
 position = Vector2( 50, 0 )
@@ -66,7 +66,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="HitArea/CollisionShape2D"]
 visible = false
@@ -85,7 +85,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="PushArea/CollisionShape2D"]
 visible = false

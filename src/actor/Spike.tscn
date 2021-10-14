@@ -8,7 +8,11 @@ z_as_relative = false
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PoolVector2Array( 0, 0, 25, -75, 50, 0, 75, -50, 100, 0 )
+width = 7.0
 default_color = Color( 0, 0, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
