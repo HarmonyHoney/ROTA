@@ -1,8 +1,8 @@
+tool
 extends KinematicBody2D
 class_name Box
 
 export var dir := 0 setget set_dir
-
 
 onready var collision_shape : CollisionShape2D = $CollisionShape2D
 onready var standing_area : Area2D = $StandingArea
@@ -21,25 +21,23 @@ var can_move := true
 
 var tile := 100.0
 
-func _ready():
-	pass
-
 func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
 func set_dir(arg):
-	if arg > 3: dir = 0
-	elif arg < 0: dir = 3
-	else: dir = arg
-	
+	dir = 3 if arg < 0 else (arg % 4)
+	if !sprite: sprite = $Sprite
 	sprite.rotation_degrees = dir * 90
 
 func spinner(right := false):
-	set_dir(dir + (1 if right else -1))
-	pass
+	set_dir(dir + (1 if right else 3))
 
 func arrow(arg):
 	set_dir(arg)
+
+func portal(pos):
+	position = pos
+	sprite.position = Vector2.ZERO
 
 #func _input(event):
 #	if event is InputEventKey and event.pressed:
@@ -70,7 +68,7 @@ func move(vector := Vector2.ZERO):
 		for i in standing_area.get_overlapping_bodies():
 			if i.is_in_group("player"):
 				i.has_jumped = true
-		print("box.position: ", position, " stepify: ", step)
+		print(name + ".position: ", position, " stepify: ", step)
 	shrink_shape(false)
 
 func shrink_shape(shrink := true):

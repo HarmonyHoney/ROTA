@@ -105,6 +105,7 @@ reset={
 2d_physics/layer_4="spike"
 2d_physics/layer_5="spinner"
 2d_physics/layer_6="arrow"
+2d_physics/layer_7="portal"
 
 [physics]
 
