@@ -12,4 +12,5 @@ func set_rotation(degrees):
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):
-		print("win")
+		Shared.advance_map(1)
+		Shared.load_map()

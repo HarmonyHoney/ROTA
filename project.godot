@@ -33,6 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 btn="*res://src/autoload/btn.gd"
+Shared="*res://src/autoload/Shared.gd"
 
 [display]
 
