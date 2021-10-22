@@ -1,4 +1,42 @@
-[gd_scene format=2]
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/shader/spike.gdshader" type="Shader" id=1]
+[ext_resource path="res://media/image/spike.png" type="Texture" id=2]
+[ext_resource path="res://media/image/spike_floor.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Left:material:shader_param/offset_y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.1, -0.25, 0, 0.25, 0, 0.46, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Right:material:shader_param/offset_y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.46, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.25, 0, 0.46, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/offset_y = 0.191044
+shader_param/mask = ExtResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/offset_y = 0.368956
+shader_param/mask = ExtResource( 3 )
 
 [node name="Spike" type="Node2D" groups=[
 "spike",
@@ -6,17 +44,31 @@
 z_index = 15
 z_as_relative = false
 
-[node name="Line2D" type="Line2D" parent="."]
-points = PoolVector2Array( 0, 0, 25, -75, 50, 0, 75, -50, 100, 0 )
-width = 7.0
-default_color = Color( 0, 0, 0, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+playback_speed = 0.7
+anims/Idle = SubResource( 1 )
+
+[node name="Sprites" type="Node2D" parent="."]
+position = Vector2( -50, -50 )
+
+[node name="Left" type="Sprite" parent="Sprites"]
+material = SubResource( 2 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Right" type="Sprite" parent="Sprites"]
+material = SubResource( 3 )
+position = Vector2( 50, 0 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+centered = false
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -50, 50 )
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PoolVector2Array( 0, 0, 25, -75, 50, 0, 75, -50, 100, 0 )
+polygon = PoolVector2Array( 0, 0, 25, -50, 50, 0, 75, -50, 100, 0 )
