@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Player
 
 onready var sprite : Sprite = $Sprite
+onready var face : Sprite = $Sprite/Face
 onready var hit_area : Area2D = $HitArea
 onready var push_area : Area2D = $PushArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
@@ -37,8 +38,10 @@ func _ready():
 		camera = i
 		camera.position = position
 		camera.reset_smoothing()
+		
+		camera.connect("set_rotation", self, "set_rotation")
 		break
-
+	
 func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
@@ -47,8 +50,11 @@ func spin(right := false, repeat := 0):
 		dir += 1 if right else 3
 		camera.target_angle += 90 if right else -90
 	dir %= 4
-	sprite.rotation_degrees = dir * 90
+	#sprite.rotation_degrees = dir * 90
 	update_areas()
+
+func set_rotation(degrees):
+	face.rotation_degrees = degrees
 
 func hit_effector(pos : Vector2):
 	move_and_collide(pos - position)
