@@ -2,38 +2,45 @@ tool
 extends KinematicBody2D
 class_name Box
 
-export var dir := 0 setget set_dir
-
 onready var collision_shape : CollisionShape2D = $CollisionShape2D
 onready var standing_area : Area2D = $StandingArea
 onready var sprite : Sprite = $Sprite
+onready var arrow : Sprite = $Sprite/Arrow
 onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
 onready var audio_push : AudioStreamPlayer2D = $AudioPush
 
-var is_floor := false
+export var dir := 0 setget set_dir
 
+var tile := 100.0
+var is_floor := false
 var move_clock := 0.0
 export var move_time := 0.4
 onready var last_pos := position
-var next_move := Vector2.ZERO
+var move_weight := 5.0
 
-var can_move := true
+var arrow_weight := 6.0
+var arrow_angle := 0.0
 
-var tile := 100.0
+func _ready():
+	set_dir()
+	arrow.rotation_degrees = arrow_angle
 
 func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
-func set_dir(arg):
+func set_dir(arg := dir):
 	dir = 3 if arg < 0 else (arg % 4)
-	if !sprite: sprite = $Sprite
-	sprite.rotation_degrees = dir * 90
+	arrow_angle = dir * 90
+	if Engine.editor_hint:
+		if !arrow: arrow = $Sprite/Arrow
+		arrow.rotation_degrees = dir * 90
 
 func spinner(right := false):
 	set_dir(dir + (1 if right else 3))
 
 func arrow(arg):
-	set_dir(arg)
+	if arg != dir:
+		set_dir(arg)
 
 func portal(pos):
 	position = pos
@@ -91,7 +98,10 @@ func _physics_process(delta):
 			move(Vector2(0, 1))
 	
 	# lerp sprite
-	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, delta * 5.0)
+	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, delta * move_weight)
 	# update collision_sprite
 	collision_sprite.position = sprite.position
+	
+	# lerp arrow
+	arrow.rotation = lerp_angle(arrow.rotation, deg2rad(arrow_angle), delta * arrow_weight)
 	

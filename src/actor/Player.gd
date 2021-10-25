@@ -1,3 +1,4 @@
+tool
 extends KinematicBody2D
 class_name Player
 
@@ -8,17 +9,16 @@ onready var push_area : Area2D = $PushArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 
+export var dir := 0 setget set_dir
+
 var velocity := Vector2.ZERO
 var move_velocity := Vector2.ZERO
 
 var walk_speed = 250
 var gravity = 600
 var jump_speed = 400
-
 var jump_clock := 0.0
 var jump_time := 0.5
-
-export var dir := 0
 
 var is_floor := false
 var has_jumped := true
@@ -38,20 +38,27 @@ func _ready():
 		camera = i
 		camera.position = position
 		camera.reset_smoothing()
-		
 		camera.connect("set_rotation", self, "set_rotation")
+		set_dir()
+		camera.rotation_degrees = camera.target_angle
 		break
 	
 func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
-func spin(right := false, repeat := 0):
-	for i in clamp(repeat, 0, 3) + 1:
-		dir += 1 if right else 3
-		camera.target_angle += 90 if right else -90
-	dir %= 4
-	#sprite.rotation_degrees = dir * 90
+func set_dir(arg := dir):
+	dir = 3 if arg < 0 else (arg % 4)
+	
+	if Engine.editor_hint:
+		if !face: face = $Sprite/Face
+		face.rotation_degrees = dir * 90
+	elif camera:
+		camera.target_angle = dir * 90
+	
 	update_areas()
+
+func spin(right := false):
+	set_dir(dir + (1 if right else 3))
 
 func set_rotation(degrees):
 	face.rotation_degrees = degrees
@@ -68,11 +75,9 @@ func spinner(right := false, pos := Vector2.ZERO):
 	hit_effector(pos)
 
 func arrow(arg, pos):
-	if dir == arg: return
-	elif (dir + 1) % 4 == arg: spin(true)
-	elif (dir + 3) % 4 == arg: spin(false)
-	elif (dir + 2) % 4 == arg: spin(randf() > 0.5, 1)
-	hit_effector(pos)
+	if dir != arg:
+		set_dir(arg)
+		hit_effector(pos)
 
 func portal(pos):
 	velocity = Vector2.ZERO
@@ -83,10 +88,12 @@ func portal(pos):
 	position = pos
 
 func update_areas():
-	hit_area.position = rot(Vector2(50 * dir_x, 0))
-	hit_area.rotation_degrees = dir * 90
-	push_area.position = rot(Vector2(40 * dir_x, 0))
-	push_area.rotation_degrees = dir * 90
+	if hit_area:
+		hit_area.position = rot(Vector2(50 * dir_x, 0))
+		hit_area.rotation_degrees = dir * 90
+	if push_area:
+		push_area.position = rot(Vector2(40 * dir_x, 0))
+		push_area.rotation_degrees = dir * 90
 
 func _input(event):
 	if event.is_action_pressed("reset"):
