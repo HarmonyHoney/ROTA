@@ -3,11 +3,12 @@ extends KinematicBody2D
 class_name Player
 
 onready var sprite : Sprite = $Sprite
-onready var face : Sprite = $Sprite/Face
 onready var hit_area : Area2D = $HitArea
 onready var push_area : Area2D = $PushArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
+
+var camera : Camera2D
 
 export var dir := 0 setget set_dir
 
@@ -27,12 +28,14 @@ var dir_x := 1
 onready var label : Label = $DebugCanvas/Labels/Label
 var readout = []
 
-var camera : Camera2D
+export var sprite_weight := 3.0
+var target_angle := 0.0
 
 func _ready():
 	if Engine.editor_hint: return
 	
 	readout.resize(4)
+	label.visible = true
 	
 	for i in get_tree().get_nodes_in_group("game_camera"):
 		camera = i
@@ -42,16 +45,18 @@ func _ready():
 		set_dir()
 		camera.rotation_degrees = camera.target_angle
 		break
-	
+
 func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
 func set_dir(arg := dir):
 	dir = 3 if arg < 0 else (arg % 4)
 	
+	target_angle = dir * 90
+	
 	if Engine.editor_hint:
-		if !face: face = $Sprite/Face
-		face.rotation_degrees = dir * 90
+		if !sprite: sprite = $Sprite/Face
+		sprite.rotation_degrees = dir * 90
 	elif camera:
 		camera.target_angle = dir * 90
 	
@@ -61,7 +66,8 @@ func spin(right := false):
 	set_dir(dir + (1 if right else 3))
 
 func set_rotation(degrees):
-	face.rotation_degrees = degrees
+	pass
+	#face.rotation_degrees = degrees
 
 func hit_effector(pos : Vector2):
 	move_and_collide(pos - position)
@@ -112,6 +118,7 @@ func _physics_process(delta):
 	if joy.x != 0:
 		dir_x = joy.x
 		update_areas()
+		sprite.flip_h = joy.x < 0
 	
 	# on floor
 	is_floor = test_move(transform, rot(Vector2.DOWN))
@@ -166,6 +173,9 @@ func _physics_process(delta):
 	
 	# camera
 	camera.position = position
+	
+	# sprite
+	sprite.rotation = lerp_angle(sprite.rotation, deg2rad(target_angle), delta * sprite_weight)
 	
 	# debug label
 	readout[0] = "dir: " + str(dir)

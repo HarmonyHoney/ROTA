@@ -1,13 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://media/image/gobot.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
 [ext_resource path="res://media/audio/sfx/slap0.wav" type="AudioStream" id=3]
 [ext_resource path="res://media/audio/sfx/player_punch0.wav" type="AudioStream" id=4]
-[ext_resource path="res://media/image/rect.png" type="Texture" id=5]
+[ext_resource path="res://media/image/player.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40, 40 )
+extents = Vector2( 30, 30 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 40 )
@@ -25,6 +24,7 @@ z_index = 10
 z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
+sprite_weight = 6.0
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 
@@ -39,6 +39,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="DebugCanvas/Labels"]
+visible = false
 margin_right = 21.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -48,16 +49,14 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.199744, 0.199744 )
-texture = ExtResource( 5 )
-
-[node name="Face" type="Sprite" parent="Sprite"]
-texture = ExtResource( 1 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="BodyArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 3
 collision_mask = 8
 
@@ -65,6 +64,7 @@ collision_mask = 8
 shape = SubResource( 2 )
 
 [node name="HitArea" type="Area2D" parent="."]
+visible = false
 position = Vector2( 50, 0 )
 collision_layer = 0
 collision_mask = 4
@@ -84,6 +84,7 @@ __meta__ = {
 }
 
 [node name="PushArea" type="Area2D" parent="."]
+visible = false
 position = Vector2( 40, 0 )
 collision_layer = 0
 collision_mask = 4

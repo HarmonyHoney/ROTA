@@ -28,7 +28,7 @@ _global_script_class_icons={
 
 config/name="gdRota"
 run/main_scene="res://src/map/0.tscn"
-config/icon="res://icon.png"
+config/icon="res://media/image/gobot.png"
 
 [autoload]
 
