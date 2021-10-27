@@ -34,6 +34,7 @@ export var sprite_weight := 3.0
 var target_angle := 0.0
 
 var blink_clock := 0.0
+var is_punch := false
 
 func _ready():
 	if Engine.editor_hint: return
@@ -160,6 +161,8 @@ func _physics_process(delta):
 	# hit box
 	if btn.p("action"):
 		#audio_slap.play()
+		anim.play("punch")
+		anim.seek(0)
 		for i in hit_area.get_overlapping_areas():
 			var o = i.owner
 			if o is Box:
@@ -181,11 +184,12 @@ func _physics_process(delta):
 	camera.position = position
 	
 	# animation
-	if is_floor:
-		if joy.x != 0:
-			anim.play("run")
-		else:
-			anim.play("idle")
+	if anim.current_animation != "punch":
+		if is_floor:
+			if joy.x != 0:
+				anim.play("run")
+			else:
+				anim.play("idle")
 	
 	# blink
 	blink_clock -= delta
@@ -214,3 +218,12 @@ func _on_BodyArea_area_entered(area):
 	if area.get_parent().is_in_group("spike"):
 		print("hit spike")
 		get_tree().reload_current_scene()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "punch":
+		if is_floor:
+			anim.play("idle")
+		else:
+			anim.play("jump")
+		#is_punch = false
