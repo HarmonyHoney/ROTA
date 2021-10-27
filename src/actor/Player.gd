@@ -2,11 +2,13 @@ tool
 extends KinematicBody2D
 class_name Player
 
-onready var sprite : Sprite = $Sprite
+onready var sprites : Node2D = $Sprites
 onready var hit_area : Area2D = $HitArea
 onready var push_area : Area2D = $PushArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
+onready var anim : AnimationPlayer = $AnimationPlayer
+onready var anim_blink : AnimationPlayer = $AnimationBlink
 
 var camera : Camera2D
 
@@ -30,6 +32,8 @@ var readout = []
 
 export var sprite_weight := 3.0
 var target_angle := 0.0
+
+var blink_clock := 0.0
 
 func _ready():
 	if Engine.editor_hint: return
@@ -55,8 +59,8 @@ func set_dir(arg := dir):
 	target_angle = dir * 90
 	
 	if Engine.editor_hint:
-		if !sprite: sprite = $Sprite/Face
-		sprite.rotation_degrees = dir * 90
+		if !sprites: sprites = $Sprites
+		sprites.rotation_degrees = dir * 90
 	elif camera:
 		camera.target_angle = dir * 90
 	
@@ -118,7 +122,7 @@ func _physics_process(delta):
 	if joy.x != 0:
 		dir_x = joy.x
 		update_areas()
-		sprite.flip_h = joy.x < 0
+		sprites.scale.x = sign(joy.x)
 	
 	# on floor
 	is_floor = test_move(transform, rot(Vector2.DOWN))
@@ -141,6 +145,8 @@ func _physics_process(delta):
 	if is_floor and btn.p("jump"):
 		has_jumped = true
 		jump_clock = jump_time
+		is_floor = false
+		anim.play("jump")
 	
 	if (jump_clock > 0 and btn.d("jump")) or jump_clock > jump_time - 0.1:
 		velocity.y = -jump_speed
@@ -153,7 +159,7 @@ func _physics_process(delta):
 	
 	# hit box
 	if btn.p("action"):
-		audio_slap.play()
+		#audio_slap.play()
 		for i in hit_area.get_overlapping_areas():
 			var o = i.owner
 			if o is Box:
@@ -162,7 +168,7 @@ func _physics_process(delta):
 				else:
 					o.set_dir(dir + (3 if dir_x == 1 else 1)) 
 				o.move_clock = 0
-				audio_punch.play()
+				#audio_punch.play()
 				break
 			
 			print(i.owner.name, "hit")
@@ -174,8 +180,21 @@ func _physics_process(delta):
 	# camera
 	camera.position = position
 	
+	# animation
+	if is_floor:
+		if joy.x != 0:
+			anim.play("run")
+		else:
+			anim.play("idle")
+	
+	# blink
+	blink_clock -= delta
+	if blink_clock < delta:
+		anim_blink.play("blink")
+		blink_clock = rand_range(2, 15)
+	
 	# sprite
-	sprite.rotation = lerp_angle(sprite.rotation, deg2rad(target_angle), delta * sprite_weight)
+	sprites.rotation = lerp_angle(sprites.rotation, deg2rad(target_angle), delta * sprite_weight)
 	
 	# debug label
 	readout[0] = "dir: " + str(dir)
