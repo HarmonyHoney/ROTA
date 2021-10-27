@@ -3,8 +3,8 @@ extends KinematicBody2D
 class_name Player
 
 onready var sprites : Node2D = $Sprites
-onready var hit_area : Area2D = $HitArea
-onready var push_area : Area2D = $PushArea
+onready var areas : Node2D = $Areas
+onready var hit_area : Area2D = $Areas/HitArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 onready var anim : AnimationPlayer = $AnimationPlayer
@@ -61,11 +61,12 @@ func set_dir(arg := dir):
 	
 	if Engine.editor_hint:
 		if !sprites: sprites = $Sprites
-		sprites.rotation_degrees = dir * 90
+		sprites.rotation_degrees = target_angle
 	elif camera:
-		camera.target_angle = dir * 90
+		camera.target_angle = target_angle
 	
-	update_areas()
+	if areas:
+		areas.rotation_degrees = target_angle
 
 func spin(right := false):
 	set_dir(dir + (1 if right else 3))
@@ -98,14 +99,6 @@ func portal(pos):
 	
 	position = pos
 
-func update_areas():
-	if hit_area:
-		hit_area.position = rot(Vector2(50 * dir_x, 0))
-		hit_area.rotation_degrees = dir * 90
-	if push_area:
-		push_area.position = rot(Vector2(40 * dir_x, 0))
-		push_area.rotation_degrees = dir * 90
-
 func _input(event):
 	if event.is_action_pressed("reset"):
 		get_tree().reload_current_scene()
@@ -122,7 +115,7 @@ func _physics_process(delta):
 	
 	if joy.x != 0:
 		dir_x = joy.x
-		update_areas()
+		areas.scale.x = sign(joy.x)
 		sprites.scale.x = sign(joy.x)
 	
 	# on floor
