@@ -5,6 +5,7 @@ class_name Player
 onready var sprites : Node2D = $Sprites
 onready var areas : Node2D = $Areas
 onready var hit_area : Area2D = $Areas/HitArea
+onready var push_area : Area2D = $Areas/PushArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 onready var anim : AnimationPlayer = $AnimationPlayer
@@ -35,6 +36,16 @@ var target_angle := 0.0
 
 var blink_clock := 0.0
 
+var push_clock := 0.0
+export var push_time := 0.2
+
+var punch_clock := 0.0
+var punch_time := 0.4
+var is_punch := false
+
+var turn_clock := 0.0
+export var turn_time := 0.1
+
 func _ready():
 	if Engine.editor_hint: return
 	
@@ -48,6 +59,7 @@ func _ready():
 		camera.connect("set_rotation", self, "set_rotation")
 		set_dir()
 		camera.rotation_degrees = camera.target_angle
+		sprites.rotation_degrees = target_angle
 		break
 
 func rot(arg : Vector2, backwards := false):
@@ -69,6 +81,9 @@ func set_dir(arg := dir):
 
 func spin(right := false):
 	set_dir(dir + (1 if right else 3))
+	
+	velocity.x = walk_speed if right else -walk_speed
+	turn_clock = turn_time
 
 func set_rotation(degrees):
 	pass
@@ -112,7 +127,7 @@ func _physics_process(delta):
 	# input
 	var joy = Vector2(btn.d("right") - btn.d("left"), btn.d("down") - btn.d("up"))
 	
-	if joy.x != 0:
+	if joy.x != 0 and anim.current_animation != "punch":
 		dir_x = joy.x
 		areas.scale.x = sign(joy.x)
 		sprites.scale.x = sign(joy.x)
@@ -126,20 +141,18 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	
 	# walking
-	velocity.x = joy.x * walk_speed
+	turn_clock = max(0, turn_clock - delta)
 	
-	# spin
-	if !has_jumped and !is_floor:
-		spin(test_move(transform, rot(Vector2(-5, 5))))
-		has_jumped = true
-		is_floor = false
+	if turn_clock == 0 and anim.current_animation != "punch":
+		velocity.x = joy.x * walk_speed
 	
 	# jump
 	if is_floor and btn.p("jump"):
 		has_jumped = true
 		jump_clock = jump_time
 		is_floor = false
-		anim.play("jump")
+		if anim.current_animation != "punch":
+			anim.play("jump")
 	
 	if (jump_clock > 0 and btn.d("jump")) or jump_clock > jump_time - 0.1:
 		velocity.y = -jump_speed
@@ -150,11 +163,24 @@ func _physics_process(delta):
 	else:
 		jump_clock = 0
 	
+	# spin
+	if !has_jumped and !is_floor:
+		spin(test_move(transform, rot(Vector2(-5, 5))))
+		has_jumped = true
+		is_floor = false
+	
 	# hit box
-	if btn.p("action"):
+	if Input.is_action_just_pressed("action"):
+		is_punch = true
+	
+	punch_clock = max(0, punch_clock - delta)
+	if punch_clock == 0 and is_punch:
+		is_punch = false
+		punch_clock = 0.25
 		#audio_slap.play()
 		anim.play("punch")
 		anim.seek(0)
+		velocity.x = 0
 		for i in hit_area.get_overlapping_areas():
 			var o = i.owner
 			if o is Box:
@@ -164,6 +190,18 @@ func _physics_process(delta):
 				#audio_punch.play()
 				print(o.name, " hit, dir: ", o.dir)
 				break
+	
+	# push box
+	if is_floor and joy.x != 0 and test_move(transform, rot(Vector2(1 if joy.x == 1 else -1, 0))):
+		push_clock += delta
+		if push_clock > push_time:
+			push_clock = 0.001
+			for i in push_area.get_overlapping_bodies():
+				if i.is_in_group("box") and i.is_floor and i.dir % 2 == dir % 2:
+					i.push((dir_x == 1) if i.dir == dir else (dir_x == -1))
+					break
+	else:
+		push_clock = 0
 	
 	# apply movement
 	move_velocity = move_and_slide(rot(velocity))
@@ -175,10 +213,18 @@ func _physics_process(delta):
 	# animation
 	if anim.current_animation != "punch":
 		if is_floor:
-			if joy.x != 0:
+			var t = anim.current_animation_position
+			var last_anim = anim.current_animation
+			
+			if push_clock > 0:
+				anim.play("push")
+			elif joy.x != 0:
 				anim.play("run")
 			else:
 				anim.play("idle")
+			
+			if anim.current_animation != last_anim and last_anim != "idle":
+				anim.seek(t)
 	
 	# blink
 	blink_clock -= delta
@@ -200,8 +246,9 @@ func _physics_process(delta):
 		label.text += str(i) + "\n"
 
 func _on_PushArea_body_entered(body):
-	if is_floor and body.is_in_group("box") and body.is_floor and body.dir % 2 == dir % 2:
-		body.push(dir_x == 1)
+	pass
+#	if is_floor and body.is_in_group("box") and body.is_floor and body.dir % 2 == dir % 2:
+#		body.push((dir_x == 1) if body.dir == dir else (dir_x == -1))
 
 func _on_BodyArea_area_entered(area):
 	if area.get_parent().is_in_group("spike"):
