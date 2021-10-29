@@ -831,11 +831,10 @@ texture = ExtResource( 6 )
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Node2D" type="Node2D" parent="Sprites"]
-position = Vector2( 0, 0.955555 )
 scale = Vector2( 0.25, 0.25 )
 
 [node name="hand2" type="Sprite" parent="Sprites/Node2D"]
-position = Vector2( 131.385, 30 )
+position = Vector2( 125, 30 )
 texture = ExtResource( 9 )
 
 [node name="body" type="Sprite" parent="Sprites/Node2D"]
@@ -852,21 +851,18 @@ texture = ExtResource( 8 )
 
 [node name="mouth" type="Sprite" parent="Sprites/Node2D/body"]
 position = Vector2( 31, 44 )
-scale = Vector2( 1.11685, 1.11685 )
 texture = ExtResource( 1 )
 
 [node name="leg" type="Sprite" parent="Sprites/Node2D"]
-position = Vector2( -92.395, 90.9563 )
-rotation = 0.14858
+position = Vector2( -87.5, 95 )
 texture = ExtResource( 5 )
 
 [node name="leg2" type="Sprite" parent="Sprites/Node2D"]
-position = Vector2( 92.395, 90.9563 )
-rotation = -0.14858
+position = Vector2( 87.5, 95 )
 texture = ExtResource( 5 )
 
 [node name="hand" type="Sprite" parent="Sprites/Node2D"]
-position = Vector2( -113.236, 30 )
+position = Vector2( -106, 30 )
 texture = ExtResource( 9 )
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
