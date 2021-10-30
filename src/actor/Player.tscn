@@ -895,9 +895,6 @@ z_index = 10
 z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
-sprite_weight = 6.0
-push_time = 0.4
-turn_time = 0.05
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 

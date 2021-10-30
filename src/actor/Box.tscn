@@ -38,6 +38,9 @@ texture = ExtResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="AudioPush" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 collision_layer = 4
@@ -60,10 +63,8 @@ shape = SubResource( 3 )
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StandingArea"]
 shape = SubResource( 4 )
 
-[node name="AudioPush" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
-
 [node name="PushAreas" type="Node2D" parent="."]
+visible = false
 
 [node name="Left" type="Area2D" parent="PushAreas"]
 position = Vector2( -50, 0 )

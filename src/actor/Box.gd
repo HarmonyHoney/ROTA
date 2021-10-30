@@ -27,7 +27,8 @@ var arrow_angle := 0.0
 func _ready():
 	set_dir()
 	arrow.rotation_degrees = arrow_angle
-	position = (position / 50).floor() * 50
+	# snap to every 100 + 50
+	position = Vector2(50, 50) + (position / 100).floor() * 100
 
 func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))

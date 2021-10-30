@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/actor/Spinner.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/actor/Arrow.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/actor/Portal.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/actor/Passthrough.tscn" type="PackedScene" id=12]
 
 [node name="Node2D" type="Node2D"]
 
@@ -24,8 +25,7 @@ tile_data = PoolIntArray( -458753, 0, 0, -524288, 0, 0, -524287, 0, 0, -524286, 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( -400, 40 )
-dir = 1
+position = Vector2( 240, 1750 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 250, 150 )
@@ -54,7 +54,7 @@ position = Vector2( -50, 650 )
 dir = 2
 
 [node name="Box8" parent="Actors" instance=ExtResource( 4 )]
-position = Vector2( -450, 750 )
+position = Vector2( -350, 850 )
 dir = 1
 
 [node name="Box9" parent="Actors" instance=ExtResource( 4 )]
@@ -72,6 +72,9 @@ dir = 1
 [node name="Box12" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( -150, 250 )
 dir = 3
+
+[node name="Box13" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 350, 1750 )
 
 [node name="Exit" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 1150, -300 )
@@ -123,3 +126,6 @@ connection_path = NodePath("../Portal2")
 [node name="Portal2" parent="Actors" instance=ExtResource( 11 )]
 position = Vector2( 1350, 50 )
 connection_path = NodePath("../Portal")
+
+[node name="Passthrough" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 550, 1750 )

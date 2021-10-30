@@ -31,20 +31,20 @@ var dir_x := 1
 onready var label : Label = $DebugCanvas/Labels/Label
 var readout = []
 
-export var sprite_weight := 3.0
+var sprite_weight := 6.0
 var target_angle := 0.0
 
 var blink_clock := 0.0
 
 var push_clock := 0.0
-export var push_time := 0.2
+var push_time := 0.4
 
 var punch_clock := 0.0
 var punch_time := 0.4
 var is_punch := false
 
 var turn_clock := 0.0
-export var turn_time := 0.1
+var turn_time := 0.1
 
 func _ready():
 	if Engine.editor_hint: return
