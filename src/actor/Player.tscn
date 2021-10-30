@@ -983,7 +983,7 @@ anims/jump = SubResource( 6 )
 anims/punch = SubResource( 7 )
 anims/push = SubResource( 11 )
 anims/run = SubResource( 9 )
-blend_times = [ "idle", "push", 0.15, "push", "idle", 0.3, "push", "jump", 0.3, "push", "run", 0.3, "run", "push", 0.15 ]
+blend_times = [ "idle", "push", 0.15, "push", "idle", 0.3, "push", "jump", 0.3, "push", "run", 0.3, "run", "jump", 0.2, "run", "push", 0.15 ]
 
 [node name="AnimationBlink" type="AnimationPlayer" parent="."]
 anims/blink = SubResource( 10 )
@@ -1017,6 +1017,7 @@ texture = ExtResource( 8 )
 
 [node name="mouth" type="Sprite" parent="Sprites/Node2D/body"]
 position = Vector2( 31, 44 )
+scale = Vector2( 1.25, 1.25 )
 texture = ExtResource( 1 )
 
 [node name="leg" type="Sprite" parent="Sprites/Node2D"]
