@@ -9,6 +9,7 @@ func parent_ready():
 	var map = auto.instance()
 	make_tiles(map)
 	get_parent().add_child(map)
+	get_parent().move_child(map, 0)
 	visible = false
 
 func make_tiles(map : TileMap):
