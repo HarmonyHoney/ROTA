@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/shader/spike.gdshader" type="Shader" id=1]
 [ext_resource path="res://media/image/spike.png" type="Texture" id=2]
 [ext_resource path="res://media/image/spike_floor.png" type="Texture" id=3]
+[ext_resource path="res://src/actor/Spike.gd" type="Script" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -41,8 +42,9 @@ shader_param/mask = ExtResource( 3 )
 [node name="Spike" type="Node2D" groups=[
 "spike",
 ]]
-z_index = 15
+z_index = 90
 z_as_relative = false
+script = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"

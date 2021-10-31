@@ -29,7 +29,7 @@ tile_data = PoolIntArray( -458753, 0, 0, -524288, 0, 0, -524287, 0, 0, -524286, 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 1150, 900 )
+position = Vector2( 1450, 250 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 250, 150 )
@@ -101,14 +101,17 @@ position = Vector2( 1650, 250 )
 [node name="Spike" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 750, 650 )
 rotation = 3.14159
+dir = 2
 
 [node name="Spike2" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 650, 650 )
 rotation = 3.14159
+dir = 2
 
 [node name="Spike3" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 550, 650 )
 rotation = 3.14159
+dir = 2
 
 [node name="Spike4" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 1550, 950 )
@@ -151,14 +154,10 @@ position = Vector2( 550, 1550 )
 
 [node name="Button" parent="Actors" instance=ExtResource( 13 )]
 position = Vector2( 1450, 1750 )
-z_index = 100
-z_as_relative = false
 is_black = true
 
 [node name="Button2" parent="Actors" instance=ExtResource( 13 )]
 position = Vector2( 2050, 1750 )
-z_index = 100
-z_as_relative = false
 
 [node name="SwitchBlock" parent="Actors" instance=ExtResource( 14 )]
 position = Vector2( 1650, 1650 )

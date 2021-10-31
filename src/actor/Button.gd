@@ -13,7 +13,7 @@ export var dir := 0 setget set_dir
 export var is_black := false setget set_black
 
 func set_dir(arg):
-	dir = 3 if arg < 0 else arg % 4
+	dir = posmod(arg, 4)
 	rotation_degrees = dir * 90
 
 func set_black(arg):

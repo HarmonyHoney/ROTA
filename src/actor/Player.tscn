@@ -516,7 +516,7 @@ tracks/15/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=8]
 resource_name = "push"
 length = 1.2
 loop = true
@@ -891,7 +891,7 @@ tracks/3/keys = {
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
-z_index = 10
+z_index = 50
 z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
@@ -981,7 +981,7 @@ playback_default_blend_time = 0.1
 anims/idle = SubResource( 5 )
 anims/jump = SubResource( 6 )
 anims/punch = SubResource( 7 )
-anims/push = SubResource( 11 )
+anims/push = SubResource( 8 )
 anims/run = SubResource( 9 )
 blend_times = [ "idle", "push", 0.15, "push", "idle", 0.3, "push", "jump", 0.3, "push", "run", 0.3, "run", "jump", 0.2, "run", "push", 0.15 ]
 

@@ -23,7 +23,8 @@ extents = Vector2( 10, 20 )
 [node name="Box" type="KinematicBody2D" groups=[
 "box",
 ]]
-z_index = 5
+position = Vector2( 50, 50 )
+z_index = 30
 z_as_relative = false
 collision_layer = 5
 script = ExtResource( 2 )

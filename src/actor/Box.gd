@@ -34,13 +34,13 @@ func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
 func set_dir(arg := dir):
-	dir = 3 if arg < 0 else (arg % 4)
+	dir = posmod(arg, 4)
 	arrow_angle = dir * 90
 	if push_areas:
-		push_areas.rotation_degrees = dir * 90
+		push_areas.rotation_degrees = arrow_angle
 	if Engine.editor_hint:
 		if !arrow: arrow = $Sprite/Arrow
-		arrow.rotation_degrees = dir * 90
+		arrow.rotation_degrees = arrow_angle
 
 func spinner(right := false):
 	set_dir(dir + (1 if right else 3))

@@ -5,16 +5,15 @@
 [ext_resource path="res://src/shader/button.gdshader" type="Shader" id=3]
 [ext_resource path="res://media/image/button_floor.png" type="Texture" id=4]
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/offset_y = 0.0
 shader_param/mask = ExtResource( 4 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 25, 10 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "press"
+[sub_resource type="Animation" id=3]
 length = 0.3
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Sprites/Button:material:shader_param/offset_y")
@@ -27,8 +26,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 )
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "release"
+[sub_resource type="Animation" id=4]
 length = 0.4
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Sprites/Button:material:shader_param/offset_y")
@@ -42,13 +40,15 @@ tracks/0/keys = {
 }
 
 [node name="Button" type="Node2D"]
+z_index = 40
+z_as_relative = false
 script = ExtResource( 2 )
 
 [node name="Sprites" type="Node2D" parent="."]
 scale = Vector2( 0.25, 0.25 )
 
 [node name="Button" type="Sprite" parent="Sprites"]
-material = SubResource( 4 )
+material = SubResource( 1 )
 position = Vector2( -200, 0 )
 texture = ExtResource( 1 )
 centered = false
@@ -65,12 +65,12 @@ collision_layer = 0
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_default_blend_time = 0.1
-anims/press = SubResource( 2 )
-anims/release = SubResource( 3 )
+anims/press = SubResource( 3 )
+anims/release = SubResource( 4 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

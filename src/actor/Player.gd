@@ -66,8 +66,7 @@ func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
 func set_dir(arg := dir):
-	dir = 3 if arg < 0 else (arg % 4)
-	
+	dir = posmod(arg, 4)
 	target_angle = dir * 90
 	
 	if Engine.editor_hint:
