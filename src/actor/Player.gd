@@ -19,8 +19,8 @@ var velocity := Vector2.ZERO
 var move_velocity := Vector2.ZERO
 
 var walk_speed = 250
-var gravity = 600
-var jump_speed = 400
+var gravity = 1300
+var jump_speed = 460
 var jump_clock := 0.0
 var jump_time := 0.5
 
@@ -46,6 +46,11 @@ var is_punch := false
 var turn_clock := 0.0
 var turn_time := 0.1
 
+var joy := Vector2.ZERO
+var btn_jump := false
+var btnp_jump := false
+var btnp_action := false
+
 func _ready():
 	if Engine.editor_hint: return
 	
@@ -56,7 +61,6 @@ func _ready():
 		camera = i
 		camera.position = position
 		camera.reset_smoothing()
-		camera.connect("set_rotation", self, "set_rotation")
 		set_dir()
 		camera.rotation_degrees = camera.target_angle
 		sprites.rotation_degrees = target_angle
@@ -83,10 +87,6 @@ func spin(right := false):
 	
 	velocity.x = walk_speed if right else -walk_speed
 	turn_clock = turn_time
-
-func set_rotation(degrees):
-	pass
-	#face.rotation_degrees = degrees
 
 func hit_effector(pos : Vector2):
 	move_and_collide(pos - position)
@@ -119,17 +119,19 @@ func _input(event):
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
-	walk_speed = 250
-	gravity = 1300
-	jump_speed = 460
-	
 	# input
-	var joy = Vector2(btn.d("right") - btn.d("left"), btn.d("down") - btn.d("up"))
+	joy = Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"),
+		Input.get_action_strength("down") - Input.get_action_strength("up")).round()
 	
+	btnp_jump = Input.is_action_just_pressed("jump")
+	btn_jump = Input.is_action_pressed("jump")
+	btnp_action = Input.is_action_just_pressed("action")
+	
+	# dir_x
 	if joy.x != 0 and anim.current_animation != "punch":
-		dir_x = joy.x
-		areas.scale.x = sign(joy.x)
-		sprites.scale.x = sign(joy.x)
+		dir_x = sign(joy.x)
+		areas.scale.x = dir_x
+		sprites.scale.x = dir_x
 	
 	# on floor
 	is_floor = test_move(transform, rot(Vector2.DOWN))
@@ -146,14 +148,14 @@ func _physics_process(delta):
 		velocity.x = joy.x * walk_speed
 	
 	# jump
-	if is_floor and btn.p("jump"):
+	if is_floor and btnp_jump:
 		has_jumped = true
 		jump_clock = jump_time
 		is_floor = false
 		if anim.current_animation != "punch":
 			anim.play("jump")
 	
-	if (jump_clock > 0 and btn.d("jump")) or jump_clock > jump_time - 0.1:
+	if (jump_clock > 0 and btn_jump) or jump_clock > jump_time - 0.1:
 		velocity.y = -jump_speed
 		jump_clock -= delta
 		
@@ -169,11 +171,11 @@ func _physics_process(delta):
 		is_floor = false
 	
 	# hit box
-	if Input.is_action_just_pressed("action"):
+	if btnp_action:
 		is_punch = true
 	
 	punch_clock = max(0, punch_clock - delta)
-	if punch_clock == 0 and is_punch:
+	if is_punch and punch_clock == 0:
 		is_punch = false
 		punch_clock = 0.25
 		#audio_slap.play()
