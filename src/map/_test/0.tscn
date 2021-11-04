@@ -1,25 +1,25 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actor/Spike.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/actor/Lock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/actor/SwitchBlock.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/actor/Key.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/actor/Spike.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/actor/Spinner.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/actor/Arrow.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/actor/Portal.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/actor/Passthrough.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/actor/Button.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/actor/SwitchBlock.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/actor/Arrow.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/actor/Passthrough.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/actor/Lock.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/actor/Spinner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/actor/Portal.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/actor/Button.tscn" type="PackedScene" id=14]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." groups=[
 "game_camera",
-] instance=ExtResource( 1 )]
+] instance=ExtResource( 11 )]
 position = Vector2( 1350, 850 )
 zoom = Vector2( 1.2, 1.2 )
 
@@ -29,7 +29,7 @@ tile_data = PoolIntArray( -458753, 0, 0, -524288, 0, 0, -524287, 0, 0, -524286, 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 1450, 250 )
+position = Vector2( 500, 950 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 250, 150 )
@@ -89,93 +89,93 @@ position = Vector2( 1850, 1450 )
 [node name="Box16" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 1250, 1450 )
 
-[node name="Exit" parent="Actors" instance=ExtResource( 7 )]
+[node name="Exit" parent="Actors" instance=ExtResource( 12 )]
 position = Vector2( 1150, -300 )
 
-[node name="Lock" parent="Actors" instance=ExtResource( 5 )]
+[node name="Lock" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 1650, 450 )
 
 [node name="Key" parent="Actors" instance=ExtResource( 6 )]
 position = Vector2( 1650, 250 )
 
-[node name="Spike" parent="Actors" instance=ExtResource( 8 )]
+[node name="Spike" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 750, 650 )
 rotation = 3.14159
 dir = 2
 
-[node name="Spike2" parent="Actors" instance=ExtResource( 8 )]
+[node name="Spike2" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 650, 650 )
 rotation = 3.14159
 dir = 2
 
-[node name="Spike3" parent="Actors" instance=ExtResource( 8 )]
+[node name="Spike3" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 550, 650 )
 rotation = 3.14159
 dir = 2
 
-[node name="Spike4" parent="Actors" instance=ExtResource( 8 )]
+[node name="Spike4" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 1550, 950 )
 
-[node name="Spike5" parent="Actors" instance=ExtResource( 8 )]
+[node name="Spike5" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 950, 950 )
 
-[node name="Spike6" parent="Actors" instance=ExtResource( 8 )]
+[node name="Spike6" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 1450, 950 )
 
-[node name="Spinner" parent="Actors" instance=ExtResource( 9 )]
+[node name="Spinner" parent="Actors" instance=ExtResource( 10 )]
 position = Vector2( 350, -350 )
 
-[node name="Arrow" parent="Actors" instance=ExtResource( 10 )]
+[node name="Arrow" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 650, -50 )
 rotation = 1.5708
 dir = 1
 
-[node name="Arrow2" parent="Actors" instance=ExtResource( 10 )]
+[node name="Arrow2" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 50, 750 )
 rotation = 1.5708
 dir = 1
 
-[node name="Portal" parent="Actors" instance=ExtResource( 11 )]
+[node name="Portal" parent="Actors" instance=ExtResource( 13 )]
 position = Vector2( 850, 150 )
 connection_path = NodePath("../Portal2")
 
-[node name="Portal2" parent="Actors" instance=ExtResource( 11 )]
+[node name="Portal2" parent="Actors" instance=ExtResource( 13 )]
 position = Vector2( 1350, 50 )
 connection_path = NodePath("../Portal")
 
-[node name="Passthrough" parent="Actors" instance=ExtResource( 12 )]
+[node name="Passthrough" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 550, 1750 )
 
-[node name="Passthrough2" parent="Actors" instance=ExtResource( 12 )]
+[node name="Passthrough2" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 550, 1650 )
 
-[node name="Passthrough3" parent="Actors" instance=ExtResource( 12 )]
+[node name="Passthrough3" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 550, 1550 )
 
-[node name="Button" parent="Actors" instance=ExtResource( 13 )]
+[node name="Button" parent="Actors" instance=ExtResource( 14 )]
 position = Vector2( 1450, 1750 )
 is_black = true
 
-[node name="Button2" parent="Actors" instance=ExtResource( 13 )]
+[node name="Button2" parent="Actors" instance=ExtResource( 14 )]
 position = Vector2( 2050, 1750 )
 
-[node name="SwitchBlock" parent="Actors" instance=ExtResource( 14 )]
+[node name="SwitchBlock" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 1650, 1650 )
 is_black = true
 
-[node name="SwitchBlock2" parent="Actors" instance=ExtResource( 14 )]
+[node name="SwitchBlock2" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 1750, 1650 )
 
-[node name="SwitchBlock3" parent="Actors" instance=ExtResource( 14 )]
+[node name="SwitchBlock3" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 1850, 1650 )
 is_black = true
 
-[node name="SwitchBlock4" parent="Actors" instance=ExtResource( 14 )]
+[node name="SwitchBlock4" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 1350, 1450 )
 
-[node name="SwitchBlock5" parent="Actors" instance=ExtResource( 14 )]
+[node name="SwitchBlock5" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 1250, 1450 )
 is_black = true
 
-[node name="SwitchBlock6" parent="Actors" instance=ExtResource( 14 )]
+[node name="SwitchBlock6" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 1150, 1450 )

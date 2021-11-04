@@ -1,15 +1,15 @@
 extends TileMap
 
-const auto = preload("res://src/stage/AutoTileMap200px.tscn")
+onready var auto : TileMap = $AutoTileMap
 
 func _ready():
 	get_parent().connect("ready", self, "parent_ready")
 
 func parent_ready():
-	var map = auto.instance()
-	make_tiles(map)
-	get_parent().add_child(map)
-	get_parent().move_child(map, 0)
+	make_tiles(auto)
+	remove_child(auto)
+	get_parent().add_child(auto)
+	get_parent().move_child(auto, 0)
 	visible = false
 
 func make_tiles(map : TileMap):

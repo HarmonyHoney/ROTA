@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/stage/SolidTileMap.gd" type="Script" id=1]
 [ext_resource path="res://media/image/rect-100.png" type="Texture" id=2]
+[ext_resource path="res://src/stage/AutoTileMap200px.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
@@ -34,3 +35,5 @@ tile_set = SubResource( 2 )
 cell_size = Vector2( 100, 100 )
 format = 1
 script = ExtResource( 1 )
+
+[node name="AutoTileMap" parent="." instance=ExtResource( 3 )]
