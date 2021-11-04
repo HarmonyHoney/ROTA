@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
+[ext_resource path="res://media/image/rect.png" type="Texture" id=2]
+[ext_resource path="res://src/fx/Wipe.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/inside = Color( 1, 1, 1, 1 )
+shader_param/line = Color( 0, 0, 0, 1 )
+shader_param/outside = Color( 0, 0, 0, 0 )
+shader_param/scale = 90.0
+shader_param/offset = Vector2( 0.6, 0.5 )
+shader_param/radius = 0.0
+shader_param/width = 0.2
+
+[sub_resource type="Animation" id=3]
+resource_name = "in"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:material:shader_param/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.3, 0, 0.4, 0, 0.9, -0.3, 0, 0.4, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "out"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:material:shader_param/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.9, -0.3, 0, 0.4, 0, 0, -0.3, 0, 0.4, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[node name="Wipe" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1280, 720 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "in"
+anims/in = SubResource( 3 )
+anims/out = SubResource( 4 )
+next/in = "out"
+next/out = "in"

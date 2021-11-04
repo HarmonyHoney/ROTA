@@ -934,19 +934,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/HitArea"]
-position = Vector2( 1.88773, 0.471939 )
 shape = SubResource( 3 )
-
-[node name="ColorRect" type="ColorRect" parent="Areas/HitArea/CollisionShape2D"]
-visible = false
-margin_left = -35.0
-margin_top = -35.0
-margin_right = 35.0
-margin_bottom = 35.0
-color = Color( 1, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PushArea" type="Area2D" parent="Areas"]
 position = Vector2( 30, 0 )
@@ -955,17 +943,6 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/PushArea"]
 shape = SubResource( 4 )
-
-[node name="ColorRect" type="ColorRect" parent="Areas/PushArea/CollisionShape2D"]
-visible = false
-margin_left = -2.0
-margin_top = -15.0
-margin_right = 2.0
-margin_bottom = 15.0
-color = Color( 0, 1, 0.345098, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AudioSlap" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -1030,5 +1007,4 @@ position = Vector2( -106, 30 )
 texture = ExtResource( 9 )
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
-[connection signal="body_entered" from="Areas/PushArea" to="." method="_on_PushArea_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

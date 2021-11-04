@@ -51,11 +51,14 @@ var btn_jump := false
 var btnp_jump := false
 var btnp_action := false
 
+export var is_debug := false
+
 func _ready():
 	if Engine.editor_hint: return
 	
 	readout.resize(4)
-	label.visible = true
+	if is_debug:
+		label.visible = true
 	
 	for i in get_tree().get_nodes_in_group("game_camera"):
 		camera = i
@@ -245,11 +248,6 @@ func _physics_process(delta):
 	label.text = ""
 	for i in readout:
 		label.text += str(i) + "\n"
-
-func _on_PushArea_body_entered(body):
-	pass
-#	if is_floor and body.is_in_group("box") and body.is_floor and body.dir % 2 == dir % 2:
-#		body.push((dir_x == 1) if body.dir == dir else (dir_x == -1))
 
 func _on_BodyArea_area_entered(area):
 	if area.get_parent().is_in_group("spike"):
