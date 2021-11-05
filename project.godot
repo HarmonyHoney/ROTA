@@ -34,6 +34,7 @@ config/icon="res://media/image/gobot.png"
 
 btn="*res://src/autoload/btn.gd"
 Shared="*res://src/autoload/Shared.gd"
+Wipe="*res://src/autoload/Wipe.tscn"
 
 [display]
 

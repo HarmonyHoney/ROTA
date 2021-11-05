@@ -5,6 +5,8 @@ var maps : Array = []
 
 var current_map : int = 0 
 
+var is_reset := false
+
 func _ready():
 	print("Shared._ready(): ")
 	
@@ -15,6 +17,8 @@ func _ready():
 		if map_path + maps[i] + ".tscn" ==get_tree().current_scene.filename:
 			current_map = i
 			print("current map: ", current_map)
+	
+	Wipe.connect("wipe_out", self, "wipe_out")
 
 func advance_map(arg):
 	current_map = clamp(current_map + arg, 0, maps.size() - 1)
@@ -44,3 +48,15 @@ func get_maps():
 		if i.ends_with(".tscn"):
 			maps.append(i.trim_suffix(".tscn"))
 	print("get_maps(): ", maps)
+
+func reset():
+	if !is_reset:
+		is_reset = true
+		Wipe.start()
+
+func wipe_out():
+	if is_reset:
+		is_reset = false
+		get_tree().reload_current_scene()
+		Wipe.start(true)
+

@@ -117,7 +117,7 @@ func portal(pos):
 
 func _input(event):
 	if event.is_action_pressed("reset"):
-		get_tree().reload_current_scene()
+		Shared.reset()
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
