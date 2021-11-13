@@ -46,6 +46,7 @@ var is_punch := false
 var turn_clock := 0.0
 var turn_time := 0.1
 
+var is_input := true
 var joy := Vector2.ZERO
 var btn_jump := false
 var btnp_jump := false
@@ -60,14 +61,26 @@ func _ready():
 	if is_debug:
 		label.visible = true
 	
+	# find camera in the same viewport
 	for i in get_tree().get_nodes_in_group("game_camera"):
-		camera = i
-		camera.position = position
-		camera.reset_smoothing()
-		set_dir()
-		camera.rotation_degrees = camera.target_angle
-		sprites.rotation_degrees = target_angle
-		break
+		if i.get_viewport() == get_viewport():
+			camera = i
+			camera.position = position
+			camera.reset_smoothing()
+			set_dir()
+			camera.rotation_degrees = camera.target_angle
+			sprites.rotation_degrees = target_angle
+			break
+	
+	# disable input if inside level select
+	if Shared.is_level_select:
+		print("player in LevelSelect")
+		is_input = false
+		camera.zoom = Vector2.ONE * 1.5
+	
+	# face left or right
+	randomize()
+	set_dir_x(1 if randf() > 0.5 else -1)
 
 func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
@@ -84,6 +97,11 @@ func set_dir(arg := dir):
 	
 	if areas:
 		areas.rotation_degrees = target_angle
+
+func set_dir_x(arg := dir_x):
+	dir_x = sign(arg)
+	areas.scale.x = dir_x
+	sprites.scale.x = dir_x
 
 func spin(right := false):
 	set_dir(dir + (1 if right else 3))
@@ -123,18 +141,17 @@ func _physics_process(delta):
 	if Engine.editor_hint: return
 	
 	# input
-	joy = Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"),
-		Input.get_action_strength("down") - Input.get_action_strength("up")).round()
-	
-	btnp_jump = Input.is_action_just_pressed("jump")
-	btn_jump = Input.is_action_pressed("jump")
-	btnp_action = Input.is_action_just_pressed("action")
+	if is_input:
+		joy = Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"),
+			Input.get_action_strength("down") - Input.get_action_strength("up")).round()
+		
+		btnp_jump = Input.is_action_just_pressed("jump")
+		btn_jump = Input.is_action_pressed("jump")
+		btnp_action = Input.is_action_just_pressed("action")
 	
 	# dir_x
 	if joy.x != 0 and anim.current_animation != "punch":
-		dir_x = sign(joy.x)
-		areas.scale.x = dir_x
-		sprites.scale.x = dir_x
+		set_dir_x(joy.x)
 	
 	# on floor
 	is_floor = test_move(transform, rot(Vector2.DOWN))
@@ -212,7 +229,8 @@ func _physics_process(delta):
 	velocity = rot(move_velocity, true)
 	
 	# camera
-	camera.position = position
+	if camera:
+		camera.position = position
 	
 	# animation
 	if anim.current_animation != "punch":

@@ -7,6 +7,8 @@ var current_map : int = 0
 
 var is_reset := false
 
+var is_level_select := false
+
 func _ready():
 	print("Shared._ready(): ")
 	
@@ -19,12 +21,15 @@ func _ready():
 			print("current map: ", current_map)
 	
 	Wipe.connect("wipe_out", self, "wipe_out")
+	
+	is_level_select = get_tree().current_scene.name == "LevelSelect"
 
 func advance_map(arg):
 	current_map = clamp(current_map + arg, 0, maps.size() - 1)
 
 func load_map():
 	get_tree().change_scene(map_path + maps[current_map] + ".tscn")
+	is_level_select = get_tree().current_scene.name == "LevelSelect"
 
 func list_folder(path):
 	var dir = Directory.new()
