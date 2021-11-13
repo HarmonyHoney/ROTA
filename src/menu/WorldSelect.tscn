@@ -1,0 +1,239 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
+[ext_resource path="res://media/font/ShareTechMono.tres" type="DynamicFont" id=2]
+[ext_resource path="res://media/image/rect-100.png" type="Texture" id=3]
+[ext_resource path="res://src/menu/WorldSelect.gd" type="Script" id=4]
+[ext_resource path="res://src/shader/inside_circle.gdshader" type="Shader" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 3.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Worlds/Preview/ViewportContainer:material:shader_param/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.43, -0.9, 0, 0.9, 0, 0.4, -0.9, 0, 0.9, 0, 0.43, -0.9, 0, 0.9, 0 ),
+"times": PoolRealArray( 0, 1.5, 3 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Picker/Cursor/Circle:material:shader_param/radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.28, -0.9, 0, 0.9, 0, 0.2, -0.9, 0, 0.9, 0, 0.28, -0.9, 0, 0.9, 0 ),
+"times": PoolRealArray( 0, 1.5, 3 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("LevelSelect/Cursor:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.9, 0, 0.9, 0, 0.85, -0.9, 0, 0.9, 0, 1, -0.9, 0, 0.9, 0 ),
+"times": PoolRealArray( 0, 1.5, 3 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("LevelSelect/Cursor:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.9, 0, 0.9, 0, 0.85, -0.9, 0, 0.9, 0, 1, -0.9, 0, 0.9, 0 ),
+"times": PoolRealArray( 0, 1.5, 3 )
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 5 )
+shader_param/radius = 0.43
+shader_param/width = 0.033
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/inside = Color( 1, 1, 1, 1 )
+shader_param/line = Color( 0, 0, 0, 1 )
+shader_param/outside = Color( 1, 1, 1, 0 )
+shader_param/scale = 1.0
+shader_param/offset = Vector2( 0, 0 )
+shader_param/radius = 0.331
+shader_param/width = 0.09
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 1 )
+shader_param/inside = Color( 0, 0, 0, 1 )
+shader_param/line = Color( 0, 0, 0, 1 )
+shader_param/outside = Color( 1, 1, 1, 0 )
+shader_param/scale = 1.0
+shader_param/offset = Vector2( 0, 0 )
+shader_param/radius = 0.28
+shader_param/width = 0.0
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 1 )
+shader_param/inside = Color( 0, 0, 0, 0 )
+shader_param/line = Color( 0, 0, 0, 1 )
+shader_param/outside = Color( 1, 1, 1, 0 )
+shader_param/scale = 1.0
+shader_param/offset = Vector2( 0, 0 )
+shader_param/radius = 0.5
+shader_param/width = 0.05
+
+[node name="WorldSelect" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="BG" type="Node2D" parent="."]
+visible = false
+z_index = -4096
+z_as_relative = false
+
+[node name="ColorRect" type="ColorRect" parent="BG"]
+margin_left = -700.0
+margin_top = -400.0
+margin_right = 700.0
+margin_bottom = 400.0
+color = Color( 0.901961, 0.901961, 0.901961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 1 )
+
+[node name="Worlds" type="Node2D" parent="."]
+
+[node name="Preview" type="Node2D" parent="Worlds"]
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Worlds/Preview"]
+material = SubResource( 2 )
+margin_left = -250.0
+margin_top = -250.0
+margin_right = 250.0
+margin_bottom = 250.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Worlds/Preview/ViewportContainer"]
+size = Vector2( 500, 500 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Picker" type="Node2D" parent="."]
+position = Vector2( 0, 290 )
+
+[node name="Circles" type="Node2D" parent="Picker"]
+
+[node name="Circle" type="Sprite" parent="Picker/Circles"]
+material = SubResource( 3 )
+texture = ExtResource( 3 )
+
+[node name="Cursor" type="Node2D" parent="Picker"]
+
+[node name="Circle" type="Sprite" parent="Picker/Cursor"]
+material = SubResource( 4 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 3 )
+
+[node name="LevelSelect" type="Node2D" parent="."]
+position = Vector2( -230, 640 )
+
+[node name="debugCenter" type="Line2D" parent="LevelSelect"]
+visible = false
+points = PoolVector2Array( 0, -100, 0, 0, 100, 0, 0, 0, 0, 100, 0, 0, -100, 0 )
+width = 15.0
+default_color = Color( 0, 0, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="debugCorner" type="Line2D" parent="LevelSelect"]
+visible = false
+points = PoolVector2Array( 0, -100, 0, 0, 100, 0, 0, 0, 0, 100, 0, 0, -100, 0 )
+width = 15.0
+default_color = Color( 0, 0, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Levels" type="Node2D" parent="LevelSelect"]
+
+[node name="Level" type="Node2D" parent="LevelSelect/Levels"]
+
+[node name="Line2D" type="Line2D" parent="LevelSelect/Levels/Level"]
+position = Vector2( -50, -50 )
+points = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100, 0, 0 )
+default_color = Color( 0, 0, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Label" type="Label" parent="LevelSelect/Levels/Level"]
+margin_left = -50.0
+margin_top = -50.0
+margin_right = 50.0
+margin_bottom = 50.0
+size_flags_stretch_ratio = 2.56
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cursor" type="Node2D" parent="LevelSelect"]
+
+[node name="Circle" type="Sprite" parent="LevelSelect/Cursor"]
+visible = false
+material = SubResource( 5 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="Line2D" type="Line2D" parent="LevelSelect/Cursor"]
+points = PoolVector2Array( 30, -80, 80, -80, 80, -30 )
+width = 12.0
+default_color = Color( 0, 0, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="LevelSelect/Cursor"]
+rotation = 1.57079
+points = PoolVector2Array( 30, -80, 80, -80, 80, -30 )
+width = 12.0
+default_color = Color( 0, 0, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D3" type="Line2D" parent="LevelSelect/Cursor"]
+rotation = -3.14159
+points = PoolVector2Array( 30, -80, 80, -80, 80, -30 )
+width = 12.0
+default_color = Color( 0, 0, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D4" type="Line2D" parent="LevelSelect/Cursor"]
+rotation = -1.57079
+points = PoolVector2Array( 30, -80, 80, -80, 80, -30 )
+width = 12.0
+default_color = Color( 0, 0, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2

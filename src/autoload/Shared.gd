@@ -12,29 +12,30 @@ var is_level_select := false
 func _ready():
 	print("Shared._ready(): ")
 	
-	get_maps()
-	
-	# current map
-	for i in maps.size():
-		if map_path + maps[i] + ".tscn" ==get_tree().current_scene.filename:
-			current_map = i
-			print("current map: ", current_map)
+#	get_maps()
+#
+#	# current map
+#	for i in maps.size():
+#		if map_path + maps[i] + ".tscn" == get_tree().current_scene.filename:
+#			current_map = i
+#			print("current map: ", current_map)
 	
 	Wipe.connect("wipe_out", self, "wipe_out")
 	
-	is_level_select = get_tree().current_scene.name == "LevelSelect"
+	is_level_select = get_tree().current_scene.name == "WorldSelect"
 
 func advance_map(arg):
 	current_map = clamp(current_map + arg, 0, maps.size() - 1)
 
 func load_map():
-	get_tree().change_scene(map_path + maps[current_map] + ".tscn")
-	is_level_select = get_tree().current_scene.name == "LevelSelect"
+	pass
+	#get_tree().change_scene(map_path + maps[current_map] + ".tscn")
+	#is_level_select = get_tree().current_scene.name == "WorldSelect"
 
-func list_folder(path):
+func list_folder(path, include_extension := true):
 	var dir = Directory.new()
 	if dir.open(path) != OK:
-		print("list_folder(): '", map_path, "' not found")
+		print("list_folder(): '", path, "' not found")
 		return
 	
 	var list = []
@@ -42,7 +43,7 @@ func list_folder(path):
 	
 	var fname = dir.get_next()
 	while fname != "":
-		list.append(fname)
+		list.append(fname if include_extension else fname.split(".")[0])
 		fname = dir.get_next()
 	
 	return list

@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="gdRota"
-run/main_scene="res://src/map/_test/0.tscn"
+run/main_scene="res://src/menu/WorldSelect.tscn"
 config/icon="res://media/image/gobot.png"
 
 [autoload]

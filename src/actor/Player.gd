@@ -74,7 +74,7 @@ func _ready():
 	
 	# disable input if inside level select
 	if Shared.is_level_select:
-		print("player in LevelSelect")
+		#print("player in WorldSelect")
 		is_input = false
 		camera.zoom = Vector2.ONE * 1.5
 	
@@ -134,7 +134,7 @@ func portal(pos):
 	position = pos
 
 func _input(event):
-	if event.is_action_pressed("reset"):
+	if is_input and event.is_action_pressed("reset"):
 		Shared.reset()
 
 func _physics_process(delta):
