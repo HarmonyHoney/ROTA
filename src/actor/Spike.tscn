@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://src/shader/spike.gdshader" type="Shader" id=1]
+[ext_resource path="res://media/image/spike connection.png" type="Texture" id=1]
 [ext_resource path="res://media/image/spike.png" type="Texture" id=2]
-[ext_resource path="res://media/image/spike_floor.png" type="Texture" id=3]
+[ext_resource path="res://media/image/spike floor.png" type="Texture" id=3]
 [ext_resource path="res://src/actor/Spike.gd" type="Script" id=4]
+[ext_resource path="res://src/shader/offset_y.gdshader" type="Shader" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -15,7 +16,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0.3, -0.25, 0, 0.25, 0, 0.46, -0.25, 0, 0.25, 0, 0.3, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0.3, -0.3, 0, 0.3, 0, 0.46, -0.3, 0, 0.3, 0, 0.3, -0.3, 0, 0.3, 0 ),
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 tracks/1/type = "bezier"
@@ -25,19 +26,17 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.46, -0.25, 0, 0.25, 0, 0.3, -0.25, 0, 0.25, 0, 0.46, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0.46, -0.3, 0, 0.3, 0, 0.3, -0.3, 0, 0.3, 0, 0.46, -0.3, 0, 0.3, 0 ),
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 1 )
+shader = ExtResource( 5 )
 shader_param/offset_y = 0.3
-shader_param/mask = ExtResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 1 )
+shader = ExtResource( 5 )
 shader_param/offset_y = 0.46
-shader_param/mask = ExtResource( 3 )
 
 [node name="Spike" type="Node2D" groups=[
 "spike",
@@ -53,19 +52,41 @@ anims/Idle = SubResource( 1 )
 
 [node name="Sprites" type="Node2D" parent="."]
 position = Vector2( -50, -50 )
+scale = Vector2( 0.25, 0.25 )
 
 [node name="Left" type="Sprite" parent="Sprites"]
 material = SubResource( 2 )
-scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
+centered = false
+
+[node name="Floor" type="Sprite" parent="Sprites/Left"]
+position = Vector2( 0, 400 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Tile" type="Sprite" parent="Sprites/Left"]
+visible = false
+position = Vector2( 0, 400 )
+texture = ExtResource( 1 )
 centered = false
 
 [node name="Right" type="Sprite" parent="Sprites"]
 material = SubResource( 3 )
-position = Vector2( 50, 0 )
-scale = Vector2( 0.25, 0.25 )
+position = Vector2( 200, 0 )
 texture = ExtResource( 2 )
 centered = false
+
+[node name="Floor" type="Sprite" parent="Sprites/Right"]
+position = Vector2( 0, 400 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Tile" type="Sprite" parent="Sprites/Right"]
+visible = false
+position = Vector2( 0, 400 )
+texture = ExtResource( 1 )
+centered = false
+flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

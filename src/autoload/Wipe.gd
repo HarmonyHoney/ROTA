@@ -8,6 +8,9 @@ var shader_scale = 100.0
 signal wipe_in
 signal wipe_out
 
+signal start_wipe_in
+signal start_wipe_out
+
 func _ready():
 	sprite.visible = false
 #	get_tree().get_root().connect("size_changed", self, "size_changed")
@@ -22,3 +25,4 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func start(wipe_in := false):
 	sprite.visible = true
 	anim.play("in") if wipe_in else anim.play("out")
+	emit_signal("start_wipe_in") if wipe_in else emit_signal("start_wipe_out")

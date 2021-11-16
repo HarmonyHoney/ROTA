@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://media/image/dashes_fill.png" type="Texture" id=1]
+[ext_resource path="res://media/image/rect.png" type="Texture" id=2]
+[ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://src/autoload/PauseMenu.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 110
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 70
+font_data = ExtResource( 3 )
+
+[node name="PauseMenu" type="CanvasLayer"]
+pause_mode = 2
+layer = 9
+script = ExtResource( 4 )
+
+[node name="Parent" type="NinePatchRect" parent="."]
+anchor_left = 0.3
+anchor_top = 0.2
+anchor_right = 0.7
+anchor_bottom = 0.8
+texture = ExtResource( 1 )
+patch_margin_left = 60
+patch_margin_top = 60
+patch_margin_right = 60
+patch_margin_bottom = 60
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Parent"]
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.4
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "PAUSED"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Items" type="Control" parent="Parent"]
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.52588e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cursor" type="NinePatchRect" parent="Parent/Items"]
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.25
+texture = ExtResource( 2 )
+patch_margin_left = 35
+patch_margin_top = 35
+patch_margin_right = 35
+patch_margin_bottom = 35
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Resume" type="Label" parent="Parent/Items"]
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.25
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "RESUME"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset" type="Label" parent="Parent/Items"]
+anchor_left = 0.3
+anchor_top = 0.25
+anchor_right = 0.7
+anchor_bottom = 0.5
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "RESET"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Label" parent="Parent/Items"]
+anchor_left = 0.33
+anchor_top = 0.5
+anchor_right = 0.67
+anchor_bottom = 0.75
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "EXIT"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

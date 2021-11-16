@@ -50,6 +50,8 @@ var level_scenes := []
 
 var orb_viewport
 
+var is_opening := false
+
 func _ready():
 	for i in world_scenes.size() - 1:
 		worlds_node.add_child(preview.duplicate())
@@ -104,8 +106,7 @@ func _input(event):
 			print("cursor: ", cursor)
 	elif enter:
 		if is_level:
-			get_tree().change_scene(worlds_path  + str(cursor + 1) + "/" + str(level_cursor + 1) + ".tscn")
-			Shared.is_level_select = false
+			open_level()
 		else:
 			open_world()
 	elif back:
@@ -164,9 +165,17 @@ func preview_level():
 	orb_viewport.add_child(level_scenes[cursor][level_cursor].instance())
 
 func open_level():
-	pass
+	Shared.change_scene(worlds_path + str(cursor + 1) + "/" + str(level_cursor + 1) + ".tscn")
+	set_process_input(false)
+	is_opening = true
 
 func _process(delta):
+	if is_opening:
+		var w = worlds[cursor]
+		w.position = w.position.linear_interpolate(Vector2(0, level_select_node.position.y), 0.1)
+		level_select_node.position = level_select_node.position.linear_interpolate(Vector2(-610, 640), 0.1)
+		return
+	
 	for i in size:
 		var w = worlds[i]
 		

@@ -1,36 +1,18 @@
 extends Node
 
-var map_path : String = "res://src/map/"
-var maps : Array = []
-
-var current_map : int = 0 
-
 var is_reset := false
-
 var is_level_select := false
 
-func _ready():
-	print("Shared._ready(): ")
-	
-#	get_maps()
-#
-#	# current map
-#	for i in maps.size():
-#		if map_path + maps[i] + ".tscn" == get_tree().current_scene.filename:
-#			current_map = i
-#			print("current map: ", current_map)
-	
-	Wipe.connect("wipe_out", self, "wipe_out")
-	
-	is_level_select = get_tree().current_scene.name == "WorldSelect"
+var next_scene = ""
 
-func advance_map(arg):
-	current_map = clamp(current_map + arg, 0, maps.size() - 1)
+var scene_world_select := "res://src/menu/WorldSelect.tscn"
+
+func _ready():
+	Wipe.connect("wipe_out", self, "wipe_out")
+	is_level_select = get_tree().current_scene.name == "WorldSelect"
 
 func load_map():
 	pass
-	#get_tree().change_scene(map_path + maps[current_map] + ".tscn")
-	#is_level_select = get_tree().current_scene.name == "WorldSelect"
 
 func list_folder(path, include_extension := true):
 	var dir = Directory.new()
@@ -48,21 +30,21 @@ func list_folder(path, include_extension := true):
 	
 	return list
 
-func get_maps():
-	maps = []
-	for i in list_folder(map_path):
-		if i.ends_with(".tscn"):
-			maps.append(i.trim_suffix(".tscn"))
-	print("get_maps(): ", maps)
-
 func reset():
 	if !is_reset:
 		is_reset = true
 		Wipe.start()
 
+func change_scene(arg):
+	next_scene = arg
+	Wipe.start()
+
 func wipe_out():
+	Wipe.start(true)
 	if is_reset:
 		is_reset = false
 		get_tree().reload_current_scene()
-		Wipe.start(true)
+	else:
+		is_level_select = next_scene == scene_world_select
+		get_tree().change_scene(next_scene)
 

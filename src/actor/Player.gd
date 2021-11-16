@@ -54,6 +54,8 @@ var btnp_action := false
 
 export var is_debug := false
 
+var is_move := true
+
 func _ready():
 	if Engine.editor_hint: return
 	
@@ -225,8 +227,9 @@ func _physics_process(delta):
 		push_clock = 0
 	
 	# apply movement
-	move_velocity = move_and_slide(rot(velocity))
-	velocity = rot(move_velocity, true)
+	if is_move:
+		move_velocity = move_and_slide(rot(velocity))
+		velocity = rot(move_velocity, true)
 	
 	# camera
 	if camera:
@@ -270,7 +273,7 @@ func _physics_process(delta):
 func _on_BodyArea_area_entered(area):
 	if area.get_parent().is_in_group("spike"):
 		print("hit spike")
-		get_tree().reload_current_scene()
+		die()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "punch":
@@ -278,3 +281,12 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			anim.play("idle")
 		else:
 			anim.play("jump")
+
+func win():
+	is_input = false
+	is_move = false
+	Shared.change_scene(Shared.scene_world_select)
+
+func die():
+	Shared.reset()
+	pass

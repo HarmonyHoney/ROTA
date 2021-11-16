@@ -1,6 +1,7 @@
 extends Node2D
 
-onready var sprite : Sprite = $Sprite
+onready var sprites = $Sprites
+onready var anim = $AnimationPlayer
 
 func _ready():
 	for i in get_tree().get_nodes_in_group("game_camera"):
@@ -8,9 +9,10 @@ func _ready():
 		break
 
 func set_rotation(degrees):
-	sprite.rotation_degrees = degrees
+	sprites.rotation_degrees = degrees
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):
-		Shared.advance_map(1)
-		Shared.load_map()
+		body.win()
+		anim.play("open")
+		print("map complete")

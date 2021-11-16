@@ -11,10 +11,10 @@ shader_param/line = Color( 0, 0, 0, 1 )
 shader_param/outside = Color( 0, 0, 0, 0 )
 shader_param/scale = 2.0
 shader_param/offset = Vector2( 0.2, -0.2 )
-shader_param/radius = 0.268637
+shader_param/radius = 0.9
 shader_param/width = 0.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 resource_name = "in"
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Sprite:material:shader_param/radius")
@@ -27,8 +27,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "out"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Sprite:material:shader_param/radius")
 tracks/0/interp = 1
@@ -41,6 +40,7 @@ tracks/0/keys = {
 }
 
 [node name="Wipe" type="CanvasLayer"]
+pause_mode = 2
 layer = 10
 script = ExtResource( 1 )
 
@@ -52,7 +52,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/in = SubResource( 3 )
-anims/out = SubResource( 2 )
+anims/in = SubResource( 4 )
+anims/out = SubResource( 3 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

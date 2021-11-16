@@ -17,17 +17,16 @@ func make_tiles(map : TileMap):
 		for v in [Vector2.ZERO, Vector2.RIGHT, Vector2.DOWN, Vector2.ONE]:
 			map.set_cellv((i * 2) + v, 0)
 	
-	var spikes = get_tree().get_nodes_in_group("spike")
-	
-	for i in spikes:
-		for v in [Vector2.ZERO, Vector2.RIGHT, Vector2.DOWN, Vector2.ONE]:
-			var s = world_to_map(i.position - Vector2(10, 10)) * 2
-			map.set_cellv(s + v, 0)
-	
 	var rect = map.get_used_rect()
 	map.update_bitmask_region(rect.position, rect.end)
 	
+	var spikes = get_tree().get_nodes_in_group("spike")
+	
 	for i in spikes:
-		for v in [Vector2.ZERO, Vector2.RIGHT, Vector2.DOWN, Vector2.ONE]:
-			var s = world_to_map(i.position - Vector2(10, 10)) * 2
-			map.set_cellv(s + v, -1)
+		var left = get_cellv(world_to_map(i.position + Vector2(-75, 75).rotated(deg2rad(i.dir * 90))))
+		var right = get_cellv(world_to_map(i.position + Vector2(75, 75).rotated(deg2rad(i.dir * 90))))
+		
+		if left == -1:
+			i.set_tile()
+		if right == -1:
+			i.set_tile(false)
