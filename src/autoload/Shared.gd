@@ -3,16 +3,25 @@ extends Node
 var is_reset := false
 var is_level_select := false
 
-var next_scene = ""
+var next_scene := ""
 
-var scene_world_select := "res://src/menu/WorldSelect.tscn"
+var scene_select := "res://src/menu/WorldSelect.tscn"
+
+var world := -1
+var level := -1
+
+var world_size = {}
+
+var unlocked = [4, -1, -1, -1, -1, -1]
+
+var worlds_path := "res://src/map/worlds/"
 
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
 	is_level_select = get_tree().current_scene.name == "WorldSelect"
-
-func load_map():
-	pass
+	
+	for i in list_folder(worlds_path).size():
+		world_size[i] = list_folder(worlds_path + str(i + 1) + "/").size() - 1
 
 func list_folder(path, include_extension := true):
 	var dir = Directory.new()
@@ -45,6 +54,13 @@ func wipe_out():
 		is_reset = false
 		get_tree().reload_current_scene()
 	else:
-		is_level_select = next_scene == scene_world_select
+		is_level_select = next_scene == scene_select
 		get_tree().change_scene(next_scene)
 
+func complete_level():
+	if world_size[world] < level + 1 and unlocked[world + 1] < 0:
+		unlocked[world + 1] = 0
+		level = -1
+	elif unlocked[world] < level + 1:
+		unlocked[world] = clamp(level + 1, 0, world_size[world])
+	Shared.change_scene(scene_select)

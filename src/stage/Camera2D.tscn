@@ -2,7 +2,9 @@
 
 [ext_resource path="res://src/stage/Camera2D.gd" type="Script" id=1]
 
-[node name="Camera2D" type="Camera2D"]
+[node name="Camera2D" type="Camera2D" groups=[
+"game_camera",
+]]
 position = Vector2( 512, 300 )
 rotating = true
 current = true

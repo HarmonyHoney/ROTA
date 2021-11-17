@@ -53,7 +53,7 @@ func _input(event):
 			1:
 				Shared.reset()
 			2:
-				Shared.change_scene(Shared.scene_world_select)
+				Shared.change_scene(Shared.scene_select)
 
 func _process(delta):
 	var anch = ["left", "top", "right", "bottom"]

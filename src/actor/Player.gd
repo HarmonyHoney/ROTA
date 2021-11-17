@@ -63,6 +63,11 @@ func _ready():
 	if is_debug:
 		label.visible = true
 	
+	# snap to floor
+	var test = rot(Vector2.DOWN * 75)
+	if test_move(transform, test):
+		move_and_collide(test)
+	
 	# find camera in the same viewport
 	for i in get_tree().get_nodes_in_group("game_camera"):
 		if i.get_viewport() == get_viewport():
@@ -285,8 +290,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func win():
 	is_input = false
 	is_move = false
-	Shared.change_scene(Shared.scene_world_select)
+	Shared.complete_level()
 
 func die():
 	Shared.reset()
-	pass
