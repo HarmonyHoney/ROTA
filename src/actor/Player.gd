@@ -22,7 +22,7 @@ var walk_speed = 250
 var gravity = 1300
 var jump_speed = 460
 var jump_clock := 0.0
-var jump_time := 0.5
+var jump_time := 0.52
 
 var is_floor := false
 var has_jumped := true
@@ -56,6 +56,9 @@ export var is_debug := false
 
 var is_move := true
 
+var is_exit := false
+var exit_node
+
 func _ready():
 	if Engine.editor_hint: return
 	
@@ -79,15 +82,17 @@ func _ready():
 			sprites.rotation_degrees = target_angle
 			break
 	
-	# disable input if inside level select
-	if Shared.is_level_select:
-		#print("player in WorldSelect")
-		is_input = false
-		camera.zoom = Vector2.ONE * 1.5
-	
 	# face left or right
 	randomize()
 	set_dir_x(1 if randf() > 0.5 else -1)
+	
+	# disable input if inside level select
+	if Shared.is_level_select:
+		#print("player in WorldSelect")
+		#is_input = false
+		#camera.zoom = Vector2.ONE * 1.5
+		set_physics_process(false)
+	
 
 func rot(arg : Vector2, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
@@ -146,6 +151,12 @@ func _input(event):
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
+	
+	if is_exit:
+		position = position.linear_interpolate(exit_node.position, 3 * delta)
+		sprites.scale = sprites.scale.linear_interpolate(Vector2.ZERO, 0.9 * delta)
+		sprites.rotate(deg2rad(dir_x * 240) * delta)
+		return
 	
 	# input
 	if is_input:
@@ -276,7 +287,10 @@ func _physics_process(delta):
 		label.text += str(i) + "\n"
 
 func _on_BodyArea_area_entered(area):
-	if area.get_parent().is_in_group("spike"):
+	pass
+
+func _on_BodyArea_body_entered(body):
+	if body.is_in_group("spike"):
 		print("hit spike")
 		die()
 
@@ -287,10 +301,17 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		else:
 			anim.play("jump")
 
-func win():
-	is_input = false
-	is_move = false
+func exit(arg):
+	if is_exit: return
+	is_exit = true
+	exit_node = arg
+	anim.play("jump")
+	
+	yield(get_tree().create_timer(0.7), "timeout")
 	Shared.complete_level()
 
 func die():
 	Shared.reset()
+
+
+

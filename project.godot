@@ -118,6 +118,7 @@ pause={
 2d_physics/layer_5="spinner"
 2d_physics/layer_6="arrow"
 2d_physics/layer_7="portal"
+2d_physics/layer_8="exit"
 
 [physics]
 

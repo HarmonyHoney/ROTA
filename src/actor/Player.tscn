@@ -921,7 +921,7 @@ shape = SubResource( 1 )
 [node name="BodyArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 3
-collision_mask = 8
+collision_mask = 136
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
 shape = SubResource( 1 )
@@ -1010,4 +1010,5 @@ position = Vector2( -106, 30 )
 texture = ExtResource( 9 )
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
+[connection signal="body_entered" from="BodyArea" to="." method="_on_BodyArea_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

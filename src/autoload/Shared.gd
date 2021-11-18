@@ -58,9 +58,10 @@ func wipe_out():
 		get_tree().change_scene(next_scene)
 
 func complete_level():
-	if world_size[world] < level + 1 and unlocked[world + 1] < 0:
-		unlocked[world + 1] = 0
-		level = -1
-	elif unlocked[world] < level + 1:
-		unlocked[world] = clamp(level + 1, 0, world_size[world])
+	if world != -1 and level != -1:
+		if world_size[world] < level + 1 and unlocked[world + 1] < 0:
+			unlocked[world + 1] = 0
+			level = -1
+		elif unlocked[world] < level + 1:
+			unlocked[world] = clamp(level + 1, 0, world_size[world])
 	Shared.change_scene(scene_select)

@@ -6,11 +6,8 @@ func _ready():
 	get_parent().connect("ready", self, "parent_ready")
 
 func parent_ready():
+	tile_set.tile_set_modulate(0, Color(0, 0, 0, 0))
 	make_tiles(auto)
-	remove_child(auto)
-	get_parent().add_child(auto)
-	get_parent().move_child(auto, 0)
-	visible = false
 
 func make_tiles(map : TileMap):
 	for i in get_used_cells():
@@ -19,14 +16,3 @@ func make_tiles(map : TileMap):
 	
 	var rect = map.get_used_rect()
 	map.update_bitmask_region(rect.position, rect.end)
-	
-	var spikes = get_tree().get_nodes_in_group("spike")
-	
-	for i in spikes:
-		var left = get_cellv(world_to_map(i.position + Vector2(-75, 75).rotated(deg2rad(i.dir * 90))))
-		var right = get_cellv(world_to_map(i.position + Vector2(75, 75).rotated(deg2rad(i.dir * 90))))
-		
-		if left == -1:
-			i.set_tile()
-		if right == -1:
-			i.set_tile(false)

@@ -67,6 +67,7 @@ func push(right := false):
 			i.push(right if i.dir == dir else !right)
 	
 	move(Vector2(1 if right else -1, 0))
+	move_clock = move_time
 	if position != last_pos:
 		pass
 		#audio_push.play()
