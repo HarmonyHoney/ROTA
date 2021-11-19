@@ -24,14 +24,14 @@ var move_weight := 5.0
 var arrow_weight := 6.0
 var arrow_angle := 0.0
 
+var push_frames := 0
+var last_push := false
+
 func _ready():
 	set_dir()
 	arrow.rotation_degrees = arrow_angle
 	# snap to every 100 + 50
 	position = Vector2(50, 50) + (position / 100).floor() * 100
-
-func rot(arg : Vector2, backwards := false):
-	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)
@@ -41,6 +41,9 @@ func set_dir(arg := dir):
 	if Engine.editor_hint:
 		if !arrow: arrow = $Sprite/Arrow
 		arrow.rotation_degrees = arrow_angle
+
+func rot(arg : Vector2, backwards := false):
+	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
 func spinner(right := false):
 	set_dir(dir + (1 if right else 3))
@@ -66,16 +69,19 @@ func push(right := false):
 		if i != self and i.is_in_group("box") and i.dir % 2 == dir % 2:
 			i.push(right if i.dir == dir else !right)
 	
-	move(Vector2(1 if right else -1, 0))
-	move_clock = move_time
-	if position != last_pos:
-		pass
-		#audio_push.play()
+	if move(Vector2(1 if right else -1, 0)):
+		move_clock = move_time
+	else:
+		last_push = right
+		push_frames = 20
 
 func move(vector := Vector2.ZERO):
+	var is_move := false
+	
 	shrink_shape()
 	# is space open
 	if !test_move(transform, rot(vector) * tile):
+		last_pos = position
 		move_and_collide(rot(vector) * tile)
 		# keep box on grid (:
 		var step = Vector2(stepify(position.x, 50), stepify(position.y, 50)) - position
@@ -90,14 +96,24 @@ func move(vector := Vector2.ZERO):
 			if i.is_in_group("player"):
 				i.has_jumped = true
 		print(name + ".position: ", position, " stepify: ", step)
+		
+		push_frames = 0
+		move_clock = move_time
+		
+		is_move = true
 	shrink_shape(false)
+	return is_move
 
 func shrink_shape(shrink := true):
 	collision_shape.shape.extents = Vector2(49, 49) if shrink else Vector2(50, 50)
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
-	last_pos = position
+	
+	# push frames
+	push_frames = max(0, push_frames - 1)
+	if push_frames > 0:
+		move(Vector2(1 if last_push else -1, 0))
 	
 	# on floor
 	shrink_shape()
@@ -108,7 +124,6 @@ func _physics_process(delta):
 	if !is_floor:
 		move_clock -= delta
 		if move_clock < 0:
-			move_clock = move_time
 			move(Vector2(0, 1))
 	
 	# lerp sprite

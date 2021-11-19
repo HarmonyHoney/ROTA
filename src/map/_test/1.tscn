@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=4]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" parent="." instance=ExtResource( 1 )]
+
+[node name="SolidTileMap" parent="." instance=ExtResource( 2 )]
+tile_data = PoolIntArray( -851958, 0, 0, -851957, 0, 0, -851956, 0, 0, -851955, 0, 0, -851954, 0, 0, -851953, 0, 0, -786422, 0, 0, -786421, 0, 0, -786418, 0, 0, -786417, 0, 0, -720886, 0, 0, -720881, 0, 0, -655350, 0, 0, -655345, 0, 0, -655344, 0, 0, -655343, 0, 0, -655342, 0, 0, -589814, 0, 0, -589806, 0, 0, -589801, 0, 0, -589800, 0, 0, -589799, 0, 0, -589798, 0, 0, -524278, 0, 0, -524270, 0, 0, -524265, 0, 0, -524262, 0, 0, -458742, 0, 0, -458734, 0, 0, -458729, 0, 0, -458726, 0, 0, -393206, 0, 0, -393201, 0, 0, -393200, 0, 0, -393199, 0, 0, -393198, 0, 0, -393197, 0, 0, -393196, 0, 0, -393195, 0, 0, -393194, 0, 0, -393193, 0, 0, -393190, 0, 0, -393189, 0, 0, -393188, 0, 0, -327670, 0, 0, -327665, 0, 0, -327664, 0, 0, -327653, 0, 0, -327652, 0, 0, -262134, 0, 0, -262129, 0, 0, -262116, 0, 0, -131077, 0, 0, -131076, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -196593, 0, 0, -196580, 0, 0, -65541, 0, 0, -65540, 0, 0, -131057, 0, 0, -131045, 0, 0, -131044, 0, 0, -5, 0, 0, -65524, 0, 0, -65521, 0, 0, -65516, 0, 0, -65515, 0, 0, -65514, 0, 0, -65513, 0, 0, -65512, 0, 0, -65511, 0, 0, -65510, 0, 0, -65509, 0, 0, -65508, 0, 0, 65531, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 20, 0, 0, 131067, 0, 0, 131068, 0, 0, 65556, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 0, 0, 131087, 0, 0, 131092, 0, 0, 262142, 0, 0, 196610, 0, 0, 196623, 0, 0, 196628, 0, 0, 327678, 0, 0, 262146, 0, 0, 262159, 0, 0, 262164, 0, 0, 393214, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327695, 0, 0, 327700, 0, 0, 393231, 0, 0, 393236, 0, 0, 458767, 0, 0, 458772, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 524308, 0, 0, 589836, 0, 0, 589843, 0, 0, 589844, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 0, 0 )
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Player" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 1300, 150 )
+
+[node name="Box" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1150, 150 )
+
+[node name="Box2" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1050, 150 )
+dir = 2
+
+[node name="Box3" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 950, 150 )
+dir = 2
+
+[node name="Box4" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 850, 150 )
+dir = 2
+
+[node name="Box5" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 750, 150 )
+dir = 2
+
+[node name="Box6" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 650, 150 )
+dir = 2
+
+[node name="Box7" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 550, 150 )
+
+[node name="Box8" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 450, 150 )
+
+[node name="Box9" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 350, 150 )
+
+[node name="Box10" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1450, -150 )
+dir = 3
+
+[node name="Box11" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1450, -250 )
+dir = 3
+
+[node name="Box12" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1450, -350 )
+dir = 3
+
+[node name="Box13" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1450, -450 )
+dir = 3
+
+[node name="Box14" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1650, 450 )
+dir = 1
+
+[node name="Box15" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1650, 550 )
+dir = 1
+
+[node name="Box16" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1650, 650 )
+dir = 1
+
+[node name="Box17" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1950, -450 )
+dir = 2
+
+[node name="Box18" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 2050, -450 )
+dir = 2
+
+[node name="Box19" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 2150, -450 )
+dir = 2
+
+[node name="Box20" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 2250, -450 )
+dir = 2
