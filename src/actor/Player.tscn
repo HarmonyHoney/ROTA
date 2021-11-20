@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://media/image/player/mouth.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://media/image/player/body.png" type="Texture" id=7]
 [ext_resource path="res://media/image/player/eye.png" type="Texture" id=8]
 [ext_resource path="res://media/image/player/hand.png" type="Texture" id=9]
+[ext_resource path="res://media/image/player/dead_eye.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26, 26 )
@@ -845,7 +846,7 @@ tracks/15/keys = {
 [sub_resource type="Animation" id=9]
 length = 0.8
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprites/Offset/Root/body/eye:scale:x")
+tracks/0/path = NodePath("Sprites/Offset/Root/body/Eyes/Left:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -855,7 +856,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4, 0.8 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Sprites/Offset/Root/body/eye:scale:y")
+tracks/1/path = NodePath("Sprites/Offset/Root/body/Eyes/Left:scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -865,7 +866,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4, 0.8 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Sprites/Offset/Root/body/eye2:scale:x")
+tracks/2/path = NodePath("Sprites/Offset/Root/body/Eyes/Right:scale:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -875,7 +876,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.4, 0.8 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("Sprites/Offset/Root/body/eye2:scale:y")
+tracks/3/path = NodePath("Sprites/Offset/Root/body/Eyes/Right:scale:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -883,6 +884,74 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.5, 0, 0.1, -0.25, 0, 0.5, 0, 1, -0.25, 0, 0.5, 0 ),
 "times": PoolRealArray( 0, 0.4, 0.8 )
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites/Offset/Root/body/Eyes:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprites/Offset/Root/body/DeadEyes:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Offset/Root/body/DeadEyes/Left:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.5, -0.1, 0, 0.2, 0, 1, -0.1, 0, 0.2, 0 ),
+"times": PoolRealArray( 0, 0.2 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Offset/Root/body/DeadEyes/Left:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0.5, -0.1, 0, 0.2, 0, 1, -0.1, 0, 0.2, 0 ),
+"times": PoolRealArray( 0, 0.2 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Offset/Root/body/DeadEyes/Right:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0.5, -0.1, 0, 0.2, 0, 1, -0.1, 0, 0.2, 0 ),
+"times": PoolRealArray( 0, 0.2 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Offset/Root/body/DeadEyes/Right:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0.5, -0.1, 0, 0.2, 0, 1, -0.1, 0, 0.2, 0 ),
+"times": PoolRealArray( 0, 0.2 )
 }
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -960,8 +1029,9 @@ anims/push = SubResource( 7 )
 anims/run = SubResource( 8 )
 blend_times = [ "idle", "push", 0.15, "jump", "idle", 0.2, "jump", "run", 0.2, "push", "idle", 0.3, "push", "jump", 0.3, "push", "run", 0.3, "run", "jump", 0.2, "run", "push", 0.15 ]
 
-[node name="AnimationBlink" type="AnimationPlayer" parent="."]
+[node name="AnimationEyes" type="AnimationPlayer" parent="."]
 anims/blink = SubResource( 9 )
+anims/die = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
@@ -985,13 +1055,26 @@ texture = ExtResource( 9 )
 position = Vector2( 0, -31 )
 texture = ExtResource( 7 )
 
-[node name="eye" type="Sprite" parent="Sprites/Offset/Root/body"]
+[node name="Eyes" type="Node2D" parent="Sprites/Offset/Root/body"]
 position = Vector2( -12.5, -12 )
+
+[node name="Left" type="Sprite" parent="Sprites/Offset/Root/body/Eyes"]
 texture = ExtResource( 8 )
 
-[node name="eye2" type="Sprite" parent="Sprites/Offset/Root/body"]
-position = Vector2( 75.5, -12 )
+[node name="Right" type="Sprite" parent="Sprites/Offset/Root/body/Eyes"]
+position = Vector2( 88, 0 )
 texture = ExtResource( 8 )
+
+[node name="DeadEyes" type="Node2D" parent="Sprites/Offset/Root/body"]
+visible = false
+position = Vector2( -12.5, -12 )
+
+[node name="Left" type="Sprite" parent="Sprites/Offset/Root/body/DeadEyes"]
+texture = ExtResource( 10 )
+
+[node name="Right" type="Sprite" parent="Sprites/Offset/Root/body/DeadEyes"]
+position = Vector2( 85, 0 )
+texture = ExtResource( 10 )
 
 [node name="mouth" type="Sprite" parent="Sprites/Offset/Root/body"]
 position = Vector2( 31, 44 )

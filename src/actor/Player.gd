@@ -10,7 +10,7 @@ onready var body_area : Area2D = $BodyArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 onready var anim : AnimationPlayer = $AnimationPlayer
-onready var anim_blink : AnimationPlayer = $AnimationBlink
+onready var anim_eyes : AnimationPlayer = $AnimationEyes
 
 var camera : Camera2D
 
@@ -35,7 +35,7 @@ var readout = []
 var sprite_weight := 6.0
 var target_angle := 0.0
 
-var blink_clock := 0.0
+onready var blink_clock := rand_range(2, 15)
 
 var push_clock := 0.0
 var push_time := 0.4
@@ -62,6 +62,24 @@ var is_exit := false
 var exit_node
 
 var is_dead := false
+
+func set_dir(arg := dir):
+	dir = posmod(arg, 4)
+	target_angle = dir * 90
+	
+	if Engine.editor_hint:
+		if !sprites: sprites = $Sprites
+		sprites.rotation_degrees = target_angle
+	elif camera:
+		camera.target_angle = target_angle
+	
+	if areas:
+		areas.rotation_degrees = target_angle
+
+func set_dir_x(arg := dir_x):
+	dir_x = sign(arg)
+	areas.scale.x = dir_x
+	sprites.scale.x = dir_x
 
 func _ready():
 	if Engine.editor_hint: return
@@ -96,58 +114,6 @@ func _ready():
 		#is_input = false
 		#camera.zoom = Vector2.ONE * 1.5
 		set_physics_process(false)
-	
-
-func rot(arg : Vector2, _dir = 0, backwards := false):
-	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
-
-func set_dir(arg := dir):
-	dir = posmod(arg, 4)
-	target_angle = dir * 90
-	
-	if Engine.editor_hint:
-		if !sprites: sprites = $Sprites
-		sprites.rotation_degrees = target_angle
-	elif camera:
-		camera.target_angle = target_angle
-	
-	if areas:
-		areas.rotation_degrees = target_angle
-
-func set_dir_x(arg := dir_x):
-	dir_x = sign(arg)
-	areas.scale.x = dir_x
-	sprites.scale.x = dir_x
-
-func spin(right := false):
-	set_dir(dir + (1 if right else 3))
-	
-	velocity.x = walk_speed if right else -walk_speed
-	turn_clock = turn_time
-
-func hit_effector(pos : Vector2):
-	move_and_collide(pos - position)
-	velocity = Vector2.ZERO
-	is_floor = false
-	has_jumped = true
-	jump_clock = 0
-
-func spinner(right := false, pos := Vector2.ZERO):
-	spin(right)
-	hit_effector(pos)
-
-func arrow(arg, pos):
-	if dir != arg:
-		set_dir(arg)
-		hit_effector(pos)
-
-func portal(pos):
-	velocity = Vector2.ZERO
-	is_floor = false
-	has_jumped = true
-	jump_clock = 0
-	
-	position = pos
 
 func _input(event):
 	if is_input and event.is_action_pressed("reset"):
@@ -278,8 +244,8 @@ func _physics_process(delta):
 	
 	# blink
 	blink_clock -= delta
-	if blink_clock < delta:
-		anim_blink.play("blink")
+	if blink_clock < 0:
+		anim_eyes.play("blink")
 		blink_clock = rand_range(2, 15)
 	
 	# sprite
@@ -294,6 +260,39 @@ func _physics_process(delta):
 	label.text = ""
 	for i in readout:
 		label.text += str(i) + "\n"
+
+func rot(arg : Vector2, _dir = 0, backwards := false):
+	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
+
+func spin(right := false):
+	set_dir(dir + (1 if right else 3))
+	
+	velocity.x = walk_speed if right else -walk_speed
+	turn_clock = turn_time
+
+func hit_effector(pos : Vector2):
+	move_and_collide(pos - position)
+	velocity = Vector2.ZERO
+	is_floor = false
+	has_jumped = true
+	jump_clock = 0
+
+func spinner(right := false, pos := Vector2.ZERO):
+	spin(right)
+	hit_effector(pos)
+
+func arrow(arg, pos):
+	if dir != arg:
+		set_dir(arg)
+		hit_effector(pos)
+
+func portal(pos):
+	velocity = Vector2.ZERO
+	is_floor = false
+	has_jumped = true
+	jump_clock = 0
+	
+	position = pos
 
 func _on_BodyArea_area_entered(area):
 	pass
@@ -323,11 +322,10 @@ func die():
 	if is_dead: return
 	is_dead = true
 	anim.play("jump")
-	anim_blink.stop()
-	anim_blink.seek(0.3, true)
+	anim_eyes.play("die")
 	velocity = Vector2(-350 * dir_x, -800)
 	
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(0.7), "timeout")
 	Shared.reset()
 
 
