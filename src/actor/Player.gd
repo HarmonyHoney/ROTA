@@ -6,6 +6,7 @@ onready var sprites : Node2D = $Sprites
 onready var areas : Node2D = $Areas
 onready var hit_area : Area2D = $Areas/HitArea
 onready var push_area : Area2D = $Areas/PushArea
+onready var body_area : Area2D = $BodyArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 onready var anim : AnimationPlayer = $AnimationPlayer
@@ -55,9 +56,12 @@ var btnp_action := false
 export var is_debug := false
 
 var is_move := true
+var is_walk := true
 
 var is_exit := false
 var exit_node
+
+var is_dead := false
 
 func _ready():
 	if Engine.editor_hint: return
@@ -94,7 +98,7 @@ func _ready():
 		set_physics_process(false)
 	
 
-func rot(arg : Vector2, backwards := false):
+func rot(arg : Vector2, _dir = 0, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
 func set_dir(arg := dir):
@@ -158,6 +162,12 @@ func _physics_process(delta):
 		sprites.rotate(deg2rad(dir_x * 240) * delta)
 		return
 	
+	if is_dead:
+		sprites.position += rot(velocity) * delta
+		sprites.rotate(deg2rad(-dir_x * 240) * delta)
+		velocity.y += gravity * delta
+		return
+	
 	# input
 	if is_input:
 		joy = Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -181,8 +191,7 @@ func _physics_process(delta):
 	
 	# walking
 	turn_clock = max(0, turn_clock - delta)
-	
-	if turn_clock == 0 and anim.current_animation != "punch":
+	if is_walk and turn_clock == 0 and anim.current_animation != "punch":
 		velocity.x = joy.x * walk_speed
 	
 	# jump
@@ -245,7 +254,7 @@ func _physics_process(delta):
 	# apply movement
 	if is_move:
 		move_velocity = move_and_slide(rot(velocity))
-		velocity = rot(move_velocity, true)
+		velocity = rot(move_velocity, dir, true)
 	
 	# camera
 	if camera:
@@ -311,6 +320,14 @@ func exit(arg):
 	Shared.complete_level()
 
 func die():
+	if is_dead: return
+	is_dead = true
+	anim.play("jump")
+	anim_blink.stop()
+	anim_blink.seek(0.3, true)
+	velocity = Vector2(-350 * dir_x, -800)
+	
+	yield(get_tree().create_timer(0.5), "timeout")
 	Shared.reset()
 
 
