@@ -236,8 +236,8 @@ func _physics_process(delta):
 		if push_clock > push_time:
 			push_clock = 0.001
 			for i in push_area.get_overlapping_bodies():
-				if i.is_in_group("box") and i.is_floor and i.dir % 2 == dir % 2:
-					i.push((dir_x == 1) if i.dir == dir else (dir_x == -1))
+				if i.is_in_group("box") and i.is_floor:
+					i.push(dir - dir_x)
 					break
 	else:
 		push_clock = 0

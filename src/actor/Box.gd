@@ -4,9 +4,7 @@ class_name Box
 
 onready var collision_shape : CollisionShape2D = $CollisionShape2D
 onready var standing_area : Area2D = $StandingArea
-onready var push_areas : Node2D = $PushAreas
-onready var push_left : Area2D = $PushAreas/Left
-onready var push_right : Area2D = $PushAreas/Right
+onready var push_areas : Array = $PushAreas.get_children()
 onready var sprite : Sprite = $Sprite
 onready var arrow : Sprite = $Sprite/Arrow
 onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
@@ -25,7 +23,7 @@ var arrow_weight := 6.0
 var arrow_angle := 0.0
 
 var push_frames := 0
-var last_push := false
+var last_push := 0
 
 func _ready():
 	set_dir()
@@ -36,14 +34,14 @@ func _ready():
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)
 	arrow_angle = dir * 90
-	if push_areas:
-		push_areas.rotation_degrees = arrow_angle
+#	if push_areas:
+#		push_areas.rotation_degrees = arrow_angle
 	if Engine.editor_hint:
 		if !arrow: arrow = $Sprite/Arrow
 		arrow.rotation_degrees = arrow_angle
 
-func rot(arg : Vector2, backwards := false):
-	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
+func rot(arg : Vector2, _dir := dir, backwards := false):
+	return arg.rotated(deg2rad((-_dir if backwards else _dir) * 90))
 
 func spinner(right := false):
 	set_dir(dir + (1 if right else 3))
@@ -63,16 +61,18 @@ func portal(pos):
 #		elif event.scancode == KEY_E:
 #			set_dir(dir + 1)
 
-func push(right := false):
-	var a = push_right if right else push_left
-	for i in a.get_overlapping_bodies():
-		if i != self and i.is_in_group("box") and i.dir % 2 == dir % 2:
-			i.push(right if i.dir == dir else !right)
+func push(push_dir := 0):
+	push_dir = posmod(push_dir, 4)
 	
-	if move(Vector2(1 if right else -1, 0)):
+	for i in push_areas[push_dir].get_overlapping_bodies():
+		print("push_areas[push_dir] ", push_areas[push_dir].name)
+		if i != self and i.is_in_group("box"):
+			i.push(push_dir)
+	
+	if move(rot(Vector2.DOWN, push_dir)):
 		move_clock = move_time
 	else:
-		last_push = right
+		last_push = push_dir
 		push_frames = 20
 
 func move(vector := Vector2.ZERO):
@@ -80,9 +80,9 @@ func move(vector := Vector2.ZERO):
 	
 	shrink_shape()
 	# is space open
-	if !test_move(transform, rot(vector) * tile):
+	if !test_move(transform, vector * tile):
 		last_pos = position
-		move_and_collide(rot(vector) * tile)
+		move_and_collide(vector * tile)
 		# keep box on grid (:
 		var step = Vector2(stepify(position.x, 50), stepify(position.y, 50)) - position
 		if step != Vector2.ZERO:
@@ -113,7 +113,7 @@ func _physics_process(delta):
 	# push frames
 	push_frames = max(0, push_frames - 1)
 	if push_frames > 0:
-		move(Vector2(1 if last_push else -1, 0))
+		move(rot(Vector2.DOWN, last_push))
 	
 	# on floor
 	shrink_shape()
@@ -124,7 +124,7 @@ func _physics_process(delta):
 	if !is_floor:
 		move_clock -= delta
 		if move_clock < 0:
-			move(Vector2(0, 1))
+			move(rot(Vector2(0, 1)))
 	
 	# lerp sprite
 	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, delta * move_weight)
