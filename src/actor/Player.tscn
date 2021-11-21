@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://media/image/player/mouth.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -13,6 +13,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26, 26 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 70, 70 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 25, 25 )
@@ -994,6 +997,14 @@ collision_mask = 136
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
 shape = SubResource( 1 )
+
+[node name="PickupArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource( 11 )
 
 [node name="Areas" type="Node2D" parent="."]
 

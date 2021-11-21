@@ -7,6 +7,7 @@ onready var areas : Node2D = $Areas
 onready var hit_area : Area2D = $Areas/HitArea
 onready var push_area : Area2D = $Areas/PushArea
 onready var body_area : Area2D = $BodyArea
+onready var pickup_area : Area2D = $PickupArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 onready var anim : AnimationPlayer = $AnimationPlayer
@@ -57,11 +58,14 @@ export var is_debug := false
 
 var is_move := true
 var is_walk := true
-
+var is_dead := false
 var is_exit := false
 var exit_node
 
-var is_dead := false
+
+
+var is_pickup := false
+var pickup
 
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)
@@ -108,16 +112,23 @@ func _ready():
 	randomize()
 	set_dir_x(1 if randf() > 0.5 else -1)
 	
-	# disable input if inside level select
-	if Shared.is_level_select:
-		#print("player in WorldSelect")
-		#is_input = false
-		#camera.zoom = Vector2.ONE * 1.5
-		set_physics_process(false)
+	
+	
+	# delay input
+	set_physics_process(false)
+	# resume input if not inside level select
+	if !Shared.is_level_select:
+		yield(get_tree().create_timer(0.5), "timeout")
+		set_physics_process(true)
 
 func _input(event):
 	if is_input and event.is_action_pressed("reset"):
 		Shared.reset()
+	elif event is InputEventKey and event.pressed:
+		if event.scancode == KEY_MINUS or event.scancode == KEY_EQUAL:
+			camera.zoom += (Vector2.ONE * 0.05) * (1 if event.scancode == KEY_MINUS else -1)
+		elif event.scancode == KEY_0:
+			camera.zoom = Vector2.ONE * 1.5
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
@@ -183,28 +194,37 @@ func _physics_process(delta):
 		has_jumped = true
 		is_floor = false
 	
-	# hit box
+	# pickup box
 	if btnp_action:
-		is_punch = true
+		# drop
+		if is_pickup:
+			drop()
+		# pickup
+		else:
+			if pickup != null:
+				pickup_box(pickup)
+			else:
+				for i in pickup_area.get_overlapping_areas():
+					pickup_box(i.owner)
+					break
 	
-	punch_clock = max(0, punch_clock - delta)
-	if is_punch and punch_clock == 0:
-		is_punch = false
-		punch_clock = 0.25
-		#audio_slap.play()
-		anim.play("punch")
-		anim.seek(0)
-		velocity.x = 0
-		for i in hit_area.get_overlapping_areas():
-			var o = i.owner
-			if o is Box:
-				var d = 0 if joy.y == 1 else 2 if joy.y == -1 else 3 if dir_x == 1 else 1
-				o.set_dir(dir + d)
-				o.move_clock = 0
-				#audio_punch.play()
-				print(o.name, " hit, dir: ", o.dir)
-				#o.push(dir + d)
-				break
+	# carry box
+	if is_pickup:
+		pickup.dir = dir if joy.y == 1 else dir - dir_x
+		
+		var p = position + rot(Vector2(0, -25))
+		var l = 6
+		var y = abs(velocity.y / 10)
+		var d = dir % 2 == 0
+		
+		pickup.position.x = lerp(pickup.position.x, p.x, (6 + (0 if d else y)) * delta)
+		pickup.position.y = lerp(pickup.position.y, p.y, (6 + (y if d else 0)) * delta)
+		
+	# resume collision when outside box
+	elif pickup != null and !body_area.overlaps_body(pickup):
+		remove_collision_exception_with(pickup)
+		pickup.remove_collision_exception_with(self)
+		pickup = null
 	
 	# push box
 	if is_floor and joy.x != 0 and test_move(transform, rot(Vector2(1 if joy.x == 1 else -1, 0))):
@@ -261,6 +281,28 @@ func _physics_process(delta):
 	label.text = ""
 	for i in readout:
 		label.text += str(i) + "\n"
+
+func pickup_box(box):
+	is_pickup = true
+	pickup = box
+	pickup.is_pickup = true
+	add_collision_exception_with(pickup)
+	pickup.add_collision_exception_with(self)
+	has_jumped = true
+	pickup.sprites.scale = Vector2.ONE * 1.5
+
+func drop():
+	is_pickup = false
+	pickup.is_pickup = false
+	pickup.move_clock = 0
+	
+	velocity.y = 0
+	
+	var p = Vector2(50, 50) + (pickup.position / 100).floor() * 100
+	var o = pickup.position - p
+	pickup.position = p
+	pickup.sprites.position = o
+	pickup.sprites.scale = Vector2.ONE * 1.5
 
 func rot(arg : Vector2, _dir = 0, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))

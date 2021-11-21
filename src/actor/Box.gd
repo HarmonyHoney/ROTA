@@ -5,25 +5,28 @@ class_name Box
 onready var collision_shape : CollisionShape2D = $CollisionShape2D
 onready var standing_area : Area2D = $StandingArea
 onready var push_areas : Array = $PushAreas.get_children()
-onready var sprite : Sprite = $Sprite
-onready var arrow : Sprite = $Sprite/Arrow
+onready var sprites : Node2D = $Sprites
+onready var arrow : Sprite = $Sprites/Box/Arrow
 onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
 onready var audio_push : AudioStreamPlayer2D = $AudioPush
 
 export var dir := 0 setget set_dir
+onready var last_pos := position
 
 var tile := 100.0
 var is_floor := false
 var move_clock := 0.0
-export var move_time := 0.4
-onready var last_pos := position
-var move_weight := 5.0
+var move_time := 0.1
+var move_weight := 7.0
+var scale_weight := 4.0
 
 var arrow_weight := 6.0
 var arrow_angle := 0.0
 
 var push_frames := 0
 var last_push := 0
+
+var is_pickup := false
 
 func _ready():
 	set_dir()
@@ -52,7 +55,7 @@ func arrow(arg):
 
 func portal(pos):
 	position = pos
-	sprite.position = Vector2.ZERO
+	sprites.position = Vector2.ZERO
 
 #func _input(event):
 #	if event is InputEventKey and event.pressed:
@@ -89,7 +92,7 @@ func move(vector := Vector2.ZERO):
 			move_and_collide(step)
 		
 		# move sprite
-		sprite.position -= position - last_pos
+		sprites.position -= position - last_pos
 		
 		# jump player
 		for i in standing_area.get_overlapping_bodies():
@@ -110,26 +113,28 @@ func shrink_shape(shrink := true):
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
-	# push frames
-	push_frames = max(0, push_frames - 1)
-	if push_frames > 0:
-		move(rot(Vector2.DOWN, last_push))
+	if !is_pickup:
+		# push frames
+		push_frames = max(0, push_frames - 1)
+		if push_frames > 0:
+			move(rot(Vector2.DOWN, last_push))
+		
+		# on floor
+		shrink_shape()
+		is_floor = test_move(transform, rot(Vector2(0, tile)))
+		shrink_shape(false)
+		
+		# move down
+		if !is_floor:
+			move_clock -= delta
+			if move_clock < 0:
+				move(rot(Vector2(0, 1)))
 	
-	# on floor
-	shrink_shape()
-	is_floor = test_move(transform, rot(Vector2(0, tile)))
-	shrink_shape(false)
-	
-	# move down
-	if !is_floor:
-		move_clock -= delta
-		if move_clock < 0:
-			move(rot(Vector2(0, 1)))
-	
-	# lerp sprite
-	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, delta * move_weight)
+	# lerp sprite position and scale
+	sprites.position = sprites.position.linear_interpolate(Vector2.ZERO, move_weight * delta)
+	sprites.scale = sprites.scale.linear_interpolate(Vector2.ONE, scale_weight * delta)
 	# update collision_sprite
-	collision_sprite.position = sprite.position
+	collision_sprite.position = sprites.position
 	
 	# lerp arrow
 	arrow.rotation = lerp_angle(arrow.rotation, deg2rad(arrow_angle), delta * arrow_weight)
