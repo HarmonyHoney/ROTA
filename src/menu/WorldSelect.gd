@@ -83,6 +83,11 @@ func _ready():
 			open_world()
 			level_cursor = Shared.level
 			preview_level()
+	
+	# delay input
+	set_process_input(false)
+	yield(get_tree().create_timer(0.5),"timeout")
+	set_process_input(true)
 
 func _input(event):
 	var left = event.is_action_pressed("left")

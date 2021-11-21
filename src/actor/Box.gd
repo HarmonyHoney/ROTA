@@ -65,7 +65,7 @@ func push(push_dir := 0):
 	push_dir = posmod(push_dir, 4)
 	
 	for i in push_areas[push_dir].get_overlapping_bodies():
-		print("push_areas[push_dir] ", push_areas[push_dir].name)
+		#print("push_areas[push_dir] ", push_areas[push_dir].name)
 		if i != self and i.is_in_group("box"):
 			i.push(push_dir)
 	

@@ -1,0 +1,237 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://media/font/ShareTechMono.tres" type="DynamicFont" id=1]
+[ext_resource path="res://media/image/rect.png" type="Texture" id=2]
+[ext_resource path="res://media/image/arrow.png" type="Texture" id=3]
+
+[node name="HUD" type="CanvasLayer"]
+layer = 9
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Arrows" type="Control" parent="Control"]
+visible = false
+margin_left = 50.0
+margin_top = 670.0
+margin_right = 50.0
+margin_bottom = 670.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keys" type="Control" parent="Control/Arrows"]
+margin_left = 55.0
+margin_top = -50.0
+margin_right = 95.0
+margin_bottom = -10.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Up" type="NinePatchRect" parent="Control/Arrows/Keys"]
+margin_top = -110.0
+margin_right = 100.0
+margin_bottom = -10.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="Control/Arrows/Keys/Up"]
+position = Vector2( 50, 50 )
+rotation = 3.14159
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="Down" type="NinePatchRect" parent="Control/Arrows/Keys"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="Control/Arrows/Keys/Down"]
+position = Vector2( 50, 50 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="Left" type="NinePatchRect" parent="Control/Arrows/Keys"]
+margin_left = -110.0
+margin_right = -10.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="Control/Arrows/Keys/Left"]
+position = Vector2( 50, 50 )
+rotation = 1.5708
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="Right" type="NinePatchRect" parent="Control/Arrows/Keys"]
+margin_left = 110.0
+margin_right = 210.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="Control/Arrows/Keys/Right"]
+position = Vector2( 50, 50 )
+rotation = 4.71239
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Control/Arrows"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = 167.021
+margin_top = -97.6539
+margin_right = 359.021
+margin_bottom = 2.34613
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "WALK"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="X" type="Control" parent="Control"]
+visible = false
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 50.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="NinePatchRect" parent="Control/X"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/X/Key"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -85.5
+margin_right = 93.5
+margin_bottom = 2.5
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "X"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/X"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = 119.211
+margin_top = 3.12738
+margin_right = 311.211
+margin_bottom = 103.127
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "JUMP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="X2" type="Control" parent="Control"]
+visible = false
+margin_left = 1230.0
+margin_top = 50.0
+margin_right = 1230.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="NinePatchRect" parent="Control/X2"]
+margin_left = -100.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/X2/Key"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -85.5
+margin_right = 93.5
+margin_bottom = 2.5
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "C"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/X2"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -256.865
+margin_top = 3.12738
+margin_right = -112.865
+margin_bottom = 103.127
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "HIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}

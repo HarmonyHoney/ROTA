@@ -23,6 +23,12 @@ func _ready():
 	for i in list_folder(worlds_path).size():
 		world_size[i] = list_folder(worlds_path + str(i + 1) + "/").size() - 1
 
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		if event.scancode == KEY_F11:
+			OS.window_fullscreen = !OS.window_fullscreen
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
+
 func list_folder(path, include_extension := true):
 	var dir = Directory.new()
 	if dir.open(path) != OK:

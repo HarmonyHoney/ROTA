@@ -203,6 +203,7 @@ func _physics_process(delta):
 				o.move_clock = 0
 				#audio_punch.play()
 				print(o.name, " hit, dir: ", o.dir)
+				#o.push(dir + d)
 				break
 	
 	# push box
