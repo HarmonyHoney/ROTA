@@ -296,19 +296,18 @@ __meta__ = {
 }
 
 [node name="Time" type="Label" parent="Control"]
-visible = false
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
 anchor_bottom = 1.0
-margin_left = 473.297
-margin_top = -618.121
-margin_right = 991.697
-margin_bottom = -518.121
+margin_left = 374.4
+margin_top = -617.6
+margin_right = 1276.8
+margin_bottom = -576.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "time_scale: "
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

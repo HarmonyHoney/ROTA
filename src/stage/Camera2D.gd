@@ -21,6 +21,9 @@ export var is_focal_zoom := false
 export var focal_zoom_threshhold := 500 setget set_threshhold
 export var focal_zoom_dividend := 1000
 
+var screen_size := Vector2(1280, 720)
+onready var size = start_zoom * screen_size.y
+
 func _ready():
 	if Shared.is_level_select:
 		zoom_clock = zoom_duration
@@ -50,12 +53,24 @@ func _process(delta):
 				zoom = start_zoom
 			else:
 				zoom = start_zoom + Vector2.ONE * ((dist - focal_zoom_threshhold) / focal_zoom_dividend)
+		
+		# keep target on screen
+		if !is_focal_zoom and zoom_clock == zoom_duration:
+			var dist = position.distance_to(target_node.position)
+			if dist + 50 < size.y / 2:
+				zoom = start_zoom
+			else:
+				zoom = Vector2.ONE * ((dist + 50) / (screen_size.y / 2))
+		
 
 
 func _draw():
 	if !Engine.editor_hint: return
 	#draw_circle(Vector2.ZERO, focal_zoom_threshhold, Color(0,0,0, 0.1))
 	draw_arc(Vector2.ZERO, focal_zoom_threshhold, 0, TAU, 33, Color(1,0,0, 0.2), 5.0)
+	
+	var size = zoom * screen_size.y
+	draw_rect(Rect2(-size * 0.5, size), Color(1,0,0, 0.2), false, 10.0)
 
 func set_threshhold(arg):
 	focal_zoom_threshhold = abs(arg)
