@@ -36,6 +36,12 @@ points = PoolVector2Array( 0, 100, 25, 50, 50, 100, 75, 50, 100, 100 )
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 500, 650 )
+zoom = Vector2( 2, 2 )
+is_moving = true
+is_focal_point = true
+focal_zoom_threshhold = 700
+focal_zoom_dividend = 600
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 3 )]
 tile_data = PoolIntArray( 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0 )

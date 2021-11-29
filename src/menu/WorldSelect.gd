@@ -11,16 +11,9 @@ var world_cursor := 0
 onready var worlds_node = $Worlds
 onready var preview = $Worlds/Preview.duplicate()
 
-var p_back := Vector2(0, -230)
-var p_one := Vector2(440, p_back.y * (1.0/3.0))
-var p_two := Vector2(p_one.x / 2.0, p_back.y * (2.0/3.0))
+var p_back := Vector2(350, -150)
 
-var pos_targets = [Vector2.ZERO,
-	p_one,
-	p_two,
-	p_back,
-	p_two * Vector2(-1, 1),
-	p_one * Vector2(-1, 1)]
+var pos_targets = [Vector2.ZERO]
 
 var circles = []
 onready var circles_node = $Picker/Circles
@@ -66,7 +59,7 @@ func _ready():
 	for i in world_size:
 		# instance previews
 		worlds[i].get_node("ViewportContainer/Viewport").add_child(preview_scenes[i].instance())
-		worlds[i].get_node("ViewportContainer/Viewport/Node2D/Camera2D").zoom = Vector2.ONE
+		#worlds[i].get_node("ViewportContainer/Viewport/Node2D/Camera2D").zoom = Vector2.ONE
 		worlds[i].get_node("Locked").visible = Shared.unlocked[i] < 0
 		# set cursor circles position
 		circles[i].position.x = (i - (world_size - 1) / 2.0) * 100
@@ -159,14 +152,14 @@ func close_world():
 	for i in orb_viewport.get_children():
 		orb_viewport.remove_child(i)
 	orb_viewport.add_child(preview_scenes[world_cursor].instance())
-	orb_viewport.get_node("Node2D/Camera2D").zoom = Vector2.ONE
+	#orb_viewport.get_node("Node2D/Camera2D").zoom = Vector2.ONE
 	worlds[world_cursor].get_node("Locked").visible = Shared.unlocked[world_cursor] < 0
 
 func preview_level():
 	for i in orb_viewport.get_children():
 		orb_viewport.remove_child(i)
 	orb_viewport.add_child(level_scenes[world_cursor][level_cursor].instance())
-	orb_viewport.get_node("Node2D/Camera2D").zoom = Vector2.ONE
+	#orb_viewport.get_node("Node2D/Camera2D").zoom = Vector2.ONE
 	worlds[world_cursor].get_node("Locked").visible = level_cursor > Shared.unlocked[world_cursor]
 
 func open_level():

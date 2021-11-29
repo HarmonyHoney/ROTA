@@ -97,8 +97,10 @@ func _ready():
 	for i in get_tree().get_nodes_in_group("game_camera"):
 		if i.get_viewport() == get_viewport():
 			camera = i
-			camera.position = position
-			camera.reset_smoothing()
+			camera.target_node = self
+#			if camera.is_moving:
+#				camera.position = position
+#				camera.reset_smoothing()
 			set_dir()
 			camera.rotation_degrees = camera.target_angle
 			sprites.rotation_degrees = target_angle
@@ -222,10 +224,6 @@ func _physics_process(delta):
 	if is_move:
 		move_velocity = move_and_slide(rot(velocity))
 		velocity = rot(move_velocity, dir, true)
-	
-	# camera
-	if camera:
-		camera.position = position
 	
 	# animation
 	if anim.current_animation != "punch":

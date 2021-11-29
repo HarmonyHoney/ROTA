@@ -15,11 +15,10 @@ __meta__ = {
 }
 
 [node name="Arrows" type="Control" parent="Control"]
-visible = false
-margin_left = 50.0
-margin_top = 670.0
-margin_right = 50.0
-margin_bottom = 670.0
+margin_left = 25.0
+margin_top = 695.0
+margin_right = 25.0
+margin_bottom = 695.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -125,11 +124,10 @@ __meta__ = {
 }
 
 [node name="X" type="Control" parent="Control"]
-visible = false
-margin_left = 50.0
-margin_top = 50.0
-margin_right = 50.0
-margin_bottom = 50.0
+margin_left = 535.0
+margin_top = 595.0
+margin_right = 535.0
+margin_bottom = 595.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -180,19 +178,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="X2" type="Control" parent="Control"]
-visible = false
-margin_left = 1230.0
-margin_top = 50.0
-margin_right = 1230.0
-margin_bottom = 50.0
+[node name="C" type="Control" parent="Control"]
+margin_left = 1255.0
+margin_top = 695.0
+margin_right = 1255.0
+margin_bottom = 695.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="Control/X2"]
+[node name="Key" type="NinePatchRect" parent="Control/C"]
 margin_left = -100.0
-margin_bottom = 100.0
+margin_top = -100.0
 texture = ExtResource( 2 )
 patch_margin_left = 25
 patch_margin_top = 25
@@ -202,7 +199,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/X2/Key"]
+[node name="Label" type="Label" parent="Control/C/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -220,18 +217,73 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/X2"]
+[node name="Label" type="Label" parent="Control/C"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
 anchor_bottom = 1.0
 margin_left = -256.865
-margin_top = 3.12738
+margin_top = -96.8726
 margin_right = -112.865
-margin_bottom = 103.127
+margin_bottom = 3.12738
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "HIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="R" type="Control" parent="Control"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 25.0
+margin_bottom = 25.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="NinePatchRect" parent="Control/R"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/R/Key"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -85.5
+margin_right = 93.5
+margin_bottom = 2.5
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "R"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/R"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = 119.211
+margin_top = 3.12738
+margin_right = 311.211
+margin_bottom = 103.127
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "RESET"
 __meta__ = {
 "_edit_use_anchors_": false
 }

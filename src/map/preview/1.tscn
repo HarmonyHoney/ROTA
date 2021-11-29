@@ -7,6 +7,8 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 500, 150 )
+zoom = Vector2( 1, 1 )
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 2 )]
 tile_data = PoolIntArray( -65531, 0, 0, 4, 0, 0, 5, 0, 0, 65541, 0, 0, 131077, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0 )
