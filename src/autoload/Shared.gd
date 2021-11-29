@@ -23,11 +23,15 @@ func _ready():
 	for i in list_folder(worlds_path).size():
 		world_size[i] = list_folder(worlds_path + str(i + 1) + "/").size() - 1
 
+
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_F11:
 			OS.window_fullscreen = !OS.window_fullscreen
 			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
+#		if event.scancode == KEY_MINUS or event.scancode == KEY_EQUAL:
+#			Engine.time_scale = max(0.5, Engine.time_scale - 0.1) if event.scancode == KEY_MINUS else min(10.0, Engine.time_scale + 0.1)
+#			HUD.get_node("Control/Time").text = "time_scale: " + str(Engine.time_scale)
 
 func list_folder(path, include_extension := true):
 	var dir = Directory.new()

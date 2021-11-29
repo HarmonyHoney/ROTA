@@ -19,6 +19,7 @@ margin_left = 25.0
 margin_top = 695.0
 margin_right = 25.0
 margin_bottom = 695.0
+rect_scale = Vector2( 0.5, 0.5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -123,66 +124,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="X" type="Control" parent="Control"]
-margin_left = 535.0
-margin_top = 595.0
-margin_right = 535.0
-margin_bottom = 595.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Key" type="NinePatchRect" parent="Control/X"]
-margin_right = 100.0
-margin_bottom = 100.0
-texture = ExtResource( 2 )
-patch_margin_left = 25
-patch_margin_top = 25
-patch_margin_right = 25
-patch_margin_bottom = 25
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/X/Key"]
-anchor_left = 0.02
-anchor_top = 0.88
-anchor_right = 0.065
-anchor_bottom = 1.0
-margin_left = -2.0
-margin_top = -85.5
-margin_right = 93.5
-margin_bottom = 2.5
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "X"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/X"]
-anchor_left = 0.02
-anchor_top = 0.88
-anchor_right = 0.065
-anchor_bottom = 1.0
-margin_left = 119.211
-margin_top = 3.12738
-margin_right = 311.211
-margin_bottom = 103.127
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "JUMP"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="C" type="Control" parent="Control"]
 margin_left = 1255.0
-margin_top = 695.0
+margin_top = 635.0
 margin_right = 1255.0
-margin_bottom = 695.0
+margin_bottom = 635.0
+rect_scale = Vector2( 0.5, 0.5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -222,13 +169,72 @@ anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
 anchor_bottom = 1.0
-margin_left = -256.865
-margin_top = -96.8726
-margin_right = -112.865
-margin_bottom = 3.12738
+margin_left = -249.0
+margin_top = -97.0
+margin_right = -105.0
+margin_bottom = 3.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "HIT"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="X" type="Control" parent="Control"]
+margin_left = 1255.0
+margin_top = 695.0
+margin_right = 1255.0
+margin_bottom = 695.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="NinePatchRect" parent="Control/X"]
+margin_left = -100.0
+margin_top = -100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/X/Key"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -85.5
+margin_right = 93.5
+margin_bottom = 2.5
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "X"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/X"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -295.0
+margin_top = -97.0
+margin_right = -103.0
+margin_bottom = 3.0
+grow_horizontal = 0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "JUMP"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -238,6 +244,7 @@ margin_left = 25.0
 margin_top = 25.0
 margin_right = 25.0
 margin_bottom = 25.0
+rect_scale = Vector2( 0.5, 0.5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -284,6 +291,24 @@ margin_bottom = 103.127
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "RESET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="Control"]
+visible = false
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = 473.297
+margin_top = -618.121
+margin_right = 991.697
+margin_bottom = -518.121
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "time_scale: "
 __meta__ = {
 "_edit_use_anchors_": false
 }

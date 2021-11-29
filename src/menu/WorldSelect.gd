@@ -65,7 +65,7 @@ func _ready():
 		circles[i].position.x = (i - (world_size - 1) / 2.0) * 100
 	
 	# create level nodes
-	for i in 19:
+	for i in 29:
 		levels_node.add_child(level.duplicate())
 	levels = levels_node.get_children()
 	

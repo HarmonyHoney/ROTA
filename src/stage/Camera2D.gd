@@ -54,7 +54,8 @@ func _process(delta):
 
 func _draw():
 	if !Engine.editor_hint: return
-	draw_circle(Vector2.ZERO, focal_zoom_threshhold, Color(0,0,0, 0.1))
+	#draw_circle(Vector2.ZERO, focal_zoom_threshhold, Color(0,0,0, 0.1))
+	draw_arc(Vector2.ZERO, focal_zoom_threshhold, 0, TAU, 33, Color(1,0,0, 0.2), 5.0)
 
 func set_threshhold(arg):
 	focal_zoom_threshhold = abs(arg)

@@ -10,25 +10,26 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 600, 200 )
+position = Vector2( 850, -200 )
+zoom = Vector2( 1.8, 1.8 )
 is_moving = true
 is_focal_point = true
-focal_influence = 0.1
-focal_zoom_dividend = 100
+is_focal_zoom = true
+focal_zoom_threshhold = 700
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 2 )]
-tile_data = PoolIntArray( -65529, 1610612736, 0, -65528, 1610612736, 0, 7, 1610612736, 0, 8, 1610612736, 0, 65543, 1610612736, 0, 65544, 1610612736, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 1610612736, 0, 131080, 1610612736, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 1610612736, 0, 196616, 1610612736, 0 )
+tile_data = PoolIntArray( -393210, 0, 0, -393209, 0, 0, -393208, 0, 0, -327674, -1073741824, 0, -327673, -1073741824, 0, -327672, -1073741824, 0, -327669, -1073741824, 0, -327668, -1073741824, 0, -327667, -1073741824, 0, -262138, -1073741824, 0, -262137, -1073741824, 0, -262136, -1073741824, 0, -262133, -1073741824, 0, -262132, -1073741824, 0, -262131, -1073741824, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, -1073741824, 0, -196597, -1073741824, 0, -196596, -1073741824, 0, -196595, -1073741824, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0 )
 
 [node name="SpikeMap" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 131074, -1073741824, 0, 196610, -1073741824, 0 )
+tile_data = PoolIntArray( -458746, 0, 0, -131061, 1610612736, 0, -131060, 1610612736, 0, -131059, 1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 400, 150 )
+position = Vector2( 850, 150 )
 
 [node name="Exit" parent="Actors" instance=ExtResource( 4 )]
-position = Vector2( 500, 500 )
+position = Vector2( 1000, -400 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 750, -150 )
+position = Vector2( 450, 150 )

@@ -181,7 +181,7 @@ func _physics_process(delta):
 	
 	# spin
 	if !has_jumped and !is_floor:
-		spin(test_move(transform, rot(Vector2(-5, 5))))
+		spin(test_move(transform, rot(Vector2(-25, 25))))
 		has_jumped = true
 		is_floor = false
 	
