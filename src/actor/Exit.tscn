@@ -38,7 +38,7 @@ shader = ExtResource( 5 )
 shader_param/offset_y = 0.0
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 50, 50 )
+extents = Vector2( 40, 40 )
 
 [node name="Exit" type="Node2D" groups=[
 "exit",
@@ -51,7 +51,7 @@ anims/close = SubResource( 1 )
 anims/open = SubResource( 2 )
 
 [node name="Sprites" type="Node2D" parent="."]
-scale = Vector2( 0.25, 0.25 )
+scale = Vector2( 0.22, 0.22 )
 
 [node name="Rect" type="Sprite" parent="Sprites"]
 texture = ExtResource( 4 )
@@ -68,6 +68,9 @@ texture = ExtResource( 3 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 4 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
