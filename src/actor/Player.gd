@@ -19,14 +19,22 @@ export var dir := 0 setget set_dir
 var velocity := Vector2.ZERO
 var move_velocity := Vector2.ZERO
 
-var walk_speed = 250
-var gravity = 1300
-var jump_speed = 460
-var jump_clock := 0.0
-var jump_time := 0.52
+export var walk_speed := 350.0
+export var air_speed := 250.0
+
+var floor_accel := 12
+var air_accel := 7
+
+var is_jump := false
+var has_jumped := true
+export var jump_height := 350.0 setget set_jump_height
+export var jump_time := 0.7 setget set_jump_time
+var jump_speed := 0.0
+var jump_gravity := 0.0
+var fall_gravity := 0.0
+#var jump_start := 0.0
 
 var is_floor := false
-var has_jumped := true
 var dir_x := 1
 
 onready var label : Label = $DebugCanvas/Labels/Label
@@ -63,26 +71,10 @@ var exit_node
 
 var is_dead := false
 
-func set_dir(arg := dir):
-	dir = posmod(arg, 4)
-	target_angle = dir * 90
-	
-	if Engine.editor_hint:
-		if !sprites: sprites = $Sprites
-		sprites.rotation_degrees = target_angle
-	elif camera:
-		camera.target_angle = target_angle
-	
-	if areas:
-		areas.rotation_degrees = target_angle
-
-func set_dir_x(arg := dir_x):
-	dir_x = sign(arg)
-	areas.scale.x = dir_x
-	sprites.scale.x = dir_x
-
 func _ready():
 	if Engine.editor_hint: return
+	
+	solve_jump()
 	
 	readout.resize(4)
 	if is_debug:
@@ -133,7 +125,7 @@ func _physics_process(delta):
 	if is_dead:
 		sprites.position += rot(velocity) * delta
 		sprites.rotate(deg2rad(-dir_x * 240) * delta)
-		velocity.y += gravity * delta
+		velocity.y += fall_gravity * delta
 		return
 	
 	# input
@@ -150,34 +142,45 @@ func _physics_process(delta):
 		set_dir_x(joy.x)
 	
 	# on floor
-	is_floor = test_move(transform, rot(Vector2.DOWN))
+	is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN))
 	if is_floor:
 		has_jumped = false
-	
-	# gravity
-	velocity.y += gravity * delta
 	
 	# walking
 	turn_clock = max(0, turn_clock - delta)
 	if is_walk and turn_clock == 0 and anim.current_animation != "punch":
-		velocity.x = joy.x * walk_speed
+		var target = joy.x * (walk_speed if is_floor else air_speed)
+		var weight = floor_accel if is_floor else air_accel
+		velocity.x = lerp(velocity.x, target, weight * delta)
 	
-	# jump
+	# start jump
 	if is_floor and btnp_jump:
-		has_jumped = true
-		jump_clock = jump_time
 		is_floor = false
 		if anim.current_animation != "punch":
 			anim.play("jump")
-	
-	if (jump_clock > 0 and btn_jump) or jump_clock > jump_time - 0.1:
-		velocity.y = -jump_speed
-		jump_clock -= delta
 		
-		if test_move(transform, rot(Vector2(0, -1))):
-			jump_clock = 0
-	else:
-		jump_clock = 0
+		is_jump = true
+		has_jumped = true
+		velocity.y = jump_speed
+		#jump_start = position.y
+	
+	# gravity
+	velocity.y += (jump_gravity if is_jump else fall_gravity) * delta
+	
+	# during jump
+	if is_jump:
+		if btn_jump:
+			if velocity.y >= 0.0 or test_move(transform, rot(Vector2(0, -1))):
+				is_jump = false
+				#print("jump start: ", jump_start, " / jump end: ", position.y + velocity.y, " / distance: ", position.y - jump_start)
+		else:
+			is_jump = false
+			velocity.y *= 0.8
+	
+	# apply movement
+	if is_move:
+		move_velocity = move_and_slide(rot(velocity))
+		velocity = rot(move_velocity, dir, true)
 	
 	# spin
 	if !has_jumped and !is_floor:
@@ -220,11 +223,6 @@ func _physics_process(delta):
 	else:
 		push_clock = 0
 	
-	# apply movement
-	if is_move:
-		move_velocity = move_and_slide(rot(velocity))
-		velocity = rot(move_velocity, dir, true)
-	
 	# animation
 	if anim.current_animation != "punch":
 		if is_floor:
@@ -241,24 +239,61 @@ func _physics_process(delta):
 			if anim.current_animation != last_anim and last_anim != "idle":
 				anim.seek(t)
 	
-	# blink
+	# blink anim
 	blink_clock -= delta
 	if blink_clock < 0:
 		anim_eyes.play("blink")
 		blink_clock = rand_range(2, 15)
 	
-	# sprite
+	# sprite rotation
 	sprites.rotation = lerp_angle(sprites.rotation, deg2rad(target_angle), delta * sprite_weight)
 	
 	# debug label
-	readout[0] = "dir: " + str(dir)
-	readout[1] = "is_floor: " + str(is_floor)
-	readout[2] = "has_jumped: " + str(has_jumped)
-	readout[3] = "dir_x: " + str(dir_x)
+	if is_debug:
+		readout[0] = "dir: " + str(dir)
+		readout[1] = "is_floor: " + str(is_floor)
+		readout[2] = "has_jumped: " + str(has_jumped)
+		readout[3] = "dir_x: " + str(dir_x)
+		
+		label.text = ""
+		for i in readout:
+			label.text += str(i) + "\n"
+
+func set_dir(arg := dir):
+	dir = posmod(arg, 4)
+	target_angle = dir * 90
 	
-	label.text = ""
-	for i in readout:
-		label.text += str(i) + "\n"
+	if Engine.editor_hint:
+		if !sprites: sprites = $Sprites
+		sprites.rotation_degrees = target_angle
+	elif camera:
+		camera.target_angle = target_angle
+	
+	if areas:
+		areas.rotation_degrees = target_angle
+
+func set_dir_x(arg := dir_x):
+	dir_x = sign(arg)
+	areas.scale.x = dir_x
+	sprites.scale.x = dir_x
+
+func set_jump_height(arg):
+	jump_height = arg
+	solve_jump()
+
+func set_jump_time(arg):
+	jump_time = arg
+	solve_jump()
+
+func solve_jump():
+	# Sebastian Lague's formula
+	#gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
+	#jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+	
+	jump_gravity = (2 * jump_height) / pow(jump_time, 2)
+	jump_speed = -jump_gravity * jump_time
+	fall_gravity = jump_gravity * 2.0
+	print("jump_speed: ", jump_speed, " / jump_gravity: ", jump_gravity, " / fall_gravity: ", fall_gravity)
 
 func rot(arg : Vector2, _dir = 0, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
@@ -274,7 +309,7 @@ func hit_effector(pos : Vector2):
 	velocity = Vector2.ZERO
 	is_floor = false
 	has_jumped = true
-	jump_clock = 0
+	is_jump = false
 
 func spinner(right := false, pos := Vector2.ZERO):
 	spin(right)
@@ -289,7 +324,7 @@ func portal(pos):
 	velocity = Vector2.ZERO
 	is_floor = false
 	has_jumped = true
-	jump_clock = 0
+	is_jump = false
 	
 	position = pos
 
@@ -326,6 +361,7 @@ func die():
 	
 	yield(get_tree().create_timer(0.7), "timeout")
 	Shared.reset()
+
 
 
 
