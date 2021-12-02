@@ -46,20 +46,23 @@ var target_angle := 0.0
 onready var blink_clock := rand_range(2, 15)
 
 var push_clock := 0.0
-var push_time := 0.4
+var push_time := 0.3
 
-var punch_clock := 0.0
-var punch_time := 0.4
-var is_punch := false
+var is_hold := false
+var held_box
+var hold_pos := Vector2.ZERO
+
 
 var turn_clock := 0.0
 var turn_time := 0.1
 
 var is_input := true
+var joy_last := Vector2.ZERO
 var joy := Vector2.ZERO
-var btn_jump := false
 var btnp_jump := false
+var btn_jump := false
 var btnp_action := false
+var btn_action := false
 
 export var is_debug := false
 
@@ -116,6 +119,7 @@ func _input(event):
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
+	# alternate updates
 	if is_exit:
 		position = position.linear_interpolate(exit_node.position, 3 * delta)
 		sprites.scale = sprites.scale.linear_interpolate(Vector2.ZERO, 0.9 * delta)
@@ -127,91 +131,106 @@ func _physics_process(delta):
 		sprites.rotate(deg2rad(-dir_x * 240) * delta)
 		velocity.y += fall_gravity * delta
 		return
+	# end alternate updates
 	
 	# input
 	if is_input:
+		joy_last = joy
 		joy = Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"),
 			Input.get_action_strength("down") - Input.get_action_strength("up")).round()
 		
 		btnp_jump = Input.is_action_just_pressed("jump")
 		btn_jump = Input.is_action_pressed("jump")
 		btnp_action = Input.is_action_just_pressed("action")
+		btn_action = Input.is_action_pressed("action")
+	# end input code
 	
-	# dir_x
-	if joy.x != 0 and anim.current_animation != "punch":
-		set_dir_x(joy.x)
-	
-	# on floor
-	is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN))
-	if is_floor:
-		has_jumped = false
-	
-	# walking
-	turn_clock = max(0, turn_clock - delta)
-	if is_walk and turn_clock == 0 and anim.current_animation != "punch":
-		var target = joy.x * (walk_speed if is_floor else air_speed)
-		var weight = floor_accel if is_floor else air_accel
-		velocity.x = lerp(velocity.x, target, weight * delta)
-	
-	# start jump
-	if is_floor and btnp_jump:
-		is_floor = false
-		if anim.current_animation != "punch":
-			anim.play("jump")
-		
-		is_jump = true
-		has_jumped = true
-		velocity.y = jump_speed
-		#jump_start = position.y
-	
-	# gravity
-	velocity.y += (jump_gravity if is_jump else fall_gravity) * delta
-	
-	# during jump
-	if is_jump:
-		if btn_jump:
-			if velocity.y >= 0.0 or test_move(transform, rot(Vector2(0, -1))):
-				is_jump = false
-				#print("jump start: ", jump_start, " / jump end: ", position.y + velocity.y, " / distance: ", position.y - jump_start)
-		else:
-			is_jump = false
-			velocity.y *= 0.8
-	
-	# apply movement
+	# movement code
 	if is_move:
-		move_velocity = move_and_slide(rot(velocity))
-		velocity = rot(move_velocity, dir, true)
+		# dir_x
+		if joy.x != 0:
+			set_dir_x(joy.x)
+		
+		# on floor
+		is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN))
+		if is_floor:
+			has_jumped = false
+		
+		# walking
+		turn_clock = max(0, turn_clock - delta)
+		if is_walk and turn_clock == 0:
+			var target = joy.x * (walk_speed if is_floor else air_speed)
+			var weight = floor_accel if is_floor else air_accel
+			velocity.x = lerp(velocity.x, target, weight * delta)
+		
+		# start jump
+		if is_floor and btnp_jump:
+			is_floor = false
+			anim.play("jump")
+			
+			is_jump = true
+			has_jumped = true
+			velocity.y = jump_speed
+			#jump_start = position.y
+		
+		# gravity
+		velocity.y += (jump_gravity if is_jump else fall_gravity) * delta
+		
+		# during jump
+		if is_jump:
+			if btn_jump:
+				if velocity.y >= 0.0 or test_move(transform, rot(Vector2(0, -1))):
+					is_jump = false
+					#print("jump start: ", jump_start, " / jump end: ", position.y + velocity.y, " / distance: ", position.y - jump_start)
+			else:
+				is_jump = false
+				velocity.y *= 0.8
+		
+		# apply movement
+		if is_move:
+			move_velocity = move_and_slide(rot(velocity))
+			velocity = rot(move_velocity, dir, true)
+		
+		# spin
+		if !has_jumped and !is_floor:
+			spin(test_move(transform, rot(Vector2(-25, 25))))
+			has_jumped = true
+			is_floor = false
+	# end movement code
 	
-	# spin
-	if !has_jumped and !is_floor:
-		spin(test_move(transform, rot(Vector2(-25, 25))))
-		has_jumped = true
-		is_floor = false
-	
-	# hit box
+	# block direction
 	if btnp_action:
-		is_punch = true
+		if !is_hold:
+			for i in hit_area.get_overlapping_areas():
+				var o = i.owner
+				if o is Box:
+					held_box = o
+					is_hold = true
+					is_move = false
+					is_jump = false
+					
+					hold_pos = o.position + rot(Vector2(-dir_x * 100, 20))
+					has_jumped = true
+					anim.play("jump")
 	
-	punch_clock = max(0, punch_clock - delta)
-	if is_punch and punch_clock == 0:
-		is_punch = false
-		punch_clock = 0.25
-		#audio_slap.play()
-		anim.play("punch")
-		anim.seek(0)
-		velocity.x = 0
-		for i in hit_area.get_overlapping_areas():
-			var o = i.owner
-			if o is Box:
-				var d = 0 if joy.y == 1 else 2 if joy.y == -1 else 3 if dir_x == 1 else 1
-				o.set_dir(dir + d)
-				o.move_clock = 0
-				#audio_punch.play()
-				print(o.name, " hit, dir: ", o.dir)
-				#o.push(dir + d)
-				break
+	if is_hold:
+		position = position.linear_interpolate(hold_pos, 6 * delta)
+		held_box.move_clock = 1.0
+		
+		if joy.y != 0 or joy.x == dir_x:
+			var d = 2 if joy.y == -1 else 0 if joy.y == 1 else -dir_x
+			held_box.set_dir(dir + d)
+		
+		if !btn_action:
+			is_hold = false
+			held_box.move_clock = held_box.move_time
+			is_move = true
+			velocity = Vector2.ZERO
+			if test_move(transform, rot(Vector2.DOWN * 50)):
+				move_and_collide(rot(Vector2.DOWN * 50))
+	# end block direction code
 	
-	# push box
+	# block push
 	if is_floor and joy.x != 0 and test_move(transform, rot(Vector2(1 if joy.x == 1 else -1, 0))):
 		push_clock += delta
 		if push_clock > push_time:
@@ -222,9 +241,10 @@ func _physics_process(delta):
 					break
 	else:
 		push_clock = 0
+	# end push code
 	
 	# animation
-	if anim.current_animation != "punch":
+	if !is_hold:
 		if is_floor:
 			var t = anim.current_animation_position
 			var last_anim = anim.current_animation
@@ -247,6 +267,7 @@ func _physics_process(delta):
 	
 	# sprite rotation
 	sprites.rotation = lerp_angle(sprites.rotation, deg2rad(target_angle), delta * sprite_weight)
+	# end animation code
 	
 	# debug label
 	if is_debug:

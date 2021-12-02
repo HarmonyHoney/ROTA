@@ -10,12 +10,12 @@ onready var arrow : Sprite = $Sprite/Arrow
 onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
 onready var audio_push : AudioStreamPlayer2D = $AudioPush
 
-export var dir := 0 setget set_dir
+export var dir := 0.0 setget set_dir
 
 var tile := 100.0
 var is_floor := false
 var move_clock := 0.0
-export var move_time := 0.4
+var move_time := 0.2
 onready var last_pos := position
 var move_weight := 5.0
 
@@ -32,7 +32,8 @@ func _ready():
 	position = Vector2(50, 50) + (position / 100).floor() * 100
 
 func set_dir(arg := dir):
-	dir = posmod(arg, 4)
+	#dir = posmod(arg, 4)
+	dir = fposmod(arg, 4)
 	arrow_angle = dir * 90
 #	if push_areas:
 #		push_areas.rotation_degrees = arrow_angle
@@ -77,12 +78,13 @@ func push(push_dir := 0):
 
 func move(vector := Vector2.ZERO):
 	var is_move := false
+	var move_vec = vector.round() * tile
 	
 	shrink_shape()
 	# is space open
-	if !test_move(transform, vector * tile):
+	if !test_move(transform, move_vec):
 		last_pos = position
-		move_and_collide(vector * tile)
+		move_and_collide(move_vec)
 		# keep box on grid (:
 		var step = Vector2(stepify(position.x, 50), stepify(position.y, 50)) - position
 		if step != Vector2.ZERO:

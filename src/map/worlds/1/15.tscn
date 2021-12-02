@@ -32,4 +32,4 @@ position = Vector2( 50, 150 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 6 )]
 position = Vector2( 50, -50 )
-dir = 2
+dir = 2.0
