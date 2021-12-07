@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 
@@ -18,6 +19,10 @@ focal_zoom_dividend = 100
 tile_data = PoolIntArray( 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0 )
 
 [node name="SpikeMap" parent="." instance=ExtResource( 5 )]
+
+[node name="Boundary" parent="." instance=ExtResource( 6 )]
+position = Vector2( 450, 350 )
+size = 12.0
 
 [node name="Actors" type="Node2D" parent="."]
 

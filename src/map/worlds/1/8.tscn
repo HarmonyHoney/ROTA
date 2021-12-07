@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://media/image/spike_tile.png" type="Texture" id=7]
+[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 100, 25, 50, 50, 100, 75, 50, 100, 100 )
@@ -51,6 +52,10 @@ tile_data = PoolIntArray( 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65
 tile_set = SubResource( 2 )
 tile_data = PoolIntArray( -6, 0, 0, -65531, 0, 0 )
 
+[node name="Boundary" parent="." instance=ExtResource( 8 )]
+position = Vector2( 0, 100 )
+size = 15.0
+
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
@@ -61,3 +66,4 @@ position = Vector2( 0, 200 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( -150, -50 )
+is_regenerate = true

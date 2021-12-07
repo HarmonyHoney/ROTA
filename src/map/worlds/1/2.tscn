@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=5]
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,6 +16,10 @@ is_focal_zoom = true
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 3 )]
 tile_data = PoolIntArray( 8, -1610612736, 0, 9, -1610612736, 0, 65544, -1610612736, 0, 65545, -1610612736, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, -1610612736, 0, 196612, 0, 0, 262148, -1610612736, 0, 327684, -1610612736, 0, 327685, -1610612736, 0, 327686, -1610612736, 0, 327687, -1610612736, 0, 327688, -1610612736, 0, 327689, -1610612736, 0, 393224, -1610612736, 0, 393225, -1610612736, 0, 458760, -1610612736, 0, 458761, -1610612736, 0 )
+
+[node name="Boundary" parent="." instance=ExtResource( 5 )]
+position = Vector2( 750, 400 )
+size = 12.0
 
 [node name="Actors" type="Node2D" parent="."]
 

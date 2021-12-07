@@ -67,7 +67,8 @@ func _process(delta):
 func _draw():
 	if !Engine.editor_hint: return
 	#draw_circle(Vector2.ZERO, focal_zoom_threshhold, Color(0,0,0, 0.1))
-	draw_arc(Vector2.ZERO, focal_zoom_threshhold, 0, TAU, 33, Color(1,0,0, 0.2), 5.0)
+	if is_focal_zoom:
+		draw_arc(Vector2.ZERO, focal_zoom_threshhold, 0, TAU, 33, Color(1,0,0, 0.2), 5.0)
 	
 	var size = zoom * screen_size.y
 	draw_rect(Rect2(-size * 0.5, size), Color(1,0,0, 0.2), false, 10.0)

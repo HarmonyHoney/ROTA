@@ -9,6 +9,9 @@ var is_solid := false
 
 var solid_clock := 0.1
 
+var is_spawn_box := false
+var box_to_move
+
 func _ready():
 	set_physics_process(false)
 
@@ -19,8 +22,13 @@ func _on_Area2D_body_exited(body):
 func _physics_process(delta):
 	solid_clock = max(0, solid_clock - delta)
 	if solid_clock == 0 and area.get_overlapping_bodies().size() == 0:
-		make_solid()
-		set_physics_process(false)
+		if is_spawn_box:
+			box_to_move.position = position
+			box_to_move.set_physics_process(true)
+			queue_free()
+		else:
+			make_solid()
+			set_physics_process(false)
 
 func make_solid():
 	is_solid = true

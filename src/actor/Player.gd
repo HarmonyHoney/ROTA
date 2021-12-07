@@ -362,6 +362,7 @@ func die():
 	yield(get_tree().create_timer(0.7), "timeout")
 	Shared.reset()
 
-
+func outside_boundary():
+	die()
 
 
