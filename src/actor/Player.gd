@@ -11,6 +11,8 @@ onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 onready var anim : AnimationPlayer = $AnimationPlayer
 onready var anim_eyes : AnimationPlayer = $AnimationEyes
+onready var line : Line2D = $Line2D
+onready var wand_origin : Node2D = $Sprites/Wand/WandOrigin
 
 var camera : Camera2D
 
@@ -199,7 +201,7 @@ func _physics_process(delta):
 	# end movement code
 	
 	# block direction
-	if btnp_action:
+	if btnp_action and is_floor:
 		if !is_hold:
 			for i in hit_area.get_overlapping_areas():
 				var o = i.owner
@@ -207,27 +209,31 @@ func _physics_process(delta):
 					held_box = o
 					is_hold = true
 					is_move = false
-					is_jump = false
-					
-					hold_pos = o.position + rot(Vector2(-dir_x * 100, 20))
-					has_jumped = true
-					anim.play("jump")
+					velocity = Vector2.ZERO
+					line.visible = true
 	
 	if is_hold:
-		position = position.linear_interpolate(hold_pos, 6 * delta)
 		held_box.move_clock = 1.0
 		
-		if joy.y != 0 or joy.x == dir_x:
-			var d = 2 if joy.y == -1 else 0 if joy.y == 1 else -dir_x
-			held_box.set_dir(dir + d)
+		var t = wand_origin.get_relative_transform_to_parent(self)
 		
+		line.points[0] = wand_origin.global_position - global_position
+		line.points[1] = held_box.sprite.global_position - global_position
+		
+		# spin box
+		if joy.x != 0 and joy_last.x == 0:
+			held_box.dir += joy.x
+		
+		# lift box
+		if joy.y != 0 and joy_last.y == 0:
+			held_box.move(rot(Vector2.DOWN * joy.y))
+		
+		# let go
 		if !btn_action:
 			is_hold = false
 			held_box.move_clock = held_box.move_time
 			is_move = true
-			velocity = Vector2.ZERO
-			if test_move(transform, rot(Vector2.DOWN * 50)):
-				move_and_collide(rot(Vector2.DOWN * 50))
+			line.visible = false
 	# end block direction code
 	
 	# block push
