@@ -5,6 +5,8 @@ var is_level_select := false
 
 var next_scene := ""
 
+var scene_splash := "res://src/menu/Splash.tscn"
+var scene_title := "res://src/menu/Title.tscn"
 var scene_select := "res://src/menu/WorldSelect.tscn"
 
 var world := -1
@@ -65,6 +67,12 @@ func wipe_out():
 	else:
 		is_level_select = next_scene == scene_select
 		get_tree().change_scene(next_scene)
+	
+	match next_scene:
+		scene_splash: HUD.show("none")
+		scene_title: HUD.show("title")
+		scene_select: HUD.show("title")
+		_: HUD.show("game")
 
 func complete_level():
 	if world != -1 and level != -1:

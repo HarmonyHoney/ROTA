@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://media/image/rect-100.png" type="Texture" id=1]
+[ext_resource path="res://media/image/tiles-4x.png" type="Texture" id=2]
+[ext_resource path="res://src/stage/DualGridMap.gd" type="Script" id=3]
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
+
+[sub_resource type="TileSet" id=8]
+0/name = "rect-100.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 100, 100 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 7 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="TileSet" id=6]
+0/name = "tiles-4x.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 2400, 2400 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 0
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 256, Vector2( 0, 1 ), 260, Vector2( 0, 2 ), 4, Vector2( 1, 0 ), 320, Vector2( 1, 1 ), 325, Vector2( 1, 2 ), 5, Vector2( 1, 3 ), 68, Vector2( 1, 4 ), 257, Vector2( 2, 0 ), 64, Vector2( 2, 1 ), 65, Vector2( 2, 2 ), 1, Vector2( 2, 3 ), 257, Vector2( 2, 4 ), 68, Vector2( 3, 1 ), 324, Vector2( 3, 2 ), 261, Vector2( 4, 1 ), 321, Vector2( 4, 2 ), 69 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 400, 400 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="DualGripMap" type="TileMap"]
+tile_set = SubResource( 8 )
+cell_size = Vector2( 100, 100 )
+format = 1
+script = ExtResource( 3 )
+
+[node name="Offset" type="TileMap" parent="."]
+modulate = Color( 1, 0.690196, 0.690196, 1 )
+position = Vector2( -50, -50 )
+scale = Vector2( 0.25, 0.25 )
+tile_set = SubResource( 6 )
+cell_size = Vector2( 400, 400 )
+cell_custom_transform = Transform2D( 400, 0, 0, 400, 0, 0 )
+format = 1

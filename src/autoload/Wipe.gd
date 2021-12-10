@@ -25,4 +25,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func start(wipe_in := false):
 	sprite.visible = true
 	anim.play("in") if wipe_in else anim.play("out")
+	anim.advance(0)
 	emit_signal("start_wipe_in") if wipe_in else emit_signal("start_wipe_out")

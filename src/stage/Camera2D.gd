@@ -5,7 +5,6 @@ var target_angle := 0.0
 var rotation_weight := 1.8
 signal set_rotation(degrees)
 
-export var easing : Curve
 var zoom_multiplier := 4.0
 onready var start_zoom := zoom
 onready var zoom_out := zoom * zoom_multiplier

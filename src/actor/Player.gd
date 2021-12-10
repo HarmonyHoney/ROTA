@@ -55,7 +55,7 @@ var is_punch := false
 var turn_clock := 0.0
 var turn_time := 0.1
 
-var is_input := true
+export var is_input := true
 var joy := Vector2.ZERO
 var btn_jump := false
 var btnp_jump := false

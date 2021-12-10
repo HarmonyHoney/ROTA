@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://media/image/menu/HarmonyHoneyLogo.png" type="Texture" id=1]
+[ext_resource path="res://src/menu/Splash.gd" type="Script" id=2]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Logo" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 640, 360 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 1 )

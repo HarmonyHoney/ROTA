@@ -11,7 +11,7 @@ shader_param/line = Color( 0, 0, 0, 1 )
 shader_param/outside = Color( 0, 0, 0, 0 )
 shader_param/scale = 2.0
 shader_param/offset = Vector2( 0.2, -0.2 )
-shader_param/radius = 0.71
+shader_param/radius = 0.0
 shader_param/width = 0.0
 
 [sub_resource type="Animation" id=2]
