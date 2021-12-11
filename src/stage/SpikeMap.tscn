@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://media/image/spike_tile.png" type="Texture" id=1]
+[ext_resource path="res://media/image/spike/spike_tile.png" type="Texture" id=1]
 [ext_resource path="res://src/stage/SpikeMap.gd" type="Script" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]

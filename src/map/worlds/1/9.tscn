@@ -6,7 +6,7 @@
 [ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://media/image/spike_tile.png" type="Texture" id=7]
+[ext_resource path="res://media/image/spike/spike_tile.png" type="Texture" id=7]
 [ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]

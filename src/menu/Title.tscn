@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://media/image/menu/title.png" type="Texture" id=3]
 [ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=4]
@@ -9,22 +9,48 @@
 [ext_resource path="res://src/menu/AttractMode.gd" type="Script" id=7]
 [ext_resource path="res://media/image/menu/play.png" type="Texture" id=8]
 [ext_resource path="res://media/image/menu/gear.png" type="Texture" id=9]
-[ext_resource path="res://media/image/menu/exit_door.png" type="Texture" id=10]
+[ext_resource path="res://media/image/menu/quit_door.png" type="Texture" id=10]
+[ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=11]
+[ext_resource path="res://src/menu/Title.gd" type="Script" id=12]
 
-[sub_resource type="DynamicFont" id=1]
-size = 265
-font_data = ExtResource( 1 )
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Menu/Cursor/Sprite:material:shader_param/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 2 )
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 11 )
+shader_param/inside = Color( 1, 1, 1, 0 )
+shader_param/line = Color( 0, 0, 0, 1 )
+shader_param/outside = Color( 1, 1, 1, 0 )
+shader_param/scale = 1.0
+shader_param/offset = Vector2( 0, 0 )
+shader_param/radius = 0.4
+shader_param/width = 0.05
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 12 )
 
 [node name="Stage" type="Node2D" parent="."]
 
 [node name="Camera2D" parent="Stage" instance=ExtResource( 4 )]
-position = Vector2( 500, 500 )
+position = Vector2( 900, 350 )
+offset = Vector2( -200, 0 )
 focal_zoom_dividend = 100
+is_zoom_out = false
 
 [node name="SolidTileMap" parent="Stage" instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 1610612736, 0, 131080, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 1610612736, 0, 196616, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 1610612736, 0, 262152, 0, 0 )
+tile_data = PoolIntArray( 131077, 0, 0, 131078, 0, 0, 131079, 1610612736, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 1610612736, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 1610612736, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0 )
 
 [node name="SpikeMap" parent="Stage" instance=ExtResource( 6 )]
 
@@ -32,39 +58,53 @@ tile_data = PoolIntArray( 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0
 script = ExtResource( 7 )
 
 [node name="Player" parent="Stage/Actors" instance=ExtResource( 2 )]
-position = Vector2( 500, 150 )
+position = Vector2( 900, 150 )
 is_input = false
 
-[node name="Label" type="Label" parent="."]
-visible = false
-margin_left = 200.0
-margin_top = 200.0
-margin_right = 800.0
-margin_bottom = 500.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "ROTA"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="title" type="Sprite" parent="."]
-position = Vector2( 500, 350 )
+[node name="title" type="Sprite" parent="Stage"]
+position = Vector2( 900, 350 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="Menu" type="Node2D" parent="."]
-position = Vector2( 500, 800 )
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+layer = 2
 
-[node name="play" type="Sprite" parent="Menu"]
-position = Vector2( -700, 0 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuLayer"]
+autoplay = "idle"
+anims/idle = SubResource( 1 )
+
+[node name="Menu" type="Node2D" parent="MenuLayer"]
+position = Vector2( 150, 360 )
+
+[node name="Items" type="Node2D" parent="MenuLayer/Menu"]
+
+[node name="Play" type="Node2D" parent="MenuLayer/Menu/Items"]
+position = Vector2( 0, -220 )
+
+[node name="Sprite" type="Sprite" parent="MenuLayer/Menu/Items/Play"]
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 
-[node name="gear" type="Sprite" parent="Menu"]
+[node name="Gear" type="Node2D" parent="MenuLayer/Menu/Items"]
+
+[node name="Sprite" type="Sprite" parent="MenuLayer/Menu/Items/Gear"]
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 9 )
 
-[node name="exit_door" type="Sprite" parent="Menu"]
-position = Vector2( 700, 0 )
+[node name="Exit" type="Node2D" parent="MenuLayer/Menu/Items"]
+position = Vector2( 0, 220 )
+
+[node name="Sprite" type="Sprite" parent="MenuLayer/Menu/Items/Exit"]
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
+__meta__ = {
+"_editor_description_": "w"
+}
+
+[node name="Cursor" type="Node2D" parent="MenuLayer/Menu"]
+position = Vector2( 0, 220 )
+
+[node name="Sprite" type="Sprite" parent="MenuLayer/Menu/Cursor"]
+material = SubResource( 2 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 1 )

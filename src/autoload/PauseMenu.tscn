@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://media/image/dashes_fill.png" type="Texture" id=1]
-[ext_resource path="res://media/image/rect.png" type="Texture" id=2]
+[ext_resource path="res://media/image/box/box-400.png" type="Texture" id=2]
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/autoload/PauseMenu.gd" type="Script" id=4]
 

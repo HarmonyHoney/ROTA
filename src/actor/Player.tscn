@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://media/image/player/mouth.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -10,9 +10,10 @@
 [ext_resource path="res://media/image/player/eye.png" type="Texture" id=8]
 [ext_resource path="res://media/image/player/hand.png" type="Texture" id=9]
 [ext_resource path="res://media/image/player/dead_eye.png" type="Texture" id=10]
+[ext_resource path="res://media/image/player/player_still.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 26, 26 )
+extents = Vector2( 30, 30 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 25, 25 )
@@ -998,7 +999,7 @@ shape = SubResource( 1 )
 [node name="Areas" type="Node2D" parent="."]
 
 [node name="HitArea" type="Area2D" parent="Areas"]
-position = Vector2( 50, 0 )
+position = Vector2( 55, 0 )
 collision_layer = 0
 collision_mask = 4
 
@@ -1006,7 +1007,7 @@ collision_mask = 4
 shape = SubResource( 2 )
 
 [node name="PushArea" type="Area2D" parent="Areas"]
-position = Vector2( 26, 0 )
+position = Vector2( 30, 0 )
 collision_layer = 0
 collision_mask = 4
 
@@ -1045,6 +1046,7 @@ texture = ExtResource( 6 )
 position = Vector2( 0, -4 )
 
 [node name="Root" type="Node2D" parent="Sprites/Offset"]
+visible = false
 scale = Vector2( 0.25, 0.25 )
 
 [node name="hand2" type="Sprite" parent="Sprites/Offset/Root"]
@@ -1091,6 +1093,10 @@ texture = ExtResource( 5 )
 [node name="hand" type="Sprite" parent="Sprites/Offset/Root"]
 position = Vector2( -106, 30 )
 texture = ExtResource( 9 )
+
+[node name="player_still" type="Sprite" parent="Sprites/Offset"]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 11 )
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_BodyArea_body_entered"]

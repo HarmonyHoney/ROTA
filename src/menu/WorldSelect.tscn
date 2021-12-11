@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
 [ext_resource path="res://media/font/ShareTechMono.tres" type="DynamicFont" id=2]
-[ext_resource path="res://media/image/rect-100.png" type="Texture" id=3]
+[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=3]
 [ext_resource path="res://src/menu/WorldSelect.gd" type="Script" id=4]
 [ext_resource path="res://src/shader/inside_circle.gdshader" type="Shader" id=5]
 [ext_resource path="res://media/image/keyhole.png" type="Texture" id=6]

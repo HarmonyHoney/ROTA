@@ -28,7 +28,8 @@ size = 15.0
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 4 )]
-position = Vector2( 800, 50 )
+position = Vector2( 550, 350 )
+dir = 3
 
 [node name="Exit" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 800, 350 )

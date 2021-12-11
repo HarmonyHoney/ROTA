@@ -17,5 +17,5 @@ func _draw():
 		draw_rect(r, Color(0, 1, 0, 0.3), false, 10.0)
 
 func _on_Boundary_body_exited(body):
-	if body.has_method("outside_boundary"):
+	if !Shared.is_level_select and body.has_method("outside_boundary"):
 		body.outside_boundary()

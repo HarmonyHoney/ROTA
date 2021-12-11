@@ -8,6 +8,7 @@ var next_scene := ""
 var scene_splash := "res://src/menu/Splash.tscn"
 var scene_title := "res://src/menu/Title.tscn"
 var scene_select := "res://src/menu/WorldSelect.tscn"
+var scene_options := "res://src/menu/Options.tscn"
 
 var world := -1
 var level := -1
@@ -28,11 +29,7 @@ func _ready():
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_F11:
-			OS.window_fullscreen = !OS.window_fullscreen
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
-		if event.scancode == KEY_MINUS or event.scancode == KEY_EQUAL:
-			Engine.time_scale = max(0.5, Engine.time_scale - 0.1) if event.scancode == KEY_MINUS else min(10.0, Engine.time_scale + 0.1)
-			HUD.get_node("Control/Time").text = "time_scale: " + str(Engine.time_scale)
+			toggle_fullscreen()
 
 func list_folder(path, include_extension := true):
 	var dir = Directory.new()
@@ -72,6 +69,7 @@ func wipe_out():
 		scene_splash: HUD.show("none")
 		scene_title: HUD.show("title")
 		scene_select: HUD.show("title")
+		scene_options: HUD.show("title")
 		_: HUD.show("game")
 
 func complete_level():
@@ -82,3 +80,8 @@ func complete_level():
 		elif unlocked[world] < level + 1:
 			unlocked[world] = clamp(level + 1, 0, world_size[world])
 	Shared.change_scene(scene_select)
+
+func toggle_fullscreen():
+	OS.window_fullscreen = !OS.window_fullscreen
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
+

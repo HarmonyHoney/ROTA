@@ -15,12 +15,15 @@ export var dir := 0 setget set_dir
 var tile := 100.0
 var is_floor := false
 var move_clock := 0.0
-var move_time := 0.15
+var move_time := 0.3
 onready var last_pos := position
 var move_weight := 5.0
 
 var arrow_weight := 6.0
 var arrow_angle := 0.0
+
+var is_push := false
+var push_time := 0.5
 
 var push_frames := 0
 var last_push := 0
@@ -29,6 +32,8 @@ export var is_regenerate := false
 var start_dir := 0
 var start_pos := Vector2.ZERO
 var passhthrough_scene = load("res://src/actor/Passthrough.tscn")
+
+export var easing : Curve
 
 func _ready():
 	set_dir()
@@ -58,16 +63,21 @@ func _physics_process(delta):
 	is_floor = test_move(transform, rot(Vector2(0, tile)))
 	shrink_shape(false)
 	
-	# move down
-	if !is_floor:
-		move_clock -= delta
-		if move_clock < 0:
-			move(rot(Vector2(0, 1)))
+	var target = push_time if is_push else move_time
 	
+	move_clock = min(move_clock + delta, target)
 	# lerp sprite
-	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, delta * move_weight)
+	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, easing.interpolate(move_clock / target))
 	# update collision_sprite
 	collision_sprite.position = sprite.position
+	
+	if move_clock == target:
+		if is_push:
+			is_push = false
+		
+		# move down
+		if !is_floor:
+			move(rot(Vector2(0, 1)))
 	
 	# lerp arrow
 	arrow.rotation = lerp_angle(arrow.rotation, deg2rad(arrow_angle), delta * arrow_weight)
@@ -75,8 +85,6 @@ func _physics_process(delta):
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)
 	arrow_angle = dir * 90
-#	if push_areas:
-#		push_areas.rotation_degrees = arrow_angle
 	if Engine.editor_hint:
 		if !arrow: arrow = $Sprite/Arrow
 		arrow.rotation_degrees = arrow_angle
@@ -121,7 +129,7 @@ func move(vector := Vector2.ZERO):
 		print(name + ".position: ", position, " stepify: ", step)
 		
 		push_frames = 0
-		move_clock = move_time
+		move_clock = 0
 		
 		is_move = true
 	shrink_shape(false)
@@ -136,7 +144,7 @@ func push(push_dir := 0):
 			i.push(push_dir)
 	
 	if move(rot(Vector2.DOWN, push_dir)):
-		move_clock = move_time
+		is_push = true
 	else:
 		last_push = push_dir
 		push_frames = 20

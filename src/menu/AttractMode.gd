@@ -5,7 +5,7 @@ onready var p : Player = $Player
 
 func _ready():
 	randomize()
-	yield(get_tree().create_timer(6.0), "timeout")
+	yield(get_tree().create_timer(4.0), "timeout")
 	attract()
 
 

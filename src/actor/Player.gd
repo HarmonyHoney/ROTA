@@ -46,7 +46,7 @@ var target_angle := 0.0
 onready var blink_clock := rand_range(2, 15)
 
 var push_clock := 0.0
-var push_time := 0.4
+var push_time := 0.2
 
 var punch_clock := 0.0
 var punch_time := 0.4
@@ -208,7 +208,7 @@ func _physics_process(delta):
 				o.move_clock = 0
 				#audio_punch.play()
 				print(o.name, " hit, dir: ", o.dir)
-				#o.push(dir + d)
+				o.push(dir + d)
 				break
 	
 	# push box
@@ -349,8 +349,9 @@ func exit(arg):
 	exit_node = arg
 	anim.play("jump")
 	
-	yield(get_tree().create_timer(0.7), "timeout")
-	Shared.complete_level()
+	if !Shared.is_level_select:
+		yield(get_tree().create_timer(0.7), "timeout")
+		Shared.complete_level()
 
 func die():
 	if is_dead: return
@@ -359,8 +360,9 @@ func die():
 	anim_eyes.play("die")
 	velocity = Vector2(-350 * dir_x, -800)
 	
-	yield(get_tree().create_timer(0.7), "timeout")
-	Shared.reset()
+	if !Shared.is_level_select:
+		yield(get_tree().create_timer(0.7), "timeout")
+		Shared.reset()
 
 func outside_boundary():
 	die()
