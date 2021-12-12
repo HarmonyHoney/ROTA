@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=5]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 450, 350 )
+easing = null
+
+[node name="SolidTileMap" parent="." instance=ExtResource( 3 )]
+tile_data = PoolIntArray( -262140, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -4, 0, 0, -1, 0, 0, -65536, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 262135, 0, 0, 262136, 0, 0, 262137, 0, 0, 262138, 0, 0, 262139, 0, 0, 262140, 0, 0, 262141, 0, 0, 262142, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 0, 0, 196625, 0, 0, 327675, 0, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 458760, 0, 0, 458761, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 655364, 0, 0 )
+
+[node name="SpikeMap" parent="." instance=ExtResource( 2 )]
+
+[node name="Boundary" parent="." instance=ExtResource( 4 )]
+position = Vector2( 450, 350 )
+size = 20.0
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Player" parent="Actors" instance=ExtResource( 1 )]
+position = Vector2( 250, 150 )

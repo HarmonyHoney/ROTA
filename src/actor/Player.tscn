@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://media/image/player/mouth.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://media/image/player/hand.png" type="Texture" id=9]
 [ext_resource path="res://media/image/player/dead_eye.png" type="Texture" id=10]
 [ext_resource path="res://media/image/player/player_still.png" type="Texture" id=11]
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
@@ -962,6 +965,7 @@ z_index = 50
 z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
+sprite_easing = SubResource( 11 )
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 

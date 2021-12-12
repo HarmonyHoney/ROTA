@@ -32,7 +32,6 @@ export var jump_time := 0.7 setget set_jump_time
 var jump_speed := 0.0
 var jump_gravity := 0.0
 var fall_gravity := 0.0
-#var jump_start := 0.0
 
 var is_floor := false
 var dir_x := 1
@@ -40,7 +39,7 @@ var dir_x := 1
 onready var label : Label = $DebugCanvas/Labels/Label
 var readout = []
 
-var sprite_weight := 6.0
+var sprite_weight := 5.0
 var target_angle := 0.0
 
 onready var blink_clock := rand_range(2, 15)
@@ -51,9 +50,6 @@ var push_time := 0.2
 var punch_clock := 0.0
 var punch_time := 0.4
 var is_punch := false
-
-var turn_clock := 0.0
-var turn_time := 0.1
 
 export var is_input := true
 var joy := Vector2.ZERO
@@ -70,6 +66,12 @@ var is_exit := false
 var exit_node
 
 var is_dead := false
+
+export var sprite_easing : Curve
+var turn_clock := 0.0
+var turn_time := 0.2
+var turn_from := 0.0
+var turn_to := 0.0
 
 func _ready():
 	if Engine.editor_hint: return
@@ -90,12 +92,10 @@ func _ready():
 		if i.get_viewport() == get_viewport():
 			camera = i
 			camera.target_node = self
-#			if camera.is_moving:
-#				camera.position = position
-#				camera.reset_smoothing()
 			set_dir()
-			camera.rotation_degrees = camera.target_angle
-			sprites.rotation_degrees = target_angle
+			camera.turn_clock = 99
+			sprites.rotation = target_angle
+			camera.connect("turning", self, "turning")
 			break
 	
 	# face left or right
@@ -146,23 +146,27 @@ func _physics_process(delta):
 	if is_floor:
 		has_jumped = false
 	
-	# walking
-	turn_clock = max(0, turn_clock - delta)
-	if is_walk and turn_clock == 0 and anim.current_animation != "punch":
-		var target = joy.x * (walk_speed if is_floor else air_speed)
-		var weight = floor_accel if is_floor else air_accel
-		velocity.x = lerp(velocity.x, target, weight * delta)
+	# turning
+	turn_clock = min(turn_clock + delta, turn_time)
+	sprites.rotation = lerp_angle(turn_from, turn_to, sprite_easing.interpolate(turn_clock / turn_time))
 	
-	# start jump
-	if is_floor and btnp_jump:
-		is_floor = false
-		if anim.current_animation != "punch":
-			anim.play("jump")
+	if turn_clock == turn_time:
+		# walking
+		if is_walk and anim.current_animation != "punch":
+			var target = joy.x * (walk_speed if is_floor else air_speed)
+			var weight = floor_accel if is_floor else air_accel
+			velocity.x = lerp(velocity.x, target, weight * delta)
 		
-		is_jump = true
-		has_jumped = true
-		velocity.y = jump_speed
-		#jump_start = position.y
+		# start jump
+		if is_floor and btnp_jump:
+			is_floor = false
+			if anim.current_animation != "punch":
+				anim.play("jump")
+			
+			is_jump = true
+			has_jumped = true
+			velocity.y = jump_speed
+			#jump_start = position.y
 	
 	# gravity
 	velocity.y += (jump_gravity if is_jump else fall_gravity) * delta
@@ -245,9 +249,6 @@ func _physics_process(delta):
 		anim_eyes.play("blink")
 		blink_clock = rand_range(2, 15)
 	
-	# sprite rotation
-	sprites.rotation = lerp_angle(sprites.rotation, deg2rad(target_angle), delta * sprite_weight)
-	
 	# debug label
 	if is_debug:
 		readout[0] = "dir: " + str(dir)
@@ -261,16 +262,20 @@ func _physics_process(delta):
 
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)
-	target_angle = dir * 90
+	target_angle = deg2rad(dir * 90)
+	
+	turn_clock = 0
+	turn_from = sprites.rotation if sprites else 0
+	turn_to = target_angle
 	
 	if Engine.editor_hint:
 		if !sprites: sprites = $Sprites
-		sprites.rotation_degrees = target_angle
+		sprites.rotation = target_angle
 	elif camera:
-		camera.target_angle = target_angle
+		camera.turn(target_angle)
 	
 	if areas:
-		areas.rotation_degrees = target_angle
+		areas.rotation = target_angle
 
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
@@ -302,7 +307,6 @@ func spin(right := false):
 	set_dir(dir + (1 if right else 3))
 	
 	velocity.x = walk_speed if right else -walk_speed
-	turn_clock = turn_time
 
 func hit_effector(pos : Vector2):
 	move_and_collide(pos - position)
@@ -367,4 +371,5 @@ func die():
 func outside_boundary():
 	die()
 
-
+func turning(angle):
+	pass#sprites.rotation = angle

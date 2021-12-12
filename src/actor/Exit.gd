@@ -5,11 +5,11 @@ onready var anim = $AnimationPlayer
 
 func _ready():
 	for i in get_tree().get_nodes_in_group("game_camera"):
-		i.connect("set_rotation", self, "set_rotation")
+		i.connect("turning", self, "turning")
 		break
 
-func set_rotation(degrees):
-	sprites.rotation_degrees = degrees
+func turning(angle):
+	sprites.rotation = angle
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):

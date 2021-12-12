@@ -16,7 +16,7 @@ points = PoolVector2Array( 0, 100, 25, 50, 50, 100, 75, 50, 100, 100 )
 0/name = "spike_tile.png 0"
 0/texture = ExtResource( 7 )
 0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
+0/modulate = Color( 0, 0, 0, 0 )
 0/region = Rect2( 0, 0, 100, 100 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
@@ -43,7 +43,6 @@ zoom = Vector2( 2, 2 )
 is_moving = true
 is_focal_point = true
 focal_influence = 0.3
-focal_zoom_dividend = 100
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 2 )]
 tile_data = PoolIntArray( 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0 )

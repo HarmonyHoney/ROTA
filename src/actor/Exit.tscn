@@ -29,7 +29,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.4, 0, 0.25, 0, -0.475, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0, 0, 0, 0.1, 0, -0.475, -0.3, 0, 0, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
 
@@ -68,9 +68,6 @@ texture = ExtResource( 3 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 4 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

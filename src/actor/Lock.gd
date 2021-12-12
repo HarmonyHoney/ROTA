@@ -7,11 +7,11 @@ onready var animation : AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	for i in get_tree().get_nodes_in_group("game_camera"):
-		i.connect("set_rotation", self, "set_rotation")
+		i.connect("turning", self, "turning")
 		break
 
-func set_rotation(degrees):
-	keyhole.rotation_degrees = degrees
+func turning(angle):
+	keyhole.rotation = angle
 
 func open():
 	collision.set_deferred("disabled", true)
