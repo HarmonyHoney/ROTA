@@ -35,7 +35,7 @@ tracks/0/keys = {
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 5 )
-shader_param/offset_y = -0.475
+shader_param/offset_y = 0.0
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 40, 40 )
