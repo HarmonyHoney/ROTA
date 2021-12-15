@@ -12,20 +12,19 @@
 [ext_resource path="res://media/image/player/dead_eye.png" type="Texture" id=10]
 [ext_resource path="res://media/image/player/player_still.png" type="Texture" id=11]
 
-[sub_resource type="Curve" id=11]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 30, 30 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 25, 25 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 2, 15 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "idle"
+[sub_resource type="Animation" id=5]
 length = 2.0
 loop = true
 tracks/0/type = "bezier"
@@ -189,8 +188,7 @@ tracks/15/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "jump"
+[sub_resource type="Animation" id=6]
 length = 0.6
 loop = true
 tracks/0/type = "bezier"
@@ -354,8 +352,7 @@ tracks/15/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "punch"
+[sub_resource type="Animation" id=7]
 length = 0.15
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Sprites/Offset/Root/hand2:position:x")
@@ -518,8 +515,7 @@ tracks/15/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "push"
+[sub_resource type="Animation" id=8]
 length = 1.2
 loop = true
 tracks/0/type = "bezier"
@@ -683,7 +679,7 @@ tracks/15/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 1.2
 loop = true
 tracks/0/type = "bezier"
@@ -847,7 +843,7 @@ tracks/15/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.8
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Sprites/Offset/Root/body/Eyes/Left:scale:x")
@@ -890,8 +886,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.4, 0.8 )
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "die"
+[sub_resource type="Animation" id=11]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprites/Offset/Root/body/Eyes:visible")
@@ -965,7 +960,7 @@ z_index = 50
 z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
-sprite_easing = SubResource( 11 )
+turn_easing = SubResource( 1 )
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 
@@ -990,7 +985,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="BodyArea" type="Area2D" parent="."]
 visible = false
@@ -998,7 +993,7 @@ collision_layer = 3
 collision_mask = 136
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Areas" type="Node2D" parent="."]
 
@@ -1008,7 +1003,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/HitArea"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="PushArea" type="Area2D" parent="Areas"]
 position = Vector2( 30, 0 )
@@ -1016,7 +1011,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/PushArea"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="AudioSlap" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -1027,16 +1022,16 @@ stream = ExtResource( 4 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 playback_default_blend_time = 0.1
-anims/idle = SubResource( 4 )
-anims/jump = SubResource( 5 )
-anims/punch = SubResource( 6 )
-anims/push = SubResource( 7 )
-anims/run = SubResource( 8 )
+anims/idle = SubResource( 5 )
+anims/jump = SubResource( 6 )
+anims/punch = SubResource( 7 )
+anims/push = SubResource( 8 )
+anims/run = SubResource( 9 )
 blend_times = [ "idle", "push", 0.15, "jump", "idle", 0.2, "jump", "run", 0.2, "push", "idle", 0.3, "push", "jump", 0.3, "push", "run", 0.3, "run", "jump", 0.2, "run", "push", 0.15 ]
 
 [node name="AnimationEyes" type="AnimationPlayer" parent="."]
-anims/blink = SubResource( 9 )
-anims/die = SubResource( 10 )
+anims/blink = SubResource( 10 )
+anims/die = SubResource( 11 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false

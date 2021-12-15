@@ -12,6 +12,17 @@ onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 onready var anim : AnimationPlayer = $AnimationPlayer
 onready var anim_eyes : AnimationPlayer = $AnimationEyes
 
+export var is_input := true
+var joy := Vector2.ZERO
+var joy_last := Vector2.ZERO
+var btn_jump := false
+var btnp_jump := false
+var btnp_action := false
+var btn_push := false
+var btnp_push := false
+
+export var is_debug := false
+
 var camera : Camera2D
 
 export var dir := 0 setget set_dir
@@ -51,14 +62,6 @@ var punch_clock := 0.0
 var punch_time := 0.4
 var is_punch := false
 
-export var is_input := true
-var joy := Vector2.ZERO
-var btn_jump := false
-var btnp_jump := false
-var btnp_action := false
-
-export var is_debug := false
-
 var is_move := true
 var is_walk := true
 
@@ -67,11 +70,20 @@ var exit_node
 
 var is_dead := false
 
-export var sprite_easing : Curve
+export var turn_easing : Curve
 var turn_clock := 0.0
 var turn_time := 0.2
 var turn_from := 0.0
 var turn_to := 0.0
+
+
+var is_push := false
+var is_end_push := false
+var hold_box 
+var hold_pos := Vector2.ZERO
+
+onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
+
 
 func _ready():
 	if Engine.editor_hint: return
@@ -130,15 +142,18 @@ func _physics_process(delta):
 	
 	# input
 	if is_input:
+		joy_last = joy
 		joy = Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"),
 			Input.get_action_strength("down") - Input.get_action_strength("up")).round()
 		
-		btnp_jump = Input.is_action_just_pressed("jump")
 		btn_jump = Input.is_action_pressed("jump")
+		btnp_jump = Input.is_action_just_pressed("jump")
 		btnp_action = Input.is_action_just_pressed("action")
+		btn_push = Input.is_action_pressed("push")
+		btnp_push = Input.is_action_just_pressed("push")
 	
 	# dir_x
-	if joy.x != 0 and anim.current_animation != "punch":
+	if joy.x != 0 and !is_push and anim.current_animation != "punch":
 		set_dir_x(joy.x)
 	
 	# on floor
@@ -148,7 +163,7 @@ func _physics_process(delta):
 	
 	# turning
 	turn_clock = min(turn_clock + delta, turn_time)
-	sprites.rotation = lerp_angle(turn_from, turn_to, sprite_easing.interpolate(turn_clock / turn_time))
+	sprites.rotation = lerp_angle(turn_from, turn_to, turn_easing.interpolate(turn_clock / turn_time))
 	
 	if turn_clock == turn_time:
 		# walking
@@ -191,9 +206,12 @@ func _physics_process(delta):
 		spin(test_move(transform, rot(Vector2(-25, 25))))
 		has_jumped = true
 		is_floor = false
+		if is_push:
+			is_end_push = true
+			position = hold_pos
 	
 	# hit box
-	if btnp_action:
+	if btnp_action and is_floor:
 		is_punch = true
 	
 	punch_clock = max(0, punch_clock - delta)
@@ -216,16 +234,65 @@ func _physics_process(delta):
 				break
 	
 	# push box
-	if is_floor and joy.x != 0 and test_move(transform, rot(Vector2(1 if joy.x == 1 else -1, 0))):
-		push_clock += delta
-		if push_clock > push_time:
-			push_clock = 0.001
-			for i in push_area.get_overlapping_bodies():
-				if i.is_in_group("box") and i.is_floor:
-					i.push(dir - dir_x)
-					break
-	else:
-		push_clock = 0
+#	if is_floor and joy.x != 0 and test_move(transform, rot(Vector2(1 if joy.x == 1 else -1, 0))):
+#		push_clock += delta
+#		if push_clock > push_time:
+#			push_clock = 0.001
+#			for i in push_area.get_overlapping_bodies():
+#				if i.is_in_group("box") and i.is_floor:
+#					i.push(dir - dir_x)
+#					break
+#	else:
+#		push_clock = 0
+	
+	# push box
+	if btnp_push and is_floor:
+		for i in hit_area.get_overlapping_bodies():
+			if i.is_in_group("box") and i.is_floor:
+				hold_box = i
+				print(name, " holding: ", i.name)
+				is_push = true
+				is_end_push = false
+				is_move = false
+				
+				add_collision_exception_with(hold_box)
+				hold_box.add_collision_exception_with(self)
+				hold_box.is_hold = true
+				
+				print(position, transform)
+	
+	if is_push:
+		if !is_end_push:
+			hold_pos = hold_box.position + rot(Vector2(100 * -dir_x, 50 - collider_size.y))
+			var new_pos = position.linear_interpolate(hold_pos, delta * 8)
+			var move_to = new_pos - position
+			move_and_collide(Vector2(move_to.x, 0))
+			move_and_collide(Vector2(0, move_to.y))
+			
+			if btn_push:
+				if joy.x != 0 and joy_last.x == 0:
+					if joy.x == dir_x:
+						hold_box.push(dir - joy.x)
+					else:
+						if hold_box.test_push(dir - joy.x, 2):
+							hold_box.push(dir - joy.x)
+					
+					if !hold_box.get_floor(dir):
+						is_end_push = true
+			else:
+				is_end_push = true
+		
+		if is_end_push:
+			is_push = false
+			is_end_push = false
+			
+			is_move = true
+			has_jumped = true
+			velocity = Vector2.ZERO
+			remove_collision_exception_with(hold_box)
+			hold_box.remove_collision_exception_with(self)
+			hold_box.is_hold = false
+			hold_box.move_clock = 0
 	
 	# animation
 	if anim.current_animation != "punch":

@@ -35,6 +35,8 @@ var passhthrough_scene = load("res://src/actor/Passthrough.tscn")
 
 export var easing : Curve
 
+var is_hold := false
+
 func _ready():
 	set_dir()
 	arrow.rotation_degrees = arrow_angle
@@ -59,9 +61,7 @@ func _physics_process(delta):
 		move(rot(Vector2.DOWN, last_push))
 	
 	# on floor
-	shrink_shape()
-	is_floor = test_move(transform, rot(Vector2(0, tile)))
-	shrink_shape(false)
+	is_floor = get_floor()
 	
 	var target = push_time if is_push else move_time
 	
@@ -76,7 +76,7 @@ func _physics_process(delta):
 			is_push = false
 		
 		# move down
-		if !is_floor:
+		if !is_floor and !is_hold:
 			move(rot(Vector2(0, 1)))
 	
 	# lerp arrow
@@ -102,6 +102,23 @@ func arrow(arg):
 func portal(pos):
 	position = pos
 	sprite.position = Vector2.ZERO
+
+func outside_boundary():
+	if is_regenerate:
+		set_physics_process(false)
+		
+		set_dir(start_dir)
+		sprite.position = Vector2.ZERO
+		arrow.rotation = deg2rad(arrow_angle)
+		
+		var p = passhthrough_scene.instance()
+		p.position = start_pos
+		p.is_spawn_box = true
+		p.box_to_move = self
+		get_parent().add_child(p)
+		p.set_physics_process(true)
+	else:
+		queue_free()
 
 func shrink_shape(shrink := true):
 	collision_shape.shape.extents = Vector2(49, 49) if shrink else Vector2(50, 50)
@@ -149,19 +166,21 @@ func push(push_dir := 0):
 		last_push = push_dir
 		push_frames = 20
 
-func outside_boundary():
-	if is_regenerate:
-		set_physics_process(false)
-		
-		set_dir(start_dir)
-		sprite.position = Vector2.ZERO
-		arrow.rotation = deg2rad(arrow_angle)
-		
-		var p = passhthrough_scene.instance()
-		p.position = start_pos
-		p.is_spawn_box = true
-		p.box_to_move = self
-		get_parent().add_child(p)
-		p.set_physics_process(true)
-	else:
-		queue_free()
+func test_push(push_dir := 0, distance := 1):
+	var test = false
+	
+	shrink_shape()
+	if !test_move(transform, rot(Vector2.DOWN * distance * tile, push_dir)):
+		test = true
+	shrink_shape(false)
+	
+	return test
+
+func get_floor(check_dir := dir) -> bool:
+	var check = false
+	shrink_shape()
+	check = test_move(transform, rot(Vector2(0, tile), check_dir))
+	shrink_shape(false)
+	return check
+
+
