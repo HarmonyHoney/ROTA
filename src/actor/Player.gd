@@ -5,12 +5,13 @@ class_name Player
 onready var sprites : Node2D = $Sprites
 onready var areas : Node2D = $Areas
 onready var hit_area : Area2D = $Areas/HitArea
-onready var push_area : Area2D = $Areas/PushArea
 onready var body_area : Area2D = $BodyArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 onready var anim : AnimationPlayer = $AnimationPlayer
 onready var anim_eyes : AnimationPlayer = $AnimationEyes
+
+onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
 
 export var is_input := true
 var joy := Vector2.ZERO
@@ -55,9 +56,6 @@ var target_angle := 0.0
 
 onready var blink_clock := rand_range(2, 15)
 
-var push_clock := 0.0
-var push_time := 0.2
-
 var punch_clock := 0.0
 var punch_time := 0.4
 var is_punch := false
@@ -77,12 +75,18 @@ var turn_from := 0.0
 var turn_to := 0.0
 
 
-var is_push := false
-var is_end_push := false
+var is_hold := false
+var is_end_hold := false
 var hold_box 
 var hold_pos := Vector2.ZERO
 
-onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
+var push_clock := 0.0
+var push_time := 0.2
+
+var push_from := Vector2.ZERO
+export var push_curve : Curve
+
+var push_dir := 1
 
 
 func _ready():
@@ -90,14 +94,19 @@ func _ready():
 	
 	solve_jump()
 	
-	readout.resize(4)
-	if is_debug:
-		label.visible = true
-	
 	# snap to floor
 	var test = rot(Vector2.DOWN * 75)
 	if test_move(transform, test):
 		move_and_collide(test)
+	
+	# face left or right
+	randomize()
+	set_dir_x(1 if randf() > 0.5 else -1)
+	
+	# disable input and process if inside level select
+	if Shared.is_level_select:
+		set_process_input(false)
+		set_physics_process(false)
 	
 	# find camera in the same viewport
 	for i in get_tree().get_nodes_in_group("game_camera"):
@@ -110,19 +119,13 @@ func _ready():
 			camera.connect("turning", self, "turning")
 			break
 	
-	# face left or right
-	randomize()
-	set_dir_x(1 if randf() > 0.5 else -1)
-	
-	# disable input if inside level select
-	if Shared.is_level_select:
-		#print("player in WorldSelect")
-		#is_input = false
-		#camera.zoom = Vector2.ONE * 1.5
-		set_physics_process(false)
+	# debug label
+	readout.resize(4)
+	if is_debug:
+		label.visible = true
 
 func _input(event):
-	if is_input and event.is_action_pressed("reset"):
+	if event.is_action_pressed("reset"):
 		Shared.reset()
 
 func _physics_process(delta):
@@ -152,197 +155,156 @@ func _physics_process(delta):
 		btn_push = Input.is_action_pressed("push")
 		btnp_push = Input.is_action_just_pressed("push")
 	
-	# dir_x
-	if joy.x != 0 and !is_push and anim.current_animation != "punch":
-		set_dir_x(joy.x)
-	
-	# on floor
-	is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN))
-	if is_floor:
-		has_jumped = false
-	
-	# turning
-	turn_clock = min(turn_clock + delta, turn_time)
-	sprites.rotation = lerp_angle(turn_from, turn_to, turn_easing.interpolate(turn_clock / turn_time))
-	
-	if turn_clock == turn_time:
-		# walking
-		if is_walk and anim.current_animation != "punch":
-			var target = joy.x * (walk_speed if is_floor else air_speed)
-			var weight = floor_accel if is_floor else air_accel
-			velocity.x = lerp(velocity.x, target, weight * delta)
-		
-		# start jump
-		if is_floor and btnp_jump:
-			is_floor = false
-			if anim.current_animation != "punch":
-				anim.play("jump")
+	# during hold
+	if is_hold:
+		if !is_end_hold:
+			push_clock = min(push_clock + delta, push_time)
 			
-			is_jump = true
-			has_jumped = true
-			velocity.y = jump_speed
-			#jump_start = position.y
-	
-	# gravity
-	velocity.y += (jump_gravity if is_jump else fall_gravity) * delta
-	
-	# during jump
-	if is_jump:
-		if btn_jump:
-			if velocity.y >= 0.0 or test_move(transform, rot(Vector2(0, -1))):
-				is_jump = false
-				#print("jump start: ", jump_start, " / jump end: ", position.y + velocity.y, " / distance: ", position.y - jump_start)
-		else:
-			is_jump = false
-			velocity.y *= 0.8
-	
-	# apply movement
-	if is_move:
-		move_velocity = move_and_slide(rot(velocity))
-		velocity = rot(move_velocity, dir, true)
-	
-	# spin
-	if !has_jumped and !is_floor:
-		spin(test_move(transform, rot(Vector2(-25, 25))))
-		has_jumped = true
-		is_floor = false
-		if is_push:
-			is_end_push = true
-			position = hold_pos
-	
-	# hit box
-	if btnp_action and is_floor:
-		is_punch = true
-	
-	punch_clock = max(0, punch_clock - delta)
-	if is_punch and punch_clock == 0:
-		is_punch = false
-		punch_clock = 0.25
-		#audio_slap.play()
-		anim.play("punch")
-		anim.seek(0)
-		velocity.x = 0
-		for i in hit_area.get_overlapping_areas():
-			var o = i.owner
-			if o is Box:
-				var d = 0 if joy.y == 1 else 2 if joy.y == -1 else 3 if dir_x == 1 else 1
-				o.set_dir(dir + d)
-				o.move_clock = 0
-				#audio_punch.play()
-				print(o.name, " hit, dir: ", o.dir)
-				o.push(dir + d)
-				break
-	
-	# push box
-#	if is_floor and joy.x != 0 and test_move(transform, rot(Vector2(1 if joy.x == 1 else -1, 0))):
-#		push_clock += delta
-#		if push_clock > push_time:
-#			push_clock = 0.001
-#			for i in push_area.get_overlapping_bodies():
-#				if i.is_in_group("box") and i.is_floor:
-#					i.push(dir - dir_x)
-#					break
-#	else:
-#		push_clock = 0
-	
-	# push box
-	if btnp_push and is_floor:
-		for i in hit_area.get_overlapping_bodies():
-			if i.is_in_group("box") and i.is_floor:
-				hold_box = i
-				print(name, " holding: ", i.name)
-				is_push = true
-				is_end_push = false
-				is_move = false
-				
-				add_collision_exception_with(hold_box)
-				hold_box.add_collision_exception_with(self)
-				hold_box.is_hold = true
-				
-				print(position, transform)
-	
-	if is_push:
-		if !is_end_push:
-			hold_pos = hold_box.position + rot(Vector2(100 * -dir_x, 50 - collider_size.y))
-			var new_pos = position.linear_interpolate(hold_pos, delta * 8)
-			var move_to = new_pos - position
-			move_and_collide(Vector2(move_to.x, 0))
-			move_and_collide(Vector2(0, move_to.y))
-			
-			if btn_push:
-				if joy.x != 0 and joy_last.x == 0:
-					if joy.x == dir_x:
-						hold_box.push(dir - joy.x)
-					else:
-						if hold_box.test_push(dir - joy.x, 2):
+			if push_clock == push_time:
+				# check floor
+				if !test_move(transform, rot(Vector2.DOWN * 50)):
+					spin(push_dir == 1)
+					is_end_hold = true
+				else:
+					# push / pull
+					if joy.x != 0 and joy_last.x == 0:
+						if hold_box.test_push(dir - joy.x, 1 if joy.x == dir_x else 2):
 							hold_box.push(dir - joy.x)
+							push_from = position
+							push_clock = 0
+							push_dir = joy.x
 					
-					if !hold_box.get_floor(dir):
-						is_end_push = true
+					# spin box
+					if joy.y != 0 and joy_last.y == 0:
+						hold_box.dir += joy.y * -dir_x
+					
+				# release button
+				if !btn_push:
+					is_end_hold = true
 			else:
-				is_end_push = true
+				hold_pos = hold_box.position + rot(Vector2(100 * -dir_x, 49 - collider_size.y))
+				var new_pos = push_from.linear_interpolate(hold_pos, push_curve.interpolate(push_clock / push_time))
+				var move_to = new_pos - position
+				
+				move_and_collide(Vector2(move_to.x, 0))
+				move_and_collide(Vector2(0, move_to.y))
 		
-		if is_end_push:
-			is_push = false
-			is_end_push = false
+		# end hold
+		if is_end_hold:
+			is_hold = false
+			is_end_hold = false
 			
 			is_move = true
 			has_jumped = true
-			velocity = Vector2.ZERO
+			#velocity = Vector2.ZERO
 			remove_collision_exception_with(hold_box)
 			hold_box.remove_collision_exception_with(self)
 			hold_box.is_hold = false
-			hold_box.move_clock = 0
+			hold_box.move_clock = 99
 	
-	# animation
-	if anim.current_animation != "punch":
-		if is_floor:
-			var t = anim.current_animation_position
-			var last_anim = anim.current_animation
+	# not holding
+	else:
+		# turning
+		turn_clock = min(turn_clock + delta, turn_time)
+		sprites.rotation = lerp_angle(turn_from, turn_to, turn_easing.interpolate(turn_clock / turn_time))
+		if turn_clock == turn_time:
+			# on floor
+			is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN))
+			if is_floor:
+				has_jumped = false
 			
-			if push_clock > 0:
-				anim.play("push")
-			elif joy.x != 0:
-				anim.play("run")
+			# dir_x
+			if joy.x != 0:
+				set_dir_x(joy.x)
+			
+			# walking
+			if is_walk:
+				var target = joy.x * walk_speed 
+				var weight = floor_accel if is_floor else air_accel
+				velocity.x = lerp(velocity.x, target, weight * delta)
+			
+			# on the floor
+			if is_floor:
+				
+				# start jump
+				if btnp_jump:
+					is_floor = false
+					anim.play("jump")
+					
+					is_jump = true
+					has_jumped = true
+					velocity.y = jump_speed
+				
+				# start hold
+				elif btnp_push:
+					for i in hit_area.get_overlapping_bodies():
+						if i.is_in_group("box") and i.is_floor:
+							hold_box = i
+							print(name, " holding: ", i.name)
+							is_hold = true
+							is_end_hold = false
+							is_move = false
+							
+							add_collision_exception_with(hold_box)
+							hold_box.add_collision_exception_with(self)
+							hold_box.is_hold = true
+							push_from = position
+							push_clock = 0
+							
+							break
+			
+			# in the air
 			else:
-				anim.play("idle")
-			
-			if anim.current_animation != last_anim and last_anim != "idle":
-				anim.seek(t)
-	
-	# blink anim
-	blink_clock -= delta
-	if blink_clock < 0:
-		anim_eyes.play("blink")
-		blink_clock = rand_range(2, 15)
-	
-	# debug label
-	if is_debug:
-		readout[0] = "dir: " + str(dir)
-		readout[1] = "is_floor: " + str(is_floor)
-		readout[2] = "has_jumped: " + str(has_jumped)
-		readout[3] = "dir_x: " + str(dir_x)
+				
+				# during jump
+				if is_jump:
+					if btn_jump:
+						if velocity.y >= 0.0 or test_move(transform, rot(Vector2(0, -1))):
+							is_jump = false
+							#print("jump start: ", jump_start, " / jump end: ", position.y + velocity.y, " / distance: ", position.y - jump_start)
+					else:
+						is_jump = false
+						velocity.y *= 0.8
+				
+				# not jumping
+				else:
+					# spin
+					if !has_jumped:
+						spin(test_move(transform, rot(Vector2(-25, 25))))
+						has_jumped = true
+						is_floor = false
 		
-		label.text = ""
-		for i in readout:
-			label.text += str(i) + "\n"
-
-func set_dir(arg := dir):
-	dir = posmod(arg, 4)
-	target_angle = deg2rad(dir * 90)
+		# movement
+		if is_move:
+			# gravity
+			velocity.y += (jump_gravity if is_jump else fall_gravity) * delta
+			
+			# move body
+			move_velocity = move_and_slide(rot(velocity))
+			velocity = rot(move_velocity, dir, true)
 	
-	turn_clock = 0
-	turn_from = sprites.rotation if sprites else 0
-	turn_to = target_angle
 	
-	if Engine.editor_hint:
-		if !sprites: sprites = $Sprites
-		sprites.rotation = target_angle
-	elif camera:
-		camera.turn(target_angle)
 	
-	if areas:
-		areas.rotation = target_angle
+	
+	
+	
+	
+#	# blink anim
+#	blink_clock -= delta
+#	if blink_clock < 0:
+#		anim_eyes.play("blink")
+#		blink_clock = rand_range(2, 15)
+#
+#	# debug label
+#	if is_debug:
+#		readout[0] = "dir: " + str(dir)
+#		readout[1] = "is_floor: " + str(is_floor)
+#		readout[2] = "has_jumped: " + str(has_jumped)
+#		readout[3] = "dir_x: " + str(dir_x)
+#
+#		label.text = ""
+#		for i in readout:
+#			label.text += str(i) + "\n"
 
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
@@ -370,9 +332,25 @@ func solve_jump():
 func rot(arg : Vector2, _dir = 0, backwards := false):
 	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
 
+func set_dir(arg := dir):
+	dir = posmod(arg, 4)
+	target_angle = deg2rad(dir * 90)
+	
+	turn_clock = 0
+	turn_from = sprites.rotation if sprites else 0
+	turn_to = target_angle
+	
+	if Engine.editor_hint:
+		if !sprites: sprites = $Sprites
+		sprites.rotation = target_angle
+	elif camera:
+		camera.turn(target_angle)
+	
+	if areas:
+		areas.rotation = target_angle
+
 func spin(right := false):
 	set_dir(dir + (1 if right else 3))
-	
 	velocity.x = walk_speed if right else -walk_speed
 
 func hit_effector(pos : Vector2):
