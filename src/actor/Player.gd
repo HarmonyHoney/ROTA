@@ -158,9 +158,19 @@ func _physics_process(delta):
 	# during hold
 	if is_hold:
 		if !is_end_hold:
-			push_clock = min(push_clock + delta, push_time)
+			# during push
+			if push_clock != push_time:
+				push_clock = min(push_clock + delta, push_time)
+				
+				hold_pos = hold_box.position + rot(Vector2(100 * -dir_x, 49 - collider_size.y))
+				var new_pos = push_from.linear_interpolate(hold_pos, push_curve.interpolate(push_clock / push_time))
+				var move_to = new_pos - position
+				
+				move_and_collide(Vector2(move_to.x, 0))
+				move_and_collide(Vector2(0, move_to.y))
 			
-			if push_clock == push_time:
+			# not pushing
+			else:
 				# check floor
 				if !test_move(transform, rot(Vector2.DOWN * 50)):
 					spin(push_dir == 1)
@@ -168,11 +178,15 @@ func _physics_process(delta):
 				else:
 					# push / pull
 					if joy.x != 0 and joy_last.x == 0:
-						if hold_box.test_push(dir - joy.x, 1 if joy.x == dir_x else 2):
-							hold_box.push(dir - joy.x)
-							push_from = position
-							push_clock = 0
-							push_dir = joy.x
+						if dir_x == joy.x or !hold_box.test_tile(dir - joy.x, 2):
+							
+							if hold_box.push(dir - joy.x):
+								push_from = position
+								push_clock = 0
+								push_dir = joy.x
+								print("push successful")
+							else:
+								print("push failed")
 					
 					# spin box
 					if joy.y != 0 and joy_last.y == 0:
@@ -181,26 +195,20 @@ func _physics_process(delta):
 				# release button
 				if !btn_push:
 					is_end_hold = true
-			else:
-				hold_pos = hold_box.position + rot(Vector2(100 * -dir_x, 49 - collider_size.y))
-				var new_pos = push_from.linear_interpolate(hold_pos, push_curve.interpolate(push_clock / push_time))
-				var move_to = new_pos - position
-				
-				move_and_collide(Vector2(move_to.x, 0))
-				move_and_collide(Vector2(0, move_to.y))
+					velocity.x = 0
 		
 		# end hold
 		if is_end_hold:
 			is_hold = false
 			is_end_hold = false
-			
 			is_move = true
 			has_jumped = true
-			#velocity = Vector2.ZERO
+			
 			remove_collision_exception_with(hold_box)
 			hold_box.remove_collision_exception_with(self)
 			hold_box.is_hold = false
-			hold_box.move_clock = 99
+			
+			velocity.y = 0
 	
 	# not holding
 	else:

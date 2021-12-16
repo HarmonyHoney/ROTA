@@ -15,7 +15,6 @@ zoom = Vector2( 1.4, 1.4 )
 is_moving = true
 is_focal_point = true
 focal_influence = 0.1
-focal_zoom_dividend = 100
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 2 )]
 tile_data = PoolIntArray( -65541, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -5, 0, 0, -65534, 0, 0, 65531, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 1, 0, 0, 2, 0, 0, 131067, 0, 0, 65536, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0 )

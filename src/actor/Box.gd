@@ -8,25 +8,22 @@ onready var push_areas : Array = $PushAreas.get_children()
 onready var sprite : Sprite = $Sprite
 onready var arrow : Sprite = $Sprite/Arrow
 onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
-onready var audio_push : AudioStreamPlayer2D = $AudioPush
 
 export var dir := 0 setget set_dir
 
 var tile := 100.0
 var is_floor := false
 var move_clock := 0.0
-var move_time := 0.3
-onready var last_pos := position
-var move_weight := 5.0
+var move_time := 0.2
 
-var arrow_weight := 6.0
-var arrow_angle := 0.0
+var arrow_from := 0.0
+var arrow_to := 0.0
+var turn_clock := 0.0
+var turn_time := 0.2
 
 var is_push := false
+var push_clock := 0.0
 var push_time := 0.5
-
-var push_frames := 0
-var last_push := 0
 
 export var is_regenerate := false
 var start_dir := 0
@@ -38,59 +35,108 @@ export var easing : Curve
 var is_hold := false
 
 func _ready():
-	set_dir()
-	arrow.rotation_degrees = arrow_angle
-	# snap to every 100 + 50
-	position = Vector2(50, 50) + (position / 100).floor() * 100
+	turn_clock = 99
+	
+	# snap to grid
+	position = (Vector2.ONE * tile / 2) + (position / tile).floor() * tile
+	
+	# vars for regeneration
 	start_dir = dir
 	start_pos = position
 
 #func _input(event):
 #	if event is InputEventKey and event.pressed:
 #		if event.scancode == KEY_Q:
-#			set_dir(dir - 1)
+#			self.dir -= 1
 #		elif event.scancode == KEY_E:
 #			set_dir(dir + 1)
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
-	# push frames
-	push_frames = max(0, push_frames - 1)
-	if push_frames > 0:
-		move(rot(Vector2.DOWN, last_push))
-	
 	# on floor
-	is_floor = get_floor()
+	is_floor = test_tile(dir, 1)
 	
+	# move clock
 	var target = push_time if is_push else move_time
-	
 	move_clock = min(move_clock + delta, target)
-	# lerp sprite
+	
+	# lerp sprite and update collision_sprite
 	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, easing.interpolate(move_clock / target))
-	# update collision_sprite
 	collision_sprite.position = sprite.position
+	
+	# turn arrow
+	turn_clock = min(turn_clock + delta, turn_time)
+	arrow.rotation = lerp_angle(arrow_from, arrow_to, easing.interpolate(turn_clock / turn_time))
 	
 	if move_clock == target:
 		if is_push:
 			is_push = false
 		
 		# move down
-		if !is_floor and !is_hold:
-			move(rot(Vector2(0, 1)))
-	
-	# lerp arrow
-	arrow.rotation = lerp_angle(arrow.rotation, deg2rad(arrow_angle), delta * arrow_weight)
+		if !is_hold and !is_floor:
+			move_tile(dir, 1)
 
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)
-	arrow_angle = dir * 90
+	
+	if is_instance_valid(arrow):
+		arrow_from = arrow.rotation
+	arrow_to = deg2rad(dir * 90)
+	turn_clock = 0.0
+	
 	if Engine.editor_hint:
-		if !arrow: arrow = $Sprite/Arrow
-		arrow.rotation_degrees = arrow_angle
+		$Sprite/Arrow.rotation = arrow_to
 
 func rot(arg : Vector2, _dir := dir, backwards := false):
 	return arg.rotated(deg2rad((-_dir if backwards else _dir) * 90))
+
+func shrink_shape(shrink := true):
+	collision_shape.shape.extents = Vector2(49, 49) if shrink else Vector2(50, 50)
+
+func test_tile(check_dir := dir, distance := 1) -> bool:
+	shrink_shape()
+	var result = test_move(transform, rot(Vector2.DOWN * distance * tile, check_dir))
+	shrink_shape(false)
+	return result
+
+func move_tile(move_dir := dir, distance := 1):
+	# jump player
+	for i in standing_area.get_overlapping_bodies():
+		if i.is_in_group("player"):
+			i.has_jumped = true
+			if i.velocity.y > 0:
+				i.velocity.y = 0
+	
+	# move
+	var move_from = position
+	position += rot(Vector2.DOWN * distance * tile, move_dir)
+	position = Vector2(stepify(position.x, 50), stepify(position.y, 50))
+	
+	# move sprite
+	sprite.position -= position - move_from
+	
+	# reset clock
+	move_clock = 0
+
+func push(push_dir := 0):
+	var result = false
+	push_dir = posmod(push_dir, 4)
+	
+	var b = push_areas[push_dir].get_overlapping_bodies()
+	if b.size() == 0:
+		if !test_tile(push_dir, 1):
+			result = true
+	else:
+		if b[0] != self and b[0].is_in_group("box"):
+			if b[0].is_floor and b[0].push(push_dir):
+				result = true
+	
+	if result:
+		move_tile(push_dir, 1)
+		is_push = true
+	
+	return result
 
 func spinner(right := false):
 	set_dir(dir + (1 if right else 3))
@@ -109,7 +155,7 @@ func outside_boundary():
 		
 		set_dir(start_dir)
 		sprite.position = Vector2.ZERO
-		arrow.rotation = deg2rad(arrow_angle)
+		turn_clock = 99
 		
 		var p = passhthrough_scene.instance()
 		p.position = start_pos
@@ -119,68 +165,5 @@ func outside_boundary():
 		p.set_physics_process(true)
 	else:
 		queue_free()
-
-func shrink_shape(shrink := true):
-	collision_shape.shape.extents = Vector2(49, 49) if shrink else Vector2(50, 50)
-
-func move(vector := Vector2.ZERO):
-	var is_move := false
-	
-	shrink_shape()
-	# is space open
-	if !test_move(transform, vector * tile):
-		last_pos = position
-		move_and_collide(vector * tile)
-		# keep box on grid (:
-		var step = Vector2(stepify(position.x, 50), stepify(position.y, 50)) - position
-		if step != Vector2.ZERO:
-			move_and_collide(step)
-		
-		# move sprite
-		sprite.position -= position - last_pos
-		
-		# jump player
-		for i in standing_area.get_overlapping_bodies():
-			if i.is_in_group("player"):
-				i.has_jumped = true
-		print(name + ".position: ", position, " stepify: ", step)
-		
-		push_frames = 0
-		move_clock = 0
-		
-		is_move = true
-	shrink_shape(false)
-	return is_move
-
-func push(push_dir := 0):
-	push_dir = posmod(push_dir, 4)
-	
-	for i in push_areas[push_dir].get_overlapping_bodies():
-		#print("push_areas[push_dir] ", push_areas[push_dir].name)
-		if i != self and i.is_in_group("box"):
-			i.push(push_dir)
-	
-	if move(rot(Vector2.DOWN, push_dir)):
-		is_push = true
-	else:
-		last_push = push_dir
-		push_frames = 20
-
-func test_push(push_dir := 0, distance := 1):
-	var test = false
-	
-	shrink_shape()
-	if !test_move(transform, rot(Vector2.DOWN * distance * tile, push_dir)):
-		test = true
-	shrink_shape(false)
-	
-	return test
-
-func get_floor(check_dir := dir) -> bool:
-	var check = false
-	shrink_shape()
-	check = test_move(transform, rot(Vector2(0, tile), check_dir))
-	shrink_shape(false)
-	return check
 
 

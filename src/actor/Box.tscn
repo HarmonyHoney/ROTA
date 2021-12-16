@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://media/image/box/box-400.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Box.gd" type="Script" id=2]
-[ext_resource path="res://media/audio/sfx/crate_move.wav" type="AudioStream" id=3]
 [ext_resource path="res://media/image/box/arrow.png" type="Texture" id=4]
 [ext_resource path="res://src/shader/add_color.gdshader" type="Shader" id=5]
 
@@ -16,13 +15,13 @@ extents = Vector2( 50, 50 )
 shader = ExtResource( 5 )
 shader_param/add_color = Color( 1, 0, 0.333333, 1 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 50, 50 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 80, 80 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 30, 30 )
 
 [node name="Box" type="KinematicBody2D" groups=[
@@ -47,19 +46,16 @@ texture = ExtResource( 1 )
 material = SubResource( 3 )
 texture = ExtResource( 4 )
 
-[node name="AudioPush" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
-
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionBody" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="CollisionSprite" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="StandingArea" type="Area2D" parent="."]
 visible = false
@@ -67,7 +63,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StandingArea"]
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="PushAreas" type="Node2D" parent="."]
 visible = false
@@ -78,7 +74,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushAreas/0"]
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="1" type="Area2D" parent="PushAreas"]
 position = Vector2( -100, 0 )
@@ -86,7 +82,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushAreas/1"]
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="2" type="Area2D" parent="PushAreas"]
 position = Vector2( 0, -100 )
@@ -94,7 +90,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushAreas/2"]
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="3" type="Area2D" parent="PushAreas"]
 position = Vector2( 100, 0 )
@@ -102,4 +98,4 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushAreas/3"]
-shape = SubResource( 7 )
+shape = SubResource( 6 )
