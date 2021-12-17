@@ -10,8 +10,12 @@ onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 onready var anim : AnimationPlayer = $AnimationPlayer
 onready var anim_eyes : AnimationPlayer = $AnimationEyes
-
 onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
+
+export var is_debug := false
+onready var debug_label : Label = $DebugCanvas/Labels/Label
+var readout = []
+var readout_size = 4
 
 export var is_input := true
 var joy := Vector2.ZERO
@@ -22,18 +26,20 @@ var btnp_action := false
 var btn_push := false
 var btnp_push := false
 
-export var is_debug := false
-
 var camera : Camera2D
 
 export var dir := 0 setget set_dir
 
+var is_move := true
+var is_walk := true
+var is_floor := false
+
 var velocity := Vector2.ZERO
 var move_velocity := Vector2.ZERO
+var dir_x := 1
 
 export var walk_speed := 350.0
 export var air_speed := 250.0
-
 var floor_accel := 12
 var air_accel := 7
 
@@ -45,49 +51,27 @@ var jump_speed := 0.0
 var jump_gravity := 0.0
 var fall_gravity := 0.0
 
-var is_floor := false
-var dir_x := 1
-
-onready var label : Label = $DebugCanvas/Labels/Label
-var readout = []
-
-var sprite_weight := 5.0
-var target_angle := 0.0
-
 onready var blink_clock := rand_range(2, 15)
 
-var punch_clock := 0.0
-var punch_time := 0.4
-var is_punch := false
-
-var is_move := true
-var is_walk := true
-
+var is_dead := false
 var is_exit := false
 var exit_node
 
-var is_dead := false
-
+var target_angle := 0.0
 export var turn_easing : Curve
 var turn_clock := 0.0
 var turn_time := 0.2
 var turn_from := 0.0
-var turn_to := 0.0
-
 
 var is_hold := false
 var is_end_hold := false
 var hold_box 
 var hold_pos := Vector2.ZERO
-
 var push_clock := 0.0
 var push_time := 0.2
-
 var push_from := Vector2.ZERO
 export var push_curve : Curve
-
 var push_dir := 1
-
 
 func _ready():
 	if Engine.editor_hint: return
@@ -120,9 +104,9 @@ func _ready():
 			break
 	
 	# debug label
-	readout.resize(4)
+	readout.resize(readout_size)
 	if is_debug:
-		label.visible = true
+		debug_label.visible = true
 
 func _input(event):
 	if event.is_action_pressed("reset"):
@@ -173,29 +157,28 @@ func _physics_process(delta):
 			else:
 				# check floor
 				if !test_move(transform, rot(Vector2.DOWN * 50)):
-					spin(push_dir == 1)
+					walk_around(push_dir == 1)
 					is_end_hold = true
-				else:
-					# push / pull
-					if joy.x != 0 and joy_last.x == 0:
-						if dir_x == joy.x or !hold_box.test_tile(dir - joy.x, 2):
-							
-							if hold_box.push(dir - joy.x):
-								push_from = position
-								push_clock = 0
-								push_dir = joy.x
-								print("push successful")
-							else:
-								print("push failed")
-					
-					# spin box
-					if joy.y != 0 and joy_last.y == 0:
-						hold_box.dir += joy.y * -dir_x
-					
+				
 				# release button
-				if !btn_push:
+				elif !btn_push:
 					is_end_hold = true
-					velocity.x = 0
+				
+				# push / pull
+				elif joy.x != 0 and joy_last.x == 0:
+					if dir_x == joy.x or !hold_box.test_tile(dir - joy.x, 2):
+						
+						if hold_box.push(dir - joy.x):
+							push_from = position
+							push_clock = 0
+							push_dir = joy.x
+							print("push successful")
+						else:
+							print("push failed")
+				
+				# spin box
+				elif joy.y != 0 and joy_last.y == 0:
+					hold_box.dir += joy.y * -dir_x
 		
 		# end hold
 		if is_end_hold:
@@ -207,14 +190,12 @@ func _physics_process(delta):
 			remove_collision_exception_with(hold_box)
 			hold_box.remove_collision_exception_with(self)
 			hold_box.is_hold = false
-			
-			velocity.y = 0
 	
 	# not holding
 	else:
 		# turning
 		turn_clock = min(turn_clock + delta, turn_time)
-		sprites.rotation = lerp_angle(turn_from, turn_to, turn_easing.interpolate(turn_clock / turn_time))
+		sprites.rotation = lerp_angle(turn_from, target_angle, turn_easing.interpolate(turn_clock / turn_time))
 		if turn_clock == turn_time:
 			# on floor
 			is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN))
@@ -252,6 +233,7 @@ func _physics_process(delta):
 							is_hold = true
 							is_end_hold = false
 							is_move = false
+							velocity = Vector2.ZERO
 							
 							add_collision_exception_with(hold_box)
 							hold_box.add_collision_exception_with(self)
@@ -278,7 +260,7 @@ func _physics_process(delta):
 				else:
 					# spin
 					if !has_jumped:
-						spin(test_move(transform, rot(Vector2(-25, 25))))
+						walk_around(test_move(transform, rot(Vector2(-25, 25))))
 						has_jumped = true
 						is_floor = false
 		
@@ -310,9 +292,9 @@ func _physics_process(delta):
 #		readout[2] = "has_jumped: " + str(has_jumped)
 #		readout[3] = "dir_x: " + str(dir_x)
 #
-#		label.text = ""
+#		debug_label.text = ""
 #		for i in readout:
-#			label.text += str(i) + "\n"
+#			debug_label.text += str(i) + "\n"
 
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
@@ -346,7 +328,6 @@ func set_dir(arg := dir):
 	
 	turn_clock = 0
 	turn_from = sprites.rotation if sprites else 0
-	turn_to = target_angle
 	
 	if Engine.editor_hint:
 		if !sprites: sprites = $Sprites
@@ -357,7 +338,8 @@ func set_dir(arg := dir):
 	if areas:
 		areas.rotation = target_angle
 
-func spin(right := false):
+func walk_around(right := false):
+	move_and_collide(rot(Vector2.DOWN))
 	set_dir(dir + (1 if right else 3))
 	velocity.x = walk_speed if right else -walk_speed
 
@@ -369,7 +351,7 @@ func hit_effector(pos : Vector2):
 	is_jump = false
 
 func spinner(right := false, pos := Vector2.ZERO):
-	spin(right)
+	set_dir(dir + (1 if right else -1))
 	hit_effector(pos)
 
 func arrow(arg, pos):
