@@ -73,13 +73,14 @@ func wipe_out():
 		_: HUD.show("game")
 
 func complete_level():
+	level += 1
 	if world != -1 and level != -1:
-		if world_size[world] < level + 1 and unlocked[world + 1] < 0:
+		if world_size[world] < level and unlocked[world + 1] < 0:
 			unlocked[world + 1] = 0
 			level = -1
-		elif unlocked[world] < level + 1:
-			unlocked[world] = clamp(level + 1, 0, world_size[world])
-	Shared.change_scene(scene_select)
+		elif unlocked[world] < level:
+			unlocked[world] = clamp(level, 0, world_size[world])
+	change_scene(scene_select)
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen

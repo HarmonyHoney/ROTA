@@ -5,8 +5,7 @@ var spike_scene = preload("res://src/actor/Spike.tscn")
 
 var solid : TileMap
 
-func rot(vec = Vector2.ZERO, dir = 0):
-	return vec.rotated(deg2rad(dir * 90)).round()
+var spikes = {}
 
 func _ready():
 	yield(get_parent(), "ready")
@@ -16,24 +15,36 @@ func _ready():
 
 func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_coord=Vector2()):
 	.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
+	
+	remove_spike(x, y)
+	
 	if tile == 0:
 		set_spike(Vector2(x, y))
-	else:
-		for i in get_children():
-			if i.position == (Vector2(x, y) + Vector2.ONE / 2) * cell_size:
-				i.queue_free()
+
+func rot(vec = Vector2.ZERO, dir = 0):
+	return vec.rotated(deg2rad(dir * 90)).round()
 
 func make_tiles():
+	spikes = {}
+	
 	for i in get_children():
 		i.queue_free()
 	
 	for i in get_used_cells():
 		set_spike(i)
 
+func remove_spike(x : int, y : int):
+	var key = str(x) + "," + str(y)
+	
+	if spikes.has(key) and is_instance_valid(spikes[key]):
+		spikes[key].queue_free()
+		spikes.erase(key)
+
 func set_spike(i : Vector2):
 	# instance spike
 	var s = spike_scene.instance()
 	add_child(s)
+	spikes[str(i.x) + "," + str(i.y)] = s
 	
 	# set pos
 	s.position = (i + Vector2.ONE / 2) * cell_size
@@ -57,4 +68,3 @@ func set_spike(i : Vector2):
 		s.set_tile(true)
 	if get_cellv(right) == -1 and solid.get_cellv(right) == -1:
 		s.set_tile(false)
-

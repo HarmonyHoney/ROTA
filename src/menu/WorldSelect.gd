@@ -74,7 +74,8 @@ func _ready():
 		world_cursor = Shared.world
 		if Shared.level > -1:
 			open_world()
-			level_cursor = Shared.level
+			#level_cursor = Shared.level
+			level_cursor = clamp(Shared.level, 0, level_size - 1)
 			preview_level()
 	
 	# delay input

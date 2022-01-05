@@ -11,31 +11,30 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 850, -200 )
+position = Vector2( 900, -100 )
 zoom = Vector2( 1.8, 1.8 )
 is_moving = true
 is_focal_point = true
-is_focal_zoom = true
-focal_zoom_threshhold = 700
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 3 )]
-tile_data = PoolIntArray( -393210, 0, 0, -393209, 0, 0, -393208, 0, 0, -327674, -1073741824, 0, -327673, -1073741824, 0, -327672, -1073741824, 0, -327669, -1073741824, 0, -327668, -1073741824, 0, -327667, -1073741824, 0, -262138, -1073741824, 0, -262137, -1073741824, 0, -262136, -1073741824, 0, -262133, -1073741824, 0, -262132, -1073741824, 0, -262131, -1073741824, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, -1073741824, 0, -196597, -1073741824, 0, -196596, -1073741824, 0, -196595, -1073741824, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0 )
+tile_data = PoolIntArray( -327673, -1073741824, 0, -327672, -1073741824, 0, -327669, -1073741824, 0, -327668, -1073741824, 0, -262137, -1073741824, 0, -262136, -1073741824, 0, -262133, -1073741824, 0, -262132, -1073741824, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, -1073741824, 0, -196597, -1073741824, 0, -196596, -1073741824, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0 )
 
 [node name="SpikeMap" parent="." instance=ExtResource( 4 )]
-tile_data = PoolIntArray( -458746, 0, 0, -131060, 1610612736, 0, -131059, 1610612736, 0 )
+tile_data = PoolIntArray( -393209, 0, 0, -393208, 0, 0, -131061, 1610612736, 0, -131060, 1610612736, 0 )
 
 [node name="Boundary" parent="." instance=ExtResource( 7 )]
-position = Vector2( 850, -200 )
-size = 13.0
+position = Vector2( 900, -100 )
+size = 9.0
 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 850, 150 )
+position = Vector2( 1000, -150 )
+dir = 2
 
 [node name="Exit" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 1000, -400 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 5 )]
-position = Vector2( 450, 150 )
+position = Vector2( 650, 50 )
 is_regenerate = true
