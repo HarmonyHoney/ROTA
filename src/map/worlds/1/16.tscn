@@ -11,20 +11,20 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 50, 450 )
-zoom = Vector2( 2, 2 )
+position = Vector2( -50, 400 )
+zoom = Vector2( 1.3, 1.3 )
 is_moving = true
 is_focal_point = true
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 3 )]
-tile_data = PoolIntArray( 131070, -1610612736, 0, 131071, -1610612736, 0, 65536, -1610612736, 0, 65537, -1610612736, 0, 262139, -1610612736, 0, 262140, -1610612736, 0, 262141, -1610612736, 0, 262142, -1610612736, 0, 196609, -1610612736, 0, 196610, -1610612736, 0, 196611, -1610612736, 0, 196612, -1610612736, 0, 393214, -1073741824, 0, 393215, -1073741824, 0, 327680, -1073741824, 0, 327681, -1073741824, 0, 458749, 1610612736, 0, 458750, 1610612736, 0, 393217, -1610612736, 0, 393218, -1610612736, 0, 524285, -1610612736, 0, 524286, -1610612736, 0, 458753, -1610612736, 0, 458754, -1610612736, 0 )
+tile_data = PoolIntArray( 131071, -1610612736, 0, 65536, -1610612736, 0, 65537, 0, 0, 131073, 0, 0, 262141, -1610612736, 0, 262142, -1610612736, 0, 262143, -1073741824, 0, 196609, 0, 0, 262145, 0, 0, 393215, -1073741824, 0, 327680, -1073741824, 0, 327681, -1610612736, 0, 458751, -1073741824, 0 )
 
 [node name="SpikeMap" parent="." instance=ExtResource( 4 )]
-tile_data = PoolIntArray( 458748, -1073741824, 0, 393219, -1610612736, 0, 524284, -1073741824, 0, 458755, -1610612736, 0 )
+tile_data = PoolIntArray( 65538, -1610612736, 0, 131074, -1610612736, 0, 196610, -1610612736, 0, 262146, -1610612736, 0, 327682, -1610612736, 0, 458750, -1073741824, 0 )
 
 [node name="Boundary" parent="." instance=ExtResource( 7 )]
-position = Vector2( 50, 500 )
-size = 15.0
+position = Vector2( -50, 400 )
+size = 8.0
 
 [node name="Actors" type="Node2D" parent="."]
 
@@ -33,7 +33,8 @@ position = Vector2( 0, 250 )
 dir = 2
 
 [node name="Exit" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 0, 700 )
+position = Vector2( 50, 650 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 5 )]
+position = Vector2( 150, 50 )
 is_regenerate = true

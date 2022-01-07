@@ -38,16 +38,16 @@ points = PoolVector2Array( 0, 100, 25, 50, 50, 100, 75, 50, 100, 100 )
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 350, -150 )
+position = Vector2( 450, -200 )
 is_moving = true
 is_focal_point = true
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 2 )]
-tile_data = PoolIntArray( -262143, 1610612736, 0, -262139, 0, 0, -196607, 1610612736, 0, -196603, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0 )
+tile_data = PoolIntArray( -327677, -1610612736, 0, -262141, -1610612736, 0, -196605, -1610612736, 0, -196601, -1610612736, 0, -131069, -1073741824, 0, -131065, -1610612736, 0, -65529, -1610612736, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, -1610612736, 0, 7, -1610612736, 0, 65537, 1610612736, 0 )
 
 [node name="SpikeMap" parent="." instance=ExtResource( 6 )]
 tile_set = SubResource( 2 )
-tile_data = PoolIntArray( -262144, -1073741824, 0, -262142, -1610612736, 0, -262140, -1073741824, 0, -262138, -1610612736, 0 )
+tile_data = PoolIntArray( -393213, 0, 0, -196602, -1073741824, 0, 131073, 1610612736, 0 )
 
 [node name="Boundary" parent="." instance=ExtResource( 8 )]
 position = Vector2( 350, -150 )
@@ -56,12 +56,13 @@ size = 12.0
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 350, 150 )
-dir = 2
+position = Vector2( 550, -50 )
+can_spin = false
 
 [node name="Exit" parent="Actors" instance=ExtResource( 4 )]
-position = Vector2( 350, -300 )
+position = Vector2( 850, -150 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 5 )]
-position = Vector2( 350, -50 )
+position = Vector2( 250, -250 )
+dir = 3
 is_regenerate = true

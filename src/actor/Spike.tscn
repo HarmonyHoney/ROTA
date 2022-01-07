@@ -16,7 +16,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0.3, -0.3, 0, 0.3, 0, 0.46, -0.3, 0, 0.3, 0, 0.3, -0.3, 0, 0.3, 0 ),
+"points": PoolRealArray( 0.3, -0.3, 0, 0.3, 0, 0.515, -0.3, 0, 0.3, 0, 0.3, -0.3, 0, 0.3, 0 ),
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 tracks/1/type = "bezier"
@@ -26,7 +26,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.46, -0.3, 0, 0.3, 0, 0.3, -0.3, 0, 0.3, 0, 0.46, -0.3, 0, 0.3, 0 ),
+"points": PoolRealArray( 0.515, -0.3, 0, 0.3, 0, 0.3, -0.3, 0, 0.3, 0, 0.515, -0.3, 0, 0.3, 0 ),
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 
@@ -36,11 +36,9 @@ shader_param/offset_y = 0.3
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 5 )
-shader_param/offset_y = 0.46
+shader_param/offset_y = 0.515
 
-[node name="Spike" type="Node2D" groups=[
-"spike",
-]]
+[node name="Spike" type="Node2D" groups=["spike"]]
 script = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -53,6 +53,7 @@ tile_set = SubResource( 2 )
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( -50, 150 )
 dir = 2
+can_spin = false
 
 [node name="Box" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( -50, -50 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=2]
@@ -7,34 +7,62 @@
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=7]
+[ext_resource path="res://media/image/spike/spike_tile.png" type="Texture" id=8]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 100, 25, 50, 50, 100, 75, 50, 100, 100 )
+
+[sub_resource type="TileSet" id=2]
+0/name = "spike_tile.png 0"
+0/texture = ExtResource( 8 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 0, 0, 0, 0 )
+0/region = Rect2( 0, 0, 100, 100 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 900, -100 )
-zoom = Vector2( 1.8, 1.8 )
+position = Vector2( 500, -150 )
+zoom = Vector2( 1.2, 1.2 )
 is_moving = true
 is_focal_point = true
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( -327673, -1073741824, 0, -327672, -1073741824, 0, -327669, -1073741824, 0, -327668, -1073741824, 0, -262137, -1073741824, 0, -262136, -1073741824, 0, -262133, -1073741824, 0, -262132, -1073741824, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, -1073741824, 0, -196597, -1073741824, 0, -196596, -1073741824, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0 )
+tile_data = PoolIntArray( -262139, 0, 0, -196603, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -65533, -1073741824, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0 )
 
 [node name="SpikeMap" parent="." instance=ExtResource( 6 )]
-tile_data = PoolIntArray( -393209, 0, 0, -393208, 0, 0, -131061, 1610612736, 0, -131060, 1610612736, 0 )
+tile_set = SubResource( 2 )
+tile_data = PoolIntArray( -262138, -1610612736, 0, -131070, -1073741824, 0, -65534, -1073741824, 0, 2, -1073741824, 0 )
 
 [node name="Boundary" parent="." instance=ExtResource( 3 )]
-position = Vector2( 900, -100 )
-size = 9.0
+position = Vector2( 350, -150 )
+size = 12.0
 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 1000, -150 )
+position = Vector2( 500, 150 )
 dir = 2
 
 [node name="Exit" parent="Actors" instance=ExtResource( 1 )]
-position = Vector2( 1000, -400 )
+position = Vector2( 450, -250 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 4 )]
-position = Vector2( 650, 50 )
+position = Vector2( 450, -50 )
 is_regenerate = true

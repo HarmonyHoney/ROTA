@@ -27,6 +27,7 @@ size = 12.0
 
 [node name="Player" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 447.272, 148.671 )
+can_spin = false
 
 [node name="Exit" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 450, 550 )

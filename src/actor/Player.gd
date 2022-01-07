@@ -39,17 +39,18 @@ var move_velocity := Vector2.ZERO
 var dir_x := 1
 
 export var walk_speed := 350.0
-export var air_speed := 250.0
+#export var air_speed := 250.0
 var floor_accel := 12
 var air_accel := 7
 
 var is_jump := false
 var has_jumped := true
-export var jump_height := 350.0 setget set_jump_height
-export var jump_time := 0.7 setget set_jump_time
+export var jump_height := 250.0 setget set_jump_height
+export var jump_time := 0.6 setget set_jump_time
 var jump_speed := 0.0
 var jump_gravity := 0.0
 var fall_gravity := 0.0
+var jump_clock := 0.0
 
 onready var blink_clock := rand_range(2, 15)
 
@@ -72,6 +73,9 @@ var push_time := 0.2
 var push_from := Vector2.ZERO
 export var push_curve : Curve
 var push_dir := 1
+
+
+export var can_spin := true
 
 func _ready():
 	if Engine.editor_hint: return
@@ -177,7 +181,7 @@ func _physics_process(delta):
 							print("push failed")
 				
 				# spin box
-				elif joy.y != 0 and joy_last.y == 0:
+				elif can_spin and joy.y != 0 and joy_last.y == 0:
 					hold_box.dir += joy.y * -dir_x
 		
 		# end hold
@@ -223,6 +227,7 @@ func _physics_process(delta):
 					is_jump = true
 					has_jumped = true
 					velocity.y = jump_speed
+					jump_clock = 0.0
 				
 				# start hold
 				elif btnp_push:
@@ -248,6 +253,7 @@ func _physics_process(delta):
 				
 				# during jump
 				if is_jump:
+					jump_clock += delta
 					if btn_jump:
 						if velocity.y >= 0.0 or test_move(transform, rot(Vector2(0, -1))):
 							is_jump = false
@@ -341,7 +347,7 @@ func set_dir(arg := dir):
 func walk_around(right := false):
 	move_and_collide(rot(Vector2.DOWN))
 	set_dir(dir + (1 if right else 3))
-	velocity.x = walk_speed if right else -walk_speed
+	velocity.x = (walk_speed if right else -walk_speed) * 0.72
 
 func hit_effector(pos : Vector2):
 	move_and_collide(pos - position)
