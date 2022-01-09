@@ -25,7 +25,7 @@ var is_push := false
 var push_clock := 0.0
 var push_time := 0.5
 
-export var is_regenerate := false
+export var is_regenerate := true
 var start_dir := 0
 var start_pos := Vector2.ZERO
 var passhthrough_scene = load("res://src/actor/Passthrough.tscn")

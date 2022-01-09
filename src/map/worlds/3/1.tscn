@@ -36,9 +36,7 @@ position = Vector2( 450, 50 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( -50, 150 )
-is_regenerate = true
 
 [node name="Box2" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 150, -50 )
 dir = 2
-is_regenerate = true
