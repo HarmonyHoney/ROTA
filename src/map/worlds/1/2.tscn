@@ -9,7 +9,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 750, 400 )
+position = Vector2( 650, 400 )
 is_moving = true
 is_focal_point = true
 

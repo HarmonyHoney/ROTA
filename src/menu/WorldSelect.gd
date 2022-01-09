@@ -13,7 +13,9 @@ onready var preview = $Worlds/Preview.duplicate()
 
 var p_back := Vector2(350, -150)
 
-var pos_targets = [Vector2.ZERO]
+var pos_targets = [Vector2(-500, 0),
+Vector2.ZERO,
+Vector2(500, 0)]
 
 var circles = []
 onready var circles_node = $Picker/Circles
@@ -71,7 +73,7 @@ func _ready():
 	
 	# resume WorldSelect on world and level
 	if Shared.world > -1:
-		world_cursor = Shared.world
+		world_cursor = clamp(Shared.world, 0, world_size - 1)
 		if Shared.level > -1:
 			open_world()
 			#level_cursor = Shared.level

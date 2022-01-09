@@ -1,18 +1,17 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=7]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
 position = Vector2( 750, 100 )
-zoom = Vector2( 2, 2 )
 is_moving = true
 is_focal_point = true
 focal_influence = 0.1
@@ -20,10 +19,10 @@ focal_influence = 0.1
 [node name="SolidTileMap" parent="." instance=ExtResource( 3 )]
 tile_data = PoolIntArray( -65533, 0, 0, -65527, 1610612736, 0, 3, 0, 0, 9, 1610612736, 0, 65539, 0, 0, 65545, 1610612736, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131081, 1610612736, 0, 131082, 1610612736, 0 )
 
-[node name="SpikeMap" parent="." instance=ExtResource( 5 )]
+[node name="SpikeMap" parent="." instance=ExtResource( 7 )]
 tile_data = PoolIntArray( -131069, 0, 0, -131063, 0, 0, 131083, -1610612736, 0 )
 
-[node name="Boundary" parent="." instance=ExtResource( 7 )]
+[node name="Boundary" parent="." instance=ExtResource( 6 )]
 position = Vector2( 750, 100 )
 size = 15.0
 
@@ -33,10 +32,10 @@ size = 15.0
 position = Vector2( 850, 100 )
 dir = 3
 
-[node name="Exit" parent="Actors" instance=ExtResource( 6 )]
+[node name="Exit" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 1050, 150 )
 
-[node name="Box" parent="Actors" instance=ExtResource( 2 )]
+[node name="Box" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 450, 50 )
 dir = 1
 is_regenerate = true

@@ -11,8 +11,8 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 750, 600 )
-zoom = Vector2( 1.9, 1.9 )
+position = Vector2( 850, 500 )
+zoom = Vector2( 1.7, 1.7 )
 is_moving = true
 is_focal_point = true
 focal_influence = 0.3
@@ -24,7 +24,7 @@ tile_data = PoolIntArray( 131077, -1610612736, 0, 131078, -1610612736, 0, 196613
 tile_data = PoolIntArray( 196620, -1610612736, 0, 262156, -1610612736, 0, 458760, -1073741824, 0 )
 
 [node name="Boundary" parent="." instance=ExtResource( 7 )]
-position = Vector2( 750, 600 )
+position = Vector2( 850, 500 )
 
 [node name="Actors" type="Node2D" parent="."]
 

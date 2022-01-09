@@ -45,7 +45,7 @@ var air_accel := 7
 
 var is_jump := false
 var has_jumped := true
-export var jump_height := 250.0 setget set_jump_height
+var jump_height := 240.0 setget set_jump_height
 export var jump_time := 0.6 setget set_jump_time
 var jump_speed := 0.0
 var jump_gravity := 0.0
@@ -194,6 +194,8 @@ func _physics_process(delta):
 			remove_collision_exception_with(hold_box)
 			hold_box.remove_collision_exception_with(self)
 			hold_box.is_hold = false
+			
+			HUD.show("game")
 	
 	# not holding
 	else:
@@ -245,6 +247,11 @@ func _physics_process(delta):
 							hold_box.is_hold = true
 							push_from = position
 							push_clock = 0
+							
+							if can_spin:
+								HUD.show("grab2")
+							else:
+								HUD.show("grab1")
 							
 							break
 			

@@ -75,8 +75,10 @@ func wipe_out():
 func complete_level():
 	level += 1
 	if world != -1 and level != -1:
-		if world_size[world] < level and unlocked[world + 1] < 0:
-			unlocked[world + 1] = 0
+		if world_size[world] < level:
+			if unlocked[world + 1] < 0:
+				unlocked[world + 1] = 0
+			world += 1
 			level = -1
 		elif unlocked[world] < level:
 			unlocked[world] = clamp(level, 0, world_size[world])

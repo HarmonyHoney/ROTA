@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=7]
 
 [node name="Node2D" type="Node2D"]
 
@@ -22,18 +22,18 @@ tile_data = PoolIntArray( -262137, 0, 0, -262136, 0, 0, -196601, -1073741824, 0,
 [node name="SpikeMap" parent="." instance=ExtResource( 6 )]
 tile_data = PoolIntArray( -327673, 0, 0, 65540, 1610612736, 0, 65541, 1610612736, 0, 65542, 1610612736, 0, 65543, 1610612736, 0 )
 
-[node name="Boundary" parent="." instance=ExtResource( 7 )]
+[node name="Boundary" parent="." instance=ExtResource( 5 )]
 position = Vector2( 650, 50 )
 size = 12.0
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Player" parent="Actors" instance=ExtResource( 5 )]
+[node name="Player" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 600, -50 )
 
-[node name="Exit" parent="Actors" instance=ExtResource( 2 )]
+[node name="Exit" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 850, -250 )
 
-[node name="Box" parent="Actors" instance=ExtResource( 3 )]
+[node name="Box" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 350, -50 )
 is_regenerate = true

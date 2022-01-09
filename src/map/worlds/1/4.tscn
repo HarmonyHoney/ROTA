@@ -47,7 +47,7 @@ tile_data = PoolIntArray( 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 196609, 0, 0
 
 [node name="SpikeMap" parent="." instance=ExtResource( 6 )]
 tile_set = SubResource( 2 )
-tile_data = PoolIntArray( 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 458761, -1610612736, 0, 524297, -1610612736, 0, 589833, -1610612736, 0 )
+tile_data = PoolIntArray( 393222, 0, 0, 393223, 0, 0, 393224, 0, 0 )
 
 [node name="Boundary" parent="." instance=ExtResource( 7 )]
 position = Vector2( 500, 650 )

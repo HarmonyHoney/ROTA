@@ -9,8 +9,8 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1200, 350 )
-zoom = Vector2( 2, 2 )
+position = Vector2( 1150, 300 )
+zoom = Vector2( 1.8, 1.8 )
 is_moving = true
 is_focal_point = true
 focal_influence = 0.1
