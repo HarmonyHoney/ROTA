@@ -1,11 +1,8 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=1]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://media/image/menu/title.png" type="Texture" id=3]
-[ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/map/base/map_base.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/menu/AttractMode.gd" type="Script" id=7]
 [ext_resource path="res://media/image/menu/play.png" type="Texture" id=8]
 [ext_resource path="res://media/image/menu/gear.png" type="Texture" id=9]
@@ -43,23 +40,27 @@ script = ExtResource( 12 )
 
 [node name="Stage" type="Node2D" parent="."]
 
-[node name="Camera2D" parent="Stage" instance=ExtResource( 4 )]
+[node name="Map" parent="Stage" instance=ExtResource( 4 )]
+
+[node name="Camera2D" parent="Stage/Map" index="0"]
 position = Vector2( 900, 350 )
 offset = Vector2( -200, 0 )
-focal_zoom_dividend = 100
+is_moving = false
+is_focal_point = false
 is_zoom_out = false
 
-[node name="SolidTileMap" parent="Stage" instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 131077, 0, 0, 131078, 0, 0, 131079, 1610612736, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 1610612736, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 1610612736, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0 )
+[node name="SolidTileMap" parent="Stage/Map" index="1"]
+tile_data = PoolIntArray( 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0 )
 
-[node name="SpikeMap" parent="Stage" instance=ExtResource( 6 )]
-
-[node name="Actors" type="Node2D" parent="Stage"]
+[node name="Actors" parent="Stage/Map" index="3"]
 script = ExtResource( 7 )
 
-[node name="Player" parent="Stage/Actors" instance=ExtResource( 2 )]
+[node name="Player" parent="Stage/Map/Actors" index="0"]
 position = Vector2( 900, 150 )
 is_input = false
+
+[node name="Exit" parent="Stage/Map/Actors" index="1"]
+visible = false
 
 [node name="title" type="Sprite" parent="Stage"]
 position = Vector2( 900, 350 )
@@ -108,3 +109,5 @@ position = Vector2( 0, 220 )
 material = SubResource( 2 )
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 1 )
+
+[editable path="Stage/Map"]

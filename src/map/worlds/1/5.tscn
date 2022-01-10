@@ -1,34 +1,22 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/map/base/map_base.tscn" type="PackedScene" id=1]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" instance=ExtResource( 1 )]
 
-[node name="Camera2D" parent="." instance=ExtResource( 1 )]
+[node name="Camera2D" parent="." index="0"]
 position = Vector2( 600, 650 )
 zoom = Vector2( 2, 2 )
-is_moving = true
-is_focal_point = true
 
-[node name="SolidTileMap" parent="." instance=ExtResource( 3 )]
+[node name="SolidTileMap" parent="." index="1"]
 tile_data = PoolIntArray( 131074, -1073741824, 0, 131075, -1073741824, 0, 131076, -1073741824, 0, 131077, -1073741824, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 262152, 0, 0, 262153, 0, 0, 327688, -1610612736, 0, 327689, -1610612736, 0, 393224, -1610612736, 0, 393225, -1610612736, 0, 458760, -1610612736, 0, 458761, -1610612736, 0, 524296, -1610612736, 0, 524297, -1610612736, 0, 589832, 0, 0, 589833, 0, 0, 655368, 0, 0, 655369, 0, 0 )
 
-[node name="SpikeMap" parent="." instance=ExtResource( 6 )]
+[node name="SpikeMap" parent="." index="2"]
 tile_data = PoolIntArray( 65542, 0, 0, 131073, -1073741824, 0, 196609, -1073741824, 0, 327690, -1610612736, 0, 393226, -1610612736, 0, 458759, -1073741824, 0, 524295, -1073741824, 0 )
 
-[node name="Boundary" parent="." instance=ExtResource( 5 )]
-position = Vector2( 600, 650 )
-size = 15.0
-
-[node name="Actors" type="Node2D" parent="."]
-
-[node name="Player" parent="Actors" instance=ExtResource( 4 )]
+[node name="Player" parent="Actors" index="0"]
 position = Vector2( 300, 150 )
+can_spin = true
 
-[node name="Exit" parent="Actors" instance=ExtResource( 2 )]
+[node name="Exit" parent="Actors" index="1"]
 position = Vector2( 350, 500 )

@@ -150,6 +150,8 @@ func portal(pos):
 	sprite.position = Vector2.ZERO
 
 func outside_boundary():
+	print(name, " outside boundary")
+	
 	if is_regenerate:
 		set_physics_process(false)
 		

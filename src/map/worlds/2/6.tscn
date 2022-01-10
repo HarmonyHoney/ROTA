@@ -1,40 +1,35 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/map/base/map_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/stage/Camera2D.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/actor/Exit.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=7]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[node name="Camera2D" parent="." instance=ExtResource( 3 )]
+[sub_resource type="Curve" id=13]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Node2D" instance=ExtResource( 1 )]
+
+[node name="Camera2D" parent="." index="0"]
 position = Vector2( -50, 400 )
 zoom = Vector2( 1.3, 1.3 )
-is_moving = true
-is_focal_point = true
 
-[node name="SolidTileMap" parent="." instance=ExtResource( 5 )]
+[node name="SolidTileMap" parent="." index="1"]
 tile_data = PoolIntArray( 131071, -1610612736, 0, 65536, -1610612736, 0, 65537, 0, 0, 131073, 0, 0, 262141, -1610612736, 0, 262142, -1610612736, 0, 262143, -1073741824, 0, 196609, 0, 0, 262145, 0, 0, 393215, -1073741824, 0, 327680, -1073741824, 0, 327681, -1610612736, 0, 458751, -1073741824, 0 )
 
-[node name="SpikeMap" parent="." instance=ExtResource( 6 )]
+[node name="SpikeMap" parent="." index="2"]
 tile_data = PoolIntArray( 65538, -1610612736, 0, 131074, -1610612736, 0, 196610, -1610612736, 0, 262146, -1610612736, 0, 327682, -1610612736, 0, 458750, -1073741824, 0 )
 
-[node name="Boundary" parent="." instance=ExtResource( 7 )]
-position = Vector2( -50, 400 )
-size = 8.0
-
-[node name="Actors" type="Node2D" parent="."]
-
-[node name="Player" parent="Actors" instance=ExtResource( 1 )]
+[node name="Player" parent="Actors" index="0"]
 position = Vector2( 0, 250 )
 dir = 2
+turn_easing = SubResource( 1 )
+push_curve = SubResource( 13 )
+can_spin = true
 
-[node name="Exit" parent="Actors" instance=ExtResource( 4 )]
+[node name="Exit" parent="Actors" index="1"]
 position = Vector2( 50, 650 )
 
-[node name="Box" parent="Actors" instance=ExtResource( 2 )]
+[node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
 position = Vector2( 150, 50 )
-is_regenerate = true

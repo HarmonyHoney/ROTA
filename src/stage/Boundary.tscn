@@ -3,7 +3,7 @@
 [ext_resource path="res://src/stage/Boundary.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1200, 1200 )
+extents = Vector2( 1000, 1000 )
 
 [node name="Boundary" type="Area2D"]
 script = ExtResource( 1 )

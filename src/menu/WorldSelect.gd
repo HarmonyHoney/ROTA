@@ -157,15 +157,19 @@ func close_world():
 	
 	for i in orb_viewport.get_children():
 		orb_viewport.remove_child(i)
-	orb_viewport.add_child(preview_scenes[world_cursor].instance())
-	#orb_viewport.get_node("Node2D/Camera2D").zoom = Vector2.ONE
+	
+	if is_instance_valid(preview_scenes[world_cursor]):
+		orb_viewport.add_child(preview_scenes[world_cursor].instance())
+	
 	worlds[world_cursor].get_node("Locked").visible = Shared.unlocked[world_cursor] < 0
 
 func preview_level():
 	for i in orb_viewport.get_children():
 		orb_viewport.remove_child(i)
-	orb_viewport.add_child(level_scenes[world_cursor][level_cursor].instance())
-	#orb_viewport.get_node("Node2D/Camera2D").zoom = Vector2.ONE
+	
+	if is_instance_valid(level_scenes[world_cursor][level_cursor]):
+		orb_viewport.add_child(level_scenes[world_cursor][level_cursor].instance())
+	
 	worlds[world_cursor].get_node("Locked").visible = level_cursor > Shared.unlocked[world_cursor]
 
 func open_level():

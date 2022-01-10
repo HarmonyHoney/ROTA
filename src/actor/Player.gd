@@ -417,6 +417,7 @@ func die():
 		Shared.reset()
 
 func outside_boundary():
+	print(name, " outside boundary")
 	die()
 
 func turning(angle):
