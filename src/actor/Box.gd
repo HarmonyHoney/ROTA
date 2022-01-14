@@ -34,6 +34,8 @@ export var easing : Curve
 
 var is_hold := false
 
+onready var actors = get_parent()
+
 func _ready():
 	turn_clock = 99
 	
@@ -95,9 +97,22 @@ func shrink_shape(shrink := true):
 	collision_shape.shape.extents = Vector2(49, 49) if shrink else Vector2(50, 50)
 
 func test_tile(check_dir := dir, distance := 1) -> bool:
+	var vec = rot(Vector2.DOWN * distance * tile, check_dir)
+	
 	shrink_shape()
-	var result = test_move(transform, rot(Vector2.DOWN * distance * tile, check_dir))
+	var result = test_move(transform, vec)
 	shrink_shape(false)
+	
+	if !result and is_instance_valid(actors):
+		var check_pos = position + vec
+		check_pos = Vector2(stepify(check_pos.x, 50), stepify(check_pos.y, 50))
+		
+		for i in actors.boxes:
+			if i != self:
+				if check_pos == i.position:
+					result = true
+					break
+	
 	return result
 
 func move_tile(move_dir := dir, distance := 1):
@@ -112,6 +127,8 @@ func move_tile(move_dir := dir, distance := 1):
 	var move_from = position
 	position += rot(Vector2.DOWN * distance * tile, move_dir)
 	position = Vector2(stepify(position.x, 50), stepify(position.y, 50))
+	
+	print(name, ": ", move_from, " - ", position)
 	
 	# move sprite
 	sprite.position -= position - move_from
@@ -166,6 +183,9 @@ func outside_boundary():
 		get_parent().add_child(p)
 		p.set_physics_process(true)
 	else:
-		queue_free()
+		remove()
 
-
+func remove():
+	if is_instance_valid(actors):
+		actors.boxes.erase(self)
+	queue_free()
