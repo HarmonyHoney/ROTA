@@ -13,9 +13,11 @@ onready var preview = $Worlds/Preview.duplicate()
 
 var p_back := Vector2(350, -150)
 
-var pos_targets = [Vector2(-500, 0),
-Vector2.ZERO,
-Vector2(500, 0)]
+var pos_targets = [Vector2(-600, 0),
+Vector2(-200, 0),
+Vector2(200, 0),
+Vector2(600, 0),
+Vector2(1000, 0)]
 
 var circles = []
 onready var circles_node = $Picker/Circles

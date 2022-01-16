@@ -195,6 +195,11 @@ func _physics_process(delta):
 			hold_box.remove_collision_exception_with(self)
 			hold_box.is_hold = false
 			
+			# move to last child
+			var p = hold_box.get_parent()
+			p.move_child(hold_box, p.get_child_count())
+			get_index()
+			
 			HUD.show("game")
 	
 	# not holding
