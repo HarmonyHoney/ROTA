@@ -268,7 +268,8 @@ func _physics_process(delta):
 				elif btnp_push and !wrench.is_swing:
 					wrench.swing()
 					
-					yield(get_tree().create_timer(0.16), "timeout")
+					#yield(get_tree().create_timer(0.16), "timeout")
+					yield(wrench, "swing_check")
 					
 					for i in hit_area.get_overlapping_bodies():
 						if i.is_in_group("box") and i.is_floor:

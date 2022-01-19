@@ -42,6 +42,7 @@ material = SubResource( 3 )
 texture = ExtResource( 4 )
 
 [node name="Bolt" type="Sprite" parent="Sprite"]
+visible = false
 texture = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]

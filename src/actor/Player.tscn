@@ -1048,7 +1048,8 @@ rotation = -1.5708
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 13 )
 
-[node name="Line2D" type="Line2D" parent="Wrench"]
+[node name="Crosshair" type="Line2D" parent="Wrench"]
+visible = false
 points = PoolVector2Array( -50, 0, 50, 0, 0, 0, 0, -50, 0, 50 )
 width = 2.0
 default_color = Color( 1, 0.4, 0.4, 1 )
