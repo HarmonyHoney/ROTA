@@ -16,5 +16,6 @@ func set_box(b):
 		place()
 
 func place():
-	rotation = box.arrow.rotation
+	rotation = box.sprite.rotation
 	position = box.sprite.global_position
+	scale.x = box.sprite.scale.x

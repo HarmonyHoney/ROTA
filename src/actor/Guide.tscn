@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actor/Guide.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=14]
+colors = PoolColorArray( 1, 0.4, 0.4, 1, 1, 1, 1, 0 )
+
+[node name="Guide" type="Line2D"]
+z_index = 29
+z_as_relative = false
+points = PoolVector2Array( 0, 0, 0, 300 )
+width = 100.0
+default_color = Color( 1, 0.4, 0.4, 1 )
+gradient = SubResource( 14 )
+script = ExtResource( 1 )

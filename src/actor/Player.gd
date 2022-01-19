@@ -12,8 +12,8 @@ onready var anim : AnimationPlayer = $AnimationPlayer
 onready var anim_eyes : AnimationPlayer = $AnimationEyes
 onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
 
-onready var wrench : Node2D = $Wrench
-onready var guide := $Guide
+var guide_scene := preload("res://src/actor/Guide.tscn")
+var guide
 
 export var is_debug := false
 onready var debug_label : Label = $DebugCanvas/Labels/Label
@@ -112,15 +112,13 @@ func _ready():
 	if is_debug:
 		debug_label.visible = true
 	
-	
+	# wait for parent
 	yield(get_parent(),"ready")
 	
-	# set wrench
-	reparent(wrench, get_parent())
-	wrench.player = self
-	
 	# set guide
-	reparent(guide, get_parent())
+	guide = guide_scene.instance()
+	get_parent().add_child(guide)
+	#reparent(guide, get_parent())
 
 func _input(event):
 	if event.is_action_pressed("reset"):
@@ -174,10 +172,6 @@ func _physics_process(delta):
 				#move_and_collide(Vector2(0, move_to.y))
 				
 			
-			# during spin
-			elif wrench.is_turn:
-				pass
-			
 			# not pushing
 			else:
 				# check floor
@@ -204,11 +198,6 @@ func _physics_process(delta):
 				# spin box
 				elif can_spin and joy.y != 0 and joy_last.y == 0:
 					hold_box.dir += joy.y * -dir_x
-					
-					#wrench_clock = 0
-					#wrench_turn = wrench_angle + deg2rad((joy.y * -dir_x) * 90)
-					
-					wrench.turn(deg2rad((joy.y * -dir_x) * 90))
 		
 		# end hold
 		if is_end_hold:
@@ -228,7 +217,6 @@ func _physics_process(delta):
 			HUD.show("game")
 			
 			guide.set_box(null)
-			wrench.set_box(null)
 	
 	# not holding
 	else:
@@ -265,12 +253,7 @@ func _physics_process(delta):
 					jump_clock = 0.0
 				
 				# start hold
-				elif btnp_push and !wrench.is_swing:
-					wrench.swing()
-					
-					#yield(get_tree().create_timer(0.16), "timeout")
-					yield(wrench, "swing_check")
-					
+				elif btnp_push:
 					for i in hit_area.get_overlapping_bodies():
 						if i.is_in_group("box") and i.is_floor:
 							hold_box = i
@@ -292,9 +275,6 @@ func _physics_process(delta):
 								HUD.show("grab1")
 							
 							guide.set_box(hold_box)
-							wrench.set_box(hold_box)
-							
-							wrench.is_swing = false
 							
 							# move to first child
 							var p = hold_box.get_parent()

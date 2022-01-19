@@ -5,8 +5,7 @@ class_name Box
 onready var collision_shape : CollisionShape2D = $CollisionShape2D
 onready var standing_area : Area2D = $StandingArea
 onready var push_areas : Array = $PushAreas.get_children()
-onready var sprite : Sprite = $Sprite
-onready var arrow : Sprite = $Sprite/Arrow
+onready var sprite : Node2D = $Sprites
 onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
 
 export var dir := 0 setget set_dir
@@ -15,15 +14,17 @@ var tile := 100.0
 var is_floor := false
 var move_clock := 0.0
 var move_time := 0.2
+var move_from := Vector2.ZERO
+var move_to := Vector2.ZERO
 
-var arrow_from := 0.0
-var arrow_to := 0.0
+var turn_from := 0.0
+var turn_to := 0.0
 var turn_clock := 0.0
 var turn_time := 0.2
 
 var is_push := false
 var push_clock := 0.0
-var push_time := 0.5
+var push_time := 0.2
 
 export var is_regenerate := true
 var start_dir := 0
@@ -62,12 +63,14 @@ func _physics_process(delta):
 	move_clock = min(move_clock + delta, target)
 	
 	# lerp sprite and update collision_sprite
-	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, smoothstep(0, 1, move_clock / target))
+	sprite.position = move_from.linear_interpolate(Vector2.ZERO, smoothstep(0, 1, move_clock / target))
 	collision_sprite.position = sprite.position
 	
-	# turn arrow
+	# turn sprite
 	turn_clock = min(turn_clock + delta, turn_time)
-	arrow.rotation = lerp_angle(arrow_from, arrow_to, smoothstep(0, 1, turn_clock / turn_time))
+	var smooth = smoothstep(0, 1, turn_clock / turn_time)
+	sprite.rotation = lerp_angle(turn_from, turn_to, smooth)
+	sprite.scale = Vector2.ONE *  lerp(0.8, 1.0, smooth)
 	
 	if move_clock == target:
 		if is_push:
@@ -80,13 +83,13 @@ func _physics_process(delta):
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)
 	
-	if is_instance_valid(arrow):
-		arrow_from = arrow.rotation
-	arrow_to = deg2rad(dir * 90)
+	if is_instance_valid(sprite):
+		turn_from = sprite.rotation
+	turn_to = deg2rad(dir * 90)
 	turn_clock = 0.0
 	
 	if Engine.editor_hint:
-		$Sprite/Arrow.rotation = arrow_to
+		$Sprites.rotation = turn_to
 
 func rot(arg : Vector2, _dir := dir, backwards := false):
 	return arg.rotated(deg2rad((-_dir if backwards else _dir) * 90))
@@ -122,14 +125,15 @@ func move_tile(move_dir := dir, distance := 1):
 				i.velocity.y = 0
 	
 	# move
-	var move_from = position
+	var last_pos = position
 	position += rot(Vector2.DOWN * distance * tile, move_dir)
 	position = Vector2(stepify(position.x, 50), stepify(position.y, 50))
 	
-	print(name, ": ", move_from, " - ", position)
+	print(name, ": ", last_pos, " - ", position)
 	
 	# move sprite
-	sprite.position -= position - move_from
+	sprite.position -= position - last_pos
+	move_from = sprite.position
 	
 	# reset clock
 	move_clock = 0
@@ -172,7 +176,8 @@ func outside_boundary():
 		
 		set_dir(start_dir)
 		sprite.position = Vector2.ZERO
-		turn_clock = 99
+		turn_clock = 0
+		move_clock = move_time
 		
 		var p = passhthrough_scene.instance()
 		p.position = start_pos

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actor/Wrench.gd" type="Script" id=1]
+[ext_resource path="res://media/image/wrench.png" type="Texture" id=2]
+
+[node name="Wrench" type="Node2D"]
+position = Vector2( -95.754, -51.6568 )
+z_index = 49
+z_as_relative = false
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = -1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="Crosshair" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( -50, 0, 50, 0, 0, 0, 0, -50, 0, 50 )
+width = 2.0
+default_color = Color( 1, 0.4, 0.4, 1 )

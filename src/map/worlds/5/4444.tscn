@@ -21,10 +21,15 @@ can_spin = true
 position = Vector2( -1450, -550 )
 
 [node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
-position = Vector2( -250, 50 )
+position = Vector2( 150, -50 )
 
 [node name="Box2" parent="Actors" index="3" instance=ExtResource( 2 )]
-position = Vector2( -150, 50 )
+position = Vector2( 150, 50 )
+dir = 2
 
 [node name="Box3" parent="Actors" index="4" instance=ExtResource( 2 )]
-position = Vector2( -50, 50 )
+position = Vector2( 250, -150 )
+
+[node name="Box4" parent="Actors" index="5" instance=ExtResource( 2 )]
+position = Vector2( 250, -50 )
+dir = 2
