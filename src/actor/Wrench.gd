@@ -18,7 +18,7 @@ var target := Vector2.ZERO
 var angle := 0.0
 
 var turn_clock := 0.0
-var turn_time := 0.3
+var turn_time := 0.2
 var turn_from := 0.0
 var turn_to := 0.0
 
@@ -36,7 +36,7 @@ func _ready():
 	sprite.position = hand_offset
 
 func _physics_process(delta):
-	
+	if !is_instance_valid(player): return
 	
 	
 	if is_hold:
@@ -48,15 +48,10 @@ func _physics_process(delta):
 		else:
 			target = player.position + player.rot(Vector2(-50 * player.dir_x, -10))
 		
-		
-		#var dist = position.distance_to(target)
-		
 		angle = deg2rad(player.dir * 90)
 		
 		var walk = player.velocity.x / player.walk_speed
 		angle += lerp(0, deg2rad(-45), walk)
-		
-		
 	
 	position = position.linear_interpolate(target, 0.1)
 	if is_hold and box.is_push:
@@ -64,12 +59,12 @@ func _physics_process(delta):
 	
 	if is_swing:
 		swing_clock = min(swing_clock + delta, swing_time)
-		rotation = lerp(swing_from, swing_to, ease((swing_clock / swing_time), -2.5))
+		rotation = lerp(swing_from, swing_to, smoothstep(0, 1, swing_clock / swing_time))
 		if swing_clock == swing_time:
 			is_swing = false
 	elif is_turn:
 		turn_clock = min(turn_clock + delta, turn_time)
-		rotation = lerp_angle(turn_from, turn_to, ease((turn_clock / turn_time), -2.5))
+		rotation = lerp_angle(turn_from, turn_to, smoothstep(0, 1, turn_clock / turn_time))
 		if turn_clock == turn_time:
 			is_turn = false
 	else:
@@ -81,10 +76,9 @@ func set_box(b):
 	
 	
 	position += (sprite.global_position - position) * 2
-	sprite.position = bolt_offset if is_hold else hand_offset
+	sprite.position = -hand_offset if is_hold else hand_offset
 	
 	z_index = player.z_index + (1 if is_hold else -1)
-	
 
 func turn(radians):
 	is_turn = true
@@ -95,5 +89,5 @@ func turn(radians):
 func swing():
 	is_swing = true
 	swing_clock = 0.0
-	swing_from = rotation
-	swing_to = rotation + (TAU * player.dir_x)
+	swing_from = angle
+	swing_to = angle + (deg2rad(360) * player.dir_x)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://media/image/player/mouth.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -15,12 +15,6 @@
 [ext_resource path="res://media/image/wrench.png" type="Texture" id=13]
 [ext_resource path="res://src/actor/Wrench.gd" type="Script" id=14]
 [ext_resource path="res://src/actor/Guide.gd" type="Script" id=15]
-
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Curve" id=13]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17, 17 )
@@ -957,6 +951,9 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.2 )
 }
 
+[sub_resource type="Gradient" id=14]
+colors = PoolColorArray( 1, 0.4, 0.4, 1, 1, 1, 1, 0 )
+
 [sub_resource type="ShaderMaterial" id=12]
 shader = ExtResource( 12 )
 shader_param/add_color = Color( 0, 0.383333, 1, 1 )
@@ -966,8 +963,6 @@ z_index = 50
 z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
-turn_easing = SubResource( 1 )
-push_curve = SubResource( 13 )
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 
@@ -1033,13 +1028,13 @@ anims/blink = SubResource( 10 )
 anims/die = SubResource( 11 )
 
 [node name="Guide" type="Line2D" parent="."]
-position = Vector2( -175.759, -49.7669 )
-z_index = 45
-points = PoolVector2Array( 0, 0, 0, 100 )
+position = Vector2( -220.593, -62.5092 )
+z_index = 29
+z_as_relative = false
+points = PoolVector2Array( 0, 0, 0, 300 )
+width = 100.0
 default_color = Color( 1, 0.4, 0.4, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+gradient = SubResource( 14 )
 script = ExtResource( 15 )
 
 [node name="Wrench" type="Node2D" parent="."]

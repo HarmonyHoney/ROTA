@@ -62,7 +62,6 @@ var is_exit := false
 var exit_node
 
 var target_angle := 0.0
-export var turn_easing : Curve
 var turn_clock := 0.0
 var turn_time := 0.2
 var turn_from := 0.0
@@ -74,9 +73,7 @@ var hold_pos := Vector2.ZERO
 var push_clock := 0.0
 var push_time := 0.2
 var push_from := Vector2.ZERO
-export var push_curve : Curve
 var push_dir := 1
-
 
 export var can_spin := true
 
@@ -115,19 +112,15 @@ func _ready():
 	if is_debug:
 		debug_label.visible = true
 	
-	# set wrench
-	yield(get_parent(),"ready")
-	remove_child(wrench)
-	get_parent().add_child(wrench)
-	wrench.owner = get_parent()
 	
+	yield(get_parent(),"ready")
+	
+	# set wrench
+	reparent(wrench, get_parent())
 	wrench.player = self
 	
 	# set guide
-	remove_child(guide)
-	get_parent().add_child(guide)
-	guide.owner = get_parent()
-	guide.visible = false
+	reparent(guide, get_parent())
 
 func _input(event):
 	if event.is_action_pressed("reset"):
@@ -163,16 +156,27 @@ func _physics_process(delta):
 	# during hold
 	if is_hold:
 		if !is_end_hold:
+			
 			# during push
 			if push_clock != push_time:
 				push_clock = min(push_clock + delta, push_time)
 				
 				hold_pos = hold_box.position + rot(Vector2(100 * -dir_x, 49 - collider_size.y))
-				var new_pos = push_from.linear_interpolate(hold_pos, push_curve.interpolate(push_clock / push_time))
+				var new_pos = push_from.linear_interpolate(hold_pos, smoothstep(0, 1, push_clock / push_time))
 				var move_to = new_pos - position
 				
 				move_and_collide(Vector2(move_to.x, 0))
 				move_and_collide(Vector2(0, move_to.y))
+				
+				#hold_pos = hold_box.sprite.global_position + rot(Vector2(100 * -dir_x, 49 - collider_size.y))
+				#var move_to = hold_pos - position
+				#move_and_collide(Vector2(move_to.x, 0))
+				#move_and_collide(Vector2(0, move_to.y))
+				
+			
+			# during spin
+			elif wrench.is_turn:
+				pass
 			
 			# not pushing
 			else:
@@ -220,11 +224,9 @@ func _physics_process(delta):
 			# move to last child
 			var p = hold_box.get_parent()
 			p.move_child(hold_box, p.get_child_count())
-			get_index()
 			
 			HUD.show("game")
 			
-			guide.visible = false
 			guide.set_box(null)
 			wrench.set_box(null)
 	
@@ -232,7 +234,7 @@ func _physics_process(delta):
 	else:
 		# turning
 		turn_clock = min(turn_clock + delta, turn_time)
-		sprites.rotation = lerp_angle(turn_from, target_angle, turn_easing.interpolate(turn_clock / turn_time))
+		sprites.rotation = lerp_angle(turn_from, target_angle, smoothstep(0, 1, turn_clock / turn_time))
 		if turn_clock == turn_time:
 			# on floor
 			is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN))
@@ -263,7 +265,7 @@ func _physics_process(delta):
 					jump_clock = 0.0
 				
 				# start hold
-				elif btnp_push:
+				elif btnp_push and !wrench.is_swing:
 					wrench.swing()
 					
 					yield(get_tree().create_timer(0.16), "timeout")
@@ -288,11 +290,14 @@ func _physics_process(delta):
 							else:
 								HUD.show("grab1")
 							
-							guide.visible = true
 							guide.set_box(hold_box)
 							wrench.set_box(hold_box)
 							
 							wrench.is_swing = false
+							
+							# move to first child
+							var p = hold_box.get_parent()
+							p.move_child(hold_box, 0)
 							
 							break
 			
@@ -458,3 +463,8 @@ func outside_boundary():
 
 func turning(angle):
 	pass#sprites.rotation = angle
+
+func reparent(child, parent):
+	remove_child(child)
+	parent.add_child(child)
+	child.owner = parent

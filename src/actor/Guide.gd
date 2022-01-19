@@ -2,10 +2,19 @@ extends Line2D
 
 var box : Box = null
 
+func _ready():
+	visible = false
+
 func _physics_process(delta):
-	if is_instance_valid(box):
-		rotation = box.arrow.rotation
-		position = box.sprite.global_position
+	if visible:
+		place()
 
 func set_box(b):
 	box = b
+	visible = is_instance_valid(box)
+	if visible:
+		place()
+
+func place():
+	rotation = box.arrow.rotation
+	position = box.sprite.global_position

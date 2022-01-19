@@ -30,8 +30,6 @@ var start_dir := 0
 var start_pos := Vector2.ZERO
 var passhthrough_scene = load("res://src/actor/Passthrough.tscn")
 
-export var easing : Curve
-
 var is_hold := false
 
 onready var actors = get_parent()
@@ -64,12 +62,12 @@ func _physics_process(delta):
 	move_clock = min(move_clock + delta, target)
 	
 	# lerp sprite and update collision_sprite
-	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, easing.interpolate(move_clock / target))
+	sprite.position = sprite.position.linear_interpolate(Vector2.ZERO, smoothstep(0, 1, move_clock / target))
 	collision_sprite.position = sprite.position
 	
 	# turn arrow
 	turn_clock = min(turn_clock + delta, turn_time)
-	arrow.rotation = lerp_angle(arrow_from, arrow_to, easing.interpolate(turn_clock / turn_time))
+	arrow.rotation = lerp_angle(arrow_from, arrow_to, smoothstep(0, 1, turn_clock / turn_time))
 	
 	if move_clock == target:
 		if is_push:
