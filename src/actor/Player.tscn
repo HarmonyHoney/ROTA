@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://media/image/player/mouth.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://media/image/player/dead_eye.png" type="Texture" id=10]
 [ext_resource path="res://media/image/player/player_still.png" type="Texture" id=11]
 [ext_resource path="res://src/shader/add_color.gdshader" type="Shader" id=12]
+[ext_resource path="res://media/image/wrench.png" type="Texture" id=13]
+[ext_resource path="res://src/actor/Wrench.gd" type="Script" id=14]
+[ext_resource path="res://src/actor/Guide.gd" type="Script" id=15]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -1028,6 +1031,32 @@ blend_times = [ "idle", "push", 0.15, "jump", "idle", 0.2, "jump", "run", 0.2, "
 [node name="AnimationEyes" type="AnimationPlayer" parent="."]
 anims/blink = SubResource( 10 )
 anims/die = SubResource( 11 )
+
+[node name="Guide" type="Line2D" parent="."]
+position = Vector2( -175.759, -49.7669 )
+z_index = 45
+points = PoolVector2Array( 0, 0, 0, 100 )
+default_color = Color( 1, 0.4, 0.4, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource( 15 )
+
+[node name="Wrench" type="Node2D" parent="."]
+position = Vector2( -95.754, -51.6568 )
+z_index = 49
+z_as_relative = false
+script = ExtResource( 14 )
+
+[node name="Sprite" type="Sprite" parent="Wrench"]
+rotation = -1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 13 )
+
+[node name="Line2D" type="Line2D" parent="Wrench"]
+points = PoolVector2Array( -50, 0, 50, 0, 0, 0, 0, -50, 0, 50 )
+width = 2.0
+default_color = Color( 1, 0.4, 0.4, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false

@@ -12,6 +12,9 @@ onready var anim : AnimationPlayer = $AnimationPlayer
 onready var anim_eyes : AnimationPlayer = $AnimationEyes
 onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
 
+onready var wrench : Node2D = $Wrench
+onready var guide := $Guide
+
 export var is_debug := false
 onready var debug_label : Label = $DebugCanvas/Labels/Label
 var readout = []
@@ -111,6 +114,20 @@ func _ready():
 	readout.resize(readout_size)
 	if is_debug:
 		debug_label.visible = true
+	
+	# set wrench
+	yield(get_parent(),"ready")
+	remove_child(wrench)
+	get_parent().add_child(wrench)
+	wrench.owner = get_parent()
+	
+	wrench.player = self
+	
+	# set guide
+	remove_child(guide)
+	get_parent().add_child(guide)
+	guide.owner = get_parent()
+	guide.visible = false
 
 func _input(event):
 	if event.is_action_pressed("reset"):
@@ -183,6 +200,11 @@ func _physics_process(delta):
 				# spin box
 				elif can_spin and joy.y != 0 and joy_last.y == 0:
 					hold_box.dir += joy.y * -dir_x
+					
+					#wrench_clock = 0
+					#wrench_turn = wrench_angle + deg2rad((joy.y * -dir_x) * 90)
+					
+					wrench.turn(deg2rad((joy.y * -dir_x) * 90))
 		
 		# end hold
 		if is_end_hold:
@@ -201,6 +223,10 @@ func _physics_process(delta):
 			get_index()
 			
 			HUD.show("game")
+			
+			guide.visible = false
+			guide.set_box(null)
+			wrench.set_box(null)
 	
 	# not holding
 	else:
@@ -238,6 +264,10 @@ func _physics_process(delta):
 				
 				# start hold
 				elif btnp_push:
+					wrench.swing()
+					
+					yield(get_tree().create_timer(0.16), "timeout")
+					
 					for i in hit_area.get_overlapping_bodies():
 						if i.is_in_group("box") and i.is_floor:
 							hold_box = i
@@ -257,6 +287,12 @@ func _physics_process(delta):
 								HUD.show("grab2")
 							else:
 								HUD.show("grab1")
+							
+							guide.visible = true
+							guide.set_box(hold_box)
+							wrench.set_box(hold_box)
+							
+							wrench.is_swing = false
 							
 							break
 			
@@ -290,11 +326,6 @@ func _physics_process(delta):
 			# move body
 			move_velocity = move_and_slide(rot(velocity))
 			velocity = rot(move_velocity, dir, true)
-	
-	
-	
-	
-	
 	
 	
 #	# blink anim
