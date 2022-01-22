@@ -12,8 +12,15 @@ onready var anim : AnimationPlayer = $AnimationPlayer
 onready var anim_eyes : AnimationPlayer = $AnimationEyes
 onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
 
+onready var hand_l := $Sprites/Offset/player_still/HandL
+onready var hand_r := $Sprites/Offset/player_still/HandR
+
+
 var guide_scene := preload("res://src/actor/Guide.tscn")
 var guide
+
+#var wrench_scene := preload("res://src/actor/Wrench.tscn")
+#var wrench
 
 export var is_debug := false
 onready var debug_label : Label = $DebugCanvas/Labels/Label
@@ -74,6 +81,8 @@ var push_clock := 0.0
 var push_time := 0.2
 var push_from := Vector2.ZERO
 var push_dir := 1
+var box_turn := 1
+
 
 export var can_spin := true
 
@@ -119,6 +128,11 @@ func _ready():
 	guide = guide_scene.instance()
 	get_parent().add_child(guide)
 	#reparent(guide, get_parent())
+	
+	# set wrench
+	#wrench = wrench_scene.instance()
+	#get_parent().add_child(wrench)
+	#wrench.player = self
 
 func _input(event):
 	if event.is_action_pressed("reset"):
@@ -151,16 +165,32 @@ func _physics_process(delta):
 		btn_push = Input.is_action_pressed("push")
 		btnp_push = Input.is_action_just_pressed("push")
 	
+	
+	# hands
+	if is_hold:
+		var d = dir
+		var s = 0.1
+		if hold_box.turn_clock != hold_box.turn_time:
+			s = 1.0
+			d += box_turn * (hold_box.turn_clock / hold_box.turn_time)
+		
+		var box_edge = hold_box.sprite.global_position - rot(Vector2(50 * dir_x, 0), d)
+		hand_l.global_position = hand_l.global_position.linear_interpolate(box_edge + rot(Vector2(0, -20), d), s)
+		hand_r.global_position = hand_r.global_position.linear_interpolate(box_edge + rot(Vector2(0, 20), d), s)
+	else:
+		hand_l.position = hand_l.position.linear_interpolate(Vector2(-170, 55), 0.1)
+		hand_r.position = hand_r.position.linear_interpolate(Vector2(170, 55), 0.1)
+	
 	# during hold
 	if is_hold:
 		if !is_end_hold:
-			
 			# during push
 			if push_clock != push_time:
 				push_clock = min(push_clock + delta, push_time)
 				
 				hold_pos = hold_box.position + rot(Vector2(100 * -dir_x, 49 - collider_size.y))
-				var new_pos = push_from.linear_interpolate(hold_pos, smoothstep(0, 1, push_clock / push_time))
+				var smooth = smoothstep(0, 1, push_clock / push_time)
+				var new_pos = push_from.linear_interpolate(hold_pos, smooth)
 				var move_to = new_pos - position
 				
 				move_and_collide(Vector2(move_to.x, 0))
@@ -170,7 +200,6 @@ func _physics_process(delta):
 				#var move_to = hold_pos - position
 				#move_and_collide(Vector2(move_to.x, 0))
 				#move_and_collide(Vector2(0, move_to.y))
-				
 			
 			# not pushing
 			else:
@@ -191,13 +220,20 @@ func _physics_process(delta):
 							push_from = position
 							push_clock = 0
 							push_dir = joy.x
+							hold_box.push_x = joy.x
 							print("push successful")
 						else:
 							print("push failed")
 				
-				# spin box
+				# turn box
 				elif can_spin and joy.y != 0 and joy_last.y == 0:
 					hold_box.dir += joy.y * -dir_x
+					box_turn = joy.y * -dir_x
+					
+					#wrench_clock = 0
+					#wrench_turn = wrench_angle + deg2rad((joy.y * -dir_x) * 90)
+					
+					#wrench.turn(deg2rad((joy.y * -dir_x) * 90))
 		
 		# end hold
 		if is_end_hold:
@@ -217,6 +253,7 @@ func _physics_process(delta):
 			HUD.show("game")
 			
 			guide.set_box(null)
+			#wrench.set_box(null)
 	
 	# not holding
 	else:
@@ -253,7 +290,12 @@ func _physics_process(delta):
 					jump_clock = 0.0
 				
 				# start hold
-				elif btnp_push:
+				elif btnp_push: # and !wrench.is_swing:
+					#wrench.swing()
+					
+					#yield(get_tree().create_timer(0.16), "timeout")
+					#yield(wrench, "swing_check")
+					
 					for i in hit_area.get_overlapping_bodies():
 						if i.is_in_group("box") and i.is_floor:
 							hold_box = i
@@ -275,6 +317,8 @@ func _physics_process(delta):
 								HUD.show("grab1")
 							
 							guide.set_box(hold_box)
+							#wrench.set_box(hold_box)
+							#wrench.is_swing = false
 							
 							# move to first child
 							var p = hold_box.get_parent()
@@ -354,8 +398,8 @@ func solve_jump():
 	fall_gravity = jump_gravity * 2.0
 	print("jump_speed: ", jump_speed, " / jump_gravity: ", jump_gravity, " / fall_gravity: ", fall_gravity)
 
-func rot(arg : Vector2, _dir = 0, backwards := false):
-	return arg.rotated(deg2rad((-dir if backwards else dir) * 90))
+func rot(arg : Vector2, _dir := dir, backwards := false):
+	return arg.rotated(deg2rad((-_dir if backwards else _dir) * 90))
 
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)

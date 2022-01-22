@@ -1086,6 +1086,17 @@ material = SubResource( 12 )
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 11 )
 
+[node name="HandL" type="Sprite" parent="Sprites/Offset/player_still"]
+use_parent_material = true
+position = Vector2( -170, 55 )
+texture = ExtResource( 9 )
+
+[node name="HandR" type="Sprite" parent="Sprites/Offset/player_still"]
+show_behind_parent = true
+use_parent_material = true
+position = Vector2( 170, 55 )
+texture = ExtResource( 9 )
+
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_BodyArea_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

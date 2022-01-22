@@ -35,6 +35,8 @@ var is_hold := false
 
 onready var actors = get_parent()
 
+var push_x := -1
+
 func _ready():
 	turn_clock = 99
 	
@@ -60,25 +62,33 @@ func _physics_process(delta):
 	
 	# move clock
 	var target = push_time if is_push else move_time
-	move_clock = min(move_clock + delta, target)
-	
-	# lerp sprite and update collision_sprite
-	sprite.position = move_from.linear_interpolate(Vector2.ZERO, smoothstep(0, 1, move_clock / target))
-	collision_sprite.position = sprite.position
-	
-	# turn sprite
-	turn_clock = min(turn_clock + delta, turn_time)
-	var smooth = smoothstep(0, 1, turn_clock / turn_time)
-	sprite.rotation = lerp_angle(turn_from, turn_to, smooth)
-	sprite.scale = Vector2.ONE *  lerp(0.8, 1.0, smooth)
+	if move_clock != target:
+		move_clock = min(move_clock + delta, target)
+		var smooth = smoothstep(0, 1, move_clock / target)
+		# lerp sprite and update collision_sprite
+		sprite.position = move_from.linear_interpolate(Vector2.ZERO, smooth)
+		collision_sprite.position = sprite.position
+		
+		if is_hold:
+			sprite.rotation = lerp_angle(turn_to + deg2rad(12 * -push_x), turn_to, abs(0.5 - smooth) * 2.0)
+			
+			#sprite.scale = Vector2.ONE *  lerp(0.9, 1.0, smooth)
+		
+	elif turn_clock != turn_time:
+		# turn sprite
+		turn_clock = min(turn_clock + delta, turn_time)
+		var smooth = smoothstep(0, 1, turn_clock / turn_time)
+		sprite.rotation = lerp_angle(turn_from, turn_to, smooth)
+		sprite.scale = Vector2.ONE *  lerp(0.8, 1.0, smooth)
 	
 	if move_clock == target:
-		if is_push:
-			is_push = false
-		
-		# move down
-		if !is_hold and !is_floor:
-			move_tile(dir, 1)
+			if is_push:
+				is_push = false
+			
+			# move down
+			if !is_hold and !is_floor:
+				move_tile(dir, 1)
+
 
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)

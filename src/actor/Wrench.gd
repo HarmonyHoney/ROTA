@@ -22,7 +22,7 @@ var turn_time := 0.2
 var turn_from := 0.0
 var turn_to := 0.0
 
-var hand_offset := Vector2(0, -58)
+var hand_offset := Vector2(0, -50)
 
 var is_swing := false
 var swing_clock := 0.0
@@ -43,7 +43,8 @@ func _physics_process(delta):
 	
 	if is_hold:
 		target = box.sprite.global_position
-		angle = deg2rad((player.dir + player.dir_x) * 90)
+		#angle = deg2rad((player.dir + player.dir_x) * 90)
+		angle = deg2rad((box.dir + 2) * 90)
 	else:
 		if is_swing:
 			target = player.position + player.rot(Vector2(50 * player.dir_x, -30))
