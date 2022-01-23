@@ -11,6 +11,7 @@ onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
 #onready var anim_eyes : AnimationPlayer = $AnimationEyes
 onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
 
+onready var sprites := $Sprites
 onready var spr_body := $Sprites/Body
 
 
@@ -18,6 +19,8 @@ onready var spr_hand_l := $Sprites/HandL
 onready var spr_hand_r := $Sprites/HandR
 onready var hands := [$Sprites/HandL, $Sprites/HandR]
 onready var hand_start : Vector2 = $Sprites/HandR.position
+
+onready var anim := $AnimationPlayer
 
 
 var guide_scene := preload("res://src/actor/Guide.tscn")
@@ -87,8 +90,9 @@ var push_from := Vector2.ZERO
 var push_dir := 1
 var box_turn := 1
 
-
 export var can_spin := true
+
+var anim_time := 0.0
 
 func _ready():
 	if Engine.editor_hint: return
@@ -147,13 +151,13 @@ func _physics_process(delta):
 	
 	if is_exit:
 		position = position.linear_interpolate(exit_node.position, 3 * delta)
-		spr_body.scale = spr_body.scale.linear_interpolate(Vector2.ZERO, 0.9 * delta)
-		spr_body.rotate(deg2rad(dir_x * 240) * delta)
+		sprites.scale = sprites.scale.linear_interpolate(Vector2.ZERO, 0.9 * delta)
+		sprites.rotate(deg2rad(dir_x * 240) * delta)
 		return
 	
 	if is_dead:
-		spr_body.position += rot(velocity) * delta
-		spr_body.rotate(deg2rad(-dir_x * 240) * delta)
+		sprites.position += rot(velocity) * delta
+		sprites.rotate(deg2rad(-dir_x * 240) * delta)
 		velocity.y += fall_gravity * delta
 		return
 	
@@ -168,30 +172,6 @@ func _physics_process(delta):
 		btnp_action = Input.is_action_just_pressed("action")
 		btn_push = Input.is_action_pressed("push")
 		btnp_push = Input.is_action_just_pressed("push")
-	
-	
-	# hands
-#	if is_hold:
-#		var d = dir
-#		var s = 0.2
-#		if box.turn_clock != box.turn_time:
-#			s = 1.0
-#			d += box_turn * (box.turn_clock / box.turn_time)
-#
-#		var box_edge = box.sprite.global_position - rot(Vector2(50 * dir_x, 0), d)
-#		spr_hand_l.global_position = spr_hand_l.global_position.linear_interpolate(box_edge + rot(Vector2(0, -20), d), s)
-#		spr_hand_r.global_position = spr_hand_r.global_position.linear_interpolate(box_edge + rot(Vector2(0, 20), d), s)
-#	else:
-#		spr_hand_l.position = spr_hand_l.position.linear_interpolate(Vector2(-25.5, 8.25), 0.1)
-#		spr_hand_r.position = spr_hand_r.position.linear_interpolate(Vector2(25.5, 8.25), 0.1)
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	# during hold
 	if is_hold:
@@ -367,7 +347,9 @@ func _physics_process(delta):
 			velocity = rot(move_velocity, -dir)
 	
 	
-	
+	# anim
+	#anim_time = fmod(anim_time + delta, 1)
+	anim_time += delta
 	
 	# hands
 	if is_hold:
@@ -387,6 +369,7 @@ func _physics_process(delta):
 		# move hands
 		for i in 2:
 			var goto = position + rot(hand_start * Vector2(1 if i > 0 else -1, 1))
+			print(fmod(anim_time, 2), " ", sin(anim_time))
 			hands[i].global_position = hands[i].global_position.linear_interpolate(goto, 0.1)
 	
 	# hand depth
@@ -394,6 +377,17 @@ func _physics_process(delta):
 		var p = rot(hands[i].position, -dir)
 		hands[i].show_behind_parent = sign(p.x) == sign(dir_x) and abs(p.x) > abs(hand_start.x) - 4
 	
+	
+	# anim
+#	if is_hold:
+#		pass
+#	else:
+#		if joy.x == 0:
+#			anim.play("idle")
+#			#print("idle")
+#		else:
+#			anim.play("run")
+#			#print("run")
 	
 	
 #
