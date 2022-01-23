@@ -2,18 +2,22 @@ tool
 extends KinematicBody2D
 class_name Player
 
-onready var sprites : Node2D = $Sprites
 onready var areas : Node2D = $Areas
 onready var hit_area : Area2D = $Areas/HitArea
 onready var body_area : Area2D = $BodyArea
 onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
 onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
-onready var anim : AnimationPlayer = $AnimationPlayer
-onready var anim_eyes : AnimationPlayer = $AnimationEyes
+#onready var anim : AnimationPlayer = $AnimationPlayer
+#onready var anim_eyes : AnimationPlayer = $AnimationEyes
 onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
 
-onready var hand_l := $Sprites/Offset/player_still/HandL
-onready var hand_r := $Sprites/Offset/player_still/HandR
+onready var spr_body := $Sprites/Body
+
+
+onready var spr_hand_l := $Sprites/HandL
+onready var spr_hand_r := $Sprites/HandR
+onready var hands := [$Sprites/HandL, $Sprites/HandR]
+onready var hand_start : Vector2 = $Sprites/HandR.position
 
 
 var guide_scene := preload("res://src/actor/Guide.tscn")
@@ -68,14 +72,14 @@ var is_dead := false
 var is_exit := false
 var exit_node
 
-var target_angle := 0.0
 var turn_clock := 0.0
 var turn_time := 0.2
 var turn_from := 0.0
+var turn_to := 0.0
 
 var is_hold := false
 var is_end_hold := false
-var hold_box 
+var box 
 var hold_pos := Vector2.ZERO
 var push_clock := 0.0
 var push_time := 0.2
@@ -112,7 +116,7 @@ func _ready():
 			camera.target_node = self
 			set_dir()
 			camera.turn_clock = 99
-			sprites.rotation = target_angle
+			spr_body.rotation = turn_to
 			camera.connect("turning", self, "turning")
 			break
 	
@@ -143,13 +147,13 @@ func _physics_process(delta):
 	
 	if is_exit:
 		position = position.linear_interpolate(exit_node.position, 3 * delta)
-		sprites.scale = sprites.scale.linear_interpolate(Vector2.ZERO, 0.9 * delta)
-		sprites.rotate(deg2rad(dir_x * 240) * delta)
+		spr_body.scale = spr_body.scale.linear_interpolate(Vector2.ZERO, 0.9 * delta)
+		spr_body.rotate(deg2rad(dir_x * 240) * delta)
 		return
 	
 	if is_dead:
-		sprites.position += rot(velocity) * delta
-		sprites.rotate(deg2rad(-dir_x * 240) * delta)
+		spr_body.position += rot(velocity) * delta
+		spr_body.rotate(deg2rad(-dir_x * 240) * delta)
 		velocity.y += fall_gravity * delta
 		return
 	
@@ -167,19 +171,27 @@ func _physics_process(delta):
 	
 	
 	# hands
-	if is_hold:
-		var d = dir
-		var s = 0.1
-		if hold_box.turn_clock != hold_box.turn_time:
-			s = 1.0
-			d += box_turn * (hold_box.turn_clock / hold_box.turn_time)
-		
-		var box_edge = hold_box.sprite.global_position - rot(Vector2(50 * dir_x, 0), d)
-		hand_l.global_position = hand_l.global_position.linear_interpolate(box_edge + rot(Vector2(0, -20), d), s)
-		hand_r.global_position = hand_r.global_position.linear_interpolate(box_edge + rot(Vector2(0, 20), d), s)
-	else:
-		hand_l.position = hand_l.position.linear_interpolate(Vector2(-170, 55), 0.1)
-		hand_r.position = hand_r.position.linear_interpolate(Vector2(170, 55), 0.1)
+#	if is_hold:
+#		var d = dir
+#		var s = 0.2
+#		if box.turn_clock != box.turn_time:
+#			s = 1.0
+#			d += box_turn * (box.turn_clock / box.turn_time)
+#
+#		var box_edge = box.sprite.global_position - rot(Vector2(50 * dir_x, 0), d)
+#		spr_hand_l.global_position = spr_hand_l.global_position.linear_interpolate(box_edge + rot(Vector2(0, -20), d), s)
+#		spr_hand_r.global_position = spr_hand_r.global_position.linear_interpolate(box_edge + rot(Vector2(0, 20), d), s)
+#	else:
+#		spr_hand_l.position = spr_hand_l.position.linear_interpolate(Vector2(-25.5, 8.25), 0.1)
+#		spr_hand_r.position = spr_hand_r.position.linear_interpolate(Vector2(25.5, 8.25), 0.1)
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	# during hold
 	if is_hold:
@@ -188,7 +200,7 @@ func _physics_process(delta):
 			if push_clock != push_time:
 				push_clock = min(push_clock + delta, push_time)
 				
-				hold_pos = hold_box.position + rot(Vector2(100 * -dir_x, 49 - collider_size.y))
+				hold_pos = box.position + rot(Vector2(88 * -dir_x, 49 - collider_size.y))
 				var smooth = smoothstep(0, 1, push_clock / push_time)
 				var new_pos = push_from.linear_interpolate(hold_pos, smooth)
 				var move_to = new_pos - position
@@ -196,10 +208,8 @@ func _physics_process(delta):
 				move_and_collide(Vector2(move_to.x, 0))
 				move_and_collide(Vector2(0, move_to.y))
 				
-				#hold_pos = hold_box.sprite.global_position + rot(Vector2(100 * -dir_x, 49 - collider_size.y))
-				#var move_to = hold_pos - position
-				#move_and_collide(Vector2(move_to.x, 0))
-				#move_and_collide(Vector2(0, move_to.y))
+				# wobble body
+				spr_body.rotation = lerp_angle(turn_to + deg2rad(12 * -push_dir), turn_to, abs(0.5 - smooth) * 2.0)
 			
 			# not pushing
 			else:
@@ -214,25 +224,24 @@ func _physics_process(delta):
 				
 				# push / pull
 				elif joy.x != 0 and joy_last.x == 0:
-					if dir_x == joy.x or !hold_box.test_tile(dir - joy.x, 2):
+					if dir_x == joy.x or !box.test_tile(dir - joy.x, 2):
 						
-						if hold_box.push(dir - joy.x):
+						if box.push(dir - joy.x):
 							push_from = position
 							push_clock = 0
 							push_dir = joy.x
-							hold_box.push_x = joy.x
+							box.push_x = joy.x
 							print("push successful")
 						else:
 							print("push failed")
 				
 				# turn box
-				elif can_spin and joy.y != 0 and joy_last.y == 0:
-					hold_box.dir += joy.y * -dir_x
+				elif !box.is_turn and can_spin and joy.y != 0 and joy_last.y == 0:
 					box_turn = joy.y * -dir_x
+					box.dir += box_turn
 					
 					#wrench_clock = 0
 					#wrench_turn = wrench_angle + deg2rad((joy.y * -dir_x) * 90)
-					
 					#wrench.turn(deg2rad((joy.y * -dir_x) * 90))
 		
 		# end hold
@@ -242,13 +251,13 @@ func _physics_process(delta):
 			is_move = true
 			has_jumped = true
 			
-			remove_collision_exception_with(hold_box)
-			hold_box.remove_collision_exception_with(self)
-			hold_box.is_hold = false
+			remove_collision_exception_with(box)
+			box.remove_collision_exception_with(self)
+			box.is_hold = false
 			
 			# move to last child
-			var p = hold_box.get_parent()
-			p.move_child(hold_box, p.get_child_count())
+			var p = box.get_parent()
+			p.move_child(box, p.get_child_count())
 			
 			HUD.show("game")
 			
@@ -259,7 +268,7 @@ func _physics_process(delta):
 	else:
 		# turning
 		turn_clock = min(turn_clock + delta, turn_time)
-		sprites.rotation = lerp_angle(turn_from, target_angle, smoothstep(0, 1, turn_clock / turn_time))
+		spr_body.rotation = lerp_angle(turn_from, turn_to, smoothstep(0, 1, turn_clock / turn_time))
 		if turn_clock == turn_time:
 			# on floor
 			is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN))
@@ -282,7 +291,7 @@ func _physics_process(delta):
 				# start jump
 				if btnp_jump:
 					is_floor = false
-					anim.play("jump")
+					#anim.play("jump")
 					
 					is_jump = true
 					has_jumped = true
@@ -298,16 +307,16 @@ func _physics_process(delta):
 					
 					for i in hit_area.get_overlapping_bodies():
 						if i.is_in_group("box") and i.is_floor:
-							hold_box = i
+							box = i
 							print(name, " holding: ", i.name)
 							is_hold = true
 							is_end_hold = false
 							is_move = false
 							velocity = Vector2.ZERO
 							
-							add_collision_exception_with(hold_box)
-							hold_box.add_collision_exception_with(self)
-							hold_box.is_hold = true
+							add_collision_exception_with(box)
+							box.add_collision_exception_with(self)
+							box.is_hold = true
 							push_from = position
 							push_clock = 0
 							
@@ -316,13 +325,13 @@ func _physics_process(delta):
 							else:
 								HUD.show("grab1")
 							
-							guide.set_box(hold_box)
-							#wrench.set_box(hold_box)
+							guide.set_box(box)
+							#wrench.set_box(box)
 							#wrench.is_swing = false
 							
 							# move to first child
-							var p = hold_box.get_parent()
-							p.move_child(hold_box, 0)
+							var p = box.get_parent()
+							p.move_child(box, 0)
 							
 							break
 			
@@ -355,14 +364,38 @@ func _physics_process(delta):
 			
 			# move body
 			move_velocity = move_and_slide(rot(velocity))
-			velocity = rot(move_velocity, dir, true)
+			velocity = rot(move_velocity, -dir)
 	
 	
-#	# blink anim
-#	blink_clock -= delta
-#	if blink_clock < 0:
-#		anim_eyes.play("blink")
-#		blink_clock = rand_range(2, 15)
+	
+	
+	# hands
+	if is_hold:
+		var box_angle = turn_to
+		var smooth = 0.2
+		if box.is_turn or box.is_push:
+			box_angle += box.sprite.rotation - (box.turn_from if box.is_turn else box.turn_to)
+			smooth = 1.0
+		
+		var box_edge = box.sprite.global_position - Vector2(50 * dir_x, 0).rotated(box_angle)
+		# move hands
+		for i in 2:
+			var offset = Vector2(0, 20  * (-1 if sign(dir_x + 1) == i else 1))
+			var goto = box_edge + offset.rotated(box_angle)
+			hands[i].global_position = hands[i].global_position.linear_interpolate(goto, smooth)
+	else:
+		# move hands
+		for i in 2:
+			var goto = position + rot(hand_start * Vector2(1 if i > 0 else -1, 1))
+			hands[i].global_position = hands[i].global_position.linear_interpolate(goto, 0.1)
+	
+	# hand depth
+	for i in 2:
+		var p = rot(hands[i].position, -dir)
+		hands[i].show_behind_parent = sign(p.x) == sign(dir_x) and abs(p.x) > abs(hand_start.x) - 4
+	
+	
+	
 #
 #	# debug label
 #	if is_debug:
@@ -378,7 +411,7 @@ func _physics_process(delta):
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
 	areas.scale.x = dir_x
-	sprites.scale.x = dir_x
+	spr_body.scale.x = dir_x
 
 func set_jump_height(arg):
 	jump_height = arg
@@ -398,24 +431,24 @@ func solve_jump():
 	fall_gravity = jump_gravity * 2.0
 	print("jump_speed: ", jump_speed, " / jump_gravity: ", jump_gravity, " / fall_gravity: ", fall_gravity)
 
-func rot(arg : Vector2, _dir := dir, backwards := false):
-	return arg.rotated(deg2rad((-_dir if backwards else _dir) * 90))
+func rot(arg : Vector2, _dir := dir):
+	return arg.rotated(deg2rad(_dir * 90))
 
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)
-	target_angle = deg2rad(dir * 90)
+	turn_to = deg2rad(dir * 90)
 	
 	turn_clock = 0
-	turn_from = sprites.rotation if sprites else 0
+	turn_from = spr_body.rotation if spr_body else 0
 	
 	if Engine.editor_hint:
-		if !sprites: sprites = $Sprites
-		sprites.rotation = target_angle
+		if !spr_body: spr_body = $Sprites
+		spr_body.rotation = turn_to
 	elif camera:
-		camera.turn(target_angle)
+		camera.turn(turn_to)
 	
 	if areas:
-		areas.rotation = target_angle
+		areas.rotation = turn_to
 
 func walk_around(right := false):
 	move_and_collide(rot(Vector2.DOWN))
@@ -454,18 +487,11 @@ func _on_BodyArea_body_entered(body):
 		print("hit spike")
 		die()
 
-func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == "punch":
-		if is_floor:
-			anim.play("idle")
-		else:
-			anim.play("jump")
-
 func exit(arg):
 	if is_exit: return
 	is_exit = true
 	exit_node = arg
-	anim.play("jump")
+	#anim.play("jump")
 	
 	if !Shared.is_level_select:
 		yield(get_tree().create_timer(0.7), "timeout")
@@ -474,8 +500,8 @@ func exit(arg):
 func die():
 	if is_dead: return
 	is_dead = true
-	anim.play("jump")
-	anim_eyes.play("die")
+	#anim.play("jump")
+	#anim_eyes.play("die")
 	velocity = Vector2(-350 * dir_x, -800)
 	
 	if !Shared.is_level_select:
@@ -487,7 +513,7 @@ func outside_boundary():
 	die()
 
 func turning(angle):
-	pass#sprites.rotation = angle
+	pass#spr_body.rotation = angle
 
 func reparent(child, parent):
 	remove_child(child)

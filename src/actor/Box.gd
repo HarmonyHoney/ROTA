@@ -9,6 +9,7 @@ onready var sprite : Node2D = $Sprites
 onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
 
 export var dir := 0 setget set_dir
+var dir_last := 0
 
 var tile := 100.0
 var is_floor := false
@@ -36,6 +37,7 @@ var is_hold := false
 onready var actors = get_parent()
 
 var push_x := -1
+var is_turn := false
 
 func _ready():
 	turn_clock = 99
@@ -80,6 +82,9 @@ func _physics_process(delta):
 		var smooth = smoothstep(0, 1, turn_clock / turn_time)
 		sprite.rotation = lerp_angle(turn_from, turn_to, smooth)
 		sprite.scale = Vector2.ONE *  lerp(0.8, 1.0, smooth)
+		
+		if turn_clock == turn_time:
+			is_turn = false
 	
 	if move_clock == target:
 			if is_push:
@@ -89,14 +94,15 @@ func _physics_process(delta):
 			if !is_hold and !is_floor:
 				move_tile(dir, 1)
 
-
 func set_dir(arg := dir):
+	dir_last = dir
 	dir = posmod(arg, 4)
 	
 	if is_instance_valid(sprite):
 		turn_from = sprite.rotation
 	turn_to = deg2rad(dir * 90)
 	turn_clock = 0.0
+	is_turn = true
 	
 	if Engine.editor_hint:
 		$Sprites.rotation = turn_to
