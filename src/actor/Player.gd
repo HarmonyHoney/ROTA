@@ -2,39 +2,32 @@ tool
 extends KinematicBody2D
 class_name Player
 
+onready var body_area : Area2D = $BodyArea
 onready var areas : Node2D = $Areas
 onready var hit_area : Area2D = $Areas/HitArea
-onready var body_area : Area2D = $BodyArea
-#onready var audio_slap : AudioStreamPlayer2D = $AudioSlap
-#onready var audio_punch : AudioStreamPlayer2D = $AudioPunch
-onready var anim : AnimationPlayer = $AnimationPlayer
-#onready var anim_eyes : AnimationPlayer = $AnimationEyes
 onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
 
+onready var anim : AnimationPlayer = $AnimationPlayer
 onready var sprites := $Sprites
 onready var spr_root := $Sprites/Root
 onready var spr_body := $Sprites/Root/Body
 
-onready var spr_hand_l := $Sprites/Root/HandL
-onready var spr_hand_r := $Sprites/Root/HandR
+onready var spr_hand_l := $Sprites/HandL
+onready var spr_hand_r := $Sprites/HandR
 onready var spr_hands := [spr_hand_l, spr_hand_r]
 onready var hand_start : Vector2 = spr_hand_r.position
-
 
 var guide_scene := preload("res://src/actor/Guide.tscn")
 var guide
 
-#var wrench_scene := preload("res://src/actor/Wrench.tscn")
-#var wrench
-
 onready var debug_label : Label = $DebugCanvas/Labels/Label
 export var is_debug := false setget set_debug
 var readout = []
-var readout_size = 4
 
 export var is_input := true
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
+var joy_q := Vector2.ZERO
 var btn_jump := false
 var btnp_jump := false
 var btnp_action := false
@@ -79,7 +72,7 @@ var turn_from := 0.0
 var turn_to := 0.0
 
 var is_hold := false
-var is_end_hold := false
+var is_release := false
 var box 
 var hold_pos := Vector2.ZERO
 var push_clock := 0.0
@@ -90,7 +83,6 @@ var box_turn := 1
 
 export var can_spin := true
 
-var anim_time := 0.0
 
 func _ready():
 	if Engine.editor_hint: return
@@ -161,7 +153,13 @@ func _physics_process(delta):
 	
 	# during hold
 	if is_hold:
-		if !is_end_hold:
+		
+		if !is_release:
+			# joy queue
+			if joy.x != 0 and joy_last.x == 0:
+				joy_q.x = joy.x
+			elif joy.y != 0 and joy_last.y == 0:
+				joy_q.y = joy.y
 			
 			# during push
 			if push_clock < push_time:
@@ -176,45 +174,70 @@ func _physics_process(delta):
 				move_and_collide(Vector2(0, move_to.y))
 				
 				# wobble body
-				spr_root.rotation = lerp_angle(turn_to + deg2rad(12 * -push_dir), turn_to, abs(0.5 - smooth) * 2.0)
+				spr_root.rotation = lerp_angle(deg2rad(12 * -push_dir), 0, abs(0.5 - smooth) * 2.0)
 			
-			# box turning
+			# during box turn
 			elif box.is_turn:
 				pass
 			
-			# not pushing
+			# not pushing or turning
 			else:
 				# check floor
 				if !test_move(transform, rot(Vector2.DOWN * 50)):
 					walk_around(push_dir == 1)
-					is_end_hold = true
+					is_release = true
+				
+				# check distance
+				elif position.distance_to(box.position) > 125:
+					is_release = true
 				
 				# release button
 				elif !btn_push:
-					is_end_hold = true
+					is_release = true
 				
 				# push / pull
-				elif joy.x != 0 and joy_last.x == 0:
-					if dir_x == joy.x or !box.test_tile(dir - joy.x, 2):
-						
-						if box.push(dir - joy.x):
+				elif joy_q.x != 0:
+					if dir_x == joy_q.x or !box.test_tile(dir - joy_q.x, 2):
+						if box.push(dir - joy_q.x):
 							push_from = position
 							push_clock = 0
-							push_dir = joy.x
-							box.push_x = joy.x
+							push_dir = joy_q.x
+							box.push_x = joy_q.x
 							print("push successful")
 						else:
 							print("push failed")
 				
 				# turn box
-				elif can_spin and joy.y != 0 and joy_last.y == 0:
-					box_turn = joy.y * -dir_x
+				elif can_spin and joy_q.y != 0:
+					box_turn = joy_q.y * -dir_x
 					box.dir += box_turn
+				
+				joy_q = Vector2.ZERO
 		
-		# end hold
-		if is_end_hold:
+		# hold animation
+		if !is_release:
+			# hands
+			var box_angle = turn_to
+			var smooth = 0.2
+			if box.is_turn or box.is_push:
+				box_angle += box.sprite.rotation - (box.turn_from if box.is_turn else box.turn_to)
+				smooth = 1.0
+			
+			var box_edge = box.sprite.global_position - Vector2(50 * dir_x, 0).rotated(box_angle)
+			# move hands
+			for i in 2:
+				var offset = Vector2(0, 20  * (-1 if sign(dir_x + 1) == i else 1))
+				var goto = box_edge + offset.rotated(box_angle)
+				spr_hands[i].global_position = spr_hands[i].global_position.linear_interpolate(goto, smooth)
+			
+			# body
+			spr_body.rotation = lerp_angle(spr_body.rotation, 0, 0.1)
+			spr_body.position.y = lerp(spr_body.position.y, 0, 0.1)
+		
+		# release box
+		if is_release:
 			is_hold = false
-			is_end_hold = false
+			is_release = false
 			is_move = true
 			has_jumped = true
 			
@@ -230,41 +253,31 @@ func _physics_process(delta):
 			
 			guide.set_box(null)
 			
+			# set animation keys
 			var rel = anim.get_animation("release")
-
+			
 			rel.bezier_track_set_key_value(0, 0, spr_body.position.x)
 			rel.bezier_track_set_key_value(1, 0, spr_body.position.y)
 			rel.bezier_track_set_key_value(2, 0, spr_body.rotation_degrees)
 			
-			var lh = 3
-			var rh = 5
-			
-#			var lhp = spr_hand_l.position if dir_x > 1 else spr_hand_r.position
-#			var rhp = spr_hand_r.position if dir_x > 1 else spr_hand_l.position
-#
-#			if hand_start.distance_to(rhp) > hand_start.distance_to(lhp):
-#				lh = 5
-#				rh = 3
+			var is_left = spr_hand_l.position.x < spr_hand_r.position.x
+			var lh = 3 if is_left else 5
+			var rh = 5 if is_left else 3
 			
 			rel.bezier_track_set_key_value(lh, 0, spr_hand_l.position.x)
 			rel.bezier_track_set_key_value(lh + 1, 0, spr_hand_l.position.y)
 			rel.bezier_track_set_key_value(rh, 0, spr_hand_r.position.x)
 			rel.bezier_track_set_key_value(rh + 1, 0, spr_hand_r.position.y)
 			
-			anim.remove_animation("release")
 			anim.add_animation("release", rel)
-			
 			anim.play("release")
-			
-			for i in rel.get_track_count():
-				print(i, " : ", rel.track_get_path(i), " : ", rel.bezier_track_get_key_value(i, 0))
 	
 	# not holding
 	else:
 		# turning
 		if turn_clock < turn_time:
 			turn_clock = min(turn_clock + delta, turn_time)
-			spr_root.rotation = lerp_angle(turn_from, turn_to, smoothstep(0, 1, turn_clock / turn_time))
+			sprites.rotation = lerp_angle(turn_from, turn_to, smoothstep(0, 1, turn_clock / turn_time))
 		
 		# in control
 		else:
@@ -287,11 +300,16 @@ func _physics_process(delta):
 			# on the floor
 			if is_floor:
 				
-				# anim
+				# animation
+				var anim_last = anim.current_animation
 				if joy.x == 0:
 					anim.play("idle")
 				else:
 					anim.play("walk")
+				
+				# seek animation halfway for mirrored effect
+				if anim.current_animation != anim_last and dir_x < 0:
+					anim.seek(anim.current_animation_length / 2, true)
 				
 				# start jump
 				if btnp_jump:
@@ -310,7 +328,7 @@ func _physics_process(delta):
 							box = i
 							print(name, " holding: ", i.name)
 							is_hold = true
-							is_end_hold = false
+							is_release = false
 							is_move = false
 							velocity = Vector2.ZERO
 							
@@ -331,7 +349,8 @@ func _physics_process(delta):
 							var p = box.get_parent()
 							p.move_child(box, 0)
 							
-							anim.play("RESET")
+							#anim.play("RESET")
+							anim.stop()
 							
 							break
 			
@@ -367,70 +386,6 @@ func _physics_process(delta):
 			velocity = rot(move_velocity, -dir)
 	
 	
-	# anim
-	#anim_time = fmod(anim_time + delta, 1)
-	anim_time += delta
-	
-	# animation 
-	
-	# holding
-	if is_hold:
-		
-		# hands
-		var box_angle = turn_to
-		var smooth = 0.2
-		if box.is_turn or box.is_push:
-			box_angle += box.sprite.rotation - (box.turn_from if box.is_turn else box.turn_to)
-			smooth = 1.0
-		
-		var box_edge = box.sprite.global_position - Vector2(50 * dir_x, 0).rotated(box_angle)
-		# move hands
-		for i in 2:
-			var offset = Vector2(0, 20  * (-1 if sign(dir_x + 1) == i else 1))
-			var goto = box_edge + offset.rotated(box_angle)
-			spr_hands[i].global_position = spr_hands[i].global_position.linear_interpolate(goto, smooth)
-		
-		
-		# body
-		spr_body.rotation = lerp_angle(spr_body.rotation, 0, 0.1)
-		spr_body.position.y = lerp(spr_body.position.y, 0, 0.1)
-		
-	
-	# not holding
-	elif false:
-		# turn
-		spr_root.rotation = lerp_angle(turn_from, turn_to, smoothstep(0, 1, turn_clock / turn_time))
-		if turn_clock < turn_time:
-			pass
-		# not turning
-		else:
-			# move hands
-			for i in 2:
-				var goto = position + rot(hand_start * Vector2(1 if i > 0 else -1, 1))
-				#print(fmod(anim_time, 2), " ", sin(anim_time))
-				spr_hands[i].global_position = spr_hands[i].global_position.linear_interpolate(goto, 0.1)
-			
-			# body
-			if is_floor:
-				# idle
-				if joy.x == 0:
-					spr_body.rotation = lerp_angle(spr_body.rotation, 0, 0.1)
-					spr_body.position.y = lerp(spr_body.position.y, 0, 0.1)
-					
-					anim_time = 0.0
-				
-				# walking
-				else:
-					spr_body.rotation = sin(anim_time * 8) * deg2rad(12)
-					spr_body.position.y = (-12) + (sin(anim_time * 16) * -12)
-			
-			# in the air
-			else:
-				spr_body.rotation = sin(anim_time * 5) * deg2rad(12)
-				spr_body.position.y = lerp(spr_body.position.y, 0, 0.1)
-	
-	
-	
 	# debug label
 	if is_debug:
 		readout.resize(10)
@@ -440,7 +395,7 @@ func _physics_process(delta):
 		readout[3] = "dir_x: " + str(dir_x)
 		readout[4] = "spr_root degrees: " + str(spr_root.rotation_degrees)
 		readout[5] = "spr_body degrees: " + str(spr_body.rotation_degrees)
-
+		
 		debug_label.text = ""
 		for i in readout:
 			if i != null:
@@ -475,6 +430,7 @@ func solve_jump():
 
 func set_debug(arg : bool):
 	is_debug = arg
+	if Engine.editor_hint: return
 	if !debug_label: debug_label = $DebugCanvas/Labels/Label
 	if debug_label:
 		debug_label.visible = is_debug
@@ -487,7 +443,7 @@ func set_dir(arg := dir):
 	turn_to = deg2rad(dir * 90)
 	
 	turn_clock = 0
-	turn_from = spr_root.rotation if spr_root else 0
+	turn_from = sprites.rotation if sprites else 0
 	
 	if Engine.editor_hint:
 		pass
