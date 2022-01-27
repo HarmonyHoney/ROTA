@@ -15,6 +15,7 @@ tile_data = PoolIntArray( -131078, 0, 0, -131077, 0, 0, -131076, 0, 0, -131075, 
 
 [node name="Player" parent="Actors" index="0"]
 position = Vector2( -50, 450 )
+is_debug = true
 can_spin = true
 
 [node name="Exit" parent="Actors" index="1"]
