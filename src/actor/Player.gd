@@ -34,6 +34,8 @@ var btnp_action := false
 var btn_push := false
 var btnp_push := false
 
+var btnp_jump_q := false
+
 var camera : Camera2D
 
 export var dir := 0 setget set_dir
@@ -110,6 +112,7 @@ func _ready():
 			camera.target_node = self
 			set_dir()
 			camera.turn_clock = 99
+			sprites.rotation = turn_to
 			#spr_body.rotation = turn_to
 			break
 	
@@ -274,6 +277,11 @@ func _physics_process(delta):
 	
 	# not holding
 	else:
+		
+		# jump queue
+		if btnp_jump:
+			btnp_jump_q = true
+		
 		# turning
 		if turn_clock < turn_time:
 			turn_clock = min(turn_clock + delta, turn_time)
@@ -312,7 +320,7 @@ func _physics_process(delta):
 					anim.seek(anim.current_animation_length / 2, true)
 				
 				# start jump
-				if btnp_jump:
+				if btnp_jump or btnp_jump_q:
 					is_floor = false
 					anim.play("jump")
 					
@@ -353,7 +361,9 @@ func _physics_process(delta):
 							anim.stop()
 							
 							break
-			
+				
+				
+				btnp_jump_q = false
 			# in the air
 			else:
 				
@@ -445,10 +455,8 @@ func set_dir(arg := dir):
 	turn_clock = 0
 	turn_from = sprites.rotation if sprites else 0
 	
-	if Engine.editor_hint:
-		pass
-		#if !spr_root: spr_root = $Sprites/Root
-		#spr_root.rotation = turn_to
+	if Engine.editor_hint:# or Shared.is_level_select:
+		$Sprites.rotation = turn_to
 	elif camera:
 		camera.turn(turn_to)
 	
@@ -496,7 +504,7 @@ func exit(arg):
 	if is_exit: return
 	is_exit = true
 	exit_node = arg
-	#anim.play("jump")
+	anim.play("jump")
 	
 	if !Shared.is_level_select:
 		yield(get_tree().create_timer(0.7), "timeout")

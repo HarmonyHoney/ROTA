@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/actor/Exit.gd" type="Script" id=1]
 [ext_resource path="res://media/image/exit/exit_back.png" type="Texture" id=2]
 [ext_resource path="res://media/image/exit/exit_door.png" type="Texture" id=3]
+[ext_resource path="res://src/shader/add_color.gdshader" type="Shader" id=4]
 [ext_resource path="res://src/shader/offset_y.gdshader" type="Shader" id=5]
 
 [sub_resource type="Animation" id=1]
@@ -33,6 +34,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 4 )
+shader_param/add_color = Color( 0.664063, 0, 1, 1 )
+
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 5 )
 shader_param/offset_y = 0.0
@@ -49,17 +54,21 @@ anims/close = SubResource( 1 )
 anims/open = SubResource( 2 )
 
 [node name="Sprites" type="Node2D" parent="."]
+material = SubResource( 5 )
 scale = Vector2( 0.2, 0.2 )
 
 [node name="Back" type="Sprite" parent="Sprites"]
+use_parent_material = true
 texture = ExtResource( 2 )
 
 [node name="Door" type="Sprite" parent="Sprites"]
 material = SubResource( 3 )
+use_parent_material = true
 texture = ExtResource( 3 )
 
 [node name="Door2" type="Sprite" parent="Sprites"]
 material = SubResource( 3 )
+use_parent_material = true
 rotation = 3.14159
 texture = ExtResource( 3 )
 

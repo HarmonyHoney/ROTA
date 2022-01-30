@@ -6,26 +6,25 @@
 [node name="Node2D" instance=ExtResource( 1 )]
 
 [node name="Camera2D" parent="." index="0"]
-position = Vector2( 400, 800 )
+position = Vector2( -50, 450 )
+zoom = Vector2( 1.7, 1.7 )
 
 [node name="SolidTileMap" parent="." index="1"]
-tile_data = PoolIntArray( 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 393222, 0, 0, 458758, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524294, 0, 0, 589825, 0, 0, 589830, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0 )
+tile_data = PoolIntArray( 131067, 0, 0, 196603, 0, 0, 262139, 0, 0, 327675, 0, 0, 393211, 0, 0, 393212, 0, 0, 393213, 0, 0, 393214, 0, 0, 393215, -1610612736, 0, 327680, -1610612736, 0, 327681, -1610612736, 0, 327682, -1610612736, 0, 327683, -1610612736, 0, 393219, -1073741824, 0, 458755, -1073741824, 0 )
 
 [node name="SpikeMap" parent="." index="2"]
-tile_data = PoolIntArray( 458753, 0, 0, 524288, -1073741824, 0, 589824, -1073741824, 0, 655360, -1073741824, 0 )
+tile_data = PoolIntArray( 131066, -1073741824, 0, 196602, -1073741824, 0, 262138, -1073741824, 0, 327674, -1073741824, 0, 327679, 0, 0, 262144, 0, 0, 393210, -1073741824, 0, 458756, -1610612736, 0, 524291, 1610612736, 0 )
 
 [node name="Player" parent="Actors" index="0"]
-position = Vector2( 400, 1150 )
-dir = 2
+position = Vector2( 250, 450 )
 can_spin = true
 
 [node name="Exit" parent="Actors" index="1"]
-position = Vector2( 250, 950 )
+position = Vector2( 250, 650 )
 
 [node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
-position = Vector2( 750, 750 )
+position = Vector2( -350, 150 )
 dir = 1
 
 [node name="Box2" parent="Actors" index="3" instance=ExtResource( 2 )]
-position = Vector2( 750, 850 )
-dir = 1
+position = Vector2( -350, 450 )
