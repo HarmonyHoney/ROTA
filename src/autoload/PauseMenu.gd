@@ -30,8 +30,10 @@ func start_wipe_out():
 
 func _input(event):
 	var pause = event.is_action_pressed("pause")
-	if pause:
+	if pause and !Shared.is_level_select:
 		set_paused(!is_paused)
+		CircleZoom.zoom(null, 0.2, 0.5, Vector2(200, 0)) if is_paused else CircleZoom.zoom(null, 1.0, 1.0, Vector2(200, 0))
+		HUD.show("title" if is_paused else "game")
 	if !is_paused: return
 	
 	var up = event.is_action_pressed("up")
@@ -51,9 +53,9 @@ func _input(event):
 			0:
 				set_paused(false)
 			1:
-				Shared.reset()
+				reset()
 			2:
-				Shared.change_scene(Shared.scene_select)
+				exit()
 
 func _process(delta):
 	var anch = ["left", "top", "right", "bottom"]
@@ -68,4 +70,29 @@ func set_paused(pause := true):
 		yield(get_tree(), "idle_frame")
 	get_tree().paused = is_paused
 	cursor = 0
+	
 
+func reset():
+	CircleZoom.zoom(null, 0, 0.5, Vector2(200, 0))
+	
+	yield(get_tree().create_timer(0.5), "timeout")
+	
+	get_tree().reload_current_scene()
+	
+	yield(get_tree(), "idle_frame")
+	CircleZoom.pos_to = Vector2.ZERO
+	CircleZoom.zoom(null, 0.6, 1.5)
+	
+	set_paused(false)
+
+func exit():
+	CircleZoom.zoom(null, 0, 0.5, Vector2(200, 0))
+	
+	yield(get_tree().create_timer(0.5), "timeout")
+	get_tree().change_scene(Shared.scene_select)
+	Shared.is_level_select = true
+	yield(get_tree(), "idle_frame")
+	CircleZoom.pos_to = Vector2.ZERO
+	CircleZoom.zoom(null, 0.6, 1.0)
+	
+	set_paused(false)

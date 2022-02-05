@@ -15,7 +15,7 @@ var level := -1
 
 var world_size = {}
 
-var unlocked = [0, -1, -1, -1, -1, -1]
+var unlocked = [5, -1, -1, -1, -1, -1]
 
 var worlds_path := "res://src/map/worlds/"
 

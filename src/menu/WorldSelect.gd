@@ -179,16 +179,38 @@ func open_level():
 		print("Level ", world_cursor + 1, "-", level_cursor + 1, " locked")
 		#return
 	
-	Shared.change_scene(worlds_path + str(world_cursor + 1) + "/" + str(level_cursor + 1) + ".tscn")
+	#Shared.change_scene(worlds_path + str(world_cursor + 1) + "/" + str(level_cursor + 1) + ".tscn")
 	set_process_input(false)
 	is_opening = true
 	Shared.world = world_cursor
 	Shared.level = level_cursor
+	
+	HUD.show("none")
+	
+	yield(get_tree().create_timer(0.5), "timeout")
+	
+	
+	var from = orb_viewport.get_parent().material.get_shader_param("radius")
+	CircleZoom.zoom(from * 0.32, null, 1.0)
+	
+	var s =	orb_viewport.get_child(0)
+	
+	#orb_viewport.remove_child(s)
+	#$TestGame.add_child(s)
+	#s.owner = $TestGame
+	#$TestGame.find_node("Camera2D").current = true
+	
+	
+	get_tree().change_scene_to(level_scenes[world_cursor][level_cursor])
+	Shared.is_level_select = false
+	
+	HUD.show("game")
 
 func _process(delta):
 	if is_opening:
 		var w = worlds[world_cursor]
-		w.position = w.position.linear_interpolate(Vector2(0, level_select_node.position.y), 0.1)
+		#w.position = w.position.linear_interpolate(Vector2(0, level_select_node.position.y), 0.1)
+		w.global_position = w.global_position.linear_interpolate(cam.global_position, 0.1)
 		level_select_node.position = level_select_node.position.linear_interpolate(Vector2(-610, 640), 0.1)
 		return
 	

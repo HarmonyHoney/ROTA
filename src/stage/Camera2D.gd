@@ -3,7 +3,7 @@ extends Camera2D
 
 signal turning(angle)
 
-var zoom_multiplier := 4.0
+var zoom_multiplier := 2.5
 onready var start_zoom := zoom
 onready var zoom_out := zoom * zoom_multiplier
 var zoom_clock := 0.0
@@ -48,21 +48,27 @@ func _process(delta):
 		if start_offset != Vector2.ZERO:
 			offset = start_offset.rotated(rotation)
 	
-	# track target
-	if is_instance_valid(target_node):
-		# position
-		if is_moving:
-			if is_focal_point:
-				position = start_position + ((target_node.position - start_position) * focal_influence)
-			else:
-				position = target_node.position
-		
-		# keep target on screen
-		if is_zoom_out and zoom_clock == zoom_duration:
-			var dist = (position.distance_to(target_node.position) + 100) / (screen_size.y / 2)
-			var zoom_dist = Vector2.ONE * dist
+	if PauseMenu.is_paused:
+		if is_instance_valid(target_node):
+			position = target_node.position + (Vector2(-200, 0) * zoom).rotated(rotation)
+			#zoom = Vector2.ONE * 1
 			
-			zoom = zoom_dist if zoom_dist > start_zoom else start_zoom
+	else:
+		# track target
+		if is_instance_valid(target_node):
+			# position
+			if is_moving:
+				if is_focal_point:
+					position = start_position + ((target_node.position - start_position) * focal_influence)
+				else:
+					position = target_node.position
+			
+			# keep target on screen
+			if is_zoom_out and zoom_clock == zoom_duration:
+				var dist = (position.distance_to(target_node.position) + 100) / (screen_size.y / 2)
+				var zoom_dist = Vector2.ONE * dist
+				
+				zoom = zoom_dist if zoom_dist > start_zoom else start_zoom
 
 func _draw():
 	if !Engine.editor_hint: return

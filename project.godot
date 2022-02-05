@@ -37,6 +37,7 @@ Shared="*res://src/autoload/Shared.gd"
 Wipe="*res://src/autoload/Wipe.tscn"
 PauseMenu="*res://src/autoload/PauseMenu.tscn"
 HUD="*res://src/autoload/HUD.tscn"
+CircleZoom="*res://src/autoload/CircleZoom.tscn"
 
 [display]
 

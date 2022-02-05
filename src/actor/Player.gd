@@ -105,16 +105,20 @@ func _ready():
 		set_process_input(false)
 		set_physics_process(false)
 	
+	
+	
 	# find camera in the same viewport
 	for i in get_tree().get_nodes_in_group("game_camera"):
 		if i.get_viewport() == get_viewport():
 			camera = i
 			camera.target_node = self
-			set_dir()
-			camera.turn_clock = 99
-			sprites.rotation = turn_to
-			#spr_body.rotation = turn_to
 			break
+	
+	# turn
+	set_dir()
+	sprites.rotation = turn_to
+	turn_clock = turn_time
+	camera.turn_clock = 99
 	
 	# wait for parent
 	yield(get_parent(),"ready")
@@ -436,7 +440,7 @@ func solve_jump():
 	jump_gravity = (2 * jump_height) / pow(jump_time, 2)
 	jump_speed = -jump_gravity * jump_time
 	fall_gravity = jump_gravity * 2.0
-	print("jump_speed: ", jump_speed, " / jump_gravity: ", jump_gravity, " / fall_gravity: ", fall_gravity)
+	#print("jump_speed: ", jump_speed, " / jump_gravity: ", jump_gravity, " / fall_gravity: ", fall_gravity)
 
 func set_debug(arg : bool):
 	is_debug = arg
