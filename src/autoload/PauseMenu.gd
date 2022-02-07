@@ -9,6 +9,14 @@ onready var cursor_node = $MenuLayer/Menu/Items/Cursor
 onready var items_node = $MenuLayer/Menu/Items
 onready var sprite = $ImageLayer/Center/Sprite
 
+
+var is_follow_circle := false
+var is_move := false
+var move_clock := 0.0
+var move_time := 0.5
+var move_from := Vector2.ZERO
+var move_to := Vector2.ZERO
+
 func _ready():
 	for i in [menu, sprite]:
 		i.visible = false
@@ -60,13 +68,20 @@ func _input(event):
 			2:
 				exit()
 
-func _process(delta):
+func _physics_process(delta):
 	var anch = ["left", "top", "right", "bottom"]
 	for i in anch:
 		var s = "anchor_" + i
 		cursor_node.set(s, lerp(cursor_node.get(s), items[cursor].get(s), 0.15))
+	
+	if is_move:
+		move_clock = min(move_clock + delta, move_time)
+		var s = smoothstep(0, 1, move_clock / move_time)
+		menu.rect_position = move_from.linear_interpolate(move_to, s)
 
 func press_pause():
+	is_move = false
+	is_follow_circle = true
 	if !is_paused:
 		CircleZoom.zoom(CircleZoom.out, 0.2, 0.5, null, Vector2(200, 0))
 	else:
@@ -93,9 +108,13 @@ func set_paused(pause := true):
 	
 
 func reset():
-	CircleZoom.zoom(null, 0, 0.5, null, Vector2(200, 0))
+	return_menu()
 	
-	yield(get_tree().create_timer(0.5), "timeout")
+	CircleZoom.zoom(null, CircleZoom.radius, 0.3)
+	yield(CircleZoom, "finish")
+	
+	CircleZoom.zoom(null, 0, 0.3)
+	yield(CircleZoom, "finish")
 	
 	get_tree().reload_current_scene()
 	
@@ -105,6 +124,8 @@ func reset():
 	set_paused(false)
 
 func exit():
+	return_menu()
+	
 	CircleZoom.zoom(null, Shared.last_orb_radius, 0.5, null, Shared.last_orb_pos)
 	yield(CircleZoom, "finish")
 	
@@ -120,4 +141,12 @@ func exit():
 
 func change_pos(pos):
 	sprite.position = pos
-	menu.rect_position.x = 50 + pos.x - (CircleZoom.radius * 1280)
+	if !is_move and is_follow_circle:
+		menu.rect_position.x = 50 + pos.x - (CircleZoom.radius * 1280)
+
+func return_menu():
+	is_move = true
+	is_follow_circle = false
+	move_clock = 0.0
+	move_from = menu.rect_position
+	move_to = Vector2(-500, move_from.y)
