@@ -71,6 +71,7 @@ func _ready():
 			#level_cursor = Shared.level
 			level_cursor = clamp(Shared.level, 0, level_size - 1)
 			preview_level()
+			worlds[world_cursor].position = Vector2(380, level_select_node.position.y)
 	
 	# delay input
 	set_process_input(false)
@@ -170,6 +171,8 @@ func open_level():
 	is_opening = true
 	Shared.world = world_cursor
 	Shared.level = level_cursor
+	var p = (worlds[world_cursor].global_position - cam.global_position) * (1 / cam.zoom.x)
+	Shared.last_orb_pos = p
 	
 	HUD.show("none")
 	
@@ -177,9 +180,13 @@ func open_level():
 	
 	Shared.start_scale = worlds[world_cursor].get_node("Sprites").scale.y / cam.zoom.y
 	
-	var from = worlds[world_cursor].get_node("Sprites/Map").material.get_shader_param("radius")
-	CircleZoom.pos_to = Vector2.ZERO
-	CircleZoom.zoom(from * 0.32, null, 1.0)
+	var map = worlds[world_cursor].get_node("Sprites/Map")
+	var from = map.material.get_shader_param("radius")
+	var factor = (map.global_scale.x * map.get_rect().size.x) / (cam.zoom.x * 1280)
+	CircleZoom.zoom(from * factor, CircleZoom.out, 1.0, Vector2.ZERO)
+	Shared.last_orb_radius = from * factor
+	
+	yield(get_tree(), "idle_frame")
 	
 	get_tree().change_scene(worlds_path + "/" + str(world_cursor + 1) + "/" + str(level_cursor + 1) + ".tscn")
 	Shared.is_level_select = false

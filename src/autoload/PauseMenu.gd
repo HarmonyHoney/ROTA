@@ -35,10 +35,9 @@ func start_wipe_out():
 func _input(event):
 	var pause = event.is_action_pressed("pause")
 	if pause and !Shared.is_level_select:
-		set_paused(!is_paused)
+		press_pause()
 		return
 	if !is_paused: return
-	
 	
 	var up = event.is_action_pressed("up")
 	var down = event.is_action_pressed("down")
@@ -51,11 +50,11 @@ func _input(event):
 		cursor = clamp(cursor + (-1 if up else 1), 0, items.size() - 1)
 	
 	if back:
-		set_paused(false)
+		press_pause()
 	elif enter:
 		match cursor:
 			0:
-				set_paused(false)
+				press_pause()
 			1:
 				reset()
 			2:
@@ -67,23 +66,26 @@ func _process(delta):
 		var s = "anchor_" + i
 		cursor_node.set(s, lerp(cursor_node.get(s), items[cursor].get(s), 0.15))
 
+func press_pause():
+	if !is_paused:
+		CircleZoom.zoom(CircleZoom.out, 0.2, 0.5, null, Vector2(200, 0))
+	else:
+		CircleZoom.zoom(0.2, CircleZoom.out, 0.5, null, Vector2.ZERO)
+		yield(CircleZoom, "finish")
+	set_paused(!is_paused)
+
 func set_paused(pause := true):
 	is_paused = pause
 	cursor = 0
 	
 	menu.visible = is_paused
 	
-	CircleZoom.zoom(null, 0.2, 0.5, Vector2(200, 0)) if is_paused else CircleZoom.zoom(null, 1.0, 1.0, Vector2.ZERO)
-	
 	HUD.show("none")
 	
 	if is_paused:
 		sprite.texture = Shared.take_screenshot()
-		sprite.position = Vector2(200, 0)
+		#sprite.position = Vector2(200, 0)
 		sprite.scale = Vector2.ONE * (720 / sprite.texture.get_size().y)
-	else:
-		if CircleZoom.is_zoom:
-			yield(CircleZoom, "finish")
 	
 	HUD.show("title" if is_paused else "game")
 	sprite.visible = is_paused
@@ -91,29 +93,31 @@ func set_paused(pause := true):
 	
 
 func reset():
-	CircleZoom.zoom(null, 0, 0.5, Vector2(200, 0))
+	CircleZoom.zoom(null, 0, 0.5, null, Vector2(200, 0))
 	
 	yield(get_tree().create_timer(0.5), "timeout")
 	
 	get_tree().reload_current_scene()
 	
 	yield(get_tree(), "idle_frame")
-	CircleZoom.pos_to = Vector2.ZERO
-	CircleZoom.zoom(null, 0.6, 1.5)
+	CircleZoom.zoom(null, 0.6, 1.5, Vector2.ZERO)
 	
 	set_paused(false)
 
 func exit():
-	CircleZoom.zoom(null, 0, 0.5, Vector2(200, 0))
+	CircleZoom.zoom(null, Shared.last_orb_radius, 0.5, null, Shared.last_orb_pos)
+	yield(CircleZoom, "finish")
 	
-	yield(get_tree().create_timer(0.5), "timeout")
 	get_tree().change_scene(Shared.scene_select)
 	Shared.is_level_select = true
 	yield(get_tree(), "idle_frame")
-	CircleZoom.pos_to = Vector2.ZERO
-	CircleZoom.zoom(null, 0.6, 1.0)
+	
+	CircleZoom.set_pos(Vector2.ZERO)
+	CircleZoom.set_radius(CircleZoom.out)
+	#CircleZoom.zoom(null, CircleZoom.out, 0)
 	
 	set_paused(false)
 
 func change_pos(pos):
 	sprite.position = pos
+	menu.rect_position.x = 50 + pos.x - (CircleZoom.radius * 1280)

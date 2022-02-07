@@ -1,40 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/autoload/CircleZoom.gd" type="Script" id=2]
-[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=3]
-
-[sub_resource type="Shader" id=7]
-code = "shader_type canvas_item;
-
-uniform float radius : hint_range(0.0, 1.0) = 0.5;
-uniform float width : hint_range(0.0, 0.2) = 0.05;
-
-uniform vec4 line_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform vec4 outside_color : hint_color = vec4(0.0, 0.0, 0.0, 0.0);
-
-void fragment(){
-	
-	float dist = distance(vec2(0.5, 0.5), UV);
-	
-	if (dist < radius - width){
-		COLOR = texture(TEXTURE, UV);
-	}
-	else if (dist < radius) {
-		COLOR = line_color;
-	}
-	else {
-		COLOR = outside_color;
-	}
-	
-}"
-
-[sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 7 )
-shader_param/radius = 0.43
-shader_param/width = 0.033
-shader_param/line_color = Color( 1, 0, 0, 1 )
-shader_param/outside_color = Color( 0, 0, 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 1 )
@@ -44,7 +11,7 @@ shader_param/outside = Color( 1, 1, 1, 1 )
 shader_param/scale = 1.0
 shader_param/offset = Vector2( 0, 0 )
 shader_param/start_offset = Vector2( 0.5, 0.5 )
-shader_param/radius = 0.138
+shader_param/radius = 0.585
 shader_param/width = 0.011
 
 [node name="CircleOut" type="CanvasLayer"]
@@ -52,29 +19,12 @@ pause_mode = 2
 layer = 8
 script = ExtResource( 2 )
 
-[node name="Test" type="Node2D" parent="."]
-visible = false
-position = Vector2( 640, 360 )
-scale = Vector2( 0.833, 0.833 )
-
-[node name="ViewportContainer" type="ViewportContainer" parent="Test"]
-material = SubResource( 8 )
-margin_left = -250.0
-margin_top = -250.0
-margin_right = 750.0
-margin_bottom = 750.0
-rect_scale = Vector2( 0.5, 0.5 )
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 6 )
+margin_top = -280.0
+margin_right = 1280.0
+margin_bottom = 1000.0
+color = Color( 0.807843, 0.470588, 0.470588, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Viewport" type="Viewport" parent="Test/ViewportContainer"]
-size = Vector2( 1000, 1000 )
-handle_input_locally = false
-render_target_update_mode = 0
-
-[node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 6 )
-position = Vector2( 640, 360 )
-scale = Vector2( 13, 13 )
-texture = ExtResource( 3 )

@@ -22,6 +22,8 @@ var worlds_path := "res://src/map/worlds/"
 
 var map_textures := {}
 var start_scale := 1.0
+var last_orb_radius := 0.0
+var last_orb_pos := Vector2.ZERO
 
 var screenshot_texture : ImageTexture
 

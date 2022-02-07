@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var sprite = $Sprite
+onready var circle = $ColorRect
 
 var is_zoom := false
 var zoom_clock := 0.0
@@ -12,11 +12,17 @@ var zoom_to := 0.0
 var pos_from := Vector2.ZERO
 var pos_to := Vector2.ZERO
 
+var out := 0.585
+
 signal change_pos(pos)
 signal finish
 
+var pos = Vector2.ZERO
+var radius = 0.0
+
+
 func _ready():
-	#sprite.visible = false
+	#circle.visible = false
 	zoom(null, 0.6)
 
 func _physics_process(delta):
@@ -34,29 +40,30 @@ func _physics_process(delta):
 		if zoom_clock == zoom_time:
 			is_zoom = false
 			emit_signal("finish")
-			#sprite.visible = false
+			#circle.visible = false
 
 func set_radius(rad):
-	sprite.material.set_shader_param("radius", rad)
+	circle.material.set_shader_param("radius", rad)
+	radius = rad
 
-func get_radius():
-	return sprite.material.get_shader_param("radius")
+#func get_radius():
+#	return circle.material.get_shader_param("radius")
 
 func set_pos(p := Vector2.ZERO):
-	sprite.material.set_shader_param("start_offset", Vector2(0.5, 0.5) + (p / 1280))
+	circle.material.set_shader_param("start_offset", Vector2(0.5, 0.5) + (p / 1280))
+	pos = p
 	emit_signal("change_pos", p)
 
 func get_pos():
-	return sprite.material.get_shader_param("start_offset")
+	return circle.material.get_shader_param("start_offset")
 
-func zoom(from = null, to = null, time = null, pos = null):
+func zoom(from = null, to = null, time = null, p_from = null, p_to = null):
 	is_zoom = true
 	zoom_clock = 0
 	
-	zoom_from = from if from != null else get_radius()
+	zoom_from = from if from != null else radius
+	zoom_to = to if to != null else out
+	zoom_time = time if time != null else 0.5
 	
-	if to != null: zoom_to = to
-	if time != null: zoom_time = time
-	
-	pos_from = pos_to
-	pos_to = pos if pos != null else Vector2.ZERO
+	pos_from = p_from if p_from != null else pos
+	pos_to = p_to if p_to != null else Vector2.ZERO
