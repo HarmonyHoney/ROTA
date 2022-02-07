@@ -12,6 +12,9 @@ var zoom_to := 0.0
 var pos_from := Vector2.ZERO
 var pos_to := Vector2.ZERO
 
+signal change_pos(pos)
+signal finish
+
 func _ready():
 	#sprite.visible = false
 	zoom(null, 0.6)
@@ -30,6 +33,7 @@ func _physics_process(delta):
 		
 		if zoom_clock == zoom_time:
 			is_zoom = false
+			emit_signal("finish")
 			#sprite.visible = false
 
 func set_radius(rad):
@@ -40,6 +44,7 @@ func get_radius():
 
 func set_pos(p := Vector2.ZERO):
 	sprite.material.set_shader_param("start_offset", Vector2(0.5, 0.5) + (p / 1280))
+	emit_signal("change_pos", p)
 
 func get_pos():
 	return sprite.material.get_shader_param("start_offset")

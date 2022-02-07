@@ -2,7 +2,6 @@ extends Node2D
 
 var preview_path = "res://src/map/preview/"
 var worlds_path := "res://src/map/worlds/"
-var level_scenes := []
 
 var worlds := []
 var world_size := 0
@@ -47,11 +46,6 @@ func _ready():
 		if i > 0:
 			worlds_node.add_child(preview.duplicate())
 			circles_node.add_child(circle.duplicate())
-		
-		# fill arrays with scenes to be instanced
-		level_scenes.append([])
-		for j in Shared.world_size[i] + 1:
-			level_scenes[i].append(load(worlds_path + str(i + 1) + "/" + str(j + 1) + ".tscn"))
 	
 	# get children and size
 	worlds = worlds_node.get_children()
@@ -184,9 +178,10 @@ func open_level():
 	Shared.start_scale = worlds[world_cursor].get_node("Sprites").scale.y / cam.zoom.y
 	
 	var from = worlds[world_cursor].get_node("Sprites/Map").material.get_shader_param("radius")
+	CircleZoom.pos_to = Vector2.ZERO
 	CircleZoom.zoom(from * 0.32, null, 1.0)
 	
-	get_tree().change_scene_to(level_scenes[world_cursor][level_cursor])
+	get_tree().change_scene(worlds_path + "/" + str(world_cursor + 1) + "/" + str(level_cursor + 1) + ".tscn")
 	Shared.is_level_select = false
 	
 	HUD.show("game")

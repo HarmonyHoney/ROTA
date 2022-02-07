@@ -49,7 +49,7 @@ shader_param/width = 0.011
 
 [node name="CircleOut" type="CanvasLayer"]
 pause_mode = 2
-layer = 7
+layer = 8
 script = ExtResource( 2 )
 
 [node name="Test" type="Node2D" parent="."]

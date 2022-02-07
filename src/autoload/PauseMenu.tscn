@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://media/image/dashes_fill.png" type="Texture" id=1]
 [ext_resource path="res://media/image/box/box-400.png" type="Texture" id=2]
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/autoload/PauseMenu.gd" type="Script" id=4]
+[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 110
@@ -13,19 +14,23 @@ font_data = ExtResource( 3 )
 size = 70
 font_data = ExtResource( 3 )
 
-[node name="PauseMenu" type="CanvasLayer"]
+[node name="PauseMenu" type="Node2D"]
 pause_mode = 2
-layer = 9
 script = ExtResource( 4 )
 
-[node name="Parent" type="NinePatchRect" parent="."]
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+layer = 9
+
+[node name="Menu" type="NinePatchRect" parent="MenuLayer"]
 self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.3
 anchor_top = 0.2
 anchor_right = 0.7
 anchor_bottom = 0.8
-margin_left = -344.0
-margin_right = -344.0
+margin_left = -340.825
+margin_top = -34.9228
+margin_right = -220.825
+margin_bottom = 85.0772
 texture = ExtResource( 1 )
 patch_margin_left = 60
 patch_margin_top = 60
@@ -35,7 +40,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="Parent"]
+[node name="Title" type="Label" parent="MenuLayer/Menu"]
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 0.4
@@ -47,7 +52,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Items" type="Control" parent="Parent"]
+[node name="Items" type="Control" parent="MenuLayer/Menu"]
 anchor_top = 0.35
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,7 +61,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cursor" type="NinePatchRect" parent="Parent/Items"]
+[node name="Cursor" type="NinePatchRect" parent="MenuLayer/Menu/Items"]
 anchor_left = 0.25
 anchor_right = 0.75
 anchor_bottom = 0.25
@@ -70,7 +75,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Resume" type="Label" parent="Parent/Items"]
+[node name="Resume" type="Label" parent="MenuLayer/Menu/Items"]
 anchor_left = 0.25
 anchor_right = 0.75
 anchor_bottom = 0.25
@@ -82,7 +87,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Label" parent="Parent/Items"]
+[node name="Reset" type="Label" parent="MenuLayer/Menu/Items"]
 anchor_left = 0.3
 anchor_top = 0.25
 anchor_right = 0.7
@@ -95,7 +100,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Exit" type="Label" parent="Parent/Items"]
+[node name="Exit" type="Label" parent="MenuLayer/Menu/Items"]
 anchor_left = 0.33
 anchor_top = 0.5
 anchor_right = 0.67
@@ -107,3 +112,12 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ImageLayer" type="CanvasLayer" parent="."]
+layer = 7
+
+[node name="Center" type="Node2D" parent="ImageLayer"]
+position = Vector2( 640, 360 )
+
+[node name="Sprite" type="Sprite" parent="ImageLayer/Center"]
+texture = ExtResource( 5 )

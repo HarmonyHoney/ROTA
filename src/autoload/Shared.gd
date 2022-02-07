@@ -21,8 +21,10 @@ var worlds_path := "res://src/map/worlds/"
 
 
 var map_textures := {}
-
 var start_scale := 1.0
+
+var screenshot_texture : ImageTexture
+
 
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
@@ -125,4 +127,14 @@ func complete_level():
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
+
+func take_screenshot():
+	var image = get_tree().root.get_texture().get_data()
+	image.flip_y()
+	
+	var it = ImageTexture.new()
+	it.create_from_image(image)
+	
+	screenshot_texture = it
+	return screenshot_texture
 
