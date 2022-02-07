@@ -14,4 +14,4 @@ func _ready():
 
 func _on_Boundary_body_exited(body):
 	if !Shared.is_level_select and body.has_method("outside_boundary"):
-		body.outside_boundary()
+		pass#body.outside_boundary()

@@ -5,7 +5,7 @@ signal turning(angle)
 
 var zoom_multiplier := 2.5
 onready var start_zoom := zoom
-onready var zoom_out := zoom * zoom_multiplier
+onready var zoom_out := zoom
 var zoom_clock := 0.0
 var zoom_duration := 1.5
 
@@ -26,17 +26,19 @@ var turn_time := 0.5
 var turn_from := 0.0
 var turn_to := 0.0
 
+var if_is_start_zoom := true
+
 func _ready():
-	if Shared.is_level_select:
+	if !if_is_start_zoom:
 		zoom_clock = zoom_duration
+	else:
+		set_zoom_out()
 
 func _process(delta):
 	if Engine.editor_hint: return
 	
 	# zoom in
-	if zoom_clock != zoom_duration:
-		zoom_clock = min(zoom_clock + delta, zoom_duration)
-		zoom = zoom_out.linear_interpolate(start_zoom, zoom_clock / zoom_duration)
+	zoom_in(delta)
 	
 	# rotation
 	if is_rotating:
@@ -82,3 +84,12 @@ func turn(arg):
 	turn_from = rotation
 	turn_to = arg
 	turn_clock = 0.0
+
+func set_zoom_out():
+	var y = start_zoom.y / Shared.start_scale
+	zoom_out = Vector2.ONE * y
+
+func zoom_in(delta := 0.0):
+	if zoom_clock != zoom_duration:
+		zoom_clock = min(zoom_clock + delta, zoom_duration)
+		zoom = zoom_out.linear_interpolate(start_zoom, zoom_clock / zoom_duration)

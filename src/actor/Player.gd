@@ -118,7 +118,14 @@ func _ready():
 	set_dir()
 	sprites.rotation = turn_to
 	turn_clock = turn_time
+	
+	camera.turn_from = turn_to
+	camera.turn_to = turn_to
+	camera.rotation = turn_to
 	camera.turn_clock = 99
+	camera.zoom_in()
+	camera.force_update_scroll()
+	camera.force_update_transform()
 	
 	# wait for parent
 	yield(get_parent(),"ready")

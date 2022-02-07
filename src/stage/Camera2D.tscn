@@ -6,7 +6,6 @@
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Camera2D" type="Camera2D" groups=["game_camera"]]
-pause_mode = 2
 rotating = true
 current = true
 zoom = Vector2( 1.5, 1.5 )

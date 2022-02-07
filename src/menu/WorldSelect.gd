@@ -1,9 +1,8 @@
 extends Node2D
 
 var preview_path = "res://src/map/preview/"
-var preview_scenes := []
-var level_scenes := []
 var worlds_path := "res://src/map/worlds/"
+var level_scenes := []
 
 var worlds := []
 var world_size := 0
@@ -37,10 +36,10 @@ onready var levels_node = $LevelSelect/Levels
 onready var level = $LevelSelect/Levels/Level
 onready var level_cursor_node = $LevelSelect/Cursor
 
-var orb_viewport
-var is_opening := false
-
 onready var debug_corner = $LevelSelect/debugCorner
+
+var is_opening := false
+var orb_sprite : Sprite
 
 func _ready():
 	for i in Shared.world_size.size():
@@ -50,7 +49,6 @@ func _ready():
 			circles_node.add_child(circle.duplicate())
 		
 		# fill arrays with scenes to be instanced
-		preview_scenes.append(load(preview_path + str(i + 1) + ".tscn"))
 		level_scenes.append([])
 		for j in Shared.world_size[i] + 1:
 			level_scenes[i].append(load(worlds_path + str(i + 1) + "/" + str(j + 1) + ".tscn"))
@@ -61,10 +59,8 @@ func _ready():
 	circles = circles_node.get_children()
 	
 	for i in world_size:
-		# instance previews
-		worlds[i].get_node("ViewportContainer/Viewport").add_child(preview_scenes[i].instance())
-		#worlds[i].get_node("ViewportContainer/Viewport/Node2D/Camera2D").zoom = Vector2.ONE
-		worlds[i].get_node("Locked").visible = Shared.unlocked[i] < 0
+		preview_world(i)
+		
 		# set cursor circles position
 		circles[i].position.x = (i - (world_size - 1) / 2.0) * 100
 	
@@ -150,36 +146,32 @@ func open_world():
 			l.get_node("Label").text = "" if i > Shared.unlocked[world_cursor] else str(i + 1)
 			l.get_node("Locked").visible = i > Shared.unlocked[world_cursor]
 	
-	orb_viewport = worlds[world_cursor].get_node("ViewportContainer/Viewport")
 	preview_level()
 
 func close_world():
 	is_level = false
 	cam.position = Vector2.ZERO
-	
-	for i in orb_viewport.get_children():
-		orb_viewport.remove_child(i)
-	
-	if is_instance_valid(preview_scenes[world_cursor]):
-		orb_viewport.add_child(preview_scenes[world_cursor].instance())
-	
-	worlds[world_cursor].get_node("Locked").visible = Shared.unlocked[world_cursor] < 0
+	preview_world()
 
-func preview_level():
-	for i in orb_viewport.get_children():
-		orb_viewport.remove_child(i)
+func preview_level(w := world_cursor, l := level_cursor):
+	var p = worlds_path + str(w + 1) + "/" + str(l + 1) + ".tscn"
+	if Shared.map_textures.has(p):
+		worlds[w].get_node("Sprites/Map").texture = Shared.map_textures[p]
 	
-	if is_instance_valid(level_scenes[world_cursor][level_cursor]):
-		orb_viewport.add_child(level_scenes[world_cursor][level_cursor].instance())
+	worlds[w].get_node("Sprites/Lock").visible = level_cursor > Shared.unlocked[w]
+
+func preview_world(w := world_cursor):
+	var p = preview_path + str(w + 1) + ".tscn"
+	if Shared.map_textures.has(p):
+		worlds[w].get_node("Sprites/Map").texture = Shared.map_textures[p]
 	
-	worlds[world_cursor].get_node("Locked").visible = level_cursor > Shared.unlocked[world_cursor]
+	worlds[w].get_node("Sprites/Lock").visible = Shared.unlocked[w] < 0
 
 func open_level():
 	if level_cursor > Shared.unlocked[world_cursor]:
 		print("Level ", world_cursor + 1, "-", level_cursor + 1, " locked")
 		#return
 	
-	#Shared.change_scene(worlds_path + str(world_cursor + 1) + "/" + str(level_cursor + 1) + ".tscn")
 	set_process_input(false)
 	is_opening = true
 	Shared.world = world_cursor
@@ -189,17 +181,10 @@ func open_level():
 	
 	yield(get_tree().create_timer(0.5), "timeout")
 	
+	Shared.start_scale = worlds[world_cursor].get_node("Sprites").scale.y / cam.zoom.y
 	
-	var from = orb_viewport.get_parent().material.get_shader_param("radius")
+	var from = worlds[world_cursor].get_node("Sprites/Map").material.get_shader_param("radius")
 	CircleZoom.zoom(from * 0.32, null, 1.0)
-	
-	var s =	orb_viewport.get_child(0)
-	
-	#orb_viewport.remove_child(s)
-	#$TestGame.add_child(s)
-	#s.owner = $TestGame
-	#$TestGame.find_node("Camera2D").current = true
-	
 	
 	get_tree().change_scene_to(level_scenes[world_cursor][level_cursor])
 	Shared.is_level_select = false

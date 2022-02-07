@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
 [ext_resource path="res://media/font/ShareTechMono.tres" type="DynamicFont" id=2]
@@ -6,33 +6,47 @@
 [ext_resource path="res://src/menu/WorldSelect.gd" type="Script" id=4]
 [ext_resource path="res://src/shader/inside_circle.gdshader" type="Shader" id=5]
 [ext_resource path="res://media/image/keyhole.png" type="Texture" id=6]
+[ext_resource path="res://media/image/tiles/tile_0.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Worlds/Preview/Sprites/Map:material:shader_param/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
 length = 3.0
 loop = true
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Worlds/Preview/ViewportContainer:material:shader_param/radius")
+tracks/0/path = NodePath("Picker/Cursor/Circle:material:shader_param/radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0.43, -0.9, 0, 0.9, 0, 0.4, -0.9, 0, 0.9, 0, 0.43, -0.9, 0, 0.9, 0 ),
+"points": PoolRealArray( 0.28, -0.9, 0, 0.9, 0, 0.2, -0.9, 0, 0.9, 0, 0.28, -0.9, 0, 0.9, 0 ),
 "times": PoolRealArray( 0, 1.5, 3 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Picker/Cursor/Circle:material:shader_param/radius")
+tracks/1/path = NodePath("LevelSelect/Cursor:scale:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.28, -0.9, 0, 0.9, 0, 0.2, -0.9, 0, 0.9, 0, 0.28, -0.9, 0, 0.9, 0 ),
+"points": PoolRealArray( 1, -0.9, 0, 0.9, 0, 0.85, -0.9, 0, 0.9, 0, 1, -0.9, 0, 0.9, 0 ),
 "times": PoolRealArray( 0, 1.5, 3 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("LevelSelect/Cursor:scale:x")
+tracks/2/path = NodePath("LevelSelect/Cursor:scale:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -42,19 +56,19 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 1.5, 3 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("LevelSelect/Cursor:scale:y")
+tracks/3/path = NodePath("Worlds/Preview/Sprites/Map:material:shader_param/radius")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 1, -0.9, 0, 0.9, 0, 0.85, -0.9, 0, 0.9, 0, 1, -0.9, 0, 0.9, 0 ),
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0.47, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1.5, 3 )
 }
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 5 )
-shader_param/radius = 0.43
+shader_param/radius = 0.0
 shader_param/width = 0.033
 shader_param/line_color = Color( 0, 0, 0, 1 )
 shader_param/outside_color = Color( 0, 0, 0, 0 )
@@ -117,30 +131,21 @@ smoothing_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
+anims/RESET = SubResource( 6 )
 anims/idle = SubResource( 1 )
 
 [node name="Worlds" type="Node2D" parent="."]
 
 [node name="Preview" type="Node2D" parent="Worlds"]
 
-[node name="ViewportContainer" type="ViewportContainer" parent="Worlds/Preview"]
+[node name="Sprites" type="Node2D" parent="Worlds/Preview"]
+scale = Vector2( 0.7, 0.7 )
+
+[node name="Map" type="Sprite" parent="Worlds/Preview/Sprites"]
 material = SubResource( 2 )
-margin_left = -250.0
-margin_top = -250.0
-margin_right = 750.0
-margin_bottom = 750.0
-rect_scale = Vector2( 0.5, 0.5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( 7 )
 
-[node name="Viewport" type="Viewport" parent="Worlds/Preview/ViewportContainer"]
-size = Vector2( 1000, 1000 )
-own_world = true
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="Locked" type="Sprite" parent="Worlds/Preview"]
+[node name="Lock" type="Sprite" parent="Worlds/Preview/Sprites"]
 texture = ExtResource( 6 )
 
 [node name="Picker" type="Node2D" parent="."]

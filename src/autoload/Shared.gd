@@ -19,6 +19,11 @@ var unlocked = [5, -1, -1, -1, -1, -1]
 
 var worlds_path := "res://src/map/worlds/"
 
+
+var map_textures := {}
+
+var start_scale := 1.0
+
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
 	is_level_select = get_tree().current_scene.name == "WorldSelect"
@@ -45,7 +50,40 @@ func list_folder(path, include_extension := true):
 		list.append(fname if include_extension else fname.split(".")[0])
 		fname = dir.get_next()
 	
+	dir.list_dir_end()
 	return list
+
+func list_all_files(path, is_ext := true):
+	var folders = [path]
+	var files = []
+	
+	while !folders.empty():
+		var s = folders.pop_back()
+		
+		var ex = list_folders_and_files(s, is_ext)
+		folders.append_array(ex[0])
+		files.append_array(ex[1])
+	
+	return files
+
+func list_folders_and_files(path, is_ext := true):
+	var dir = Directory.new()
+	if dir.open(path) != OK:
+		print("list_folder(): '", path, "' not found")
+		return
+	
+	dir.list_dir_begin(true)
+	var fname = dir.get_next()
+	var files := []
+	var folders := []
+	
+	while fname != "":
+		var s = dir.get_current_dir() + "/" + (fname if is_ext else fname.split(".")[0])
+		folders.append(s) if dir.current_is_dir() else files.append(s)
+		fname = dir.get_next()
+	
+	dir.list_dir_end()
+	return [folders, files]
 
 func reset():
 	if !is_reset:
