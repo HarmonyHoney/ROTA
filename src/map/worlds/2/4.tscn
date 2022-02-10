@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/map/base/map_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=3]
 
 [node name="Node2D" instance=ExtResource( 1 )]
 
@@ -23,3 +24,7 @@ position = Vector2( 850, -150 )
 [node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
 position = Vector2( 250, -250 )
 dir = 3
+
+[node name="Door" parent="Actors" index="3" instance=ExtResource( 3 )]
+position = Vector2( 550, -50 )
+scene_path = "res://src/map/hub/2.tscn"

@@ -2,7 +2,7 @@ extends Node2D
 
 var maps = "res://src/map/worlds/"
 var preview = "res://src/map/preview/"
-
+var hub = "res://src/map/hub/"
 
 onready var viewport = $Viewport
 onready var sprite = $Sprite
@@ -15,12 +15,15 @@ var joy = Vector2.ZERO
 var joy_last = joy
 
 func _ready():
+	
+	var image_dict = {}
+	
 	sprite.scale = Vector2(1280, 720) / viewport.size
 	
 	yield(get_parent(), "ready")
 	get_tree().paused = true
 	
-	var l = Shared.list_all_files(maps) + Shared.list_all_files(preview)
+	var l = Shared.list_all_files(maps) + Shared.list_all_files(preview) + Shared.list_all_files(hub)
 	
 	for c in viewport.get_children():
 		viewport.remove_child(c)
@@ -33,11 +36,13 @@ func _ready():
 		var cam = scene.get_node("Camera2D")
 		var player = scene.get_node("Actors/Player")
 		
+		player.visible = false
+		
 		cam.rotation = deg2rad(player.dir * 90)
 		cam.zoom = cam.start_zoom
 		cam.force_update_scroll()
 		
-		for f in 2:
+		for f in 1:
 			yield(get_tree(), "idle_frame")
 		
 		var image = viewport.get_texture().get_data()
@@ -52,14 +57,16 @@ func _ready():
 		sprite.texture = it
 		
 		viewport.remove_child(scene)
+		
+#		image_dict[l[i]] = {}
+#		image_dict[l[i]]["width"] = image.get_width()
+#		image_dict[l[i]]["height"] = image.get_height()
+#		image_dict[l[i]]["use_mipmaps"] = image.has_mipmaps()
+#		image_dict[l[i]]["data"] = image.get_data()
 	
 	get_tree().paused = false
 	Shared.map_textures = map_textures.duplicate()
-	
-	for i in map_textures.keys():
-		print(map_textures[i].get_data())
-	
-	get_tree().change_scene(Shared.scene_select)
+	get_tree().change_scene("res://src/map/hub/1.tscn")
 
 func _input(event):
 	joy_last = joy

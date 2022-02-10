@@ -27,6 +27,7 @@ var last_orb_pos := Vector2.ZERO
 
 var screenshot_texture : ImageTexture
 
+var last_door := {}
 
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
@@ -139,4 +140,3 @@ func take_screenshot():
 	
 	screenshot_texture = it
 	return screenshot_texture
-

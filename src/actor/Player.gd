@@ -30,7 +30,6 @@ var joy_last := Vector2.ZERO
 var joy_q := Vector2.ZERO
 var btn_jump := false
 var btnp_jump := false
-var btnp_action := false
 var btn_push := false
 var btnp_push := false
 
@@ -85,11 +84,23 @@ var box_turn := 1
 
 export var can_spin := true
 
+onready var start_pos = position
 
 func _ready():
 	if Engine.editor_hint: return
 	
 	solve_jump()
+	
+	# go to last door
+	var csf = get_tree().current_scene.filename
+	if Shared.last_door.has(csf):
+		var dn = Shared.last_door[csf]
+		
+		var gp = get_parent()
+		if gp.has_node(dn):
+			var door = gp.get_node(dn)
+			position = door.position
+			dir = door.dir
 	
 	# snap to floor
 	var test = rot(Vector2.DOWN * 75)
@@ -104,8 +115,6 @@ func _ready():
 	if Shared.is_level_select:
 		set_process_input(false)
 		set_physics_process(false)
-	
-	
 	
 	# find camera in the same viewport
 	for i in get_tree().get_nodes_in_group("game_camera"):
@@ -161,7 +170,6 @@ func _physics_process(delta):
 		
 		btn_jump = Input.is_action_pressed("jump")
 		btnp_jump = Input.is_action_just_pressed("jump")
-		btnp_action = Input.is_action_just_pressed("action")
 		btn_push = Input.is_action_pressed("push")
 		btnp_push = Input.is_action_just_pressed("push")
 	
@@ -326,10 +334,6 @@ func _physics_process(delta):
 				else:
 					anim.play("walk")
 				
-				# seek animation halfway for mirrored effect
-				if anim.current_animation != anim_last and dir_x < 0:
-					anim.seek(anim.current_animation_length / 2, true)
-				
 				# start jump
 				if btnp_jump or btnp_jump_q:
 					is_floor = false
@@ -340,8 +344,12 @@ func _physics_process(delta):
 					velocity.y = jump_speed
 					jump_clock = 0.0
 				
+				# seek animation halfway for mirrored effect
+				if anim.current_animation != anim_last and dir_x < 0:
+					anim.seek(anim.current_animation_length / 2, true)
+				
 				# start hold
-				elif btnp_push:
+				elif btn_push:
 					for i in hit_area.get_overlapping_bodies():
 						if i.is_in_group("box") and i.is_floor:
 							box = i

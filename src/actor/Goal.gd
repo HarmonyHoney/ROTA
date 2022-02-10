@@ -12,8 +12,5 @@ func turning(angle):
 	sprites.rotation = angle
 
 func _on_Area2D_body_entered(body):
+	visible = false
 	pass
-#	if body.is_in_group("player"):
-#		body.exit(self)
-#		anim.play("open")
-#		print("map complete")
