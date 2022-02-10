@@ -335,7 +335,7 @@ func _physics_process(delta):
 					anim.play("walk")
 				
 				# start jump
-				if btnp_jump or btnp_jump_q:
+				if btnp_jump_q and btn_jump:
 					is_floor = false
 					anim.play("jump")
 					

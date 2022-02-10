@@ -64,6 +64,13 @@ func enter_door():
 	if !is_active: return
 	if player != null and player.is_hold: return
 	
+	# acquire goal
+	var goal = get_parent().get_node("Goal")
+	
+	if goal != null:
+		if goal.is_collected and !Shared.goals_collected.has(goal.csf):
+			Shared.goals_collected.append(goal.csf)
+	
 	Shared.last_door[get_tree().current_scene.filename] = name
 	if scene_path != "":
 		Shared.change_scene(scene_path)
