@@ -4,6 +4,8 @@ extends Node2D
 onready var area : Area2D = $Area2D
 onready var preview := $Preview
 onready var sprite : Sprite = $Preview/Sprite
+onready var door := $Polygon2D
+onready var arrow := $Arrow
 
 export var dir := 0 setget set_dir
 export var scene_path := ""
@@ -21,6 +23,12 @@ var scale_to = 1.0
 
 var player = null
 
+export var stage_color := Color("e59d57")
+export var hub_color := Color("ff0078")
+
+onready var complete := $Complete
+onready var incomplete := $Incomplete
+
 func _ready():
 	if Engine.editor_hint: return
 	
@@ -28,6 +36,17 @@ func _ready():
 	
 	if Shared.map_textures.has(scene_path):
 		sprite.texture = Shared.map_textures[scene_path]
+	
+	var h = "hub" in scene_path
+	var c = Shared.goals_collected.has(scene_path)
+		
+	complete.visible = c and !h
+	incomplete.visible = !c and !h
+	door.color = hub_color if h else stage_color
+	#door.color = stage_color
+	
+	
+	arrow.visible = is_active
 
 func _input(event):
 	if Engine.editor_hint: return
@@ -51,11 +70,13 @@ func _on_Area2D_body_entered(body):
 		if player == null : player = body
 		if player.dir == dir:
 			is_active = true
-			show_preview()
+			arrow.visible = is_active
+			#show_preview()
 
 func _on_Area2D_body_exited(body):
 	is_active = false
-	show_preview()
+	arrow.visible = is_active
+	#show_preview()
 
 func show_preview(arg := is_active):
 	preview.visible = true

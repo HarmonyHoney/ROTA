@@ -29,3 +29,4 @@ position = Vector2( 350, -50 )
 [node name="Door" parent="Actors" index="3" instance=ExtResource( 3 )]
 position = Vector2( 600, -50 )
 scene_path = "res://src/map/hub/3.tscn"
+hub_color = Color( 1, 1, 1, 1 )

@@ -30,6 +30,7 @@ points = PoolVector2Array( 0, 100, 25, 40, 50, 100, 75, 40, 100, 100 )
 0/z_index = 0
 
 [node name="SpikeMap" type="TileMap" groups=["spike"]]
+z_index = -1
 tile_set = SubResource( 2 )
 cell_size = Vector2( 100, 100 )
 cell_custom_transform = Transform2D( 100, 0, 0, 100, 0, 0 )

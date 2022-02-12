@@ -383,7 +383,7 @@ tracks/6/keys = {
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 12 )
-shader_param/add_color = Color( 0, 0.5, 1, 1 )
+shader_param/add_color = Color( 0.713726, 0.701961, 1, 1 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 z_index = 50

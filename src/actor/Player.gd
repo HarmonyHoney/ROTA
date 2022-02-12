@@ -132,9 +132,9 @@ func _ready():
 	camera.turn_to = turn_to
 	camera.rotation = turn_to
 	camera.turn_clock = 99
-	camera.zoom_in()
-	camera.force_update_scroll()
-	camera.force_update_transform()
+	#camera.zoom_in()
+	#camera.force_update_scroll()
+	#camera.force_update_transform()
 	
 	# wait for parent
 	yield(get_parent(),"ready")

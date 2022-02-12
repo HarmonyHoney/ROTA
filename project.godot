@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="gdRota"
-run/main_scene="res://src/menu/CreateImages.tscn"
+run/main_scene="res://src/map/hub/1.tscn"
 config/icon="res://media/image/gobot.png"
 
 [autoload]
@@ -38,6 +38,7 @@ Wipe="*res://src/autoload/Wipe.tscn"
 PauseMenu="*res://src/autoload/PauseMenu.tscn"
 HUD="*res://src/autoload/HUD.tscn"
 CircleZoom="*res://src/autoload/CircleZoom.tscn"
+BG="*res://src/autoload/BG.tscn"
 
 [display]
 
@@ -137,5 +138,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_clear_color=Color( 1, 1, 1, 1 )
+environment/default_clear_color=Color( 0, 0.741176, 1, 1 )
 environment/default_environment="res://default_env.tres"

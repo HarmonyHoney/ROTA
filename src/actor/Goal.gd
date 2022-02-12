@@ -13,7 +13,7 @@ func _ready():
 		break
 	
 	if Shared.goals_collected.has(csf):
-		sprites.modulate -= Color(0, 0, 0, 0.75)
+		pickup()
 
 func turning(angle):
 	sprites.rotation = angle
@@ -22,5 +22,6 @@ func _on_Area2D_body_entered(body):
 	pickup()
 
 func pickup():
-	visible = false
-	is_collected = true
+	if !is_collected:
+		is_collected = true
+		sprites.modulate.a = 0.25

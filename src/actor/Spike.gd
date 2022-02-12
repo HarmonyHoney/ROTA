@@ -8,7 +8,8 @@ func set_dir(arg):
 	rotation_degrees = dir * 90
 
 func set_tile(left := true):
-	if left:
-		$Sprites/Left/Tile.visible = true
-	else:
-		$Sprites/Right/Tile.visible = true
+	return
+#	if left:
+#		$Sprites/Left/Tile.visible = true
+#	else:
+#		$Sprites/Right/Tile.visible = true

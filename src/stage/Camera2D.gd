@@ -29,10 +29,20 @@ var turn_to := 0.0
 var if_is_start_zoom := true
 
 func _ready():
+	if Engine.editor_hint: return
+	
 	if !if_is_start_zoom:
 		zoom_clock = zoom_duration
 	else:
 		set_zoom_out()
+	
+	
+#	yield(get_tree(),"idle_frame")
+#
+#	is_moving = true
+#	is_focal_point = false
+#	is_zoom_out = false
+	
 
 func _process(delta):
 	if Engine.editor_hint: return

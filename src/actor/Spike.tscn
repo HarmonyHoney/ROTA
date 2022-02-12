@@ -1,10 +1,9 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://media/image/spike/spike_connection.png" type="Texture" id=1]
 [ext_resource path="res://media/image/spike/spike.png" type="Texture" id=2]
-[ext_resource path="res://media/image/spike/spike_floor.png" type="Texture" id=3]
 [ext_resource path="res://src/actor/Spike.gd" type="Script" id=4]
 [ext_resource path="res://src/shader/offset_y.gdshader" type="Shader" id=5]
+[ext_resource path="res://src/shader/add_color.gdshader" type="Shader" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -30,13 +29,19 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 6 )
+shader_param/add_color = Color( 1, 0.658824, 0.658824, 1 )
+
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 5 )
 shader_param/offset_y = 0.3
+shader_param/add_color = Color( 1, 0.658824, 0.658824, 1 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 5 )
 shader_param/offset_y = 0.515
+shader_param/add_color = Color( 1, 0.658824, 0.658824, 1 )
 
 [node name="Spike" type="Node2D" groups=["spike"]]
 script = ExtResource( 4 )
@@ -47,23 +52,29 @@ playback_speed = 0.7
 anims/Idle = SubResource( 1 )
 
 [node name="Sprites" type="Node2D" parent="."]
+material = SubResource( 4 )
 position = Vector2( -50, -50 )
 scale = Vector2( 0.25, 0.25 )
+
+[node name="LeftFloor" type="Sprite" parent="Sprites"]
+use_parent_material = true
+position = Vector2( 0, 400 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 200, 200, 200 )
+
+[node name="RightFloor" type="Sprite" parent="Sprites"]
+use_parent_material = true
+position = Vector2( 200, 400 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 200, 200, 200 )
 
 [node name="Left" type="Sprite" parent="Sprites"]
 material = SubResource( 2 )
 texture = ExtResource( 2 )
-centered = false
-
-[node name="Floor" type="Sprite" parent="Sprites/Left"]
-position = Vector2( 0, 400 )
-texture = ExtResource( 3 )
-centered = false
-
-[node name="Tile" type="Sprite" parent="Sprites/Left"]
-visible = false
-position = Vector2( 0, 400 )
-texture = ExtResource( 1 )
 centered = false
 
 [node name="Right" type="Sprite" parent="Sprites"]
@@ -71,15 +82,3 @@ material = SubResource( 3 )
 position = Vector2( 200, 0 )
 texture = ExtResource( 2 )
 centered = false
-
-[node name="Floor" type="Sprite" parent="Sprites/Right"]
-position = Vector2( 0, 400 )
-texture = ExtResource( 3 )
-centered = false
-
-[node name="Tile" type="Sprite" parent="Sprites/Right"]
-visible = false
-position = Vector2( 0, 400 )
-texture = ExtResource( 1 )
-centered = false
-flip_h = true
