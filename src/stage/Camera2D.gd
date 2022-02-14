@@ -14,7 +14,7 @@ onready var start_position := position
 export var is_rotating := true
 export var is_moving := false
 export var is_focal_point := false
-export var focal_influence := 0.25
+export var focal_influence := 0.35
 export var is_zoom_out := true
 
 var screen_size := Vector2(1280, 720)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/map/base/map_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
 
 [node name="Node2D" instance=ExtResource( 1 )]
 
@@ -19,6 +20,7 @@ position = Vector2( -100, 150 )
 dir = 2
 
 [node name="Exit" parent="Actors" index="1"]
+visible = false
 position = Vector2( -350, 150 )
 
 [node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
@@ -30,3 +32,6 @@ position = Vector2( -100, 150 )
 rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/hub/2.tscn"
+
+[node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
+position = Vector2( -350, 150 )

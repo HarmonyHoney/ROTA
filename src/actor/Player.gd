@@ -132,9 +132,10 @@ func _ready():
 	camera.turn_to = turn_to
 	camera.rotation = turn_to
 	camera.turn_clock = 99
+	camera.position = position
 	#camera.zoom_in()
-	#camera.force_update_scroll()
-	#camera.force_update_transform()
+	camera.force_update_scroll()
+	camera.force_update_transform()
 	
 	# wait for parent
 	yield(get_parent(),"ready")
@@ -347,6 +348,14 @@ func _physics_process(delta):
 				# seek animation halfway for mirrored effect
 				if anim.current_animation != anim_last and dir_x < 0:
 					anim.seek(anim.current_animation_length / 2, true)
+				
+				# pickup goal
+				elif btn_push and joy.y == 1:
+					for i in body_area.get_overlapping_areas():
+						var p = i.get_parent()
+						if p and p.is_in_group("goal") and !p.is_collected and p.dir == dir:
+							p.pickup()
+							break
 				
 				# start hold
 				elif btn_push:

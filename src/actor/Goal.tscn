@@ -22,20 +22,22 @@ anims/close = SubResource( 1 )
 anims/open = SubResource( 2 )
 
 [node name="Sprites" type="Node2D" parent="."]
-scale = Vector2( 0.6, 0.6 )
 
-[node name="Polygon2D2" type="Polygon2D" parent="Sprites"]
+[node name="Polygon2D" type="Polygon2D" parent="Sprites"]
+scale = Vector2( 0.6, 0.6 )
 color = Color( 1, 0.866667, 0, 1 )
 offset = Vector2( 80, 0 )
 polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
 
-[node name="Polygon2D" type="Polygon2D" parent="Sprites/Polygon2D2"]
+[node name="Polygon2D" type="Polygon2D" parent="Sprites/Polygon2D"]
 color = Color( 1, 0.984314, 0, 1 )
 offset = Vector2( 50, 0 )
 polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
+collision_layer = 2048
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 4 )

@@ -419,7 +419,7 @@ shape = SubResource( 2 )
 [node name="BodyArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 3
-collision_mask = 136
+collision_mask = 2184
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
 shape = SubResource( 2 )

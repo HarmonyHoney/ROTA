@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/actor/Door.gd" type="Script" id=1]
 [ext_resource path="res://media/image/white_square_400x.png" type="Texture" id=2]
 [ext_resource path="res://src/shader/inside_circle.gdshader" type="Shader" id=3]
 [ext_resource path="res://media/image/box/arrow.png" type="Texture" id=4]
+[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 50 )
@@ -14,6 +15,26 @@ shader_param/radius = 0.5
 shader_param/width = 0.035
 shader_param/line_color = Color( 0, 0, 0, 1 )
 shader_param/outside_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform float margin : hint_range(0.0, 0.5) = 0.15;
+uniform float progress : hint_range(0.0, 1.0) = 0.5;
+
+uniform vec4 fill_color : hint_color = vec4(1.0);
+
+void fragment(){
+	if (UV.y > mix(margin, 1.0 - margin, progress)){
+		COLOR = fill_color;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/margin = 0.15
+shader_param/progress = 1.0
+shader_param/fill_color = Color( 1, 0, 0.445313, 1 )
 
 [node name="Door" type="Node2D" groups=["door"]]
 script = ExtResource( 1 )
@@ -92,7 +113,10 @@ polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
 [node name="Arrow" type="Node2D" parent="."]
 position = Vector2( 0, -95 )
 
-[node name="Polygon2D" type="Polygon2D" parent="Arrow"]
+[node name="Back" type="Polygon2D" parent="Arrow"]
+material = SubResource( 4 )
+texture = ExtResource( 5 )
+texture_offset = Vector2( 50, 50 )
 polygon = PoolVector2Array( -30, -30, -20, -35, 20, -35, 30, -30, 35, -20, 35, 20, 30, 30, 20, 35, -20, 35, -30, 30, -35, 20, -35, -20 )
 
 [node name="Arrow" type="Sprite" parent="Arrow"]

@@ -29,4 +29,4 @@ dir = 3
 scene_path = "res://src/map/hub/1.tscn"
 
 [node name="Goal" parent="Actors" index="3" instance=ExtResource( 3 )]
-position = Vector2( 750, 450 )
+position = Vector2( 800, 450 )

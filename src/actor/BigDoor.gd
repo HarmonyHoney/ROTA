@@ -72,6 +72,7 @@ func _input(event):
 		# dev cheat unlock
 		if is_locked and Input.is_action_pressed("jump") and Input.is_action_pressed("push"):
 			is_locked = false
+			arrow.visible = true
 
 func _physics_process(delta):
 	if Engine.editor_hint: return

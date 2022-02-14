@@ -8,7 +8,7 @@
 [node name="Node2D" instance=ExtResource( 1 )]
 
 [node name="Camera2D" parent="." index="0"]
-position = Vector2( 350, 0 )
+position = Vector2( 400, 0 )
 focal_influence = 0.1
 
 [node name="SolidTileMap" parent="." index="1"]

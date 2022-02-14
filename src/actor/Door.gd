@@ -6,6 +6,7 @@ onready var preview := $Preview
 onready var sprite : Sprite = $Preview/Sprite
 onready var door := $Polygon2D
 onready var arrow := $Arrow
+#onready var arrow_back := $Arrow/Back
 
 export var dir := 0 setget set_dir
 export var scene_path := ""
@@ -29,6 +30,10 @@ export var hub_color := Color("ff0078")
 onready var complete := $Complete
 onready var incomplete := $Incomplete
 
+
+#var open_clock := 0.0
+#var open_time := 0.5
+
 func _ready():
 	if Engine.editor_hint: return
 	
@@ -43,23 +48,25 @@ func _ready():
 	complete.visible = c and !h
 	incomplete.visible = !c and !h
 	door.color = hub_color if h else stage_color
-	#door.color = stage_color
-	
 	
 	arrow.visible = is_active
+	#set_progress(0)
 
 func _input(event):
-	if Engine.editor_hint: return
-	
 	if event.is_action_pressed("up"):
-		enter_door()
+		if is_active and player != null and !player.is_hold and player.dir == dir:
+			enter_door()
 
-func _physics_process(delta):
-	if (is_active and move_clock < move_time) or (!is_active and move_clock > 0):
-		move_clock = min(move_clock + delta * (1 if is_active else -1), move_time)
-		var s = smoothstep(0, 1, move_clock / move_time)
-		preview.position = move_from.linear_interpolate(move_to, s)
-		preview.scale = Vector2.ONE * lerp(scale_from, scale_to, s)
+#func _physics_process(delta):
+#	if is_active:
+#		var is_up = Input.is_action_pressed("up") and player != null and !player.is_hold
+#
+#		open_clock = clamp(open_clock + (delta if is_up else -delta), 0, open_time)
+#		set_progress()
+#
+#		if open_clock == open_time:
+#			enter_door()
+
 
 func set_dir(arg):
 	dir = posmod(arg, 4)
@@ -71,19 +78,22 @@ func _on_Area2D_body_entered(body):
 		if player.dir == dir:
 			is_active = true
 			arrow.visible = is_active
-			#show_preview()
+#			open_clock = 0.0
+#			set_progress()
 
 func _on_Area2D_body_exited(body):
 	is_active = false
 	arrow.visible = is_active
-	#show_preview()
+#	open_clock = 0.0
+#	set_progress()
 
-func show_preview(arg := is_active):
-	preview.visible = true
+#func show_preview(arg := is_active):
+#	preview.visible = true
 
 func enter_door():
-	if !is_active: return
-	if player != null and player.is_hold: return
+	# disable player
+	player.set_physics_process(false)
+	player.anim.play("idle")
 	
 	# acquire goal
 	var goal = get_parent().get_node("Goal")
@@ -96,3 +106,6 @@ func enter_door():
 	if scene_path != "":
 		Shared.change_scene(scene_path)
 
+#func set_progress(arg = open_clock / open_time):
+#	var s = smoothstep(0, 1, open_clock / open_time)
+#	arrow_back.material.set_shader_param("progress", 1 - s)

@@ -8,6 +8,7 @@
 
 [node name="Camera2D" parent="." index="0"]
 is_focal_point = false
+focal_influence = 0.25
 is_zoom_out = false
 
 [node name="SolidTileMap" parent="." index="1"]

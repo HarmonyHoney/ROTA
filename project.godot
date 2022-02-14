@@ -131,6 +131,7 @@ push={
 2d_physics/layer_7="portal"
 2d_physics/layer_8="exit"
 2d_physics/layer_11="door"
+2d_physics/layer_12="goal"
 
 [physics]
 
