@@ -12,25 +12,21 @@ position = Vector2( 100, -350 )
 focal_influence = 0.1
 
 [node name="SolidTileMap" parent="." index="1"]
-tile_data = PoolIntArray( -393218, 0, 0, -393217, 0, 0, -458752, 0, 0, -458751, 0, 0, -458750, 0, 0, -458749, 0, 0, -327682, 0, 0, -393213, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327678, 0, 0, -327677, 0, 0, -196610, 0, 0, -262144, 0, 0, -262142, 0, 0, -131074, 0, 0, -196608, 0, 0, -196606, 0, 0, -65538, 0, 0, -131070, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0 )
+tile_data = PoolIntArray( -393218, 0, 0, -393217, 0, 0, -458752, 0, 0, -458751, 0, 0, -458750, 0, 0, -458749, 0, 0, -327682, 0, 0, -393213, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327678, 0, 0, -327677, 0, 0, -196610, 0, 0, -262144, 0, 0, -262142, 0, 0, -262141, 0, 0, -131074, 0, 0, -196608, 0, 0, -196606, 0, 0, -196605, 0, 0, -65538, 0, 0, -131070, 0, 0, -131069, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0 )
 
 [node name="Player" parent="Actors" index="0"]
 position = Vector2( -50, -350 )
 dir = 3
 can_spin = true
 
-[node name="Exit" parent="Actors" index="1"]
-visible = false
-position = Vector2( -50, -550 )
-
-[node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
+[node name="Box" parent="Actors" index="1" instance=ExtResource( 2 )]
 position = Vector2( 150, -150 )
 
-[node name="Door" parent="Actors" index="3" instance=ExtResource( 3 )]
+[node name="Door" parent="Actors" index="2" instance=ExtResource( 3 )]
 position = Vector2( -50, -350 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/hub/3.tscn"
 
-[node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
+[node name="Goal" parent="Actors" index="3" instance=ExtResource( 4 )]
 position = Vector2( -50, -550 )

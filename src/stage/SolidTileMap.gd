@@ -11,10 +11,12 @@ func _ready():
 	var gp = get_parent()
 	if gp:
 		if "/map/worlds/2/" in gp.filename or "/map/hub/2" in gp.filename:
-			auto.tile_set = load("res://src/stage/TileSet2.tres")
+			#auto.tile_set = load("res://src/stage/TileSet2.tres")
 			BG.set_gradient(BG.col2_a, BG.col2_b)
 		else:
 			BG.set_gradient(BG.col1_a, BG.col1_b)
+	
+	BG.set_gradient(BG.col2_a, BG.col2_b)
 
 func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_coord=Vector2()):
 	.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)

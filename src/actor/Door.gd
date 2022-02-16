@@ -54,7 +54,7 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("up"):
-		if is_active and player != null and !player.is_hold and player.dir == dir:
+		if is_active and player != null and !player.is_hold and player.dir == dir and player.is_floor:
 			enter_door()
 
 #func _physics_process(delta):

@@ -30,7 +30,7 @@ var push_time := 0.2
 export var is_regenerate := true
 var start_dir := 0
 var start_pos := Vector2.ZERO
-var passhthrough_scene = load("res://src/actor/Passthrough.tscn")
+var passthrough_scene = load("res://src/actor/Passthrough.tscn")
 
 var is_hold := false
 
@@ -195,7 +195,7 @@ func outside_boundary():
 		turn_clock = 0
 		move_clock = move_time
 		
-		var p = passhthrough_scene.instance()
+		var p = passthrough_scene.instance()
 		p.position = start_pos
 		p.is_spawn_box = true
 		p.box_to_move = self
