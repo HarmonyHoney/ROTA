@@ -1,17 +1,24 @@
 extends Area2D
 
-var margin = 6
+var margin = 15
 
 func _ready():
 	var s = get_parent()
 	var r = s.get_used_rect()
+	var cell = s.cell_size
 	
-	var center = (r.position + (r.size / 2)) * s.cell_size
+	var center = (r.position + (r.size / 2)) * cell
 	position = center
 	
-	$CollisionShape2D.shape.extents = ((r.size / 2) + (Vector2.ONE * margin)) * s.cell_size
-	$CollisionShape2D.visible = true
+	var c = get_children()
+	for i in c.size():
+		c[i].position = (Vector2(0, margin) * cell).rotated(i * deg2rad(90))
+		c[i].shape.extents = Vector2(margin, 1) * cell
+		c[i].rotation_degrees = i * 90
+	
+	visible = true
 
-func _on_Boundary_body_exited(body):
-	if !Shared.is_level_select and body.has_method("outside_boundary"):
-		pass#body.outside_boundary()
+func _on_Boundary_body_entered(body):
+	if Engine.editor_hint: return
+	if body.has_method("outside_boundary"):
+		body.outside_boundary()

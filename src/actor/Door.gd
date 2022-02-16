@@ -73,7 +73,7 @@ func set_dir(arg):
 	rotation_degrees = dir * 90
 
 func _on_Area2D_body_entered(body):
-	if body is Player:
+	if body.is_in_group("player"):
 		if player == null : player = body
 		if player.dir == dir:
 			is_active = true

@@ -315,10 +315,6 @@ func _physics_process(delta):
 			if is_floor:
 				has_jumped = false
 			
-			# dir_x
-			if joy.x != 0:
-				set_dir_x(joy.x)
-			
 			# walking
 			if is_walk:
 				var target = joy.x * walk_speed 
@@ -330,10 +326,7 @@ func _physics_process(delta):
 				
 				# animation
 				var anim_last = anim.current_animation
-				if joy.x == 0:
-					anim.play("idle")
-				else:
-					anim.play("walk")
+				anim.play("idle" if joy.x == 0 else "walk")
 				
 				# start jump
 				if btnp_jump_q and btn_jump:
@@ -344,18 +337,6 @@ func _physics_process(delta):
 					has_jumped = true
 					velocity.y = jump_speed
 					jump_clock = 0.0
-				
-				# seek animation halfway for mirrored effect
-				if anim.current_animation != anim_last and dir_x < 0:
-					anim.seek(anim.current_animation_length / 2, true)
-				
-				# pickup goal
-				elif btn_push and joy.y == 1:
-					for i in body_area.get_overlapping_areas():
-						var p = i.get_parent()
-						if p and p.is_in_group("goal") and !p.is_collected and p.dir == dir:
-							p.pickup()
-							break
 				
 				# start hold
 				elif btn_push:
@@ -390,8 +371,13 @@ func _physics_process(delta):
 							
 							break
 				
+				# seek animation halfway for mirrored effect
+				#if anim_last != "release" and anim.current_animation != anim_last and dir_x < 0:
+				#	anim.seek(anim.current_animation_length / 2, true)
+				
 				
 				btnp_jump_q = false
+			
 			# in the air
 			else:
 				
@@ -413,6 +399,10 @@ func _physics_process(delta):
 						walk_around(test_move(transform, rot(Vector2(-25, 25))))
 						has_jumped = true
 						is_floor = false
+		
+		# dir_x
+		if !is_hold and joy.x != 0:
+			set_dir_x(joy.x)
 		
 		# movement
 		if is_move:

@@ -5,8 +5,8 @@
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 1 )
-shader_param/col1 = Color( 0, 0.517647, 1, 1 )
-shader_param/col2 = Color( 0, 1, 0.27451, 1 )
+shader_param/col1 = Color( 0, 0.384314, 1, 1 )
+shader_param/col2 = Color( 0, 0.917647, 1, 1 )
 
 [node name="BG" type="CanvasLayer"]
 layer = -5

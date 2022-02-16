@@ -16,7 +16,7 @@ func _ready():
 #	var is_door := false
 	
 	for i in get_children():
-		if i is Box:
+		if i.is_in_group("box"):
 			boxes.append(i)
 		
 #		if i.is_in_group("player"):

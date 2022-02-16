@@ -27,10 +27,12 @@ var is_push := false
 var push_clock := 0.0
 var push_time := 0.2
 
-export var is_regenerate := true
+
 var start_dir := 0
 var start_pos := Vector2.ZERO
-var passthrough_scene = load("res://src/actor/Passthrough.tscn")
+export var is_respawn := true
+var spawner_scene = load("res://src/actor/BoxRespawn.tscn")
+var spawner
 
 var is_hold := false
 
@@ -40,14 +42,30 @@ var push_x := -1
 var is_turn := false
 
 func _ready():
+	if Engine.editor_hint: return
+	
 	turn_clock = 99
 	
 	# snap to grid
 	position = (Vector2.ONE * tile / 2) + (position / tile).floor() * tile
 	
-	# vars for regeneration
+	# vars for respawn
 	start_dir = dir
 	start_pos = position
+	
+	# wait for parent
+	yield(get_parent(), "ready")
+	
+	# set up respawn
+	if is_respawn:
+		spawner = spawner_scene.instance()
+		var gp = get_parent()
+		gp.add_child(spawner)
+		gp.owner = gp
+		
+		
+		spawner.position = position
+		spawner.box = self
 
 #func _input(event):
 #	if event is InputEventKey and event.pressed:
@@ -187,20 +205,15 @@ func portal(pos):
 func outside_boundary():
 	print(name, " outside boundary")
 	
-	if is_regenerate:
+	if is_respawn:
+		spawner.respawn(deg2rad(dir * 90))
+		
 		set_physics_process(false)
 		
 		set_dir(start_dir)
 		sprite.position = Vector2.ZERO
 		turn_clock = 0
 		move_clock = move_time
-		
-		var p = passthrough_scene.instance()
-		p.position = start_pos
-		p.is_spawn_box = true
-		p.box_to_move = self
-		get_parent().add_child(p)
-		p.set_physics_process(true)
 	else:
 		remove()
 

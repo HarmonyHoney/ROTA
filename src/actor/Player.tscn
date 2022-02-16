@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
 [ext_resource path="res://media/image/player/hand.png" type="Texture" id=9]
-[ext_resource path="res://media/image/player/player_still.png" type="Texture" id=11]
-[ext_resource path="res://src/shader/add_color.gdshader" type="Shader" id=12]
+[ext_resource path="res://media/image/player/body.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17, 17 )
@@ -381,10 +380,6 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 12 )
-shader_param/add_color = Color( 0.713726, 0.701961, 1, 1 )
-
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 z_index = 50
 z_as_relative = false
@@ -443,7 +438,6 @@ anims/release = SubResource( 9 )
 anims/walk = SubResource( 8 )
 
 [node name="Sprites" type="Node2D" parent="."]
-material = SubResource( 4 )
 
 [node name="Root" type="Node2D" parent="Sprites"]
 use_parent_material = true
