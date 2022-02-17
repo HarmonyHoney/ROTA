@@ -22,7 +22,7 @@ func _physics_process(delta):
 	visible = open_clock > 0
 	if visible:
 		var s = smoothstep(0, 1, open_clock / open_time)
-		sprite.scale.x = s
+		sprite.scale.x = s#clamp(s, 0, box.sprite.scale.x)
 		sprite.material.set_shader_param("scale_y", s)
 		if is_instance_valid(box):
 			place()

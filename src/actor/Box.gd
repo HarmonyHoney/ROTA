@@ -41,6 +41,13 @@ onready var actors = get_parent()
 var push_x := -1
 var is_turn := false
 
+var last_floor := false
+
+var pickup_clock := 0.0
+var pickup_time := 0.2
+var pickup_angle := 12.0
+
+
 func _ready():
 	if Engine.editor_hint: return
 	
@@ -61,7 +68,7 @@ func _ready():
 		spawner = spawner_scene.instance()
 		var gp = get_parent()
 		gp.add_child(spawner)
-		gp.owner = gp
+		spawner.owner = gp
 		
 		
 		spawner.position = position
@@ -93,17 +100,24 @@ func _physics_process(delta):
 			sprite.rotation = lerp_angle(turn_to + deg2rad(12 * -push_x), turn_to, abs(0.5 - smooth) * 2.0)
 			
 			#sprite.scale = Vector2.ONE *  lerp(0.9, 1.0, smooth)
-		
+	
+	# turn clock
 	elif turn_clock != turn_time:
-		# turn sprite
 		turn_clock = min(turn_clock + delta, turn_time)
 		var smooth = smoothstep(0, 1, turn_clock / turn_time)
 		sprite.rotation = lerp_angle(turn_from, turn_to, smooth)
-		sprite.scale = Vector2.ONE *  lerp(0.8, 1.0, smooth)
+		sprite.scale = Vector2.ONE * lerp(0.8, 1.0, smooth)
 		
 		if turn_clock == turn_time:
 			is_turn = false
 	
+	# pickup clock
+	if pickup_clock != pickup_time:
+		pickup_clock = min(pickup_clock + delta, pickup_time)
+		var smooth = smoothstep(0, 1, pickup_clock / pickup_time)
+		sprite.scale = Vector2.ONE * lerp(1.1, 1.0, smooth)
+	
+	# movement
 	if move_clock == target:
 			if is_push:
 				is_push = false
@@ -111,6 +125,9 @@ func _physics_process(delta):
 			# move down
 			if !is_hold and !is_floor:
 				move_tile(dir, 1)
+				
+				#if test_tile(dir, 1):
+				#	pickup_clock = 0.0
 
 func set_dir(arg := dir):
 	dir_last = dir
@@ -221,3 +238,4 @@ func remove():
 	if is_instance_valid(actors):
 		actors.boxes.erase(self)
 	queue_free()
+

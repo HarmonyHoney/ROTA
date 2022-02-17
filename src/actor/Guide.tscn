@@ -12,8 +12,10 @@ colors = PoolColorArray( 1, 0.4, 0.4, 1, 1, 1, 1, 0 )
 shader = ExtResource( 3 )
 shader_param/height = 3.0
 shader_param/fade_height = 1.5
+shader_param/scale_x = 0.511
 shader_param/scale_y = 1.0
-shader_param/mask = ExtResource( 4 )
+shader_param/time_scale = 0.5
+shader_param/tread_mask = ExtResource( 4 )
 
 [node name="Guide" type="Node2D"]
 show_behind_parent = true

@@ -33,7 +33,7 @@ var btnp_jump := false
 var btn_push := false
 var btnp_push := false
 
-var btnp_jump_q := false
+var holding_jump := 0.0
 
 var camera : Camera2D
 
@@ -81,6 +81,9 @@ var push_time := 0.2
 var push_from := Vector2.ZERO
 var push_dir := 1
 var box_turn := 1
+
+var hold_clock := 0.0
+var hold_cooldown := 0.2
 
 export var can_spin := true
 
@@ -173,6 +176,9 @@ func _physics_process(delta):
 		btnp_jump = Input.is_action_just_pressed("jump")
 		btn_push = Input.is_action_pressed("push")
 		btnp_push = Input.is_action_just_pressed("push")
+		
+		# jump hold time
+		holding_jump = (holding_jump + delta) if btn_jump else 0.0
 	
 	# during hold
 	if is_hold:
@@ -263,10 +269,12 @@ func _physics_process(delta):
 			is_release = false
 			is_move = true
 			has_jumped = true
+			hold_clock = 0.0
 			
 			remove_collision_exception_with(box)
 			box.remove_collision_exception_with(self)
 			box.is_hold = false
+			box.pickup_clock = 0.0
 			
 			# move to last child
 			var p = box.get_parent()
@@ -297,11 +305,6 @@ func _physics_process(delta):
 	
 	# not holding
 	else:
-		
-		# jump queue
-		if btnp_jump:
-			btnp_jump_q = true
-		
 		# turning
 		if turn_clock < turn_time:
 			turn_clock = min(turn_clock + delta, turn_time)
@@ -328,8 +331,12 @@ func _physics_process(delta):
 				var anim_last = anim.current_animation
 				anim.play("idle" if joy.x == 0 else "walk")
 				
+				# hold cooldown
+				if hold_clock < hold_cooldown:
+					hold_clock = min(hold_clock + delta, hold_cooldown)
+				
 				# start jump
-				if btnp_jump_q and btn_jump:
+				if btn_jump and holding_jump < 0.3:
 					is_floor = false
 					anim.play("jump")
 					
@@ -339,7 +346,7 @@ func _physics_process(delta):
 					jump_clock = 0.0
 				
 				# start hold
-				elif btn_push:
+				elif btn_push and hold_clock == hold_cooldown:
 					for i in hit_area.get_overlapping_bodies():
 						if i.is_in_group("box") and i.is_floor:
 							box = i
@@ -352,6 +359,8 @@ func _physics_process(delta):
 							add_collision_exception_with(box)
 							box.add_collision_exception_with(self)
 							box.is_hold = true
+							box.pickup_clock = 0.0
+							
 							push_from = position
 							push_clock = 0
 							
@@ -374,9 +383,6 @@ func _physics_process(delta):
 				# seek animation halfway for mirrored effect
 				#if anim_last != "release" and anim.current_animation != anim_last and dir_x < 0:
 				#	anim.seek(anim.current_animation_length / 2, true)
-				
-				
-				btnp_jump_q = false
 			
 			# in the air
 			else:
