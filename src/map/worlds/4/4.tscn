@@ -22,24 +22,20 @@ position = Vector2( 150, 350 )
 dir = 3
 can_spin = true
 
-[node name="Exit" parent="Actors" index="1"]
-visible = false
-position = Vector2( 1250, 150 )
-
-[node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
+[node name="Box" parent="Actors" index="1" instance=ExtResource( 2 )]
 position = Vector2( 150, 50 )
 dir = 3
 
-[node name="Box2" parent="Actors" index="3" instance=ExtResource( 2 )]
+[node name="Box2" parent="Actors" index="2" instance=ExtResource( 2 )]
 position = Vector2( 150, -50 )
 dir = 3
 
-[node name="Door" parent="Actors" index="4" instance=ExtResource( 3 )]
+[node name="Door" parent="Actors" index="3" instance=ExtResource( 3 )]
 position = Vector2( 150, 350 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/hub/4.tscn"
 
-[node name="Goal" parent="Actors" index="5" instance=ExtResource( 4 )]
+[node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
 position = Vector2( 650, 200 )
 z_index = -5

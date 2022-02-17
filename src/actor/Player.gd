@@ -106,7 +106,7 @@ func _ready():
 			dir = door.dir
 	
 	# snap to floor
-	var test = rot(Vector2.DOWN * 75)
+	var test = rot(Vector2.DOWN * 150)
 	if test_move(transform, test):
 		move_and_collide(test)
 	
