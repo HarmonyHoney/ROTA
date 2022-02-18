@@ -1,6 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
+[ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
+[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=3]
 [ext_resource path="res://media/image/player/hand.png" type="Texture" id=9]
 [ext_resource path="res://media/image/player/body.png" type="Texture" id=11]
 
@@ -380,11 +382,26 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 )
 }
 
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.745454 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 1 )
+shader_param/inside = Color( 1, 0.875, 0.75, 1 )
+shader_param/line = Color( 0, 0, 0, 1 )
+shader_param/outside = Color( 1, 1, 1, 0 )
+shader_param/scale = 1.0
+shader_param/offset = Vector2( 0, 0 )
+shader_param/start_offset = Vector2( 0.5, 0.5 )
+shader_param/radius = 0.5
+shader_param/width = 0.0
+
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 z_index = 50
 z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
+hair_length = 25.0
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 
@@ -437,12 +454,72 @@ anims/jump = SubResource( 7 )
 anims/release = SubResource( 9 )
 anims/walk = SubResource( 8 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+margin_left = -17.0
+margin_top = -17.0
+margin_right = 17.0
+margin_bottom = 17.0
+color = Color( 1, 1, 1, 0.360784 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Sprites" type="Node2D" parent="."]
+
+[node name="Hair" type="Line2D" parent="Sprites"]
+position = Vector2( 0, -25 )
+points = PoolVector2Array( 0, 0, -16.904, 17.3872 )
+width = 53.0
+width_curve = SubResource( 10 )
+default_color = Color( 1, 0, 0.492188, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Body" type="Line2D" parent="Sprites"]
+position = Vector2( 0, -9.5 )
+points = PoolVector2Array( 0, 0, 0, 15 )
+width = 25.0
+default_color = Color( 0.97, 0.8, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Head" type="Sprite" parent="Sprites"]
+material = SubResource( 11 )
+position = Vector2( 0, -25 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+
+[node name="EyeL" type="Line2D" parent="Sprites/Head"]
+position = Vector2( -24.2854, -19.2299 )
+points = PoolVector2Array( 0, 0, 0, 15 )
+width = 20.0
+default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="EyeR" type="Line2D" parent="Sprites/Head"]
+position = Vector2( 26.2695, -16.1473 )
+points = PoolVector2Array( 0, 0, 0, 15 )
+width = 20.0
+default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Hair" type="Line2D" parent="Sprites/Head"]
+position = Vector2( 11.005, -42.4415 )
+points = PoolVector2Array( 0, 0, -10.3664, 18.8852 )
+width = 40.0
+width_curve = SubResource( 10 )
+default_color = Color( 1, 0, 0.492188, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="Root" type="Node2D" parent="Sprites"]
 use_parent_material = true
 
 [node name="Body" type="Node2D" parent="Sprites/Root"]
+visible = false
 use_parent_material = true
 
 [node name="Sprite" type="Sprite" parent="Sprites/Root/Body"]
@@ -456,9 +533,15 @@ use_parent_material = true
 position = Vector2( -25, 5 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/HandL"]
+visible = false
 use_parent_material = true
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 9 )
+
+[node name="Circle" type="Sprite" parent="Sprites/HandL"]
+material = SubResource( 11 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 3 )
 
 [node name="HandR" type="Node2D" parent="Sprites"]
 show_behind_parent = true
@@ -466,9 +549,15 @@ use_parent_material = true
 position = Vector2( 25, 5 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/HandR"]
+visible = false
 use_parent_material = true
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 9 )
+
+[node name="Circle" type="Sprite" parent="Sprites/HandR"]
+material = SubResource( 11 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 3 )
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_BodyArea_body_entered"]
