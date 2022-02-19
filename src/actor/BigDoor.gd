@@ -33,10 +33,11 @@ export var gem_world := ""
 var gems_collected := 0
 var is_locked := false
 
+var arrow_clock = 0.0
+var arrow_time = 0.3
+
 func _ready():
 	if Engine.editor_hint: return
-	
-	arrow.visible = is_active
 	
 	gems.visible = is_gem
 	if is_gem:
@@ -76,6 +77,9 @@ func _input(event):
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
+	
+	arrow_clock = clamp(arrow_clock + (delta if (is_active and !is_locked) else -delta), 0, arrow_time)
+	arrow.modulate.a = smoothstep(0, 1, arrow_clock / arrow_time)
 
 func set_dir(arg):
 	dir = posmod(arg, 4)
@@ -86,11 +90,9 @@ func _on_Area2D_body_entered(body):
 		if player == null : player = body
 		if player.dir == dir:
 			is_active = true
-			arrow.visible = is_active and !is_locked
 
 func _on_Area2D_body_exited(body):
 	is_active = false
-	arrow.visible = is_active
 
 func enter_door():
 	if!is_locked and player != null and !player.is_hold and player.is_floor:
