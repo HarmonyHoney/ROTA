@@ -9,8 +9,8 @@
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2( 850, 500 )
-zoom = Vector2( 1.4, 1.4 )
-focal_influence = 0.5
+zoom = Vector2( 1, 1 )
+focal_influence = 0.7
 
 [node name="SolidTileMap" parent="." index="1"]
 tile_data = PoolIntArray( 131077, -1610612736, 0, 131078, -1610612736, 0, 196613, -1610612736, 0, 196614, -1610612736, 0, 196617, 0, 0, 196618, -1610612736, 0, 196619, -1610612736, 0, 262153, 0, 0, 327689, 0, 0, 393225, 0, 0, 458761, -1610612736, 0 )

@@ -10,5 +10,6 @@ rotating = true
 current = true
 zoom = Vector2( 1.5, 1.5 )
 smoothing_enabled = true
+smoothing_speed = 2.5
 script = ExtResource( 1 )
 easing = SubResource( 1 )
