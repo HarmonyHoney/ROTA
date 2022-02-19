@@ -435,29 +435,29 @@ func _physics_process(delta):
 			velocity = rot(move_velocity, -dir)
 	
 	
-	# hair
-	hair_end -= rot(position - last_pos, - dir)
-	
-	# gravity
-	hair_end += Vector2.DOWN * hair_gravity * delta
-	
-	# keep hair behind back
-	var a = rad2deg(hair_end.angle()) - 90
-	if abs(a) < 15:
-	#if abs(hair_end.rotated(-sprites.rotation).x) > 55:
-		hair_end += Vector2.LEFT * 100 * delta * dir_x
-	
-	# keep length
-	if hair_end.length() > hair_length:
-		hair_end = hair_end.normalized() * hair_length
-	
-	
-	
-	#a = fmod(a, 360)
-	#a = fmod(a, 180)
-	print(a)
-	
-	hair.points[1] = hair_end
+#	# hair
+#	hair_end -= rot(position - last_pos, - dir)
+#
+#	# gravity
+#	hair_end += Vector2.DOWN * hair_gravity * delta
+#
+#	# keep hair behind back
+#	var a = rad2deg(hair_end.angle()) - 90
+#	if abs(a) < 15:
+#	#if abs(hair_end.rotated(-sprites.rotation).x) > 55:
+#		hair_end += Vector2.LEFT * 100 * delta * dir_x
+#
+#	# keep length
+#	if hair_end.length() > hair_length:
+#		hair_end = hair_end.normalized() * hair_length
+#
+#
+#
+#	#a = fmod(a, 360)
+#	#a = fmod(a, 180)
+#	print(a)
+#
+#	hair.points[1] = hair_end
 	
 	# debug label
 	if is_debug:
@@ -477,11 +477,14 @@ func _physics_process(delta):
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
 	areas.scale.x = dir_x
-	spr_body.scale.x = dir_x
+	#spr_body.scale.x = dir_x
+	spr_root.scale.x = dir_x
+	
+	#hair.scale.x = dir_x
 	
 	# hand depth
-	for i in 2:
-		spr_hands[i].show_behind_parent = sign(i - 0.5) == dir_x
+	#for i in 2:
+	#	spr_hands[i].show_behind_parent = sign(i - 0.5) == dir_x
 
 func set_jump_height(arg):
 	jump_height = arg

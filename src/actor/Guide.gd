@@ -10,7 +10,7 @@ var open_clock := 0.0
 var open_time := 0.3
 
 var z_start = 30
-var z_in_front = 36
+#var z_in_front = 36
 
 func _ready():
 	visible = false
@@ -32,7 +32,7 @@ func set_box(b):
 	if is_deploy:
 		box_z(z_start)
 		box = b
-		box_z(z_in_front)
+		box_z(z_index + 1)
 		place()
 
 func box_z(arg):

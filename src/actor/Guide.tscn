@@ -19,7 +19,7 @@ shader_param/tread_mask = ExtResource( 4 )
 
 [node name="Guide" type="Node2D"]
 show_behind_parent = true
-z_index = 35
+z_index = 55
 z_as_relative = false
 script = ExtResource( 1 )
 

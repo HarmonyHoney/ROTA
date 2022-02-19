@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=3]
+[ext_resource path="res://src/actor/Hair.tscn" type="PackedScene" id=4]
 [ext_resource path="res://media/image/player/hand.png" type="Texture" id=9]
 [ext_resource path="res://media/image/player/body.png" type="Texture" id=11]
 
@@ -382,9 +383,6 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Curve" id=10]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.745454 ), 0.0, 0.0, 0, 0 ]
-
 [sub_resource type="ShaderMaterial" id=11]
 shader = ExtResource( 1 )
 shader_param/inside = Color( 1, 0.875, 0.75, 1 )
@@ -395,6 +393,9 @@ shader_param/offset = Vector2( 0, 0 )
 shader_param/start_offset = Vector2( 0.5, 0.5 )
 shader_param/radius = 0.5
 shader_param/width = 0.0
+
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.463636 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 z_index = 50
@@ -467,54 +468,6 @@ __meta__ = {
 
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="Hair" type="Line2D" parent="Sprites"]
-position = Vector2( 0, -25 )
-points = PoolVector2Array( 0, 0, -16.904, 17.3872 )
-width = 53.0
-width_curve = SubResource( 10 )
-default_color = Color( 1, 0, 0.492188, 1 )
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Body" type="Line2D" parent="Sprites"]
-position = Vector2( 0, -9.5 )
-points = PoolVector2Array( 0, 0, 0, 15 )
-width = 25.0
-default_color = Color( 0.97, 0.8, 1, 1 )
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Head" type="Sprite" parent="Sprites"]
-material = SubResource( 11 )
-position = Vector2( 0, -25 )
-scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 3 )
-
-[node name="EyeL" type="Line2D" parent="Sprites/Head"]
-position = Vector2( -24.2854, -19.2299 )
-points = PoolVector2Array( 0, 0, 0, 15 )
-width = 20.0
-default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="EyeR" type="Line2D" parent="Sprites/Head"]
-position = Vector2( 26.2695, -16.1473 )
-points = PoolVector2Array( 0, 0, 0, 15 )
-width = 20.0
-default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Hair" type="Line2D" parent="Sprites/Head"]
-position = Vector2( 11.005, -42.4415 )
-points = PoolVector2Array( 0, 0, -10.3664, 18.8852 )
-width = 40.0
-width_curve = SubResource( 10 )
-default_color = Color( 1, 0, 0.492188, 1 )
-begin_cap_mode = 2
-end_cap_mode = 2
-
 [node name="Root" type="Node2D" parent="Sprites"]
 use_parent_material = true
 
@@ -528,9 +481,59 @@ position = Vector2( 0, -3 )
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 11 )
 
+[node name="Hair" parent="Sprites/Root" instance=ExtResource( 4 )]
+position = Vector2( 0, -25 )
+
+[node name="Body2" type="Line2D" parent="Sprites/Root"]
+position = Vector2( 0, -9.5 )
+points = PoolVector2Array( 0, 0, 0, 15 )
+width = 25.0
+default_color = Color( 0.97, 0.8, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Head" type="Sprite" parent="Sprites/Root"]
+material = SubResource( 11 )
+position = Vector2( 0, -25 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+
+[node name="EyeL" type="Line2D" parent="Sprites/Root/Head"]
+position = Vector2( -24.2854, -19.2299 )
+points = PoolVector2Array( 0, 0, 0, 15 )
+width = 20.0
+default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="EyeR" type="Line2D" parent="Sprites/Root/Head"]
+position = Vector2( 26.2695, -16.1473 )
+points = PoolVector2Array( 0, 0, 0, 15 )
+width = 20.0
+default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Hair" type="Line2D" parent="Sprites/Root/Head"]
+visible = false
+position = Vector2( 0, -44.6075 )
+points = PoolVector2Array( -20, 0, 0, 10, 20, 0 )
+width = 30.0
+default_color = Color( 1, 0, 0.492188, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Hair2" parent="Sprites/Root" instance=ExtResource( 4 )]
+position = Vector2( 0, -44.2913 )
+width = 20.0
+width_curve = SubResource( 12 )
+length = 15
+sitting_angle = 20.0
+
 [node name="HandL" type="Node2D" parent="Sprites"]
 use_parent_material = true
 position = Vector2( -25, 5 )
+z_index = 15
 
 [node name="Sprite" type="Sprite" parent="Sprites/HandL"]
 visible = false
@@ -544,9 +547,9 @@ scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 3 )
 
 [node name="HandR" type="Node2D" parent="Sprites"]
-show_behind_parent = true
 use_parent_material = true
 position = Vector2( 25, 5 )
+z_index = 15
 
 [node name="Sprite" type="Sprite" parent="Sprites/HandR"]
 visible = false
