@@ -38,7 +38,7 @@ func _ready():
 		
 	complete.visible = c and !h
 	incomplete.visible = !c and !h
-	door.color = hub_color if h else stage_color
+	#door.color = hub_color if h else stage_color
 
 func _input(event):
 	if Engine.editor_hint: return

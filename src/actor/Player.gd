@@ -316,6 +316,10 @@ func _physics_process(delta):
 		# in control
 		else:
 			
+			# dir_x
+			if joy.x != 0:
+				set_dir_x(joy.x)
+			
 			# on floor
 			is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN))
 			if is_floor:
@@ -331,7 +335,7 @@ func _physics_process(delta):
 			if is_floor:
 				
 				# animation
-				var anim_last = anim.current_animation
+				#var anim_last = anim.current_animation
 				anim.play("idle" if joy.x == 0 else "walk")
 				
 				# hold cooldown
@@ -383,10 +387,6 @@ func _physics_process(delta):
 							
 							break
 				
-				# seek animation halfway for mirrored effect
-				#if anim_last != "release" and anim.current_animation != anim_last and dir_x < 0:
-				#	anim.seek(anim.current_animation_length / 2, true)
-			
 			# in the air
 			else:
 				
@@ -408,10 +408,6 @@ func _physics_process(delta):
 						walk_around(test_move(transform, rot(Vector2(-25, 25))))
 						has_jumped = true
 						is_floor = false
-		
-		# dir_x
-		if !is_hold and joy.x != 0:
-			set_dir_x(joy.x)
 		
 		# movement
 		if is_move:
@@ -439,10 +435,16 @@ func _physics_process(delta):
 				debug_label.text += str(i) + "\n"
 
 func set_dir_x(arg := dir_x):
+	if dir_x != sign(arg):
+		print("set_dir_x: ", sign(arg))
+	
 	dir_x = sign(arg)
 	areas.scale.x = dir_x
-	#spr_body.scale.x = dir_x
-	spr_root.scale.x = dir_x
+	spr_body.scale.x = dir_x
+	#spr_root.scale.x = dir_x
+	
+	
+	anim.playback_speed = dir_x
 	
 	# hand depth
 	#for i in 2:

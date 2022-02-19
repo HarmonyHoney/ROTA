@@ -1,11 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=3]
 [ext_resource path="res://src/actor/Hair.tscn" type="PackedScene" id=4]
-[ext_resource path="res://media/image/player/hand.png" type="Texture" id=9]
-[ext_resource path="res://media/image/player/body.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17, 17 )
@@ -210,7 +208,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 tracks/5/type = "bezier"
@@ -230,7 +228,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 
@@ -319,7 +317,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0 ),
 "times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
 }
 tracks/1/type = "bezier"
@@ -329,7 +327,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.15, 0, 0, 0, -10, -0.15, 0, 0, 0, 0, -0.15, 0, 0, 0, -10, -0.15, 0, 0, 0, 0, -0.15, 0, 0, 0 ),
+"points": PoolRealArray( 0, -0.2, 0, 0.2, 0, -15, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, -15, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0 ),
 "times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
 }
 tracks/2/type = "bezier"
@@ -349,8 +347,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( -25, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PoolRealArray( -25, -0.1, 0, 0.1, 0, -30, -0.25, 0, 0.25, 0, -25, -0.1, 0, 0.1, 0, -25, -0.25, 0, 0.25, 0, -25, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
 }
 tracks/4/type = "bezier"
 tracks/4/path = NodePath("Sprites/HandL:position:y")
@@ -359,8 +357,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PoolRealArray( 5, -0.1, 0, 0.1, 0, -10, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0, -25, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
 }
 tracks/5/type = "bezier"
 tracks/5/path = NodePath("Sprites/HandR:position:x")
@@ -369,8 +367,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( 25, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PoolRealArray( 25, -0.1, 0, 0.1, 0, 25, -0.25, 0, 0.25, 0, 25, -0.1, 0, 0.1, 0, 30, -0.25, 0, 0.25, 0, 25, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
 }
 tracks/6/type = "bezier"
 tracks/6/path = NodePath("Sprites/HandR:position:y")
@@ -379,8 +377,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"points": PoolRealArray( 5, -0.1, 0, 0.1, 0, -25, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0, -10, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
 }
 
 [sub_resource type="Curve" id=13]
@@ -453,6 +451,7 @@ anims/idle = SubResource( 5 )
 anims/jump = SubResource( 7 )
 anims/release = SubResource( 9 )
 anims/walk = SubResource( 8 )
+next/jump = "jump"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -471,20 +470,13 @@ __meta__ = {
 use_parent_material = true
 
 [node name="Body" type="Node2D" parent="Sprites/Root"]
-visible = false
 use_parent_material = true
 
-[node name="Sprite" type="Sprite" parent="Sprites/Root/Body"]
-use_parent_material = true
-position = Vector2( 0, -3 )
-scale = Vector2( 0.15, 0.15 )
-texture = ExtResource( 11 )
-
-[node name="Hair" parent="Sprites/Root" instance=ExtResource( 4 )]
+[node name="HairBack" parent="Sprites/Root/Body" instance=ExtResource( 4 )]
 position = Vector2( 0, -25 )
 end_scale = 0.8
 
-[node name="Body2" type="Line2D" parent="Sprites/Root"]
+[node name="Left" type="Line2D" parent="Sprites/Root/Body"]
 position = Vector2( -5, -9.5 )
 rotation = 0.387463
 points = PoolVector2Array( 0, 0, 0, 26 )
@@ -492,7 +484,7 @@ default_color = Color( 1, 0, 0.584314, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Body3" type="Line2D" parent="Sprites/Root"]
+[node name="Middle" type="Line2D" parent="Sprites/Root/Body"]
 position = Vector2( 5, -9.5 )
 rotation = -0.387463
 points = PoolVector2Array( 0, 0, 0, 26 )
@@ -500,20 +492,20 @@ default_color = Color( 1, 0, 0.584314, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Body4" type="Line2D" parent="Sprites/Root"]
+[node name="Right" type="Line2D" parent="Sprites/Root/Body"]
 position = Vector2( 0, -9.5 )
 points = PoolVector2Array( 0, 0, 0, 20 )
 width = 22.0
 width_curve = SubResource( 13 )
 default_color = Color( 1, 0, 0.584314, 1 )
 
-[node name="Head" type="Sprite" parent="Sprites/Root"]
+[node name="Head" type="Sprite" parent="Sprites/Root/Body"]
 material = SubResource( 11 )
 position = Vector2( 0, -25 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 3 )
 
-[node name="EyeL" type="Line2D" parent="Sprites/Root/Head"]
+[node name="EyeL" type="Line2D" parent="Sprites/Root/Body/Head"]
 position = Vector2( -24.2854, -19.2299 )
 points = PoolVector2Array( 0, 0, 0, 15 )
 width = 20.0
@@ -521,7 +513,7 @@ default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="EyeR" type="Line2D" parent="Sprites/Root/Head"]
+[node name="EyeR" type="Line2D" parent="Sprites/Root/Body/Head"]
 position = Vector2( 26.2695, -16.1473 )
 points = PoolVector2Array( 0, 0, 0, 15 )
 width = 20.0
@@ -529,16 +521,7 @@ default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Hair" type="Line2D" parent="Sprites/Root/Head"]
-visible = false
-position = Vector2( 0, -44.6075 )
-points = PoolVector2Array( -20, 0, 0, 10, 20, 0 )
-width = 30.0
-default_color = Color( 1, 0, 0.492188, 1 )
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="HairFront" parent="Sprites/Root" instance=ExtResource( 4 )]
+[node name="HairFront" parent="Sprites/Root/Body" instance=ExtResource( 4 )]
 position = Vector2( 0, -44.2 )
 width = 20.0
 sitting_angle = 70.0
@@ -549,12 +532,6 @@ use_parent_material = true
 position = Vector2( -25, 5 )
 z_index = 15
 
-[node name="Sprite" type="Sprite" parent="Sprites/HandL"]
-visible = false
-use_parent_material = true
-scale = Vector2( 0.15, 0.15 )
-texture = ExtResource( 9 )
-
 [node name="Circle" type="Sprite" parent="Sprites/HandL"]
 material = SubResource( 11 )
 scale = Vector2( 0.15, 0.15 )
@@ -564,12 +541,6 @@ texture = ExtResource( 3 )
 use_parent_material = true
 position = Vector2( 25, 5 )
 z_index = 15
-
-[node name="Sprite" type="Sprite" parent="Sprites/HandR"]
-visible = false
-use_parent_material = true
-scale = Vector2( 0.15, 0.15 )
-texture = ExtResource( 9 )
 
 [node name="Circle" type="Sprite" parent="Sprites/HandR"]
 material = SubResource( 11 )
