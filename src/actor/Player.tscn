@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -397,9 +397,6 @@ shader_param/start_offset = Vector2( 0.5, 0.5 )
 shader_param/radius = 0.5
 shader_param/width = 0.0
 
-[sub_resource type="Curve" id=12]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.463636 ), 0.0, 0.0, 0, 0 ]
-
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 z_index = 50
 z_as_relative = false
@@ -486,7 +483,9 @@ texture = ExtResource( 11 )
 
 [node name="Hair" parent="Sprites/Root" instance=ExtResource( 4 )]
 position = Vector2( 0, -25 )
-default_color = Color( 0, 1, 0.976471, 1 )
+end_scale = 0.8
+length = 24
+reload = true
 
 [node name="Body2" type="Line2D" parent="Sprites/Root"]
 position = Vector2( -5, -9.5 )
@@ -544,11 +543,9 @@ end_cap_mode = 2
 
 [node name="HairFront" parent="Sprites/Root" instance=ExtResource( 4 )]
 position = Vector2( 0, -44.2913 )
-width = 20.0
-width_curve = SubResource( 12 )
-default_color = Color( 0, 1, 0.976471, 1 )
-length = 15
-sitting_angle = 20.0
+width = 17.0
+length = 24
+point_count = 6
 
 [node name="HandL" type="Node2D" parent="Sprites"]
 use_parent_material = true
