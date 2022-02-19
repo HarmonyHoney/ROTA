@@ -402,7 +402,6 @@ z_index = 50
 z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
-hair_length = 25.0
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 
@@ -484,8 +483,6 @@ texture = ExtResource( 11 )
 [node name="Hair" parent="Sprites/Root" instance=ExtResource( 4 )]
 position = Vector2( 0, -25 )
 end_scale = 0.8
-length = 24
-reload = true
 
 [node name="Body2" type="Line2D" parent="Sprites/Root"]
 position = Vector2( -5, -9.5 )
@@ -542,9 +539,9 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="HairFront" parent="Sprites/Root" instance=ExtResource( 4 )]
-position = Vector2( 0, -44.2913 )
-width = 17.0
-length = 24
+position = Vector2( 0, -44.2 )
+width = 20.0
+sitting_angle = 70.0
 point_count = 6
 
 [node name="HandL" type="Node2D" parent="Sprites"]

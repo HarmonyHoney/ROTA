@@ -17,14 +17,6 @@ onready var spr_hand_r := $Sprites/HandR
 onready var spr_hands := [spr_hand_l, spr_hand_r]
 onready var hand_start : Vector2 = spr_hand_r.position
 
-onready var hair := $Sprites/Hair
-onready var hair_end := Vector2.ZERO
-
-export var hair_length = 50.0
-export var hair_gravity = 200.0
-
-
-
 var guide_scene := preload("res://src/actor/Guide.tscn")
 var guide
 
@@ -154,10 +146,6 @@ func _ready():
 	# set guide
 	guide = guide_scene.instance()
 	get_parent().add_child(guide)
-	
-	# hair
-	#hair_end = Node2D.instance()
-	#get_parent().add_child(hair_end)
 
 func _input(event):
 	if event.is_action_pressed("reset"):
@@ -435,30 +423,6 @@ func _physics_process(delta):
 			velocity = rot(move_velocity, -dir)
 	
 	
-#	# hair
-#	hair_end -= rot(position - last_pos, - dir)
-#
-#	# gravity
-#	hair_end += Vector2.DOWN * hair_gravity * delta
-#
-#	# keep hair behind back
-#	var a = rad2deg(hair_end.angle()) - 90
-#	if abs(a) < 15:
-#	#if abs(hair_end.rotated(-sprites.rotation).x) > 55:
-#		hair_end += Vector2.LEFT * 100 * delta * dir_x
-#
-#	# keep length
-#	if hair_end.length() > hair_length:
-#		hair_end = hair_end.normalized() * hair_length
-#
-#
-#
-#	#a = fmod(a, 360)
-#	#a = fmod(a, 180)
-#	print(a)
-#
-#	hair.points[1] = hair_end
-	
 	# debug label
 	if is_debug:
 		readout.resize(10)
@@ -479,8 +443,6 @@ func set_dir_x(arg := dir_x):
 	areas.scale.x = dir_x
 	#spr_body.scale.x = dir_x
 	spr_root.scale.x = dir_x
-	
-	#hair.scale.x = dir_x
 	
 	# hand depth
 	#for i in 2:

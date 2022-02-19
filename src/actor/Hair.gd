@@ -1,25 +1,25 @@
 tool
 extends Node2D
 
+export var color := Color("00fff9") # 00fff9 ff007e
 export var width := 50.0
 export var end_scale := 0.75
-export var length = 25
-export var point_count := 3 setget _set_points
-
-export var gravity = 200.0
+export var length = 25.0
 export var sitting_angle = 15.0
-export var lerp_weight := 0.3
-export var reload := false setget set_reload
 
-var hair_end = Vector2(-150, 150)
+export var gravity = 190.0
+export var lerp_weight := 0.2
+
+export var point_count := 3 setget set_points
+
+var points = []
 var last_pos := Vector2.ZERO
+var hair_end = Vector2(-150, 150)
 
-var p = []
-
-export var color := Color("00fff9") # 00fff9 ff007e
+func _ready():
+	set_points()
 
 func _physics_process(delta):
-	
 	# move end
 	hair_end -= hair_end - to_local(last_pos)
 	
@@ -38,31 +38,28 @@ func _physics_process(delta):
 		hair_end = hair_end.normalized() * length
 	
 	# set points
-	for i in p.size():
-		p[i] = hair_end.normalized() * hair_end.length() * (float(i) / (p.size() - 1))
+	for i in points.size():
+		points[i] = hair_end.normalized() * hair_end.length() * (float(i) / (points.size() - 1))
 	
 	
 	last_pos = to_global(hair_end)
 	update()
 
-func set_reload(arg):
-	reload = arg
-	_set_points()
+func _draw():
+	for i in points.size():
+		var w = (width * 0.5) * lerp(1.0, end_scale, i / float(points.size() - 1))
+		draw_circle(points[i], w, color) 
+	
+	if Engine.editor_hint:
+		for i in points.size():
+			draw_circle(points[i], 1, Color.white)
 
-func _set_points(arg := point_count):
+func set_points(arg := point_count):
 	point_count = max(2, arg)
 	
-	p = []
+	points = []
 	for i in point_count:
-		p.append(Vector2.ZERO)
+		points.append(Vector2.ZERO)
 	
 	update()
 
-func _draw():
-	for i in p.size():
-		var w = (width * 0.5) * lerp(1.0, end_scale, i / float(p.size() - 1))
-		draw_circle(p[i], w, color) 
-	
-	if Engine.editor_hint:
-		for i in p.size():
-			draw_circle(p[i], 1, Color.white)
