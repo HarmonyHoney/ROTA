@@ -16,7 +16,8 @@ load_path = "res://.import/rock.png-3b38d6b197ed3a878d6dbc45f40a3022.stex"
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2( 500, 600 )
-zoom = Vector2( 1.9, 1.9 )
+zoom = Vector2( 1.2, 1.2 )
+focal_influence = 0.6
 
 [node name="SolidTileMap" parent="." index="1"]
 tile_data = PoolIntArray( 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0 )

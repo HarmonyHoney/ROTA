@@ -30,9 +30,9 @@ func _physics_process(delta):
 func set_box(b):
 	is_deploy = is_instance_valid(b)
 	if is_deploy:
-		box_z(z_start)
+		#box_z(z_start)
 		box = b
-		box_z(z_index + 1)
+		#box_z(z_index + 1)
 		place()
 
 func box_z(arg):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/actor/Guide.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
 [ext_resource path="res://src/shader/guide.gdshader" type="Shader" id=3]
 [ext_resource path="res://media/image/treads.png" type="Texture" id=4]
+[ext_resource path="res://media/image/box/box_new.png" type="Texture" id=5]
 
 [sub_resource type="Gradient" id=14]
 colors = PoolColorArray( 1, 0.4, 0.4, 1, 1, 1, 1, 0 )
@@ -16,11 +17,11 @@ shader_param/scale_x = 0.511
 shader_param/scale_y = 1.0
 shader_param/time_scale = 0.5
 shader_param/tread_mask = ExtResource( 4 )
+shader_param/box_mask = ExtResource( 5 )
 
 [node name="Guide" type="Node2D"]
 show_behind_parent = true
-z_index = 55
-z_as_relative = false
+z_index = 60
 script = ExtResource( 1 )
 
 [node name="Line2D" type="Line2D" parent="."]

@@ -10,26 +10,30 @@
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2( 2000, 1400 )
-zoom = Vector2( 1.8, 1.8 )
+zoom = Vector2( 1, 1 )
 is_focal_point = false
-focal_influence = 0.8
+focal_influence = 1.0
 
 [node name="SolidTileMap" parent="." index="1"]
-tile_data = PoolIntArray( 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196617, 1610612736, 0, 196618, 1610612736, 0, 196619, 0, 0, 262153, 1610612736, 0, 262154, 1610612736, 0, 262155, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 524290, 1610612736, 0, 524291, -1073741824, 0, 589826, 1610612736, 0, 589827, -1073741824, 0, 589835, 0, 0, 655371, 0, 0, 720907, 0, 0, 786450, -1073741824, 0, 786451, -1073741824, 0, 786452, -1073741824, 0, 786453, -1073741824, 0, 851986, -1073741824, 0, 851987, 1610612736, 0, 917522, -1073741824, 0, 917523, 1610612736, 0, 983058, -1073741824, 0, 983059, -1073741824, 0, 983060, -1073741824, 0, 983061, -1073741824, 0 )
+position = Vector2( 1, 0 )
+tile_data = PoolIntArray( 131076, 1610612736, 0, 131077, 1610612736, 0, 131080, 1610612736, 0, 131081, 1610612736, 0, 131082, 1610612736, 0, 131083, 1610612736, 0, 196612, 1610612736, 0, 196613, 0, 0, 196616, 1610612736, 0, 196617, 1610612736, 0, 196618, 1610612736, 0, 196619, 0, 0, 262149, 1610612736, 0, 262152, 1610612736, 0, 262153, 1610612736, 0, 262154, 1610612736, 0, 262155, 0, 0, 327685, 1610612736, 0, 327688, 1610612736, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327699, 0, 0, 393221, 1610612736, 0, 393231, 0, 0, 393232, 0, 0, 393233, 0, 0, 393234, 0, 0, 393235, 0, 0, 458756, 1610612736, 0, 458757, 1610612736, 0, 458767, 0, 0, 524292, 1610612736, 0, 524293, 1610612736, 0, 524303, 0, 0, 589828, 1610612736, 0, 589829, -1073741824, 0, 589833, -1073741824, 0, 589834, 0, 0, 589835, 0, 0, 589839, 0, 0, 589840, 0, 0, 589841, 0, 0, 655369, -1073741824, 0, 655370, -1073741824, 0, 655371, 0, 0, 720905, -1073741824, 0, 720906, 1610612736, 0, 720907, 1610612736, 0 )
 
 [node name="SpikeMap" parent="." index="2"]
-tile_data = PoolIntArray( 262148, 1610612736, 0, 262152, -1073741824, 0, 327688, -1073741824, 0, 393225, 1610612736, 0, 393226, 1610612736, 0, 458754, 0, 0, 458755, 0, 0, 524289, -1073741824, 0, 589825, -1073741824, 0, 720915, 0, 0, 720916, 0, 0, 786443, 1610612736, 0, 1048595, 1610612736, 0, 1048596, 1610612736, 0 )
+tile_data = PoolIntArray( 262151, -1073741824, 0, 262163, 0, 0, 327687, -1073741824, 0, 327688, -1073741824, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0, 393224, 1610612736, 0, 393225, 1610612736, 0, 458755, -1073741824, 0, 524291, -1073741824, 0, 589827, -1073741824, 0, 655377, 1610612736, 0, 786441, 1610612736, 0, 786442, 1610612736, 0, 786443, 1610612736, 0 )
 
 [node name="Player" parent="Actors" index="0"]
-position = Vector2( 350, 250 )
+position = Vector2( 650, 850 )
+dir = 1
 can_spin = true
 
 [node name="Door" parent="Actors" index="1" instance=ExtResource( 2 )]
-position = Vector2( 350, 250 )
+position = Vector2( 650, 850 )
+rotation = 1.5708
+dir = 1
 scene_path = "res://src/map/hub/1.tscn"
 
 [node name="Goal" parent="Actors" index="2" instance=ExtResource( 3 )]
-position = Vector2( 2050, 1400 )
+position = Vector2( 1700, 800 )
 
 [node name="Details" type="Node2D" parent="." index="4"]
 scale = Vector2( 0.25, 0.25 )
@@ -39,30 +43,46 @@ position = Vector2( 4400, 2000 )
 rotation = 1.57079
 texture = ExtResource( 4 )
 
-[node name="Rocks2" type="Sprite" parent="Details" index="1"]
-position = Vector2( 7600, 6000 )
+[node name="Rocks3" type="Sprite" parent="Details" index="1"]
+position = Vector2( 2000, 3600 )
 rotation = 3.14159
 texture = ExtResource( 4 )
 
-[node name="Rock" type="Sprite" parent="Details" index="2"]
-position = Vector2( 2600, 1400 )
+[node name="Rocks2" type="Sprite" parent="Details" index="2"]
+position = Vector2( 4000, 4400 )
+rotation = 6.28318
+texture = ExtResource( 4 )
+
+[node name="Rocks4" type="Sprite" parent="Details" index="3"]
+position = Vector2( 7800, 2600 )
+rotation = -1.57079
+texture = ExtResource( 4 )
+
+[node name="Rock" type="Sprite" parent="Details" index="4"]
+position = Vector2( 2000, 1200 )
 rotation = 0.785397
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 5 )
 
-[node name="Rock2" type="Sprite" parent="Details" index="3"]
-position = Vector2( 1200, 3600 )
-scale = Vector2( 0.830896, 0.830896 )
+[node name="Rock2" type="Sprite" parent="Details" index="5"]
+position = Vector2( 2200, 2200 )
+scale = Vector2( 0.567663, 0.567663 )
 texture = ExtResource( 5 )
 
-[node name="Rock3" type="Sprite" parent="Details" index="4"]
-position = Vector2( 4600, 4200 )
+[node name="Rock3" type="Sprite" parent="Details" index="6"]
+position = Vector2( 4400, 4000 )
 rotation = -0.785397
 scale = Vector2( 0.65855, 0.65855 )
 texture = ExtResource( 5 )
 
-[node name="Rock4" type="Sprite" parent="Details" index="5"]
-position = Vector2( 7600, 5200 )
+[node name="Rock5" type="Sprite" parent="Details" index="7"]
+position = Vector2( 6200, 2600 )
+rotation = -0.785397
+scale = Vector2( 0.65855, 0.65855 )
+texture = ExtResource( 5 )
+
+[node name="Rock4" type="Sprite" parent="Details" index="8"]
+position = Vector2( 3600, 1200 )
 rotation = -1.57079
 scale = Vector2( 0.620569, 0.620569 )
 texture = ExtResource( 5 )
