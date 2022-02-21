@@ -16,7 +16,9 @@ void fragment(){
 	// gradient fade out
 	c.a *= smoothstep(1.0, 0.0, (UV.y - (height * scale_y) + fade_height) / fade_height);
 	// tread_mask
-	c.a *= texture(tread_mask, UV + vec2(0, -TIME * time_scale)).r;
+	c.a *= texture(tread_mask, vec2(UV.x,  UV.y + -TIME * time_scale)).r;
+	// scale_x cutoff
+	c.a *= float(abs(UV.x - 0.5) < (scale_x * 0.5));
 	// box_mask
 	c.a *= 1.0 - texture(box_mask, UV - vec2(0.0, 0.5)).a * float(UV.y < 0.5);
 	

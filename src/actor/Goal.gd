@@ -80,3 +80,12 @@ func pickup(arg):
 	gem.z_as_relative = true
 	#z_index = 90
 	sprites.modulate = Color.white
+	
+	var p = $Sprites/Gem/Polygon2D
+	var p2 = $Sprites/Gem/Polygon2D/Polygon2D
+	for i in [p, p2]:
+		i.color = Color.white - i.color
+		i.color.a = 1.0
+	
+	
+	
