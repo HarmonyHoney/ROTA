@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/actor/BigDoor.gd" type="Script" id=1]
+[ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=2]
 [ext_resource path="res://media/image/box/arrow.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -76,16 +77,7 @@ polygon = PoolVector2Array( 0, 85, 0, -115, 5, -115, 5, 85 )
 
 [node name="Gems" type="Node2D" parent="."]
 
-[node name="Gem" type="Polygon2D" parent="Gems"]
-scale = Vector2( 0.5, 0.5 )
-color = Color( 1, 0.866667, 0, 1 )
-offset = Vector2( 80, 0 )
-polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
-
-[node name="Fill" type="Polygon2D" parent="Gems/Gem"]
-color = Color( 1, 0.984314, 0, 1 )
-offset = Vector2( 50, 0 )
-polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
+[node name="Gem" parent="Gems" instance=ExtResource( 2 )]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

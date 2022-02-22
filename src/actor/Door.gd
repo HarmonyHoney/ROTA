@@ -5,6 +5,8 @@ onready var area : Area2D = $Area2D
 onready var door := $Polygon2D
 onready var arrow := $Arrow
 #onready var arrow_back := $Arrow/Back
+onready var csf := get_tree().current_scene.filename
+onready var gem := $Gem
 
 export var dir := 0 setget set_dir
 export var scene_path := ""
@@ -23,21 +25,37 @@ var player = null
 export var stage_color := Color("e59d57")
 export var hub_color := Color("ff0078")
 
-onready var complete := $Complete
-onready var incomplete := $Incomplete
-
 
 var arrow_clock := 0.0
 var arrow_time := 0.3
 
+var is_complete := false
+
 func _ready():
 	if Engine.editor_hint: return
 	
+	if !Shared.scene_dict.has(csf):
+		Shared.scene_dict[csf] = {}
+	
+	if Shared.scene_dict.has(csf):
+		if !Shared.scene_dict[csf].has(name):
+			Shared.scene_dict[csf][name] = is_complete
+	
+	
+	
 	var h = "hub" in scene_path
-	var c = Shared.goals_collected.has(scene_path)
-		
-	complete.visible = c and !h
-	incomplete.visible = !c and !h
+	is_complete = Shared.goals_collected.has(scene_path)
+	
+	if h:
+		gem.visible = false
+	else:
+		if is_complete:
+			gem.set_color(true)
+	
+	
+	
+	#complete.visible = c and !h
+	#incomplete.visible = !c and !h
 	#door.color = hub_color if h else stage_color
 
 func _input(event):

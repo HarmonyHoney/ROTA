@@ -31,6 +31,8 @@ var if_is_start_zoom := true
 func _ready():
 	if Engine.editor_hint: return
 	
+	Shared.game_camera = self
+	
 	if !if_is_start_zoom:
 		zoom_clock = zoom_duration
 	else:

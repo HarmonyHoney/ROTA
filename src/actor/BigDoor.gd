@@ -4,31 +4,18 @@ extends Node2D
 onready var area : Area2D = $Area2D
 onready var arrow := $Arrow
 onready var gems := $Gems
+onready var gem := $Gems/Gem
+onready var csf = get_tree().current_scene.filename
 
 export var dir := 0 setget set_dir
 export var scene_path := ""
-
-var is_active := false
-
-var move_clock := 0.0
-var move_time := 0.5
-var move_from = Vector2.ZERO
-var move_to = Vector2(0, -250)
-var scale_from = 0.0
-var scale_to = 1.0
-
-var player = null
-
-export var col_1a := Color("ffdd00")
-export var col_1b := Color("fffb00")
-
-export var col_2a := Color("af00ff")
-export var col_2b := Color("ff00e9")
-
 export var is_gem := false
 export var gem_count := 1
 export var gem_radius := 60.0
 export var gem_world := ""
+
+var is_active := false
+var player = null
 
 var gems_collected := 0
 var is_locked := false
@@ -39,29 +26,34 @@ var arrow_time = 0.3
 func _ready():
 	if Engine.editor_hint: return
 	
-	gems.visible = is_gem
+	player = get_parent().find_node("Player")
+	
 	if is_gem:
 		
+		# gems collected
 		if gem_world != "":
 			for i in Shared.goals_collected:
 				if i.begins_with(gem_world):
 					gems_collected += 1
 		
+		# create gems
 		for i in gem_count:
-			var gem = $Gems/Gem.duplicate()
-			gems.add_child(gem)
-			gem.owner = self
+			var g = gem
+			if i > 0:
+				g = gem.duplicate()
+				gems.add_child(g)
+				g.owner = self
 			var angle = (float(i) / float(gem_count)) * TAU
-			gem.position = Vector2(0, gem_radius).rotated(angle)
-			gem.rotation = angle
-			
-			if i >= gems_collected:
-				gem.color = col_2a
-				gem.get_child(0).color = col_2b
-		$Gems/Gem.queue_free()
+			g.position = Vector2(0, gem_radius).rotated(angle)
+			g.rotation = angle
+			if i < gems_collected:
+				g.set_color(true)
 		
 		is_locked = gems_collected < gem_count
 		
+		Shared.big_door_data[csf] = gems_collected
+	else:
+		gems.visible = false
 
 func _input(event):
 	if Engine.editor_hint: return
@@ -78,6 +70,7 @@ func _input(event):
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
+	# arrow
 	arrow_clock = clamp(arrow_clock + (delta if (is_active and !is_locked) else -delta), 0, arrow_time)
 	arrow.modulate.a = smoothstep(0, 1, arrow_clock / arrow_time)
 

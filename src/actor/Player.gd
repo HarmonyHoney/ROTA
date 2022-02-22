@@ -89,8 +89,6 @@ onready var start_pos = position
 onready var last_pos = position
 
 
-
-
 func _ready():
 	if Engine.editor_hint: return
 	

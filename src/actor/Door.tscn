@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/actor/Door.gd" type="Script" id=1]
 [ext_resource path="res://media/image/white_square_400x.png" type="Texture" id=2]
 [ext_resource path="res://src/shader/inside_circle.gdshader" type="Shader" id=3]
 [ext_resource path="res://media/image/box/arrow.png" type="Texture" id=4]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=5]
+[ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 50 )
@@ -81,35 +82,8 @@ material = SubResource( 2 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
-[node name="Incomplete" type="Node2D" parent="."]
-position = Vector2( 0, -5 )
-
-[node name="Polygon2D2" type="Polygon2D" parent="Incomplete"]
-position = Vector2( 0, -5 )
-scale = Vector2( 0.5, 0.5 )
-color = Color( 0.686275, 0, 1, 1 )
-offset = Vector2( 80, 0 )
-polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
-
-[node name="Polygon2D" type="Polygon2D" parent="Incomplete/Polygon2D2"]
-color = Color( 1, 0, 0.913725, 1 )
-offset = Vector2( 50, 0 )
-polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
-
-[node name="Complete" type="Node2D" parent="."]
-position = Vector2( 0, -5 )
-
-[node name="Polygon2D2" type="Polygon2D" parent="Complete"]
-position = Vector2( 0, -5 )
-scale = Vector2( 0.5, 0.5 )
-color = Color( 1, 0.866667, 0, 1 )
-offset = Vector2( 80, 0 )
-polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
-
-[node name="Polygon2D" type="Polygon2D" parent="Complete/Polygon2D2"]
-color = Color( 1, 0.984314, 0, 1 )
-offset = Vector2( 50, 0 )
-polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
+[node name="Gem" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, -10 )
 
 [node name="Arrow" type="Node2D" parent="."]
 position = Vector2( 0, -95 )

@@ -29,7 +29,11 @@ var screenshot_texture : ImageTexture
 
 var last_door := {}
 var goals_collected := []
+var big_door_data := {}
 
+var scene_dict := {}
+
+var game_camera : Camera2D
 
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")

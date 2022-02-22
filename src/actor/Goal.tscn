@@ -34,6 +34,7 @@ offset = Vector2( 50, 0 )
 polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
 
 [node name="Circle" type="Node2D" parent="Sprites"]
+visible = false
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="Sprites/Circle"]
 copy_mode = 2
