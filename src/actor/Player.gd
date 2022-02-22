@@ -17,9 +17,6 @@ onready var spr_hand_r := $Sprites/HandR
 onready var spr_hands := [spr_hand_l, spr_hand_r]
 onready var hand_start : Vector2 = spr_hand_r.position
 
-var guide_scene := preload("res://src/actor/Guide.tscn")
-var guide
-
 onready var debug_label : Label = $DebugCanvas/Labels/Label
 export var is_debug := false setget set_debug
 var readout = []
@@ -120,11 +117,15 @@ func _ready():
 		set_physics_process(false)
 	
 	# find camera in the same viewport
-	for i in get_tree().get_nodes_in_group("game_camera"):
-		if i.get_viewport() == get_viewport():
-			camera = i
-			camera.target_node = self
-			break
+#	for i in get_tree().get_nodes_in_group("game_camera"):
+#		if i.get_viewport() == get_viewport():
+#			camera = i
+#			camera.target_node = self
+#			break
+	
+	camera = Shared.game_camera
+	camera.target_node = self
+	
 	
 	# turn
 	set_dir()
@@ -144,8 +145,8 @@ func _ready():
 	yield(get_parent(),"ready")
 	
 	# set guide
-	guide = guide_scene.instance()
-	get_parent().add_child(guide)
+	#guide = guide_scene.instance()
+	#get_parent().add_child(guide)
 
 func _input(event):
 	if event.is_action_pressed("reset"):
@@ -285,7 +286,7 @@ func _physics_process(delta):
 			
 			HUD.show("game")
 			
-			guide.set_box(null)
+			Guide.set_box(null)
 			
 			# set animation keys
 			var rel = anim.get_animation("release")
@@ -376,7 +377,7 @@ func _physics_process(delta):
 							else:
 								HUD.show("grab1")
 							
-							guide.set_box(box)
+							Guide.set_box(box)
 							
 							# move to first child
 							var p = box.get_parent()

@@ -47,11 +47,9 @@ func _ready():
 			g.position = Vector2(0, gem_radius).rotated(angle)
 			g.rotation = angle
 			if i < gems_collected:
-				g.set_color(true)
+				g.fade_color(true)
 		
 		is_locked = gems_collected < gem_count
-		
-		Shared.big_door_data[csf] = gems_collected
 	else:
 		gems.visible = false
 

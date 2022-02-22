@@ -34,15 +34,6 @@ var is_complete := false
 func _ready():
 	if Engine.editor_hint: return
 	
-	if !Shared.scene_dict.has(csf):
-		Shared.scene_dict[csf] = {}
-	
-	if Shared.scene_dict.has(csf):
-		if !Shared.scene_dict[csf].has(name):
-			Shared.scene_dict[csf][name] = is_complete
-	
-	
-	
 	var h = "hub" in scene_path
 	is_complete = Shared.goals_collected.has(scene_path)
 	
@@ -50,13 +41,7 @@ func _ready():
 		gem.visible = false
 	else:
 		if is_complete:
-			gem.set_color(true)
-	
-	
-	
-	#complete.visible = c and !h
-	#incomplete.visible = !c and !h
-	#door.color = hub_color if h else stage_color
+			gem.fade_color(true)
 
 func _input(event):
 	if Engine.editor_hint: return
@@ -95,6 +80,7 @@ func enter_door():
 		if goal != null:
 			if goal.is_collected and !Shared.goals_collected.has(goal.csf):
 				Shared.goals_collected.append(goal.csf)
+				Shared.is_collect = true
 	
 	Shared.last_door[get_tree().current_scene.filename] = name
 	if scene_path != "":

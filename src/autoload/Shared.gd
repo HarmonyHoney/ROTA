@@ -29,9 +29,7 @@ var screenshot_texture : ImageTexture
 
 var last_door := {}
 var goals_collected := []
-var big_door_data := {}
-
-var scene_dict := {}
+var is_collect := false
 
 var game_camera : Camera2D
 
