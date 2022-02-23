@@ -41,6 +41,7 @@ CircleZoom="*res://src/autoload/CircleZoom.tscn"
 BG="*res://src/autoload/BG.tscn"
 Guide="*res://src/actor/Guide.tscn"
 GemCollect="*res://src/cutscene/GemCollect.gd"
+GoalShow="*res://src/cutscene/GoalShow.gd"
 
 [display]
 

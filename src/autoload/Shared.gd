@@ -7,10 +7,10 @@ var scene_options := "res://src/menu/Options.tscn"
 
 var is_reset := false
 var is_change := false
-var is_level_select := false
 
+var last_scene := ""
 var next_scene := ""
-
+onready var csfn := get_tree().current_scene.filename
 
 var worlds_path := "res://src/map/worlds/"
 
@@ -21,18 +21,18 @@ var last_orb_pos := Vector2.ZERO
 
 var screenshot_texture : ImageTexture
 
-var last_door := {}
 var goals_collected := []
 var is_collect := false
+var is_show_goal := false
 
 var player
 var camera
 var door_goal
 var door_destination
+var goal
 
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
-	is_level_select = get_tree().current_scene.name == "WorldSelect"
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -47,6 +47,7 @@ func reset():
 func change_scene(arg):
 	if !is_change:
 		is_change = true
+		last_scene = csfn
 		next_scene = arg
 		Wipe.start()
 
@@ -55,7 +56,7 @@ func wipe_out():
 	if is_reset:
 		get_tree().reload_current_scene()
 	else:
-		is_level_select = next_scene == scene_select
+		csfn = next_scene
 		get_tree().change_scene(next_scene)
 	
 	is_reset = false
@@ -81,6 +82,7 @@ func take_screenshot():
 	
 	screenshot_texture = it
 	return screenshot_texture
+
 
 
 

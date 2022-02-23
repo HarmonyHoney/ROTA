@@ -136,6 +136,9 @@ func _ready():
 		GemCollect.begin()
 		Shared.is_collect = false
 		#GemCollect.player = self
+	elif Shared.is_show_goal:
+		GoalShow.begin()
+		Shared.is_show_goal = false
 
 func _input(event):
 	if event.is_action_pressed("reset"):

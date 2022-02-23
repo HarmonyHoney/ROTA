@@ -75,11 +75,11 @@ func _process(delta):
 			# position
 			if is_moving:
 				if is_focal_point:
-					target_pos = start_position + ((target_node.position - start_position) * focal_influence)
+					target_pos = start_position + ((target_node.global_position - start_position) * focal_influence)
 				else:
-					target_pos = target_node.position
+					target_pos = target_node.global_position
 				
-				position = position.linear_interpolate(target_pos, 0.08)
+				global_position = global_position.linear_interpolate(target_pos, 0.08)
 			
 			# keep target on screen
 			if is_focal_point and is_zoom_out and zoom_clock == zoom_duration:

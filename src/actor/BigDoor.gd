@@ -5,7 +5,6 @@ onready var area : Area2D = $Area2D
 onready var arrow := $Arrow
 onready var gems := $Gems
 onready var gem := $Gems/Gem
-onready var csf = get_tree().current_scene.filename
 
 export var dir := 0 setget set_dir
 export var scene_path := ""
@@ -24,9 +23,8 @@ var arrow_clock = 0.0
 var arrow_time = 0.3
 
 func _enter_tree():
-	if Shared.last_door.has(csf):
-		if Shared.last_door[csf] == name:
-			Shared.door_destination = self
+	if Shared.last_scene == scene_path:
+		Shared.door_destination = self
 	
 	if is_gem:
 		Shared.door_goal = self
@@ -98,7 +96,6 @@ func _on_Area2D_body_exited(body):
 
 func enter_door():
 	if!is_locked and player != null and !player.is_hold and player.is_floor:
-		Shared.last_door[csf] = name
 		if scene_path != "":
 			Shared.change_scene(scene_path)
 

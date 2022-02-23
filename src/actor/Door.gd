@@ -5,7 +5,6 @@ onready var area : Area2D = $Area2D
 onready var door := $Polygon2D
 onready var arrow := $Arrow
 #onready var arrow_back := $Arrow/Back
-onready var csf := get_tree().current_scene.filename
 onready var gem := $Gem
 
 export var dir := 0 setget set_dir
@@ -25,17 +24,14 @@ var player = null
 export var stage_color := Color("e59d57")
 export var hub_color := Color("ff0078")
 
-
 var arrow_clock := 0.0
 var arrow_time := 0.3
 
 var is_complete := false
 
 func _enter_tree():
-	var csf = get_tree().current_scene.filename
-	if Shared.last_door.has(csf):
-		if Shared.last_door[csf] == name:
-			Shared.door_destination = self
+	if Shared.last_scene == scene_path:
+		Shared.door_destination = self
 
 func _ready():
 	if Engine.editor_hint: return
@@ -84,10 +80,12 @@ func enter_door():
 	if gp.has_node("Goal"):
 		var goal = gp.get_node("Goal")
 		if goal != null:
-			if goal.is_collected and !Shared.goals_collected.has(goal.csf):
-				Shared.goals_collected.append(goal.csf)
+			if goal.is_collected and !Shared.goals_collected.has(Shared.csfn):
+				Shared.goals_collected.append(Shared.csfn)
 				Shared.is_collect = true
 	
-	Shared.last_door[csf] = name
+	#Shared.last_door[Shared.csfn] = name
 	if scene_path != "":
+		if not "hub" in scene_path:
+			Shared.is_show_goal = true
 		Shared.change_scene(scene_path)

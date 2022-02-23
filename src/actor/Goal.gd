@@ -4,7 +4,6 @@ onready var sprites = $Sprites
 onready var circle := $Sprites/Circle
 onready var gem := $Sprites/Gem
 
-onready var csf = get_tree().current_scene.filename
 onready var start_pos := position
 
 var is_collected := false
@@ -21,12 +20,13 @@ var p2_time := 0.3
 var p3_clock := 0.0
 var p3_time := 0.5
 
+func _enter_tree():
+	Shared.goal = self
+
 func _ready():
-	for i in get_tree().get_nodes_in_group("game_camera"):
-		i.connect("turning", self, "turning")
-		break
+	Shared.camera.connect("turning", self, "turning")
 	
-	if Shared.goals_collected.has(csf):
+	if Shared.goals_collected.has(Shared.csfn):
 		#is_collected = true
 		sprites.modulate.a = 0.25
 	
