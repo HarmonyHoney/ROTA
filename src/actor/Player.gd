@@ -85,6 +85,10 @@ export var can_spin := true
 onready var start_pos = position
 onready var last_pos = position
 
+var last_door
+
+func _enter_tree():
+	Shared.player = self
 
 func _ready():
 	if Engine.editor_hint: return
@@ -92,15 +96,10 @@ func _ready():
 	solve_jump()
 	
 	# go to last door
-	var csf = get_tree().current_scene.filename
-	if Shared.last_door.has(csf):
-		var dn = Shared.last_door[csf]
-		
-		var gp = get_parent()
-		if gp.has_node(dn):
-			var door = gp.get_node(dn)
-			position = door.position
-			dir = door.dir
+	if is_instance_valid(Shared.door_destination):
+		var d = Shared.door_destination
+		position = d.position
+		dir = d.dir
 	
 	# snap to floor
 	var test = rot(Vector2.DOWN * 150)
@@ -111,21 +110,10 @@ func _ready():
 	randomize()
 	set_dir_x(1 if randf() > 0.5 else -1)
 	
-	# disable input and process if inside level select
-	if Shared.is_level_select:
-		set_process_input(false)
-		set_physics_process(false)
-	
-	# find camera in the same viewport
-#	for i in get_tree().get_nodes_in_group("game_camera"):
-#		if i.get_viewport() == get_viewport():
-#			camera = i
-#			camera.target_node = self
-#			break
-	
-	camera = Shared.game_camera
+	# set camera
+	if is_instance_valid(Shared.camera):
+		camera = Shared.camera
 	camera.target_node = self
-	
 	
 	# turn
 	set_dir()
@@ -138,15 +126,16 @@ func _ready():
 	camera.turn_clock = 99
 	camera.position = position
 	#camera.zoom_in()
+	camera.reset_smoothing()
 	camera.force_update_scroll()
 	camera.force_update_transform()
 	
-	# wait for parent
-	yield(get_parent(),"ready")
 	
-	# set guide
-	#guide = guide_scene.instance()
-	#get_parent().add_child(guide)
+	yield(get_tree(), "idle_frame")
+	if Shared.is_collect:
+		GemCollect.begin()
+		Shared.is_collect = false
+		#GemCollect.player = self
 
 func _input(event):
 	if event.is_action_pressed("reset"):

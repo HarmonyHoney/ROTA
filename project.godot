@@ -40,6 +40,7 @@ HUD="*res://src/autoload/HUD.tscn"
 CircleZoom="*res://src/autoload/CircleZoom.tscn"
 BG="*res://src/autoload/BG.tscn"
 Guide="*res://src/actor/Guide.tscn"
+GemCollect="*res://src/cutscene/GemCollect.gd"
 
 [display]
 

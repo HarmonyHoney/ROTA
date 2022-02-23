@@ -31,6 +31,12 @@ var arrow_time := 0.3
 
 var is_complete := false
 
+func _enter_tree():
+	var csf = get_tree().current_scene.filename
+	if Shared.last_door.has(csf):
+		if Shared.last_door[csf] == name:
+			Shared.door_destination = self
+
 func _ready():
 	if Engine.editor_hint: return
 	
@@ -41,7 +47,7 @@ func _ready():
 		gem.visible = false
 	else:
 		if is_complete:
-			gem.fade_color(true)
+			gem.set_color()
 
 func _input(event):
 	if Engine.editor_hint: return
@@ -82,6 +88,6 @@ func enter_door():
 				Shared.goals_collected.append(goal.csf)
 				Shared.is_collect = true
 	
-	Shared.last_door[get_tree().current_scene.filename] = name
+	Shared.last_door[csf] = name
 	if scene_path != "":
 		Shared.change_scene(scene_path)

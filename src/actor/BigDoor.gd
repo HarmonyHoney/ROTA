@@ -23,10 +23,18 @@ var is_locked := false
 var arrow_clock = 0.0
 var arrow_time = 0.3
 
+func _enter_tree():
+	if Shared.last_door.has(csf):
+		if Shared.last_door[csf] == name:
+			Shared.door_destination = self
+	
+	if is_gem:
+		Shared.door_goal = self
+
 func _ready():
 	if Engine.editor_hint: return
 	
-	player = get_parent().find_node("Player")
+	player = Shared.player
 	
 	if is_gem:
 		
@@ -46,8 +54,11 @@ func _ready():
 			var angle = (float(i) / float(gem_count)) * TAU
 			g.position = Vector2(0, gem_radius).rotated(angle)
 			g.rotation = angle
+		
+		# color gems
+		for i in gem_count:
 			if i < gems_collected:
-				g.fade_color(true)
+				gems.get_child(i).set_color()
 		
 		is_locked = gems_collected < gem_count
 	else:
@@ -87,7 +98,7 @@ func _on_Area2D_body_exited(body):
 
 func enter_door():
 	if!is_locked and player != null and !player.is_hold and player.is_floor:
-		Shared.last_door[get_tree().current_scene.filename] = name
+		Shared.last_door[csf] = name
 		if scene_path != "":
 			Shared.change_scene(scene_path)
 

@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 100, 100 )
 
-[node name="BigDoor" type="Node2D" groups=["door"]]
+[node name="BigDoor" type="Node2D" groups=["big_door", "door"]]
 z_index = -10
 script = ExtResource( 1 )
 

@@ -10,6 +10,7 @@ var zoom_clock := 0.0
 var zoom_duration := 1.5
 
 var target_node
+var target_pos := Vector2.ZERO
 onready var start_position := position
 export var is_rotating := true
 export var is_moving := false
@@ -28,10 +29,11 @@ var turn_to := 0.0
 
 var if_is_start_zoom := true
 
+func _enter_tree():
+	Shared.camera = self
+
 func _ready():
 	if Engine.editor_hint: return
-	
-	Shared.game_camera = self
 	
 	if !if_is_start_zoom:
 		zoom_clock = zoom_duration
@@ -73,12 +75,14 @@ func _process(delta):
 			# position
 			if is_moving:
 				if is_focal_point:
-					position = start_position + ((target_node.position - start_position) * focal_influence)
+					target_pos = start_position + ((target_node.position - start_position) * focal_influence)
 				else:
-					position = target_node.position
+					target_pos = target_node.position
+				
+				position = position.linear_interpolate(target_pos, 0.08)
 			
 			# keep target on screen
-			if is_zoom_out and zoom_clock == zoom_duration:
+			if is_focal_point and is_zoom_out and zoom_clock == zoom_duration:
 				var dist = (position.distance_to(target_node.position) + 100) / (screen_size.y / 2)
 				var zoom_dist = Vector2.ONE * dist
 				
