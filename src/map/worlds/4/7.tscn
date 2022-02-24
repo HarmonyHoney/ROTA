@@ -9,7 +9,8 @@
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2( 400, 800 )
-focal_influence = 0.25
+zoom = Vector2( 1, 1 )
+focal_influence = 0.8
 
 [node name="SolidTileMap" parent="." index="1"]
 tile_data = PoolIntArray( 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 393222, 0, 0, 458758, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524294, 0, 0, 589825, 0, 0, 589830, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0 )
@@ -22,23 +23,19 @@ position = Vector2( 400, 1150 )
 dir = 2
 can_spin = true
 
-[node name="Exit" parent="Actors" index="1"]
-visible = false
-position = Vector2( 250, 950 )
-
-[node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
+[node name="Box" parent="Actors" index="1" instance=ExtResource( 2 )]
 position = Vector2( 750, 750 )
 dir = 1
 
-[node name="Box2" parent="Actors" index="3" instance=ExtResource( 2 )]
+[node name="Box2" parent="Actors" index="2" instance=ExtResource( 2 )]
 position = Vector2( 750, 850 )
 dir = 1
 
-[node name="Door" parent="Actors" index="4" instance=ExtResource( 3 )]
+[node name="Door" parent="Actors" index="3" instance=ExtResource( 3 )]
 position = Vector2( 400, 1150 )
 rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/hub/4.tscn"
 
-[node name="Goal" parent="Actors" index="5" instance=ExtResource( 4 )]
+[node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
 position = Vector2( 250, 950 )

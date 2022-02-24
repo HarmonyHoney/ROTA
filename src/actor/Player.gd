@@ -478,7 +478,7 @@ func set_dir(arg := dir):
 	turn_clock = 0
 	turn_from = sprites.rotation if sprites else 0
 	
-	if Engine.editor_hint:# or Shared.is_level_select:
+	if Engine.editor_hint:
 		$Sprites.rotation = turn_to
 	elif camera:
 		camera.turn(turn_to)
@@ -529,9 +529,8 @@ func exit(arg):
 	exit_node = arg
 	anim.play("jump")
 	
-	if !Shared.is_level_select:
-		yield(get_tree().create_timer(0.7), "timeout")
-		Shared.complete_level()
+	yield(get_tree().create_timer(0.7), "timeout")
+	Shared.complete_level()
 
 func die():
 	if is_dead: return
@@ -540,9 +539,8 @@ func die():
 	#anim_eyes.play("die")
 	velocity = Vector2(-350 * dir_x, -800)
 	
-	if !Shared.is_level_select:
-		yield(get_tree().create_timer(0.7), "timeout")
-		Shared.reset()
+	yield(get_tree().create_timer(0.7), "timeout")
+	Shared.reset()
 
 func outside_boundary():
 	print(name, " outside boundary")

@@ -9,7 +9,8 @@
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2( 150, 50 )
-zoom = Vector2( 1.7, 1.7 )
+zoom = Vector2( 1, 1 )
+is_focal_point = false
 focal_influence = 0.25
 
 [node name="SolidTileMap" parent="." index="1"]
@@ -23,22 +24,18 @@ position = Vector2( -150, 350 )
 dir = 2
 can_spin = true
 
-[node name="Exit" parent="Actors" index="1"]
-visible = false
-position = Vector2( 550, -350 )
-
-[node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
+[node name="Box" parent="Actors" index="1" instance=ExtResource( 2 )]
 position = Vector2( -350, 250 )
 dir = 3
 
-[node name="Box2" parent="Actors" index="3" instance=ExtResource( 2 )]
+[node name="Box2" parent="Actors" index="2" instance=ExtResource( 2 )]
 position = Vector2( -50, 150 )
 
-[node name="Door" parent="Actors" index="4" instance=ExtResource( 3 )]
+[node name="Door" parent="Actors" index="3" instance=ExtResource( 3 )]
 position = Vector2( -150, 350 )
 rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/hub/4.tscn"
 
-[node name="Goal" parent="Actors" index="5" instance=ExtResource( 4 )]
+[node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
 position = Vector2( 550, -350 )

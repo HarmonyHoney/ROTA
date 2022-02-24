@@ -7,6 +7,7 @@
 [node name="Map" instance=ExtResource( 1 )]
 
 [node name="Camera2D" parent="." index="0"]
+zoom = Vector2( 1, 1 )
 is_focal_point = false
 focal_influence = 0.25
 
@@ -17,84 +18,81 @@ tile_data = PoolIntArray( -262137, 0, 0, -262136, 0, 0, -262135, 0, 0, -196601, 
 position = Vector2( 450, 550 )
 dir = 3
 
-[node name="Exit" parent="Actors" index="1"]
-position = Vector2( -150, -250 )
-
-[node name="Door1" parent="Actors" index="2" instance=ExtResource( 2 )]
+[node name="Door1" parent="Actors" index="1" instance=ExtResource( 2 )]
 position = Vector2( 650, 50 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/worlds/4/1.tscn"
 
-[node name="Door2" parent="Actors" index="3" instance=ExtResource( 2 )]
+[node name="Door2" parent="Actors" index="2" instance=ExtResource( 2 )]
 position = Vector2( 650, -250 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/worlds/4/2.tscn"
 
-[node name="Door3" parent="Actors" index="4" instance=ExtResource( 2 )]
+[node name="Door3" parent="Actors" index="3" instance=ExtResource( 2 )]
 position = Vector2( 850, -450 )
 scene_path = "res://src/map/worlds/4/3.tscn"
 
-[node name="Door4" parent="Actors" index="5" instance=ExtResource( 2 )]
+[node name="Door4" parent="Actors" index="4" instance=ExtResource( 2 )]
 position = Vector2( 1050, -250 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/4/4.tscn"
 
-[node name="Door5" parent="Actors" index="6" instance=ExtResource( 2 )]
+[node name="Door5" parent="Actors" index="5" instance=ExtResource( 2 )]
 position = Vector2( 1050, 50 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/4/5.tscn"
 
-[node name="Door6" parent="Actors" index="7" instance=ExtResource( 2 )]
+[node name="Door6" parent="Actors" index="6" instance=ExtResource( 2 )]
 position = Vector2( 1350, 350 )
 scene_path = "res://src/map/worlds/4/6.tscn"
 
-[node name="Door7" parent="Actors" index="8" instance=ExtResource( 2 )]
+[node name="Door7" parent="Actors" index="7" instance=ExtResource( 2 )]
 position = Vector2( 1350, 750 )
 rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/worlds/4/7.tscn"
 
-[node name="Door8" parent="Actors" index="9" instance=ExtResource( 2 )]
+[node name="Door8" parent="Actors" index="8" instance=ExtResource( 2 )]
 position = Vector2( 1050, 1050 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/4/8.tscn"
 
-[node name="Door9" parent="Actors" index="10" instance=ExtResource( 2 )]
+[node name="Door9" parent="Actors" index="9" instance=ExtResource( 2 )]
 position = Vector2( 1050, 1350 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/4/9.tscn"
 
-[node name="Door10" parent="Actors" index="11" instance=ExtResource( 2 )]
+[node name="Door10" parent="Actors" index="10" instance=ExtResource( 2 )]
 position = Vector2( 850, 1550 )
 rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/worlds/4/10.tscn"
 
-[node name="Door11" parent="Actors" index="12" instance=ExtResource( 2 )]
+[node name="Door11" parent="Actors" index="11" instance=ExtResource( 2 )]
 position = Vector2( 650, 1350 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/worlds/4/11.tscn"
 
-[node name="Door12" parent="Actors" index="13" instance=ExtResource( 2 )]
+[node name="Door12" parent="Actors" index="12" instance=ExtResource( 2 )]
 position = Vector2( 650, 1050 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/worlds/4/12.tscn"
 
-[node name="BigDoor" parent="Actors" index="14" instance=ExtResource( 3 )]
+[node name="BigDoor" parent="Actors" index="13" instance=ExtResource( 3 )]
 position = Vector2( 400, 550 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/hub/3.tscn"
 
-[node name="BigDoor2" parent="Actors" index="15" instance=ExtResource( 3 )]
+[node name="BigDoor2" parent="Actors" index="14" instance=ExtResource( 3 )]
 position = Vector2( 2200, 550 )
 rotation = 1.5708
 dir = 1

@@ -189,7 +189,7 @@ func open_level():
 	yield(get_tree(), "idle_frame")
 	
 	get_tree().change_scene(worlds_path + "/" + str(world_cursor + 1) + "/" + str(level_cursor + 1) + ".tscn")
-	Shared.is_level_select = false
+	#Shared.is_level_select = false
 	
 	HUD.show("game")
 

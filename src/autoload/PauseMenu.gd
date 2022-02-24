@@ -42,7 +42,7 @@ func start_wipe_out():
 
 func _input(event):
 	var pause = event.is_action_pressed("pause")
-	if pause and !Shared.is_level_select:
+	if pause:
 		press_pause()
 		return
 	if !is_paused: return
@@ -130,7 +130,6 @@ func exit():
 	yield(CircleZoom, "finish")
 	
 	get_tree().change_scene(Shared.scene_select)
-	Shared.is_level_select = true
 	yield(get_tree(), "idle_frame")
 	
 	CircleZoom.set_pos(Vector2.ZERO)

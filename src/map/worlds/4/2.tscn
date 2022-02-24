@@ -9,7 +9,8 @@
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2( 350, -150 )
-zoom = Vector2( 1.2, 1.2 )
+zoom = Vector2( 1, 1 )
+is_focal_point = false
 focal_influence = 0.5
 
 [node name="SolidTileMap" parent="." index="1"]
