@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/map/base/map_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=5]
 
 [node name="Node2D" instance=ExtResource( 1 )]
 
@@ -33,3 +34,8 @@ scene_path = "res://src/map/hub/2.tscn"
 
 [node name="Goal" parent="Actors" index="3" instance=ExtResource( 4 )]
 position = Vector2( 500, -50 )
+
+[node name="Details" type="Node2D" parent="." index="4"]
+
+[node name="Lamppost" parent="Details" index="0" instance=ExtResource( 5 )]
+position = Vector2( 150, 300 )

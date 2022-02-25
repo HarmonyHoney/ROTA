@@ -1,9 +1,10 @@
 extends CanvasLayer
 
-export var col1_a := Color.white
-export var col1_b := Color.white
-export var col2_a := Color.white
-export var col2_b := Color.white
+export var w1a := Color("0062ff")
+export var w1b := Color("00eaff")
+
+export var w2a := Color("c900db")
+export var w2b := Color("0079db")
 
 onready var color_rect := $ColorRect
 

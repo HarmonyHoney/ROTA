@@ -5,16 +5,13 @@
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 1 )
-shader_param/col1 = Color( 0, 0.384314, 1, 1 )
-shader_param/col2 = Color( 0, 0.917647, 1, 1 )
+shader_param/col1 = Color( 0.686275, 0, 0.74902, 1 )
+shader_param/col2 = Color( 0, 0.47451, 0.858824, 1 )
 
 [node name="BG" type="CanvasLayer"]
 layer = -5
 script = ExtResource( 2 )
-col1_a = Color( 0, 0.741176, 1, 1 )
-col1_b = Color( 0.921569, 0, 1, 1 )
-col2_a = Color( 0, 0.517647, 1, 1 )
-col2_b = Color( 0, 1, 0.27451, 1 )
+w2a = Color( 0.686275, 0, 0.74902, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource( 2 )

@@ -10,8 +10,12 @@ func _ready():
 	
 	var gp = get_parent()
 	if gp:
+		if "/map/worlds/1/" in gp.filename or "/map/hub/1" in gp.filename:
+			#auto.tile_set = load("res://src/stage/TileSet2.tres")
+			BG.set_gradient(BG.w1a, BG.w1b)
 		if "/map/worlds/2/" in gp.filename or "/map/hub/2" in gp.filename:
 			auto.tile_set = load("res://src/stage/TileSet2.tres")
+			BG.set_gradient(BG.w2a, BG.w2b)
 			#BG.set_gradient(BG.col2_a, BG.col2_b)
 		#else:
 		#	BG.set_gradient(BG.col1_a, BG.col1_b)

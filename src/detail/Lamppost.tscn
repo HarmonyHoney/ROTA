@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/actor/Circle.gd" type="Script" id=1]
+[ext_resource path="res://media/image/details/lamppost.png" type="Texture" id=2]
+[ext_resource path="res://src/detail/Lamppost.gd" type="Script" id=3]
+
+[node name="Lamppost" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+z_index = -50
+z_as_relative = false
+texture = ExtResource( 2 )
+
+[node name="Circle" type="Node2D" parent="."]
+modulate = Color( 0.997, 1, 0.91, 0.4 )
+position = Vector2( 0, -56.7307 )
+scale = Vector2( 0.953553, 0.953553 )
+z_index = 100
+z_as_relative = false
+script = ExtResource( 1 )
+radius = 200.0
