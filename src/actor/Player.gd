@@ -80,8 +80,6 @@ var box_turn := 1
 var hold_clock := 0.0
 var hold_cooldown := 0.2
 
-export var can_spin := true
-
 onready var start_pos = position
 onready var last_pos = position
 
@@ -141,7 +139,7 @@ func _ready():
 		Shared.is_show_goal = false
 
 func _input(event):
-	if event.is_action_pressed("reset"):
+	if is_input and event.is_action_pressed("reset"):
 		Shared.reset()
 
 func _physics_process(delta):
@@ -233,7 +231,7 @@ func _physics_process(delta):
 							print("push failed")
 				
 				# turn box
-				elif can_spin and joy_q.y != 0:
+				elif box.is_spin and joy_q.y != 0:
 					box_turn = joy_q.y * -dir_x
 					box.dir += box_turn
 				
@@ -364,7 +362,7 @@ func _physics_process(delta):
 							push_from = position
 							push_clock = 0
 							
-							if can_spin:
+							if box.is_spin:
 								HUD.show("grab2")
 							else:
 								HUD.show("grab1")
@@ -544,4 +542,8 @@ func die():
 
 func outside_boundary():
 	print(name, " outside boundary")
-	die()
+	fall_out()
+
+func fall_out():
+	Shared.reset()
+	is_input = false

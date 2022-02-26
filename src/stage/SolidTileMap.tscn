@@ -52,4 +52,3 @@ cell_custom_transform = Transform2D( 400, 0, 0, 400, 0, 0 )
 format = 1
 
 [node name="Boundary" parent="." instance=ExtResource( 3 )]
-visible = false

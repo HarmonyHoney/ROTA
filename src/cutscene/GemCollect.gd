@@ -21,7 +21,8 @@ func _physics_process(delta):
 			door_dest.gem.set_color(false)
 			door_dest.arrow.visible = false
 			door_dest.set_process_input(false)
-			door_goal.gems.get_child(door_goal.gems_collected - 1).set_color(false)
+			if door_goal.gems_collected <= door_goal.gem_count:
+				door_goal.gems.get_child(door_goal.gems_collected - 1).set_color(false)
 			next_step()
 		1:
 			if time > 0.15:
@@ -34,7 +35,8 @@ func _physics_process(delta):
 		3:
 			if camera.global_position.distance_to(camera.target_node.global_position) < 100:
 				next_step()
-				door_goal.gems.get_child(door_goal.gems_collected - 1).fade_color()
+				if door_goal.gems_collected <= door_goal.gem_count:
+					door_goal.gems.get_child(door_goal.gems_collected - 1).fade_color()
 		4:
 			if  time > 0.75:
 				next_step()

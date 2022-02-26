@@ -74,6 +74,7 @@ gem_world = "res://src/map/worlds/2/"
 
 [node name="Bench" parent="Details" index="0" instance=ExtResource( 4 )]
 position = Vector2( 2250, 350 )
+scale = Vector2( -1, 1 )
 
 [node name="Bench2" parent="Details" index="1" instance=ExtResource( 4 )]
 position = Vector2( 1050, 250 )

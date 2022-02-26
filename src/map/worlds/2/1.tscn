@@ -23,6 +23,7 @@ position = Vector2( 100, -50 )
 [node name="Box" parent="Actors" index="1" instance=ExtResource( 2 )]
 position = Vector2( -50, -50 )
 dir = 2
+is_spin = false
 
 [node name="Door" parent="Actors" index="2" instance=ExtResource( 3 )]
 position = Vector2( 100, -50 )

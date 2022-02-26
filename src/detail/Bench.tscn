@@ -3,10 +3,10 @@
 [ext_resource path="res://media/image/details/bench.png" type="Texture" id=1]
 
 [node name="Bench" type="Node2D"]
+z_index = -20
+z_as_relative = false
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 20 )
 scale = Vector2( 0.3, 0.3 )
-z_index = -50
-z_as_relative = false
 texture = ExtResource( 1 )

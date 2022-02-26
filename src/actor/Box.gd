@@ -11,6 +11,8 @@ onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
 export var dir := 0 setget set_dir
 var dir_last := 0
 
+export var is_spin := true
+
 var tile := 100.0
 var is_floor := false
 var move_clock := 0.0
