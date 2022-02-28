@@ -5,18 +5,18 @@
 [ext_resource path="res://src/detail/Lamppost.gd" type="Script" id=3]
 
 [node name="Lamppost" type="Node2D"]
+z_index = -40
+z_as_relative = false
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.25, 0.25 )
-z_index = -50
-z_as_relative = false
 texture = ExtResource( 2 )
 
 [node name="Circle" type="Node2D" parent="."]
-modulate = Color( 0.997, 1, 0.91, 0.4 )
+modulate = Color( 0.996078, 1, 0.909804, 0.4 )
 position = Vector2( 0, -56.7307 )
-scale = Vector2( 0.953553, 0.953553 )
+scale = Vector2( 0.921161, 0.921161 )
 z_index = 100
 z_as_relative = false
 script = ExtResource( 1 )

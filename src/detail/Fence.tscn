@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/shader/repeat_x_axis.gdshader" type="Shader" id=1]
+[ext_resource path="res://media/image/details/fence_pattern.png" type="Texture" id=2]
+[ext_resource path="res://src/detail/Fence.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+
+[node name="Fence" type="Node2D"]
+modulate = Color( 0.486275, 0.466667, 0.568627, 1 )
+z_index = -5
+z_as_relative = false
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -100 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 600, 200 )
+region_filter_clip = true

@@ -3,7 +3,7 @@ extends Node2D
 
 onready var top := $Sprite
 
-var colors = ["5DFF00", "7ee356", "FF78CB", "79FFFF", "FFFA00"]
+var colors = ["5DFF00", "7ee356", "FFC6E9", "79FFFF", "FFC900"]
 export var palette := 0 setget set_palette
 
 var angle := 0.0

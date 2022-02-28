@@ -16,11 +16,7 @@ tile_data = PoolIntArray( 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0
 position = Vector2( 350, 550 )
 dir = 3
 
-[node name="Exit" parent="Actors" index="1"]
-visible = false
-position = Vector2( -150, -150 )
-
-[node name="BigDoor2" parent="Actors" index="2" instance=ExtResource( 3 )]
+[node name="BigDoor2" parent="Actors" index="1" instance=ExtResource( 3 )]
 position = Vector2( 300, 550 )
 rotation = 4.71239
 dir = 3
