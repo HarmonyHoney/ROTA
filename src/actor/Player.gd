@@ -61,6 +61,8 @@ var jump_clock := 0.0
 var is_dead := false
 var is_exit := false
 var exit_node
+var is_goal := false
+var goal_node
 
 var turn_clock := 0.0
 var turn_time := 0.2
@@ -174,8 +176,12 @@ func _physics_process(delta):
 		# jump hold time
 		holding_jump = (holding_jump + delta) if btn_jump else 0.0
 	
+	# pickup goal
+	if is_goal:
+		pass
+	
 	# during hold
-	if is_hold:
+	elif is_hold:
 		
 		if !is_release:
 			# joy queue
@@ -285,7 +291,8 @@ func _physics_process(delta):
 			rel.bezier_track_set_key_value(1, 0, spr_body.position.y)
 			rel.bezier_track_set_key_value(2, 0, spr_body.rotation_degrees)
 			
-			var is_left = spr_hand_l.position.x < spr_hand_r.position.x
+			var diff = spr_hand_l.position - spr_hand_r.position
+			var is_left = (diff.x < 0) if abs(diff.x) > 1 else (diff.y > 0) == (dir_x > 0)
 			var lh = 3 if is_left else 5
 			var rh = 5 if is_left else 3
 			
@@ -514,7 +521,16 @@ func portal(pos):
 	position = pos
 
 func _on_BodyArea_area_entered(area):
-	pass
+	var p = area.get_parent()
+	
+	# pickup goal
+	if !is_goal and p.is_in_group("goal") and !p.is_collected:
+		is_goal = true
+		goal_node = p
+		goal_node.pickup(self)
+		velocity = Vector2.ZERO
+		#anim.play("idle")
+		anim.stop()
 
 func _on_BodyArea_body_entered(body):
 	if body.is_in_group("spike"):

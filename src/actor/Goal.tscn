@@ -1,13 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/actor/Goal.gd" type="Script" id=1]
-[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
-[ext_resource path="res://src/shader/goal.gdshader" type="Shader" id=3]
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 3 )
-shader_param/color = Color( 1, 1, 1, 1 )
-shader_param/radius = 0.5
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 35, 35 )
@@ -33,16 +26,6 @@ color = Color( 1, 0.984314, 0, 1 )
 offset = Vector2( 50, 0 )
 polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
 
-[node name="Circle" type="Node2D" parent="Sprites"]
-visible = false
-
-[node name="BackBufferCopy" type="BackBufferCopy" parent="Sprites/Circle"]
-copy_mode = 2
-
-[node name="Sprite" type="Sprite" parent="Sprites/Circle/BackBufferCopy"]
-material = SubResource( 6 )
-texture = ExtResource( 2 )
-
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 collision_layer = 2048
@@ -50,5 +33,3 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 4 )
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

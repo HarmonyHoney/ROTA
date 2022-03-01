@@ -552,6 +552,7 @@ scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 3 )
 
 [node name="SpriteArea" type="Area2D" parent="Sprites"]
+visible = false
 collision_layer = 2
 collision_mask = 0
 
