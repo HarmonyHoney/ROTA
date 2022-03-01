@@ -41,10 +41,10 @@ func _physics_process(delta):
 	# cooldown
 	cooldown_clock = max(cooldown_clock - delta, 0)
 
-func _on_Area2D_body_entered(body):
-	if cooldown_clock == 0:
-		hit(1 if to_local(body.global_position).x < 0 else -1)
-		cooldown_clock = cooldown_time
-
 func hit(scale := 1.0):
 	velocity += add_vel * scale
+
+func _on_Area2D_area_entered(area):
+	if cooldown_clock == 0:
+		hit(1 if to_local(area.global_position).x < 0 else -1)
+		cooldown_clock = cooldown_time

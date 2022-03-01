@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -395,6 +395,10 @@ shader_param/start_offset = Vector2( 0.5, 0.5 )
 shader_param/radius = 0.5
 shader_param/width = 0.0
 
+[sub_resource type="CapsuleShape2D" id=14]
+radius = 20.0
+height = 30.0
+
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 z_index = 50
 z_as_relative = false
@@ -546,6 +550,14 @@ z_index = 15
 material = SubResource( 11 )
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 3 )
+
+[node name="SpriteArea" type="Area2D" parent="Sprites"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/SpriteArea"]
+position = Vector2( 0, -15 )
+shape = SubResource( 14 )
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_BodyArea_body_entered"]

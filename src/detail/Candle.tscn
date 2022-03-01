@@ -23,18 +23,18 @@ texture = ExtResource( 3 )
 [node name="Circle" type="Node2D" parent="Sprites"]
 modulate = Color( 0.996078, 1, 0.909804, 0.4 )
 position = Vector2( 0, -66 )
+scale = Vector2( 1.00086, 1.00086 )
 z_index = 100
 z_as_relative = false
 script = ExtResource( 2 )
 radius = 100.0
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
-position = Vector2( 0, -25 )
+position = Vector2( 0, -35 )
 collision_layer = 0
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

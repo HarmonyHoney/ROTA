@@ -36,7 +36,6 @@ position = Vector2( 0, -125 )
 texture = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 position = Vector2( 0, -25 )
 collision_layer = 0
 collision_mask = 6
@@ -44,4 +43,4 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

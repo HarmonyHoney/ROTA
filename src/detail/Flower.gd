@@ -41,19 +41,20 @@ func petal_color():
 	if $Sprites/Flower/Petals:
 		$Sprites/Flower/Petals.modulate = Color.white if palette == 0 else Color(colors[palette - 1])
 
-func _on_Area2D_body_entered(body):
-	if cooldown_clock == 0:
-		hit(1 if to_local(body.global_position).x < 0 else -1)
-		cooldown_clock = cooldown_time
-
 func hit(scale := 1.0):
 	velocity += add_vel * scale
 
 func set_pot(arg : bool):
 	is_pot = arg
 	
-	if $Sprites:
+	if $Sprites and $Area2D:
 		$Sprites/Flower.position.y = -150 * int(is_pot)
 		$Sprites/Pot.visible = is_pot
+		$Area2D.position.y = -45 if is_pot else -25
 	
 	z_index = 1 if is_pot else -10
+
+func _on_Area2D_area_entered(area):
+	if cooldown_clock == 0:
+		hit(1 if to_local(area.global_position).x < 0 else -1)
+		cooldown_clock = cooldown_time
