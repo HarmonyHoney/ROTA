@@ -2,6 +2,7 @@ tool
 extends Node2D
 
 onready var sprites := $Sprites
+onready var petals := $Sprites/Flower/Petals
 
 var colors = ["FF0000", "FF78CB", "79FFFF", "FFFA00"]
 export var palette := 0 setget set_palette
@@ -38,8 +39,8 @@ func set_palette(arg):
 	petal_color()
 
 func petal_color():
-	if $Sprites/Flower/Petals:
-		$Sprites/Flower/Petals.modulate = Color.white if palette == 0 else Color(colors[palette - 1])
+	if petals:
+		petals.modulate = Color.white if palette == 0 else Color(colors[palette - 1])
 
 func hit(scale := 1.0):
 	velocity += add_vel * scale

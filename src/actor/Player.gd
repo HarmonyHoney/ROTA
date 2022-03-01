@@ -61,8 +61,6 @@ var jump_clock := 0.0
 var is_dead := false
 var is_exit := false
 var exit_node
-var is_goal := false
-var goal_node
 
 var turn_clock := 0.0
 var turn_time := 0.2
@@ -86,6 +84,15 @@ onready var start_pos = position
 onready var last_pos = position
 
 var last_door
+
+
+var is_goal := false
+var goal
+var goal_clock := 0.0
+var goal_times := [0.2, 0.3, 0.5]
+var goal_step := 0
+var hand_positions := [Vector2.ZERO, Vector2.ZERO]
+
 
 func _enter_tree():
 	Shared.player = self
@@ -178,9 +185,40 @@ func _physics_process(delta):
 	
 	# pickup goal
 	if is_goal:
-		pass
+		
+		var offset = Vector2(20, 20)
+		var p1 = goal.sprites.to_global(offset * Vector2(-1, 1))
+		var p2 = goal.sprites.to_global(offset)
+		
+		if goal_step < goal_times.size():
+			var limit = goal_times[goal_step]
+			goal_clock = min(goal_clock + delta, limit)
+			var s = smoothstep(0, 1, goal_clock / limit)
+			
+			match goal_step:
+				0:
+					spr_hand_l.global_position = hand_positions[0].linear_interpolate(p1, s)
+					spr_hand_r.global_position = hand_positions[1].linear_interpolate(p2, s)
+				1:
+					goal.position = goal.start_pos.linear_interpolate(position + rot(Vector2(0, -100)), s)
+					spr_hand_l.global_position = p1
+					spr_hand_r.global_position = p2
+				2:
+					goal.gem.scale = Vector2.ONE * lerp(2.0, 1.0, s)
+			
+			# next step
+			if goal_clock == limit:
+				goal_step += 1
+				goal_clock = 0.0
+				
+				# finished
+				if goal_step > 2:
+					is_goal = false
+					goal.gem.z_as_relative = false
+					goal.is_follow = true
+					release_anim()
 	
-	# during hold
+	# holding box
 	elif is_hold:
 		
 		if !is_release:
@@ -284,25 +322,7 @@ func _physics_process(delta):
 			
 			Guide.set_box(null)
 			
-			# set animation keys
-			var rel = anim.get_animation("release")
-			
-			rel.bezier_track_set_key_value(0, 0, spr_body.position.x)
-			rel.bezier_track_set_key_value(1, 0, spr_body.position.y)
-			rel.bezier_track_set_key_value(2, 0, spr_body.rotation_degrees)
-			
-			var diff = spr_hand_l.position - spr_hand_r.position
-			var is_left = (diff.x < 0) if abs(diff.x) > 1 else (diff.y > 0) == (dir_x > 0)
-			var lh = 3 if is_left else 5
-			var rh = 5 if is_left else 3
-			
-			rel.bezier_track_set_key_value(lh, 0, spr_hand_l.position.x)
-			rel.bezier_track_set_key_value(lh + 1, 0, spr_hand_l.position.y)
-			rel.bezier_track_set_key_value(rh, 0, spr_hand_r.position.x)
-			rel.bezier_track_set_key_value(rh + 1, 0, spr_hand_r.position.y)
-			
-			anim.add_animation("release", rel)
-			anim.play("release")
+			release_anim()
 	
 	# not holding
 	else:
@@ -526,11 +546,14 @@ func _on_BodyArea_area_entered(area):
 	# pickup goal
 	if !is_goal and p.is_in_group("goal") and !p.is_collected:
 		is_goal = true
-		goal_node = p
-		goal_node.pickup(self)
+		goal = p
+		goal.pickup(self)
 		velocity = Vector2.ZERO
 		#anim.play("idle")
 		anim.stop()
+		
+		for i in spr_hands.size():
+			hand_positions[i] = spr_hands[i].global_position
 
 func _on_BodyArea_body_entered(body):
 	if body.is_in_group("spike"):
@@ -563,3 +586,24 @@ func outside_boundary():
 func fall_out():
 	Shared.reset()
 	is_input = false
+
+func release_anim():
+	# set animation keys
+	var rel = anim.get_animation("release")
+	
+	rel.bezier_track_set_key_value(0, 0, spr_body.position.x)
+	rel.bezier_track_set_key_value(1, 0, spr_body.position.y)
+	rel.bezier_track_set_key_value(2, 0, spr_body.rotation_degrees)
+	
+	var diff = spr_hand_l.position - spr_hand_r.position
+	var is_left = (diff.x < 0) if abs(diff.x) > 1 else (diff.y > 0) == (dir_x > 0)
+	var lh = 3 if is_left else 5
+	var rh = 5 if is_left else 3
+	
+	rel.bezier_track_set_key_value(lh, 0, spr_hand_l.position.x)
+	rel.bezier_track_set_key_value(lh + 1, 0, spr_hand_l.position.y)
+	rel.bezier_track_set_key_value(rh, 0, spr_hand_r.position.x)
+	rel.bezier_track_set_key_value(rh + 1, 0, spr_hand_r.position.y)
+	
+	anim.add_animation("release", rel)
+	anim.play("release")

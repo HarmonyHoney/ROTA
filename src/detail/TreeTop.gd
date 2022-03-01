@@ -1,7 +1,7 @@
 tool
 extends Node2D
 
-onready var top := $Sprite
+onready var sprite := $Sprite
 
 var colors = ["5DFF00", "7ee356", "FFC6E9", "79FFFF", "FFC900"]
 export var palette := 0 setget set_palette
@@ -18,21 +18,24 @@ export var cooldown_time := 0.8
 
 func _ready():
 	set_palette()
+	
+	# change add_vel from scale
+	add_vel *= 1.0 / scale.x
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
 	velocity = lerp(velocity, (target - angle) * 0.5, delta * weight)
 	angle += velocity
-	top.scale = Vector2.ONE + (Vector2.ONE * angle)
+	sprite.scale = Vector2.ONE + (Vector2.ONE * angle)
 	
 	# cooldown
 	cooldown_clock = max(cooldown_clock - delta, 0)
 
 func set_palette(arg := palette):
 	palette = posmod(int(arg), 6)
-	if top:
-		top.modulate = Color.white if palette == 0 else Color(colors[palette - 1])
+	if sprite:
+		sprite.modulate = Color.white if palette == 0 else Color(colors[palette - 1])
 
 func _on_Area2D_body_entered(body):
 	if cooldown_clock == 0:
