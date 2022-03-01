@@ -140,11 +140,12 @@ func _ready():
 	
 	yield(get_tree(), "idle_frame")
 	if Shared.is_collect:
-		GemCollect.begin()
+		if is_instance_valid(Shared.door_destination):
+			GemCollect.begin()
 		Shared.is_collect = false
-		#GemCollect.player = self
 	elif Shared.is_show_goal:
-		GoalShow.begin()
+		if is_instance_valid(Shared.goal):
+			GoalShow.begin()
 		Shared.is_show_goal = false
 
 func _input(event):
@@ -263,7 +264,7 @@ func _physics_process(delta):
 					is_release = true
 				
 				# push / pull
-				elif joy_q.x != 0:
+				elif box.can_push and joy_q.x != 0:
 					if dir_x == joy_q.x or !box.test_tile(dir - joy_q.x, 2):
 						if box.push(dir - joy_q.x):
 							push_from = position
@@ -275,7 +276,7 @@ func _physics_process(delta):
 							print("push failed")
 				
 				# turn box
-				elif box.is_spin and joy_q.y != 0:
+				elif box.can_spin and joy_q.y != 0:
 					box_turn = joy_q.y * -dir_x
 					box.dir += box_turn
 				
@@ -389,7 +390,7 @@ func _physics_process(delta):
 							push_from = position
 							push_clock = 0
 							
-							if box.is_spin:
+							if box.can_spin:
 								HUD.show("grab2")
 							else:
 								HUD.show("grab1")

@@ -6,12 +6,18 @@ onready var collision_shape : CollisionShape2D = $CollisionShape2D
 onready var standing_area : Area2D = $StandingArea
 onready var push_areas : Array = $PushAreas.get_children()
 onready var sprite : Node2D = $Sprites
+onready var box_sprite : Sprite = $Sprites/Box
 onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
 
 export var dir := 0 setget set_dir
 var dir_last := 0
 
-export var is_spin := true
+export var can_push := true setget set_can_push
+export var can_spin := true setget set_can_spin
+
+var tex0 = preload("res://media/image/box/box_new.png")
+var tex1 = preload("res://media/image/box/box1.png")
+var tex2 = preload("res://media/image/box/box2.png")
 
 var tile := 100.0
 var is_floor := false
@@ -28,7 +34,6 @@ var turn_time := 0.2
 var is_push := false
 var push_clock := 0.0
 var push_time := 0.2
-
 
 var start_dir := 0
 var start_pos := Vector2.ZERO
@@ -52,6 +57,7 @@ var pickup_angle := 12.0
 
 func _ready():
 	if Engine.editor_hint: return
+	set_sprite()
 	
 	turn_clock = 99
 	
@@ -121,15 +127,15 @@ func _physics_process(delta):
 	
 	# movement
 	if move_clock == target:
-			if is_push:
-				is_push = false
+		if is_push:
+			is_push = false
+		
+		# move down
+		if !is_hold and !is_floor:
+			move_tile(dir, 1)
 			
-			# move down
-			if !is_hold and !is_floor:
-				move_tile(dir, 1)
-				
-				#if test_tile(dir, 1):
-				#	pickup_clock = 0.0
+			#if test_tile(dir, 1):
+			#	pickup_clock = 0.0
 
 func set_dir(arg := dir):
 	dir_last = dir
@@ -241,3 +247,20 @@ func remove():
 		actors.boxes.erase(self)
 	queue_free()
 
+
+func set_can_push(arg):
+	can_push = arg
+	set_sprite()
+
+func set_can_spin(arg):
+	can_spin = arg
+	set_sprite()
+
+func set_sprite():
+	if box_sprite:
+		if can_push and can_spin:
+			box_sprite.texture = tex0
+		elif can_push:
+			box_sprite.texture = tex1
+		elif can_spin:
+			box_sprite.texture = tex2

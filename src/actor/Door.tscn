@@ -87,6 +87,8 @@ position = Vector2( 0, -10 )
 
 [node name="Arrow" type="Node2D" parent="."]
 position = Vector2( 0, -95 )
+z_index = 70
+z_as_relative = false
 
 [node name="Back" type="Polygon2D" parent="Arrow"]
 material = SubResource( 4 )

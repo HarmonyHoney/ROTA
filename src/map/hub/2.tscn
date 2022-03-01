@@ -169,42 +169,52 @@ position = Vector2( -1650, 1850 )
 [node name="TreeTop2" parent="Details" index="20" instance=ExtResource( 8 )]
 position = Vector2( -950, 1300 )
 scale = Vector2( 0.3, 0.3 )
+add_vel = 0.04
 
 [node name="TreeTop3" parent="Details" index="21" instance=ExtResource( 8 )]
 position = Vector2( -650, 1350 )
 scale = Vector2( 0.5, 0.5 )
+add_vel = 0.024
 
 [node name="TreeTop4" parent="Details" index="22" instance=ExtResource( 8 )]
 position = Vector2( -1850, 1700 )
 scale = Vector2( 0.7, 0.7 )
+add_vel = 0.0171429
 
 [node name="TreeTop6" parent="Details" index="23" instance=ExtResource( 8 )]
 position = Vector2( -900, 2250 )
 scale = Vector2( 0.5, 0.5 )
+add_vel = 0.024
 
 [node name="TreeTop7" parent="Details" index="24" instance=ExtResource( 8 )]
 position = Vector2( -750, 2400 )
 scale = Vector2( 0.5, 0.5 )
+add_vel = 0.024
 
 [node name="TreeTop10" parent="Details" index="25" instance=ExtResource( 8 )]
 position = Vector2( -250, 2750 )
 scale = Vector2( 0.6, 0.6 )
+add_vel = 0.02
 
 [node name="TreeTop11" parent="Details" index="26" instance=ExtResource( 8 )]
 position = Vector2( -2050, 2750 )
 scale = Vector2( 0.6, 0.6 )
+add_vel = 0.02
 
 [node name="TreeTop12" parent="Details" index="27" instance=ExtResource( 8 )]
 position = Vector2( -1700, 2400 )
 scale = Vector2( 0.5, 0.5 )
+add_vel = 0.024
 
 [node name="TreeTop8" parent="Details" index="28" instance=ExtResource( 8 )]
 position = Vector2( -50, 2350 )
 scale = Vector2( 0.9, 0.9 )
+add_vel = 0.0133333
 
 [node name="TreeTop9" parent="Details" index="29" instance=ExtResource( 8 )]
 position = Vector2( -1500, 1200 )
 scale = Vector2( 0.8, 0.8 )
+add_vel = 0.015
 
 [node name="Fencing" parent="Details" index="30" instance=ExtResource( 9 )]
 position = Vector2( -1700, 1100 )

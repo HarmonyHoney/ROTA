@@ -33,4 +33,5 @@ func pickup(ply):
 	player = ply
 	is_collected = true
 	gem.z_as_relative = true
-	area.monitorable = false
+	area.set_deferred("monitorable", false)
+	#area.monitorable = false

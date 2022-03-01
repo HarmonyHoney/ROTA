@@ -18,22 +18,16 @@ func _physics_process(delta):
 	
 	match step:
 		0:
-			next_step()
-			player.set_physics_process(false)
-			camera.is_focal_point = false
-			return_door.arrow.visible = false
-			return_door.set_process_input(false)
-		1:
 			if time > 0.3:
 				next_step()
 				camera.target_node = goal
-		2:
+		1:
 			if camera.global_position.distance_to(camera.target_node.global_position) < 100:
 				next_step()
-		3:
+		2:
 			if time > 0.1:
 				next_step()
-		4:
+		3:
 			var limit = 0.8
 			var t = min(time, limit)
 			var s = smoothstep(0, 1, t / limit)
@@ -42,7 +36,7 @@ func _physics_process(delta):
 			if time > limit:
 				next_step()
 				camera.target_node = player
-		5:
+		4:
 			if camera.global_position.distance_to(camera.target_node.global_position) < 100:
 				next_step()
 				player.set_physics_process(true)
@@ -67,4 +61,9 @@ func begin():
 	return_door = Shared.door_destination
 	
 	focal = camera.is_focal_point
+	
+	player.set_physics_process(false)
+	camera.is_focal_point = false
+	return_door.arrow.visible = false
+	return_door.set_process_input(false)
 	
