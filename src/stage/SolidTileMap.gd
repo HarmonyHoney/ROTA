@@ -3,6 +3,7 @@ extends TileMap
 
 onready var auto = get_child(0)
 
+
 func _ready():
 	yield(get_parent(), "ready")
 	tile_set.tile_set_modulate(0, Color(0, 0, 0, 0))
@@ -13,16 +14,17 @@ func _ready():
 		if "/map/worlds/1/" in gp.filename or "/map/hub/1" in gp.filename:
 			#auto.tile_set = load("res://src/stage/TileSet2.tres")
 			BG.set_gradient(BG.w1a, BG.w1b)
-		if "/map/worlds/2/" in gp.filename or "/map/hub/2" in gp.filename:
+		
+		elif "/map/worlds/2/" in gp.filename or "/map/hub/2" in gp.filename:
 			auto.tile_set = load("res://src/stage/TileSet2.tres")
 			BG.set_gradient(BG.w2a, BG.w2b)
+		
+		elif "/map/worlds/3/" in gp.filename or "/map/hub/3" in gp.filename:
+			auto.tile_set = load("res://src/stage/TileSet3.tres")
+			BG.set_gradient(BG.w3a, BG.w3b)
+		
 		else:
 			BG.set_gradient(BG.w1a, BG.w1b)
-			#BG.set_gradient(BG.col2_a, BG.col2_b)
-		#else:
-		#	BG.set_gradient(BG.col1_a, BG.col1_b)
-
-	#BG.set_gradient(BG.col2_a, BG.col2_b)
 
 func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_coord=Vector2()):
 	.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)

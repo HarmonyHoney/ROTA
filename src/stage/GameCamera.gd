@@ -30,6 +30,7 @@ var turn_to := 0.0
 var if_is_start_zoom := true
 
 func _enter_tree():
+	if Engine.editor_hint: return
 	Shared.camera = self
 
 func _ready():

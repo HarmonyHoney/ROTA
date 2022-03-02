@@ -18,9 +18,6 @@ export var cooldown_time := 0.8
 
 func _ready():
 	set_palette()
-	
-	# change add_vel from scale
-	add_vel *= 1.0 / scale.x
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
@@ -42,5 +39,5 @@ func _on_Area2D_body_entered(body):
 		hit(1 if randf() > 0.5 else -1)
 		cooldown_clock = cooldown_time
 
-func hit(scale := 1.0):
-	velocity += add_vel * scale
+func hit(factor := 1.0):
+	velocity += (add_vel * (1.0 / scale.x)) * factor

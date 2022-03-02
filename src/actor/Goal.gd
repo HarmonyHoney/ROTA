@@ -10,6 +10,7 @@ var is_collected := false
 var is_follow := false
 
 func _enter_tree():
+	if Engine.editor_hint: return
 	Shared.goal = self
 
 func _ready():

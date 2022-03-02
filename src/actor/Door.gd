@@ -30,6 +30,7 @@ var arrow_time := 0.3
 var is_complete := false
 
 func _enter_tree():
+	if Engine.editor_hint: return
 	if Shared.last_scene == scene_path:
 		Shared.door_destination = self
 

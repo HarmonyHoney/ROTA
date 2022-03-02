@@ -18,20 +18,15 @@ tile_data = PoolIntArray( -131075, 0, 0, -65534, -1610612736, 0, 65533, 16106127
 [node name="Player" parent="Actors" index="0"]
 position = Vector2( -150, 550 )
 dir = 2
-can_spin = true
 
-[node name="Exit" parent="Actors" index="1"]
-visible = false
-position = Vector2( 50, -50 )
-
-[node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
+[node name="Box" parent="Actors" index="1" instance=ExtResource( 2 )]
 position = Vector2( -250, 350 )
 
-[node name="Box2" parent="Actors" index="3" instance=ExtResource( 2 )]
+[node name="Box2" parent="Actors" index="2" instance=ExtResource( 2 )]
 position = Vector2( -150, 350 )
 
-[node name="Box3" parent="Actors" index="4" instance=ExtResource( 2 )]
+[node name="Box3" parent="Actors" index="3" instance=ExtResource( 2 )]
 position = Vector2( -50, 350 )
 
-[node name="Goal" parent="Actors" index="5" instance=ExtResource( 3 )]
+[node name="Goal" parent="Actors" index="4" instance=ExtResource( 3 )]
 position = Vector2( 50, -50 )

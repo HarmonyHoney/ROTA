@@ -95,6 +95,7 @@ var hand_positions := [Vector2.ZERO, Vector2.ZERO]
 
 
 func _enter_tree():
+	if Engine.editor_hint: return
 	Shared.player = self
 
 func _ready():

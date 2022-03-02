@@ -12,12 +12,13 @@ onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
 export var dir := 0 setget set_dir
 var dir_last := 0
 
-export var can_push := true setget set_can_push
+var can_push := true setget set_can_push
 export var can_spin := true setget set_can_spin
 
 var tex0 = preload("res://media/image/box/box_new.png")
 var tex1 = preload("res://media/image/box/box1.png")
 var tex2 = preload("res://media/image/box/box2.png")
+var tex3 = preload("res://media/image/box/box3.png")
 
 var tile := 100.0
 var is_floor := false
@@ -56,8 +57,8 @@ var pickup_angle := 12.0
 
 
 func _ready():
-	if Engine.editor_hint: return
 	set_sprite()
+	if Engine.editor_hint: return
 	
 	turn_clock = 99
 	
@@ -258,9 +259,7 @@ func set_can_spin(arg):
 
 func set_sprite():
 	if box_sprite:
-		if can_push and can_spin:
-			box_sprite.texture = tex0
-		elif can_push:
+		if !can_spin:
 			box_sprite.texture = tex1
-		elif can_spin:
-			box_sprite.texture = tex2
+		else:
+			box_sprite.texture = tex0
