@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/map/base/Actors.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=12]
+[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=13]
+[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=14]
+[ext_resource path="res://media/image/details/rock.png" type="Texture" id=15]
 
 [node name="Map" type="Node2D"]
 
@@ -25,7 +28,7 @@ tile_data = PoolIntArray( -196599, -1610612736, 0, -196598, -1610612736, 0, -196
 detail = 2
 
 [node name="SpikeMap" parent="." instance=ExtResource( 11 )]
-tile_data = PoolIntArray( 655368, -1610612736, 0, 720904, -1610612736, 0, 786440, -1610612736, 0 )
+tile_data = PoolIntArray( 720904, -1610612736, 0, 786440, -1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -82,6 +85,136 @@ gem_count = 4
 gem_world = "res://src/map/worlds/3/"
 
 [node name="Details" type="Node2D" parent="."]
+
+[node name="Rocks" type="Node2D" parent="Details"]
+
+[node name="Rock" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 50, 850 )
+rotation = -0.785397
+scale = Vector2( 0.566917, 0.566917 )
+texture = ExtResource( 15 )
+
+[node name="Rock2" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 350, -50 )
+rotation = -0.785397
+scale = Vector2( 0.314772, 0.314772 )
+texture = ExtResource( 15 )
+
+[node name="Rock3" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 1300, 4.1008e-05 )
+rotation = -0.785397
+scale = Vector2( 0.190054, 0.190054 )
+texture = ExtResource( 15 )
+
+[node name="Rock4" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 1450, 450 )
+rotation = -1.57079
+scale = Vector2( 0.392879, 0.392879 )
+texture = ExtResource( 15 )
+
+[node name="Rocks" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 100, 1200 )
+rotation = -3.14159
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 14 )
+
+[node name="Rocks5" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 1250, 700 )
+rotation = -3.14159
+scale = Vector2( 0.517075, 0.517075 )
+texture = ExtResource( 14 )
+
+[node name="Rocks6" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 1250, 850 )
+scale = Vector2( 0.517075, 0.517075 )
+texture = ExtResource( 14 )
+
+[node name="Rocks4" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 100, 400 )
+rotation = -4.71238
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 14 )
+
+[node name="Rocks2" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 700, 1100 )
+rotation = -6.28318
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 14 )
+
+[node name="Rocks3" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+rotation = -7.85397
+scale = Vector2( 0.45, 0.45 )
+texture = ExtResource( 14 )
+
+[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 1450, 1050 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 13 )
+
+[node name="RoundRock4" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 250, 1100 )
+scale = Vector2( 0.333241, 0.333241 )
+texture = ExtResource( 13 )
+
+[node name="RoundRock5" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 550, 1200 )
+scale = Vector2( 0.214811, 0.214811 )
+texture = ExtResource( 13 )
+
+[node name="RoundRock6" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( -100, 400 )
+scale = Vector2( 0.383748, 0.383748 )
+texture = ExtResource( 13 )
+
+[node name="RoundRock7" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 200, 100 )
+scale = Vector2( 0.190304, 0.190304 )
+texture = ExtResource( 13 )
+
+[node name="RoundRock9" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 200, 700 )
+scale = Vector2( 0.190304, 0.190304 )
+texture = ExtResource( 13 )
+
+[node name="RoundRock8" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 600, -50 )
+scale = Vector2( 0.212826, 0.212826 )
+texture = ExtResource( 13 )
+
+[node name="RoundRock10" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 1050, -150 )
+scale = Vector2( 0.436193, 0.436193 )
+texture = ExtResource( 13 )
+
+[node name="RoundRock2" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 1519.13, 1050 )
+scale = Vector2( 0.192203, 0.192203 )
+texture = ExtResource( 13 )
+
+[node name="RoundRock3" type="Sprite" parent="Details/Rocks"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 1580.87, 1050 )
+scale = Vector2( 0.150797, 0.150797 )
+texture = ExtResource( 13 )
 
 [node name="Bench" parent="Details" instance=ExtResource( 5 )]
 position = Vector2( 650, 1350 )
@@ -176,7 +309,6 @@ rotation = -1.70267
 position = Vector2( 1100, 1100 )
 rotation = -2.1472
 scale = Vector2( 0.4, 0.3 )
-offset = Vector2( 0, -350 )
 
 [node name="PineTree23" parent="Details" instance=ExtResource( 4 )]
 modulate = Color( 0.95, 0.95, 0.95, 1 )
@@ -184,7 +316,6 @@ position = Vector2( 1100, 850 )
 rotation = -1.90138
 scale = Vector2( 0.35, 0.35 )
 z_index = -30
-offset = Vector2( 0, -375 )
 
 [node name="PineTree21" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1400, 700 )

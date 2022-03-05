@@ -6,6 +6,7 @@
 [node name="Map" instance=ExtResource( 2 )]
 
 [node name="Camera2D" parent="." index="0"]
+zoom = Vector2( 1, 1 )
 is_focal_point = false
 is_zoom_out = false
 
@@ -13,8 +14,8 @@ is_zoom_out = false
 tile_data = PoolIntArray( 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0 )
 
 [node name="Player" parent="Actors" index="0"]
-position = Vector2( 350, 550 )
-dir = 3
+position = Vector2( 950, 550 )
+dir = 1
 
 [node name="BigDoor2" parent="Actors" index="1" instance=ExtResource( 3 )]
 position = Vector2( 300, 550 )

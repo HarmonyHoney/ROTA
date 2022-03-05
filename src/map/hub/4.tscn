@@ -20,7 +20,7 @@ dir = 3
 
 [node name="BigDoor" parent="Actors" index="1" instance=ExtResource( 3 )]
 position = Vector2( 400, 550 )
-rotation = -1.5708
+rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/hub/3.tscn"
 
