@@ -4,7 +4,8 @@ var actions := []
 var history := []
 
 var codes := {"konami code": "up, up, down, down, left, right, left, right, push, jump",
-	"big hair": "up, right, down, left, up, right, down, left, up, left, down, right, up, left, down, right"}
+	"big hair": "up, right, down, left, up, right, down, left, up, left, down, right, up, left, down, right",
+	"moon jump": "up, up, up, up, up, up, up, down, up, up, up, up, up, up, up, down"}
 
 signal activate(cheat)
 
@@ -29,7 +30,7 @@ func clear_history():
 func add(arg):
 	history.append(arg)
 	history.remove(0)
-	#print(history)
+	print(history)
 	
 	for i in codes.keys():
 		if codes[i] in str(history):

@@ -618,3 +618,7 @@ func cheat_code(cheat):
 	if "big hair" in cheat:
 		$Sprites/Root/Body/HairBack.scale = Vector2.ONE * 2
 		$Sprites/Root/Body/HairFront.scale = Vector2.ONE * 2
+	elif "moon jump" in cheat:
+		jump_height = 500.0
+		jump_time = 1.5
+		solve_jump()
