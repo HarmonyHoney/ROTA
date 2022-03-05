@@ -98,5 +98,5 @@ func _on_Area2D_body_exited(body):
 func enter_door():
 	if!is_locked and player != null and !player.is_hold and player.is_floor:
 		if scene_path != "":
-			Shared.change_scene(scene_path)
+			Shared.wipe_scene(scene_path)
 

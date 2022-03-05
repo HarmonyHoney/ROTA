@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://media/image/details/pine_tree.png" type="Texture" id=1]
+
+[node name="PineTree" type="Sprite"]
+position = Vector2( 0, -430 )
+scale = Vector2( 0.4, 0.4 )
+z_index = -25
+z_as_relative = false
+texture = ExtResource( 1 )
+offset = Vector2( 0, -430 )

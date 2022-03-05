@@ -574,8 +574,10 @@ func exit(arg):
 func die():
 	if is_dead: return
 	is_dead = true
-	#anim.play("jump")
-	#anim_eyes.play("die")
+	if is_hold:
+		release_anim()
+		Guide.set_box(null)
+	anim.play("jump")
 	velocity = Vector2(-350 * dir_x, -800)
 	
 	yield(get_tree().create_timer(0.7), "timeout")

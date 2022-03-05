@@ -10,6 +10,9 @@ onready var gem := $Gem
 export var dir := 0 setget set_dir
 export var scene_path := ""
 
+export var folder_path := "res://src/map/hub/"
+export var scene_name := ""
+
 var is_active := false
 
 var move_clock := 0.0
@@ -36,6 +39,10 @@ func _enter_tree():
 
 func _ready():
 	if Engine.editor_hint: return
+	
+	# set path
+	if folder_path != "" and scene_name != "":
+		scene_path = folder_path + scene_name + ".tscn"
 	
 	var h = "hub" in scene_path
 	is_complete = Shared.goals_collected.has(scene_path)
@@ -89,4 +96,4 @@ func enter_door():
 	if scene_path != "":
 		if not "hub" in scene_path:
 			Shared.is_show_goal = true
-		Shared.change_scene(scene_path)
+		Shared.wipe_scene(scene_path)

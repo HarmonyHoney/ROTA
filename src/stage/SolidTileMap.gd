@@ -1,30 +1,38 @@
 tool
 extends TileMap
 
-onready var auto = get_child(0)
+onready var auto = $Offset
+export var detail := 0 setget set_tileset
 
+var sets = [preload("res://src/stage/tileset/TileSet0.tres"),preload("res://src/stage/tileset/TileSet1.tres"),
+preload("res://src/stage/tileset/TileSet2.tres"),preload("res://src/stage/tileset/TileSet3.tres")]
 
 func _ready():
+	set_tileset()
+	
 	yield(get_parent(), "ready")
 	tile_set.tile_set_modulate(0, Color(0, 0, 0, 0))
 	make_tiles(auto)
 	
-	var gp = get_parent()
-	if gp:
-		if "/map/worlds/1/" in gp.filename or "/map/hub/1" in gp.filename:
-			#auto.tile_set = load("res://src/stage/TileSet2.tres")
+	Boundary.add_shape(get_used_rect(), cell_size)
+	
+	var gpfn = str(get_parent().filename)
+	if gpfn != "":
+		if "/map/worlds/1/" in gpfn or "/map/hub/1" in gpfn:
 			BG.set_gradient(BG.w1a, BG.w1b)
-		
-		elif "/map/worlds/2/" in gp.filename or "/map/hub/2" in gp.filename:
-			auto.tile_set = load("res://src/stage/TileSet2.tres")
+		elif "/map/worlds/2/" in gpfn or "/map/hub/2" in gpfn:
 			BG.set_gradient(BG.w2a, BG.w2b)
-		
-		elif "/map/worlds/3/" in gp.filename or "/map/hub/3" in gp.filename:
-			auto.tile_set = load("res://src/stage/TileSet3.tres")
+		elif "/map/worlds/3/" in gpfn or "/map/hub/3" in gpfn:
 			BG.set_gradient(BG.w3a, BG.w3b)
-		
 		else:
 			BG.set_gradient(BG.w1a, BG.w1b)
+
+func set_tileset(arg := detail):
+	detail = posmod(int(arg), 4)
+	if auto and detail < sets.size():
+		if sets[detail] is TileSet:
+			auto.tile_set = sets[detail]
+			auto.update()
 
 func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_coord=Vector2()):
 	.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)

@@ -52,14 +52,18 @@ func next_step():
 	step += 1
 
 func begin():
-	set_physics_process(true)
-	time = 0.0
-	step = 0
-	
 	camera = Shared.camera
 	door_dest = Shared.door_destination
 	door_goal = Shared.door_goal
 	player = Shared.player
+	
+	for i in [camera, door_dest, door_goal, player]:
+		if !is_instance_valid(i):
+			return
+	
+	set_physics_process(true)
+	time = 0.0
+	step = 0
 	
 	player.set_physics_process(false)
 	player.visible = false

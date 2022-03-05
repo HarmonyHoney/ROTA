@@ -42,6 +42,7 @@ BG="*res://src/autoload/BG.tscn"
 Guide="*res://src/actor/Guide.tscn"
 GemCollect="*res://src/cutscene/GemCollect.gd"
 GoalShow="*res://src/cutscene/GoalShow.gd"
+Boundary="*res://src/stage/Boundary.tscn"
 
 [display]
 

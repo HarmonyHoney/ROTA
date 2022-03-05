@@ -51,14 +51,19 @@ func next_step():
 	step += 1
 
 func begin():
-	set_physics_process(true)
-	time = 0.0
-	step = 0
 	
 	camera = Shared.camera
 	player = Shared.player
 	goal = Shared.goal
 	return_door = Shared.door_destination
+	
+	for i in [camera, player, goal, return_door]:
+		if !is_instance_valid(i):
+			return
+	
+	set_physics_process(true)
+	time = 0.0
+	step = 0
 	
 	focal = camera.is_focal_point
 	

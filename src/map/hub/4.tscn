@@ -12,87 +12,63 @@ is_focal_point = false
 focal_influence = 0.25
 
 [node name="SolidTileMap" parent="." index="1"]
-tile_data = PoolIntArray( -262137, 0, 0, -262136, 0, 0, -262135, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262162, 0, 0, 262163, 0, 0, 262164, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393234, 0, 0, 393235, 0, 0, 393236, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 720903, 0, 0, 720904, 0, 0, 720905, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 917511, 0, 0, 917512, 0, 0, 917513, 0, 0 )
+tile_data = PoolIntArray( -262137, 0, 0, -262136, 0, 0, -262135, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262162, 0, 0, 262163, 0, 0, 262164, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393234, 0, 0, 393235, 0, 0, 393236, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 720903, 0, 0, 720904, 0, 0, 720905, 0, 0 )
 
 [node name="Player" parent="Actors" index="0"]
 position = Vector2( 450, 550 )
 dir = 3
 
-[node name="Door1" parent="Actors" index="1" instance=ExtResource( 2 )]
+[node name="BigDoor" parent="Actors" index="1" instance=ExtResource( 3 )]
+position = Vector2( 400, 550 )
+rotation = -1.5708
+dir = 3
+scene_path = "res://src/map/hub/3.tscn"
+
+[node name="Door1" parent="Actors" index="2" instance=ExtResource( 2 )]
 position = Vector2( 650, 50 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/worlds/4/1.tscn"
 
-[node name="Door2" parent="Actors" index="2" instance=ExtResource( 2 )]
+[node name="Door2" parent="Actors" index="3" instance=ExtResource( 2 )]
 position = Vector2( 650, -250 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/worlds/4/2.tscn"
 
-[node name="Door3" parent="Actors" index="3" instance=ExtResource( 2 )]
+[node name="Door3" parent="Actors" index="4" instance=ExtResource( 2 )]
 position = Vector2( 850, -450 )
 scene_path = "res://src/map/worlds/4/3.tscn"
 
-[node name="Door4" parent="Actors" index="4" instance=ExtResource( 2 )]
+[node name="Door4" parent="Actors" index="5" instance=ExtResource( 2 )]
 position = Vector2( 1050, -250 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/4/4.tscn"
 
-[node name="Door5" parent="Actors" index="5" instance=ExtResource( 2 )]
+[node name="Door5" parent="Actors" index="6" instance=ExtResource( 2 )]
 position = Vector2( 1050, 50 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/4/5.tscn"
 
-[node name="Door6" parent="Actors" index="6" instance=ExtResource( 2 )]
+[node name="Door6" parent="Actors" index="7" instance=ExtResource( 2 )]
 position = Vector2( 1350, 350 )
 scene_path = "res://src/map/worlds/4/6.tscn"
 
-[node name="Door7" parent="Actors" index="7" instance=ExtResource( 2 )]
+[node name="Door7" parent="Actors" index="8" instance=ExtResource( 2 )]
 position = Vector2( 1350, 750 )
 rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/worlds/4/7.tscn"
 
-[node name="Door8" parent="Actors" index="8" instance=ExtResource( 2 )]
+[node name="Door8" parent="Actors" index="9" instance=ExtResource( 2 )]
 position = Vector2( 1050, 1050 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/4/8.tscn"
 
-[node name="Door9" parent="Actors" index="9" instance=ExtResource( 2 )]
-position = Vector2( 1050, 1350 )
-rotation = 1.5708
-dir = 1
-scene_path = "res://src/map/worlds/4/9.tscn"
-
-[node name="Door10" parent="Actors" index="10" instance=ExtResource( 2 )]
-position = Vector2( 850, 1550 )
-rotation = 3.14159
-dir = 2
-scene_path = "res://src/map/worlds/4/10.tscn"
-
-[node name="Door11" parent="Actors" index="11" instance=ExtResource( 2 )]
-position = Vector2( 650, 1350 )
-rotation = 4.71239
-dir = 3
-scene_path = "res://src/map/worlds/4/11.tscn"
-
-[node name="Door12" parent="Actors" index="12" instance=ExtResource( 2 )]
-position = Vector2( 650, 1050 )
-rotation = 4.71239
-dir = 3
-scene_path = "res://src/map/worlds/4/12.tscn"
-
-[node name="BigDoor" parent="Actors" index="13" instance=ExtResource( 3 )]
-position = Vector2( 400, 550 )
-rotation = 4.71239
-dir = 3
-scene_path = "res://src/map/hub/3.tscn"
-
-[node name="BigDoor2" parent="Actors" index="14" instance=ExtResource( 3 )]
+[node name="BigDoor2" parent="Actors" index="10" instance=ExtResource( 3 )]
 position = Vector2( 2200, 550 )
 rotation = 1.5708
 dir = 1

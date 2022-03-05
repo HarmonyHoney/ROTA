@@ -5,8 +5,7 @@ var scene_title := "res://src/menu/Title.tscn"
 var scene_select := "res://src/menu/WorldSelect.tscn"
 var scene_options := "res://src/menu/Options.tscn"
 
-var is_reset := false
-var is_change := false
+var is_wipe := false
 
 var last_scene := ""
 var next_scene := ""
@@ -31,6 +30,8 @@ var door_goal
 var door_destination
 var goal
 
+signal scene_changed
+
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
 
@@ -39,28 +40,28 @@ func _input(event):
 		if event.scancode == KEY_F11:
 			toggle_fullscreen()
 
-func reset():
-	if !is_reset:
-		is_reset = true
-		Wipe.start()
-
-func change_scene(arg):
-	if !is_change:
-		is_change = true
+func wipe_scene(arg):
+	if !is_wipe:
+		is_wipe = true
 		last_scene = csfn
 		next_scene = arg
 		Wipe.start()
 
 func wipe_out():
-	Wipe.start(true)
-	if is_reset:
+	if is_wipe:
+		Wipe.start(true)
+		change_scene()
+
+func reset():
+	wipe_scene(csfn)
+
+func change_scene():
+	is_wipe = false
+	if next_scene == csfn:
 		get_tree().reload_current_scene()
 	else:
 		csfn = next_scene
 		get_tree().change_scene(next_scene)
-	
-	is_reset = false
-	is_change = false
 	
 	match next_scene:
 		scene_splash: HUD.show("none")
@@ -68,6 +69,8 @@ func wipe_out():
 		scene_select: HUD.show("title")
 		scene_options: HUD.show("title")
 		_: HUD.show("game")
+	
+	emit_signal("scene_changed")
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen

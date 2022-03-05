@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/stage/SolidTileMap.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
-[ext_resource path="res://src/stage/Boundary.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/shader/add_color.gdshader" type="Shader" id=4]
-[ext_resource path="res://src/stage/TileSet1.tres" type="TileSet" id=5]
+[ext_resource path="res://src/stage/tileset/TileSet0.tres" type="TileSet" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
@@ -50,5 +49,3 @@ tile_set = ExtResource( 5 )
 cell_size = Vector2( 400, 400 )
 cell_custom_transform = Transform2D( 400, 0, 0, 400, 0, 0 )
 format = 1
-
-[node name="Boundary" parent="." instance=ExtResource( 3 )]

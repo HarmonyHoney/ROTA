@@ -11,4 +11,4 @@ func _input(event):
 	
 	if back:
 		set_process_input(false)
-		Shared.change_scene(Shared.scene_title)
+		Shared.wipe_scene(Shared.scene_title)

@@ -33,9 +33,9 @@ func pick():
 	match cursor:
 		0:
 			set_process_input(false)
-			Shared.change_scene(Shared.scene_select)
+			Shared.wipe_scene(Shared.scene_select)
 		1:
 			set_process_input(false)
-			Shared.change_scene(Shared.scene_options)
+			Shared.wipe_scene(Shared.scene_options)
 		2:
 			get_tree().quit()

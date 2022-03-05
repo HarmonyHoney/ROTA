@@ -1,23 +1,52 @@
 extends Area2D
 
-var shape := Vector2.ONE
-var margin := 10.0
+onready var c0 := $C0
+onready var c1 := $C1
+onready var c2 := $C2
+onready var c3 := $C3
+onready var shapes = [c0, c1, c2, c3]
+onready var shapes_size : int = shapes.size()
+var active_shapes := 0
+
+var margin = 10.0
 
 func _ready():
-	var s = get_parent()
-	var r = s.get_used_rect()
-	var cell = s.cell_size
+	print(name, "._ready(): ")
+	for i in shapes:
+		print(i.name, " / extents: ", i.shape.extents)
 	
-	var half = r.size / 2.0
-	position = (r.position + half) * cell
-	shape = (half + (Vector2.ONE * margin)) * cell
-	$CollisionShape2D.shape.extents = shape
+	Shared.connect("scene_changed", self, "scene_changed")
+
+func scene_changed():
+	active_shapes = 0
+
+func add_shape(rect, cell):
+	var half = rect.size / 2.0
+	shapes[active_shapes].global_position = (rect.position + half) * cell
+	shapes[active_shapes].shape.extents = (half + (Vector2.ONE * margin)) * cell
+	
+	print(name, ".add_shape(): ")
+	for i in shapes:
+		print(i.name, " / extents: ", i.shape.extents)
+	
+	active_shapes = clamp(active_shapes + 1, 0, shapes_size)
+	print("active_shapes: ", active_shapes)
 
 func _on_Boundary_body_exited(body):
-	if Engine.editor_hint: return
+	var check = 0
+	for i in shapes_size:
+		if i > active_shapes:
+			check +=1 
+		else:
+			var p = shapes[i].to_local(body.global_position)
+			var s = shapes[i].shape.extents
+			if abs(p.x) > s.x or abs(p.y) > s.y:
+				check += 1
+				print(shapes[i].name, ": out")
 	
-	var p = to_local(body.global_position)
-	
-	if abs(p.x) > shape.x or abs(p.y) > shape.y:
+	if check == shapes_size:
 		if body.has_method("outside_boundary"):
 			body.outside_boundary()
+		print(name, ": all out")
+		
+	

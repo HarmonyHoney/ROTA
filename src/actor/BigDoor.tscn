@@ -23,6 +23,7 @@ __meta__ = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 1024
 collision_mask = 2
 

@@ -107,7 +107,7 @@ func _input(event):
 			close_world()
 		else:
 			set_process_input(false)
-			Shared.change_scene(Shared.scene_title)
+			Shared.wipe_scene(Shared.scene_title)
 
 func open_world():
 	if Shared.unlocked[world_cursor] < 0:
