@@ -156,15 +156,15 @@ position = Vector2( -505, 2705 )
 rotation = 0.785397
 
 [node name="Tree" parent="Details" instance=ExtResource( 7 )]
-position = Vector2( -1700, 950 )
+position = Vector2( -1700, 1100 )
 palette = 5
 
 [node name="Tree3" parent="Details" instance=ExtResource( 7 )]
-position = Vector2( -1450, 2250 )
+position = Vector2( -1450, 2400 )
 palette = 5
 
 [node name="Tree2" parent="Details" instance=ExtResource( 7 )]
-position = Vector2( -1200, 1950 )
+position = Vector2( -1200, 1800 )
 rotation = -3.14159
 palette = 3
 

@@ -11,9 +11,9 @@ var active_shapes := 0
 var margin = 10.0
 
 func _ready():
-	print(name, "._ready(): ")
-	for i in shapes:
-		print(i.name, " / extents: ", i.shape.extents)
+	#print(name, "._ready(): ")
+	#for i in shapes:
+	#	print(i.name, " / extents: ", i.shape.extents)
 	
 	Shared.connect("scene_changed", self, "scene_changed")
 
@@ -25,12 +25,12 @@ func add_shape(rect, cell):
 	shapes[active_shapes].global_position = (rect.position + half) * cell
 	shapes[active_shapes].shape.extents = (half + (Vector2.ONE * margin)) * cell
 	
-	print(name, ".add_shape(): ")
-	for i in shapes:
-		print(i.name, " / extents: ", i.shape.extents)
+	#print(name, ".add_shape(): ")
+	#for i in shapes:
+	#	print(i.name, " / extents: ", i.shape.extents)
 	
 	active_shapes = clamp(active_shapes + 1, 0, shapes_size)
-	print("active_shapes: ", active_shapes)
+	#print("active_shapes: ", active_shapes)
 
 func _on_Boundary_body_exited(body):
 	var check = 0

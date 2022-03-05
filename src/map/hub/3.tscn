@@ -28,7 +28,7 @@ tile_data = PoolIntArray( -196599, -1610612736, 0, -196598, -1610612736, 0, -196
 detail = 2
 
 [node name="SpikeMap" parent="." instance=ExtResource( 11 )]
-tile_data = PoolIntArray( 720904, -1610612736, 0, 786440, -1610612736, 0 )
+tile_data = PoolIntArray( 655368, -1610612736, 0, 720904, -1610612736, 0, 786440, -1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -156,12 +156,6 @@ rotation = -7.85397
 scale = Vector2( 0.45, 0.45 )
 texture = ExtResource( 14 )
 
-[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
-position = Vector2( 1450, 1050 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 13 )
-
 [node name="RoundRock4" type="Sprite" parent="Details/Rocks"]
 modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 250, 1100 )
@@ -204,29 +198,30 @@ position = Vector2( 1050, -150 )
 scale = Vector2( 0.436193, 0.436193 )
 texture = ExtResource( 13 )
 
-[node name="RoundRock2" type="Sprite" parent="Details/Rocks"]
+[node name="RoundRock11" type="Sprite" parent="Details"]
 modulate = Color( 100, 100, 100, 1 )
-position = Vector2( 1519.13, 1050 )
-scale = Vector2( 0.192203, 0.192203 )
-texture = ExtResource( 13 )
-
-[node name="RoundRock3" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
-position = Vector2( 1580.87, 1050 )
-scale = Vector2( 0.150797, 0.150797 )
-texture = ExtResource( 13 )
-
-[node name="Bench" parent="Details" instance=ExtResource( 5 )]
 position = Vector2( 650, 1350 )
-rotation = -3.14159
-scale = Vector2( -1, 1 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 13 )
 
-[node name="Bench3" parent="Details" instance=ExtResource( 5 )]
-position = Vector2( 1450, 950 )
-rotation = -4.71238
+[node name="RoundRock12" type="Sprite" parent="Details/RoundRock11"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 0, 280 )
+scale = Vector2( 0.768812, 0.768812 )
+texture = ExtResource( 13 )
+
+[node name="RoundRock13" type="Sprite" parent="Details/RoundRock11"]
+modulate = Color( 100, 100, 100, 1 )
+position = Vector2( 0, 520 )
+scale = Vector2( 0.603188, 0.603188 )
+texture = ExtResource( 13 )
 
 [node name="Bench2" parent="Details" instance=ExtResource( 5 )]
 position = Vector2( 50, -250 )
+
+[node name="Bench3" parent="Details" instance=ExtResource( 5 )]
+position = Vector2( 1450, 950 )
+rotation = 1.57079
 
 [node name="PineTree" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( -200, 925 )

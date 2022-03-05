@@ -64,7 +64,7 @@ scale = Vector2( 0.143111, 0.143111 )
 texture = SubResource( 2 )
 
 [node name="Tree" parent="Details" index="4" instance=ExtResource( 4 )]
-position = Vector2( 600, 550 )
+position = Vector2( 600, 400 )
 rotation = 3.14159
 
 [node name="Flower" parent="Details" index="5" instance=ExtResource( 5 )]

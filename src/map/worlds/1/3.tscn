@@ -66,23 +66,23 @@ scale = Vector2( 0.191985, 0.191985 )
 texture = ExtResource( 5 )
 
 [node name="Tree" parent="Details" index="5" instance=ExtResource( 6 )]
-position = Vector2( 875, 225 )
+position = Vector2( 775, 325 )
 rotation = 0.785397
 palette = 3
 
 [node name="Tree2" parent="Details" index="6" instance=ExtResource( 6 )]
-position = Vector2( 625, -375 )
+position = Vector2( 725, -275 )
 rotation = -0.785397
 scale = Vector2( -1, 1 )
 
 [node name="Tree3" parent="Details" index="7" instance=ExtResource( 6 )]
-position = Vector2( 1475, -175 )
+position = Vector2( 1375, -75 )
 rotation = 0.785397
 scale = Vector2( -1, 1 )
 palette = 5
 
 [node name="Tree4" parent="Details" index="8" instance=ExtResource( 6 )]
-position = Vector2( 1475, 475 )
+position = Vector2( 1375, 375 )
 rotation = 2.35619
 
 [node name="TreeTop" parent="Details" index="9" instance=ExtResource( 7 )]

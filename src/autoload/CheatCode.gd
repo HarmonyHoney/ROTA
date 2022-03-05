@@ -13,7 +13,6 @@ func _ready():
 	for i in InputMap.get_actions():
 		if !i.begins_with("ui_"):
 			actions.append(i)
-	print(actions)
 	clear_history()
 
 func _input(event):
@@ -30,7 +29,7 @@ func clear_history():
 func add(arg):
 	history.append(arg)
 	history.remove(0)
-	print(history)
+	#print(history)
 	
 	for i in codes.keys():
 		if codes[i] in str(history):
