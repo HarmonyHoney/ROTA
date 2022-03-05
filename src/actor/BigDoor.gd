@@ -33,6 +33,8 @@ func _enter_tree():
 func _ready():
 	if Engine.editor_hint: return
 	
+	CheatCode.connect("activate", self, "cheat_code")
+	
 	player = Shared.player
 	
 	if is_gem:
@@ -69,11 +71,6 @@ func _input(event):
 	if is_active:
 		if event.is_action_pressed("up"):
 			enter_door()
-		
-		# dev cheat unlock
-		if is_locked and Input.is_action_pressed("jump") and Input.is_action_pressed("push"):
-			is_locked = false
-			arrow.visible = true
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
@@ -85,6 +82,12 @@ func _physics_process(delta):
 func set_dir(arg):
 	dir = posmod(arg, 4)
 	rotation_degrees = dir * 90
+
+# unlock cheat
+func unlock():
+	is_locked = false
+	arrow.visible = true
+	print(name, " unlocked")
 
 func _on_Area2D_body_entered(body):
 	if body is Player:
@@ -99,4 +102,8 @@ func enter_door():
 	if!is_locked and player != null and !player.is_hold and player.is_floor:
 		if scene_path != "":
 			Shared.wipe_scene(scene_path)
+
+func cheat_code(cheat):
+	if "konami" in cheat and is_locked and area.overlaps_body(player):
+		unlock()
 

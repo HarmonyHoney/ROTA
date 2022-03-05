@@ -101,6 +101,8 @@ func _enter_tree():
 func _ready():
 	if Engine.editor_hint: return
 	
+	CheatCode.connect("activate", self, "cheat_code")
+	
 	solve_jump()
 	
 	# go to last door
@@ -455,8 +457,8 @@ func _physics_process(delta):
 				debug_label.text += str(i) + "\n"
 
 func set_dir_x(arg := dir_x):
-	if dir_x != sign(arg):
-		print("set_dir_x: ", sign(arg))
+	#if dir_x != sign(arg):
+	#	print("set_dir_x: ", sign(arg))
 	
 	dir_x = sign(arg)
 	areas.scale.x = dir_x
@@ -611,3 +613,8 @@ func release_anim():
 	
 	anim.add_animation("release", rel)
 	anim.play("release")
+
+func cheat_code(cheat):
+	if "big hair" in cheat:
+		$Sprites/Root/Body/HairBack.scale = Vector2.ONE * 2
+		$Sprites/Root/Body/HairFront.scale = Vector2.ONE * 2
