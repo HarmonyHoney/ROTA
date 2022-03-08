@@ -24,7 +24,7 @@ var arrow_time = 0.3
 
 func _enter_tree():
 	if Engine.editor_hint: return
-	if Shared.last_scene == scene_path:
+	if scene_path != "" and Shared.last_scene == scene_path:
 		Shared.door_destination = self
 	
 	if is_gem:

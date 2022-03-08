@@ -34,7 +34,7 @@ var is_complete := false
 
 func _enter_tree():
 	if Engine.editor_hint: return
-	if Shared.last_scene == scene_path:
+	if scene_path != "" and Shared.last_scene == scene_path:
 		Shared.door_destination = self
 
 func _ready():
@@ -79,6 +79,8 @@ func _on_Area2D_body_exited(body):
 	is_active = false
 
 func enter_door():
+	if scene_path == "": return
+	
 	# disable player
 	player.set_physics_process(false)
 	player.anim.play("idle")
@@ -92,8 +94,6 @@ func enter_door():
 				Shared.goals_collected.append(Shared.csfn)
 				Shared.is_collect = true
 	
-	#Shared.last_door[Shared.csfn] = name
-	if scene_path != "":
-		if not "hub" in scene_path:
-			Shared.is_show_goal = true
-		Shared.wipe_scene(scene_path)
+	if not "hub" in scene_path:
+		Shared.is_show_goal = true
+	Shared.wipe_scene(scene_path)
