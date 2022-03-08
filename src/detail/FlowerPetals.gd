@@ -4,7 +4,7 @@ extends Node2D
 onready var sprites := $Sprites
 onready var petals := $Sprites/Petals
 
-var colors = ["FF0000", "FF78CB", "79FFFF", "FFFA00"]
+var colors = ["FF0000", "FF78CB", "79FFFF", "FFFA00", "FFC900"]
 export var palette := 1 setget set_palette
 
 var angle := 0.0
@@ -31,7 +31,7 @@ func _physics_process(delta):
 	cooldown_clock = max(cooldown_clock - delta, 0)
 
 func set_palette(arg):
-	palette = posmod(int(arg), 5)
+	palette = posmod(int(arg), 6)
 	petal_color()
 
 func petal_color():
