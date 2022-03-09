@@ -20,7 +20,6 @@ tile_data = PoolIntArray( -131075, -1610612736, 0, 196602, -1073741824, 0 )
 [node name="Player" parent="Actors" index="0"]
 position = Vector2( -250, 350 )
 dir = 2
-can_spin = true
 
 [node name="Box" parent="Actors" index="1" instance=ExtResource( 2 )]
 position = Vector2( -350, 150 )
@@ -33,7 +32,7 @@ dir = 2
 position = Vector2( -250, 350 )
 rotation = 3.14159
 dir = 2
-scene_path = "res://src/map/hub/4.tscn"
+scene_name = "5"
 
 [node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
 position = Vector2( -550, 0 )

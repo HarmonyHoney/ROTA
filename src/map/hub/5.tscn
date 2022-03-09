@@ -30,7 +30,7 @@ dir = 3
 
 [node name="BigDoor" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 400, 550 )
-rotation = -1.5708
+rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/hub/4.tscn"
 
@@ -108,4 +108,4 @@ rotation = 1.5708
 dir = 1
 is_gem = true
 gem_count = 11
-gem_world = "res://src/map/worlds/4/"
+gem_world = "res://src/map/worlds/5/"

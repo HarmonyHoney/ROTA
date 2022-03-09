@@ -319,8 +319,8 @@ func _physics_process(delta):
 			box.pickup_clock = 0.0
 			
 			# move to last child
-			var p = box.get_parent()
-			p.move_child(box, p.get_child_count())
+			#var p = box.get_parent()
+			#p.move_child(box, p.get_child_count())
 			
 			HUD.show("game")
 			
