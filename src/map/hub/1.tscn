@@ -18,8 +18,7 @@
 [node name="Map" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 13 )]
-position = Vector2( 550, 550 )
-zoom = Vector2( 1, 1 )
+position = Vector2( -1150, 0 )
 is_moving = true
 focal_influence = 0.25
 is_zoom_out = false

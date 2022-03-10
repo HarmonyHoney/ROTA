@@ -8,6 +8,5 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 [node name="GameCamera" type="Camera2D" groups=["game_camera"]]
 rotating = true
 current = true
-zoom = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
 easing = SubResource( 1 )

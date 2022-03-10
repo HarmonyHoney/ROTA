@@ -8,35 +8,32 @@
 [node name="Node2D" instance=ExtResource( 1 )]
 
 [node name="Camera2D" parent="." index="0"]
-position = Vector2( 400, 200 )
-zoom = Vector2( 1, 1 )
+position = Vector2( 0, 200 )
+current = false
 is_focal_point = false
-focal_influence = 0.3
 
 [node name="SolidTileMap" parent="." index="1"]
-tile_data = PoolIntArray( -65534, 0, 0, -65533, -1073741824, 0, -65532, 0, 0, -65531, 0, 0, 2, 0, 0, 3, -1610612736, 0, 4, -1610612736, 0, 5, 1610612736, 0, 65538, 0, 0, 65539, -1610612736, 0, 65540, -1610612736, 0, 65541, 1610612736, 0, 131074, 0, 0, 131075, -1610612736, 0, 131076, -1610612736, 0, 131077, 1610612736, 0, 196610, -1610612736, 0, 196611, -1610612736, 0, 196612, -1610612736, 0, 196613, 1610612736, 0, 262146, -1610612736, 0, 262147, -1610612736, 0, 262148, -1610612736, 0, 262149, 1610612736, 0 )
+tile_data = PoolIntArray( -65535, 0, 0, -65534, 0, 0, 1, -1073741824, 0, 65537, -1073741824, 0, 131073, -1073741824, 0, 196609, -1073741824, 0, 327677, -1610612736, 0, 327678, -1610612736, 0, 327679, -1610612736, 0, 262144, -1610612736, 0, 262145, -1073741824, 0 )
 
 [node name="SpikeMap" parent="." index="2"]
-tile_data = PoolIntArray( -131068, 0, 0, -131067, 0, 0, 327683, 1610612736, 0, 327684, 1610612736, 0, 327685, 1610612736, 0 )
+tile_data = PoolIntArray( -65533, -1610612736, 0, 262141, 0, 0, 262146, -1610612736, 0 )
 
 [node name="Player" parent="Actors" index="0"]
-position = Vector2( 150, 350 )
-dir = 3
+position = Vector2( -50, 550 )
+dir = 2
 
 [node name="Box" parent="Actors" index="1" instance=ExtResource( 2 )]
-position = Vector2( 150, 50 )
+position = Vector2( 50, -50 )
 dir = 3
 
 [node name="Box2" parent="Actors" index="2" instance=ExtResource( 2 )]
-position = Vector2( 150, -50 )
-dir = 3
+position = Vector2( -250, 350 )
 
 [node name="Door" parent="Actors" index="3" instance=ExtResource( 3 )]
-position = Vector2( 150, 350 )
-rotation = 4.71239
-dir = 3
+position = Vector2( -50, 550 )
+rotation = 3.14159
+dir = 2
 scene_name = "5"
 
 [node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
-position = Vector2( 650, 200 )
-z_index = -5
+position = Vector2( 250, 150 )
