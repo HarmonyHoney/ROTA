@@ -187,6 +187,11 @@ func _physics_process(delta):
 		# jump hold time
 		holding_jump = (holding_jump + delta) if btn_jump else 0.0
 	
+	# check floor
+	is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN * (50 if is_hold else 1)))
+	if is_floor:
+		has_jumped = false
+
 	# pickup goal
 	if is_goal:
 		
@@ -254,7 +259,7 @@ func _physics_process(delta):
 			# not pushing or turning
 			else:
 				# check floor
-				if !test_move(transform, rot(Vector2.DOWN * 50)):
+				if !is_floor:
 					walk_around(push_dir == 1)
 					is_release = true
 				
@@ -341,11 +346,6 @@ func _physics_process(delta):
 			# dir_x
 			if joy.x != 0:
 				set_dir_x(joy.x)
-			
-			# on floor
-			is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN))
-			if is_floor:
-				has_jumped = false
 			
 			# walking
 			if is_walk:
@@ -581,7 +581,7 @@ func die():
 		Guide.set_box(null)
 	anim.play("jump")
 	velocity = Vector2(-350 * dir_x, -800)
-	
+
 	yield(get_tree().create_timer(0.7), "timeout")
 	Shared.reset()
 

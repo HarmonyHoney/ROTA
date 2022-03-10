@@ -12,17 +12,16 @@ position = Vector2( 150, 250 )
 focal_influence = 0.8
 
 [node name="SolidTileMap" parent="." index="1"]
-tile_data = PoolIntArray( -2, 0, 0, -1, -1610612736, 0, -65536, -1610612736, 0, 65534, 0, 0, 0, 0, 0, 131070, 0, 0, 65536, 0, 0, 196606, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 262142, 0, 0, 327678, 0, 0, 393214, -1610612736, 0, 393215, -1610612736, 0, 327680, -1610612736, 0, 327681, -1610612736, 0, 327682, -1610612736, 0, 327683, -1610612736, 0, 327684, 0, 0 )
+tile_data = PoolIntArray( -2, 0, 0, -1, -1610612736, 0, -65536, -1610612736, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, 65534, 0, 0, 131070, 0, 0, 196606, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 262142, 0, 0, 196608, 0, 0, 327678, 0, 0, 262144, 0, 0, 393214, -1610612736, 0, 393215, -1610612736, 0, 327680, 0, 0 )
 
 [node name="SpikeMap" parent="." index="2"]
-tile_data = PoolIntArray( 65538, 0, 0, 131075, -1610612736, 0, 327685, -1610612736, 0 )
+tile_data = PoolIntArray( -65531, -1610612736, 0, 131075, -1610612736, 0, 196610, 1610612736, 0 )
 
 [node name="Player" parent="Actors" index="0"]
-position = Vector2( 150, 650 )
-dir = 2
+position = Vector2( 150, -150 )
 
 [node name="Box" parent="Actors" index="1" instance=ExtResource( 1 )]
-position = Vector2( -250, 350 )
+position = Vector2( -250, 450 )
 dir = 3
 
 [node name="Box2" parent="Actors" index="2" instance=ExtResource( 1 )]
@@ -30,10 +29,8 @@ position = Vector2( -250, 50 )
 dir = 3
 
 [node name="Door" parent="Actors" index="3" instance=ExtResource( 2 )]
-position = Vector2( 150, 650 )
-rotation = 3.14159
-dir = 2
+position = Vector2( 150, -150 )
 scene_name = "6"
 
 [node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
-position = Vector2( -50, 100 )
+position = Vector2( -50, 400 )

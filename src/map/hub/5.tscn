@@ -16,7 +16,8 @@ is_moving = true
 focal_influence = 0.25
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( -262137, 0, 0, -262136, 0, 0, -262135, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -131065, 0, 0, -131064, 0, 0, -131063, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262162, 0, 0, 262163, 0, 0, 262164, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393234, 0, 0, 393235, 0, 0, 393236, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0 )
+tile_data = PoolIntArray( 12, 0, 0, 13, 0, 0, 14, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 131081, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196635, 0, 0, 196636, 0, 0, 262149, 0, 0, 262150, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 262160, 0, 0, 262161, 0, 0, 262162, 0, 0, 262163, 0, 0, 262164, 0, 0, 262165, 0, 0, 262171, 0, 0, 262172, 0, 0, 327685, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 327701, 0, 0, 327707, 0, 0, 327708, 0, 0, 393221, 0, 0, 393222, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393231, 0, 0, 393232, 0, 0, 393233, 0, 0, 393234, 0, 0, 393235, 0, 0, 393236, 0, 0, 393237, 0, 0, 458757, 0, 0, 458758, 0, 0, 458762, 0, 0, 458763, 0, 0, 458767, 0, 0, 458768, 0, 0, 458769, 0, 0, 458770, 0, 0, 458771, 0, 0, 458772, 0, 0, 458773, 0, 0, 458774, 0, 0, 458775, 0, 0, 458776, 0, 0, 458777, 0, 0, 524299, 0, 0, 524309, 0, 0, 524310, 0, 0, 524311, 0, 0, 524312, 0, 0, 524313, 0, 0, 589835, 0, 0, 589845, 0, 0, 589846, 0, 0, 589847, 0, 0, 589848, 0, 0, 589849, 0, 0, 655381, 0, 0, 655382, 0, 0, 655383, 0, 0, 655384, 0, 0, 655385, 0, 0 )
+detail = 4
 
 [node name="SpikeMap" parent="." instance=ExtResource( 7 )]
 
@@ -34,54 +35,42 @@ dir = 3
 scene_path = "res://src/map/hub/4.tscn"
 
 [node name="Door1" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 650, 50 )
-rotation = 4.71239
-dir = 3
+position = Vector2( 750, 250 )
 scene_path = "res://src/map/worlds/5/1.tscn"
 
 [node name="Door2" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 650, -250 )
-rotation = 4.71239
-dir = 3
+position = Vector2( 1350, 350 )
 scene_path = "res://src/map/worlds/5/2.tscn"
 
 [node name="Door3" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 850, -450 )
+position = Vector2( 1450, 350 )
 scene_path = "res://src/map/worlds/5/3.tscn"
 
 [node name="Door4" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 1050, -250 )
-rotation = 1.5708
-dir = 1
+position = Vector2( 1550, 350 )
 scene_path = "res://src/map/worlds/5/4.tscn"
 
 [node name="Door5" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 1050, 50 )
-rotation = 1.5708
-dir = 1
+position = Vector2( 1650, 350 )
 scene_path = "res://src/map/worlds/5/5.tscn"
 
 [node name="Door6" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 1350, 350 )
+position = Vector2( 1750, 350 )
 scene_path = "res://src/map/worlds/5/6.tscn"
 
 [node name="Door7" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 1350, 750 )
-rotation = 3.14159
-dir = 2
+position = Vector2( 1850, 350 )
 scene_path = "res://src/map/worlds/5/7.tscn"
 
 [node name="Door8" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 950, 850 )
-rotation = 3.14159
-dir = 2
+position = Vector2( 1950, 350 )
 scene_path = "res://src/map/worlds/5/8.tscn"
 
 [node name="BigDoor2" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 2200, 550 )
+position = Vector2( 3000, 450 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/hub/6.tscn"
 is_gem = true
-gem_count = 11
+gem_count = 7
 gem_world = "res://src/map/worlds/5/"

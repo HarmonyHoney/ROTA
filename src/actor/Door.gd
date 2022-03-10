@@ -34,15 +34,16 @@ var is_complete := false
 
 func _enter_tree():
 	if Engine.editor_hint: return
+	
+	# set path
+	if folder_path != "" and scene_name != "":
+		scene_path = folder_path + scene_name + ".tscn"
+	
 	if scene_path != "" and Shared.last_scene == scene_path:
 		Shared.door_destination = self
 
 func _ready():
 	if Engine.editor_hint: return
-	
-	# set path
-	if folder_path != "" and scene_name != "":
-		scene_path = folder_path + scene_name + ".tscn"
 	
 	var h = "hub" in scene_path
 	is_complete = Shared.goals_collected.has(scene_path)

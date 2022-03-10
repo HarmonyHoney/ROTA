@@ -36,4 +36,4 @@ dir = 3
 scene_name = "6"
 
 [node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
-position = Vector2( 50, 650 )
+position = Vector2( 0, 650 )

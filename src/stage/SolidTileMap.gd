@@ -5,7 +5,8 @@ onready var auto = $Offset
 export var detail := 0 setget set_tileset
 
 var sets = [preload("res://src/stage/tileset/TileSet0.tres"),preload("res://src/stage/tileset/TileSet1.tres"),
-preload("res://src/stage/tileset/TileSet2.tres"),preload("res://src/stage/tileset/TileSet3.tres")]
+preload("res://src/stage/tileset/TileSet2.tres"),preload("res://src/stage/tileset/TileSet3.tres"),
+preload("res://src/stage/tileset/TileSet4.tres")]
 
 func _ready():
 	set_tileset()
@@ -28,7 +29,7 @@ func _ready():
 			BG.set_gradient(BG.w1a, BG.w1b)
 
 func set_tileset(arg := detail):
-	detail = posmod(int(arg), 4)
+	detail = posmod(int(arg), 5)
 	if auto and detail < sets.size():
 		if sets[detail] is TileSet:
 			auto.tile_set = sets[detail]

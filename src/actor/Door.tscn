@@ -39,6 +39,7 @@ shader_param/fill_color = Color( 1, 0, 0.445313, 1 )
 
 [node name="Door" type="Node2D" groups=["door"]]
 z_index = -10
+z_as_relative = false
 script = ExtResource( 1 )
 
 [node name="Tile" type="ColorRect" parent="."]

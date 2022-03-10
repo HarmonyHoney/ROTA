@@ -9,11 +9,11 @@
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2( 0, 200 )
-current = false
 is_focal_point = false
 
 [node name="SolidTileMap" parent="." index="1"]
 tile_data = PoolIntArray( -65535, 0, 0, -65534, 0, 0, 1, -1073741824, 0, 65537, -1073741824, 0, 131073, -1073741824, 0, 196609, -1073741824, 0, 327677, -1610612736, 0, 327678, -1610612736, 0, 327679, -1610612736, 0, 262144, -1610612736, 0, 262145, -1073741824, 0 )
+detail = 4
 
 [node name="SpikeMap" parent="." index="2"]
 tile_data = PoolIntArray( -65533, -1610612736, 0, 262141, 0, 0, 262146, -1610612736, 0 )
