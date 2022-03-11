@@ -3,14 +3,11 @@ extends TileMap
 
 var spike_scene = preload("res://src/actor/Spike.tscn")
 
-var solid : TileMap
-
 var spikes = {}
 
 func _ready():
 	yield(get_parent(), "ready")
 	tile_set.tile_set_modulate(0, Color(0, 0, 0, 0))
-	solid = get_parent().get_node("SolidTileMap")
 	make_tiles()
 
 func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_coord=Vector2()):
@@ -59,12 +56,3 @@ func set_spike(i : Vector2):
 		s.dir = 1
 	elif y:
 		s.dir = 2
-	
-	# set spike floor
-	var left = i + rot(Vector2(-1, 1), s.dir)
-	var right = i + rot(Vector2(1, 1), s.dir)
-	
-	if get_cellv(left) == -1 and solid.get_cellv(left) == -1:
-		s.set_tile(true)
-	if get_cellv(right) == -1 and solid.get_cellv(right) == -1:
-		s.set_tile(false)
