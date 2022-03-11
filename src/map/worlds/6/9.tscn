@@ -10,10 +10,10 @@
 position = Vector2( -100, 200 )
 
 [node name="SolidTileMap" parent="." index="1"]
-tile_data = PoolIntArray( -65539, -1610612736, 0, -3, -1610612736, 0, -65535, -1610612736, 0, 0, -1610612736, 0, 1, -1610612736, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 327680, 1610612736, 0 )
+tile_data = PoolIntArray( 0, -1610612736, 0, 1, -1610612736, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 327680, 1610612736, 0 )
 
 [node name="SpikeMap" parent="." index="2"]
-tile_data = PoolIntArray( -131075, 0, 0, -65534, -1610612736, 0, 65533, 1610612736, 0, 65535, -1073741824, 0, 2, -1610612736, 0 )
+tile_data = PoolIntArray( 65535, -1073741824, 0, 2, -1610612736, 0 )
 
 [node name="Player" parent="Actors" index="0"]
 position = Vector2( -150, 550 )
@@ -29,4 +29,4 @@ position = Vector2( -150, 350 )
 position = Vector2( -50, 350 )
 
 [node name="Goal" parent="Actors" index="4" instance=ExtResource( 3 )]
-position = Vector2( 50, -50 )
+position = Vector2( 100, -50 )

@@ -19,12 +19,14 @@ func _ready():
 	
 	var gpfn = str(get_parent().filename)
 	if gpfn != "":
-		if "/map/worlds/2/" in gpfn or "/map/hub/2" in gpfn:
+		if "worlds/2" in gpfn or "hub/2" in gpfn:
 			BG.set_gradient(BG.w2a, BG.w2b)
-		elif "/map/worlds/3/" in gpfn or "/map/hub/3" in gpfn:
+		elif "worlds/3" in gpfn or "hub/3" in gpfn:
 			BG.set_gradient(BG.w3a, BG.w3b)
-		elif "/map/worlds/5/" in gpfn or "/map/hub/5" in gpfn:
+		elif "worlds/5" in gpfn or "hub/5" in gpfn:
 			BG.set_gradient(BG.w5a, BG.w5b)
+		elif "worlds/6" in gpfn or "hub/6" in gpfn:
+			BG.set_gradient(BG.w2a, BG.w2b)
 		else:
 			BG.set_gradient(BG.w1a, BG.w1b)
 
