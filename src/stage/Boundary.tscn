@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/stage/Boundary.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
@@ -15,6 +15,9 @@ extents = Vector2( 0, 0 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 0, 0 )
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 0, 0 )
+
 [node name="Boundary" type="Area2D"]
 script = ExtResource( 1 )
 
@@ -29,6 +32,9 @@ shape = SubResource( 3 )
 
 [node name="C3" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
+
+[node name="C4" type="CollisionShape2D" parent="."]
+shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false

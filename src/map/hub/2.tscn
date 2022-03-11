@@ -23,7 +23,6 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 16 )]
 position = Vector2( 350, 600 )
-zoom = Vector2( 1, 1 )
 is_moving = true
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 15 )]

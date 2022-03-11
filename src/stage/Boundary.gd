@@ -4,7 +4,8 @@ onready var c0 := $C0
 onready var c1 := $C1
 onready var c2 := $C2
 onready var c3 := $C3
-onready var shapes = [c0, c1, c2, c3]
+onready var c4 := $C4
+onready var shapes = [c0, c1, c2, c3, c4]
 onready var shapes_size : int = shapes.size()
 var active_shapes := 0
 
