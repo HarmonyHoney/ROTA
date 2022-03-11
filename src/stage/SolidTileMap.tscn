@@ -2,8 +2,8 @@
 
 [ext_resource path="res://src/stage/SolidTileMap.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
+[ext_resource path="res://src/stage/tileset/TileSet5.tres" type="TileSet" id=3]
 [ext_resource path="res://src/shader/add_color.gdshader" type="Shader" id=4]
-[ext_resource path="res://src/stage/tileset/TileSet0.tres" type="TileSet" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
@@ -45,7 +45,7 @@ script = ExtResource( 1 )
 material = SubResource( 4 )
 position = Vector2( 50, 50 )
 scale = Vector2( 0.25, 0.25 )
-tile_set = ExtResource( 5 )
+tile_set = ExtResource( 3 )
 cell_size = Vector2( 400, 400 )
 cell_custom_transform = Transform2D( 400, 0, 0, 400, 0, 0 )
 format = 1

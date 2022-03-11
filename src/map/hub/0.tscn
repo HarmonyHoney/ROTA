@@ -6,7 +6,6 @@
 [node name="Map" instance=ExtResource( 2 )]
 
 [node name="Camera2D" parent="." index="0"]
-zoom = Vector2( 1, 1 )
 is_focal_point = false
 is_zoom_out = false
 

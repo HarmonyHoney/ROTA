@@ -6,7 +6,7 @@ export var detail := 0 setget set_tileset
 
 var sets = [preload("res://src/stage/tileset/TileSet0.tres"),preload("res://src/stage/tileset/TileSet1.tres"),
 preload("res://src/stage/tileset/TileSet2.tres"),preload("res://src/stage/tileset/TileSet3.tres"),
-preload("res://src/stage/tileset/TileSet4.tres")]
+preload("res://src/stage/tileset/TileSet4.tres"),preload("res://src/stage/tileset/TileSet5.tres")]
 
 func _ready():
 	set_tileset()
@@ -19,17 +19,17 @@ func _ready():
 	
 	var gpfn = str(get_parent().filename)
 	if gpfn != "":
-		if "/map/worlds/1/" in gpfn or "/map/hub/1" in gpfn:
-			BG.set_gradient(BG.w1a, BG.w1b)
-		elif "/map/worlds/2/" in gpfn or "/map/hub/2" in gpfn:
+		if "/map/worlds/2/" in gpfn or "/map/hub/2" in gpfn:
 			BG.set_gradient(BG.w2a, BG.w2b)
 		elif "/map/worlds/3/" in gpfn or "/map/hub/3" in gpfn:
 			BG.set_gradient(BG.w3a, BG.w3b)
+		elif "/map/worlds/5/" in gpfn or "/map/hub/5" in gpfn:
+			BG.set_gradient(BG.w5a, BG.w5b)
 		else:
 			BG.set_gradient(BG.w1a, BG.w1b)
 
 func set_tileset(arg := detail):
-	detail = posmod(int(arg), 5)
+	detail = posmod(int(arg), 6)
 	if auto and detail < sets.size():
 		if sets[detail] is TileSet:
 			auto.tile_set = sets[detail]
