@@ -5,7 +5,7 @@ var time := 0.0
 
 var camera : Camera2D
 var door_dest
-var slab
+var door_goal
 var player
 
 var goal_gem
@@ -24,11 +24,11 @@ func _physics_process(delta):
 		1:
 			if time > 0.75:
 				next_step()
-				camera.target_node = slab
+				camera.target_node = door_goal
 		2:
 			if camera.global_position.distance_to(camera.target_node.global_position) < 100:
 				next_step()
-				if slab.gems_collected <= slab.gem_count:
+				if door_goal.gems_collected <= door_goal.gem_count:
 					goal_gem.fade_color()
 		3:
 			if  time > 0.75:
@@ -57,10 +57,10 @@ func begin():
 	player = Shared.player
 	camera = Shared.camera
 	door_dest = Shared.door_destination
-	slab = Shared.slab
-	goal_gem = slab.gems.get_child(slab.gems_collected - 1)
+	door_goal = Shared.door_goal
+	goal_gem = door_goal.gems.get_child(door_goal.gems_collected - 1)
 	
-	for i in [player, camera, door_dest, slab, goal_gem]:
+	for i in [player, camera, door_dest, door_goal, goal_gem]:
 		if !is_instance_valid(i):
 			return
 	
@@ -73,5 +73,5 @@ func begin():
 	door_dest.gem.set_color(false)
 	door_dest.arrow.visible = false
 	door_dest.set_process_input(false)
-	if slab.gems_collected <= slab.gem_count:
+	if door_goal.gems_collected <= door_goal.gem_count:
 		goal_gem.set_color(false)

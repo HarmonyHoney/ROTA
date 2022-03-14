@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/map/base/Actors.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=2]
@@ -13,12 +13,12 @@
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/actor/Slab.tscn" type="PackedScene" id=14]
 
 [node name="Map" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( -450, -450 )
+current = false
 is_moving = true
 focal_influence = 0.25
 
@@ -40,7 +40,7 @@ dir = 3
 position = Vector2( 300, 700 )
 rotation = 4.71239
 dir = 3
-scene_path = "res://src/map/hub/0.tscn"
+scene_path = "res://src/map/hub/4.tscn"
 
 [node name="Door1" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 300, -250 )
@@ -84,9 +84,12 @@ scene_path = "res://src/map/worlds/5/7.tscn"
 position = Vector2( 2950, 1150 )
 scene_path = "res://src/map/worlds/5/8.tscn"
 
-[node name="Slab" parent="Actors" instance=ExtResource( 14 )]
+[node name="BigDoor2" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 2700, 2300 )
-rotation = 1.57079
+rotation = 1.5708
+dir = 1
+scene_path = "res://src/map/hub/6.tscn"
+is_gem = true
 gem_count = 7
 gem_world = "res://src/map/worlds/5/"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/map/base/Actors.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://src/detail/Fence.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/actor/Slab.tscn" type="PackedScene" id=13]
 
 [node name="Map" type="Node2D"]
 
@@ -49,7 +48,7 @@ position = Vector2( -1000, 300 )
 
 [node name="BigDoor" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( -1000, 300 )
-scene_path = "res://src/map/hub/0.tscn"
+scene_path = "res://src/map/hub/5.tscn"
 
 [node name="Door1" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -1750, 950 )
@@ -108,9 +107,11 @@ position = Vector2( 1150, 1500 )
 folder_path = "res://src/map/worlds/6/"
 scene_name = "9"
 
-[node name="Slab" parent="Actors" instance=ExtResource( 13 )]
-position = Vector2( 1250, 1100 )
-gem_radius = 7.0
+[node name="BigDoor2" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 950, 1100 )
+scene_path = "res://src/map/hub/0.tscn"
+is_gem = true
+gem_count = 7
 gem_world = "res://src/map/worlds/6/"
 
 [node name="Details" type="Node2D" parent="."]

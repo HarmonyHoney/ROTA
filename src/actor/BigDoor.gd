@@ -11,6 +11,7 @@ export var scene_path := ""
 export var is_gem := false
 export var gem_count := 1
 export var gem_radius := 60.0
+export var gem_world := ""
 
 var is_active := false
 var player = null
@@ -39,7 +40,10 @@ func _ready():
 	if is_gem:
 		
 		# gems collected
-		gems_collected = Shared.slabs_completed.size()
+		if gem_world != "":
+			for i in Shared.goals_collected:
+				if i.begins_with(gem_world):
+					gems_collected += 1
 		
 		# create gems
 		for i in gem_count:

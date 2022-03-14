@@ -1,21 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/actor/Door.gd" type="Script" id=1]
-[ext_resource path="res://media/image/white_square_400x.png" type="Texture" id=2]
-[ext_resource path="res://src/shader/inside_circle.gdshader" type="Shader" id=3]
+[ext_resource path="res://media/image/details/door.png" type="Texture" id=2]
 [ext_resource path="res://media/image/box/arrow.png" type="Texture" id=4]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=5]
 [ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 50 )
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 3 )
-shader_param/radius = 0.5
-shader_param/width = 0.035
-shader_param/line_color = Color( 0, 0, 0, 1 )
-shader_param/outside_color = Color( 0, 0, 0, 0 )
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -61,26 +53,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2( 0, 15 )
-color = Color( 0.898039, 0.615686, 0.341176, 1 )
-polygon = PoolVector2Array( -40, 35, -40, -45, -35, -55, -25, -60, 25, -60, 35, -55, 40, -45, 40, 35 )
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2( 0.1, 0.1 )
 
-[node name="Line2D" type="Line2D" parent="Polygon2D"]
-position = Vector2( 25, 10 )
-points = PoolVector2Array( 0, 0, 0, 0.001 )
-width = 15.0
-default_color = Color( 1, 0.984314, 0, 1 )
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Preview" type="Node2D" parent="."]
-visible = false
-position = Vector2( 0, -250 )
-
-[node name="Sprite" type="Sprite" parent="Preview"]
-material = SubResource( 2 )
-scale = Vector2( 0.5, 0.5 )
+[node name="Door" type="Sprite" parent="Sprites"]
 texture = ExtResource( 2 )
 
 [node name="Gem" parent="." instance=ExtResource( 6 )]

@@ -14,18 +14,18 @@ is_moving = true
 is_zoom_out = false
 
 [node name="SolidTileMap0" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0 )
+tile_data = PoolIntArray( 65541, 0, 0, 65547, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0 )
 
 [node name="SolidTileMap1" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 65550, 0, 0, 65551, 0, 0, 65552, 0, 0, 65553, 0, 0, 65554, 0, 0, 131086, 0, 0, 131087, 0, 0, 131088, 0, 0, 131089, 0, 0, 131090, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 0, 0, 196625, 0, 0, 196626, 0, 0, 262158, 0, 0, 262159, 0, 0, 262160, 0, 0, 262161, 0, 0, 262162, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0 )
+tile_data = PoolIntArray( -196595, 0, 0, -196594, 0, 0, -196593, 0, 0, -131059, 0, 0, -131058, 0, 0, -131057, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 0, 0 )
 detail = 1
 
 [node name="SolidTileMap2" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 196630, 0, 0, 196631, 0, 0, 196632, 0, 0, 196633, 0, 0, 196634, 0, 0, 262166, 0, 0, 262167, 0, 0, 262168, 0, 0, 262169, 0, 0, 262170, 0, 0, 327702, 0, 0, 327703, 0, 0, 327704, 0, 0, 327705, 0, 0, 327706, 0, 0, 393238, 0, 0, 393239, 0, 0, 393240, 0, 0, 393241, 0, 0, 393242, 0, 0, 458774, 0, 0, 458775, 0, 0, 458776, 0, 0, 458777, 0, 0, 458778, 0, 0 )
+tile_data = PoolIntArray( -589817, 0, 0, -589816, 0, 0, -589815, 0, 0, -524281, 0, 0, -524280, 0, 0, -524279, 0, 0, -458745, 0, 0, -458744, 0, 0, -458743, 0, 0, -327669, 0, 0 )
 detail = 2
 
 [node name="SolidTileMap3" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 327710, 0, 0, 327711, 0, 0, 327712, 0, 0, 327713, 0, 0, 327714, 0, 0, 393246, 0, 0, 393247, 0, 0, 393248, 0, 0, 393249, 0, 0, 393250, 0, 0, 458782, 0, 0, 458783, 0, 0, 458784, 0, 0, 458785, 0, 0, 458786, 0, 0, 524318, 0, 0, 524319, 0, 0, 524320, 0, 0, 524321, 0, 0, 524322, 0, 0, 589854, 0, 0, 589855, 0, 0, 589856, 0, 0, 589857, 0, 0, 589858, 0, 0 )
+tile_data = PoolIntArray( -327675, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0 )
 detail = 3
 
 [node name="SolidTileMap4" parent="." instance=ExtResource( 5 )]
@@ -41,26 +41,28 @@ script = ExtResource( 1 )
 position = Vector2( 950, 250 )
 
 [node name="BigDoor1" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 950, 200 )
+position = Vector2( 850, 200 )
 scene_path = "res://src/map/hub/1.tscn"
 
 [node name="BigDoor2" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 1650, 700 )
-rotation = 3.14159
-dir = 2
+position = Vector2( 1200, -150 )
+rotation = 4.71239
+dir = 3
 scene_path = "res://src/map/hub/2.tscn"
 is_gem = true
 
 [node name="BigDoor3" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 2450, 200 )
+position = Vector2( 850, -500 )
+rotation = 3.14159
+dir = 2
 scene_path = "res://src/map/hub/3.tscn"
 is_gem = true
 gem_count = 2
 
 [node name="BigDoor4" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 3250, 1100 )
-rotation = 3.14159
-dir = 2
+position = Vector2( 500, -150 )
+rotation = 1.5708
+dir = 1
 scene_path = "res://src/map/hub/4.tscn"
 is_gem = true
 gem_count = 3

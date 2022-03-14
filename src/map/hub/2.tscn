@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/detail/Fence.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=10]
-[ext_resource path="res://media/image/details/plantpot.png" type="Texture" id=11]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=12]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=13]
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=14]
@@ -18,12 +17,11 @@
 [ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/map/base/Actors.gd" type="Script" id=18]
-[ext_resource path="res://src/actor/Slab.tscn" type="PackedScene" id=19]
 
 [node name="Map" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 16 )]
-position = Vector2( 350, 600 )
+position = Vector2( 0, 800 )
 is_moving = true
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 15 )]
@@ -46,7 +44,7 @@ rotation = 1.5708
 z_index = -50
 z_as_relative = false
 dir = 1
-scene_path = "res://src/map/hub/0.tscn"
+scene_path = "res://src/map/hub/1.tscn"
 
 [node name="Door1" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -1150, 1250 )
@@ -86,9 +84,12 @@ rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/worlds/2/7.tscn"
 
-[node name="Slab" parent="Actors" instance=ExtResource( 19 )]
+[node name="BigDoor2" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( -1600, 2900 )
 rotation = 3.14159
+dir = 2
+scene_path = "res://src/map/hub/3.tscn"
+is_gem = true
 gem_count = 7
 gem_world = "res://src/map/worlds/2/"
 
@@ -243,12 +244,6 @@ position = Vector2( -1900, 1700 )
 rotation = -1.57079
 length = 7
 is_offset = true
-
-[node name="Plantpot" type="Sprite" parent="Details"]
-position = Vector2( 250, 700 )
-scale = Vector2( 0.1, 0.1 )
-z_as_relative = false
-texture = ExtResource( 11 )
 
 [node name="FlowerPetals" parent="Details" instance=ExtResource( 10 )]
 position = Vector2( -1964.88, 1606.54 )

@@ -2,9 +2,7 @@ tool
 extends Node2D
 
 onready var area : Area2D = $Area2D
-onready var door := $Polygon2D
 onready var arrow := $Arrow
-#onready var arrow_back := $Arrow/Back
 onready var gem := $Gem
 
 export var dir := 0 setget set_dir
