@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/map/base/Actors.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=13]
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=14]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=15]
+[ext_resource path="res://src/detail/Snowman.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/actor/Slab.tscn" type="PackedScene" id=17]
 
 [node name="Map" type="Node2D"]
 
@@ -40,7 +42,7 @@ dir = 3
 position = Vector2( -300, 750 )
 rotation = 4.71239
 dir = 3
-scene_path = "res://src/map/hub/2.tscn"
+scene_path = "res://src/map/hub/0.tscn"
 
 [node name="Door1" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -250, 50 )
@@ -50,7 +52,7 @@ scene_path = "res://src/map/worlds/3/1.tscn"
 hub_color = Color( 1, 1, 1, 1 )
 
 [node name="Door2" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 300, -250 )
+position = Vector2( 250, -250 )
 scene_path = "res://src/map/worlds/3/2.tscn"
 hub_color = Color( 1, 1, 1, 1 )
 
@@ -74,12 +76,9 @@ position = Vector2( 650, 950 )
 scene_path = "res://src/map/worlds/3/5.tscn"
 hub_color = Color( 1, 1, 1, 1 )
 
-[node name="BigDoor2" parent="Actors" instance=ExtResource( 3 )]
+[node name="Slab" parent="Actors" instance=ExtResource( 17 )]
 position = Vector2( 1000, 600 )
-rotation = 4.71239
-dir = 3
-scene_path = "res://src/map/hub/4.tscn"
-is_gem = true
+rotation = -1.5708
 gem_count = 4
 gem_world = "res://src/map/worlds/3/"
 
@@ -197,23 +196,23 @@ position = Vector2( 1050, -150 )
 scale = Vector2( 0.436193, 0.436193 )
 texture = ExtResource( 13 )
 
-[node name="RoundRock11" type="Sprite" parent="Details"]
-modulate = Color( 100, 100, 100, 1 )
-position = Vector2( 650, 1350 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 13 )
+[node name="Snowman" parent="Details" instance=ExtResource( 16 )]
+position = Vector2( 600, 1300 )
+rotation = 3.14159
+scale = Vector2( 0.3, 0.3 )
 
-[node name="RoundRock12" type="Sprite" parent="Details/RoundRock11"]
-modulate = Color( 100, 100, 100, 1 )
-position = Vector2( 0, 280 )
-scale = Vector2( 0.768812, 0.768812 )
-texture = ExtResource( 13 )
+[node name="Snowman4" parent="Details" instance=ExtResource( 16 )]
+position = Vector2( 600, 700 )
+rotation = 7.85397
+scale = Vector2( 0.3, 0.3 )
 
-[node name="RoundRock13" type="Sprite" parent="Details/RoundRock11"]
-modulate = Color( 100, 100, 100, 1 )
-position = Vector2( 0, 520 )
-scale = Vector2( 0.603188, 0.603188 )
-texture = ExtResource( 13 )
+[node name="Snowman2" parent="Details" instance=ExtResource( 16 )]
+position = Vector2( 400, -200 )
+scale = Vector2( 0.3, 0.3 )
+
+[node name="Snowman3" parent="Details" instance=ExtResource( 16 )]
+position = Vector2( 1500, 300 )
+scale = Vector2( -0.3, 0.3 )
 
 [node name="Bench2" parent="Details" instance=ExtResource( 5 )]
 position = Vector2( 50, -250 )
@@ -351,7 +350,7 @@ rotation = -2.35619
 palette = 3
 
 [node name="Flower3" parent="Details" instance=ExtResource( 6 )]
-position = Vector2( 450, -200 )
+position = Vector2( 500, -200 )
 palette = 4
 
 [node name="Flower9" parent="Details" instance=ExtResource( 6 )]
@@ -403,11 +402,6 @@ rotation = -1.57079
 z_index = -5
 palette = 5
 
-[node name="Flower13" parent="Details" instance=ExtResource( 6 )]
-position = Vector2( 600, 700 )
-rotation = -4.71238
-palette = 4
-
 [node name="Flower15" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 300, 650 )
 rotation = -4.45058
@@ -421,6 +415,7 @@ palette = 5
 [node name="Flower16" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 400, 900 )
 rotation = -5.49778
+palette = 4
 
 [node name="Flower17" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 500, 1000 )

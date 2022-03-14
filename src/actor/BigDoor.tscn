@@ -76,6 +76,24 @@ position = Vector2( -2.5, 15 )
 color = Color( 0.707031, 0.394749, 0.0911407, 1 )
 polygon = PoolVector2Array( 0, 85, 0, -115, 5, -115, 5, 85 )
 
+[node name="Knob" type="Line2D" parent="Doors"]
+visible = false
+position = Vector2( 25, 55 )
+points = PoolVector2Array( 0, 0, 0, 0.001 )
+width = 15.0
+default_color = Color( 1, 0.984314, 0, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Knob2" type="Line2D" parent="Doors"]
+visible = false
+position = Vector2( -25, 55 )
+points = PoolVector2Array( 0, 0, 0, 0.001 )
+width = 15.0
+default_color = Color( 1, 0.984314, 0, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="Gems" type="Node2D" parent="."]
 
 [node name="Gem" parent="Gems" instance=ExtResource( 2 )]
