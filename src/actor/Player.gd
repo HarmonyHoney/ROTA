@@ -92,6 +92,7 @@ var goal_clock := 0.0
 var goal_times := [0.2, 0.3, 0.5]
 var goal_step := 0
 var hand_positions := [Vector2.ZERO, Vector2.ZERO]
+var goal_start := Vector2.ZERO
 
 
 func _enter_tree():
@@ -208,6 +209,12 @@ func _physics_process(delta):
 				0:
 					spr_hand_l.global_position = hand_positions[0].linear_interpolate(p1, s)
 					spr_hand_r.global_position = hand_positions[1].linear_interpolate(p2, s)
+					
+					var move_to = goal_start.linear_interpolate(goal.start_pos, s)
+					var diff = move_to - position
+					
+					move_and_collide(Vector2(diff.x, 0))
+					move_and_collide(Vector2(0, diff.y))
 				1:
 					goal.position = goal.start_pos.linear_interpolate(position + rot(Vector2(0, -100)), s)
 					spr_hand_l.global_position = p1
@@ -226,6 +233,9 @@ func _physics_process(delta):
 					goal.gem.z_as_relative = false
 					goal.is_follow = true
 					release_anim()
+					
+					has_jumped = true
+					is_floor = false
 	
 	# holding box
 	elif is_hold:
@@ -243,11 +253,11 @@ func _physics_process(delta):
 				
 				hold_pos = box.position + rot(Vector2(88 * -dir_x, 49 - collider_size.y))
 				var smooth = smoothstep(0, 1, push_clock / push_time)
-				var new_pos = push_from.linear_interpolate(hold_pos, smooth)
-				var move_to = new_pos - position
+				var move_to = push_from.linear_interpolate(hold_pos, smooth)
+				var diff = move_to - position
 				
-				move_and_collide(Vector2(move_to.x, 0))
-				move_and_collide(Vector2(0, move_to.y))
+				move_and_collide(Vector2(diff.x, 0))
+				move_and_collide(Vector2(0, diff.y))
 				
 				# wobble body
 				spr_root.rotation = lerp_angle(deg2rad(12 * -push_dir), 0, abs(0.5 - smooth) * 2.0)
@@ -549,10 +559,15 @@ func _on_BodyArea_area_entered(area):
 	
 	# pickup goal
 	if !is_goal and p.is_in_group("goal") and !p.is_collected:
-		is_goal = true
 		goal = p
 		goal.pickup(self)
+		
+		is_goal = true
+		has_jumped = true
+		is_floor = false
 		velocity = Vector2.ZERO
+		goal_start = position
+		
 		#anim.play("idle")
 		anim.stop()
 		

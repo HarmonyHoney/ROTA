@@ -18,7 +18,6 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( -450, -450 )
-current = false
 is_moving = true
 focal_influence = 0.25
 
