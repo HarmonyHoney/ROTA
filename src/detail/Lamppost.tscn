@@ -12,11 +12,12 @@ script = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
+offset = Vector2( 0, -400 )
 
 [node name="Circle" type="Node2D" parent="."]
 modulate = Color( 0.996078, 1, 0.909804, 0.4 )
-position = Vector2( 0, -56.7307 )
-scale = Vector2( 0.921161, 0.921161 )
+position = Vector2( 0, -154.893 )
+scale = Vector2( 0.900506, 0.900506 )
 z_index = 100
 z_as_relative = false
 script = ExtResource( 1 )

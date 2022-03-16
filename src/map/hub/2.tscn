@@ -108,26 +108,26 @@ rotation = -4.71239
 scale = Vector2( -1, 1 )
 
 [node name="Lamppost" parent="Details" instance=ExtResource( 5 )]
-position = Vector2( -1000, 1200 )
+position = Vector2( -1000, 1300 )
 
 [node name="Lamppost5" parent="Details" instance=ExtResource( 5 )]
-position = Vector2( -1350, 2900 )
+position = Vector2( -1350, 2800 )
 rotation = 3.14159
 
 [node name="Lamppost6" parent="Details" instance=ExtResource( 5 )]
-position = Vector2( -1850, 2900 )
+position = Vector2( -1850, 2800 )
 rotation = 3.14159
 
 [node name="Lamppost2" parent="Details" instance=ExtResource( 5 )]
-position = Vector2( -2000, 1500 )
+position = Vector2( -1900, 1500 )
 rotation = -1.57079
 
 [node name="Lamppost3" parent="Details" instance=ExtResource( 5 )]
-position = Vector2( -950, 2450 )
+position = Vector2( -875, 2375 )
 rotation = -2.35619
 
 [node name="Lamppost4" parent="Details" instance=ExtResource( 5 )]
-position = Vector2( 100, 2450 )
+position = Vector2( 0, 2450 )
 rotation = -4.71239
 
 [node name="Candle2" parent="Details" instance=ExtResource( 6 )]

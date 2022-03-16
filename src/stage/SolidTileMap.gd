@@ -19,7 +19,7 @@ func _ready():
 	
 	var gpfn = str(get_parent().filename)
 	if gpfn != "":
-		if "worlds/2" in gpfn or "hub/2" in gpfn:
+		if "worlds/2" in gpfn or "hub/2" in gpfn or "hub/0" in gpfn:
 			BG.set_gradient(BG.w2a, BG.w2b)
 		elif "worlds/3" in gpfn or "hub/3" in gpfn:
 			BG.set_gradient(BG.w3a, BG.w3b)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/map/base/Actors.gd" type="Script" id=1]
 [ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=7]
 
 [node name="Map" type="Node2D"]
 
@@ -25,7 +26,12 @@ script = ExtResource( 1 )
 position = Vector2( 350, 250 )
 
 [node name="BigDoor1" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 850, 700 )
+position = Vector2( 950, 700 )
 rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/hub/1.tscn"
+
+[node name="Details" type="Node2D" parent="."]
+
+[node name="Candle" parent="Details" instance=ExtResource( 7 )]
+position = Vector2( 200, 300 )

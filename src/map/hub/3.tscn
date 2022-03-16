@@ -429,7 +429,7 @@ position = Vector2( 700, 500 )
 rotation = -7.06857
 
 [node name="Lamppost" parent="Details" instance=ExtResource( 7 )]
-position = Vector2( 150, -300 )
+position = Vector2( 150, -200 )
 
 [node name="Candle" parent="Details" instance=ExtResource( 12 )]
 position = Vector2( 1050, -300 )
