@@ -1,21 +1,51 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/detail/Light.gd" type="Script" id=1]
 [ext_resource path="res://media/image/details/lamppost.png" type="Texture" id=2]
+[ext_resource path="res://src/detail/Spring.gd" type="Script" id=3]
+[ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.0
+height = 180.0
 
 [node name="Lamppost" type="Node2D"]
 z_index = -40
 z_as_relative = false
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Sprites"]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -400 )
 
-[node name="Circle" type="Node2D" parent="."]
+[node name="Circle" type="Node2D" parent="Sprites"]
 modulate = Color( 0.996078, 1, 0.909804, 0.4 )
 position = Vector2( 0, -155 )
 z_index = 100
 z_as_relative = false
 script = ExtResource( 1 )
 radius = 200.0
+
+[node name="Spring" type="Node2D" parent="."]
+script = ExtResource( 3 )
+sprites_path = NodePath("../Sprites")
+add_vel = 1.25
+weight = 3.5
+audio_path = NodePath("Hit")
+pitch_from = 0.25
+pitch_to = 0.5
+
+[node name="Area2D" type="Area2D" parent="Spring"]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spring/Area2D"]
+position = Vector2( 0, -100 )
+shape = SubResource( 1 )
+
+[node name="Hit" type="AudioStreamPlayer" parent="Spring"]
+stream = ExtResource( 4 )
+
+[connection signal="area_entered" from="Spring/Area2D" to="Spring" method="_on_Area2D_area_entered"]

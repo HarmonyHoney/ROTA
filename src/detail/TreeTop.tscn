@@ -23,8 +23,8 @@ add_vel = 0.012
 weight = 8.0
 cooldown_time = 0.8
 audio_path = NodePath("../Audio/Hit")
-pitch_from = 0.5
-pitch_to = 0.9
+pitch_from = 0.25
+pitch_to = 0.5
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.494118, 0.890196, 0.337255, 1 )
