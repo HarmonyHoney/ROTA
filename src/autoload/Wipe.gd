@@ -2,6 +2,7 @@ extends CanvasLayer
 
 onready var anim : AnimationPlayer = $AnimationPlayer
 onready var sprite : Sprite = $Sprite
+onready var audio := $AudioStreamPlayer
 
 var shader_scale = 100.0
 
@@ -27,3 +28,9 @@ func start(wipe_in := false):
 	anim.play("in") if wipe_in else anim.play("out")
 	anim.advance(0)
 	emit_signal("start_wipe_in") if wipe_in else emit_signal("start_wipe_out")
+	
+	if !wipe_in:
+		audio.pitch_scale = rand_range(0.9, 1.1)
+		audio.play()
+		pass
+	

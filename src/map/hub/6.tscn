@@ -18,7 +18,7 @@
 [ext_resource path="res://src/detail/PineTree.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/detail/Snowman.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=18]
-[ext_resource path="res://src/actor/Circle.gd" type="Script" id=19]
+[ext_resource path="res://src/detail/Light.gd" type="Script" id=19]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=20]
 [ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=21]
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=22]
@@ -46,11 +46,11 @@ tile_data = PoolIntArray( 589839, 0, 0, 589840, 0, 0, 589841, 0, 0, 589842, 0, 0
 detail = 2
 
 [node name="SolidTileMap3" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 1376228, 0, 0, 1376229, 0, 0, 1441764, 0, 0, 1441765, 0, 0, 1507299, 0, 0, 1507300, 0, 0, 1507301, 0, 0, 1572835, 0, 0, 1572836, 0, 0, 1572837, 0, 0, 1834985, 0, 0, 1834986, 0, 0, 1834987, 0, 0, 1834988, 0, 0, 1900521, 0, 0, 1900522, 0, 0, 1900523, 0, 0, 1900524, 0, 0, 1966057, 0, 0, 1966058, 0, 0, 2031593, 0, 0, 2031594, 0, 0 )
+tile_data = PoolIntArray( 1310688, -1073741824, 0, 1376228, 0, 0, 1376229, 0, 0, 1441764, 0, 0, 1441765, 0, 0, 1507299, 0, 0, 1507300, 0, 0, 1507301, 0, 0, 1572835, 0, 0, 1572836, 0, 0, 1572837, 0, 0, 1834985, 0, 0, 1834986, 0, 0, 1834987, 0, 0, 1834988, 0, 0, 1900516, -1073741824, 0, 1900521, 0, 0, 1900522, 0, 0, 1900523, 0, 0, 1900524, 0, 0, 1966057, 0, 0, 1966058, 0, 0, 2031593, 0, 0, 2031594, 0, 0, 2097135, -1073741824, 0 )
 detail = 3
 
 [node name="SpikeMap" parent="." instance=ExtResource( 7 )]
-tile_data = PoolIntArray( 720891, 0, 0, 720892, 0, 0, 720893, 0, 0, 720894, 0, 0, 720895, 0, 0, 655360, 0, 0, 655361, 0, 0, 851965, 1610612736, 0, 851966, 1610612736, 0, 851967, 1610612736, 0 )
+tile_data = PoolIntArray( 720891, 0, 0, 720892, 0, 0, 720893, 0, 0, 720894, 0, 0, 720895, 0, 0, 655360, 0, 0, 655361, 0, 0, 851965, 1610612736, 0, 851966, 1610612736, 0, 851967, 1610612736, 0, 1245152, 0, 0, 1310687, -1073741824, 0, 1310689, -1610612736, 0, 1376224, 1610612736, 0, 1834980, 0, 0, 1900515, -1073741824, 0, 1900517, -1610612736, 0, 1966052, 1610612736, 0, 2031599, 0, 0, 2097134, -1073741824, 0, 2097136, -1610612736, 0, 2162671, 1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -125,7 +125,7 @@ scene_name = "9"
 position = Vector2( 550, 3000 )
 rotation = 3.14159
 dir = 2
-scene_path = "res://src/map/hub/0.tscn"
+scene_path = "res://src/map/hub/7.tscn"
 is_gem = true
 gem_count = 8
 gem_world = "res://src/map/worlds/6/"
@@ -139,8 +139,20 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 22 )
 
 [node name="Rocks3" type="Sprite" parent="Rocks"]
-position = Vector2( -3300, 1396.3 )
+position = Vector2( -2700, 1400 )
 rotation = -3.14159
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 22 )
+
+[node name="Rocks4" type="Sprite" parent="Rocks"]
+position = Vector2( -2700, 2300 )
+rotation = -4.71238
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 22 )
+
+[node name="Rocks5" type="Sprite" parent="Rocks"]
+position = Vector2( -2000, 2800 )
+rotation = -6.28318
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 22 )
 
@@ -151,9 +163,15 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 22 )
 
 [node name="Rock2" type="Sprite" parent="Rocks"]
-position = Vector2( -3200, 1246.3 )
+position = Vector2( -2550, 1050 )
 rotation = -0.785397
-scale = Vector2( 0.163685, 0.163685 )
+scale = Vector2( 0.336814, 0.336814 )
+texture = ExtResource( 20 )
+
+[node name="Rock7" type="Sprite" parent="Rocks"]
+position = Vector2( -1925, 625 )
+rotation = -0.785397
+scale = Vector2( 0.266776, 0.266776 )
 texture = ExtResource( 20 )
 
 [node name="Rock6" type="Sprite" parent="Rocks"]
@@ -180,9 +198,20 @@ rotation = -2.35619
 scale = Vector2( 0.355864, 0.355864 )
 texture = ExtResource( 20 )
 
+[node name="Rock8" type="Sprite" parent="Rocks"]
+position = Vector2( -2200, 3000 )
+rotation = -3.14159
+scale = Vector2( 0.190597, 0.190597 )
+texture = ExtResource( 20 )
+
 [node name="RoundRock4" type="Sprite" parent="Rocks"]
-position = Vector2( -3100, 1396.3 )
-scale = Vector2( 0.290449, 0.290449 )
+position = Vector2( -2600, 1700 )
+scale = Vector2( 0.208641, 0.208641 )
+texture = ExtResource( 21 )
+
+[node name="RoundRock6" type="Sprite" parent="Rocks"]
+position = Vector2( -1687.5, 1187.5 )
+scale = Vector2( 0.278481, 0.278481 )
 texture = ExtResource( 21 )
 
 [node name="RoundRock5" type="Sprite" parent="Rocks"]

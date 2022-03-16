@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://media/image/details/TreeTop.png" type="Texture" id=1]
-[ext_resource path="res://src/detail/TreeTop.gd" type="Script" id=2]
+[ext_resource path="res://src/detail/PaletteSwap.gd" type="Script" id=2]
+[ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=3]
+[ext_resource path="res://src/detail/Spring.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 175.0
@@ -11,6 +13,18 @@ z_index = -50
 z_as_relative = false
 script = ExtResource( 2 )
 palette = 2
+sprite_path = NodePath("Sprite")
+
+[node name="Spring" type="Node2D" parent="."]
+script = ExtResource( 4 )
+sprites_path = NodePath("../Sprite")
+is_scale = true
+add_vel = 0.012
+weight = 8.0
+cooldown_time = 0.8
+audio_path = NodePath("../Audio/Hit")
+pitch_from = 0.5
+pitch_to = 0.9
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.494118, 0.890196, 0.337255, 1 )
@@ -24,4 +38,9 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 3 )
+
+[connection signal="area_entered" from="Area2D" to="Spring" method="_on_Area2D_area_entered"]

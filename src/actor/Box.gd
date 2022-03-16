@@ -8,6 +8,8 @@ onready var push_areas : Array = $PushAreas.get_children()
 onready var sprite : Node2D = $Sprites
 onready var box_sprite : Sprite = $Sprites/Box
 onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
+onready var audio_move := $Audio/Move
+onready var audio_land := $Audio/Land
 
 export var dir := 0 setget set_dir
 var dir_last := 0
@@ -109,6 +111,10 @@ func _physics_process(delta):
 			sprite.rotation = lerp_angle(turn_to + deg2rad(12 * -push_x), turn_to, abs(0.5 - smooth) * 2.0)
 			
 			#sprite.scale = Vector2.ONE *  lerp(0.9, 1.0, smooth)
+		
+		if move_clock == target and !is_hold and is_floor:
+			audio_land.pitch_scale = rand_range(0.7, 1.3)
+			audio_land.play()
 	
 	# turn clock
 	elif turn_clock != turn_time:
@@ -134,6 +140,9 @@ func _physics_process(delta):
 		# move down
 		if !is_hold and !is_floor:
 			move_tile(dir, 1)
+			
+			audio_move.pitch_scale = rand_range(0.7, 1.3)
+			audio_move.play()
 			
 			#if test_tile(dir, 1):
 			#	pickup_clock = 0.0

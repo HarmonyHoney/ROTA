@@ -21,6 +21,8 @@ func _physics_process(delta):
 			if time > 0.15:
 				next_step()
 				door_dest.gem.fade_color()
+				door_dest.audio_collect.pitch_scale = rand_range(0.8, 1.2)
+				door_dest.audio_collect.play()
 		1:
 			if time > 0.75:
 				next_step()
@@ -30,6 +32,8 @@ func _physics_process(delta):
 				next_step()
 				if door_goal.gems_collected <= door_goal.gem_count:
 					goal_gem.fade_color()
+					door_dest.audio_collect.pitch_scale = rand_range(0.9, 1.3)
+					door_dest.audio_collect.play()
 		3:
 			if  time > 0.75:
 				next_step()
@@ -58,6 +62,10 @@ func begin():
 	camera = Shared.camera
 	door_dest = Shared.door_destination
 	door_goal = Shared.door_goal
+	
+	if door_goal.gems_collected > door_goal.gems.get_child_count():
+		return
+	
 	goal_gem = door_goal.gems.get_child(door_goal.gems_collected - 1)
 	
 	for i in [player, camera, door_dest, door_goal, goal_gem]:

@@ -144,125 +144,102 @@ palette = 3
 
 [node name="Flower" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 550, 200 )
-cooldown_time = 0.8
 
 [node name="Flower14" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( -100, 800 )
 rotation = -1.57079
 palette = 4
-cooldown_time = 0.8
 
 [node name="Flower15" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( -100, 500 )
 rotation = -1.57079
 palette = 2
-cooldown_time = 0.8
 
 [node name="Flower11" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 550, 800 )
 rotation = 3.14159
 palette = 3
-cooldown_time = 0.8
 
 [node name="Flower12" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 750, 800 )
 rotation = 3.14159
 palette = 4
-cooldown_time = 0.8
 
 [node name="Flower13" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 1000, 900 )
 rotation = 4.71238
 palette = 2
-cooldown_time = 0.8
 
 [node name="Flower10" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 50, 1300 )
 rotation = -3.14159
 z_index = 1
 palette = 0
-cooldown_time = 0.8
 is_pot = true
 
 [node name="Flower16" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 200, 1000 )
 rotation = -4.71238
 palette = 5
-cooldown_time = 0.8
 
 [node name="Flower17" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 200, 1150 )
 rotation = -4.71238
-cooldown_time = 0.8
 
 [node name="Flower6" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 2050, 1100 )
 palette = 2
-cooldown_time = 0.8
 
 [node name="Flower7" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 2190, 1110 )
 rotation = 1.0472
 palette = 3
-cooldown_time = 0.8
 
 [node name="Flower9" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 1400, 1500 )
 rotation = -1.57079
 palette = 0
-cooldown_time = 0.8
 
 [node name="Flower8" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 2200, 1250 )
 rotation = 1.57079
 palette = 4
-cooldown_time = 0.8
 
 [node name="Flower5" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 1200, 650 )
 rotation = 1.57079
-cooldown_time = 0.8
 
 [node name="Flower2" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 1150, 200 )
 palette = 2
-cooldown_time = 0.8
 
 [node name="Flower3" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 1700, 250 )
 rotation = 1.57079
 palette = 4
-cooldown_time = 0.8
 
 [node name="Flower4" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 1500, 400 )
 rotation = 3.14159
 palette = 3
-cooldown_time = 0.8
 
 [node name="TreeTop" parent="Details" instance=ExtResource( 8 )]
 position = Vector2( 1350, 300 )
-cooldown_time = 0.6
 
 [node name="TreeTop5" parent="Details" instance=ExtResource( 8 )]
 position = Vector2( 200, 1050 )
-cooldown_time = 0.6
 
 [node name="TreeTop6" parent="Details" instance=ExtResource( 8 )]
 position = Vector2( 850, 800 )
-cooldown_time = 0.6
 
 [node name="TreeTop8" parent="Details" instance=ExtResource( 8 )]
 position = Vector2( 1500, 1200 )
-cooldown_time = 0.6
 
 [node name="TreeTop9" parent="Details" instance=ExtResource( 8 )]
 position = Vector2( 1600, 1400 )
-cooldown_time = 0.6
 
 [node name="TreeTop7" parent="Details" instance=ExtResource( 8 )]
 position = Vector2( 450, 400 )
-cooldown_time = 0.6
 
 [node name="Rocks" type="Sprite" parent="Details"]
 position = Vector2( -100, 1000 )

@@ -4,6 +4,8 @@ extends Node2D
 onready var area : Area2D = $Area2D
 onready var arrow := $Arrow
 onready var gem := $Gem
+onready var audio_open := $Audio/Open
+onready var audio_collect := $Audio/Collect
 
 export var dir := 0 setget set_dir
 export var scene_path := ""
@@ -92,6 +94,10 @@ func enter_door():
 			if goal.is_collected and !Shared.goals_collected.has(Shared.csfn):
 				Shared.goals_collected.append(Shared.csfn)
 				Shared.is_collect = true
+	
+	
+	audio_open.pitch_scale = rand_range(0.9, 1.1)
+	audio_open.play()
 	
 	if not "hub" in scene_path:
 		Shared.is_show_goal = true

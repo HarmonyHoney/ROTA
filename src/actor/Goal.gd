@@ -4,6 +4,8 @@ onready var sprites = $Sprites
 onready var gem := $Sprites/Gem
 onready var area = $Area2D
 onready var start_pos := position
+onready var audio_coin := $Audio/Coin
+onready var audio_collect := $Audio/Collect
 
 var player = null
 var is_collected := false
@@ -36,3 +38,5 @@ func pickup(ply):
 	gem.z_as_relative = true
 	area.set_deferred("monitorable", false)
 	#area.monitorable = false
+	
+	audio_collect.play()

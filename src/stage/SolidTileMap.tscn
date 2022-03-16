@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/stage/SolidTileMap.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
-[ext_resource path="res://src/stage/tileset/TileSet5.tres" type="TileSet" id=3]
+[ext_resource path="res://src/stage/tileset/TileSet0.tres" type="TileSet" id=3]
 [ext_resource path="res://src/shader/add_color.gdshader" type="Shader" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]

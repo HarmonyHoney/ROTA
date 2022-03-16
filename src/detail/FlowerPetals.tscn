@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://src/detail/FlowerPetals.gd" type="Script" id=1]
+[ext_resource path="res://src/detail/PaletteSwap.gd" type="Script" id=1]
 [ext_resource path="res://media/image/details/FlowerPetals.png" type="Texture" id=2]
+[ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=3]
+[ext_resource path="res://src/detail/Spring.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 35.0
@@ -10,6 +12,14 @@ radius = 35.0
 z_index = -10
 z_as_relative = false
 script = ExtResource( 1 )
+palette = 1
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )
+sprite_path = NodePath("Sprites/Petals")
+
+[node name="Spring" type="Node2D" parent="."]
+script = ExtResource( 4 )
+sprites_path = NodePath("../Sprites")
+audio_path = NodePath("../Audio/Hit")
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -26,4 +36,9 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 3 )
+
+[connection signal="area_entered" from="Area2D" to="Spring" method="_on_Area2D_area_entered"]

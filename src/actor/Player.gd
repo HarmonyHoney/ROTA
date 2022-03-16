@@ -21,6 +21,17 @@ onready var debug_label : Label = $DebugCanvas/Labels/Label
 export var is_debug := false setget set_debug
 var readout = []
 
+onready var audio_pickup := $Audio/Pickup
+onready var audio_drop := $Audio/Drop
+onready var audio_push := $Audio/Push
+onready var audio_turn := $Audio/Turn
+onready var audio_jump := $Audio/Jump
+onready var audio_land := $Audio/Land
+onready var audio_fallout := $Audio/FallOut
+onready var audio_spike := $Audio/Spike
+onready var audio_around := $Audio/Around
+
+
 export var is_input := true
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
@@ -57,6 +68,7 @@ var jump_speed := 0.0
 var jump_gravity := 0.0
 var fall_gravity := 0.0
 var jump_clock := 0.0
+var air_clock := 0.0
 
 var is_dead := false
 var is_exit := false
@@ -191,7 +203,14 @@ func _physics_process(delta):
 	# check floor
 	is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN * (50 if is_hold else 1)))
 	if is_floor:
+		if air_clock > 0.4:
+			audio_land.pitch_scale = rand_range(0.7, 1.1)
+			audio_land.play()
+		
+		air_clock = 0.0
 		has_jumped = false
+	else:
+		air_clock += delta
 
 	# pickup goal
 	if is_goal:
@@ -226,6 +245,9 @@ func _physics_process(delta):
 			if goal_clock == limit:
 				goal_step += 1
 				goal_clock = 0.0
+				
+				if goal_step == 2:
+					goal.audio_coin.play()
 				
 				# finished
 				if goal_step > 2:
@@ -290,6 +312,9 @@ func _physics_process(delta):
 							push_dir = joy_q.x
 							box.push_x = joy_q.x
 							print("push successful")
+							
+							audio_push.pitch_scale = rand_range(0.7, 1.3)
+							audio_push.play()
 						else:
 							print("push failed")
 				
@@ -297,6 +322,9 @@ func _physics_process(delta):
 				elif box.can_spin and joy_q.y != 0:
 					box_turn = joy_q.y * -dir_x
 					box.dir += box_turn
+					
+					audio_turn.pitch_scale = rand_range(0.9, 1.3)
+					audio_turn.play()
 				
 				joy_q = Vector2.ZERO
 		
@@ -342,6 +370,10 @@ func _physics_process(delta):
 			Guide.set_box(null)
 			
 			release_anim()
+			
+			
+			audio_pickup.pitch_scale = rand_range(0.7, 1.3)
+			audio_pickup.play()
 	
 	# not holding
 	else:
@@ -383,6 +415,9 @@ func _physics_process(delta):
 					has_jumped = true
 					velocity.y = jump_speed
 					jump_clock = 0.0
+					
+					audio_jump.pitch_scale = rand_range(0.9, 1.1)
+					audio_jump.play()
 				
 				# start hold
 				elif btn_push and hold_clock == hold_cooldown:
@@ -417,6 +452,10 @@ func _physics_process(delta):
 							#anim.play("RESET")
 							anim.stop()
 							
+							audio_pickup.pitch_scale = rand_range(0.7, 1.3)
+							audio_pickup.play()
+							
+							
 							break
 				
 			# in the air
@@ -449,6 +488,7 @@ func _physics_process(delta):
 			# move body
 			move_velocity = move_and_slide(rot(velocity))
 			velocity = rot(move_velocity, -dir)
+			
 	
 	
 	# debug label
@@ -529,6 +569,9 @@ func walk_around(right := false):
 	move_and_collide(rot(Vector2.DOWN))
 	set_dir(dir + (1 if right else 3))
 	velocity.x = (walk_speed if right else -walk_speed) * 0.72
+	
+	audio_around.pitch_scale = rand_range(0.9, 1.3)
+	audio_around.play()
 
 func hit_effector(pos : Vector2):
 	move_and_collide(pos - position)
@@ -596,6 +639,9 @@ func die():
 		Guide.set_box(null)
 	anim.play("jump")
 	velocity = Vector2(-350 * dir_x, -800)
+	
+	audio_spike.play()
+	audio_fallout.play()
 
 	yield(get_tree().create_timer(0.7), "timeout")
 	Shared.reset()
@@ -605,6 +651,8 @@ func outside_boundary():
 	fall_out()
 
 func fall_out():
+	audio_fallout.play()
+	
 	Shared.reset()
 	is_input = false
 

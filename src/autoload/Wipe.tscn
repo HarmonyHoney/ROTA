@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/autoload/Wipe.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=3]
+[ext_resource path="res://media/audio/sfx/portal0.wav" type="AudioStream" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -57,5 +58,8 @@ region_rect = Rect2( 0, 0, 1280, 720 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/in = SubResource( 2 )
 anims/out = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -15,20 +15,21 @@ func _ready():
 	tile_set.tile_set_modulate(0, Color(0, 0, 0, 0))
 	make_tiles(auto)
 	
-	Boundary.add_shape(get_used_rect(), cell_size)
-	
-	var gpfn = str(get_parent().filename)
-	if gpfn != "":
-		if "worlds/2" in gpfn or "hub/2" in gpfn or "hub/0" in gpfn:
-			BG.set_gradient(BG.w2a, BG.w2b)
-		elif "worlds/3" in gpfn or "hub/3" in gpfn:
-			BG.set_gradient(BG.w3a, BG.w3b)
-		elif "worlds/5" in gpfn or "hub/5" in gpfn:
-			BG.set_gradient(BG.w5a, BG.w5b)
-		elif "worlds/6" in gpfn or "hub/6" in gpfn:
-			BG.set_gradient(BG.w2a, BG.w2b)
-		else:
-			BG.set_gradient(BG.w1a, BG.w1b)
+	if !Engine.editor_hint:
+		Boundary.add_shape(get_used_rect(), cell_size)
+		
+		var gpfn = str(get_parent().filename)
+		if gpfn != "":
+			if "worlds/2" in gpfn or "hub/2" in gpfn or "hub/0" in gpfn:
+				BG.set_gradient(BG.w2a, BG.w2b)
+			elif "worlds/3" in gpfn or "hub/3" in gpfn:
+				BG.set_gradient(BG.w3a, BG.w3b)
+			elif "worlds/5" in gpfn or "hub/5" in gpfn:
+				BG.set_gradient(BG.w5a, BG.w5b)
+			elif "worlds/6" in gpfn or "hub/6" in gpfn:
+				BG.set_gradient(BG.w2a, BG.w2b)
+			else:
+				BG.set_gradient(BG.w1a, BG.w1b)
 
 func set_tileset(arg := detail):
 	detail = posmod(int(arg), 6)

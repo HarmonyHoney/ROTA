@@ -27,6 +27,7 @@ func _physics_process(delta):
 		2:
 			if time > 0.1:
 				next_step()
+				goal.audio_coin.play()
 		3:
 			var limit = 0.8
 			var t = min(time, limit)

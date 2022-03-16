@@ -1,9 +1,18 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=3]
 [ext_resource path="res://src/actor/Hair.tscn" type="PackedScene" id=4]
+[ext_resource path="res://media/audio/sfx/btn3.wav" type="AudioStream" id=5]
+[ext_resource path="res://media/audio/sfx/Randomize105.wav" type="AudioStream" id=6]
+[ext_resource path="res://media/audio/sfx/player_jump.wav" type="AudioStream" id=7]
+[ext_resource path="res://media/audio/sfx/player_land.wav" type="AudioStream" id=8]
+[ext_resource path="res://media/audio/sfx/Randomize104.wav" type="AudioStream" id=9]
+[ext_resource path="res://media/audio/sfx/sfx4.wav" type="AudioStream" id=10]
+[ext_resource path="res://media/audio/sfx/fallout3.wav" type="AudioStream" id=11]
+[ext_resource path="res://media/audio/sfx/slap2.wav" type="AudioStream" id=12]
+[ext_resource path="res://media/audio/sfx/jump3.wav" type="AudioStream" id=13]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17, 17 )
@@ -559,6 +568,36 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/SpriteArea"]
 position = Vector2( 0, -15 )
 shape = SubResource( 14 )
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Pickup" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 5 )
+
+[node name="Drop" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 10 )
+
+[node name="Push" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 9 )
+
+[node name="Turn" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 6 )
+
+[node name="Jump" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 7 )
+
+[node name="Land" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 8 )
+
+[node name="FallOut" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 11 )
+
+[node name="Spike" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 12 )
+
+[node name="Around" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 13 )
+volume_db = -7.0
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_BodyArea_body_entered"]

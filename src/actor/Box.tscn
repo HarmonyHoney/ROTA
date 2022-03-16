@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://media/image/box/box_new.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Box.gd" type="Script" id=2]
+[ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=3]
+[ext_resource path="res://media/audio/sfx/hit10.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 50, 50 )
@@ -85,3 +87,11 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushAreas/3"]
 shape = SubResource( 6 )
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Move" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 3 )
+
+[node name="Land" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 4 )

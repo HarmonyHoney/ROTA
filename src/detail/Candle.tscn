@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://src/detail/Candle.gd" type="Script" id=1]
-[ext_resource path="res://src/actor/Circle.gd" type="Script" id=2]
+[ext_resource path="res://src/detail/Spring.gd" type="Script" id=1]
+[ext_resource path="res://src/detail/Light.gd" type="Script" id=2]
 [ext_resource path="res://media/image/details/candle.png" type="Texture" id=3]
+[ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 13.0
@@ -12,6 +13,8 @@ height = 50.0
 z_index = 1
 z_as_relative = false
 script = ExtResource( 1 )
+sprites_path = NodePath("Sprites")
+audio_path = NodePath("Audio/Hit")
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -23,7 +26,6 @@ texture = ExtResource( 3 )
 [node name="Circle" type="Node2D" parent="Sprites"]
 modulate = Color( 0.996078, 1, 0.909804, 0.4 )
 position = Vector2( 0, -66 )
-scale = Vector2( 1.00086, 1.00086 )
 z_index = 100
 z_as_relative = false
 script = ExtResource( 2 )
@@ -36,5 +38,10 @@ collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 4 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
