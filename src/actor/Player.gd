@@ -55,7 +55,7 @@ var velocity := Vector2.ZERO
 var move_velocity := Vector2.ZERO
 var dir_x := 1
 
-export var walk_speed := 350.0
+var walk_speed := 350.0
 #export var air_speed := 250.0
 var floor_accel := 12
 var air_accel := 7
@@ -63,7 +63,7 @@ var air_accel := 7
 var is_jump := false
 var has_jumped := true
 var jump_height := 240.0 setget set_jump_height
-export var jump_time := 0.6 setget set_jump_time
+var jump_time := 0.6 setget set_jump_time
 var jump_speed := 0.0
 var jump_gravity := 0.0
 var fall_gravity := 0.0
@@ -106,6 +106,10 @@ var goal_step := 0
 var hand_positions := [Vector2.ZERO, Vector2.ZERO]
 var goal_start := Vector2.ZERO
 
+
+var squish_from := Vector2.ONE
+var squish_clock := 0.0
+var squish_time := 0.5
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -206,6 +210,9 @@ func _physics_process(delta):
 		if air_clock > 0.4:
 			audio_land.pitch_scale = rand_range(0.7, 1.1)
 			audio_land.play()
+			
+			squish_from = Vector2(1.3, 0.7)
+			squish_clock = 0.0
 		
 		air_clock = 0.0
 		has_jumped = false
@@ -418,6 +425,9 @@ func _physics_process(delta):
 					
 					audio_jump.pitch_scale = rand_range(0.9, 1.1)
 					audio_jump.play()
+					
+					squish_from = Vector2(0.7, 1.3)
+					squish_clock = 0.0
 				
 				# start hold
 				elif btn_push and hold_clock == hold_cooldown:
@@ -489,6 +499,12 @@ func _physics_process(delta):
 			move_velocity = move_and_slide(rot(velocity))
 			velocity = rot(move_velocity, -dir)
 			
+	
+	# squash squish and stretch
+	
+	squish_clock = min(squish_clock + delta, squish_time)
+	var s = smoothstep(0, 1, squish_clock / squish_time)
+	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, s)
 	
 	
 	# debug label

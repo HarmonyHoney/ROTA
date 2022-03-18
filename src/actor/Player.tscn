@@ -579,9 +579,11 @@ stream = ExtResource( 10 )
 
 [node name="Push" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 9 )
+volume_db = -5.0
 
 [node name="Turn" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 6 )
+volume_db = -5.0
 
 [node name="Jump" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 7 )
