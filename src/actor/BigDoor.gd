@@ -7,11 +7,11 @@ onready var gems := $Gems
 onready var gem := $Gems/Gem
 
 export var dir := 0 setget set_dir
-export var scene_path := ""
+export(String, FILE) var scene_path := ""
 export var is_gem := false
 export var gem_count := 1
 export var gem_radius := 60.0
-export var gem_world := ""
+export(String, DIR) var gem_world := ""
 
 var is_active := false
 var player = null

@@ -5,27 +5,16 @@ onready var area : Area2D = $Area2D
 onready var arrow := $Arrow
 onready var gem := $Gem
 onready var audio_open := $Audio/Open
-onready var audio_collect := $Audio/Collect
 
 export var dir := 0 setget set_dir
-export var scene_path := ""
+export(String, FILE) var scene_path := ""
 
 export var folder_path := "res://src/map/hub/"
 export var scene_name := ""
 
 var is_active := false
 
-var move_clock := 0.0
-var move_time := 0.5
-var move_from = Vector2.ZERO
-var move_to = Vector2(0, -250)
-var scale_from = 0.0
-var scale_to = 1.0
-
 var player = null
-
-export var stage_color := Color("e59d57")
-export var hub_color := Color("ff0078")
 
 var arrow_clock := 0.0
 var arrow_time := 0.3
@@ -46,11 +35,10 @@ func _ready():
 	if Engine.editor_hint: return
 	
 	var h = "hub" in scene_path
-	is_complete = Shared.goals_collected.has(scene_path)
-	
 	if h:
 		gem.visible = false
 	else:
+		is_complete = Shared.goals_collected.has(scene_path)
 		if is_complete:
 			gem.set_color()
 

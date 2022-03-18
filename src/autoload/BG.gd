@@ -1,26 +1,12 @@
 extends CanvasLayer
 
-#onready var color_rect := $ColorRect
 onready var mat : ShaderMaterial = $ColorRect.material
-
-export var w1a := Color("0062ff")
-export var w1b := Color("00eaff")
-
-export var w2a := Color("af00bf")
-export var w2b := Color("0079db")
-
-export var w3a := Color("ff00ff")
-export var w3b := Color("009dff")
-
-#export var w4a := Color("7b00ff")
-#export var w4b := Color("ff7700")
-
-export var w5a := Color("00eaff")
-export var w5b := Color("0062ff")
+export(PoolColorArray) var test : PoolColorArray = ["0062ff", "00eaff", "af00bf", "0079db", "ff00ff", "009dff", "00eaff", "0062ff"]
 
 func _ready():
-	set_gradient(w1a, w1b)
+	set_colors(0)
 
-func set_gradient(c1, c2):
-	mat.set_shader_param("col1", c1)
-	mat.set_shader_param("col2", c2)
+func set_colors(arg := 0):
+	if (arg * 2) + 1 < test.size():
+		mat.set_shader_param("col1", test[arg * 2])
+		mat.set_shader_param("col2", test[(arg * 2) + 1])

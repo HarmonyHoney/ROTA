@@ -161,11 +161,11 @@ func _ready():
 	yield(get_tree(), "idle_frame")
 	if Shared.is_collect:
 		if is_instance_valid(Shared.door_destination):
-			GemCollect.begin()
+			Cutscene.gem_collect.begin()
 		Shared.is_collect = false
 	elif Shared.is_show_goal:
 		if is_instance_valid(Shared.goal):
-			GoalShow.begin()
+			Cutscene.goal_show.begin()
 		Shared.is_show_goal = false
 
 func _input(event):

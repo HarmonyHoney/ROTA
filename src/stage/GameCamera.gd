@@ -21,7 +21,6 @@ export var is_zoom_out := true
 var screen_size := Vector2(1280, 720)
 onready var start_offset = offset
 
-export var easing : Curve
 var turn_clock := 0.0
 var turn_time := 0.5
 var turn_from := 0.0
@@ -29,12 +28,16 @@ var turn_to := 0.0
 
 var if_is_start_zoom := true
 
+export var bg_palette := 0
+
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.camera = self
 
 func _ready():
 	if Engine.editor_hint: return
+	
+	BG.set_colors(bg_palette)
 	
 	if !if_is_start_zoom:
 		zoom_clock = zoom_duration
@@ -59,7 +62,8 @@ func _process(delta):
 	if is_rotating:
 		turn_clock = min(turn_clock + delta, turn_time)
 		
-		rotation = lerp_angle(turn_from, turn_to, easing.interpolate(turn_clock / turn_time))
+		var s = smoothstep(0, 1, turn_clock / turn_time)
+		rotation = lerp_angle(turn_from, turn_to, s)
 		emit_signal("turning", rotation)
 		
 		if start_offset != Vector2.ZERO:
