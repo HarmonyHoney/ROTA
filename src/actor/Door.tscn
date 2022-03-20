@@ -1,39 +1,21 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/actor/Door.gd" type="Script" id=1]
-[ext_resource path="res://media/image/details/door.png" type="Texture" id=2]
+[ext_resource path="res://src/actor/DoorLittle.gd" type="Script" id=1]
+[ext_resource path="res://media/image/door/door.png" type="Texture" id=2]
 [ext_resource path="res://media/audio/sfx/hit0.wav" type="AudioStream" id=3]
 [ext_resource path="res://media/image/box/arrow.png" type="Texture" id=4]
-[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=5]
+[ext_resource path="res://media/image/box/round_rect400.png" type="Texture" id=5]
 [ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 50 )
 
-[sub_resource type="Shader" id=3]
-code = "shader_type canvas_item;
-
-uniform float margin : hint_range(0.0, 0.5) = 0.15;
-uniform float progress : hint_range(0.0, 1.0) = 0.5;
-
-uniform vec4 fill_color : hint_color = vec4(1.0);
-
-void fragment(){
-	if (UV.y > mix(margin, 1.0 - margin, progress)){
-		COLOR = fill_color;
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
-shader_param/margin = 0.15
-shader_param/progress = 1.0
-shader_param/fill_color = Color( 1, 0, 0.445313, 1 )
-
 [node name="Door" type="Node2D" groups=["door"]]
 z_index = -10
 z_as_relative = false
 script = ExtResource( 1 )
+arrow_path = NodePath("Arrow")
+audio_path = NodePath("Audio/Open")
 
 [node name="Tile" type="ColorRect" parent="."]
 visible = false
@@ -54,25 +36,15 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[node name="Sprites" type="Node2D" parent="."]
-scale = Vector2( 0.1, 0.1 )
-
-[node name="Door" type="Sprite" parent="Sprites"]
-texture = ExtResource( 2 )
-
-[node name="Gem" parent="." instance=ExtResource( 6 )]
-position = Vector2( 0, -5 )
-
 [node name="Arrow" type="Node2D" parent="."]
 position = Vector2( 0, -95 )
 z_index = 70
 z_as_relative = false
 
-[node name="Back" type="Polygon2D" parent="Arrow"]
-material = SubResource( 4 )
+[node name="RoundRect400" type="Sprite" parent="Arrow"]
+position = Vector2( 7.62939e-06, 0 )
+scale = Vector2( 0.175, 0.175 )
 texture = ExtResource( 5 )
-texture_offset = Vector2( 50, 50 )
-polygon = PoolVector2Array( -30, -30, -20, -35, 20, -35, 30, -30, 35, -20, 35, 20, 30, 30, 20, 35, -20, 35, -30, 30, -35, 20, -35, -20 )
 
 [node name="Arrow" type="Sprite" parent="Arrow"]
 rotation = -3.14159
@@ -83,6 +55,15 @@ texture = ExtResource( 4 )
 
 [node name="Open" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 3 )
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2( 0.1, 0.1 )
+
+[node name="Door" type="Sprite" parent="Sprites"]
+texture = ExtResource( 2 )
+
+[node name="Gem" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, -5 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

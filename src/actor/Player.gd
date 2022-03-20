@@ -77,8 +77,6 @@ var jump_clock := 0.0
 var air_clock := 0.0
 
 var is_dead := false
-var is_exit := false
-var exit_node
 
 var turn_clock := 0.0
 var turn_time := 0.2
@@ -101,9 +99,6 @@ var hold_cooldown := 0.2
 onready var start_pos = position
 onready var last_pos = position
 
-var last_door
-
-
 var is_goal := false
 var goal
 var goal_clock := 0.0
@@ -111,7 +106,6 @@ var goal_times := [0.2, 0.3, 0.5]
 var goal_step := 0
 var hand_positions := [Vector2.ZERO, Vector2.ZERO]
 var goal_start := Vector2.ZERO
-
 
 var squish_from := Vector2.ONE
 var squish_clock := 0.0
@@ -174,21 +168,11 @@ func _ready():
 			Cutscene.goal_show.begin()
 		Shared.is_show_goal = false
 
-func _input(event):
-	if is_input and event.is_action_pressed("reset"):
-		Shared.reset()
-
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
 	#last pos
 	last_pos = position
-	
-	if is_exit:
-		position = position.linear_interpolate(exit_node.position, 3 * delta)
-		sprites.scale = sprites.scale.linear_interpolate(Vector2.ZERO, 0.9 * delta)
-		sprites.rotate(deg2rad(dir_x * 240) * delta)
-		return
 	
 	if is_dead:
 		sprites.position += rot(velocity) * delta
@@ -209,6 +193,11 @@ func _physics_process(delta):
 		
 		# jump hold time
 		holding_jump = (holding_jump + delta) if btn_jump else 0.0
+		
+		# reset scene
+		if Input.is_action_just_pressed("reset"):
+			is_input = false
+			Shared.reset()
 	
 	# check floor
 	is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN * (50 if is_hold else 1)))
@@ -523,7 +512,6 @@ func _physics_process(delta):
 			
 	
 	# squash squish and stretch
-	
 	squish_clock = min(squish_clock + delta, squish_time)
 	var s = smoothstep(0, 1, squish_clock / squish_time)
 	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, s)
@@ -543,6 +531,9 @@ func _physics_process(delta):
 		for i in readout:
 			if i != null:
 				debug_label.text += str(i) + "\n"
+
+func idle_frame():
+	pass
 
 func set_dir_x(arg := dir_x):
 	#if dir_x != sign(arg):
@@ -660,15 +651,6 @@ func _on_BodyArea_body_entered(body):
 		print("hit spike")
 		die()
 
-func exit(arg):
-	if is_exit: return
-	is_exit = true
-	exit_node = arg
-	anim.play("jump")
-	
-	yield(get_tree().create_timer(0.7), "timeout")
-	Shared.complete_level()
-
 func die():
 	if is_dead: return
 	is_dead = true
@@ -723,3 +705,7 @@ func cheat_code(cheat):
 		jump_height = 500.0
 		jump_time = 1.5
 		solve_jump()
+
+func enter_door():
+	set_physics_process(false)
+	anim.play("idle")

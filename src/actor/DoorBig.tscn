@@ -1,16 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/actor/BigDoor.gd" type="Script" id=1]
+[ext_resource path="res://src/actor/DoorBig.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=2]
-[ext_resource path="res://media/image/details/bigdoor.png" type="Texture" id=3]
+[ext_resource path="res://media/image/door/bigdoor.png" type="Texture" id=3]
 [ext_resource path="res://media/image/box/arrow.png" type="Texture" id=4]
+[ext_resource path="res://media/audio/sfx/hit0.wav" type="AudioStream" id=5]
+[ext_resource path="res://media/image/box/round_rect400.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 100, 100 )
 
-[node name="BigDoor" type="Node2D" groups=["big_door", "door"]]
+[node name="DoorBig" type="Node2D" groups=["big_door", "door"]]
 z_index = -10
 script = ExtResource( 1 )
+arrow_path = NodePath("Arrow")
+audio_path = NodePath("Audio/Open")
 
 [node name="Tile" type="ColorRect" parent="."]
 visible = false
@@ -34,17 +38,24 @@ shape = SubResource( 1 )
 [node name="Arrow" type="Node2D" parent="."]
 position = Vector2( 0, -150 )
 
-[node name="Polygon2D" type="Polygon2D" parent="Arrow"]
-polygon = PoolVector2Array( -30, -30, -20, -35, 20, -35, 30, -30, 35, -20, 35, 20, 30, 30, 20, 35, -20, 35, -30, 30, -35, 20, -35, -20 )
+[node name="RoundRect400" type="Sprite" parent="Arrow"]
+position = Vector2( 7.62939e-06, 0 )
+scale = Vector2( 0.175, 0.175 )
+texture = ExtResource( 6 )
 
 [node name="Arrow" type="Sprite" parent="Arrow"]
 rotation = -3.14159
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 4 )
 
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Open" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 5 )
+
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="Sprites" type="Sprite" parent="Sprites"]
+[node name="Door" type="Sprite" parent="Sprites"]
 scale = Vector2( 0.334, 0.334 )
 texture = ExtResource( 3 )
 

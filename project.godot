@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://src/actor/Box.gd"
 }, {
 "base": "Node2D",
+"class": "Door",
+"language": "GDScript",
+"path": "res://src/actor/Door.gd"
+}, {
+"base": "Node2D",
 "class": "PaletteSwap",
 "language": "GDScript",
 "path": "res://src/detail/PaletteSwap.gd"
@@ -26,6 +31,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Box": "",
+"Door": "",
 "PaletteSwap": "",
 "Player": ""
 }

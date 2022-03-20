@@ -29,8 +29,8 @@ var camera
 var door_goal
 var door_destination
 var goal
-var slab
 
+var slab
 var slabs_completed = []
 
 signal scene_changed
@@ -46,8 +46,11 @@ func _input(event):
 func wipe_scene(arg):
 	if !is_wipe:
 		is_wipe = true
-		last_scene = csfn
-		next_scene = arg
+		
+		if arg != csfn:
+			last_scene = csfn
+			next_scene = arg
+		
 		Wipe.start()
 
 func wipe_out():
