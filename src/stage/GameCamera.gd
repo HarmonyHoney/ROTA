@@ -10,13 +10,13 @@ var zoom_clock := 0.0
 var zoom_duration := 1.5
 
 var target_node
-var target_pos := Vector2.ZERO
+onready var target_pos := position
 onready var start_position := position
 export var is_rotating := true
 export var is_moving := false
 export var is_focal_point := false
 export var focal_influence := 0.35
-export var is_zoom_out := true
+#export var is_zoom_out := true
 
 var screen_size := Vector2(1280, 720)
 onready var start_offset = offset
@@ -84,14 +84,14 @@ func _process(delta):
 				else:
 					target_pos = target_node.global_position
 				
-				global_position = global_position.linear_interpolate(target_pos, 0.08)
+		global_position = global_position.linear_interpolate(target_pos, 0.08)
 			
 			# keep target on screen
-			if is_focal_point and is_zoom_out and zoom_clock == zoom_duration:
-				var dist = (position.distance_to(target_node.position) + 100) / (screen_size.y / 2)
-				var zoom_dist = Vector2.ONE * dist
-				
-				zoom = zoom_dist if zoom_dist > start_zoom else start_zoom
+#			if is_focal_point and is_zoom_out and zoom_clock == zoom_duration:
+#				var dist = (position.distance_to(target_node.position) + 100) / (screen_size.y / 2)
+#				var zoom_dist = Vector2.ONE * dist
+#
+#				zoom = zoom_dist if zoom_dist > start_zoom else start_zoom
 
 func _draw():
 	if !Engine.editor_hint: return

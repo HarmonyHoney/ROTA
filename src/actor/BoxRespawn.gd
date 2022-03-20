@@ -2,6 +2,7 @@ extends Node2D
 
 onready var sprites := $Sprites
 onready var area := $Area2D
+onready var audio := $Audio/Respawn
 
 var box
 var solid_clock := 0.0
@@ -20,6 +21,8 @@ func _physics_process(delta):
 		
 		box.position = position
 		box.set_physics_process(true)
+		
+		audio.play()
 
 func respawn(angle := 0.0):
 	sprites.rotation = angle

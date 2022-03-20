@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/actor/BoxRespawn.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/box_new.png" type="Texture" id=2]
+[ext_resource path="res://media/audio/sfx/oneup2.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 49.9, 49.9 )
@@ -22,3 +23,8 @@ collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Respawn" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 3 )

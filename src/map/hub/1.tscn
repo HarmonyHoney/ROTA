@@ -95,7 +95,7 @@ scene_path = "res://src/map/worlds/1/7.tscn"
 position = Vector2( 1850, 1000 )
 scene_path = "res://src/map/hub/2.tscn"
 is_gem = true
-gem_count = 6
+gem_count = 7
 gem_world = "res://src/map/worlds/1"
 
 [node name="Details" type="Node2D" parent="."]

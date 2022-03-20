@@ -13,7 +13,6 @@
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2( 2000, 1400 )
-zoom = Vector2( 1, 1 )
 is_focal_point = false
 focal_influence = 1.0
 is_zoom_out = false
@@ -140,12 +139,9 @@ palette = 0
 
 [node name="TreeTop" parent="Details" index="19" instance=ExtResource( 8 )]
 position = Vector2( 1100, 300 )
-cooldown_time = 0.6
 
 [node name="TreeTop3" parent="Details" index="20" instance=ExtResource( 8 )]
 position = Vector2( 1600, 900 )
-cooldown_time = 0.6
 
 [node name="TreeTop2" parent="Details" index="21" instance=ExtResource( 8 )]
 position = Vector2( 1000, 1150 )
-cooldown_time = 0.6

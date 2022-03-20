@@ -14,7 +14,6 @@
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2( 700, 450 )
-zoom = Vector2( 1, 1 )
 is_focal_point = false
 focal_influence = 0.9
 

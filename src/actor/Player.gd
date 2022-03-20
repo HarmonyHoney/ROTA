@@ -30,6 +30,11 @@ onready var audio_land := $Audio/Land
 onready var audio_fallout := $Audio/FallOut
 onready var audio_spike := $Audio/Spike
 onready var audio_around := $Audio/Around
+onready var audio_peek := $Audio/Peek
+
+onready var cam_target := $CamTarget
+var peek_clock := 0.0
+var peek_time := 0.2
 
 
 export var is_input := true
@@ -64,6 +69,7 @@ var is_jump := false
 var has_jumped := true
 var jump_height := 240.0 setget set_jump_height
 var jump_time := 0.6 setget set_jump_time
+var jump_minimum := 0.12
 var jump_speed := 0.0
 var jump_gravity := 0.0
 var fall_gravity := 0.0
@@ -140,7 +146,7 @@ func _ready():
 	# set camera
 	if is_instance_valid(Shared.camera):
 		camera = Shared.camera
-	camera.target_node = self
+	camera.target_node = cam_target
 	
 	# turn
 	set_dir()
@@ -392,6 +398,22 @@ func _physics_process(delta):
 		# in control
 		else:
 			
+			# camera peek
+			if joy.x == 0 and joy.y != 0 and joy.y == joy_last.y:
+				peek_clock = min(peek_clock + delta, peek_time)
+			else:
+				peek_clock = 0.0
+				cam_target.position = Vector2.ZERO
+			
+			if peek_clock == peek_time and cam_target.position == Vector2.ZERO:
+				audio_peek.pitch_scale = rand_range(0.9, 1.3)
+				audio_peek.play()
+				if joy.y == 1:
+					cam_target.global_position = sprites.to_global(Vector2.DOWN * 250)
+				elif joy.y == -1:
+					cam_target.global_position = sprites.to_global(Vector2.UP * 250)
+			
+			
 			# dir_x
 			if joy.x != 0:
 				set_dir_x(joy.x)
@@ -478,7 +500,7 @@ func _physics_process(delta):
 						if velocity.y >= 0.0 or test_move(transform, rot(Vector2(0, -1))):
 							is_jump = false
 							#print("jump start: ", jump_start, " / jump end: ", position.y + velocity.y, " / distance: ", position.y - jump_start)
-					else:
+					elif jump_clock > jump_minimum:
 						is_jump = false
 						velocity.y *= 0.8
 				

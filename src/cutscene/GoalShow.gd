@@ -36,7 +36,7 @@ func _physics_process(delta):
 			
 			if time > limit:
 				next_step()
-				camera.target_node = player
+				camera.target_node = player.cam_target
 		4:
 			if camera.global_position.distance_to(camera.target_node.global_position) < 100:
 				next_step()

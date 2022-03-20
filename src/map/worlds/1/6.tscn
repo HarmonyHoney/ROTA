@@ -19,7 +19,6 @@ load_path = "res://.import/rock.png-3b38d6b197ed3a878d6dbc45f40a3022.stex"
 
 [node name="Camera2D" parent="." index="0"]
 position = Vector2( 650, 650 )
-zoom = Vector2( 1, 1 )
 focal_influence = 0.8
 
 [node name="SolidTileMap" parent="." index="1"]

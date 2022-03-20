@@ -414,6 +414,8 @@ z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
 
+[node name="CamTarget" type="Node2D" parent="."]
+
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 
 [node name="Labels" type="Control" parent="DebugCanvas"]
@@ -599,6 +601,10 @@ stream = ExtResource( 12 )
 
 [node name="Around" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 13 )
+volume_db = -7.0
+
+[node name="Peek" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 10 )
 volume_db = -7.0
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
