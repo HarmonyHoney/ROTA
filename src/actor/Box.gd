@@ -237,7 +237,6 @@ func push(push_dir := 0):
 		if behind.size() > 0:
 			if behind[0] != self and behind[0].is_in_group("box"):
 				get_parent().move_child(behind[0], get_index() + 1)
-		
 	
 	return result
 

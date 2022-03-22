@@ -1,16 +1,19 @@
 extends CanvasLayer
 
-var kids = {}
+var controls = {}
+
+onready var gem_label : Label= $Control/Gems/Label
 
 func _ready():
-	for i in get_children():
-		kids[i.name.to_lower()] = i
-	
+	for i in $GameControls.get_children():
+		controls[i.name.to_lower()] = i
 	show()
+	
+	gem_label.text = str(Shared.gem_count)
 
 func show(arg := "none"):
-	for i in kids.values():
+	for i in controls.values():
 		i.visible = false
 	
-	if kids.has(arg.to_lower()):
-		kids[arg.to_lower()].visible = true
+	if controls.has(arg.to_lower()):
+		controls[arg.to_lower()].visible = true

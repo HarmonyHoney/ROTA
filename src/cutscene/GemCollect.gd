@@ -29,6 +29,7 @@ func _physics_process(delta):
 			if time > 0.75:
 				next_step()
 				camera.target_node = door_goal
+				HUD.gem_label.text = str(Shared.gem_count)
 		2:
 			if camera.global_position.distance_to(camera.target_node.global_position) < 100:
 				next_step()

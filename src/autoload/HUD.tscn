@@ -9,15 +9,22 @@
 layer = 9
 script = ExtResource( 4 )
 
-[node name="Game" type="Control" parent="."]
-visible = false
+[node name="GameControls" type="Control" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="Control" parent="GameControls"]
 margin_right = 1280.0
 margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Walk" type="Control" parent="Game"]
+[node name="Walk" type="Control" parent="GameControls/Player"]
 margin_left = 25.0
 margin_top = 645.0
 margin_right = 25.0
@@ -27,14 +34,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Keys" type="Control" parent="Game/Walk"]
+[node name="Keys" type="Control" parent="GameControls/Player/Walk"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="NinePatchRect" parent="Game/Walk/Keys"]
+[node name="Left" type="NinePatchRect" parent="GameControls/Player/Walk/Keys"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -46,13 +53,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="Game/Walk/Keys/Left"]
+[node name="arrow" type="Sprite" parent="GameControls/Player/Walk/Keys/Left"]
 position = Vector2( 50, 50 )
 rotation = 1.5708
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Right" type="NinePatchRect" parent="Game/Walk/Keys"]
+[node name="Right" type="NinePatchRect" parent="GameControls/Player/Walk/Keys"]
 margin_left = 110.0
 margin_right = 210.0
 margin_bottom = 100.0
@@ -65,13 +72,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="Game/Walk/Keys/Right"]
+[node name="arrow" type="Sprite" parent="GameControls/Player/Walk/Keys/Right"]
 position = Vector2( 50, 50 )
 rotation = 4.71239
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="Game/Walk"]
+[node name="Label" type="Label" parent="GameControls/Player/Walk"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -87,7 +94,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Grab" type="Control" parent="Game"]
+[node name="Grab" type="Control" parent="GameControls/Player"]
 margin_left = 1255.0
 margin_top = 635.0
 margin_right = 1255.0
@@ -97,7 +104,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="Game/Grab"]
+[node name="Key" type="NinePatchRect" parent="GameControls/Player/Grab"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -109,7 +116,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Game/Grab/Key"]
+[node name="Label" type="Label" parent="GameControls/Player/Grab/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -127,7 +134,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Game/Grab"]
+[node name="Label" type="Label" parent="GameControls/Player/Grab"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -145,7 +152,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Jump" type="Control" parent="Game"]
+[node name="Jump" type="Control" parent="GameControls/Player"]
 margin_left = 1255.0
 margin_top = 695.0
 margin_right = 1255.0
@@ -155,7 +162,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="Game/Jump"]
+[node name="Key" type="NinePatchRect" parent="GameControls/Player/Jump"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -167,7 +174,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Game/Jump/Key"]
+[node name="Label" type="Label" parent="GameControls/Player/Jump/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -185,7 +192,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Game/Jump"]
+[node name="Label" type="Label" parent="GameControls/Player/Jump"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -203,7 +210,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Control" parent="Game"]
+[node name="Reset" type="Control" parent="GameControls/Player"]
+visible = false
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 25.0
@@ -213,7 +221,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="Game/Reset"]
+[node name="Key" type="NinePatchRect" parent="GameControls/Player/Reset"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -225,7 +233,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Game/Reset/Key"]
+[node name="Label" type="Label" parent="GameControls/Player/Reset/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -243,7 +251,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Game/Reset"]
+[node name="Label" type="Label" parent="GameControls/Player/Reset"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -259,7 +267,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Time" type="Label" parent="Game"]
+[node name="Time" type="Label" parent="GameControls/Player"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -276,7 +284,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GamePush" type="Control" parent="."]
+[node name="BoxPush" type="Control" parent="GameControls"]
 visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
@@ -284,7 +292,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Walk" type="Control" parent="GamePush"]
+[node name="Walk" type="Control" parent="GameControls/BoxPush"]
 margin_left = 25.0
 margin_top = 645.0
 margin_right = 25.0
@@ -294,14 +302,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Keys" type="Control" parent="GamePush/Walk"]
+[node name="Keys" type="Control" parent="GameControls/BoxPush/Walk"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="NinePatchRect" parent="GamePush/Walk/Keys"]
+[node name="Left" type="NinePatchRect" parent="GameControls/BoxPush/Walk/Keys"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -313,13 +321,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GamePush/Walk/Keys/Left"]
+[node name="arrow" type="Sprite" parent="GameControls/BoxPush/Walk/Keys/Left"]
 position = Vector2( 50, 50 )
 rotation = 1.5708
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Right" type="NinePatchRect" parent="GamePush/Walk/Keys"]
+[node name="Right" type="NinePatchRect" parent="GameControls/BoxPush/Walk/Keys"]
 margin_left = 110.0
 margin_right = 210.0
 margin_bottom = 100.0
@@ -332,13 +340,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GamePush/Walk/Keys/Right"]
+[node name="arrow" type="Sprite" parent="GameControls/BoxPush/Walk/Keys/Right"]
 position = Vector2( 50, 50 )
 rotation = 4.71239
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="GamePush/Walk"]
+[node name="Label" type="Label" parent="GameControls/BoxPush/Walk"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -354,7 +362,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Grab" type="Control" parent="GamePush"]
+[node name="Grab" type="Control" parent="GameControls/BoxPush"]
 margin_left = 1255.0
 margin_top = 635.0
 margin_right = 1255.0
@@ -364,7 +372,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GamePush/Grab"]
+[node name="Key" type="NinePatchRect" parent="GameControls/BoxPush/Grab"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -376,7 +384,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GamePush/Grab/Key"]
+[node name="Label" type="Label" parent="GameControls/BoxPush/Grab/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -394,7 +402,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GamePush/Grab"]
+[node name="Label" type="Label" parent="GameControls/BoxPush/Grab"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -412,7 +420,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Jump" type="Control" parent="GamePush"]
+[node name="Jump" type="Control" parent="GameControls/BoxPush"]
 margin_left = 1255.0
 margin_top = 695.0
 margin_right = 1255.0
@@ -422,7 +430,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GamePush/Jump"]
+[node name="Key" type="NinePatchRect" parent="GameControls/BoxPush/Jump"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -434,7 +442,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GamePush/Jump/Key"]
+[node name="Label" type="Label" parent="GameControls/BoxPush/Jump/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -452,7 +460,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GamePush/Jump"]
+[node name="Label" type="Label" parent="GameControls/BoxPush/Jump"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -470,7 +478,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Control" parent="GamePush"]
+[node name="Reset" type="Control" parent="GameControls/BoxPush"]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 25.0
@@ -480,7 +488,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GamePush/Reset"]
+[node name="Key" type="NinePatchRect" parent="GameControls/BoxPush/Reset"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -492,7 +500,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GamePush/Reset/Key"]
+[node name="Label" type="Label" parent="GameControls/BoxPush/Reset/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -510,7 +518,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GamePush/Reset"]
+[node name="Label" type="Label" parent="GameControls/BoxPush/Reset"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -526,7 +534,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Time" type="Label" parent="GamePush"]
+[node name="Time" type="Label" parent="GameControls/BoxPush"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -543,14 +551,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameSpin" type="Control" parent="."]
+[node name="BoxSpin" type="Control" parent="GameControls"]
+visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Rotate" type="Control" parent="GameSpin"]
+[node name="Rotate" type="Control" parent="GameControls/BoxSpin"]
 margin_left = 25.0
 margin_top = 645.0
 margin_right = 25.0
@@ -560,14 +569,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Keys" type="Control" parent="GameSpin/Rotate"]
+[node name="Keys" type="Control" parent="GameControls/BoxSpin/Rotate"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="NinePatchRect" parent="GameSpin/Rotate/Keys"]
+[node name="Left" type="NinePatchRect" parent="GameControls/BoxSpin/Rotate/Keys"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -579,13 +588,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GameSpin/Rotate/Keys/Left"]
+[node name="arrow" type="Sprite" parent="GameControls/BoxSpin/Rotate/Keys/Left"]
 position = Vector2( 50, 50 )
 rotation = 3.14159
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Right" type="NinePatchRect" parent="GameSpin/Rotate/Keys"]
+[node name="Right" type="NinePatchRect" parent="GameControls/BoxSpin/Rotate/Keys"]
 margin_left = 110.0
 margin_right = 210.0
 margin_bottom = 100.0
@@ -598,12 +607,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GameSpin/Rotate/Keys/Right"]
+[node name="arrow" type="Sprite" parent="GameControls/BoxSpin/Rotate/Keys/Right"]
 position = Vector2( 50, 50 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="GameSpin/Rotate"]
+[node name="Label" type="Label" parent="GameControls/BoxSpin/Rotate"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -619,7 +628,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Grab" type="Control" parent="GameSpin"]
+[node name="Grab" type="Control" parent="GameControls/BoxSpin"]
 margin_left = 1255.0
 margin_top = 635.0
 margin_right = 1255.0
@@ -629,7 +638,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameSpin/Grab"]
+[node name="Key" type="NinePatchRect" parent="GameControls/BoxSpin/Grab"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -641,7 +650,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameSpin/Grab/Key"]
+[node name="Label" type="Label" parent="GameControls/BoxSpin/Grab/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -659,7 +668,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameSpin/Grab"]
+[node name="Label" type="Label" parent="GameControls/BoxSpin/Grab"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -677,7 +686,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Jump" type="Control" parent="GameSpin"]
+[node name="Jump" type="Control" parent="GameControls/BoxSpin"]
 margin_left = 1255.0
 margin_top = 695.0
 margin_right = 1255.0
@@ -687,7 +696,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameSpin/Jump"]
+[node name="Key" type="NinePatchRect" parent="GameControls/BoxSpin/Jump"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -699,7 +708,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameSpin/Jump/Key"]
+[node name="Label" type="Label" parent="GameControls/BoxSpin/Jump/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -717,7 +726,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameSpin/Jump"]
+[node name="Label" type="Label" parent="GameControls/BoxSpin/Jump"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -735,7 +744,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Control" parent="GameSpin"]
+[node name="Reset" type="Control" parent="GameControls/BoxSpin"]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 25.0
@@ -745,7 +754,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameSpin/Reset"]
+[node name="Key" type="NinePatchRect" parent="GameControls/BoxSpin/Reset"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -757,7 +766,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameSpin/Reset/Key"]
+[node name="Label" type="Label" parent="GameControls/BoxSpin/Reset/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -775,7 +784,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameSpin/Reset"]
+[node name="Label" type="Label" parent="GameControls/BoxSpin/Reset"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -791,7 +800,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Time" type="Label" parent="GameSpin"]
+[node name="Time" type="Label" parent="GameControls/BoxSpin"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -808,7 +817,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameBoth" type="Control" parent="."]
+[node name="BoxBoth" type="Control" parent="GameControls"]
 visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
@@ -816,7 +825,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Walk" type="Control" parent="GameBoth"]
+[node name="Walk" type="Control" parent="GameControls/BoxBoth"]
 margin_left = 25.0
 margin_top = 645.0
 margin_right = 25.0
@@ -826,14 +835,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Keys" type="Control" parent="GameBoth/Walk"]
+[node name="Keys" type="Control" parent="GameControls/BoxBoth/Walk"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="NinePatchRect" parent="GameBoth/Walk/Keys"]
+[node name="Left" type="NinePatchRect" parent="GameControls/BoxBoth/Walk/Keys"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -845,13 +854,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GameBoth/Walk/Keys/Left"]
+[node name="arrow" type="Sprite" parent="GameControls/BoxBoth/Walk/Keys/Left"]
 position = Vector2( 50, 50 )
 rotation = 1.5708
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Right" type="NinePatchRect" parent="GameBoth/Walk/Keys"]
+[node name="Right" type="NinePatchRect" parent="GameControls/BoxBoth/Walk/Keys"]
 margin_left = 110.0
 margin_right = 210.0
 margin_bottom = 100.0
@@ -864,13 +873,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GameBoth/Walk/Keys/Right"]
+[node name="arrow" type="Sprite" parent="GameControls/BoxBoth/Walk/Keys/Right"]
 position = Vector2( 50, 50 )
 rotation = 4.71239
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="GameBoth/Walk"]
+[node name="Label" type="Label" parent="GameControls/BoxBoth/Walk"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -886,7 +895,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Rotate" type="Control" parent="GameBoth"]
+[node name="Rotate" type="Control" parent="GameControls/BoxBoth"]
 margin_left = 25.0
 margin_top = 585.0
 margin_right = 25.0
@@ -896,14 +905,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Keys" type="Control" parent="GameBoth/Rotate"]
+[node name="Keys" type="Control" parent="GameControls/BoxBoth/Rotate"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="NinePatchRect" parent="GameBoth/Rotate/Keys"]
+[node name="Left" type="NinePatchRect" parent="GameControls/BoxBoth/Rotate/Keys"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -915,13 +924,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GameBoth/Rotate/Keys/Left"]
+[node name="arrow" type="Sprite" parent="GameControls/BoxBoth/Rotate/Keys/Left"]
 position = Vector2( 50, 50 )
 rotation = 3.14159
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Right" type="NinePatchRect" parent="GameBoth/Rotate/Keys"]
+[node name="Right" type="NinePatchRect" parent="GameControls/BoxBoth/Rotate/Keys"]
 margin_left = 110.0
 margin_right = 210.0
 margin_bottom = 100.0
@@ -934,12 +943,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GameBoth/Rotate/Keys/Right"]
+[node name="arrow" type="Sprite" parent="GameControls/BoxBoth/Rotate/Keys/Right"]
 position = Vector2( 50, 50 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="GameBoth/Rotate"]
+[node name="Label" type="Label" parent="GameControls/BoxBoth/Rotate"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -955,7 +964,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Grab" type="Control" parent="GameBoth"]
+[node name="Grab" type="Control" parent="GameControls/BoxBoth"]
 margin_left = 1255.0
 margin_top = 635.0
 margin_right = 1255.0
@@ -965,7 +974,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameBoth/Grab"]
+[node name="Key" type="NinePatchRect" parent="GameControls/BoxBoth/Grab"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -977,7 +986,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameBoth/Grab/Key"]
+[node name="Label" type="Label" parent="GameControls/BoxBoth/Grab/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -995,7 +1004,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameBoth/Grab"]
+[node name="Label" type="Label" parent="GameControls/BoxBoth/Grab"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1013,7 +1022,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Jump" type="Control" parent="GameBoth"]
+[node name="Jump" type="Control" parent="GameControls/BoxBoth"]
 margin_left = 1255.0
 margin_top = 695.0
 margin_right = 1255.0
@@ -1023,7 +1032,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameBoth/Jump"]
+[node name="Key" type="NinePatchRect" parent="GameControls/BoxBoth/Jump"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -1035,7 +1044,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameBoth/Jump/Key"]
+[node name="Label" type="Label" parent="GameControls/BoxBoth/Jump/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1053,7 +1062,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameBoth/Jump"]
+[node name="Label" type="Label" parent="GameControls/BoxBoth/Jump"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1071,7 +1080,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Control" parent="GameBoth"]
+[node name="Reset" type="Control" parent="GameControls/BoxBoth"]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 25.0
@@ -1081,7 +1090,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameBoth/Reset"]
+[node name="Key" type="NinePatchRect" parent="GameControls/BoxBoth/Reset"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -1093,7 +1102,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameBoth/Reset/Key"]
+[node name="Label" type="Label" parent="GameControls/BoxBoth/Reset/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1111,7 +1120,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameBoth/Reset"]
+[node name="Label" type="Label" parent="GameControls/BoxBoth/Reset"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1127,7 +1136,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Time" type="Label" parent="GameBoth"]
+[node name="Time" type="Label" parent="GameControls/BoxBoth"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1144,7 +1153,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Control" parent="."]
+[node name="Title" type="Control" parent="GameControls"]
 visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
@@ -1152,7 +1161,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Arrows" type="Control" parent="Title"]
+[node name="Arrows" type="Control" parent="GameControls/Title"]
 margin_left = 1173.86
 margin_top = 704.126
 margin_right = 1173.86
@@ -1162,7 +1171,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Keys" type="Control" parent="Title/Arrows"]
+[node name="Keys" type="Control" parent="GameControls/Title/Arrows"]
 margin_left = 55.0
 margin_top = -50.0
 margin_right = 95.0
@@ -1172,7 +1181,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Up" type="NinePatchRect" parent="Title/Arrows/Keys"]
+[node name="Up" type="NinePatchRect" parent="GameControls/Title/Arrows/Keys"]
 margin_top = -110.0
 margin_right = 100.0
 margin_bottom = -10.0
@@ -1185,13 +1194,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="Title/Arrows/Keys/Up"]
+[node name="arrow" type="Sprite" parent="GameControls/Title/Arrows/Keys/Up"]
 position = Vector2( 50, 50 )
 rotation = 3.14159
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Down" type="NinePatchRect" parent="Title/Arrows/Keys"]
+[node name="Down" type="NinePatchRect" parent="GameControls/Title/Arrows/Keys"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -1203,12 +1212,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="Title/Arrows/Keys/Down"]
+[node name="arrow" type="Sprite" parent="GameControls/Title/Arrows/Keys/Down"]
 position = Vector2( 50, 50 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Left" type="NinePatchRect" parent="Title/Arrows/Keys"]
+[node name="Left" type="NinePatchRect" parent="GameControls/Title/Arrows/Keys"]
 margin_left = -110.0
 margin_right = -10.0
 margin_bottom = 100.0
@@ -1221,13 +1230,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="Title/Arrows/Keys/Left"]
+[node name="arrow" type="Sprite" parent="GameControls/Title/Arrows/Keys/Left"]
 position = Vector2( 50, 50 )
 rotation = 1.5708
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Right" type="NinePatchRect" parent="Title/Arrows/Keys"]
+[node name="Right" type="NinePatchRect" parent="GameControls/Title/Arrows/Keys"]
 margin_left = 110.0
 margin_right = 210.0
 margin_bottom = 100.0
@@ -1240,13 +1249,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="Title/Arrows/Keys/Right"]
+[node name="arrow" type="Sprite" parent="GameControls/Title/Arrows/Keys/Right"]
 position = Vector2( 50, 50 )
 rotation = 4.71239
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="Title/Arrows"]
+[node name="Label" type="Label" parent="GameControls/Title/Arrows"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1262,7 +1271,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="C" type="Control" parent="Title"]
+[node name="C" type="Control" parent="GameControls/Title"]
 margin_left = 1255.0
 margin_top = 579.069
 margin_right = 1255.0
@@ -1272,7 +1281,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="Title/C"]
+[node name="Key" type="NinePatchRect" parent="GameControls/Title/C"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -1284,7 +1293,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Title/C/Key"]
+[node name="Label" type="Label" parent="GameControls/Title/C/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1302,7 +1311,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Title/C"]
+[node name="Label" type="Label" parent="GameControls/Title/C"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1320,7 +1329,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="X" type="Control" parent="Title"]
+[node name="X" type="Control" parent="GameControls/Title"]
 margin_left = 1255.0
 margin_top = 639.069
 margin_right = 1255.0
@@ -1330,7 +1339,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="Title/X"]
+[node name="Key" type="NinePatchRect" parent="GameControls/Title/X"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -1342,7 +1351,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Title/X/Key"]
+[node name="Label" type="Label" parent="GameControls/Title/X/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1360,7 +1369,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Title/X"]
+[node name="Label" type="Label" parent="GameControls/Title/X"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1378,7 +1387,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title2" type="Control" parent="."]
+[node name="Title2" type="Control" parent="GameControls"]
 visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
@@ -1386,7 +1395,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Arrows" type="Control" parent="Title2"]
+[node name="Arrows" type="Control" parent="GameControls/Title2"]
 margin_left = 25.0
 margin_top = 695.0
 margin_right = 25.0
@@ -1396,7 +1405,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Keys" type="Control" parent="Title2/Arrows"]
+[node name="Keys" type="Control" parent="GameControls/Title2/Arrows"]
 margin_left = 55.0
 margin_top = -50.0
 margin_right = 95.0
@@ -1406,7 +1415,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Up" type="NinePatchRect" parent="Title2/Arrows/Keys"]
+[node name="Up" type="NinePatchRect" parent="GameControls/Title2/Arrows/Keys"]
 margin_top = -110.0
 margin_right = 100.0
 margin_bottom = -10.0
@@ -1419,13 +1428,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="Title2/Arrows/Keys/Up"]
+[node name="arrow" type="Sprite" parent="GameControls/Title2/Arrows/Keys/Up"]
 position = Vector2( 50, 50 )
 rotation = 3.14159
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Down" type="NinePatchRect" parent="Title2/Arrows/Keys"]
+[node name="Down" type="NinePatchRect" parent="GameControls/Title2/Arrows/Keys"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -1437,12 +1446,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="Title2/Arrows/Keys/Down"]
+[node name="arrow" type="Sprite" parent="GameControls/Title2/Arrows/Keys/Down"]
 position = Vector2( 50, 50 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Left" type="NinePatchRect" parent="Title2/Arrows/Keys"]
+[node name="Left" type="NinePatchRect" parent="GameControls/Title2/Arrows/Keys"]
 margin_left = -110.0
 margin_right = -10.0
 margin_bottom = 100.0
@@ -1455,13 +1464,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="Title2/Arrows/Keys/Left"]
+[node name="arrow" type="Sprite" parent="GameControls/Title2/Arrows/Keys/Left"]
 position = Vector2( 50, 50 )
 rotation = 1.5708
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Right" type="NinePatchRect" parent="Title2/Arrows/Keys"]
+[node name="Right" type="NinePatchRect" parent="GameControls/Title2/Arrows/Keys"]
 margin_left = 110.0
 margin_right = 210.0
 margin_bottom = 100.0
@@ -1474,13 +1483,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="Title2/Arrows/Keys/Right"]
+[node name="arrow" type="Sprite" parent="GameControls/Title2/Arrows/Keys/Right"]
 position = Vector2( 50, 50 )
 rotation = 4.71239
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="Title2/Arrows"]
+[node name="Label" type="Label" parent="GameControls/Title2/Arrows"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1496,7 +1505,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="C" type="Control" parent="Title2"]
+[node name="C" type="Control" parent="GameControls/Title2"]
 margin_left = 1255.0
 margin_top = 635.0
 margin_right = 1255.0
@@ -1506,7 +1515,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="Title2/C"]
+[node name="Key" type="NinePatchRect" parent="GameControls/Title2/C"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -1518,7 +1527,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Title2/C/Key"]
+[node name="Label" type="Label" parent="GameControls/Title2/C/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1536,7 +1545,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Title2/C"]
+[node name="Label" type="Label" parent="GameControls/Title2/C"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1554,7 +1563,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="X" type="Control" parent="Title2"]
+[node name="X" type="Control" parent="GameControls/Title2"]
 margin_left = 1255.0
 margin_top = 695.0
 margin_right = 1255.0
@@ -1564,7 +1573,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="Title2/X"]
+[node name="Key" type="NinePatchRect" parent="GameControls/Title2/X"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -1576,7 +1585,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Title2/X/Key"]
+[node name="Label" type="Label" parent="GameControls/Title2/X/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1594,7 +1603,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Title2/X"]
+[node name="Label" type="Label" parent="GameControls/Title2/X"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1612,7 +1621,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="R" type="Control" parent="Title2"]
+[node name="R" type="Control" parent="GameControls/Title2"]
 visible = false
 margin_left = 25.0
 margin_top = 25.0
@@ -1623,7 +1632,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="Title2/R"]
+[node name="Key" type="NinePatchRect" parent="GameControls/Title2/R"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -1635,7 +1644,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Title2/R/Key"]
+[node name="Label" type="Label" parent="GameControls/Title2/R/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1653,7 +1662,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Title2/R"]
+[node name="Label" type="Label" parent="GameControls/Title2/R"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1669,7 +1678,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Time" type="Label" parent="Title2"]
+[node name="Time" type="Label" parent="GameControls/Title2"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -1682,6 +1691,56 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 1 )
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+visible = false
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 1, 1, 1, 0.270588 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Gems" type="Control" parent="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gem" type="Node2D" parent="Control/Gems"]
+position = Vector2( 80, 80 )
+
+[node name="Back" type="Polygon2D" parent="Control/Gems/Gem"]
+scale = Vector2( 0.5, 0.5 )
+color = Color( 1, 0.866667, 0, 1 )
+offset = Vector2( 80, 0 )
+polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
+
+[node name="Fill" type="Polygon2D" parent="Control/Gems/Gem/Back"]
+color = Color( 1, 0.984314, 0, 1 )
+offset = Vector2( 50, 0 )
+polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
+
+[node name="Label" type="Label" parent="Control/Gems"]
+margin_left = 120.0
+margin_top = 34.0
+margin_right = 216.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 1 )
+text = "17"
 __meta__ = {
 "_edit_use_anchors_": false
 }

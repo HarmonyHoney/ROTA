@@ -13,10 +13,7 @@ func _ready():
 
 # acquire goal
 func on_enter():
-	if is_instance_valid(Shared.goal):
-		if Shared.goal.is_collected and !Shared.goals_collected.has(Shared.csfn):
-			Shared.goals_collected.append(Shared.csfn)
-			Shared.is_collect = true
+	Shared.collect_gem()
 	
 	if not "hub" in scene_path:
 		Shared.is_show_goal = true
