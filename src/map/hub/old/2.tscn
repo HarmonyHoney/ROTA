@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=17]
-[ext_resource path="res://src/map/base/Actors.gd" type="Script" id=18]
 
 [node name="Map" type="Node2D"]
 
@@ -33,7 +32,6 @@ detail = 1
 tile_data = PoolIntArray( 1310717, -1610612736, 0, 1376253, -1610612736, 0, 1441789, -1610612736, 0, 1441790, 0, 0, 1441791, 0, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
-script = ExtResource( 18 )
 
 [node name="Player" parent="Actors" instance=ExtResource( 17 )]
 position = Vector2( -550, 1600 )

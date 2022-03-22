@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/map/base/Actors.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
@@ -25,7 +24,6 @@ detail = 1
 tile_data = PoolIntArray( -5, -1073741824, 0, -65529, -1610612736, 0, 524288, 1610612736, 0, 524289, 1610612736, 0, 524290, 1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
-script = ExtResource( 1 )
 
 [node name="Door" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( -50, 550 )

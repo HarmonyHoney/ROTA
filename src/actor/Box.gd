@@ -14,7 +14,7 @@ onready var audio_land := $Audio/Land
 export var dir := 0 setget set_dir
 var dir_last := 0
 
-var can_push := true setget set_can_push
+export var can_push := true setget set_can_push
 export var can_spin := true setget set_can_spin
 
 var tex0 = preload("res://media/image/box/box_new.png")
@@ -46,8 +46,6 @@ var spawner
 
 var is_hold := false
 
-onready var actors = get_parent()
-
 var push_x := -1
 var is_turn := false
 
@@ -57,6 +55,13 @@ var pickup_clock := 0.0
 var pickup_time := 0.2
 var pickup_angle := 12.0
 
+func _enter_tree():
+	if Engine.editor_hint: return
+	Shared.boxes.append(self)
+
+func _exit_tree():
+	if Engine.editor_hint: return
+	Shared.boxes.erase(self)
 
 func _ready():
 	set_sprite()
@@ -81,16 +86,8 @@ func _ready():
 		gp.add_child(spawner)
 		spawner.owner = gp
 		
-		
 		spawner.position = position
 		spawner.box = self
-
-#func _input(event):
-#	if event is InputEventKey and event.pressed:
-#		if event.scancode == KEY_Q:
-#			self.dir -= 1
-#		elif event.scancode == KEY_E:
-#			set_dir(dir + 1)
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
@@ -173,11 +170,11 @@ func test_tile(check_dir := dir, distance := 1) -> bool:
 	var result = test_move(transform, vec)
 	shrink_shape(false)
 	
-	if !result and is_instance_valid(actors):
+	if !result:
 		var check_pos = position + vec
 		check_pos = Vector2(stepify(check_pos.x, 50), stepify(check_pos.y, 50))
 		
-		for i in actors.boxes:
+		for i in Shared.boxes:
 			if i != self:
 				if check_pos == i.position:
 					result = true
@@ -223,6 +220,13 @@ func push(push_dir := 0):
 	if result:
 		move_tile(push_dir, 1)
 		is_push = true
+		
+		# bring box behind
+		var behind = push_areas[posmod(push_dir + 2, 4)].get_overlapping_bodies()
+		if behind.size() > 0:
+			if behind[0] != self and behind[0].is_in_group("box"):
+				get_parent().move_child(behind[0], get_index() + 1)
+		
 	
 	return result
 
@@ -250,13 +254,7 @@ func outside_boundary():
 		turn_clock = 0
 		move_clock = move_time
 	else:
-		remove()
-
-func remove():
-	if is_instance_valid(actors):
-		actors.boxes.erase(self)
-	queue_free()
-
+		queue_free()
 
 func set_can_push(arg):
 	can_push = arg

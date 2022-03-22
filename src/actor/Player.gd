@@ -313,12 +313,12 @@ func _physics_process(delta):
 							push_clock = 0
 							push_dir = joy_q.x
 							box.push_x = joy_q.x
-							print("push successful")
+							#print("push successful")
 							
 							audio_push.pitch_scale = rand_range(0.7, 1.3)
 							audio_push.play()
-						else:
-							print("push failed")
+						#else:
+						#	print("push failed")
 				
 				# turn box
 				elif box.can_spin and joy_q.y != 0:

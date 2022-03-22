@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://src/map/base/Actors.gd" type="Script" id=1]
 [ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/DoorBig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=4]
@@ -12,7 +11,6 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
 is_moving = true
-is_zoom_out = false
 bg_palette = 3
 
 [node name="SolidTileMap0" parent="." instance=ExtResource( 5 )]
@@ -21,7 +19,6 @@ tile_data = PoolIntArray( 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0
 [node name="SpikeMap" parent="." instance=ExtResource( 4 )]
 
 [node name="Actors" type="Node2D" parent="."]
-script = ExtResource( 1 )
 
 [node name="Player" parent="Actors" instance=ExtResource( 6 )]
 position = Vector2( 600, 200 )

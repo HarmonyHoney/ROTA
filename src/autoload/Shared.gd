@@ -7,9 +7,9 @@ var scene_options := "res://src/menu/Options.tscn"
 
 var is_wipe := false
 
-var last_scene := ""
-var next_scene := ""
 onready var csfn := get_tree().current_scene.filename
+onready var last_scene := csfn
+onready var next_scene := csfn
 
 var worlds_path := "res://src/map/worlds/"
 
@@ -24,6 +24,8 @@ var goals_collected := []
 var is_collect := false
 var is_show_goal := false
 
+var boxes := []
+
 var player
 var camera
 var door_goal
@@ -35,13 +37,19 @@ var slabs_completed = []
 
 signal scene_changed
 
+var volume_master := 100
+
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
+	set_volume(50)
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_F11:
 			toggle_fullscreen()
+		
+		elif event.scancode == KEY_MINUS or event.scancode == KEY_EQUAL:
+			set_volume(volume_master + (-10 if event.scancode == KEY_MINUS else 10))
 
 func wipe_scene(arg):
 	if !is_wipe:
@@ -63,6 +71,8 @@ func reset():
 
 func change_scene():
 	is_wipe = false
+	boxes.clear()
+	
 	if next_scene == csfn:
 		get_tree().reload_current_scene()
 	else:
@@ -93,6 +103,12 @@ func take_screenshot():
 	return screenshot_texture
 
 
+### Volume
+
+func set_volume(arg = 0):
+	volume_master = clamp(arg, 0, 100)
+	AudioServer.set_bus_volume_db(0, linear2db(volume_master / 100.0))
+	print("volume_master: ", volume_master)
 
 
 ### Files and Directory Funcs ###
