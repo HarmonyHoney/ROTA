@@ -4,7 +4,7 @@
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
 [ext_resource path="res://src/shader/guide.gdshader" type="Shader" id=3]
 [ext_resource path="res://media/image/treads.png" type="Texture" id=4]
-[ext_resource path="res://media/image/box/box_new.png" type="Texture" id=5]
+[ext_resource path="res://media/image/box/box_push.png" type="Texture" id=5]
 
 [sub_resource type="Gradient" id=14]
 colors = PoolColorArray( 1, 0.4, 0.4, 1, 1, 1, 1, 0 )

@@ -5,11 +5,16 @@ class_name Box
 onready var collision_shape : CollisionShape2D = $CollisionShape2D
 onready var standing_area : Area2D = $StandingArea
 onready var push_areas : Array = $PushAreas.get_children()
+onready var area_respawn := $RespawnArea
+onready var area := $Area2D
+onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
+
 onready var sprite : Node2D = $Sprites
 onready var box_sprite : Sprite = $Sprites/Box
-onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
+
 onready var audio_move := $Audio/Move
 onready var audio_land := $Audio/Land
+onready var audio_respawn := $Audio/Respawn
 
 export var dir := 0 setget set_dir
 var dir_last := 0
@@ -17,10 +22,9 @@ var dir_last := 0
 export var can_push := true setget set_can_push
 export var can_spin := true setget set_can_spin
 
-var tex0 = preload("res://media/image/box/box_new.png")
-var tex1 = preload("res://media/image/box/box1.png")
-var tex2 = preload("res://media/image/box/box2.png")
-var tex3 = preload("res://media/image/box/box3.png")
+var tex_push = preload("res://media/image/box/box_push.png")
+var tex_spin = preload("res://media/image/box/box_spin.png")
+var tex_both = preload("res://media/image/box/box_both.png")
 
 var tile := 100.0
 var is_floor := false
@@ -40,9 +44,9 @@ var push_time := 0.2
 
 var start_dir := 0
 var start_pos := Vector2.ZERO
-export var is_respawn := true
-var spawner_scene = load("res://src/actor/BoxRespawn.tscn")
-var spawner
+var is_respawn := false
+var respawn_clock := 0.0
+var respawn_time := 0.1
 
 var is_hold := false
 
@@ -54,6 +58,7 @@ var last_floor := false
 var pickup_clock := 0.0
 var pickup_time := 0.2
 var pickup_angle := 12.0
+
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -80,17 +85,30 @@ func _ready():
 	yield(get_parent(), "ready")
 	
 	# set up respawn
-	if is_respawn:
-		spawner = spawner_scene.instance()
-		var gp = get_parent()
-		gp.add_child(spawner)
-		spawner.owner = gp
-		
-		spawner.position = position
-		spawner.box = self
+#	if is_respawn:
+#		spawner = spawner_scene.instance()
+#		var gp = get_parent()
+#		gp.add_child(spawner)
+#		spawner.owner = gp
+#
+#		spawner.position = position
+#		spawner.box = self
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
+	
+	if is_respawn:
+		respawn_clock = min(respawn_clock + delta, respawn_time)
+		if respawn_clock == respawn_time and area_respawn.get_overlapping_bodies().size() == 0:
+			is_respawn = false
+			
+			collision_shape.set_deferred("disabled", false)
+			area.set_deferred("monitorable", true)
+			
+			audio_respawn.play()
+			sprite.modulate.a = 1.0
+		return
+	
 	
 	# on floor
 	is_floor = test_tile(dir, 1)
@@ -244,17 +262,31 @@ func portal(pos):
 func outside_boundary():
 	print(name, " outside boundary")
 	
-	if is_respawn:
-		spawner.respawn(deg2rad(dir * 90))
+	if !is_respawn:
+		is_respawn = true
 		
-		set_physics_process(false)
-		
+		position = start_pos
 		set_dir(start_dir)
 		sprite.position = Vector2.ZERO
 		turn_clock = 0
 		move_clock = move_time
-	else:
-		queue_free()
+		
+		collision_shape.set_deferred("disabled", true)
+		area.set_deferred("monitorable", false)
+		
+		sprite.modulate.a = 0.5
+	
+#	if is_respawn:
+#		spawner.respawn(deg2rad(dir * 90))
+#
+#		set_physics_process(false)
+#
+#		set_dir(start_dir)
+#		sprite.position = Vector2.ZERO
+#		turn_clock = 0
+#		move_clock = move_time
+#	else:
+#		queue_free()
 
 func set_can_push(arg):
 	can_push = arg
@@ -266,7 +298,11 @@ func set_can_spin(arg):
 
 func set_sprite():
 	if box_sprite:
-		if !can_spin:
-			box_sprite.texture = tex1
+		if can_push and can_spin:
+			box_sprite.texture = tex_both
+		elif can_spin:
+			box_sprite.texture = tex_spin
 		else:
-			box_sprite.texture = tex0
+			box_sprite.texture = tex_push
+
+
