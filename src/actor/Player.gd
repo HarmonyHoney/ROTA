@@ -367,7 +367,7 @@ func _physics_process(delta):
 			#var p = box.get_parent()
 			#p.move_child(box, p.get_child_count())
 			
-			HUD.show("game")
+			HUD.show("Game")
 			
 			Guide.set_box(null)
 			
@@ -459,10 +459,12 @@ func _physics_process(delta):
 							push_from = position
 							push_clock = 0
 							
-							if box.can_spin:
-								HUD.show("grab2")
+							if box.can_push and box.can_spin:
+								HUD.show("GameBoth")
+							elif box.can_spin:
+								HUD.show("GameSpin")
 							else:
-								HUD.show("grab1")
+								HUD.show("GamePush")
 							
 							Guide.set_box(box)
 							

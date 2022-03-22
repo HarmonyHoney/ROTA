@@ -276,14 +276,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameGrab1" type="Control" parent="."]
+[node name="GamePush" type="Control" parent="."]
+visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Walk" type="Control" parent="GameGrab1"]
+[node name="Walk" type="Control" parent="GamePush"]
 margin_left = 25.0
 margin_top = 645.0
 margin_right = 25.0
@@ -293,14 +294,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Keys" type="Control" parent="GameGrab1/Walk"]
+[node name="Keys" type="Control" parent="GamePush/Walk"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="NinePatchRect" parent="GameGrab1/Walk/Keys"]
+[node name="Left" type="NinePatchRect" parent="GamePush/Walk/Keys"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -312,13 +313,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GameGrab1/Walk/Keys/Left"]
+[node name="arrow" type="Sprite" parent="GamePush/Walk/Keys/Left"]
 position = Vector2( 50, 50 )
 rotation = 1.5708
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Right" type="NinePatchRect" parent="GameGrab1/Walk/Keys"]
+[node name="Right" type="NinePatchRect" parent="GamePush/Walk/Keys"]
 margin_left = 110.0
 margin_right = 210.0
 margin_bottom = 100.0
@@ -331,13 +332,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GameGrab1/Walk/Keys/Right"]
+[node name="arrow" type="Sprite" parent="GamePush/Walk/Keys/Right"]
 position = Vector2( 50, 50 )
 rotation = 4.71239
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="GameGrab1/Walk"]
+[node name="Label" type="Label" parent="GamePush/Walk"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -353,7 +354,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Grab" type="Control" parent="GameGrab1"]
+[node name="Grab" type="Control" parent="GamePush"]
 margin_left = 1255.0
 margin_top = 635.0
 margin_right = 1255.0
@@ -363,7 +364,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameGrab1/Grab"]
+[node name="Key" type="NinePatchRect" parent="GamePush/Grab"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -375,7 +376,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab1/Grab/Key"]
+[node name="Label" type="Label" parent="GamePush/Grab/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -393,7 +394,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab1/Grab"]
+[node name="Label" type="Label" parent="GamePush/Grab"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -411,7 +412,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Jump" type="Control" parent="GameGrab1"]
+[node name="Jump" type="Control" parent="GamePush"]
 margin_left = 1255.0
 margin_top = 695.0
 margin_right = 1255.0
@@ -421,7 +422,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameGrab1/Jump"]
+[node name="Key" type="NinePatchRect" parent="GamePush/Jump"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -433,7 +434,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab1/Jump/Key"]
+[node name="Label" type="Label" parent="GamePush/Jump/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -451,7 +452,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab1/Jump"]
+[node name="Label" type="Label" parent="GamePush/Jump"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -469,7 +470,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Control" parent="GameGrab1"]
+[node name="Reset" type="Control" parent="GamePush"]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 25.0
@@ -479,7 +480,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameGrab1/Reset"]
+[node name="Key" type="NinePatchRect" parent="GamePush/Reset"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -491,7 +492,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab1/Reset/Key"]
+[node name="Label" type="Label" parent="GamePush/Reset/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -509,7 +510,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab1/Reset"]
+[node name="Label" type="Label" parent="GamePush/Reset"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -525,7 +526,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Time" type="Label" parent="GameGrab1"]
+[node name="Time" type="Label" parent="GamePush"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -542,15 +543,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameGrab2" type="Control" parent="."]
-visible = false
+[node name="GameSpin" type="Control" parent="."]
 margin_right = 1280.0
 margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Walk" type="Control" parent="GameGrab2"]
+[node name="Rotate" type="Control" parent="GameSpin"]
 margin_left = 25.0
 margin_top = 645.0
 margin_right = 25.0
@@ -560,14 +560,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Keys" type="Control" parent="GameGrab2/Walk"]
+[node name="Keys" type="Control" parent="GameSpin/Rotate"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="NinePatchRect" parent="GameGrab2/Walk/Keys"]
+[node name="Left" type="NinePatchRect" parent="GameSpin/Rotate/Keys"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -579,83 +579,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GameGrab2/Walk/Keys/Left"]
-position = Vector2( 50, 50 )
-rotation = 1.5708
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Right" type="NinePatchRect" parent="GameGrab2/Walk/Keys"]
-margin_left = 110.0
-margin_right = 210.0
-margin_bottom = 100.0
-texture = ExtResource( 2 )
-patch_margin_left = 25
-patch_margin_top = 25
-patch_margin_right = 25
-patch_margin_bottom = 25
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="arrow" type="Sprite" parent="GameGrab2/Walk/Keys/Right"]
-position = Vector2( 50, 50 )
-rotation = 4.71239
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="GameGrab2/Walk"]
-anchor_left = 0.02
-anchor_top = 0.88
-anchor_right = 0.065
-anchor_bottom = 1.0
-margin_left = 220.0
-margin_right = 412.0
-margin_bottom = 100.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
-text = "PUSH/PULL"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Rotate" type="Control" parent="GameGrab2"]
-margin_left = 25.0
-margin_top = 585.0
-margin_right = 25.0
-margin_bottom = 585.0
-rect_scale = Vector2( 0.5, 0.5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Keys" type="Control" parent="GameGrab2/Rotate"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Left" type="NinePatchRect" parent="GameGrab2/Rotate/Keys"]
-margin_right = 100.0
-margin_bottom = 100.0
-texture = ExtResource( 2 )
-patch_margin_left = 25
-patch_margin_top = 25
-patch_margin_right = 25
-patch_margin_bottom = 25
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="arrow" type="Sprite" parent="GameGrab2/Rotate/Keys/Left"]
+[node name="arrow" type="Sprite" parent="GameSpin/Rotate/Keys/Left"]
 position = Vector2( 50, 50 )
 rotation = 3.14159
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Right" type="NinePatchRect" parent="GameGrab2/Rotate/Keys"]
+[node name="Right" type="NinePatchRect" parent="GameSpin/Rotate/Keys"]
 margin_left = 110.0
 margin_right = 210.0
 margin_bottom = 100.0
@@ -668,12 +598,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="arrow" type="Sprite" parent="GameGrab2/Rotate/Keys/Right"]
+[node name="arrow" type="Sprite" parent="GameSpin/Rotate/Keys/Right"]
 position = Vector2( 50, 50 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="GameGrab2/Rotate"]
+[node name="Label" type="Label" parent="GameSpin/Rotate"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -689,7 +619,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Grab" type="Control" parent="GameGrab2"]
+[node name="Grab" type="Control" parent="GameSpin"]
 margin_left = 1255.0
 margin_top = 635.0
 margin_right = 1255.0
@@ -699,7 +629,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameGrab2/Grab"]
+[node name="Key" type="NinePatchRect" parent="GameSpin/Grab"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -711,7 +641,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab2/Grab/Key"]
+[node name="Label" type="Label" parent="GameSpin/Grab/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -729,7 +659,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab2/Grab"]
+[node name="Label" type="Label" parent="GameSpin/Grab"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -747,7 +677,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Jump" type="Control" parent="GameGrab2"]
+[node name="Jump" type="Control" parent="GameSpin"]
 margin_left = 1255.0
 margin_top = 695.0
 margin_right = 1255.0
@@ -757,7 +687,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameGrab2/Jump"]
+[node name="Key" type="NinePatchRect" parent="GameSpin/Jump"]
 margin_left = -100.0
 margin_top = -100.0
 texture = ExtResource( 2 )
@@ -769,7 +699,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab2/Jump/Key"]
+[node name="Label" type="Label" parent="GameSpin/Jump/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -787,7 +717,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab2/Jump"]
+[node name="Label" type="Label" parent="GameSpin/Jump"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -805,7 +735,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Control" parent="GameGrab2"]
+[node name="Reset" type="Control" parent="GameSpin"]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 25.0
@@ -815,7 +745,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="NinePatchRect" parent="GameGrab2/Reset"]
+[node name="Key" type="NinePatchRect" parent="GameSpin/Reset"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 2 )
@@ -827,7 +757,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab2/Reset/Key"]
+[node name="Label" type="Label" parent="GameSpin/Reset/Key"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -845,7 +775,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameGrab2/Reset"]
+[node name="Label" type="Label" parent="GameSpin/Reset"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065
@@ -861,7 +791,343 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Time" type="Label" parent="GameGrab2"]
+[node name="Time" type="Label" parent="GameSpin"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = 374.4
+margin_top = -617.6
+margin_right = 1276.8
+margin_bottom = -576.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameBoth" type="Control" parent="."]
+visible = false
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Walk" type="Control" parent="GameBoth"]
+margin_left = 25.0
+margin_top = 645.0
+margin_right = 25.0
+margin_bottom = 645.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keys" type="Control" parent="GameBoth/Walk"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="NinePatchRect" parent="GameBoth/Walk/Keys"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="GameBoth/Walk/Keys/Left"]
+position = Vector2( 50, 50 )
+rotation = 1.5708
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="Right" type="NinePatchRect" parent="GameBoth/Walk/Keys"]
+margin_left = 110.0
+margin_right = 210.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="GameBoth/Walk/Keys/Right"]
+position = Vector2( 50, 50 )
+rotation = 4.71239
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="GameBoth/Walk"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = 220.0
+margin_right = 412.0
+margin_bottom = 100.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "PUSH/PULL"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rotate" type="Control" parent="GameBoth"]
+margin_left = 25.0
+margin_top = 585.0
+margin_right = 25.0
+margin_bottom = 585.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keys" type="Control" parent="GameBoth/Rotate"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="NinePatchRect" parent="GameBoth/Rotate/Keys"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="GameBoth/Rotate/Keys/Left"]
+position = Vector2( 50, 50 )
+rotation = 3.14159
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="Right" type="NinePatchRect" parent="GameBoth/Rotate/Keys"]
+margin_left = 110.0
+margin_right = 210.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="GameBoth/Rotate/Keys/Right"]
+position = Vector2( 50, 50 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="GameBoth/Rotate"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = 220.0
+margin_right = 412.0
+margin_bottom = 100.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "ROTATE"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grab" type="Control" parent="GameBoth"]
+margin_left = 1255.0
+margin_top = 635.0
+margin_right = 1255.0
+margin_bottom = 635.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="NinePatchRect" parent="GameBoth/Grab"]
+margin_left = -100.0
+margin_top = -100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameBoth/Grab/Key"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -85.5
+margin_right = 93.5
+margin_bottom = 2.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "C"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameBoth/Grab"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -249.0
+margin_top = -97.0
+margin_right = -105.0
+margin_bottom = 3.0
+grow_horizontal = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "GRAB"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jump" type="Control" parent="GameBoth"]
+margin_left = 1255.0
+margin_top = 695.0
+margin_right = 1255.0
+margin_bottom = 695.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="NinePatchRect" parent="GameBoth/Jump"]
+margin_left = -100.0
+margin_top = -100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameBoth/Jump/Key"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -85.5
+margin_right = 93.5
+margin_bottom = 2.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "X"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameBoth/Jump"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -295.0
+margin_top = -97.0
+margin_right = -103.0
+margin_bottom = 3.0
+grow_horizontal = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "JUMP"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset" type="Control" parent="GameBoth"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 25.0
+margin_bottom = 25.0
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="NinePatchRect" parent="GameBoth/Reset"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 2 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameBoth/Reset/Key"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -85.5
+margin_right = 93.5
+margin_bottom = 2.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "R"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameBoth/Reset"]
+anchor_left = 0.02
+anchor_top = 0.88
+anchor_right = 0.065
+anchor_bottom = 1.0
+margin_left = 119.211
+margin_top = 3.12738
+margin_right = 311.211
+margin_bottom = 103.127
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "RESET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="GameBoth"]
 anchor_left = 0.02
 anchor_top = 0.88
 anchor_right = 0.065

@@ -81,10 +81,10 @@ func change_scene():
 	
 	match next_scene:
 		scene_splash: HUD.show("none")
-		scene_title: HUD.show("title")
-		scene_select: HUD.show("title")
-		scene_options: HUD.show("title")
-		_: HUD.show("game")
+		scene_title: HUD.show("Title")
+		scene_select: HUD.show("Title")
+		scene_options: HUD.show("Title")
+		_: HUD.show("Game")
 	
 	emit_signal("scene_changed")
 

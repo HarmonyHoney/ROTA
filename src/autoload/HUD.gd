@@ -1,17 +1,16 @@
 extends CanvasLayer
 
-onready var game : Control = $Game
-onready var title : Control = $Title
-onready var grab1 : Control = $GameGrab1
-onready var grab2 : Control = $GameGrab2
+var kids = {}
 
 func _ready():
+	for i in get_children():
+		kids[i.name.to_lower()] = i
+	
 	show()
 
 func show(arg := "none"):
-	for i in get_children():
+	for i in kids.values():
 		i.visible = false
 	
-	var c = get(arg)
-	if c != null:
-		c.visible = true
+	if kids.has(arg.to_lower()):
+		kids[arg.to_lower()].visible = true

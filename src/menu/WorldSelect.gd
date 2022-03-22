@@ -191,7 +191,7 @@ func open_level():
 	get_tree().change_scene(worlds_path + "/" + str(world_cursor + 1) + "/" + str(level_cursor + 1) + ".tscn")
 	#Shared.is_level_select = false
 	
-	HUD.show("game")
+	HUD.show("Game")
 
 func _process(delta):
 	if is_opening:

@@ -102,7 +102,7 @@ func set_paused(pause := true):
 		#sprite.position = Vector2(200, 0)
 		sprite.scale = Vector2.ONE * (720 / sprite.texture.get_size().y)
 	
-	HUD.show("title" if is_paused else "game")
+	HUD.show("Title" if is_paused else "Game")
 	sprite.visible = is_paused
 	get_tree().paused = is_paused
 	
