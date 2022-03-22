@@ -14,6 +14,7 @@ onready var box_sprite : Sprite = $Sprites/Box
 
 onready var audio_move := $Audio/Move
 onready var audio_land := $Audio/Land
+onready var audio_fallout := $Audio/Fallout
 onready var audio_respawn := $Audio/Respawn
 
 export var dir := 0 setget set_dir
@@ -46,14 +47,11 @@ var start_dir := 0
 var start_pos := Vector2.ZERO
 var is_respawn := false
 var respawn_clock := 0.0
-var respawn_time := 0.1
+var respawn_time := 0.4
 
 var is_hold := false
-
 var push_x := -1
 var is_turn := false
-
-var last_floor := false
 
 var pickup_clock := 0.0
 var pickup_time := 0.2
@@ -81,24 +79,19 @@ func _ready():
 	start_dir = dir
 	start_pos = position
 	
-	# wait for parent
-	yield(get_parent(), "ready")
-	
-	# set up respawn
-#	if is_respawn:
-#		spawner = spawner_scene.instance()
-#		var gp = get_parent()
-#		gp.add_child(spawner)
-#		spawner.owner = gp
-#
-#		spawner.position = position
-#		spawner.box = self
+	# check floor
+	is_floor = test_tile(dir, 1)
+	move_clock = move_time
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
 	if is_respawn:
 		respawn_clock = min(respawn_clock + delta, respawn_time)
+		
+		var s = smoothstep(0, 1, respawn_clock / respawn_time)
+		sprite.scale = Vector2.ONE * s
+		
 		if respawn_clock == respawn_time and area_respawn.get_overlapping_bodies().size() == 0:
 			is_respawn = false
 			
@@ -115,7 +108,7 @@ func _physics_process(delta):
 	
 	# move clock
 	var target = push_time if is_push else move_time
-	if move_clock != target:
+	if move_clock < target:
 		move_clock = min(move_clock + delta, target)
 		var smooth = smoothstep(0, 1, move_clock / target)
 		# lerp sprite and update collision_sprite
@@ -265,28 +258,18 @@ func outside_boundary():
 	if !is_respawn:
 		is_respawn = true
 		
-		position = start_pos
 		set_dir(start_dir)
+		position = start_pos
 		sprite.position = Vector2.ZERO
 		turn_clock = 0
 		move_clock = move_time
+		respawn_clock = 0.0
 		
 		collision_shape.set_deferred("disabled", true)
 		area.set_deferred("monitorable", false)
 		
 		sprite.modulate.a = 0.5
-	
-#	if is_respawn:
-#		spawner.respawn(deg2rad(dir * 90))
-#
-#		set_physics_process(false)
-#
-#		set_dir(start_dir)
-#		sprite.position = Vector2.ZERO
-#		turn_clock = 0
-#		move_clock = move_time
-#	else:
-#		queue_free()
+		audio_fallout.play()
 
 func set_can_push(arg):
 	can_push = arg
