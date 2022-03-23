@@ -1,7 +1,7 @@
 tool
 extends TileMap
 
-onready var auto = $Offset
+onready var auto = get_child(0)
 export var detail := 0 setget set_tileset
 
 var sets = [preload("res://src/stage/tileset/TileSet0.tres"),preload("res://src/stage/tileset/TileSet1.tres"),
@@ -11,9 +11,8 @@ preload("res://src/stage/tileset/TileSet4.tres"),preload("res://src/stage/tilese
 func _ready():
 	set_tileset()
 	
-	yield(get_parent(), "ready")
 	tile_set.tile_set_modulate(0, Color(0, 0, 0, 0))
-	make_tiles(auto)
+	make_tiles()
 	
 	if !Engine.editor_hint:
 		Boundary.add_shape(get_used_rect(), cell_size)
@@ -27,18 +26,23 @@ func set_tileset(arg := detail):
 
 func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_coord=Vector2()):
 	.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
-	for _x in range(x - 1, x + 2):
-		for _y in range(y - 1, y + 2):
-			set_tile(_x, _y, auto)
+	
+	# larger range while in game
+	var n = 1 if Engine.editor_hint else 2
+	
+	# set tile range
+	for _x in range(x - n, x + n):
+		for _y in range(y - n, y + n):
+			set_tile(_x, _y)
 
-func make_tiles(map : TileMap):
-	map.clear()
+func make_tiles():
+	auto.clear()
 	var r = get_used_rect()
 	for x in range(r.position.x - 1, r.position.x + r.size.x + 1):
 		for y in range(r.position.y - 1, r.position.y + r.size.y + 1):
-			set_tile(x, y, auto)
+			set_tile(x, y)
 
-func set_tile(x : int, y : int, map):
+func set_tile(x : int, y : int):
 	var up_left = int(get_cell(x, y) != -1)
 	var up_right = int(get_cell(x + 1, y) != -1)
 	var down_right = int(get_cell(x + 1, y + 1) != -1)
@@ -105,6 +109,6 @@ func set_tile(x : int, y : int, map):
 		15:
 			tile = solid
 	
-	if !map: map = get_child(0)
-	map.set_cell(x, y, tile, fx, fy, tr)
+	if !auto: auto = get_child(0)
+	auto.set_cell(x, y, tile, fx, fy, tr)
 
