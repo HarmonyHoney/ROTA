@@ -6,6 +6,7 @@
 [ext_resource path="res://src/autoload/HUD.gd" type="Script" id=4]
 
 [node name="HUD" type="CanvasLayer"]
+pause_mode = 2
 layer = 9
 script = ExtResource( 4 )
 

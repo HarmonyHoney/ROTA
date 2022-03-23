@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/actor/DoorBig.gd" type="Script" id=1]
-[ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://media/image/door/bigdoor.png" type="Texture" id=3]
 [ext_resource path="res://media/image/box/arrow.png" type="Texture" id=4]
 [ext_resource path="res://media/audio/sfx/hit0.wav" type="AudioStream" id=5]
@@ -9,6 +9,12 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 100, 100 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 80
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
 
 [node name="DoorBig" type="Node2D" groups=["big_door", "door"]]
 z_index = -10
@@ -59,9 +65,32 @@ stream = ExtResource( 5 )
 scale = Vector2( 0.334, 0.334 )
 texture = ExtResource( 3 )
 
-[node name="Gems" type="Node2D" parent="."]
+[node name="Gem" type="Node2D" parent="Sprites"]
+visible = false
 
-[node name="Gem" parent="Gems" instance=ExtResource( 2 )]
+[node name="Back" type="Polygon2D" parent="Sprites/Gem"]
+scale = Vector2( 1.25, 1.25 )
+color = Color( 1, 0.866667, 0, 1 )
+offset = Vector2( 80, 0 )
+polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
+
+[node name="Fill" type="Polygon2D" parent="Sprites/Gem/Back"]
+color = Color( 1, 0.984314, 0, 1 )
+offset = Vector2( 50, 0 )
+polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
+
+[node name="Label" type="Label" parent="Sprites/Gem"]
+margin_left = -75.0
+margin_top = -75.0
+margin_right = 75.0
+margin_bottom = 75.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

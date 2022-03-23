@@ -1,53 +1,24 @@
 tool
 extends Door
 
-onready var gems := $Gems
-onready var gem := $Gems/Gem
+onready var gem := $Sprites/Gem
+onready var label := $Sprites/Gem/Label
 
-export var is_gem := false
-export var gem_count := 1
-export var gem_radius := 60.0
-export(String, DIR) var gem_world := ""
-var gems_collected := 0
-
-func _enter_tree():
-	if Engine.editor_hint: return
-	
-	if is_gem:
-		Shared.door_goal = self
+export var gem_count := 0 setget set_gem
 
 func _ready():
+	set_gem()
 	if Engine.editor_hint: return
 	
 	CheatCode.connect("activate", self, "cheat_code")
-	
-	if is_gem:
-		
-		# gems collected
-		if gem_world != "":
-			for i in Shared.goals_collected:
-				if i.begins_with(gem_world):
-					gems_collected += 1
-		
-		# create gems
-		for i in gem_count:
-			var g = gem
-			if i > 0:
-				g = gem.duplicate()
-				gems.add_child(g)
-				g.owner = self
-			var angle = (float(i) / float(gem_count)) * TAU
-			g.position = Vector2(0, gem_radius).rotated(angle)
-			g.rotation = angle
-		
-		# color gems
-		for i in gem_count:
-			if i < gems_collected:
-				gems.get_child(i).set_color()
-		
-		is_locked = gems_collected < gem_count
-	else:
-		gems.visible = false
+	is_locked = Shared.gem_count < gem_count
+
+func set_gem(arg := gem_count):
+	gem_count = max(arg, 0)
+	if label:
+		label.text = str(gem_count)
+	if gem:
+		gem.visible = gem_count > 0
 
 # unlock cheat
 func cheat_code(cheat):
@@ -58,3 +29,6 @@ func unlock():
 	is_locked = false
 	arrow.visible = true
 	print(name, " unlocked")
+
+func on_active():
+	HUD.is_gem = is_active and gem_count > 0

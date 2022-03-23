@@ -16,7 +16,7 @@ onready var audio_open := get_node(audio_path)
 
 var player = null
 var is_active := false
-var is_locked := false
+export var is_locked := false
 
 var arrow_clock := 0.0
 var arrow_time := 0.3
@@ -39,14 +39,14 @@ func _ready():
 func _input(event):
 	if Engine.editor_hint: return
 	if event.is_action_pressed("up"):
-		if is_active and player != null and !player.is_hold and player.dir == dir and player.is_floor:
+		if is_active and !is_locked and player != null and !player.is_hold and player.dir == dir and player.is_floor:
 			enter_door()
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
 	# arrow display
-	arrow_clock = clamp(arrow_clock + (delta if is_active else -delta), 0, arrow_time)
+	arrow_clock = clamp(arrow_clock + (delta if (is_active and !is_locked) else -delta), 0, arrow_time)
 	arrow.modulate.a = smoothstep(0, 1, arrow_clock / arrow_time)
 
 func set_dir(arg):
@@ -54,11 +54,13 @@ func set_dir(arg):
 	rotation_degrees = dir * 90
 
 func _on_Area2D_body_entered(body):
-	if !is_locked and body == player and player.dir == dir:
+	if body == player and player.dir == dir:
 		is_active = true
+		on_active()
 
 func _on_Area2D_body_exited(body):
 	is_active = false
+	on_active()
 
 func enter_door():
 	if scene_path != "":
@@ -73,4 +75,6 @@ func enter_door():
 func on_enter():
 	pass
 
+func on_active():
+	pass
 

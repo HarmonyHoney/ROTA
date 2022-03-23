@@ -7,7 +7,7 @@
 shader = ExtResource( 1 )
 shader_param/inside = Color( 1, 1, 1, 0 )
 shader_param/line = Color( 0, 0, 0, 1 )
-shader_param/outside = Color( 1, 1, 1, 1 )
+shader_param/outside = Color( 1, 1, 1, 0 )
 shader_param/scale = 1.0
 shader_param/offset = Vector2( 0, 0 )
 shader_param/start_offset = Vector2( 0.5, 0.5 )

@@ -29,12 +29,8 @@ var boxes := []
 
 var player
 var camera
-var door_goal
 var door_destination
 var goal
-
-var slab
-var slabs_completed = []
 
 signal scene_changed
 

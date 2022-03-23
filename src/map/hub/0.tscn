@@ -14,22 +14,67 @@ is_moving = true
 bg_palette = 1
 
 [node name="SolidTileMap0" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0 )
+tile_data = PoolIntArray( 196623, 0, 0, 196624, 0, 0, 196625, 0, 0, 196626, 0, 0, 262159, 0, 0, 262160, 0, 0, 262161, 0, 0, 262162, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0 )
+
+[node name="SolidTileMap1" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( 196629, 0, 0, 196630, 0, 0, 196631, 0, 0, 196632, 0, 0, 262165, 0, 0, 262166, 0, 0, 262167, 0, 0, 262168, 0, 0, 327701, 0, 0, 327702, 0, 0, 327703, 0, 0, 327704, 0, 0 )
+detail = 1
+
+[node name="SolidTileMap2" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( 196635, 0, 0, 196636, 0, 0, 196637, 0, 0, 196638, 0, 0, 262171, 0, 0, 262172, 0, 0, 262173, 0, 0, 262174, 0, 0, 327707, 0, 0, 327708, 0, 0, 327709, 0, 0, 327710, 0, 0 )
+detail = 2
+
+[node name="SolidTileMap3" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( 196641, 0, 0, 196642, 0, 0, 196643, 0, 0, 196644, 0, 0, 262177, 0, 0, 262178, 0, 0, 262179, 0, 0, 262180, 0, 0, 327713, 0, 0, 327714, 0, 0, 327715, 0, 0, 327716, 0, 0 )
+detail = 3
+
+[node name="SolidTileMap4" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196647, 0, 0, 196648, 0, 0, 196649, 0, 0, 196650, 0, 0, 196653, 0, 0, 196654, 0, 0, 196655, 0, 0, 196656, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262183, 0, 0, 262184, 0, 0, 262185, 0, 0, 262186, 0, 0, 262189, 0, 0, 262190, 0, 0, 262191, 0, 0, 262192, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327719, 0, 0, 327720, 0, 0, 327721, 0, 0, 327722, 0, 0, 327725, 0, 0, 327726, 0, 0, 327727, 0, 0, 327728, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 458761, 0, 0, 458762, 0, 0, 524297, 0, 0, 524298, 0, 0, 589833, 0, 0, 589834, 0, 0, 655369, 0, 0, 655370, 0, 0 )
+detail = 4
 
 [node name="SpikeMap" parent="." instance=ExtResource( 4 )]
 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 350, 250 )
+position = Vector2( 1000, 250 )
 
 [node name="DoorBig" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 950, 700 )
+position = Vector2( 1700, 200 )
+scene_path = "res://src/map/hub/1.tscn"
+
+[node name="DoorBig2" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 2300, 700 )
 rotation = 3.14159
 dir = 2
-scene_path = "res://src/map/hub/1.tscn"
+scene_path = "res://src/map/hub/2.tscn"
+gem_count = 7
+
+[node name="DoorBig3" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 2900, 200 )
+scene_path = "res://src/map/hub/3.tscn"
+gem_count = 14
+
+[node name="DoorBig4" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 3500, 700 )
+rotation = 3.14159
+dir = 2
+scene_path = "res://src/map/hub/4.tscn"
+gem_count = 21
+
+[node name="DoorBig5" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 4100, 200 )
+scene_path = "res://src/map/hub/5.tscn"
+gem_count = 28
+
+[node name="DoorBig6" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 4700, 700 )
+rotation = 3.14159
+dir = 2
+scene_path = "res://src/map/hub/6.tscn"
+gem_count = 35
 
 [node name="Details" type="Node2D" parent="."]
 
 [node name="Candle" parent="Details" instance=ExtResource( 7 )]
-position = Vector2( 200, 300 )
+position = Vector2( 650, 400 )
