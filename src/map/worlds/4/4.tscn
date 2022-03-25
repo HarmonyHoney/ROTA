@@ -8,29 +8,32 @@
 [node name="Node2D" instance=ExtResource( 1 )]
 
 [node name="Camera2D" parent="." index="0"]
-position = Vector2( 500, -150 )
-focal_influence = 0.9
+position = Vector2( 0, 200 )
+is_focal_point = false
 
 [node name="SolidTileMap" parent="." index="1"]
-tile_data = PoolIntArray( -262141, -1073741824, 0, -262140, -1073741824, 0, -262139, 0, 0, -196605, -1073741824, 0, -196604, -1073741824, 0, -196603, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -65533, -1073741824, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0 )
+tile_data = PoolIntArray( -65535, 0, 0, -65534, 0, 0, 1, -1073741824, 0, 65537, -1073741824, 0, 131073, -1073741824, 0, 196609, -1073741824, 0, 327677, -1610612736, 0, 327678, -1610612736, 0, 327679, -1610612736, 0, 262144, -1610612736, 0, 262145, -1073741824, 0 )
 detail = 3
 
 [node name="SpikeMap" parent="." index="2"]
-tile_data = PoolIntArray( -262142, -1073741824, 0, -262138, -1610612736, 0 )
+tile_data = PoolIntArray( -65533, -1610612736, 0, 262141, 0, 0, 262146, -1610612736, 0 )
 
 [node name="Player" parent="Actors" index="0"]
-position = Vector2( 250, -150 )
+position = Vector2( -50, 550 )
+dir = 2
+
+[node name="Box" parent="Actors" index="1" instance=ExtResource( 2 )]
+position = Vector2( 50, -50 )
 dir = 3
 
-[node name="Door" parent="Actors" index="1" instance=ExtResource( 3 )]
-position = Vector2( 250, -150 )
-rotation = 4.71239
-dir = 3
-scene_path = "res://src/map/hub/3.tscn"
-scene_name = "4"
+[node name="Box2" parent="Actors" index="2" instance=ExtResource( 2 )]
+position = Vector2( -250, 350 )
 
-[node name="Box" parent="Actors" index="2" instance=ExtResource( 2 )]
-position = Vector2( 450, -50 )
+[node name="Door" parent="Actors" index="3" instance=ExtResource( 3 )]
+position = Vector2( -50, 550 )
+rotation = 3.14159
+dir = 2
+scene_path = "res://src/map/hub/4.tscn"
 
-[node name="Goal" parent="Actors" index="3" instance=ExtResource( 4 )]
-position = Vector2( 450, -450 )
+[node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
+position = Vector2( 250, 150 )

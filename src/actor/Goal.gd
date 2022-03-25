@@ -37,6 +37,8 @@ func pickup(ply):
 	is_collected = true
 	gem.z_as_relative = true
 	area.set_deferred("monitorable", false)
+	
+	start_pos = position
 	#area.monitorable = false
 	
 	audio_collect.play()

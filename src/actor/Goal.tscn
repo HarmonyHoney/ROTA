@@ -11,6 +11,9 @@ extents = Vector2( 35, 35 )
 z_index = 90
 z_as_relative = false
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
 
 [node name="Sprites" type="Node2D" parent="."]
 

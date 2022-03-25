@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=7]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( -900, -700 )
+is_moving = true
+focal_influence = 0.1
+bg_palette = 1
+
+[node name="SolidTileMap" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( -65530, -1073741824, 0, -65529, -1073741824, 0, -65528, -1073741824, 0, -65527, -1610612736, 0, 7, -1073741824, 0, 65543, -1073741824, 0, 196604, 0, 0, 196605, 0, 0, 196606, -1073741824, 0, 196607, -1073741824, 0, 131072, -1073741824, 0, 131073, -1073741824, 0, 131074, -1073741824, 0, 131079, -1073741824, 0, 262140, 0, 0, 262141, 0, 0, 262142, -1073741824, 0, 262143, -1073741824, 0, 196608, -1073741824, 0, 196609, -1073741824, 0, 196610, -1073741824, 0, 196615, -1073741824, 0, 262144, -1610612736, 0, 262145, -1073741824, 0, 262146, -1073741824, 0, 327681, -1610612736, 0, 327682, -1610612736, 0, 393217, -1610612736, 0, 393218, -1610612736, 0, 458753, -1610612736, 0, 458754, -1610612736, 0, 524289, -1610612736, 0, 524290, -1610612736, 0, 524291, -1610612736, 0, 524292, -1610612736, 0, 524293, -1610612736, 0, 524294, -1610612736, 0, 524295, 0, 0, 589825, -1610612736, 0, 589826, -1610612736, 0, 589827, -1610612736, 0, 589828, -1610612736, 0, 589829, -1610612736, 0, 589830, -1610612736, 0, 589831, 0, 0 )
+detail = 1
+
+[node name="SpikeMap" parent="." instance=ExtResource( 3 )]
+tile_data = PoolIntArray( -65531, -1073741824, 0, -65526, -1610612736, 0, 131068, 0, 0, 131069, 0, 0, 131075, -1610612736, 0, 196614, -1073741824, 0, 524296, -1610612736, 0, 589832, -1610612736, 0, 655361, 1610612736, 0 )
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Door" parent="Actors" instance=ExtResource( 1 )]
+position = Vector2( 50, 750 )
+rotation = 4.71239
+dir = 3
+scene_path = "res://src/map/hub/2.tscn"
+
+[node name="Player" parent="Actors" instance=ExtResource( 5 )]
+position = Vector2( 50, 750 )
+dir = 3
+
+[node name="Box" parent="Actors" instance=ExtResource( 7 )]
+position = Vector2( 50, 150 )
+can_spin = false
+
+[node name="Box2" parent="Actors" instance=ExtResource( 7 )]
+position = Vector2( 850, 50 )
+dir = 1
+can_spin = false
+
+[node name="Goal" parent="Actors" instance=ExtResource( 2 )]
+position = Vector2( 800, -250 )
+
+[node name="Details" type="Node2D" parent="."]

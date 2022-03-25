@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/actor/DoorBig.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=7]
+
+[node name="Map" type="Node2D"]
+
+[node name="Camera2D" parent="." instance=ExtResource( 2 )]
+is_moving = true
+bg_palette = 1
+
+[node name="SolidTileMap0" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( 131087, -1610612736, 0, 131088, -1610612736, 0, 131089, -1610612736, 0, 131090, -1610612736, 0, 196623, 0, 0, 196624, 0, 0, 196625, 0, 0, 196626, 0, 0, 262159, 0, 0, 262160, 0, 0, 262161, 0, 0, 262162, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0 )
+
+[node name="SolidTileMap1" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( -327672, -1610612736, 0, -327671, -1610612736, 0, -327670, -1610612736, 0, -327669, -1610612736, 0, -262136, -1610612736, 0, -262135, -1610612736, 0, -262134, -1610612736, 0, -262133, -1610612736, 0, -196600, -1610612736, 0, -196599, -1610612736, 0, -196598, -1610612736, 0, -196597, -1610612736, 0, -131064, -1610612736, 0, -131063, -1610612736, 0, -131062, -1610612736, 0, -131061, -1610612736, 0 )
+detail = 1
+
+[node name="SolidTileMap2" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( -786417, -1610612736, 0, -786416, -1610612736, 0, -786415, -1610612736, 0, -786414, -1610612736, 0, -720881, -1610612736, 0, -720880, -1610612736, 0, -720879, -1610612736, 0, -720878, -1610612736, 0, -655345, -1610612736, 0, -655344, -1610612736, 0, -655343, -1610612736, 0, -655342, -1610612736, 0, -589809, -1610612736, 0, -589808, -1610612736, 0, -589807, -1610612736, 0, -589806, -1610612736, 0 )
+detail = 2
+
+[node name="SolidTileMap3" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( -327658, -1610612736, 0, -327657, -1610612736, 0, -327656, -1610612736, 0, -327655, -1610612736, 0, -262122, -1610612736, 0, -262121, -1610612736, 0, -262120, -1610612736, 0, -262119, -1610612736, 0, -196586, -1610612736, 0, -196585, -1610612736, 0, -196584, -1610612736, 0, -196583, -1610612736, 0, -131050, -1610612736, 0, -131049, -1610612736, 0, -131048, -1610612736, 0, -131047, -1610612736, 0 )
+detail = 3
+
+[node name="SolidTileMap4" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( -327665, -1610612736, 0, -327664, -1610612736, 0, -327663, -1610612736, 0, -327662, -1610612736, 0, -262129, -1610612736, 0, -262128, -1610612736, 0, -262127, -1610612736, 0, -262126, -1610612736, 0, -196593, -1610612736, 0, -196592, -1610612736, 0, -196591, -1610612736, 0, -196590, -1610612736, 0, -131057, -1610612736, 0, -131056, -1610612736, 0, -131055, -1610612736, 0, -131054, -1610612736, 0 )
+detail = 4
+
+[node name="SpikeMap" parent="." instance=ExtResource( 4 )]
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Player" parent="Actors" instance=ExtResource( 6 )]
+position = Vector2( 1700, -550 )
+
+[node name="DoorBig" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 1700, 700 )
+rotation = 3.14159
+dir = 2
+scene_path = "res://src/map/worlds/1/0_hub.tscn"
+
+[node name="DoorBig2" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 700, -300 )
+rotation = 4.71239
+dir = 3
+scene_path = "res://src/map/worlds/2/0_hub.tscn"
+gem_count = 7
+
+[node name="DoorBig3" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 1700, -1300 )
+scene_path = "res://src/map/worlds/3/0_hub.tscn"
+gem_count = 14
+
+[node name="DoorBig5" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 2700, -300 )
+rotation = 1.5708
+dir = 1
+scene_path = "res://src/map/worlds/4/0_hub.tscn"
+gem_count = 28
+
+[node name="Details" type="Node2D" parent="."]
+
+[node name="Candle" parent="Details" instance=ExtResource( 7 )]
+position = Vector2( 1500, -300 )
+rotation = -1.57079

@@ -1,45 +1,45 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=7]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Camera2D" parent="." instance=ExtResource( 7 )]
+[node name="Camera2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( -900, -700 )
 is_moving = true
 focal_influence = 0.1
 bg_palette = 1
 
-[node name="SolidTileMap" parent="." instance=ExtResource( 8 )]
+[node name="SolidTileMap" parent="." instance=ExtResource( 1 )]
 tile_data = PoolIntArray( -393217, -1073741824, 0, -458752, -1610612736, 0, -458751, -1073741824, 0, -458750, -1073741824, 0, -458749, -1610612736, 0, -458748, -1610612736, 0, -327681, -1073741824, 0, -393216, -1073741824, 0, -393213, -1610612736, 0, -393212, -1610612736, 0, -262145, -1073741824, 0, -327680, -1073741824, 0, -327677, -1610612736, 0, -327676, -1610612736, 0, -196609, -1073741824, 0, -262144, -1073741824, 0, -262141, -1610612736, 0, -262140, -1610612736, 0, -196605, -1610612736, 0, -196604, -1610612736, 0, -65540, -1073741824, 0, -65539, -1073741824, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131069, -1610612736, 0, -131068, -1610612736, 0, -4, -1073741824, 0, -3, -1073741824, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65533, -1610612736, 0, -65532, -1610612736, 0, 65532, -1073741824, 0, 3, -1610612736, 0, 4, -1610612736, 0, 131068, -1073741824, 0, 65539, -1610612736, 0, 65540, -1610612736, 0, 196604, -1073741824, 0, 196605, -1073741824, 0, 196606, -1073741824, 0, 196607, -1073741824, 0, 131072, -1073741824, 0, 131073, -1073741824, 0, 131074, -1073741824, 0, 131075, -1073741824, 0, 131076, -1610612736, 0, 262140, -1610612736, 0, 262141, -1610612736, 0, 262142, -1610612736, 0, 262143, -1610612736, 0, 196608, -1610612736, 0, 196609, -1610612736, 0, 196610, -1610612736, 0, 196611, -1610612736, 0, 196612, -1610612736, 0 )
 detail = 1
 
-[node name="SpikeMap" parent="." instance=ExtResource( 6 )]
-tile_data = PoolIntArray( -196610, -1073741824, 0, -262142, -1073741824, 0, -196606, -1073741824, 0, -131070, -1073741824, 0 )
+[node name="SpikeMap" parent="." instance=ExtResource( 4 )]
+tile_data = PoolIntArray( -196610, -1073741824, 0, -262142, -1073741824, 0, -196606, -1073741824, 0, -131070, -1073741824, 0, 262139, -1073741824, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Door" parent="Actors" instance=ExtResource( 3 )]
+[node name="Door" parent="Actors" instance=ExtResource( 6 )]
 position = Vector2( -150, 50 )
 rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/hub/2.tscn"
 
-[node name="Player" parent="Actors" instance=ExtResource( 9 )]
+[node name="Player" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( -150, 50 )
 dir = 2
 
-[node name="Box" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 150, -750 )
+[node name="Box" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 250, -750 )
 can_spin = false
 
-[node name="Goal" parent="Actors" instance=ExtResource( 4 )]
+[node name="Goal" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 200, -500 )
 
 [node name="Details" type="Node2D" parent="."]

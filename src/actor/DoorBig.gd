@@ -22,7 +22,7 @@ func set_gem(arg := gem_count):
 
 # unlock cheat
 func cheat_code(cheat):
-	if "konami" in cheat and is_locked:
+	if "konami" in cheat and is_locked and is_active:
 		unlock()
 
 func unlock():

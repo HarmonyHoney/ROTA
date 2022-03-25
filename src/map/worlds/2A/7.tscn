@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=7]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" parent="." instance=ExtResource( 6 )]
+position = Vector2( -900, -700 )
+is_moving = true
+focal_influence = 0.1
+bg_palette = 1
+
+[node name="SolidTileMap" parent="." instance=ExtResource( 2 )]
+tile_data = PoolIntArray( -393203, -1610612736, 0, -393202, -1610612736, 0, -327667, 0, 0, -327666, -1610612736, 0, -262131, 0, 0, -262130, -1610612736, 0, -196595, 0, 0, -196594, -1610612736, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 196620, 0, 0, 196621, 0, 0, 262156, 1610612736, 0, 262157, 1610612736, 0, 327692, 1610612736, 0, 327693, 1610612736, 0, 393228, 1610612736, 0, 393229, 1610612736, 0 )
+detail = 1
+
+[node name="SpikeMap" parent="." instance=ExtResource( 3 )]
+tile_data = PoolIntArray( -458739, 0, 0, -458738, 0, 0, -196593, -1610612736, 0, -65531, 0, 0, -65530, 0, 0, -65523, 0, 0, 458764, 1610612736, 0, 458765, 1610612736, 0 )
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Door" parent="Actors" instance=ExtResource( 7 )]
+position = Vector2( 1150, 450 )
+rotation = 4.71239
+dir = 3
+scene_path = "res://src/map/hub/2.tscn"
+
+[node name="Player" parent="Actors" instance=ExtResource( 1 )]
+position = Vector2( 1150, 450 )
+dir = 3
+
+[node name="Box" parent="Actors" instance=ExtResource( 5 )]
+position = Vector2( 1050, -50 )
+can_spin = false
+
+[node name="Box2" parent="Actors" instance=ExtResource( 5 )]
+position = Vector2( 1250, -550 )
+dir = 3
+can_spin = false
+
+[node name="Goal" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1550, 350 )
+
+[node name="Details" type="Node2D" parent="."]

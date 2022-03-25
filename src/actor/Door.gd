@@ -5,8 +5,6 @@ class_name Door
 export var dir := 0 setget set_dir
 
 export(String, FILE) var scene_path := ""
-export var folder_path := "res://src/map/hub/"
-export var scene_name := ""
 
 export var arrow_path : NodePath
 export var audio_path : NodePath
@@ -23,10 +21,6 @@ var arrow_time := 0.3
 
 func _enter_tree():
 	if Engine.editor_hint: return
-	
-	# set path
-	if folder_path != "" and scene_name != "":
-		scene_path = folder_path + scene_name + ".tscn"
 	
 	# set destination
 	if scene_path != "" and Shared.last_scene == scene_path:
