@@ -1,5 +1,6 @@
 extends Node
 
+onready var audio_coin := $Coin
 onready var audio_collect := $Collect
 
 var step := 0
@@ -27,6 +28,7 @@ func _physics_process(delta):
 			if time > 1.0:
 				next_step()
 				HUD.gem_label.text = str(Shared.gem_count)
+				audio_coin.play()
 		2:
 			var limit = 0.5
 			var t = min(time, limit)

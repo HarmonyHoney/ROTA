@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/cutscene/Cutscene.gd" type="Script" id=1]
 [ext_resource path="res://src/cutscene/GemCollect.gd" type="Script" id=2]
 [ext_resource path="res://src/cutscene/GoalShow.gd" type="Script" id=3]
 [ext_resource path="res://media/audio/sfx/oneup1.wav" type="AudioStream" id=4]
+[ext_resource path="res://media/audio/sfx/coin0.wav" type="AudioStream" id=5]
 
 [node name="Cutscene" type="Node"]
 script = ExtResource( 1 )
 
 [node name="GemCollect" type="Node" parent="."]
 script = ExtResource( 2 )
+
+[node name="Coin" type="AudioStreamPlayer" parent="GemCollect"]
+stream = ExtResource( 5 )
 
 [node name="Collect" type="AudioStreamPlayer" parent="GemCollect"]
 stream = ExtResource( 4 )

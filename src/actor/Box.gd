@@ -20,11 +20,10 @@ onready var audio_respawn := $Audio/Respawn
 export var dir := 0 setget set_dir
 var dir_last := 0
 
-export var can_push := true setget set_can_push
+var can_push := true setget set_can_push
 export var can_spin := true setget set_can_spin
 
 var tex_push = preload("res://media/image/box/box_push.png")
-var tex_spin = preload("res://media/image/box/box_spin.png")
 var tex_both = preload("res://media/image/box/box_both.png")
 
 var tile := 100.0
@@ -280,11 +279,6 @@ func set_can_spin(arg):
 
 func set_sprite():
 	if box_sprite:
-		if can_push and can_spin:
-			box_sprite.texture = tex_both
-		elif can_spin:
-			box_sprite.texture = tex_spin
-		else:
-			box_sprite.texture = tex_push
+		box_sprite.texture = tex_both if can_spin else tex_push
 
 

@@ -1,41 +1,50 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/detail/PineTree.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 5 )]
-position = Vector2( -50, -200 )
+position = Vector2( 0, -300 )
 is_moving = true
-is_focal_point = true
-focal_influence = 0.9
+focal_influence = 0.5
+bg_palette = 2
 
-[node name="SolidTileMap" parent="." instance=ExtResource( 1 )]
-tile_data = PoolIntArray( -327682, 0, 0, -327681, 0, 0, -393216, 0, 0, -262146, 0, 0, -327680, 1610612736, 0, -196614, 0, 0, -196613, 0, 0, -196612, 0, 0, -196611, 0, 0, -196610, 0, 0, -262144, 1610612736, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -131078, 0, 0, -196604, 0, 0, -65542, 0, 0, -131068, 0, 0, -6, 0, 0, -65532, 0, 0, 65530, 0, 0, 4, 0, 0, 131066, 0, 0, 131067, 1610612736, 0, 131068, 1610612736, 0, 131069, 1610612736, 0, 131070, 1610612736, 0, 131071, 1610612736, 0, 65536, 1610612736, 0, 65537, 1610612736, 0, 65538, 1610612736, 0, 65539, 1610612736, 0, 65540, 0, 0 )
+[node name="SolidTileMap" parent="." instance=ExtResource( 7 )]
+tile_data = PoolIntArray( -524277, -1610612736, 0, -524276, -1610612736, 0, -524275, -1610612736, 0, -524274, -1610612736, 0, -458741, -1610612736, 0, -458740, -1073741824, 0, -458739, -1073741824, 0, -458738, -1073741824, 0, -393205, -1610612736, 0, -393204, -1073741824, 0, -393203, -1073741824, 0, -393202, -1073741824, 0, -327669, -1610612736, 0, -327668, -1073741824, 0, -327667, -1073741824, 0, -327666, -1073741824, 0, -262133, -1610612736, 0, -262132, -1073741824, 0, -262131, -1073741824, 0, -262130, -1073741824, 0, -131058, -1073741824, 0, -131057, -1073741824, 0, -131056, -1073741824, 0, -131055, -1073741824, 0, -131054, -1073741824, 0, -65522, -1073741824, 0, -65521, -1073741824, 0, -65520, -1073741824, 0, -65519, -1073741824, 0, -65518, -1073741824, 0, 14, -1073741824, 0, 15, -1073741824, 0, 16, -1073741824, 0, 17, -1073741824, 0, 18, -1073741824, 0, 65550, -1610612736, 0, 65551, -1610612736, 0, 65552, -1610612736, 0, 65553, -1610612736, 0, 65554, -1610612736, 0 )
 detail = 2
 
-[node name="SpikeMap" parent="." instance=ExtResource( 6 )]
-tile_data = PoolIntArray( -196607, 1610612736, 0, -196606, 1610612736, 0, -196605, 1610612736, 0 )
+[node name="SpikeMap" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -524278, -1073741824, 0, -524273, -1610612736, 0, -458742, -1073741824, 0, 65549, -1073741824, 0, 65555, -1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Player" parent="Actors" instance=ExtResource( 7 )]
-position = Vector2( -50, 50 )
-
-[node name="Box" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 350, -50 )
-dir = 3
-can_push = false
+[node name="Player" parent="Actors" instance=ExtResource( 6 )]
+position = Vector2( 1650, 250 )
+dir = 2
 
 [node name="Door" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( -50, 50 )
+position = Vector2( 1650, 250 )
+rotation = 3.14159
+dir = 2
 scene_path = "res://src/map/hub/3.tscn"
 
 [node name="Goal" parent="Actors" instance=ExtResource( 4 )]
-position = Vector2( -50, -450 )
+position = Vector2( 1300, -950 )
+
+[node name="Box" parent="Actors" instance=ExtResource( 2 )]
+position = Vector2( 1050, -650 )
+dir = 3
+
+[node name="Details" type="Node2D" parent="."]
+
+[node name="PineTree" parent="Details" instance=ExtResource( 8 )]
+position = Vector2( 1250, -300 )
+rotation = 3.40339

@@ -12,8 +12,9 @@ extents = Vector2( 100, 100 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 80
-outline_size = 3
+outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
 font_data = ExtResource( 2 )
 
 [node name="DoorBig" type="Node2D" groups=["big_door", "door"]]
