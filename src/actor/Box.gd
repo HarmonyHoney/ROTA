@@ -28,6 +28,7 @@ var tex_both = preload("res://media/image/box/box_both.png")
 
 var tile := 100.0
 var is_floor := false
+var last_floor := false
 var move_clock := 0.0
 var move_time := 0.2
 var move_from := Vector2.ZERO
@@ -80,6 +81,7 @@ func _ready():
 	
 	# check floor
 	is_floor = test_tile(dir, 1)
+	last_floor = is_floor
 	move_clock = move_time
 
 func _physics_process(delta):
@@ -103,6 +105,7 @@ func _physics_process(delta):
 	
 	
 	# on floor
+	last_floor = is_floor
 	is_floor = test_tile(dir, 1)
 	
 	# move clock
@@ -119,7 +122,7 @@ func _physics_process(delta):
 			
 			#sprite.scale = Vector2.ONE *  lerp(0.9, 1.0, smooth)
 		
-		if move_clock == target and !is_hold and is_floor:
+		if move_clock == target and !is_hold and is_floor and !last_floor:
 			audio_land.pitch_scale = rand_range(0.7, 1.3)
 			audio_land.play()
 	

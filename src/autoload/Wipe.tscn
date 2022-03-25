@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/autoload/Wipe.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
@@ -13,35 +13,8 @@ shader_param/outside = Color( 0, 0, 0, 0 )
 shader_param/scale = 2.0
 shader_param/offset = Vector2( 0.2, -0.2 )
 shader_param/start_offset = Vector2( 0.5, 0.5 )
-shader_param/radius = 0.71
+shader_param/radius = 0.0
 shader_param/width = 0.0
-
-[sub_resource type="Animation" id=2]
-resource_name = "in"
-length = 0.6
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:material:shader_param/radius")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0.71, -0.1, 0, 0.1, 0, 0, -0.1, 0, 0.1, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-
-[sub_resource type="Animation" id=3]
-length = 0.6
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:material:shader_param/radius")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.1, 0, 0.1, 0, 0.71, -0.1, 0, 0.1, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
 
 [node name="Wipe" type="CanvasLayer"]
 pause_mode = 2
@@ -55,11 +28,5 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 1280, 720 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/in = SubResource( 2 )
-anims/out = SubResource( 3 )
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

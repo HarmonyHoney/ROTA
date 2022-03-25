@@ -1,36 +1,42 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/map/base/map_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=7]
 
-[node name="Node2D" instance=ExtResource( 1 )]
+[node name="Node2D" type="Node2D"]
 
-[node name="Camera2D" parent="." index="0"]
-position = Vector2( 400, 700 )
-focal_influence = 0.8
+[node name="Camera2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( -600, -100 )
 
-[node name="SolidTileMap" parent="." index="1"]
-tile_data = PoolIntArray( 262150, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 393217, 0, 0, 458753, 0, 0, 524289, 0, 0, 589825, 0, 0 )
+[node name="SolidTileMap" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, -1610612736, 0, 327688, -1073741824, 0, 327689, -1073741824, 0, 393217, 0, 0, 393218, -1610612736, 0, 393219, -1610612736, 0, 393220, -1610612736, 0, 393221, -1610612736, 0, 393222, -1610612736, 0, 393223, -1610612736, 0, 393224, -1073741824, 0, 393225, -1073741824, 0, 458753, 0, 0, 458760, 0, 0, 458761, 0, 0, 524289, 0, 0, 524296, 0, 0, 524297, 0, 0, 589825, 0, 0, 589832, -1073741824, 0, 589833, -1073741824, 0, 655361, -1610612736, 0, 655368, -1073741824, 0, 655369, -1073741824, 0, 655370, -1073741824, 0, 655371, -1610612736, 0, 720897, -1610612736, 0, 720904, -1610612736, 0, 720905, -1610612736, 0, 720906, -1610612736, 0, 720907, -1610612736, 0 )
 detail = 3
 
-[node name="SpikeMap" parent="." index="2"]
-tile_data = PoolIntArray( 196614, 0, 0, 262151, -1610612736, 0, 327680, -1073741824, 0, 327687, -1610612736, 0 )
+[node name="SpikeMap" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( 262145, 0, 0, 262152, 0, 0, 262153, 0, 0, 655372, -1610612736, 0, 720896, -1073741824, 0, 720903, -1073741824, 0, 720908, -1610612736, 0 )
 
-[node name="Player" parent="Actors" index="0"]
-position = Vector2( 450, 450 )
+[node name="Actors" type="Node2D" parent="."]
 
-[node name="Box" parent="Actors" index="1" instance=ExtResource( 2 )]
-position = Vector2( 150, 450 )
+[node name="Player" parent="Actors" instance=ExtResource( 7 )]
+position = Vector2( 1050, 750 )
+dir = 1
 
-[node name="Box2" parent="Actors" index="2" instance=ExtResource( 2 )]
-position = Vector2( 50, 950 )
-dir = 3
+[node name="Door" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 1050, 750 )
+rotation = 1.5708
+dir = 1
+scene_path = "res://src/map/worlds/4/0_hub.tscn"
 
-[node name="Door" parent="Actors" index="3" instance=ExtResource( 3 )]
-position = Vector2( 450, 450 )
-scene_path = "res://src/map/hub/4.tscn"
+[node name="Goal" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 1000, 1350 )
 
-[node name="Goal" parent="Actors" index="4" instance=ExtResource( 4 )]
-position = Vector2( 650, 650 )
+[node name="Box" parent="Actors" instance=ExtResource( 2 )]
+position = Vector2( 650, 450 )
+
+[node name="Box2" parent="Actors" instance=ExtResource( 2 )]
+position = Vector2( 550, 450 )
