@@ -12,7 +12,6 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( -100, 200 )
-is_moving = true
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 6 )]
 tile_data = PoolIntArray( 327674, -1610612736, 0, 327675, -1610612736, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 327680, 1610612736, 0 )

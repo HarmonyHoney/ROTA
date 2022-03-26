@@ -4,7 +4,7 @@
 [ext_resource path="res://src/stage/SpikeMap.gd" type="Script" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 0, 100, 25, 40, 50, 100, 75, 40, 100, 100 )
+points = PoolVector2Array( 0, 100, 25, 50, 50, 100, 75, 50, 100, 100 )
 
 [sub_resource type="TileSet" id=2]
 0/name = "spike_tile.png 0"

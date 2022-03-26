@@ -7,10 +7,6 @@
 
 [node name="Node2D" instance=ExtResource( 3 )]
 
-[node name="Camera2D" parent="." index="0"]
-is_focal_point = false
-focal_influence = 0.7
-
 [node name="SolidTileMap" parent="." index="1"]
 tile_data = PoolIntArray( 196613, -1610612736, 0, 196614, -1610612736, 0, 196615, -1610612736, 0, 458755, -1610612736, 0, 458756, -1610612736, 0, 458757, -1610612736, 0 )
 
