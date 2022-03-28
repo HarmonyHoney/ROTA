@@ -15,22 +15,22 @@ position = Vector2( -900, -700 )
 bg_palette = 1
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 4 )]
-tile_data = PoolIntArray( -65515, 0, 0, -65514, 0, 0, -65513, 0, 0, -65512, -1073741824, 0, 131099, -1610612736, 0, 196635, -1610612736, 0, 262163, 1610612736, 0, 262164, 0, 0, 262165, 0, 0, 262166, 0, 0, 262171, -1610612736, 0, 327699, 1610612736, 0, 327700, 0, 0, 327701, 0, 0, 327702, 0, 0, 327707, -1610612736, 0, 393235, 1610612736, 0, 393236, 0, 0, 393237, 0, 0, 393238, 0, 0, 458771, 1610612736, 0, 458772, 1610612736, 0, 458773, 1610612736, 0, 458774, 1610612736, 0 )
+tile_data = PoolIntArray( 27, -1073741824, 0, 28, -1073741824, 0, 29, -1073741824, 0, 30, -1073741824, 0, 262163, -1610612736, 0, 262164, -1610612736, 0, 262165, 0, 0, 262166, 0, 0, 327699, -1610612736, 0, 327700, -1610612736, 0, 327701, 0, 0, 327702, 0, 0, 393235, -1610612736, 0, 393236, -1610612736, 0, 393237, -1610612736, 0, 393238, -1610612736, 0, 458771, -1610612736, 0, 458772, -1610612736, 0, 458773, -1610612736, 0, 458774, -1610612736, 0, 655386, -1610612736, 0, 720922, -1610612736, 0, 786458, -1610612736, 0, 851994, -1610612736, 0 )
 detail = 1
 
 [node name="SpikeMap" parent="." instance=ExtResource( 3 )]
-tile_data = PoolIntArray( -65516, -1073741824, 0, -65511, -1610612736, 0, 65563, 0, 0, 393243, 1610612736, 0 )
+tile_data = PoolIntArray( 26, -1073741824, 0, 31, -1610612736, 0, 589850, 0, 0, 917530, 1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Door" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 2850, 450 )
+position = Vector2( 2750, 1250 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/2C/0_hub.tscn"
 
 [node name="Player" parent="Actors" instance=ExtResource( 1 )]
-position = Vector2( 2850, 450 )
+position = Vector2( 2750, 1250 )
 dir = 1
 
 [node name="Box" parent="Actors" instance=ExtResource( 6 )]
@@ -38,21 +38,20 @@ position = Vector2( 2050, 350 )
 can_spin = false
 
 [node name="Box2" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 2350, 550 )
+position = Vector2( 2350, 650 )
 dir = 1
 can_spin = false
 
 [node name="Box3" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 2150, 850 )
-dir = 2
+position = Vector2( 1950, 350 )
 can_spin = false
 
 [node name="Box4" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 1850, 650 )
-dir = 3
+position = Vector2( 2350, 750 )
+dir = 1
 can_spin = false
 
 [node name="Goal" parent="Actors" instance=ExtResource( 7 )]
-position = Vector2( 2300, -250 )
+position = Vector2( 2900, -150 )
 
 [node name="Details" type="Node2D" parent="."]

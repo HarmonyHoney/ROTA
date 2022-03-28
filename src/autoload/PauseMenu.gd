@@ -95,15 +95,15 @@ func set_paused(pause := true):
 	
 	menu.visible = is_paused
 	
-	HUD.show("none")
+	#UI.show("none")
 	
 	if is_paused:
 		sprite.texture = Shared.take_screenshot()
 		#sprite.position = Vector2(200, 0)
 		sprite.scale = Vector2.ONE * (720 / sprite.texture.get_size().y)
 	
-	HUD.is_gem = is_paused
-	HUD.show("Title" if is_paused else "Game")
+	UI.is_gem = is_paused
+	#UI.show("Title" if is_paused else "Game")
 	sprite.visible = is_paused
 	get_tree().paused = is_paused
 	

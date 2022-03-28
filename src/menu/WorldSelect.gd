@@ -174,7 +174,7 @@ func open_level():
 	var p = (worlds[world_cursor].global_position - cam.global_position) * (1 / cam.zoom.x)
 	Shared.last_orb_pos = p
 	
-	HUD.show("none")
+	#UI.show("none")
 	
 	yield(get_tree().create_timer(0.5), "timeout")
 	
@@ -191,7 +191,7 @@ func open_level():
 	get_tree().change_scene(worlds_path + "/" + str(world_cursor + 1) + "/" + str(level_cursor + 1) + ".tscn")
 	#Shared.is_level_select = false
 	
-	HUD.show("Game")
+	#UI.show("Game")
 
 func _process(delta):
 	if is_opening:

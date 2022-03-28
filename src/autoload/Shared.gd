@@ -76,12 +76,12 @@ func change_scene():
 		csfn = next_scene
 		get_tree().change_scene(next_scene)
 	
-	match next_scene:
-		scene_splash: HUD.show("none")
-		scene_title: HUD.show("Title")
-		scene_select: HUD.show("Title")
-		scene_options: HUD.show("Title")
-		_: HUD.show("Game")
+#	match next_scene:
+#		scene_splash: UI.show("none")
+#		scene_title: UI.show("Title")
+#		scene_select: UI.show("Title")
+#		scene_options: UI.show("Title")
+#		_: UI.show("Game")
 	
 	emit_signal("scene_changed")
 
@@ -107,7 +107,7 @@ func collect_gem():
 		is_collect = true
 		gem_count = goals_collected.size()
 		
-		#HUD.gem_label.text = str(gem_count)
+		#UI.gem_label.text = str(gem_count)
 
 
 ### Volume

@@ -43,10 +43,9 @@ var joy_last := Vector2.ZERO
 var joy_q := Vector2.ZERO
 var btn_jump := false
 var btnp_jump := false
+var holding_jump := 0.0
 var btn_push := false
 var btnp_push := false
-
-var holding_jump := 0.0
 
 var camera : Camera2D
 
@@ -193,11 +192,6 @@ func _physics_process(delta):
 		
 		# jump hold time
 		holding_jump = (holding_jump + delta) if btn_jump else 0.0
-		
-		# reset scene
-		if Input.is_action_just_pressed("reset"):
-			is_input = false
-			Shared.reset()
 	
 	# check floor
 	is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN * (50 if is_hold else 1)))
@@ -363,16 +357,11 @@ func _physics_process(delta):
 			box.is_hold = false
 			box.pickup_clock = 0.0
 			
-			# move to last child
-			#var p = box.get_parent()
-			#p.move_child(box, p.get_child_count())
-			
-			HUD.show("Player")
+			UI.dpad_spin.visible = false
 			
 			Guide.set_box(null)
 			
 			release_anim()
-			
 			
 			audio_pickup.pitch_scale = rand_range(0.7, 1.3)
 			audio_pickup.play()
@@ -459,12 +448,8 @@ func _physics_process(delta):
 							push_from = position
 							push_clock = 0
 							
-							if box.can_push and box.can_spin:
-								HUD.show("BoxBoth")
-							elif box.can_spin:
-								HUD.show("BoxSpin")
-							else:
-								HUD.show("BoxPush")
+							if box.can_spin:
+								UI.dpad_spin.visible = true
 							
 							Guide.set_box(box)
 							
@@ -535,9 +520,6 @@ func _physics_process(delta):
 		for i in readout:
 			if i != null:
 				debug_label.text += str(i) + "\n"
-
-func idle_frame():
-	pass
 
 func set_dir_x(arg := dir_x):
 	#if dir_x != sign(arg):

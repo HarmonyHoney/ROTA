@@ -23,11 +23,11 @@ func _physics_process(delta):
 				audio_collect.pitch_scale = rand_range(0.8, 1.3)
 				audio_collect.play()
 				
-				HUD.is_gem = true
+				UI.is_gem = true
 		1:
 			if clock > 1.0:
 				next_step()
-				HUD.gem_label.text = str(Shared.gem_count)
+				UI.gem_label.text = str(Shared.gem_count)
 				audio_coin.play()
 		2:
 			var limit = 0.5
@@ -45,7 +45,7 @@ func _physics_process(delta):
 				door_dest.arrow.visible = true
 				door_dest.arrow_clock = 0.0
 				
-				HUD.is_gem = false
+				UI.is_gem = false
 
 func next_step():
 	clock = 0.0

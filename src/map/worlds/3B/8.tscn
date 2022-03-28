@@ -11,34 +11,40 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" parent="." instance=ExtResource( 3 )]
-position = Vector2( -100, 200 )
+position = Vector2( -1550, -200 )
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 6 )]
-tile_data = PoolIntArray( 327674, -1610612736, 0, 327675, -1610612736, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 393210, -1610612736, 0, 393211, -1610612736, 0, 393212, -1610612736, 0, 393213, -1610612736, 0, 393214, -1610612736, 0, 393215, -1610612736, 0, 327680, 1610612736, 0 )
+tile_data = PoolIntArray( -65529, -1073741824, 0, -65528, -1073741824, 0, -65527, 1610612736, 0, 7, -1073741824, 0, 8, -1073741824, 0, 9, 1610612736, 0, 65543, -1073741824, 0, 65544, -1073741824, 0, 65545, -1073741824, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 393213, -1610612736, 0, 393214, -1610612736, 0, 393215, -1610612736, 0, 327680, 1610612736, 0, 458749, 1610612736, 0, 458750, 1610612736, 0, 458751, 1610612736, 0, 393216, 1610612736, 0, 524285, -1073741824, 0, 524286, -1073741824, 0, 524287, -1073741824, 0, 458752, -1073741824, 0, 917507, 1610612736, 0, 917508, 1610612736, 0, 983043, 1610612736, 0, 983044, 1610612736, 0, 1048579, 1610612736, 0, 1048580, 1610612736, 0 )
 
 [node name="SpikeMap" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 393209, -1073741824, 0 )
+tile_data = PoolIntArray( -65530, -1073741824, 0, 6, -1073741824, 0, 65542, -1073741824, 0, 131079, 1610612736, 0, 131080, 1610612736, 0, 131081, 1610612736, 0, 851971, 0, 0, 851972, 0, 0, 917506, -1073741824, 0, 983042, -1073741824, 0, 1048578, -1073741824, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 7 )]
-position = Vector2( -250, 650 )
-dir = 2
+position = Vector2( 1050, 50 )
+dir = 1
 
 [node name="Door" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( -250, 650 )
-rotation = 3.14159
-dir = 2
+position = Vector2( 1050, 50 )
+rotation = 1.5708
+dir = 1
 scene_path = "res://src/map/worlds/3B/0_hub.tscn"
 
 [node name="Box" parent="Actors" instance=ExtResource( 1 )]
-position = Vector2( -350, 350 )
+position = Vector2( 150, 550 )
+dir = 1
 
 [node name="Box2" parent="Actors" instance=ExtResource( 1 )]
-position = Vector2( -250, 350 )
-
-[node name="Box3" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( -150, 350 )
 
+[node name="Box3" parent="Actors" instance=ExtResource( 1 )]
+position = Vector2( -50, 850 )
+dir = 2
+
+[node name="Box4" parent="Actors" instance=ExtResource( 1 )]
+position = Vector2( -350, 650 )
+dir = 3
+
 [node name="Goal" parent="Actors" instance=ExtResource( 4 )]
-position = Vector2( -450, -50 )
+position = Vector2( 650, 1550 )

@@ -24,6 +24,8 @@ var zoom_time := 0.5
 var zoom_from := 1.0
 var zoom_to := 1.0
 
+var zoom_limit := 2.5
+
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.camera = self
@@ -31,10 +33,14 @@ func _enter_tree():
 func _ready():
 	if Engine.editor_hint: return
 	BG.set_colors(bg_palette)
+	
+	UI.set_zoom(0)
 
 func _input(event):
-	if event.is_action_pressed("zoom_in") or event.is_action_pressed("zoom_out"):
-		start_zoom(0.5 if event.is_action_pressed("zoom_out") else -0.5)
+	if event.is_action_pressed("zoom_in"):
+		start_zoom(-0.5)
+	elif event.is_action_pressed("zoom_out"):
+		start_zoom(0.5)
 
 func _process(delta):
 	if Engine.editor_hint: return
@@ -50,17 +56,13 @@ func _process(delta):
 		if start_offset != Vector2.ZERO:
 			offset = start_offset.rotated(rotation)
 	
-	if PauseMenu.is_paused:
-		if is_instance_valid(target_node):
-			position = target_node.position + (Vector2(-200, 0) * zoom).rotated(rotation)
-	else:
-		# track target
-		if is_instance_valid(target_node):
-			target_pos = target_node.global_position
-		
-		# position
-		if is_moving:
-			global_position = global_position.linear_interpolate(target_pos, 0.08)
+	# track target
+	if is_instance_valid(target_node):
+		target_pos = target_node.global_position
+	
+	# position
+	if is_moving:
+		global_position = global_position.linear_interpolate(target_pos, 0.08)
 	
 	
 	# zoom
@@ -88,10 +90,13 @@ func turn(arg):
 
 func start_zoom(arg):
 	var z = zoom_to
-	zoom_to = clamp(zoom_to + arg, 1.0, 2.5)
+	zoom_to = clamp(zoom_to + arg, 1.0, zoom_limit)
 	
 	if zoom_to != z:
 		is_zoom = true
 		zoom_from = zoom.x
 		zoom_clock = 0.0
+		
+		var sz = (zoom_to - 1.0) / (zoom_limit - 1.0)
+		UI.set_zoom(sz)
 
