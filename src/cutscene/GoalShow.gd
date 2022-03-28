@@ -8,8 +8,6 @@ var player
 var goal
 var return_door
 
-var focal := false
-
 func _ready():
 	set_physics_process(false)
 
@@ -42,7 +40,6 @@ func _physics_process(delta):
 				next_step()
 				player.set_physics_process(true)
 				set_physics_process(false)
-				camera.is_focal_point = focal
 				return_door.arrow.visible = true
 				return_door.arrow_clock = 0.0
 				return_door.set_process_input(true)
@@ -66,10 +63,7 @@ func begin():
 	time = 0.0
 	step = 0
 	
-	focal = camera.is_focal_point
-	
 	player.set_physics_process(false)
-	camera.is_focal_point = false
 	return_door.arrow.visible = false
 	return_door.set_process_input(false)
 	
