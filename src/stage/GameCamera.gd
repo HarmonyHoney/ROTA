@@ -18,6 +18,12 @@ var turn_to := 0.0
 
 export var bg_palette := 0
 
+var is_zoom := false
+var zoom_clock := 0.0
+var zoom_time := 0.5
+var zoom_from := 1.0
+var zoom_to := 1.0
+
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.camera = self
@@ -25,6 +31,10 @@ func _enter_tree():
 func _ready():
 	if Engine.editor_hint: return
 	BG.set_colors(bg_palette)
+
+func _input(event):
+	if event.is_action_pressed("zoom_in") or event.is_action_pressed("zoom_out"):
+		start_zoom(0.5 if event.is_action_pressed("zoom_out") else -0.5)
 
 func _process(delta):
 	if Engine.editor_hint: return
@@ -51,6 +61,17 @@ func _process(delta):
 		# position
 		if is_moving:
 			global_position = global_position.linear_interpolate(target_pos, 0.08)
+	
+	
+	# zoom
+	if is_zoom:
+		zoom_clock = min(zoom_clock + delta, zoom_time)
+		var s = smoothstep(0, 1, zoom_clock / zoom_time)
+		
+		zoom = Vector2.ONE * lerp(zoom_from, zoom_to, s)
+		if zoom_clock == zoom_time:
+			is_zoom = false
+	
 
 func _draw():
 	if !Engine.editor_hint: return
@@ -64,3 +85,13 @@ func turn(arg):
 	turn_from = rotation
 	turn_to = arg
 	turn_clock = 0.0
+
+func start_zoom(arg):
+	var z = zoom_to
+	zoom_to = clamp(zoom_to + arg, 1.0, 2.5)
+	
+	if zoom_to != z:
+		is_zoom = true
+		zoom_from = zoom.x
+		zoom_clock = 0.0
+

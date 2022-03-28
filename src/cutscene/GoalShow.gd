@@ -1,55 +1,55 @@
 extends Node
 
 var step := 0
-var time := 0.0
+var clock := 0.0
 
 var camera : Camera2D
 var player
 var goal
 var return_door
 
+var cam_from := Vector2.ZERO
+var cam_to := Vector2.ZERO
+var cam_time := 1.0
+
 func _ready():
 	set_physics_process(false)
 
 func _physics_process(delta):
-	time += delta
+	clock += delta
 	
 	match step:
 		0:
-			if time > 0.3:
+			if clock > 0.3:
 				next_step()
-				camera.target_node = goal
+				cam_target(goal.global_position)
 		1:
-			if camera.global_position.distance_to(camera.target_node.global_position) < 100:
+			cam_move()
+			if clock > cam_time:
 				next_step()
 		2:
-			if time > 0.1:
+			if clock > 0.1:
 				next_step()
 				goal.audio_coin.play()
 		3:
 			var limit = 0.8
-			var t = min(time, limit)
+			var t = min(clock, limit)
 			var s = smoothstep(0, 1, t / limit)
 			goal.scale = Vector2.ONE * lerp(1.8, 1.0, s)
 			
-			if time > limit:
+			if clock > limit:
 				next_step()
-				camera.target_node = player.cam_target
+				cam_target(player.cam_target.global_position)
 		4:
-			if camera.global_position.distance_to(camera.target_node.global_position) < 100:
-				next_step()
-				player.set_physics_process(true)
-				set_physics_process(false)
-				return_door.arrow.visible = true
-				return_door.arrow_clock = 0.0
-				return_door.set_process_input(true)
+			cam_move()
+			if clock > cam_time:
+				end()
 
 func next_step():
-	time = 0.0
+	clock = 0.0
 	step += 1
 
 func begin():
-	
 	camera = Shared.camera
 	player = Shared.player
 	goal = Shared.goal
@@ -60,10 +60,29 @@ func begin():
 			return
 	
 	set_physics_process(true)
-	time = 0.0
+	clock = 0.0
 	step = 0
 	
 	player.set_physics_process(false)
 	return_door.arrow.visible = false
 	return_door.set_process_input(false)
+	camera.set_process(false)
+
+func end():
+	set_physics_process(false)
+	player.set_physics_process(true)
+	return_door.arrow.visible = true
+	return_door.arrow_clock = 0.0
+	return_door.set_process_input(true)
+	camera.set_process(true)
+
+func cam_target(target):
+	cam_from = camera.global_position
+	cam_to = target
 	
+	var d = cam_from.distance_to(cam_to) / 100.0
+	cam_time = lerp(0.3, 1.0, clamp(d, 0, 20) / 20)
+
+func cam_move():
+	var s = smoothstep(0, 1, min(clock, cam_time) / cam_time)
+	camera.global_position = cam_from.linear_interpolate(cam_to, s)

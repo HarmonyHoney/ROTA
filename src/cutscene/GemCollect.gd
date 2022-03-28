@@ -4,7 +4,7 @@ onready var audio_coin := $Coin
 onready var audio_collect := $Collect
 
 var step := 0
-var time := 0.0
+var clock := 0.0
 
 var door_dest
 var player
@@ -13,11 +13,11 @@ func _ready():
 	set_physics_process(false)
 
 func _physics_process(delta):
-	time += delta
+	clock += delta
 	
 	match step:
 		0:
-			if time > 0.15:
+			if clock > 0.15:
 				next_step()
 				door_dest.gem.fade_color()
 				audio_collect.pitch_scale = rand_range(0.8, 1.3)
@@ -25,18 +25,18 @@ func _physics_process(delta):
 				
 				HUD.is_gem = true
 		1:
-			if time > 1.0:
+			if clock > 1.0:
 				next_step()
 				HUD.gem_label.text = str(Shared.gem_count)
 				audio_coin.play()
 		2:
 			var limit = 0.5
-			var t = min(time, limit)
+			var t = min(clock, limit)
 			var s = smoothstep(0, 1, t / limit)
 			player.visible = true
 			player.modulate.a = s
 			
-			if time > limit:
+			if clock > limit:
 				next_step()
 				player.set_physics_process(true)
 				set_physics_process(false)
@@ -48,7 +48,7 @@ func _physics_process(delta):
 				HUD.is_gem = false
 
 func next_step():
-	time = 0.0
+	clock = 0.0
 	step += 1
 
 func begin():
@@ -61,7 +61,7 @@ func begin():
 			return
 	
 	set_physics_process(true)
-	time = 0.0
+	clock = 0.0
 	step = 0
 	
 	player.set_physics_process(false)
