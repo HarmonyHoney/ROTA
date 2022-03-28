@@ -20,7 +20,6 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( -1150, -600 )
-is_moving = true
 bg_palette = 2
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 12 )]
@@ -67,6 +66,18 @@ scene_path = "res://src/map/worlds/3/4.tscn"
 [node name="Door5" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 650, 950 )
 scene_path = "res://src/map/worlds/3/5.tscn"
+
+[node name="Door6" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 1050, 600 )
+rotation = 4.71239
+dir = 3
+scene_path = "res://src/map/worlds/3/6.tscn"
+
+[node name="Door7" parent="Actors" instance=ExtResource( 3 )]
+position = Vector2( 1450, 950 )
+rotation = 1.5708
+dir = 1
+scene_path = "res://src/map/worlds/3/7.tscn"
 
 [node name="Details" type="Node2D" parent="."]
 
@@ -204,8 +215,9 @@ scale = Vector2( -0.3, 0.3 )
 position = Vector2( 50, -250 )
 
 [node name="Bench3" parent="Details" instance=ExtResource( 5 )]
-position = Vector2( 1450, 950 )
-rotation = 1.57079
+position = Vector2( 1050, 1000 )
+rotation = 4.71238
+scale = Vector2( -1, 1 )
 
 [node name="PineTree" parent="Details" instance=ExtResource( 7 )]
 position = Vector2( -200, 925 )

@@ -30,7 +30,7 @@ dir = 1
 position = Vector2( 1050, 750 )
 rotation = 1.5708
 dir = 1
-scene_path = "res://src/map/worlds/4/0_hub.tscn"
+scene_path = "res://src/map/worlds/3A/0_hub.tscn"
 
 [node name="Goal" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 1000, 1350 )

@@ -12,8 +12,6 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -300 )
-is_moving = true
-focal_influence = 0.5
 bg_palette = 2
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 7 )]
@@ -33,7 +31,7 @@ dir = 2
 position = Vector2( 2350, 450 )
 rotation = 3.14159
 dir = 2
-scene_path = "res://src/map/hub/3.tscn"
+scene_path = "res://src/map/worlds/3/0_hub.tscn"
 
 [node name="Goal" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 2350, -650 )

@@ -488,9 +488,11 @@ func _physics_process(delta):
 				if is_jump:
 					jump_clock += delta
 					if btn_jump:
-						if velocity.y >= 0.0 or test_move(transform, rot(Vector2(0, -1))):
+						# keep jump gravity if bonk head on ceiling
+						if velocity.y >= -1.0 and jump_clock > (jump_time / 2.0):
 							is_jump = false
 							#print("jump start: ", jump_start, " / jump end: ", position.y + velocity.y, " / distance: ", position.y - jump_start)
+					# short jump
 					elif jump_clock > jump_minimum:
 						is_jump = false
 						velocity.y *= 0.8

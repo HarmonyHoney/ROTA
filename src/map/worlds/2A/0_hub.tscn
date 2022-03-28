@@ -11,7 +11,6 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 800 )
-is_moving = true
 bg_palette = 1
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 1 )]

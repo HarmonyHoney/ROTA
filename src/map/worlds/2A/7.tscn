@@ -12,8 +12,6 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( -900, -700 )
-is_moving = true
-focal_influence = 0.1
 bg_palette = 1
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 2 )]
@@ -29,7 +27,7 @@ tile_data = PoolIntArray( -458739, 0, 0, -458738, 0, 0, -196593, -1610612736, 0,
 position = Vector2( 1150, 450 )
 rotation = 4.71239
 dir = 3
-scene_path = "res://src/map/hub/2.tscn"
+scene_path = "res://src/map/worlds/2A/0_hub.tscn"
 
 [node name="Player" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 1150, 450 )
