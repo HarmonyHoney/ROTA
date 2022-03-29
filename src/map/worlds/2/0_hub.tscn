@@ -13,7 +13,7 @@
 [ext_resource path="res://src/detail/Fence.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=15]
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=16]
 

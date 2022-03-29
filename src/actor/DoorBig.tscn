@@ -18,9 +18,6 @@ font_data = ExtResource( 2 )
 [node name="Door" instance=ExtResource( 4 )]
 script = ExtResource( 1 )
 
-[node name="Area2D" parent="." index="0"]
-visible = true
-
 [node name="CollisionShape2D" parent="Area2D" index="0"]
 scale = Vector2( 0.996662, 1 )
 shape = SubResource( 2 )

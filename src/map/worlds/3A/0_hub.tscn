@@ -9,7 +9,7 @@
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=12]
 

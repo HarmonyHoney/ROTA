@@ -5,7 +5,7 @@
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/actor/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=7]
 
 [node name="Node2D" type="Node2D"]

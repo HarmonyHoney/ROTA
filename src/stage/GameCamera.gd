@@ -32,6 +32,14 @@ func _enter_tree():
 func _ready():
 	if Engine.editor_hint: return
 	BG.set_colors(bg_palette)
+	
+	print(name, Shared.is_reload)
+	
+	if Shared.is_reload:
+		start_zoom(float(UI.zoom_step) / UI.zoom_steps)
+		zoom_clock = zoom_time
+	else:
+		UI.set_zoom(0)
 
 func _process(delta):
 	if Engine.editor_hint: return

@@ -31,6 +31,7 @@ var door_destination
 var goal
 
 signal scene_changed
+var is_reload := false
 
 var volume_master := 100
 
@@ -68,7 +69,8 @@ func change_scene():
 	is_wipe = false
 	boxes.clear()
 	
-	if next_scene == csfn:
+	is_reload = next_scene == csfn
+	if is_reload:
 		get_tree().reload_current_scene()
 	else:
 		csfn = next_scene

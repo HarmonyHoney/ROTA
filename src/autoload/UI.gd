@@ -33,7 +33,7 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("zoom_out"):
-		set_zoom()
+		set_zoom(zoom_step + 1)
 
 func _physics_process(delta):
 	# gem
@@ -59,8 +59,8 @@ func _physics_process(delta):
 		if is_instance_valid(Shared.player):
 			Shared.player.set_physics_process(false)
 
-func set_zoom(arg := 1):
-	zoom_step = posmod(zoom_step + arg, zoom_steps + 1)
+func set_zoom(arg := 0):
+	zoom_step = posmod(arg, zoom_steps + 1)
 	var zf = float(zoom_step) / zoom_steps
 	zoom_notch.position.y = lerp(8, 56, zf)
 	

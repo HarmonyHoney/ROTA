@@ -18,7 +18,7 @@ var arrow_clock := 0.0
 var arrow_time := 0.3
 
 var open_clock := 0.0
-var open_time := 0.75
+var open_time := 0.5
 
 var start_clock := 0.0
 var start_time := 0.5
