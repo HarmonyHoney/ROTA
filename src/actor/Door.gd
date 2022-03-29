@@ -6,11 +6,9 @@ export var dir := 0 setget set_dir
 
 export(String, FILE) var scene_path := ""
 
-export var arrow_path : NodePath
-export var audio_path : NodePath
-
-onready var arrow := get_node(arrow_path)
-onready var audio_open := get_node(audio_path)
+onready var arrow := $Arrow
+onready var arrow_sprite_mat : ShaderMaterial = $Arrow/Sprite.material
+onready var audio_open := $Audio/Open
 
 var player = null
 var is_active := false
@@ -18,6 +16,12 @@ export var is_locked := false
 
 var arrow_clock := 0.0
 var arrow_time := 0.3
+
+var open_clock := 0.0
+var open_time := 0.75
+
+var start_clock := 0.0
+var start_time := 0.5
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -29,19 +33,32 @@ func _enter_tree():
 func _ready():
 	if Engine.editor_hint: return
 	player = Shared.player
-
-func _input(event):
-	if Engine.editor_hint: return
-	if event.is_action_pressed("up"):
-		if is_active and !is_locked and player != null and !player.is_hold and player.dir == dir and player.is_floor:
-			enter_door()
+	
+	arrow.modulate.a = 0.0
+	arrow_sprite_mat.set_shader_param("fill_y", 0.0)
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
+	# starting delay
+	if start_clock < start_time:
+		start_clock += delta
+		return
+	
 	# arrow display
 	arrow_clock = clamp(arrow_clock + (delta if (is_active and !is_locked) else -delta), 0, arrow_time)
 	arrow.modulate.a = smoothstep(0, 1, arrow_clock / arrow_time)
+	
+	# open door
+	var open = Input.is_action_pressed("up") and is_active and !is_locked and player != null and !player.is_hold and player.dir == dir and player.is_floor
+	open_clock = clamp(open_clock + (delta if open else -delta), 0, open_time)
+	
+	if open_clock > 0:
+		var os = smoothstep(0, 1, open_clock / open_time)
+		arrow_sprite_mat.set_shader_param("fill_y", os)
+		
+		if open_clock == open_time:
+			enter_door()
 
 func set_dir(arg):
 	dir = posmod(arg, 4)

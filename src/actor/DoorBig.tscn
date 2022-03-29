@@ -1,97 +1,62 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/actor/DoorBig.gd" type="Script" id=1]
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://media/image/door/bigdoor.png" type="Texture" id=3]
-[ext_resource path="res://media/image/box/arrow.png" type="Texture" id=4]
-[ext_resource path="res://media/audio/sfx/hit0.wav" type="AudioStream" id=5]
-[ext_resource path="res://media/image/box/round_rect400.png" type="Texture" id=6]
+[ext_resource path="res://src/actor/DoorBase.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 100, 100 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 80
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 2 )
 
-[node name="DoorBig" type="Node2D" groups=["big_door", "door"]]
-z_index = -10
+[node name="Door" instance=ExtResource( 4 )]
 script = ExtResource( 1 )
-arrow_path = NodePath("Arrow")
-audio_path = NodePath("Audio/Open")
 
-[node name="Tile" type="ColorRect" parent="."]
-visible = false
-margin_left = -50.0
-margin_top = -50.0
-margin_right = 50.0
-margin_bottom = 50.0
-color = Color( 1, 0.768627, 0.768627, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Area2D" parent="." index="0"]
+visible = true
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-collision_layer = 1024
-collision_mask = 2
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+scale = Vector2( 0.996662, 1 )
+shape = SubResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
-
-[node name="Arrow" type="Node2D" parent="."]
+[node name="Arrow" parent="." index="1"]
 position = Vector2( 0, -150 )
 
-[node name="RoundRect400" type="Sprite" parent="Arrow"]
-position = Vector2( 7.62939e-06, 0 )
-scale = Vector2( 0.175, 0.175 )
-texture = ExtResource( 6 )
+[node name="Sprites" type="Node2D" parent="." index="3"]
 
-[node name="Arrow" type="Sprite" parent="Arrow"]
-rotation = -3.14159
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 4 )
-
-[node name="Audio" type="Node2D" parent="."]
-
-[node name="Open" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 5 )
-
-[node name="Sprites" type="Node2D" parent="."]
-
-[node name="Door" type="Sprite" parent="Sprites"]
+[node name="Door" type="Sprite" parent="Sprites" index="0"]
 scale = Vector2( 0.334, 0.334 )
 texture = ExtResource( 3 )
 
-[node name="Gem" type="Node2D" parent="Sprites"]
+[node name="Gem" type="Node2D" parent="Sprites" index="1"]
 visible = false
 
-[node name="Back" type="Polygon2D" parent="Sprites/Gem"]
+[node name="Back" type="Polygon2D" parent="Sprites/Gem" index="0"]
 scale = Vector2( 1.25, 1.25 )
 color = Color( 1, 0.866667, 0, 1 )
 offset = Vector2( 80, 0 )
 polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
 
-[node name="Fill" type="Polygon2D" parent="Sprites/Gem/Back"]
+[node name="Fill" type="Polygon2D" parent="Sprites/Gem/Back" index="0"]
 color = Color( 1, 0.984314, 0, 1 )
 offset = Vector2( 50, 0 )
 polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
 
-[node name="Label" type="Label" parent="Sprites/Gem"]
+[node name="Label" type="Label" parent="Sprites/Gem" index="1"]
 margin_left = -75.0
 margin_top = -75.0
 margin_right = 75.0
 margin_bottom = 75.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

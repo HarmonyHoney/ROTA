@@ -158,14 +158,14 @@ func _ready():
 	
 	
 	yield(get_tree(), "idle_frame")
-	if Shared.is_collect:
+	if Cutscene.is_collect:
 		if is_instance_valid(Shared.door_destination):
 			Cutscene.gem_collect.begin()
-		Shared.is_collect = false
-	elif Shared.is_show_goal:
+		Cutscene.is_collect = false
+	elif Cutscene.is_show_goal:
 		if is_instance_valid(Shared.goal):
 			Cutscene.goal_show.begin()
-		Shared.is_show_goal = false
+		Cutscene.is_show_goal = false
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
@@ -376,20 +376,20 @@ func _physics_process(delta):
 		# in control
 		else:
 			
-			# camera peek
-			if joy.x == 0 and joy.y != 0 and joy.y == joy_last.y:
-				peek_clock = min(peek_clock + delta, peek_time)
-			else:
-				peek_clock = 0.0
-				cam_target.position = Vector2.ZERO
-			
-			if peek_clock == peek_time and cam_target.position == Vector2.ZERO:
-				audio_peek.pitch_scale = rand_range(0.9, 1.3)
-				audio_peek.play()
-				if joy.y == 1:
-					cam_target.global_position = sprites.to_global(Vector2.DOWN * 250)
-				elif joy.y == -1:
-					cam_target.global_position = sprites.to_global(Vector2.UP * 250)
+#			# camera peek
+#			if joy.x == 0 and joy.y != 0 and joy.y == joy_last.y:
+#				peek_clock = min(peek_clock + delta, peek_time)
+#			else:
+#				peek_clock = 0.0
+#				cam_target.position = Vector2.ZERO
+#
+#			if peek_clock == peek_time and cam_target.position == Vector2.ZERO:
+#				audio_peek.pitch_scale = rand_range(0.9, 1.3)
+#				audio_peek.play()
+#				if joy.y == 1:
+#					cam_target.global_position = sprites.to_global(Vector2.DOWN * 250)
+#				elif joy.y == -1:
+#					cam_target.global_position = sprites.to_global(Vector2.UP * 250)
 			
 			
 			# dir_x

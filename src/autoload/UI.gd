@@ -23,10 +23,17 @@ var reset_time := 1.0
 onready var zoom := $Control/Zoom
 onready var zoom_notch := $Control/Zoom/Slider/Notch
 
+var zoom_step := 0
+var zoom_steps := 3
+
 onready var dpad_spin := $Control/DPad/Spin
 
 func _ready():
 	gem_label.text = str(Shared.gem_count)
+
+func _input(event):
+	if event.is_action_pressed("zoom_out"):
+		set_zoom()
 
 func _physics_process(delta):
 	# gem
@@ -52,5 +59,11 @@ func _physics_process(delta):
 		if is_instance_valid(Shared.player):
 			Shared.player.set_physics_process(false)
 
-func set_zoom(arg):
-	zoom_notch.position.y = lerp(8, 56, arg)
+func set_zoom(arg := 1):
+	zoom_step = posmod(zoom_step + arg, zoom_steps + 1)
+	var zf = float(zoom_step) / zoom_steps
+	zoom_notch.position.y = lerp(8, 56, zf)
+	
+	if is_instance_valid(Shared.camera):
+		Shared.camera.start_zoom(zf)
+	

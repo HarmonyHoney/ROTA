@@ -21,8 +21,6 @@ var last_orb_pos := Vector2.ZERO
 var screenshot_texture : ImageTexture
 
 var goals_collected := []
-var is_collect := false
-var is_show_goal := false
 var gem_count := 0
 
 var boxes := []
@@ -104,7 +102,7 @@ func take_screenshot():
 func collect_gem():
 	if is_instance_valid(goal) and goal.is_collected and !goals_collected.has(csfn):
 		goals_collected.append(csfn)
-		is_collect = true
+		Cutscene.is_collect = true
 		gem_count = goals_collected.size()
 		
 		#UI.gem_label.text = str(gem_count)

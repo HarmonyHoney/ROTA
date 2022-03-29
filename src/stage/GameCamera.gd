@@ -23,8 +23,7 @@ var zoom_clock := 0.0
 var zoom_time := 0.5
 var zoom_from := 1.0
 var zoom_to := 1.0
-
-var zoom_limit := 2.5
+var zoom_out := 2.5
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -33,14 +32,6 @@ func _enter_tree():
 func _ready():
 	if Engine.editor_hint: return
 	BG.set_colors(bg_palette)
-	
-	UI.set_zoom(0)
-
-func _input(event):
-	if event.is_action_pressed("zoom_in"):
-		start_zoom(-0.5)
-	elif event.is_action_pressed("zoom_out"):
-		start_zoom(0.5)
 
 func _process(delta):
 	if Engine.editor_hint: return
@@ -88,15 +79,12 @@ func turn(arg):
 	turn_to = arg
 	turn_clock = 0.0
 
-func start_zoom(arg):
+func start_zoom(arg := 0.0):
 	var z = zoom_to
-	zoom_to = clamp(zoom_to + arg, 1.0, zoom_limit)
+	zoom_to = lerp(1.0, zoom_out, arg)
 	
 	if zoom_to != z:
 		is_zoom = true
 		zoom_from = zoom.x
 		zoom_clock = 0.0
-		
-		var sz = (zoom_to - 1.0) / (zoom_limit - 1.0)
-		UI.set_zoom(sz)
 
