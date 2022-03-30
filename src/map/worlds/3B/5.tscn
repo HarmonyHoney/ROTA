@@ -12,11 +12,11 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 7 )]
 position = Vector2( -50, 50 )
-bg_palette = 1
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 5 )]
 tile_data = PoolIntArray( -131077, 1610612736, 0, -131076, 1610612736, 0, -65541, 1610612736, 0, -5, 1610612736, 0, 65531, 1610612736, 0, 2, -1073741824, 0, 3, -1073741824, 0, 131067, 1610612736, 0, 196603, 0, 0, 196604, -1073741824, 0, 196605, -1073741824, 0, 196606, -1073741824, 0, 196607, -1073741824, 0, 131072, -1073741824, 0, 196608, -1073741824, 0 )
 detail = 3
+bg_palette = 1
 
 [node name="SpikeMap" parent="." instance=ExtResource( 6 )]
 tile_data = PoolIntArray( -131075, -1610612736, 0, 196602, -1073741824, 0 )

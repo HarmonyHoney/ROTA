@@ -6,3 +6,5 @@
 rotating = true
 current = true
 script = ExtResource( 1 )
+is_rotating = true
+is_moving = true

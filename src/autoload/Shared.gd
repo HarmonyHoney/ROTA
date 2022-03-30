@@ -76,14 +76,16 @@ func change_scene():
 		csfn = next_scene
 		get_tree().change_scene(next_scene)
 	
+	BG.set_colors(0)
+	
+	emit_signal("scene_changed")
+	
 #	match next_scene:
 #		scene_splash: UI.show("none")
 #		scene_title: UI.show("Title")
 #		scene_select: UI.show("Title")
 #		scene_options: UI.show("Title")
 #		_: UI.show("Game")
-	
-	emit_signal("scene_changed")
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen

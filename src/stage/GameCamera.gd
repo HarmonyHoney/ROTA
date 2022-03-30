@@ -5,8 +5,8 @@ signal turning(angle)
 
 var target_node
 onready var target_pos := position
-export var is_rotating := true
-export var is_moving := true
+var is_rotating := true
+var is_moving := true
 
 var screen_size := Vector2(1280, 720)
 onready var start_offset = offset
@@ -15,8 +15,6 @@ var turn_clock := 0.0
 var turn_time := 0.5
 var turn_from := 0.0
 var turn_to := 0.0
-
-export var bg_palette := 0
 
 var is_zoom := false
 var zoom_clock := 0.0
@@ -31,7 +29,6 @@ func _enter_tree():
 
 func _ready():
 	if Engine.editor_hint: return
-	BG.set_colors(bg_palette)
 	
 	if Shared.is_reload:
 		start_zoom(float(UI.zoom_step) / UI.zoom_steps)

@@ -8,6 +8,8 @@ var sets = [preload("res://src/stage/tileset/TileSet0.tres"),preload("res://src/
 preload("res://src/stage/tileset/TileSet2.tres"),preload("res://src/stage/tileset/TileSet3.tres"),
 preload("res://src/stage/tileset/TileSet4.tres"),preload("res://src/stage/tileset/TileSet5.tres")]
 
+export var bg_palette := 0
+
 func _ready():
 	set_tileset()
 	
@@ -16,6 +18,9 @@ func _ready():
 	
 	if !Engine.editor_hint:
 		Boundary.add_shape(get_used_rect(), cell_size)
+		
+		if bg_palette > 0:
+			BG.set_colors(bg_palette)
 
 func set_tileset(arg := detail):
 	detail = posmod(int(arg), 6)
