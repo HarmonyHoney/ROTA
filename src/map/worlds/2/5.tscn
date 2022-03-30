@@ -1,17 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=9]
 
 [node name="Node2D" type="Node2D"]
-
-[node name="Camera2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( -900, -700 )
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 8 )]
 tile_data = PoolIntArray( -196608, -1610612736, 0, -196607, -1610612736, 0, -196606, -1610612736, 0, -131072, -1610612736, 0, -131071, -1610612736, 0, -131070, -1610612736, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, -1610612736, 0, -65535, -1610612736, 0, -65534, -1610612736, 0, -65533, -1610612736, 0, -65532, -1610612736, 0, -65531, -1610612736, 0, -65530, -1610612736, 0, 65532, 0, 0, 65533, -1610612736, 0, 65534, -1610612736, 0, 65535, -1610612736, 0, 0, -1610612736, 0, 1, -1610612736, 0, 2, -1610612736, 0, 3, -1610612736, 0, 4, -1610612736, 0, 5, -1610612736, 0, 6, -1610612736, 0, 131068, 0, 0, 131069, -1610612736, 0, 131070, -1610612736, 0, 131071, -1610612736, 0, 65536, -1610612736, 0, 65537, -1610612736, 0, 65538, -1610612736, 0, 65539, -1610612736, 0, 65540, -1610612736, 0, 65541, -1610612736, 0, 65542, -1610612736, 0, 196607, 0, 0, 131072, 0, 0, 131073, -1610612736, 0, 131074, -1610612736, 0, 131075, 0, 0, 196608, 1610612736, 0, 196609, -1610612736, 0, 196610, -1610612736, 0, 262144, 1610612736, 0, 262145, -1610612736, 0, 262146, -1610612736, 0, 327680, 1610612736, 0, 327681, -1610612736, 0, 327682, -1610612736, 0, 393216, 1610612736, 0, 393217, 0, 0, 393218, 0, 0, 458752, 1610612736, 0, 458753, 1610612736, 0, 458754, 1610612736, 0 )

@@ -21,7 +21,7 @@ func _enter_tree():
 	CheatCode.connect("activate", self, "cheat_code")
 
 func _ready():
-	Shared.camera.connect("turning", self, "turning")
+	Cam.connect("turning", self, "turning")
 	
 	if Shared.goals_collected.has(Shared.csfn):
 		#is_collected = true

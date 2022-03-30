@@ -137,9 +137,9 @@ func _ready():
 	set_dir_x(1 if randf() > 0.5 else -1)
 	
 	# set camera
-	if is_instance_valid(Shared.camera):
-		camera = Shared.camera
+	camera = Cam
 	camera.target_node = cam_target
+	#camera.current = true
 	
 	# turn
 	set_dir()
@@ -156,8 +156,10 @@ func _ready():
 	camera.force_update_scroll()
 	camera.force_update_transform()
 	
-	
+	set_physics_process(false)
 	yield(get_tree(), "idle_frame")
+	set_physics_process(true)
+	
 	if Cutscene.is_show_goal:
 		if is_instance_valid(Shared.goal):
 			Cutscene.goal_show.begin()

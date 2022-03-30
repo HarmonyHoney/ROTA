@@ -55,6 +55,7 @@ Guide="*res://src/actor/Guide.tscn"
 Boundary="*res://src/stage/Boundary.tscn"
 CheatCode="*res://src/autoload/CheatCode.gd"
 Cutscene="*res://src/cutscene/Cutscene.tscn"
+Cam="*res://src/autoload/Cam.tscn"
 
 [display]
 

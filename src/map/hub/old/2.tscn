@@ -14,7 +14,7 @@
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=13]
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=14]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/autoload/Cam.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=17]
 
 [node name="Map" type="Node2D"]

@@ -26,7 +26,6 @@ var gem_count := 0
 var boxes := []
 
 var player
-var camera
 var door_destination
 var goal
 
@@ -75,6 +74,9 @@ func change_scene():
 	else:
 		csfn = next_scene
 		get_tree().change_scene(next_scene)
+		
+		UI.set_zoom(0)
+		Cam.zoom_clock = 99
 	
 	BG.set_colors(0)
 	

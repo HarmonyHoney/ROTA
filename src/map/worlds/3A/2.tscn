@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
@@ -9,9 +8,6 @@
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=7]
 
 [node name="Node2D" type="Node2D"]
-
-[node name="Camera2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 200 )
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 6 )]
 tile_data = PoolIntArray( -65535, 0, 0, -65534, 0, 0, 1, -1073741824, 0, 2, -1610612736, 0, 65537, -1073741824, 0, 65538, -1610612736, 0, 131073, -1073741824, 0, 131074, -1610612736, 0, 196609, -1073741824, 0, 196610, -1610612736, 0, 327675, 0, 0, 327676, -1610612736, 0, 327677, -1610612736, 0, 327678, -1610612736, 0, 327679, -1610612736, 0, 262144, -1610612736, 0, 262145, -1073741824, 0, 262146, -1610612736, 0, 393211, 0, 0, 393212, -1610612736, 0, 393213, -1610612736, 0, 393214, -1610612736, 0, 393215, -1610612736, 0, 327680, -1610612736, 0, 327681, -1610612736, 0, 327682, -1610612736, 0 )

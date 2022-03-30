@@ -1,4 +1,3 @@
-tool
 extends Camera2D
 
 signal turning(angle)
@@ -23,22 +22,7 @@ var zoom_from := 1.0
 var zoom_to := 1.0
 var zoom_out := 2.5
 
-func _enter_tree():
-	if Engine.editor_hint: return
-	Shared.camera = self
-
-func _ready():
-	if Engine.editor_hint: return
-	
-	if Shared.is_reload:
-		start_zoom(float(UI.zoom_step) / UI.zoom_steps)
-		zoom_clock = zoom_time
-	else:
-		UI.set_zoom(0)
-
 func _process(delta):
-	if Engine.editor_hint: return
-	
 	# rotation
 	if is_rotating:
 		turn_clock = min(turn_clock + delta, turn_time)
@@ -58,7 +42,6 @@ func _process(delta):
 	if is_moving:
 		global_position = global_position.linear_interpolate(target_pos, 0.08)
 	
-	
 	# zoom
 	if is_zoom:
 		zoom_clock = min(zoom_clock + delta, zoom_time)
@@ -67,15 +50,6 @@ func _process(delta):
 		zoom = Vector2.ONE * lerp(zoom_from, zoom_to, s)
 		if zoom_clock == zoom_time:
 			is_zoom = false
-	
-
-func _draw():
-	if !Engine.editor_hint: return
-	var size = zoom * screen_size.y
-	var col = Color(0.3,0,1, 0.2)
-	var width = 10
-	draw_rect(Rect2(-size / 2, size), col, false, width)
-	draw_arc(Vector2.ZERO, size.y / 2, 0, TAU, 33, col, width)
 
 func turn(arg):
 	turn_from = rotation

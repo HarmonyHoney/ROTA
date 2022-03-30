@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=9]
 
@@ -19,9 +18,6 @@ flags = 4
 load_path = "res://.import/rock.png-3b38d6b197ed3a878d6dbc45f40a3022.stex"
 
 [node name="Node2D" type="Node2D"]
-
-[node name="Camera2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 650, 650 )
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 8 )]
 tile_data = PoolIntArray( 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 262147, 0, 0, 262152, 0, 0, 262153, 0, 0, 327683, 0, 0, 327688, -1610612736, 0, 327689, -1610612736, 0, 393224, -1610612736, 0, 393225, -1610612736, 0, 458760, -1610612736, 0, 458761, -1610612736, 0, 524296, -1610612736, 0, 524297, -1610612736, 0, 589832, 0, 0, 589833, 0, 0 )

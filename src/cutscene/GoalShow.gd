@@ -49,7 +49,7 @@ func next_step():
 	step += 1
 
 func begin():
-	camera = Shared.camera
+	camera = Cam
 	player = Shared.player
 	goal = Shared.goal
 	

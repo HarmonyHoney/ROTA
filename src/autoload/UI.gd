@@ -64,6 +64,5 @@ func set_zoom(arg := 0):
 	var zf = float(zoom_step) / zoom_steps
 	zoom_notch.position.y = lerp(8, 56, zf)
 	
-	if is_instance_valid(Shared.camera):
-		Shared.camera.start_zoom(zf)
+	Cam.start_zoom(zf)
 	

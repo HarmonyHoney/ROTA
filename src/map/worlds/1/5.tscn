@@ -6,7 +6,7 @@
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/stage/GameCamera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=7]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=9]
 
@@ -20,14 +20,11 @@ load_path = "res://.import/rock.png-3b38d6b197ed3a878d6dbc45f40a3022.stex"
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Camera2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 500, 600 )
-
 [node name="SolidTileMap" parent="." instance=ExtResource( 8 )]
-tile_data = PoolIntArray( 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0 )
+tile_data = PoolIntArray( 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131083, -1073741824, 0, 131084, -1073741824, 0, 131085, -1073741824, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196619, -1073741824, 0, 196620, -1073741824, 0, 196621, -1073741824, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262155, -1073741824, 0, 262156, -1073741824, 0, 262157, -1073741824, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0 )
 
 [node name="SpikeMap" parent="." instance=ExtResource( 9 )]
-tile_data = PoolIntArray( 393222, 0, 0, 393223, 0, 0, 393224, 0, 0 )
+tile_data = PoolIntArray( 131082, -1073741824, 0, 196618, -1073741824, 0, 262154, -1073741824, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
@@ -42,35 +39,51 @@ dir = 1
 scene_path = "res://src/map/worlds/1/0_hub.tscn"
 
 [node name="Goal" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 750, 1150 )
+position = Vector2( 1250, 50 )
 
 [node name="Details" type="Node2D" parent="."]
 
-[node name="Tree" parent="Details" instance=ExtResource( 4 )]
-position = Vector2( 600, 850 )
-rotation = -1.5708
-scale = Vector2( -1, 1 )
-palette = 3
+[node name="Rocks" type="Node2D" parent="Details"]
 
-[node name="Tree2" parent="Details" instance=ExtResource( 4 )]
-position = Vector2( 250, 200 )
-palette = 5
-
-[node name="Rocks" type="Sprite" parent="Details"]
+[node name="Rocks" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 200, 300 )
 rotation = -1.57079
 scale = Vector2( 0.25, 0.25 )
 texture = SubResource( 1 )
 
-[node name="Rock" type="Sprite" parent="Details"]
+[node name="Rock" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 800, 800 )
 rotation = 0.785397
 scale = Vector2( 0.164516, 0.164516 )
 texture = SubResource( 2 )
 
+[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 1250, 350 )
+scale = Vector2( 0.273765, 0.273765 )
+texture = ExtResource( 7 )
+
+[node name="Tree" parent="Details" instance=ExtResource( 4 )]
+position = Vector2( 600, 850 )
+rotation = -1.44219
+scale = Vector2( -1, 1 )
+palette = 3
+
+[node name="Tree2" parent="Details" instance=ExtResource( 4 )]
+position = Vector2( 250, 200 )
+rotation = -0.083118
+palette = 5
+
+[node name="Tree3" parent="Details" instance=ExtResource( 4 )]
+position = Vector2( 1300, 500 )
+rotation = 3.35442
+
 [node name="Bench" parent="Details" instance=ExtResource( 5 )]
 position = Vector2( 50, 350 )
 rotation = -1.57079
+
+[node name="Bench2" parent="Details" instance=ExtResource( 5 )]
+position = Vector2( 1450, 350 )
+rotation = 1.57079
 
 [node name="Flower" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 350, 500 )
@@ -91,6 +104,15 @@ palette = 0
 position = Vector2( 900, 850 )
 rotation = -4.71238
 palette = 3
+
+[node name="Flower6" parent="Details" instance=ExtResource( 6 )]
+position = Vector2( 1150, 200 )
+rotation = -6.28318
+palette = 2
+
+[node name="Flower7" parent="Details" instance=ExtResource( 6 )]
+position = Vector2( 1395, 205 )
+rotation = -5.49778
 
 [node name="Flower2" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 150, 500 )

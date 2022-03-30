@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/autoload/Cam.gd" type="Script" id=1]
+
+[node name="Cam" type="Camera2D" groups=["game_camera"]]
+rotating = true
+current = true
+script = ExtResource( 1 )
