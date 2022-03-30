@@ -104,10 +104,8 @@ func take_screenshot():
 func collect_gem():
 	if is_instance_valid(goal) and goal.is_collected and !goals_collected.has(csfn):
 		goals_collected.append(csfn)
-		Cutscene.is_collect = true
 		gem_count = goals_collected.size()
-		
-		#UI.gem_label.text = str(gem_count)
+		Cutscene.is_collect = true
 
 
 ### Volume

@@ -37,15 +37,7 @@ func _physics_process(delta):
 			player.modulate.a = s
 			
 			if clock > limit:
-				next_step()
-				player.set_physics_process(true)
-				set_physics_process(false)
-				door_dest.set_process_input(true)
-				
-				door_dest.arrow.visible = true
-				door_dest.arrow_clock = 0.0
-				
-				UI.is_gem = false
+				end()
 
 func next_step():
 	clock = 0.0
@@ -55,10 +47,11 @@ func begin():
 	player = Shared.player
 	door_dest = Shared.door_destination
 	
-	
 	for i in [player, door_dest]:
 		if !is_instance_valid(i):
 			return
+	
+	Cutscene.is_playing = true
 	
 	set_physics_process(true)
 	clock = 0.0
@@ -67,5 +60,10 @@ func begin():
 	player.set_physics_process(false)
 	player.visible = false
 	door_dest.gem.set_color(false)
-	door_dest.arrow.visible = false
-	door_dest.set_process_input(false)
+
+func end():
+	Cutscene.is_playing = false
+	player.set_physics_process(true)
+	set_physics_process(false)
+	
+	UI.is_gem = false

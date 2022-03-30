@@ -1,5 +1,7 @@
 extends Node
 
+var is_playing := false
+
 var is_show_goal := false
 var is_collect := false
 

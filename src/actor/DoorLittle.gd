@@ -14,6 +14,3 @@ func _ready():
 # acquire goal
 func on_enter():
 	Shared.collect_gem()
-	
-	if not "hub" in scene_path:
-		Cutscene.is_show_goal = true

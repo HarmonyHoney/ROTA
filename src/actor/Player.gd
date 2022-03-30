@@ -158,14 +158,15 @@ func _ready():
 	
 	
 	yield(get_tree(), "idle_frame")
-	if Cutscene.is_collect:
-		if is_instance_valid(Shared.door_destination):
-			Cutscene.gem_collect.begin()
-		Cutscene.is_collect = false
-	elif Cutscene.is_show_goal:
+	if Cutscene.is_show_goal:
 		if is_instance_valid(Shared.goal):
 			Cutscene.goal_show.begin()
 		Cutscene.is_show_goal = false
+	
+	elif Cutscene.is_collect:
+		if is_instance_valid(Shared.door_destination):
+			Cutscene.gem_collect.begin()
+		Cutscene.is_collect = false
 
 func _physics_process(delta):
 	if Engine.editor_hint: return

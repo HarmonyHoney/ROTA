@@ -14,6 +14,9 @@ var is_follow := false
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.goal = self
+	
+	if !Shared.is_reload:
+		Cutscene.is_show_goal = true
 
 func _ready():
 	Shared.camera.connect("turning", self, "turning")

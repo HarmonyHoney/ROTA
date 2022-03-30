@@ -6,7 +6,6 @@ var clock := 0.0
 var camera : Camera2D
 var player
 var goal
-var return_door
 
 var cam_from := Vector2.ZERO
 var cam_to := Vector2.ZERO
@@ -53,27 +52,24 @@ func begin():
 	camera = Shared.camera
 	player = Shared.player
 	goal = Shared.goal
-	return_door = Shared.door_destination
 	
-	for i in [camera, player, goal, return_door]:
+	for i in [camera, player, goal]:
 		if !is_instance_valid(i):
 			return
+	
+	Cutscene.is_playing = true
 	
 	set_physics_process(true)
 	clock = 0.0
 	step = 0
 	
 	player.set_physics_process(false)
-	return_door.arrow.visible = false
-	return_door.set_process_input(false)
 	camera.set_process(false)
 
 func end():
+	Cutscene.is_playing = false
 	set_physics_process(false)
 	player.set_physics_process(true)
-	return_door.arrow.visible = true
-	return_door.arrow_clock = 0.0
-	return_door.set_process_input(true)
 	camera.set_process(true)
 
 func cam_target(target):

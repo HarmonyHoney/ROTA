@@ -41,7 +41,7 @@ func _physics_process(delta):
 	if Engine.editor_hint: return
 	
 	# starting delay
-	if start_clock < start_time:
+	if Cutscene.is_playing or start_clock < start_time:
 		start_clock += delta
 		return
 	
@@ -77,6 +77,7 @@ func enter_door():
 	if scene_path != "":
 		player.enter_door()
 		Shared.wipe_scene(scene_path)
+		set_physics_process(false)
 		on_enter()
 		
 		if audio_open:
