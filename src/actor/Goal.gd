@@ -17,6 +17,8 @@ func _enter_tree():
 	
 	if !Shared.is_reload:
 		Cutscene.is_show_goal = true
+	
+	CheatCode.connect("activate", self, "cheat_code")
 
 func _ready():
 	Shared.camera.connect("turning", self, "turning")
@@ -45,3 +47,7 @@ func pickup(ply):
 	#area.monitorable = false
 	
 	audio_collect.play()
+
+func cheat_code(cheat):
+	if "collect" in cheat:
+		pickup(Shared.player)

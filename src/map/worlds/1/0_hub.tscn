@@ -39,8 +39,8 @@ scene_path = "res://src/map/worlds/0/0_hub.tscn"
 
 [node name="DoorBig2" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 1800, 1000 )
-scene_path = "res://src/map/worlds/2B/0_hub.tscn"
-gem_count = 25
+scene_path = "res://src/map/worlds/3A/0_hub.tscn"
+gem_count = 20
 
 [node name="Door" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 350, 350 )

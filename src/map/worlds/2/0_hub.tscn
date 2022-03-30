@@ -40,7 +40,6 @@ dir = 1
 position = Vector2( -500, 1600 )
 rotation = 1.5708
 z_index = -50
-z_as_relative = false
 dir = 1
 scene_path = "res://src/map/worlds/0/0_hub.tscn"
 
@@ -48,10 +47,9 @@ scene_path = "res://src/map/worlds/0/0_hub.tscn"
 position = Vector2( -1600, 2900 )
 rotation = 3.14159
 z_index = -50
-z_as_relative = false
 dir = 2
-scene_path = "res://src/map/worlds/2A/0_hub.tscn"
-gem_count = 15
+scene_path = "res://src/map/worlds/2B/0_hub.tscn"
+gem_count = 25
 
 [node name="Door1" parent="Actors" instance=ExtResource( 14 )]
 position = Vector2( -1150, 1250 )

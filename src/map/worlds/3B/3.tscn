@@ -12,9 +12,11 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 7 )]
 position = Vector2( -1200, -400 )
+bg_palette = 1
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 5 )]
 tile_data = PoolIntArray( -65540, -1610612736, 0, -65539, -1610612736, 0, -65538, -1610612736, 0, -65537, -1610612736, 0, -131072, -1610612736, 0, -4, 0, 0, -3, -1610612736, 0, -2, 1610612736, 0, -1, 1610612736, 0, -65536, 1610612736, 0, 65532, 0, 0, 65533, -1610612736, 0, 131068, 0, 0, 131069, -1610612736, 0, 196604, 0, 0, 196605, -1610612736, 0, 262140, 0, 0, 262141, -1610612736, 0, 327676, 0, 0, 327677, -1610612736, 0, 393212, -1610612736, 0, 393213, -1610612736, 0, 458748, -1610612736, 0, 458749, -1610612736, 0 )
+detail = 3
 
 [node name="SpikeMap" parent="." instance=ExtResource( 6 )]
 tile_data = PoolIntArray( -131076, 0, 0, -131071, -1610612736, 0, -65535, -1610612736, 0, 393214, -1610612736, 0, 458750, -1610612736, 0 )
@@ -32,7 +34,7 @@ dir = 3
 scene_path = "res://src/map/worlds/3B/0_hub.tscn"
 
 [node name="Box" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( -150, 250 )
+position = Vector2( -150, 150 )
 dir = 1
 
 [node name="Box2" parent="Actors" instance=ExtResource( 2 )]

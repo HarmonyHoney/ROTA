@@ -5,7 +5,8 @@ var history := []
 
 var codes := {"konami code": "up, up, down, down, left, right, left, right, push, jump",
 	"big hair": "up, right, down, left, up, right, down, left, up, left, down, right, up, left, down, right",
-	"moon jump": "up, up, up, up, up, up, up, down, up, up, up, up, up, up, up, down"}
+	"moon jump": "up, up, up, up, up, up, up, down, up, up, up, up, up, up, up, down",
+	"collect": "up, up, up, down, left, left, left, right, push, jump"}
 
 signal activate(cheat)
 
