@@ -156,6 +156,11 @@ func _physics_process(delta):
 			
 			#if test_tile(dir, 1):
 			#	pickup_clock = 0.0
+	
+	# check boundary
+	if Boundary.is_outside(global_position):
+		outside_boundary()
+
 
 func set_dir(arg := dir):
 	dir_last = dir

@@ -503,6 +503,11 @@ func _physics_process(delta):
 			velocity = rot(move_velocity, -dir)
 			
 	
+	# check boundary
+	if Boundary.is_outside(global_position):
+		outside_boundary()
+	
+	
 	# squash squish and stretch
 	squish_clock = min(squish_clock + delta, squish_time)
 	var s = smoothstep(0, 1, squish_clock / squish_time)
