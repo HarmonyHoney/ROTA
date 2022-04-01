@@ -305,15 +305,14 @@ func _physics_process(delta):
 				# push / pull
 				elif box.can_push and joy_q.x != 0:
 					if dir_x == joy_q.x or !box.test_tile(dir - joy_q.x, 2):
-						if box.push(dir - joy_q.x):
+						if box.start_push(dir - joy_q.x, joy_q.x):
 							push_from = position
 							push_clock = 0
 							push_dir = joy_q.x
-							box.push_x = joy_q.x
-							#print("push successful")
 							
 							audio_push.pitch_scale = rand_range(0.7, 1.3)
 							audio_push.play()
+							#print("push successful")
 						#else:
 						#	print("push failed")
 				

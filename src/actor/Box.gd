@@ -117,9 +117,8 @@ func _physics_process(delta):
 		sprite.position = move_from.linear_interpolate(Vector2.ZERO, smooth)
 		collision_sprite.position = sprite.position
 		
-		if is_hold:
+		if is_push:
 			sprite.rotation = lerp_angle(turn_to + deg2rad(12 * -push_x), turn_to, abs(0.5 - smooth) * 2.0)
-			
 			#sprite.scale = Vector2.ONE *  lerp(0.9, 1.0, smooth)
 		
 		if move_clock == target and !is_hold and is_floor and !last_floor:
@@ -153,9 +152,6 @@ func _physics_process(delta):
 			
 			audio_move.pitch_scale = rand_range(0.7, 1.3)
 			audio_move.play()
-			
-			#if test_tile(dir, 1):
-			#	pickup_clock = 0.0
 	
 	# check boundary
 	if Boundary.is_outside(global_position):
@@ -213,7 +209,7 @@ func move_tile(move_dir := dir, distance := 1):
 	position += rot(Vector2.DOWN * distance * tile, move_dir)
 	position = Vector2(stepify(position.x, 50), stepify(position.y, 50))
 	
-	print(name, ": ", last_pos, " - ", position)
+	#print(name, ": ", last_pos, " - ", position)
 	
 	# move sprite
 	sprite.position -= position - last_pos
@@ -222,28 +218,35 @@ func move_tile(move_dir := dir, distance := 1):
 	# reset clock
 	move_clock = 0
 
-func push(push_dir := 0):
-	var result = false
+# start push at first box in line
+func start_push(push_dir := 0, _push_x := 1):
 	push_dir = posmod(push_dir, 4)
+	var result = false
+	
+	var b = push_areas[posmod(push_dir + 2, 4)].get_overlapping_bodies()
+	if b.size() > 0 and b[0].is_floor and b[0].dir == push_dir:
+		result = b[0].start_push(push_dir, _push_x)
+	else:
+		result = push(push_dir, _push_x)
+	
+	return result
+
+# move boxes in line
+func push(push_dir := 0, _push_x := 1):
+	push_dir = posmod(push_dir, 4)
+	push_x = _push_x
+	var result = false
 	
 	var b = push_areas[push_dir].get_overlapping_bodies()
 	if b.size() == 0:
 		if !test_tile(push_dir, 1):
 			result = true
-	else:
-		if b[0] != self and b[0].is_in_group("box"):
-			if b[0].is_floor and b[0].push(push_dir):
-				result = true
+	elif b[0] != self and b[0].is_in_group("box") and b[0].is_floor and b[0].push(push_dir, _push_x):
+		result = true
 	
 	if result:
 		move_tile(push_dir, 1)
 		is_push = true
-		
-		# bring box behind
-		var behind = push_areas[posmod(push_dir + 2, 4)].get_overlapping_bodies()
-		if behind.size() > 0:
-			if behind[0] != self and behind[0].is_in_group("box"):
-				get_parent().move_child(behind[0], get_index() + 1)
 	
 	return result
 
