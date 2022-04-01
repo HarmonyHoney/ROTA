@@ -433,40 +433,41 @@ func _physics_process(delta):
 				
 				# start hold
 				elif btn_push and hold_clock == hold_cooldown:
-					for i in hit_area.get_overlapping_bodies():
-						if i.is_in_group("box") and i.is_floor:
-							box = i
-							print(name, " holding: ", i.name)
-							is_hold = true
-							is_release = false
-							is_move = false
-							velocity = Vector2.ZERO
-							
-							add_collision_exception_with(box)
-							box.add_collision_exception_with(self)
-							box.is_hold = true
-							box.pickup_clock = 0.0
-							
-							push_from = position
-							push_clock = 0
-							
-							if box.can_spin:
-								UI.dpad_spin.visible = true
-							
-							Guide.set_box(box)
-							
-							# move to first child
-							var p = box.get_parent()
-							p.move_child(box, 0)
-							
-							#anim.play("RESET")
-							anim.stop()
-							
-							audio_pickup.pitch_scale = rand_range(0.7, 1.3)
-							audio_pickup.play()
-							
-							
-							break
+					var hb = hit_area.get_overlapping_bodies()
+					if hb.size() > 0 and hb[0].is_in_group("box") and hb[0].is_floor:
+						box = hb[0]
+						print(name, " holding: ", box.name)
+						is_hold = true
+						is_release = false
+						is_move = false
+						velocity = Vector2.ZERO
+						
+						add_collision_exception_with(box)
+						box.add_collision_exception_with(self)
+						box.is_hold = true
+						box.pickup_clock = 0.0
+						
+						push_from = position
+						push_clock = 0
+						
+						if box.can_spin:
+							UI.dpad_spin.visible = true
+						
+						Guide.set_box(box)
+						
+						# move to first child
+						var p = box.get_parent()
+						p.move_child(box, 0)
+						
+						#anim.play("RESET")
+						anim.stop()
+						
+						audio_pickup.pitch_scale = rand_range(0.7, 1.3)
+						audio_pickup.play()
+						
+						# dir_x double check
+						var check_x = sprites.to_local(box.global_position).x > 0
+						set_dir_x(1 if check_x else -1)
 				
 			# in the air
 			else:
