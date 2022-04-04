@@ -183,7 +183,7 @@ func open_level():
 	var map = worlds[world_cursor].get_node("Sprites/Map")
 	var from = map.material.get_shader_param("radius")
 	var factor = (map.global_scale.x * map.get_rect().size.x) / (cam.zoom.x * 1280)
-	CircleZoom.zoom(from * factor, CircleZoom.out, 1.0, Vector2.ZERO)
+	#CircleZoom.zoom(from * factor, CircleZoom.out, 1.0, Vector2.ZERO)
 	Shared.last_orb_radius = from * factor
 	
 	yield(get_tree(), "idle_frame")

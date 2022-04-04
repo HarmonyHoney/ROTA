@@ -31,4 +31,4 @@ func unlock():
 	print(name, " unlocked")
 
 func on_active():
-	UI.is_gem = is_active and gem_count > 0
+	UI.gem.show = is_active and gem_count > 0

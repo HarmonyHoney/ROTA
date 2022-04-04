@@ -1,59 +1,78 @@
 extends CanvasLayer
 
-var is_gem := false
-var gem_clock := 0.0
-var gem_time := 0.5
+class Mover:
+	var show := true
+	var clock := 0.0
+	var time := 0.5
+	var from := Vector2.ZERO
+	var to := Vector2.ZERO
+	var node
+	
+	func count(delta, arg := show):
+		clock = clamp(clock + (delta if arg else -delta), 0, time)
+		return smoothstep(0, 1, clock / time)
+	
+	func move(delta):
+		var s = count(delta)
+		node.rect_position = from.linear_interpolate(to, s)
 
-onready var gems := $Control/Gems
-onready var gem_label : Label= $Control/Gems/Label
-onready var gem_to : Vector2 = gems.rect_position
-onready var gem_from := Vector2(gem_to.x, -120)
+var gem = Mover.new()
+var top = Mover.new()
+var bottom = Mover.new()
+var reset = Mover.new()
 
-onready var reset := $Control/Reset
-onready var reset_spinner := $Control/Reset/Spinner
-onready var reset_cirlce := $Control/Reset/Circle
-onready var reset_to : Vector2 = reset.rect_position
-onready var reset_from := Vector2(reset_to.x, -120)
+onready var gem_label : Label = $Control/Gems/Label
 
+onready var reset_spinner := $Control/Top/Reset/Spinner
+onready var reset_cirlce := $Control/Top/Reset/Circle
 var is_reset := false
 var btn_reset := false
-var reset_clock := 0.0
-var reset_time := 1.0
 
-onready var zoom := $Control/Zoom
-onready var zoom_notch := $Control/Zoom/Slider/Notch
-
+onready var zoom := $Control/Top/Zoom
+onready var zoom_notch := $Control/Top/Zoom/Slider/Notch
 var zoom_step := 0
 var zoom_steps := 3
 
-onready var dpad_spin := $Control/DPad/Spin
+onready var dpad_spin := $Control/Bottom/DPad/Spin
 
 func _ready():
 	gem_label.text = str(Shared.gem_count)
+	
+	gem.node = $Control/Gems
+	gem.to = gem.node.rect_position
+	gem.from = gem.to - Vector2(0, 120)
+	gem.show = false
+	
+	top.node = $Control/Top
+	top.to = top.node.rect_position
+	top.from = top.to - Vector2(0, 125)
+	
+	bottom.node = $Control/Bottom
+	bottom.to = bottom.node.rect_position
+	bottom.from = bottom.to + Vector2(0, 200)
+	
+	
 
 func _input(event):
 	if event.is_action_pressed("zoom_out"):
 		set_zoom(zoom_step + 1)
 
 func _physics_process(delta):
-	# gem
-	gem_clock = clamp(gem_clock + (delta if is_gem else -delta), 0, gem_time)
-	var s = smoothstep(0, 1, gem_clock / gem_time)
-	gems.rect_position = gem_from.linear_interpolate(gem_to, s)
+	gem.move(delta)
+	top.move(delta)
+	bottom.move(delta)
 	
 	# reset
-	
 	if is_reset:
 		is_reset = Input.is_action_pressed("reset")
 	else:
 		is_reset = Input.is_action_just_pressed("reset")
 	
-	reset_clock = clamp(reset_clock + (delta if is_reset else -delta), 0, reset_time)
-	var rs = smoothstep(0, 1, reset_clock / reset_time)
+	var rs = reset.count(delta, is_reset)
 	reset_spinner.rotation = lerp(0, PI, rs)
 	reset_cirlce.scale = Vector2.ONE * rs
 	
-	if reset_clock == reset_time:
+	if reset.clock == reset.time:
 		is_reset = false
 		Shared.reset()
 		if is_instance_valid(Shared.player):

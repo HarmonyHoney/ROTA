@@ -46,16 +46,16 @@ config/icon="res://media/image/gobot.png"
 
 btn="*res://src/autoload/btn.gd"
 Shared="*res://src/autoload/Shared.gd"
-Wipe="*res://src/autoload/Wipe.tscn"
-PauseMenu="*res://src/autoload/PauseMenu.tscn"
+Cam="*res://src/autoload/Cam.tscn"
 UI="*res://src/autoload/UI.tscn"
-CircleZoom="*res://src/autoload/CircleZoom.tscn"
 BG="*res://src/autoload/BG.tscn"
+Wipe="*res://src/autoload/Wipe.tscn"
 Guide="*res://src/actor/Guide.tscn"
 Boundary="*res://src/stage/Boundary.tscn"
 CheatCode="*res://src/autoload/CheatCode.gd"
 Cutscene="*res://src/cutscene/Cutscene.tscn"
-Cam="*res://src/autoload/Cam.tscn"
+PauseMenu="*res://src/autoload/PauseMenu.tscn"
+OptionsMenu="*res://src/autoload/OptionsMenu.tscn"
 
 [display]
 

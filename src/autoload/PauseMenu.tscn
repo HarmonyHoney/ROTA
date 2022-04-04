@@ -1,10 +1,21 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://media/image/dashes_fill.png" type="Texture" id=1]
-[ext_resource path="res://media/image/box/box-400.png" type="Texture" id=2]
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/autoload/PauseMenu.gd" type="Script" id=4]
-[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=5]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 25
+border_width_top = 25
+border_width_right = 25
+border_width_bottom = 25
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 50
+shadow_offset = Vector2( 50, 50 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 110
@@ -14,37 +25,32 @@ font_data = ExtResource( 3 )
 size = 70
 font_data = ExtResource( 3 )
 
-[node name="PauseMenu" type="Node2D"]
+[node name="PauseMenu" type="CanvasLayer"]
 pause_mode = 2
+layer = 5
 script = ExtResource( 4 )
 
-[node name="MenuLayer" type="CanvasLayer" parent="."]
-layer = 9
-
-[node name="Menu" type="NinePatchRect" parent="MenuLayer"]
-self_modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.3
-anchor_top = 0.2
-anchor_right = 0.7
-anchor_bottom = 0.8
-margin_left = -339.0
-margin_top = -44.0
-margin_right = -219.0
-margin_bottom = 76.0
-texture = ExtResource( 1 )
-patch_margin_left = 60
-patch_margin_top = 60
-patch_margin_right = 60
-patch_margin_bottom = 60
+[node name="Control" type="Control" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="MenuLayer/Menu"]
+[node name="Menu" type="Panel" parent="Control"]
+anchor_left = 0.3
+anchor_top = 0.2
+anchor_right = 0.7
+anchor_bottom = 0.8
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Control/Menu"]
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 0.4
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "PAUSED"
 align = 1
@@ -52,7 +58,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Items" type="Control" parent="MenuLayer/Menu"]
+[node name="List" type="Control" parent="Control/Menu"]
 anchor_top = 0.35
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -61,63 +67,80 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cursor" type="NinePatchRect" parent="MenuLayer/Menu/Items"]
-anchor_left = 0.25
+[node name="Cursor" type="ColorRect" parent="Control/Menu/List"]
 anchor_right = 0.75
 anchor_bottom = 0.25
-texture = ExtResource( 2 )
-patch_margin_left = 35
-patch_margin_top = 35
-patch_margin_right = 35
-patch_margin_bottom = 35
+margin_left = 136.0
+margin_bottom = 5.8
+color = Color( 1, 1, 1, 0.509804 )
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
 
-[node name="Resume" type="Label" parent="MenuLayer/Menu/Items"]
-anchor_left = 0.25
-anchor_right = 0.75
-anchor_bottom = 0.25
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+[node name="Items" type="VBoxContainer" parent="Control/Menu/List"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -25.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="CenterContainer" parent="Control/Menu/List/Items"]
+margin_right = 512.0
+margin_bottom = 82.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/Menu/List/Items/Resume"]
+margin_left = 142.0
+margin_top = 1.0
+margin_right = 370.0
+margin_bottom = 80.0
+size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
 text = "RESUME"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Label" parent="MenuLayer/Menu/Items"]
-anchor_left = 0.3
-anchor_top = 0.25
-anchor_right = 0.7
-anchor_bottom = 0.5
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+[node name="Options" type="CenterContainer" parent="Control/Menu/List/Items"]
+margin_top = 86.0
+margin_right = 512.0
+margin_bottom = 168.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/Menu/List/Items/Options"]
+margin_left = 123.0
+margin_top = 1.0
+margin_right = 389.0
+margin_bottom = 80.0
+size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
-text = "RESET"
+text = "OPTIONS"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Exit" type="Label" parent="MenuLayer/Menu/Items"]
-anchor_left = 0.33
-anchor_top = 0.5
-anchor_right = 0.67
-anchor_bottom = 0.75
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+[node name="Exit" type="CenterContainer" parent="Control/Menu/List/Items"]
+margin_top = 172.0
+margin_right = 512.0
+margin_bottom = 255.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/Menu/List/Items/Exit"]
+margin_left = 180.0
+margin_top = 2.0
+margin_right = 332.0
+margin_bottom = 81.0
+size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
 text = "EXIT"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ImageLayer" type="CanvasLayer" parent="."]
-layer = 7
-
-[node name="Center" type="Node2D" parent="ImageLayer"]
-position = Vector2( 640, 360 )
-
-[node name="Sprite" type="Sprite" parent="ImageLayer/Center"]
-texture = ExtResource( 5 )

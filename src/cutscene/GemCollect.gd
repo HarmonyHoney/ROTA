@@ -23,7 +23,7 @@ func _physics_process(delta):
 				audio_collect.pitch_scale = rand_range(0.8, 1.3)
 				audio_collect.play()
 				
-				UI.is_gem = true
+				UI.gem.show = true
 		1:
 			if clock > 1.0:
 				next_step()
@@ -66,4 +66,4 @@ func end():
 	player.set_physics_process(true)
 	set_physics_process(false)
 	
-	UI.is_gem = false
+	UI.gem.show = false
