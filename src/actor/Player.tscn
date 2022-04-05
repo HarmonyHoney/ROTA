@@ -575,37 +575,47 @@ shape = SubResource( 14 )
 
 [node name="Pickup" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 5 )
+bus = "SFX"
 
 [node name="Drop" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 10 )
+bus = "SFX"
 
 [node name="Push" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 9 )
 volume_db = -5.0
+bus = "SFX"
 
 [node name="Turn" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 6 )
 volume_db = -5.0
+bus = "SFX"
 
 [node name="Jump" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 7 )
+bus = "SFX"
 
 [node name="Land" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 8 )
+bus = "SFX"
 
 [node name="FallOut" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 11 )
+bus = "SFX"
 
 [node name="Spike" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 12 )
+bus = "SFX"
 
 [node name="Around" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 13 )
 volume_db = -7.0
+bus = "SFX"
 
 [node name="Peek" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 10 )
 volume_db = -7.0
+bus = "SFX"
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_BodyArea_body_entered"]

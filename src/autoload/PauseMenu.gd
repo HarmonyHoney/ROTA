@@ -19,15 +19,6 @@ func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
 	Wipe.connect("start_wipe_out", self, "start_wipe_out")
 
-func wipe_out():
-	if is_paused:
-		set_paused(false)
-	yield(get_tree().create_timer(0.7), "timeout")
-	set_process_input(true)
-
-func start_wipe_out():
-	set_process_input(false)
-
 func _input(event):
 	var pause = event.is_action_pressed("pause")
 	if pause:
@@ -52,31 +43,38 @@ func _input(event):
 			0:
 				press_pause()
 			1:
-				OptionsMenu.visible = !OptionsMenu.visible
-				pass#reset()
+				options()
 			2:
 				pass#exit()
 
 func _physics_process(delta):
-	cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(labels[cursor].rect_global_position, 0.15)
-	cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(labels[cursor].rect_size, 0.15)
+	cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(labels[cursor].rect_global_position - Vector2(10, 0), 0.15)
+	cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(labels[cursor].rect_size + Vector2(20, 0), 0.15)
 
-func press_pause():
-	set_paused(!is_paused)
+func wipe_out():
+	if is_paused:
+		set_paused(false)
+	yield(get_tree().create_timer(0.7), "timeout")
+	set_process_input(true)
+
+func start_wipe_out():
+	set_process_input(false)
 
 func set_paused(pause := true):
 	is_paused = pause
 	cursor = 0
 	
 	menu.visible = is_paused
-	
-	#UI.show("none")
-	
-	
 	UI.gem.show = is_paused
 	UI.top.show = !is_paused
-	#UI.show("Title" if is_paused else "Game")
-	#yield(get_tree(), "idle_frame")
 	
 	get_tree().paused = is_paused
+
+func press_pause():
+	set_paused(!is_paused)
+
+
+func options():
+	OptionsMenu.show(true)
+	is_paused = false
 

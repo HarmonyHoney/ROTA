@@ -40,5 +40,6 @@ shape = SubResource( 1 )
 
 [node name="Hit" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 3 )
+bus = "SFX"
 
 [connection signal="area_entered" from="Area2D" to="Spring" method="_on_Area2D_area_entered"]

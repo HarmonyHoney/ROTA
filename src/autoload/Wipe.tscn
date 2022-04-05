@@ -30,3 +30,4 @@ region_rect = Rect2( 0, 0, 1280, 720 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "SFX"

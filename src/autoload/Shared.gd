@@ -34,9 +34,12 @@ var is_reload := false
 
 var volume_master := 100
 
+var volume = [100, 100, 100]
+
+
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
-	set_volume(30)
+	set_volume(0, 50)
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -114,10 +117,10 @@ func collect_gem():
 
 ### Volume
 
-func set_volume(arg = 0):
-	volume_master = clamp(arg, 0, 100)
-	AudioServer.set_bus_volume_db(0, linear2db(volume_master / 100.0))
-	print("volume_master: ", volume_master)
+func set_volume(bus = 0, vol = 0):
+	volume[bus] = clamp(vol, 0, 100)
+	AudioServer.set_bus_volume_db(bus, linear2db(volume[bus] / 100.0))
+	#print("volume[", bus, "] ",AudioServer.get_bus_name(bus) ," : ", volume[bus])
 
 
 ### Files and Directory Funcs ###

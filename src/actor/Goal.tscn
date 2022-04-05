@@ -43,6 +43,8 @@ shape = SubResource( 4 )
 
 [node name="Coin" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 3 )
+bus = "SFX"
 
 [node name="Collect" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 2 )
+bus = "SFX"

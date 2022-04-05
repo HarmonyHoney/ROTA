@@ -14,9 +14,11 @@ script = ExtResource( 2 )
 
 [node name="Coin" type="AudioStreamPlayer" parent="GemCollect"]
 stream = ExtResource( 5 )
+bus = "SFX"
 
 [node name="Collect" type="AudioStreamPlayer" parent="GemCollect"]
 stream = ExtResource( 4 )
+bus = "SFX"
 
 [node name="GoalShow" type="Node" parent="."]
 script = ExtResource( 3 )
