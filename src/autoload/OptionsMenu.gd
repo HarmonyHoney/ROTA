@@ -2,10 +2,10 @@ extends CanvasLayer
 
 onready var control := $Control
 onready var cursor_node := $Control/Cursor
-onready var list_node := $Control/List
+onready var list_node := $Control/Tabs
 
 var tab := 0 setget set_tab
-onready var tabs := [$Control/List/Audio, $Control/List/Video, $Control/List/Input]
+onready var tabs := $Control/Tabs.get_children()
 onready var headers := $Control/Header.get_children()
 
 onready var items_node = tabs[tab]
@@ -104,7 +104,7 @@ func set_tab(arg := 0):
 			i._ready()
 	
 	# items
-	items_node = tabs[tab]
+	items_node = tabs[tab].get_node("List")
 	items = items_node.get_children()
 	
 	

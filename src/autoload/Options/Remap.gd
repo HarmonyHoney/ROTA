@@ -41,9 +41,9 @@ var tex = {"JOY 0": preload("res://media/image/UI/btn_a.png"),
 "JOY 10": preload("res://media/image/UI/btn_select.png"),
 "JOY 11": preload("res://media/image/UI/btn_start.png"),
 "JOY 12": preload("res://media/image/UI/dpad_up.png"),
-"JOY 13": preload("res://media/image/UI/dpad_down.png"),
-"JOY 14": preload("res://media/image/UI/dpad_left.png"),
-"JOY 15": preload("res://media/image/UI/dpad_right.png"),
+"JOY 13": preload("res://media/image/UI/dpad_up.png"),
+"JOY 14": preload("res://media/image/UI/dpad_up.png"),
+"JOY 15": preload("res://media/image/UI/dpad_up.png"),
 "AXIS 1-": preload("res://media/image/UI/l_stick_up.png"),
 "AXIS 1+": preload("res://media/image/UI/l_stick_down.png"),
 "AXIS 0-": preload("res://media/image/UI/l_stick_left.png"),
@@ -51,21 +51,44 @@ var tex = {"JOY 0": preload("res://media/image/UI/btn_a.png"),
 "AXIS 2-": preload("res://media/image/UI/r_stick_up.png"),
 "AXIS 2+": preload("res://media/image/UI/r_stick_down.png"),
 "AXIS 3-": preload("res://media/image/UI/r_stick_left.png"),
-"AXIS 3+": preload("res://media/image/UI/r_stick_right.png")}
+"AXIS 3+": preload("res://media/image/UI/r_stick_right.png"),
+"KEY": preload("res://media/image/box/round_rect200.png"),
+"KEY_2": preload("res://media/image/UI/key_2.png"),
+"KEY_3": preload("res://media/image/UI/key_3.png"),
+"UP": preload("res://media/image/UI/key_up.png"),
+"DOWN": preload("res://media/image/UI/key_up.png"),
+"LEFT": preload("res://media/image/UI/key_up.png"),
+"RIGHT": preload("res://media/image/UI/key_up.png"),
+}
+
+var rotate = {"DOWN": 180,
+"LEFT": 270,
+"RIGHT": 90,
+"JOY 13": 180,
+"JOY 14": 270,
+"JOY 15": 90,}
+
+
 
 func _ready():
-	var a = InputMap.get_action_list(action)
-	
-	var sort = []
-	for i in a:
+	var joy = []
+	var keys = []
+	for i in InputMap.get_action_list(action):
 		if i is InputEventJoypadButton or i is InputEventJoypadMotion:
-			sort.push_back(i)
+			joy.append(i)
 		else:
-			sort.push_front(i)
-	a = sort
+			keys.append(i)
+	
+	var a = []
+	for i in 2:
+		if i < keys.size():
+			a.append(keys[i])
+		else:
+			a.append("")
+	a.append_array(joy)
 	
 	for i in 4:
-		var s = " "
+		var s = ""
 		if i < a.size():
 			if a[i] is InputEventJoypadButton:
 				s = "JOY " + str(a[i].button_index)
@@ -73,24 +96,34 @@ func _ready():
 				var av = a[i].axis_value
 				var sgn = "+" if av > 0 else "-"
 				s = "AXIS " + str(a[i].axis) + sgn
-			else:
-				s = str(a[i].as_text())
-		
-		var l = s
-		
-		if dict.has(s):
-			l = dict[s]
+			elif a[i] is InputEvent:
+				s = str(a[i].as_text().to_upper())
 		
 		var label = list[i].get_node("Label")
-		label.text = l
-		
-		
+		label.visible = true
 		var spr = list[i].get_node("Sprite")
-		spr.visible = tex.has(s)
-		label.visible = !spr.visible
+		spr.visible = true
 		
-		if spr.visible:
+		# no text
+		if s == "":
+			label.visible = false
+			spr.visible = false
+		
+		# sprite
+		elif tex.has(s):
+			label.visible = false
+			
 			spr.texture = tex[s]
+			if rotate.has(s):
+				spr.rotation_degrees = rotate[s]
 		
+		# text over key
+		else:
+			label.text = s
+			
+			if s.length() < 2:
+				spr.texture = tex["KEY"]
+			else:
+				spr.texture = tex["KEY_2"]
 		
 		
