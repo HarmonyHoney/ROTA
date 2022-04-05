@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/autoload/Options/Volume.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://media/image/UI/Video.png" type="Texture" id=7]
 [ext_resource path="res://media/image/UI/Input.png" type="Texture" id=8]
 [ext_resource path="res://media/image/UI/Audio.png" type="Texture" id=9]
+[ext_resource path="res://src/autoload/Options/Remap.tscn" type="PackedScene" id=10]
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0, 0, 0, 1 )
@@ -610,175 +611,71 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control1" type="Control" parent="Control/List/Input"]
-margin_right = 1080.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 80 )
+[node name="Control1" parent="Control/List/Input" instance=ExtResource( 10 )]
 
-[node name="Label" type="Label" parent="Control/List/Input/Control1"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
-text = "up"
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control2" type="Control" parent="Control/List/Input"]
+[node name="Control2" parent="Control/List/Input" instance=ExtResource( 10 )]
 margin_top = 80.0
-margin_right = 1080.0
 margin_bottom = 160.0
-rect_min_size = Vector2( 0, 80 )
+action = "down"
 
-[node name="Label" type="Label" parent="Control/List/Input/Control2"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
+[node name="Label" parent="Control/List/Input/Control2" index="0"]
 text = "down"
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Control3" type="Control" parent="Control/List/Input"]
+[node name="Control3" parent="Control/List/Input" instance=ExtResource( 10 )]
 margin_top = 160.0
-margin_right = 1080.0
 margin_bottom = 240.0
-rect_min_size = Vector2( 0, 80 )
+action = "left"
 
-[node name="Label" type="Label" parent="Control/List/Input/Control3"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
+[node name="Label" parent="Control/List/Input/Control3" index="0"]
 text = "left"
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Control4" type="Control" parent="Control/List/Input"]
+[node name="Control4" parent="Control/List/Input" instance=ExtResource( 10 )]
 margin_top = 240.0
-margin_right = 1080.0
 margin_bottom = 320.0
-rect_min_size = Vector2( 0, 80 )
+action = "right"
 
-[node name="Label" type="Label" parent="Control/List/Input/Control4"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
+[node name="Label" parent="Control/List/Input/Control4" index="0"]
 text = "right"
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Control5" type="Control" parent="Control/List/Input"]
+[node name="Control5" parent="Control/List/Input" instance=ExtResource( 10 )]
 margin_top = 320.0
-margin_right = 1080.0
 margin_bottom = 400.0
-rect_min_size = Vector2( 0, 80 )
+action = "jump"
 
-[node name="Label" type="Label" parent="Control/List/Input/Control5"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
+[node name="Label" parent="Control/List/Input/Control5" index="0"]
 text = "jump / accept"
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Control6" type="Control" parent="Control/List/Input"]
+[node name="Control6" parent="Control/List/Input" instance=ExtResource( 10 )]
 margin_top = 400.0
-margin_right = 1080.0
 margin_bottom = 480.0
-rect_min_size = Vector2( 0, 80 )
+action = "grab"
 
-[node name="Label" type="Label" parent="Control/List/Input/Control6"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
+[node name="Label" parent="Control/List/Input/Control6" index="0"]
 text = "grab / back"
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Control7" type="Control" parent="Control/List/Input"]
+[node name="Control7" parent="Control/List/Input" instance=ExtResource( 10 )]
 margin_top = 480.0
-margin_right = 1080.0
 margin_bottom = 560.0
-rect_min_size = Vector2( 0, 80 )
+action = "zoom"
 
-[node name="Label" type="Label" parent="Control/List/Input/Control7"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
+[node name="Label" parent="Control/List/Input/Control7" index="0"]
 text = "zoom"
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Control8" type="Control" parent="Control/List/Input"]
+[node name="Control8" parent="Control/List/Input" instance=ExtResource( 10 )]
 margin_top = 560.0
-margin_right = 1080.0
 margin_bottom = 640.0
-rect_min_size = Vector2( 0, 80 )
+action = "reset"
 
-[node name="Label" type="Label" parent="Control/List/Input/Control8"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
+[node name="Label" parent="Control/List/Input/Control8" index="0"]
 text = "reset"
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Control9" type="Control" parent="Control/List/Input"]
+[node name="Control9" parent="Control/List/Input" instance=ExtResource( 10 )]
 margin_top = 640.0
-margin_right = 1080.0
 margin_bottom = 720.0
-rect_min_size = Vector2( 0, 80 )
+action = "pause"
 
-[node name="Label" type="Label" parent="Control/List/Input/Control9"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
+[node name="Label" parent="Control/List/Input/Control9" index="0"]
 text = "pause"
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Control10" type="Control" parent="Control/List/Input"]
 margin_top = 720.0
@@ -798,3 +695,13 @@ uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[editable path="Control/List/Input/Control1"]
+[editable path="Control/List/Input/Control2"]
+[editable path="Control/List/Input/Control3"]
+[editable path="Control/List/Input/Control4"]
+[editable path="Control/List/Input/Control5"]
+[editable path="Control/List/Input/Control6"]
+[editable path="Control/List/Input/Control7"]
+[editable path="Control/List/Input/Control8"]
+[editable path="Control/List/Input/Control9"]

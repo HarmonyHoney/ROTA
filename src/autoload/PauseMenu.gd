@@ -31,7 +31,7 @@ func _input(event):
 	#var left = event.is_action_pressed("left")
 	#var right = event.is_action_pressed("right")
 	var enter = event.is_action_pressed("jump")
-	var back = event.is_action_pressed("push")
+	var back = event.is_action_pressed("grab")
 	
 	if up or down:
 		cursor = clamp(cursor + (-1 if up else 1), 0, items.size() - 1)

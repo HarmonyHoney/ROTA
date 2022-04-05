@@ -190,8 +190,8 @@ func _physics_process(delta):
 		
 		btn_jump = Input.is_action_pressed("jump")
 		btnp_jump = Input.is_action_just_pressed("jump")
-		btn_push = Input.is_action_pressed("push")
-		btnp_push = Input.is_action_just_pressed("push")
+		btn_push = Input.is_action_pressed("grab")
+		btnp_push = Input.is_action_just_pressed("grab")
 		
 		# jump hold time
 		holding_jump = (holding_jump + delta) if btn_jump else 0.0

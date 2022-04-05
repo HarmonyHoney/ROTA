@@ -54,7 +54,7 @@ func _ready():
 	
 
 func _input(event):
-	if event.is_action_pressed("zoom_out"):
+	if event.is_action_pressed("zoom"):
 		set_zoom(zoom_step + 1)
 
 func _physics_process(delta):

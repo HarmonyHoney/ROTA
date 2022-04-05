@@ -22,6 +22,10 @@ export var header_margin := Vector2(-20, 20)
 
 func _ready():
 	control.visible = false
+	
+	#show()
+	
+	#print(InputMap.get_actions())
 
 func _input(event):
 	if !is_open: return
@@ -48,7 +52,7 @@ func _input(event):
 				items[cursor].act()
 	
 	# exit
-	if event.is_action_pressed("push"):
+	if event.is_action_pressed("grab"):
 		yield(get_tree(), "idle_frame")
 		show(false)
 	
@@ -60,7 +64,9 @@ func _physics_process(delta):
 	else:
 		cursor_node.rect_position = cursor_node.rect_position.linear_interpolate(list_node.rect_position + items[cursor - scroll].rect_position, 0.15)
 		cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size, 0.15)
-		items_node.rect_position = items_node.rect_position.linear_interpolate(Vector2(0, 80) * -scroll, 0.15)
+	
+	# scroll
+	items_node.rect_position = items_node.rect_position.linear_interpolate(Vector2(0, 80) * -scroll, 0.15)
 
 
 func show(arg := true):
