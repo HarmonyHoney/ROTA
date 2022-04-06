@@ -19,8 +19,17 @@ var joy_last := Vector2.ZERO
 
 var grid := {}
 
+
+var open = EaseMover.new()
+
 func _ready():
-	show(false)
+	open.from = Vector2(0, 720)
+	open.to = Vector2.ZERO
+	open.node = control
+	
+	
+	
+	#show(false)
 	
 	cursor_node.rect_size = $Control/List/Items/Up/HBoxContainer.get_child(0).rect_size
 	
@@ -52,6 +61,12 @@ func _input(event):
 		show(false)
 
 func _physics_process(delta):
+	
+	# ease mover
+	open.move(delta, is_open)
+	
+	
+	
 	var target = grid[Vector2(cursor_x, cursor)]
 	
 	# position
@@ -69,7 +84,7 @@ func _physics_process(delta):
 
 func show(arg := true):
 	is_open = arg
-	control.visible = is_open
+	#control.visible = is_open
 	OptionsMenu.is_open = !is_open
 
 func set_cursor(arg := 0):

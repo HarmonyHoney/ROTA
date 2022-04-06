@@ -1,26 +1,5 @@
 extends CanvasLayer
 
-class Mover:
-	var show := true
-	var clock := 0.0
-	var time := 0.5
-	var from := Vector2.ZERO
-	var to := Vector2.ZERO
-	var node
-	
-	func count(delta, arg := show):
-		clock = clamp(clock + (delta if arg else -delta), 0, time)
-		return smoothstep(0, 1, clock / time)
-	
-	func move(delta):
-		var s = count(delta)
-		node.rect_position = from.linear_interpolate(to, s)
-
-var gem = Mover.new()
-var top = Mover.new()
-var bottom = Mover.new()
-var reset = Mover.new()
-
 onready var gem_label : Label = $Control/Gems/Label
 
 onready var reset_spinner := $Control/Top/Reset/Spinner
@@ -34,6 +13,11 @@ var zoom_step := 0
 var zoom_steps := 3
 
 onready var dpad_spin := $Control/Bottom/DPad/Spin
+
+var gem = EaseMover.new()
+var top = EaseMover.new()
+var bottom = EaseMover.new()
+var reset = EaseMover.new()
 
 func _ready():
 	gem_label.text = str(Shared.gem_count)

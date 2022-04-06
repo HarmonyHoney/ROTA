@@ -1,14 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/autoload/PauseMenu.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_left = 25
-border_width_top = 25
-border_width_right = 25
-border_width_bottom = 25
+bg_color = Color( 0, 0, 0, 0.5 )
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -20,6 +16,14 @@ shadow_offset = Vector2( 50, 50 )
 [sub_resource type="DynamicFont" id=1]
 size = 110
 font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.75, 0.375, 0.38125, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="DynamicFont" id=2]
 size = 70
@@ -48,12 +52,12 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="Control/Menu"]
-anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 0.4
 custom_fonts/font = SubResource( 1 )
-text = "PAUSED"
+text = "PAUSE"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -67,14 +71,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cursor" type="ColorRect" parent="Control/Menu/List"]
+[node name="Cursor" type="Panel" parent="Control/Menu/List"]
 anchor_right = 0.75
 anchor_bottom = 0.25
 margin_left = 136.0
 margin_bottom = 5.8
-color = Color( 1, 1, 1, 0.509804 )
+custom_styles/panel = SubResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false,
 "_editor_description_": ""
 }
 

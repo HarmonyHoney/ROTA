@@ -6,11 +6,18 @@ onready var items_node = $Control/Menu/List/Items
 
 var is_paused := false
 var cursor := 0
+var cursor_margin := Vector2(30, 0)
+
 var items = []
 var labels = []
 
+var open = EaseMover.new()
+
 func _ready():
-	menu.visible = false
+	open.node = $Control
+	open.from = Vector2(0, 720)
+	open.to = Vector2.ZERO
+	
 	
 	items = items_node.get_children()
 	for i in items:
@@ -48,8 +55,11 @@ func _input(event):
 				pass#exit()
 
 func _physics_process(delta):
-	cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(labels[cursor].rect_global_position - Vector2(10, 0), 0.15)
-	cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(labels[cursor].rect_size + Vector2(20, 0), 0.15)
+	open.move(delta, is_paused)
+	
+	if !is_paused: return
+	cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(labels[cursor].rect_global_position - cursor_margin, 0.15)
+	cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(labels[cursor].rect_size + (cursor_margin * 2.0), 0.15)
 
 func wipe_out():
 	if is_paused:
@@ -64,7 +74,7 @@ func set_paused(pause := true):
 	is_paused = pause
 	cursor = 0
 	
-	menu.visible = is_paused
+	#menu.visible = is_paused
 	UI.gem.show = is_paused
 	UI.top.show = !is_paused
 	

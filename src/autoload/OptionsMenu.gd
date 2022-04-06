@@ -20,8 +20,16 @@ var joy_last := Vector2.ZERO
 
 export var header_margin := Vector2(-20, 20)
 
+var open = EaseMover.new()
+
 func _ready():
-	control.visible = false
+	#control.visible = false
+	
+	
+	open.node = control
+	open.to = Vector2.ZERO
+	open.from = Vector2(0, 720)
+	
 
 func _input(event):
 	if !is_open: return
@@ -55,6 +63,9 @@ func _input(event):
 	
 
 func _physics_process(delta):
+	
+	open.move(delta, is_open)
+	
 	if !is_open: return
 	
 	if cursor == -1:
@@ -69,7 +80,7 @@ func _physics_process(delta):
 
 func show(arg := true):
 	is_open = arg
-	control.visible = is_open
+	#control.visible = is_open
 	
 	PauseMenu.is_paused = !is_open
 	UI.gem.show = !is_open
