@@ -6,7 +6,6 @@
 [ext_resource path="res://media/image/UI/Video.png" type="Texture" id=7]
 [ext_resource path="res://media/image/UI/Input.png" type="Texture" id=8]
 [ext_resource path="res://media/image/UI/Audio.png" type="Texture" id=9]
-[ext_resource path="res://src/autoload/Options/Remap.tscn" type="PackedScene" id=10]
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0, 0, 0, 1 )
@@ -95,12 +94,22 @@ func act():
 	axis_x(0)
 "
 
-[sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 1, 1, 1, 0.4 )
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
+[sub_resource type="GDScript" id=16]
+script/source = "extends Control
+
+onready var fill := $Control/Panel/Fill
+
+func act():
+	fill.visible = !fill.visible
+"
+
+[sub_resource type="GDScript" id=17]
+script/source = "extends Control
+
+
+func act():
+	RemapMenu.show()
+"
 
 [sub_resource type="DynamicFont" id=15]
 size = 50
@@ -201,15 +210,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Audio" type="Control" parent="Control/Tabs"]
+[node name="Audio" type="VBoxContainer" parent="Control/Tabs"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="List" type="VBoxContainer" parent="Control/Tabs/Audio"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
@@ -217,33 +219,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Master" parent="Control/Tabs/Audio/List" instance=ExtResource( 2 )]
+[node name="Master" parent="Control/Tabs/Audio" instance=ExtResource( 2 )]
 
-[node name="SFX" parent="Control/Tabs/Audio/List" instance=ExtResource( 2 )]
+[node name="SFX" parent="Control/Tabs/Audio" instance=ExtResource( 2 )]
 margin_top = 80.0
 margin_bottom = 160.0
 bus = 1
 
-[node name="Label" parent="Control/Tabs/Audio/List/SFX" index="0"]
+[node name="Label" parent="Control/Tabs/Audio/SFX" index="0"]
 text = "SFX Volume"
 
-[node name="Music" parent="Control/Tabs/Audio/List" instance=ExtResource( 2 )]
+[node name="Music" parent="Control/Tabs/Audio" instance=ExtResource( 2 )]
 margin_top = 160.0
 margin_bottom = 240.0
 bus = 1
 
-[node name="Label" parent="Control/Tabs/Audio/List/Music" index="0"]
+[node name="Label" parent="Control/Tabs/Audio/Music" index="0"]
 text = "Music Volume"
 
-[node name="Video" type="Control" parent="Control/Tabs"]
+[node name="Video" type="VBoxContainer" parent="Control/Tabs"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="List" type="VBoxContainer" parent="Control/Tabs/Video"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
@@ -251,13 +246,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Fullscreen" type="Control" parent="Control/Tabs/Video/List"]
+[node name="Fullscreen" type="Control" parent="Control/Tabs/Video"]
 margin_right = 1080.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 script = SubResource( 12 )
 
-[node name="Label" type="Label" parent="Control/Tabs/Video/List/Fullscreen"]
+[node name="Label" type="Label" parent="Control/Tabs/Video/Fullscreen"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 25.0
@@ -269,7 +264,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="Control/Tabs/Video/List/Fullscreen"]
+[node name="Control" type="Control" parent="Control/Tabs/Video/Fullscreen"]
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -277,7 +272,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="Control/Tabs/Video/List/Fullscreen/Control"]
+[node name="Panel" type="Panel" parent="Control/Tabs/Video/Fullscreen/Control"]
 anchor_left = 0.35
 anchor_top = 0.25
 anchor_right = 0.65
@@ -288,7 +283,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Fill" type="Panel" parent="Control/Tabs/Video/List/Fullscreen/Control/Panel"]
+[node name="Fill" type="Panel" parent="Control/Tabs/Video/Fullscreen/Control/Panel"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -298,14 +293,14 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Resolution" type="Control" parent="Control/Tabs/Video/List"]
+[node name="Resolution" type="Control" parent="Control/Tabs/Video"]
 margin_top = 80.0
 margin_right = 1080.0
 margin_bottom = 160.0
 rect_min_size = Vector2( 0, 80 )
 script = SubResource( 14 )
 
-[node name="Label" type="Label" parent="Control/Tabs/Video/List/Resolution"]
+[node name="Label" type="Label" parent="Control/Tabs/Video/Resolution"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 25.0
@@ -317,7 +312,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Resolution" type="Label" parent="Control/Tabs/Video/List/Resolution"]
+[node name="Resolution" type="Label" parent="Control/Tabs/Video/Resolution"]
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -331,23 +326,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Input" type="Control" parent="Control/Tabs"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="Control/Tabs/Input"]
-anchor_left = 0.325
-anchor_right = 0.625
-anchor_bottom = 1.0
-custom_styles/panel = SubResource( 16 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="List" type="VBoxContainer" parent="Control/Tabs/Input"]
+[node name="Input" type="VBoxContainer" parent="Control/Tabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 565.0
@@ -356,140 +335,279 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="Control" parent="Control/Tabs/Input/List"]
+[node name="Vibration" type="Control" parent="Control/Tabs/Input"]
 margin_right = 1080.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
+script = SubResource( 16 )
+
+[node name="Label" type="Label" parent="Control/Tabs/Input/Vibration"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 8 )
+text = "Controller Vibration"
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/Tabs/Input/List/Key"]
-anchor_right = 0.3
+[node name="Control" type="Control" parent="Control/Tabs/Input/Vibration"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Control/Tabs/Input/Vibration/Control"]
+anchor_left = 0.35
+anchor_top = 0.25
+anchor_right = 0.65
+anchor_bottom = 0.75
+custom_styles/panel = SubResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Fill" type="Panel" parent="Control/Tabs/Input/Vibration/Control/Panel"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ToggleGrab" type="Control" parent="Control/Tabs/Input"]
+margin_top = 80.0
+margin_right = 1080.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 0, 80 )
+script = SubResource( 16 )
+
+[node name="Label" type="Label" parent="Control/Tabs/Input/ToggleGrab"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 8 )
+text = "Toggle Grab"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Control/Tabs/Input/ToggleGrab"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Control/Tabs/Input/ToggleGrab/Control"]
+anchor_left = 0.35
+anchor_top = 0.25
+anchor_right = 0.65
+anchor_bottom = 0.75
+custom_styles/panel = SubResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Fill" type="Panel" parent="Control/Tabs/Input/ToggleGrab/Control/Panel"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Edit" type="Control" parent="Control/Tabs/Input"]
+margin_top = 160.0
+margin_right = 1080.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 0, 80 )
+script = SubResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Tabs/Input/Edit"]
+anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 25.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 15 )
-text = "Action"
+text = "Edit Controls"
 valign = 1
-uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Tabs/Input/List/Key"]
-anchor_left = 0.3
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/Tabs/Input/List/Key/HBoxContainer"]
-margin_left = 81.0
-margin_top = 11.0
-margin_right = 297.0
-margin_bottom = 69.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_horizontal = 6
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
-text = "Keyboard"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="Label" parent="Control/Tabs/Input/List/Key/HBoxContainer"]
-margin_left = 472.0
-margin_top = 11.0
-margin_right = 661.0
-margin_bottom = 69.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_horizontal = 6
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
-text = "Gamepad"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control1" parent="Control/Tabs/Input/List" instance=ExtResource( 10 )]
-margin_top = 80.0
-margin_bottom = 160.0
-
-[node name="Control2" parent="Control/Tabs/Input/List" instance=ExtResource( 10 )]
-margin_top = 160.0
-margin_bottom = 240.0
-action = "down"
-
-[node name="Label" parent="Control/Tabs/Input/List/Control2" index="0"]
-text = "down"
-
-[node name="Control3" parent="Control/Tabs/Input/List" instance=ExtResource( 10 )]
+[node name="Defaults" type="Control" parent="Control/Tabs/Input"]
 margin_top = 240.0
+margin_right = 1080.0
 margin_bottom = 320.0
-action = "left"
+rect_min_size = Vector2( 0, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" parent="Control/Tabs/Input/List/Control3" index="0"]
-text = "left"
+[node name="Label" type="Label" parent="Control/Tabs/Input/Defaults"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Reset to Defaults"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Control4" parent="Control/Tabs/Input/List" instance=ExtResource( 10 )]
+[node name="Test1" type="Control" parent="Control/Tabs/Input"]
 margin_top = 320.0
+margin_right = 1080.0
 margin_bottom = 400.0
-action = "right"
+rect_min_size = Vector2( 0, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" parent="Control/Tabs/Input/List/Control4" index="0"]
-text = "right"
+[node name="Label" type="Label" parent="Control/Tabs/Input/Test1"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Test"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Control5" parent="Control/Tabs/Input/List" instance=ExtResource( 10 )]
+[node name="Test2" type="Control" parent="Control/Tabs/Input"]
 margin_top = 400.0
+margin_right = 1080.0
 margin_bottom = 480.0
-action = "jump"
+rect_min_size = Vector2( 0, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" parent="Control/Tabs/Input/List/Control5" index="0"]
-text = "jump/accept"
+[node name="Label" type="Label" parent="Control/Tabs/Input/Test2"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Test"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Control6" parent="Control/Tabs/Input/List" instance=ExtResource( 10 )]
+[node name="Test3" type="Control" parent="Control/Tabs/Input"]
 margin_top = 480.0
+margin_right = 1080.0
 margin_bottom = 560.0
-action = "grab"
+rect_min_size = Vector2( 0, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" parent="Control/Tabs/Input/List/Control6" index="0"]
-text = "grab/back"
+[node name="Label" type="Label" parent="Control/Tabs/Input/Test3"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Test"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Control7" parent="Control/Tabs/Input/List" instance=ExtResource( 10 )]
+[node name="Test4" type="Control" parent="Control/Tabs/Input"]
 margin_top = 560.0
+margin_right = 1080.0
 margin_bottom = 640.0
-action = "zoom"
+rect_min_size = Vector2( 0, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" parent="Control/Tabs/Input/List/Control7" index="0"]
-text = "zoom"
+[node name="Label" type="Label" parent="Control/Tabs/Input/Test4"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Test"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Control8" parent="Control/Tabs/Input/List" instance=ExtResource( 10 )]
+[node name="Test5" type="Control" parent="Control/Tabs/Input"]
 margin_top = 640.0
+margin_right = 1080.0
 margin_bottom = 720.0
-action = "reset"
+rect_min_size = Vector2( 0, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" parent="Control/Tabs/Input/List/Control8" index="0"]
-text = "reset"
+[node name="Label" type="Label" parent="Control/Tabs/Input/Test5"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Test"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Control9" parent="Control/Tabs/Input/List" instance=ExtResource( 10 )]
+[node name="Test6" type="Control" parent="Control/Tabs/Input"]
 margin_top = 720.0
+margin_right = 1080.0
 margin_bottom = 800.0
-action = "pause"
+rect_min_size = Vector2( 0, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" parent="Control/Tabs/Input/List/Control9" index="0"]
-text = "pause"
+[node name="Label" type="Label" parent="Control/Tabs/Input/Test6"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Test"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Defaults" type="Control" parent="Control/Tabs/Input/List"]
+[node name="Test7" type="Control" parent="Control/Tabs/Input"]
 margin_top = 800.0
 margin_right = 1080.0
 margin_bottom = 880.0
@@ -498,28 +616,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/Tabs/Input/List/Defaults"]
+[node name="Label" type="Label" parent="Control/Tabs/Input/Test7"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 25.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 15 )
-text = "LOAD DEFAULTS"
+text = "Test"
 valign = 1
-uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[editable path="Control/Tabs/Audio/List/SFX"]
-[editable path="Control/Tabs/Audio/List/Music"]
-[editable path="Control/Tabs/Input/List/Control1"]
-[editable path="Control/Tabs/Input/List/Control2"]
-[editable path="Control/Tabs/Input/List/Control3"]
-[editable path="Control/Tabs/Input/List/Control4"]
-[editable path="Control/Tabs/Input/List/Control5"]
-[editable path="Control/Tabs/Input/List/Control6"]
-[editable path="Control/Tabs/Input/List/Control7"]
-[editable path="Control/Tabs/Input/List/Control8"]
-[editable path="Control/Tabs/Input/List/Control9"]
+[editable path="Control/Tabs/Audio/SFX"]
+[editable path="Control/Tabs/Audio/Music"]

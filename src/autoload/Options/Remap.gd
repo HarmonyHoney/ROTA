@@ -69,8 +69,11 @@ var rotate = {"DOWN": 180,
 "JOY 15": 90,}
 
 
-
 func _ready():
+	if action != "":
+		set_keys()
+
+func set_keys():
 	var joy = []
 	var keys = []
 	for i in InputMap.get_action_list(action):

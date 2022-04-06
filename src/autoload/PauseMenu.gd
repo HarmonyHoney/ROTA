@@ -73,7 +73,6 @@ func set_paused(pause := true):
 func press_pause():
 	set_paused(!is_paused)
 
-
 func options():
 	OptionsMenu.show(true)
 	is_paused = false

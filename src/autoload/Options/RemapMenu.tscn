@@ -1,0 +1,236 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/autoload/Options/RemapMenu.gd" type="Script" id=2]
+[ext_resource path="res://src/autoload/Options/Remap.tscn" type="PackedScene" id=3]
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.75, 0.375, 0.38125, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 1, 1, 1, 0.4 )
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="DynamicFont" id=15]
+size = 50
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+pause_mode = 2
+layer = 7
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Panel" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cursor" type="Panel" parent="Control"]
+anchor_right = 1.0
+margin_left = 448.0
+margin_top = 115.0
+margin_right = -682.0
+margin_bottom = 195.0
+rect_min_size = Vector2( 0, 80 )
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Column" type="Panel" parent="Control"]
+visible = false
+anchor_left = 0.35
+anchor_top = 0.05
+anchor_right = 0.61
+anchor_bottom = 0.825
+custom_styles/panel = SubResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="Control" parent="Control"]
+margin_left = 100.0
+margin_top = 35.0
+margin_right = 1180.0
+margin_bottom = 115.0
+rect_min_size = Vector2( 0, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Key"]
+anchor_right = 0.3
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Action"
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Key"]
+anchor_left = 0.3
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Key/HBoxContainer"]
+margin_left = 81.0
+margin_top = 11.0
+margin_right = 297.0
+margin_bottom = 69.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Keyboard"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Control/Key/HBoxContainer"]
+margin_left = 472.0
+margin_top = 11.0
+margin_right = 661.0
+margin_bottom = 69.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Gamepad"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="List" type="Control" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 115.0
+margin_right = -100.0
+margin_bottom = -125.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Items" type="VBoxContainer" parent="Control/List"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 565.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Up" parent="Control/List/Items" instance=ExtResource( 3 )]
+
+[node name="Down" parent="Control/List/Items" instance=ExtResource( 3 )]
+margin_top = 80.0
+margin_bottom = 160.0
+action = "down"
+
+[node name="Label" parent="Control/List/Items/Down" index="0"]
+text = "Down"
+
+[node name="Left" parent="Control/List/Items" instance=ExtResource( 3 )]
+margin_top = 160.0
+margin_bottom = 240.0
+action = "left"
+
+[node name="Label" parent="Control/List/Items/Left" index="0"]
+text = "Left"
+
+[node name="Right" parent="Control/List/Items" instance=ExtResource( 3 )]
+margin_top = 240.0
+margin_bottom = 320.0
+action = "right"
+
+[node name="Label" parent="Control/List/Items/Right" index="0"]
+text = "Right"
+
+[node name="Jump" parent="Control/List/Items" instance=ExtResource( 3 )]
+margin_top = 320.0
+margin_bottom = 400.0
+action = "jump"
+
+[node name="Label" parent="Control/List/Items/Jump" index="0"]
+text = "Jump/Accept"
+
+[node name="Grab" parent="Control/List/Items" instance=ExtResource( 3 )]
+margin_top = 400.0
+margin_bottom = 480.0
+action = "grab"
+
+[node name="Label" parent="Control/List/Items/Grab" index="0"]
+text = "Grab/Back"
+
+[node name="Zoom" parent="Control/List/Items" instance=ExtResource( 3 )]
+margin_top = 480.0
+margin_bottom = 560.0
+action = "zoom"
+
+[node name="Label" parent="Control/List/Items/Zoom" index="0"]
+text = "Zoom"
+
+[node name="Reset" parent="Control/List/Items" instance=ExtResource( 3 )]
+margin_top = 560.0
+margin_bottom = 640.0
+action = "reset"
+
+[node name="Label" parent="Control/List/Items/Reset" index="0"]
+text = "Reset"
+
+[node name="Pause" parent="Control/List/Items" instance=ExtResource( 3 )]
+margin_top = 640.0
+margin_bottom = 720.0
+action = "pause"
+
+[node name="Label" parent="Control/List/Items/Pause" index="0"]
+text = "Pause"
+
+[editable path="Control/List/Items/Up"]
+[editable path="Control/List/Items/Down"]
+[editable path="Control/List/Items/Left"]
+[editable path="Control/List/Items/Right"]
+[editable path="Control/List/Items/Jump"]
+[editable path="Control/List/Items/Grab"]
+[editable path="Control/List/Items/Zoom"]
+[editable path="Control/List/Items/Reset"]
+[editable path="Control/List/Items/Pause"]

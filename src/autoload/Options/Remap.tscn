@@ -31,9 +31,8 @@ margin_left = 25.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 15 )
-text = "up"
+text = "Up"
 valign = 1
-uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
