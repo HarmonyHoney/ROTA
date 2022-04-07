@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/autoload/Options/RemapMenu.gd" type="Script" id=2]
-[ext_resource path="res://src/autoload/Options/Remap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://media/image/box/round_rect200.png" type="Texture" id=3]
 
 [sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0, 0, 0, 0.95 )
@@ -28,6 +28,16 @@ corner_radius_bottom_left = 50
 
 [sub_resource type="DynamicFont" id=15]
 size = 50
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 50
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 25
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -155,78 +165,143 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Up" parent="Control/List/Items" instance=ExtResource( 3 )]
+[node name="Up" type="Control" parent="Control/List/Items"]
+margin_right = 1080.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Down" parent="Control/List/Items" instance=ExtResource( 3 )]
-margin_top = 80.0
-margin_bottom = 160.0
-action = "down"
+[node name="Label" type="Label" parent="Control/List/Items/Up"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 20 )
+text = "Up"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" parent="Control/List/Items/Down" index="0"]
-text = "Down"
+[node name="Keys" type="HBoxContainer" parent="Control/List/Items/Up"]
+anchor_left = 0.3
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Left" parent="Control/List/Items" instance=ExtResource( 3 )]
-margin_top = 160.0
-margin_bottom = 240.0
-action = "left"
+[node name="Key1" type="Control" parent="Control/List/Items/Up/Keys"]
+margin_right = 189.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Label" parent="Control/List/Items/Left" index="0"]
-text = "Left"
+[node name="Sprite" type="Sprite" parent="Control/List/Items/Up/Keys/Key1"]
+position = Vector2( 94, 40 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
 
-[node name="Right" parent="Control/List/Items" instance=ExtResource( 3 )]
-margin_top = 240.0
-margin_bottom = 320.0
-action = "right"
+[node name="Label" type="Label" parent="Control/List/Items/Up/Keys/Key1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 16 )
+text = "/"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" parent="Control/List/Items/Right" index="0"]
-text = "Right"
+[node name="Key2" type="Control" parent="Control/List/Items/Up/Keys"]
+margin_left = 189.0
+margin_right = 378.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Jump" parent="Control/List/Items" instance=ExtResource( 3 )]
-margin_top = 320.0
-margin_bottom = 400.0
-action = "jump"
+[node name="Sprite" type="Sprite" parent="Control/List/Items/Up/Keys/Key2"]
+position = Vector2( 94, 40 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
 
-[node name="Label" parent="Control/List/Items/Jump" index="0"]
-text = "Jump/Accept"
+[node name="Label" type="Label" parent="Control/List/Items/Up/Keys/Key2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 16 )
+text = "/"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Grab" parent="Control/List/Items" instance=ExtResource( 3 )]
-margin_top = 400.0
-margin_bottom = 480.0
-action = "grab"
+[node name="Key3" type="Control" parent="Control/List/Items/Up/Keys"]
+margin_left = 378.0
+margin_right = 567.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Label" parent="Control/List/Items/Grab" index="0"]
-text = "Grab/Back"
+[node name="Sprite" type="Sprite" parent="Control/List/Items/Up/Keys/Key3"]
+position = Vector2( 94, 40 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
 
-[node name="Zoom" parent="Control/List/Items" instance=ExtResource( 3 )]
-margin_top = 480.0
-margin_bottom = 560.0
-action = "zoom"
+[node name="Label" type="Label" parent="Control/List/Items/Up/Keys/Key3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 16 )
+text = "/"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" parent="Control/List/Items/Zoom" index="0"]
-text = "Zoom"
+[node name="Key4" type="Control" parent="Control/List/Items/Up/Keys"]
+margin_left = 567.0
+margin_right = 756.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Reset" parent="Control/List/Items" instance=ExtResource( 3 )]
-margin_top = 560.0
-margin_bottom = 640.0
-action = "reset"
+[node name="Sprite" type="Sprite" parent="Control/List/Items/Up/Keys/Key4"]
+position = Vector2( 94, 40 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
 
-[node name="Label" parent="Control/List/Items/Reset" index="0"]
-text = "Reset"
-
-[node name="Pause" parent="Control/List/Items" instance=ExtResource( 3 )]
-margin_top = 640.0
-margin_bottom = 720.0
-action = "pause"
-
-[node name="Label" parent="Control/List/Items/Pause" index="0"]
-text = "Pause"
-
-[editable path="Control/List/Items/Up"]
-[editable path="Control/List/Items/Down"]
-[editable path="Control/List/Items/Left"]
-[editable path="Control/List/Items/Right"]
-[editable path="Control/List/Items/Jump"]
-[editable path="Control/List/Items/Grab"]
-[editable path="Control/List/Items/Zoom"]
-[editable path="Control/List/Items/Reset"]
-[editable path="Control/List/Items/Pause"]
+[node name="Label" type="Label" parent="Control/List/Items/Up/Keys/Key4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 16 )
+text = "/"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
