@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/autoload/Options/Volume.tscn" type="PackedScene" id=2]
@@ -132,6 +132,15 @@ font_data = ExtResource( 1 )
 script/source = "extends Control
 
 func act():
+	RemapMenu.is_gamepad = false
+	RemapMenu.show()
+"
+
+[sub_resource type="GDScript" id=22]
+script/source = "extends Control
+
+func act():
+	RemapMenu.is_gamepad = true
 	RemapMenu.show()
 "
 
@@ -516,7 +525,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Edit" type="Control" parent="Control/Tabs/Input"]
+[node name="Keyboard" type="Control" parent="Control/Tabs/Input"]
 margin_top = 240.0
 margin_right = 1080.0
 margin_bottom = 320.0
@@ -526,7 +535,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/Tabs/Input/Edit"]
+[node name="Label" type="Label" parent="Control/Tabs/Input/Keyboard"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 25.0
@@ -539,10 +548,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Defaults" type="Control" parent="Control/Tabs/Input"]
+[node name="Gamepad" type="Control" parent="Control/Tabs/Input"]
 margin_top = 320.0
 margin_right = 1080.0
 margin_bottom = 400.0
+rect_min_size = Vector2( 0, 80 )
+script = SubResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Tabs/Input/Gamepad"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Gamepad Setup"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Defaults" type="Control" parent="Control/Tabs/Input"]
+margin_top = 400.0
+margin_right = 1080.0
+margin_bottom = 480.0
 rect_min_size = Vector2( 0, 80 )
 script = SubResource( 20 )
 __meta__ = {
@@ -563,9 +595,9 @@ __meta__ = {
 }
 
 [node name="Test1" type="Control" parent="Control/Tabs/Input"]
-margin_top = 400.0
+margin_top = 480.0
 margin_right = 1080.0
-margin_bottom = 480.0
+margin_bottom = 560.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -585,9 +617,9 @@ __meta__ = {
 }
 
 [node name="Test2" type="Control" parent="Control/Tabs/Input"]
-margin_top = 480.0
+margin_top = 560.0
 margin_right = 1080.0
-margin_bottom = 560.0
+margin_bottom = 640.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -607,9 +639,9 @@ __meta__ = {
 }
 
 [node name="Test3" type="Control" parent="Control/Tabs/Input"]
-margin_top = 560.0
+margin_top = 640.0
 margin_right = 1080.0
-margin_bottom = 640.0
+margin_bottom = 720.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -629,9 +661,9 @@ __meta__ = {
 }
 
 [node name="Test4" type="Control" parent="Control/Tabs/Input"]
-margin_top = 640.0
+margin_top = 720.0
 margin_right = 1080.0
-margin_bottom = 720.0
+margin_bottom = 800.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -651,9 +683,9 @@ __meta__ = {
 }
 
 [node name="Test5" type="Control" parent="Control/Tabs/Input"]
-margin_top = 720.0
+margin_top = 800.0
 margin_right = 1080.0
-margin_bottom = 800.0
+margin_bottom = 880.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -673,9 +705,9 @@ __meta__ = {
 }
 
 [node name="Test6" type="Control" parent="Control/Tabs/Input"]
-margin_top = 800.0
+margin_top = 880.0
 margin_right = 1080.0
-margin_bottom = 880.0
+margin_bottom = 960.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -695,9 +727,9 @@ __meta__ = {
 }
 
 [node name="Test7" type="Control" parent="Control/Tabs/Input"]
-margin_top = 880.0
+margin_top = 960.0
 margin_right = 1080.0
-margin_bottom = 960.0
+margin_bottom = 1040.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false

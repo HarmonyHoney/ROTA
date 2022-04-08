@@ -74,6 +74,8 @@ var events = {}
 onready var row := $Control/List/Base/Row
 onready var key := $Control/List/Base/Key
 
+export var is_gamepad := false
+
 func _ready():
 	open.from = Vector2(0, 720)
 	open.to = Vector2.ZERO
@@ -85,7 +87,7 @@ func _ready():
 	
 	$Control/List/Base.visible = false
 	
-	
+	# create items
 	for i in actions.size():
 		var r = row.duplicate()
 		items_node.add_child(r)
@@ -93,6 +95,7 @@ func _ready():
 		r.get_node("Label").text = actions.keys()[i]
 	items = items_node.get_children()
 	
+	# create keys
 	for i in items.size():
 		create_keys(i)
 	
@@ -103,7 +106,7 @@ func _input(event):
 	if is_prompt:
 		if event.is_action_pressed("ui_pause"):
 			is_prompt = false
-		elif event is InputEventKey and event.is_pressed():
+		elif event.is_pressed() and is_type(event):
 			assign_key(actions.values()[cursor], event)
 			is_prompt = false
 			get_tree().set_input_as_handled()
@@ -169,6 +172,11 @@ func show(arg := true):
 	if is_open:
 		cursor = 0
 		scroll = 0
+		
+		# create keys
+		for i in items.size():
+			remove_keys(i)
+			create_keys(i)
 
 func set_cursor(arg := 0):
 	cursor = clamp(arg, 0, items.size() - 1)
@@ -177,7 +185,7 @@ func set_cursor(arg := 0):
 		scroll = max(0, cursor - (0 if cursor < scroll else 5))
 
 func draw_key(key_node, event):
-	if !(event is InputEventKey): return
+	if !is_type(event): return
 	
 	var label = key_node.get_node("Label")
 	var sprite = key_node.get_node("CenterContainer/Control/Sprite")
@@ -185,6 +193,9 @@ func draw_key(key_node, event):
 	var s = ""
 	if event is InputEventJoypadButton:
 		s = "JOY " + str(event.button_index)
+	elif event is InputEventJoypadMotion:
+		var sgn = "+" if event.axis_value > 0 else "-"
+		s = "AXIS " + str(event.axis) + sgn
 	elif event is InputEvent:
 		s = str(event.as_text().to_upper())
 	
@@ -204,16 +215,18 @@ func draw_key(key_node, event):
 			sprite.texture = tex["KEY"]
 		else:
 			sprite.texture = tex["KEY_2"]
-	
 
-func clear_row(row := 0):
+func remove_keys(row := 0):
 	for i in items[row].get_node("Keys").get_children():
 		i.queue_free()
+
+func clear_row(row := 0):
+	remove_keys(row)
 	
 	var action = actions.values()[row]
 	
 	for i in InputMap.get_action_list(action):
-		if i is InputEventKey:
+		if is_type(i):
 			InputMap.action_erase_event(action, i)
 	
 
@@ -230,8 +243,17 @@ func create_keys(row):
 		i.queue_free()
 	
 	for i in InputMap.get_action_list(action):
-		if i is InputEventKey:
+		if is_type(i):
 			var k = key.duplicate()
 			r.get_node("Keys").add_child(k)
 			
 			draw_key(k, i)
+
+func is_type(event):
+	var test = !is_gamepad and event is InputEventKey
+	if !test:
+		test = is_gamepad and (event is InputEventJoypadButton or event is InputEventJoypadMotion)
+	
+	return test
+	
+	pass
