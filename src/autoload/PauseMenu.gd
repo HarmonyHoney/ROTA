@@ -27,18 +27,18 @@ func _ready():
 	Wipe.connect("start_wipe_out", self, "start_wipe_out")
 
 func _input(event):
-	var pause = event.is_action_pressed("pause")
+	var pause = event.is_action_pressed("ui_pause")
 	if pause:
 		press_pause()
 		return
 	if !is_paused: return
 	
-	var up = event.is_action_pressed("up")
-	var down = event.is_action_pressed("down")
+	var up = event.is_action_pressed("ui_up")
+	var down = event.is_action_pressed("ui_down")
 	#var left = event.is_action_pressed("left")
 	#var right = event.is_action_pressed("right")
-	var enter = event.is_action_pressed("jump")
-	var back = event.is_action_pressed("grab")
+	var enter = event.is_action_pressed("ui_accept")
+	var back = event.is_action_pressed("ui_cancel")
 	
 	if up or down:
 		cursor = clamp(cursor + (-1 if up else 1), 0, items.size() - 1)

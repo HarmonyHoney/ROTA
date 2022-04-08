@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/autoload/Options/RemapMenu.gd" type="Script" id=2]
@@ -41,11 +41,18 @@ size = 25
 use_filter = true
 font_data = ExtResource( 1 )
 
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
 [node name="RemapMenu" type="CanvasLayer"]
 pause_mode = 2
 layer = 7
 script = ExtResource( 2 )
-cursor_margin = Vector2( -30, 0 )
+cursor_margin = Vector2( 0, 0 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 1280.0
@@ -94,19 +101,20 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Control/Header"]
-anchor_right = 0.3
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 25.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 15 )
-text = "Action"
+text = "Press X to add button, Del to clear"
+align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Header"]
+visible = false
 anchor_left = 0.3
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -155,17 +163,15 @@ margin_top = 115.0
 margin_right = -100.0
 margin_bottom = -125.0
 rect_clip_content = true
-
-[node name="Items" type="VBoxContainer" parent="Control/List"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 565.0
-custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Up" type="Control" parent="Control/List/Items"]
+[node name="Base" type="Control" parent="Control/List"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Row" type="Control" parent="Control/List/Base"]
 margin_right = 1080.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
@@ -173,7 +179,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/List/Items/Up"]
+[node name="Label" type="Label" parent="Control/List/Base/Row"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 25.0
@@ -186,7 +192,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Keys" type="HBoxContainer" parent="Control/List/Items/Up"]
+[node name="Keys" type="HBoxContainer" parent="Control/List/Base/Row"]
 anchor_left = 0.3
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -195,74 +201,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key1" type="Control" parent="Control/List/Items/Up/Keys"]
-margin_right = 189.0
+[node name="Key" type="Control" parent="Control/List/Base"]
+margin_left = 324.0
+margin_right = 1080.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Sprite" type="Sprite" parent="Control/List/Items/Up/Keys/Key1"]
-position = Vector2( 94, 40 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="Control/List/Items/Up/Keys/Key1"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_horizontal = 6
-size_flags_vertical = 6
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 16 )
-text = "/"
-align = 1
-valign = 1
-uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key2" type="Control" parent="Control/List/Items/Up/Keys"]
-margin_left = 189.0
-margin_right = 378.0
-margin_bottom = 80.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Sprite" type="Sprite" parent="Control/List/Items/Up/Keys/Key2"]
-position = Vector2( 94, 40 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="Control/List/Items/Up/Keys/Key2"]
+[node name="CenterContainer" type="CenterContainer" parent="Control/List/Base/Key"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_horizontal = 6
-size_flags_vertical = 6
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 16 )
-text = "/"
-align = 1
-valign = 1
-uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key3" type="Control" parent="Control/List/Items/Up/Keys"]
+[node name="Control" type="Control" parent="Control/List/Base/Key/CenterContainer"]
 margin_left = 378.0
-margin_right = 567.0
-margin_bottom = 80.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+margin_top = 40.0
+margin_right = 378.0
+margin_bottom = 40.0
 
-[node name="Sprite" type="Sprite" parent="Control/List/Items/Up/Keys/Key3"]
-position = Vector2( 94, 40 )
+[node name="Sprite" type="Sprite" parent="Control/List/Base/Key/CenterContainer/Control"]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="Control/List/Items/Up/Keys/Key3"]
+[node name="Label" type="Label" parent="Control/List/Base/Key"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
@@ -270,7 +236,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 16 )
-text = "/"
+text = "W"
 align = 1
 valign = 1
 uppercase = true
@@ -278,30 +244,76 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key4" type="Control" parent="Control/List/Items/Up/Keys"]
-margin_left = 567.0
-margin_right = 756.0
-margin_bottom = 80.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Sprite" type="Sprite" parent="Control/List/Items/Up/Keys/Key4"]
-position = Vector2( 94, 40 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="Control/List/Items/Up/Keys/Key4"]
+[node name="Items" type="VBoxContainer" parent="Control/List"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = 565.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prompt" type="Panel" parent="Control"]
+self_modulate = Color( 1, 1, 1, 0.95 )
+anchor_left = 0.3
+anchor_top = 0.3
+anchor_right = 0.7
+anchor_bottom = 0.7
+margin_right = 40.0
+margin_bottom = 40.0
+custom_styles/panel = SubResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Prompt"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prompt" type="Label" parent="Control/Prompt/VBoxContainer"]
+margin_right = 552.0
+margin_bottom = 109.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_horizontal = 6
-size_flags_vertical = 6
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 16 )
-text = "/"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 15 )
+text = "Press new key for:"
 align = 1
 valign = 1
-uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="Label" parent="Control/Prompt/VBoxContainer"]
+margin_top = 109.0
+margin_right = 552.0
+margin_bottom = 218.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 15 )
+text = "Up"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Label" parent="Control/Prompt/VBoxContainer"]
+margin_top = 218.0
+margin_right = 552.0
+margin_bottom = 328.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 15 )
+text = "5"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

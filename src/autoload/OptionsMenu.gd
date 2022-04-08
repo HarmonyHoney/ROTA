@@ -34,7 +34,7 @@ func _ready():
 func _input(event):
 	if !is_open: return
 	joy_last = joy
-	joy = Input.get_vector("left", "right", "up", "down").round()
+	joy = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").round()
 	
 	# cursor
 	if joy.y != 0 and joy.y != joy_last.y:
@@ -50,13 +50,13 @@ func _input(event):
 		elif items[cursor].has_method("axis_x"):
 			items[cursor].axis_x(joy.x)
 	
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("ui_accept"):
 		if cursor != -1:
 			if items[cursor].has_method("act"):
 				items[cursor].act()
 	
 	# exit
-	if event.is_action_pressed("grab"):
+	if event.is_action_pressed("ui_cancel"):
 		get_tree().set_input_as_handled()
 		#yield(get_tree(), "idle_frame")
 		show(false)

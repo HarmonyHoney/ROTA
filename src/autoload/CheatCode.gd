@@ -3,10 +3,10 @@ extends Node
 var actions := []
 var history := []
 
-var codes := {"konami code": "up, up, down, down, left, right, left, right, push, jump",
+var codes := {"konami code": "up, up, down, down, left, right, left, right, grab, jump",
 	"big hair": "up, right, down, left, up, right, down, left, up, left, down, right, up, left, down, right",
 	"moon jump": "up, up, up, up, up, up, up, down, up, up, up, up, up, up, up, down",
-	"collect": "up, up, up, down, left, left, left, right, push, jump"}
+	"collect": "up, up, up, down, left, left, left, right, grab, jump"}
 
 signal activate(cheat)
 

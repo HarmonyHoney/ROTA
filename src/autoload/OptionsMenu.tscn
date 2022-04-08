@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/autoload/Options/Volume.tscn" type="PackedScene" id=2]
@@ -112,18 +112,35 @@ func act():
 	fill.visible = !fill.visible
 "
 
-[sub_resource type="GDScript" id=17]
+[sub_resource type="GDScript" id=21]
 script/source = "extends Control
 
+var cursor = 0
+var stick = [\"Left Stick\", \"Right Stick\", \"Both\"]
 
-func act():
-	RemapMenu.show()
+func axis_x(arg):
+	cursor = clamp(cursor + arg, 0, 2)
+	$Label2.text = stick[cursor]
 "
 
 [sub_resource type="DynamicFont" id=15]
 size = 50
 use_filter = true
 font_data = ExtResource( 1 )
+
+[sub_resource type="GDScript" id=17]
+script/source = "extends Control
+
+func act():
+	RemapMenu.show()
+"
+
+[sub_resource type="GDScript" id=20]
+script/source = "extends Control
+
+func act():
+	InputMap.load_from_globals()
+"
 
 [node name="OptionsMenu" type="CanvasLayer"]
 pause_mode = 2
@@ -461,10 +478,48 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Edit" type="Control" parent="Control/Tabs/Input"]
+[node name="Stick" type="Control" parent="Control/Tabs/Input"]
 margin_top = 160.0
 margin_right = 1080.0
 margin_bottom = 240.0
+rect_min_size = Vector2( 0, 80 )
+script = SubResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Tabs/Input/Stick"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Analog Stick"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Control/Tabs/Input/Stick"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 15 )
+text = "Left Stick"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Edit" type="Control" parent="Control/Tabs/Input"]
+margin_top = 240.0
+margin_right = 1080.0
+margin_bottom = 320.0
 rect_min_size = Vector2( 0, 80 )
 script = SubResource( 17 )
 __meta__ = {
@@ -478,17 +533,18 @@ margin_left = 25.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 15 )
-text = "Edit Controls"
+text = "Keyboard Setup"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Defaults" type="Control" parent="Control/Tabs/Input"]
-margin_top = 240.0
+margin_top = 320.0
 margin_right = 1080.0
-margin_bottom = 320.0
+margin_bottom = 400.0
 rect_min_size = Vector2( 0, 80 )
+script = SubResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -507,9 +563,9 @@ __meta__ = {
 }
 
 [node name="Test1" type="Control" parent="Control/Tabs/Input"]
-margin_top = 320.0
+margin_top = 400.0
 margin_right = 1080.0
-margin_bottom = 400.0
+margin_bottom = 480.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -529,9 +585,9 @@ __meta__ = {
 }
 
 [node name="Test2" type="Control" parent="Control/Tabs/Input"]
-margin_top = 400.0
+margin_top = 480.0
 margin_right = 1080.0
-margin_bottom = 480.0
+margin_bottom = 560.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -551,9 +607,9 @@ __meta__ = {
 }
 
 [node name="Test3" type="Control" parent="Control/Tabs/Input"]
-margin_top = 480.0
+margin_top = 560.0
 margin_right = 1080.0
-margin_bottom = 560.0
+margin_bottom = 640.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -573,9 +629,9 @@ __meta__ = {
 }
 
 [node name="Test4" type="Control" parent="Control/Tabs/Input"]
-margin_top = 560.0
+margin_top = 640.0
 margin_right = 1080.0
-margin_bottom = 640.0
+margin_bottom = 720.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -595,9 +651,9 @@ __meta__ = {
 }
 
 [node name="Test5" type="Control" parent="Control/Tabs/Input"]
-margin_top = 640.0
+margin_top = 720.0
 margin_right = 1080.0
-margin_bottom = 720.0
+margin_bottom = 800.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -617,9 +673,9 @@ __meta__ = {
 }
 
 [node name="Test6" type="Control" parent="Control/Tabs/Input"]
-margin_top = 720.0
+margin_top = 800.0
 margin_right = 1080.0
-margin_bottom = 800.0
+margin_bottom = 880.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -639,9 +695,9 @@ __meta__ = {
 }
 
 [node name="Test7" type="Control" parent="Control/Tabs/Input"]
-margin_top = 800.0
+margin_top = 880.0
 margin_right = 1080.0
-margin_bottom = 880.0
+margin_bottom = 960.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false

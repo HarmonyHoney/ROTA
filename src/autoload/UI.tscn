@@ -166,9 +166,13 @@ __meta__ = {
 }
 
 [node name="Bottom" type="Control" parent="Control"]
+visible = false
 margin_top = 720.0
 margin_right = 40.0
 margin_bottom = 760.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Jump" type="Control" parent="Control/Bottom"]
 margin_left = 1280.0
@@ -258,6 +262,93 @@ margin_bottom = -79.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "SPIN"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI_Bottom" type="Control" parent="Control"]
+margin_top = 720.0
+margin_right = 40.0
+margin_bottom = 760.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DPad" type="Control" parent="Control/UI_Bottom"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Control/UI_Bottom/DPad"]
+position = Vector2( 64, -64 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+
+[node name="Move" type="Label" parent="Control/UI_Bottom/DPad"]
+margin_left = 106.0
+margin_top = -109.0
+margin_right = 298.0
+margin_bottom = -13.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Select"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jump" type="Control" parent="Control/UI_Bottom"]
+margin_left = 1280.0
+margin_right = 1320.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Control/UI_Bottom/Jump"]
+position = Vector2( -64, -64 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="Control/UI_Bottom/Jump"]
+margin_left = -296.882
+margin_top = -109.0
+margin_right = -104.882
+margin_bottom = -13.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Accept"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grab" type="Control" parent="Control/UI_Bottom"]
+margin_left = 1022.38
+margin_right = 1062.38
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Control/UI_Bottom/Grab"]
+position = Vector2( -64, -64 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 8 )
+
+[node name="Label" type="Label" parent="Control/UI_Bottom/Grab"]
+margin_left = -296.882
+margin_top = -109.0
+margin_right = -104.882
+margin_bottom = -13.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Back"
+align = 2
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false

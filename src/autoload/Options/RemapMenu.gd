@@ -12,7 +12,6 @@ var open = EaseMover.new()
 
 var scroll := 0
 var cursor := 0 setget set_cursor
-var cursor_x := 0 setget set_cursor_x
 export var cursor_margin := Vector2(-50, 0)
 
 var joy := Vector2.ZERO
@@ -20,15 +19,14 @@ var joy_last := Vector2.ZERO
 
 var grid := {}
 
-var actions = {"Up": "up",
-"Down": "down",
-"Left": "left",
-"Right": "right",
-"Jump/Accept": "jump",
-"Grab/Back": "grab",
+var actions = {"Move Left": "left",
+"Move Right": "right",
+"Turn Box+": "up",
+"Turn Box-": "down",
+"Jump": "jump",
+"Grab": "grab",
 "Zoom": "zoom",
-"Reset": "reset",
-"Pause": "pause",}
+"Reset": "reset",}
 
 var tex = {"JOY 0": preload("res://media/image/UI/btn_a.png"),
 "JOY 1": preload("res://media/image/UI/btn_b.png"),
@@ -63,57 +61,93 @@ var rotate = {"DOWN": 180,
 "JOY 14": 270,
 "JOY 15": 90,}
 
+var prompt := EaseMover.new()
+var is_prompt := false
+onready var prompt_key := $Control/Prompt/VBoxContainer/Key
+onready var prompt_timer_label := $Control/Prompt/VBoxContainer/Timer
+var prompt_clock := 0.0
+var prompt_time := 5.0
+var is_button := false
+
+var events = {}
+
+onready var row := $Control/List/Base/Row
+onready var key := $Control/List/Base/Key
+
 func _ready():
 	open.from = Vector2(0, 720)
 	open.to = Vector2.ZERO
 	open.node = control
 	
-	# create rows
-	var u = items_node.get_child(0)
-	for i in actions.size() - 1:
-		var dup = u.duplicate()
-		items_node.add_child(dup)
+	prompt.node = $Control/Prompt
+	prompt.to = prompt.node.rect_position
+	prompt.from = Vector2(prompt.to.x, 720)
+	
+	$Control/List/Base.visible = false
+	
+	
+	for i in actions.size():
+		var r = row.duplicate()
+		items_node.add_child(r)
+		
+		r.get_node("Label").text = actions.keys()[i]
 	items = items_node.get_children()
 	
-	# setup rows
-	for y in items.size():
-		items[y].get_node("Label").text = actions.keys()[y]
-		
-		# fill grid dict
-		var k = items[y].get_node("Keys")
-		for x in k.get_child_count():
-			grid[Vector2(x, y)] = k.get_child(x)
-		
-		set_keys(y)
+	for i in items.size():
+		create_keys(i)
 	
-	#print(grid)
 
 func _input(event):
 	if !is_open: return
 	
-	joy_last = joy
-	joy = Input.get_vector("left", "right", "up", "down").round()
-	
-	if joy.y != 0 and joy.y != joy_last.y:
-		self.cursor += joy.y
-	
-	if joy.x != 0 and joy.x != joy_last.x:
-		self.cursor_x += joy.x
-	
-	
-	# exit
-	if event.is_action("grab"):
-		get_tree().set_input_as_handled()
-		show(false)
+	if is_prompt:
+		if event.is_action_pressed("ui_pause"):
+			is_prompt = false
+		elif event is InputEventKey and event.is_pressed():
+			assign_key(actions.values()[cursor], event)
+			is_prompt = false
+			get_tree().set_input_as_handled()
+		
+	else:
+		joy_last = joy
+		joy = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").round()
+		
+		# move cursor
+		if joy.y != 0 and joy.y != joy_last.y:
+			self.cursor += joy.y
+		
+		# open prompt
+		elif event.is_action_pressed("ui_accept"):
+			is_prompt = true
+			prompt_key.text = actions.keys()[cursor]
+			prompt_clock = prompt_time
+			get_tree().set_input_as_handled()
+		
+		# clear key
+		elif event.is_action_pressed("ui_end"):
+			clear_row(cursor)
+			pass
+		
+		# exit
+		elif event.is_action_pressed("ui_cancel"):
+			get_tree().set_input_as_handled()
+			show(false)
 
 func _physics_process(delta):
+	if is_prompt:
+		prompt_clock -= delta
+		prompt_timer_label.text = str(ceil(max(0, prompt_clock)))
+		
+		if prompt_clock < 0:
+			is_prompt = false
 	
 	# ease mover
 	open.move(delta, is_open)
+	prompt.move(delta, is_prompt)
 	
+	if open.clock == 0: return
 	
-	
-	var target = grid[Vector2(cursor_x, cursor)]
+	var target = items[cursor]
 	
 	# position
 	var cg = cursor_node.rect_global_position
@@ -130,8 +164,11 @@ func _physics_process(delta):
 
 func show(arg := true):
 	is_open = arg
-	#control.visible = is_open
 	OptionsMenu.is_open = !is_open
+	
+	if is_open:
+		cursor = 0
+		scroll = 0
 
 func set_cursor(arg := 0):
 	cursor = clamp(arg, 0, items.size() - 1)
@@ -139,61 +176,62 @@ func set_cursor(arg := 0):
 	if cursor < scroll or cursor > 5 + scroll:
 		scroll = max(0, cursor - (0 if cursor < scroll else 5))
 
-func set_cursor_x(arg := 0):
-	cursor_x = clamp(arg, 0, 3)
+func draw_key(key_node, event):
+	if !(event is InputEventKey): return
+	
+	var label = key_node.get_node("Label")
+	var sprite = key_node.get_node("CenterContainer/Control/Sprite")
+	
+	var s = ""
+	if event is InputEventJoypadButton:
+		s = "JOY " + str(event.button_index)
+	elif event is InputEvent:
+		s = str(event.as_text().to_upper())
+	
+	# sprite
+	if tex.has(s):
+		label.visible = false
+		
+		sprite.texture = tex[s]
+		if rotate.has(s):
+			sprite.rotation_degrees = rotate[s]
+	
+	# text over key
+	else:
+		label.text = s
+		
+		if s.length() < 2:
+			sprite.texture = tex["KEY"]
+		else:
+			sprite.texture = tex["KEY_2"]
+	
 
-func set_keys(row := 0):
-	var joy = []
-	var keys = []
-	for i in InputMap.get_action_list(actions.values()[row]):
-		if i is InputEventJoypadButton or i is InputEventJoypadMotion:
-			joy.append(i)
-		else:
-			keys.append(i)
+func clear_row(row := 0):
+	for i in items[row].get_node("Keys").get_children():
+		i.queue_free()
 	
-	var a = []
-	for i in 2:
-		if i < keys.size():
-			a.append(keys[i])
-		else:
-			a.append("")
-	a.append_array(joy)
+	var action = actions.values()[row]
 	
-	for i in 4:
-		var s = ""
-		if i < a.size():
-			if a[i] is InputEventJoypadButton:
-				s = "JOY " + str(a[i].button_index)
-			elif a[i] is InputEventJoypadMotion:
-				var av = a[i].axis_value
-				var sgn = "+" if av > 0 else "-"
-				s = "AXIS " + str(a[i].axis) + sgn
-			elif a[i] is InputEvent:
-				s = str(a[i].as_text().to_upper())
-		
-		var label = grid[Vector2(i, row)].get_node("Label")
-		label.visible = true
-		var spr = grid[Vector2(i, row)].get_node("Sprite")
-		spr.visible = true
-		
-		# no text
-		if s == "":
-			label.visible = false
-			spr.visible = false
-		
-		# sprite
-		elif tex.has(s):
-			label.visible = false
+	for i in InputMap.get_action_list(action):
+		if i is InputEventKey:
+			InputMap.action_erase_event(action, i)
+	
+
+func assign_key(action, event):
+	InputMap.action_add_event(action, event)
+	
+	create_keys(cursor)
+
+func create_keys(row):
+	var r = items[row]
+	var action = actions.values()[row]
+	
+	for i in r.get_node("Keys").get_children():
+		i.queue_free()
+	
+	for i in InputMap.get_action_list(action):
+		if i is InputEventKey:
+			var k = key.duplicate()
+			r.get_node("Keys").add_child(k)
 			
-			spr.texture = tex[s]
-			if rotate.has(s):
-				spr.rotation_degrees = rotate[s]
-		
-		# text over key
-		else:
-			label.text = s
-			
-			if s.length() < 2:
-				spr.texture = tex["KEY"]
-			else:
-				spr.texture = tex["KEY_2"]
+			draw_key(k, i)
