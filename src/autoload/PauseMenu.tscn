@@ -1,24 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/autoload/PauseMenu.gd" type="Script" id=4]
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0, 0, 0, 0.5 )
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-shadow_size = 50
-shadow_offset = Vector2( 50, 50 )
-
 [sub_resource type="DynamicFont" id=1]
 size = 110
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.75, 0.375, 0.38125, 1 )
+bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -41,12 +32,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BG" type="ColorRect" parent="Control"]
+modulate = Color( 1, 1, 1, 0.3 )
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Menu" type="Panel" parent="Control"]
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.3
 anchor_top = 0.2
 anchor_right = 0.7
 anchor_bottom = 0.8
-custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -78,6 +78,7 @@ margin_left = 136.0
 margin_bottom = 5.8
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
+"_edit_use_anchors_": false,
 "_editor_description_": ""
 }
 
@@ -101,7 +102,7 @@ margin_right = 370.0
 margin_bottom = 80.0
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
-text = "RESUME"
+text = "Resume"
 align = 1
 valign = 1
 __meta__ = {
@@ -121,7 +122,7 @@ margin_right = 389.0
 margin_bottom = 80.0
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
-text = "OPTIONS"
+text = "Options"
 align = 1
 valign = 1
 __meta__ = {
@@ -141,7 +142,7 @@ margin_right = 332.0
 margin_bottom = 81.0
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 2 )
-text = "EXIT"
+text = "Exit"
 align = 1
 valign = 1
 __meta__ = {

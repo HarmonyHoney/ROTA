@@ -1,15 +1,11 @@
 extends CanvasLayer
 
 onready var control := $Control
-onready var cursor_node := $Control/Cursor
-onready var list_node := $Control/Tabs
+onready var cursor_node := $Control/Menu/Cursor
+onready var menu := $Control/Menu/
 
-var tab := 0 setget set_tab
-onready var tabs := $Control/Tabs.get_children()
-onready var headers := $Control/Header.get_children()
-
-onready var items_node = tabs[tab]
-onready var items = tabs[tab].get_children()
+onready var items_node = $Control/Menu/List
+var items := []
 
 var is_open := false
 var scroll := 0
@@ -18,103 +14,73 @@ var cursor := 0 setget set_cursor
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
 
-export var header_margin := Vector2(-20, 20)
-
 var open = EaseMover.new()
 
 func _ready():
 	#control.visible = false
-	
-	
+
 	open.node = control
 	open.to = Vector2.ZERO
 	open.from = Vector2(0, 720)
 	
+	for i in items_node.get_children():
+		if !i.is_in_group("no_item"):
+			items.append(i)
 
 func _input(event):
 	if !is_open: return
 	joy_last = joy
 	joy = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").round()
-	
+
 	# cursor
 	if joy.y != 0 and joy.y != joy_last.y:
 		self.cursor += joy.y
-	
+
 	# left and right
 	if joy.x != 0 and joy.x != joy_last.x:
-		# headers
-		if cursor == -1:
-			self.tab += joy.x
-		
-		# option
-		elif items[cursor].has_method("axis_x"):
+		if items[cursor].has_method("axis_x"):
 			items[cursor].axis_x(joy.x)
-	
+
 	if event.is_action_pressed("ui_accept"):
-		if cursor != -1:
-			if items[cursor].has_method("act"):
-				items[cursor].act()
-	
+		if items[cursor].has_method("act"):
+			items[cursor].act()
+
 	# exit
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().set_input_as_handled()
 		#yield(get_tree(), "idle_frame")
 		show(false)
-	
+
 
 func _physics_process(delta):
+	open.count(delta, is_open)
+	control.modulate.a = lerp(0.0, 1.0, open.clock / open.time)
 	
-	open.move(delta, is_open)
+	control.visible = open.clock > 0
 	
 	if !is_open: return
 	
-	if cursor == -1:
-		cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(headers[tab].rect_global_position - header_margin, 0.15)
-		cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(headers[tab].rect_size + (header_margin * 2.0), 0.15)
-	else:
-		cursor_node.rect_position = cursor_node.rect_position.linear_interpolate(list_node.rect_position + items[cursor - scroll].rect_position, 0.15)
-		cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size, 0.15)
+	# cursor
+	cursor_node.rect_position = cursor_node.rect_position.linear_interpolate(items_node.rect_position + items[cursor - scroll].rect_position, 0.15)
+	cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size, 0.15)
 	
 	# scroll
-	items_node.rect_position = items_node.rect_position.linear_interpolate(Vector2(0, 80) * -scroll, 0.15)
+	menu.rect_position.y = lerp(menu.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
+	
 
 func show(arg := true):
 	is_open = arg
 	#control.visible = is_open
-	
+
 	PauseMenu.is_paused = !is_open
 	UI.gem.show = !is_open
-	
+
 	if is_open:
-		self.tab = 0
+		self.cursor = 0
 
 func set_cursor(arg := 0):
-	cursor = clamp(arg, -1, items.size() - 1)
-	
-	if cursor < scroll or cursor > 4 + scroll:
-		scroll = max(0, cursor - (0 if cursor < scroll else 4))
+	cursor = clamp(arg, 0, items.size() - 1)
 
-func set_tab(arg := 0):
-	tab = clamp(arg, 0, tabs.size() - 1)
-	cursor = -1
-	scroll = 0
-	
-	# header
-	for i in headers.size():
-		headers[i].modulate.a = 1.0 if i == tab else 0.5
-	
-	# visible
-	for i in tabs.size():
-		tabs[i].visible = i == tab
-	
-	# ready
-	for i in tabs[tab].get_children():
-		if i.has_method("_ready"):
-			i._ready()
-	
-	# items
-	items_node = tabs[tab]
-	items = items_node.get_children()
-	
-	
+	#if cursor < scroll or cursor > 4 + scroll:
+	#	scroll = max(0, cursor - (0 if cursor < scroll else 4))
 

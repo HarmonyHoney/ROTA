@@ -1,11 +1,12 @@
 extends CanvasLayer
 
+onready var control := $Control
 onready var menu = $Control/Menu
 onready var cursor_node = $Control/Menu/List/Cursor
 onready var items_node = $Control/Menu/List/Items
 
 var is_paused := false
-var cursor := 0
+var cursor := 0 setget set_cursor
 var cursor_margin := Vector2(30, 0)
 
 var items = []
@@ -13,11 +14,17 @@ var labels = []
 
 var open = EaseMover.new()
 
+var highlight_color := Color("bf6061")
+#onready var bg := $BG
+
 func _ready():
 	open.node = $Control
 	open.from = Vector2(0, 720)
 	open.to = Vector2.ZERO
+	open.time = 0.25
 	
+	#open.node.visible = false
+	#menu.visible = false
 	
 	items = items_node.get_children()
 	for i in items:
@@ -25,6 +32,8 @@ func _ready():
 	
 	Wipe.connect("wipe_out", self, "wipe_out")
 	Wipe.connect("start_wipe_out", self, "start_wipe_out")
+	
+	self.cursor = 0
 
 func _input(event):
 	var pause = event.is_action_pressed("ui_pause")
@@ -41,7 +50,7 @@ func _input(event):
 	var back = event.is_action_pressed("ui_cancel")
 	
 	if up or down:
-		cursor = clamp(cursor + (-1 if up else 1), 0, items.size() - 1)
+		self.cursor += -1 if up else 1
 	
 	if back:
 		press_pause()
@@ -55,7 +64,11 @@ func _input(event):
 				pass#exit()
 
 func _physics_process(delta):
-	open.move(delta, is_paused)
+	#open.move(delta, is_paused)
+	open.count(delta, is_paused)
+	control.modulate.a = lerp(0.0, 1.0, open.clock / open.time)
+	#bg.modulate.a = lerp(0.0, 0.3, open.clock / open.time)
+	
 	
 	if !is_paused: return
 	cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(labels[cursor].rect_global_position - cursor_margin, 0.15)
@@ -86,4 +99,12 @@ func press_pause():
 func options():
 	OptionsMenu.show(true)
 	is_paused = false
+
+func set_cursor(arg := 0):
+	cursor = clamp(arg, 0, items.size() - 1)
+	
+	for i in labels:
+		i.modulate = Color.white
+	
+	#labels[cursor].modulate = highlight_color
 
