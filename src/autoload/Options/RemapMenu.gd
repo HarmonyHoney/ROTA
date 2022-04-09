@@ -66,8 +66,6 @@ var prompt_clock := 0.0
 var prompt_time := 5.0
 var is_button := false
 
-var events = {}
-
 onready var row := $Control/Menu/Base/Row
 onready var key := $Control/Menu/Base/Key
 
@@ -75,6 +73,8 @@ export var is_gamepad := false
 
 onready var header_back := $Control/Header/Back
 onready var header := EaseMover.new(null, 0.2)
+
+var defaults := {}
 
 func _ready():
 	open.from = Vector2(0, 720)
@@ -93,11 +93,24 @@ func _ready():
 		items_node.add_child(r)
 		
 		r.get_node("Label").text = actions.keys()[i]
-	items = items_node.get_children()
 	
 	# create keys
 	for i in items.size():
 		create_keys(i)
+	
+	# reset item
+	var r = row.duplicate()
+	items_node.add_child(r)
+	r.get_node("Label").text = "Reset to Defaults"
+	
+	# fill items
+	items = items_node.get_children()
+	
+	
+	# get default binds
+	for i in InputMap.get_actions():
+		defaults[i] = InputMap.get_action_list(i)
+	
 	
 
 func _input(event):
@@ -121,10 +134,13 @@ func _input(event):
 		
 		# open prompt
 		elif event.is_action_pressed("ui_accept"):
-			is_prompt = true
-			prompt_key.text = actions.keys()[cursor]
-			prompt_clock = prompt_time
-			get_tree().set_input_as_handled()
+			if cursor == items.size() - 1:
+				reset_to_defaults()
+			else:
+				is_prompt = true
+				prompt_key.text = actions.keys()[cursor]
+				prompt_clock = prompt_time
+				get_tree().set_input_as_handled()
 		
 		# clear key
 		elif event.is_action_pressed("ui_end"):
@@ -182,7 +198,7 @@ func show(arg := true):
 		scroll = 0
 		
 		# create keys
-		for i in items.size():
+		for i in items.size() - 1:
 			remove_keys(i)
 			create_keys(i)
 
@@ -260,5 +276,18 @@ func is_type(event):
 		test = is_gamepad and (event is InputEventJoypadButton or event is InputEventJoypadMotion)
 	
 	return test
+
+func reset_to_defaults():
+	for action in InputMap.get_actions():
+		for event in InputMap.get_action_list(action):
+			if is_type(event):
+				InputMap.action_erase_event(action, event)
 	
-	pass
+	for action in defaults.keys():
+		for event in defaults[action]:
+			if is_type(event):
+				InputMap.action_add_event(action, event)
+	
+	for i in items.size() - 1:
+		create_keys(i)
+

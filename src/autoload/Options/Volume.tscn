@@ -1,20 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
 [ext_resource path="res://src/autoload/Options/Volume.gd" type="Script" id=3]
+[ext_resource path="res://src/autoload/Options/VolumeOn.tres" type="StyleBox" id=4]
+[ext_resource path="res://src/autoload/Options/VolumeOff.tres" type="StyleBox" id=5]
 
 [sub_resource type="DynamicFont" id=8]
 size = 50
 use_filter = true
 font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
 
 [node name="Volume" type="Control"]
 margin_right = 1080.0
@@ -50,83 +45,73 @@ __meta__ = {
 }
 
 [node name="C1" type="Panel" parent="Control"]
-modulate = Color( 0, 1, 0, 1 )
 margin_right = 43.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="C2" type="Panel" parent="Control"]
-modulate = Color( 0, 1, 0, 1 )
 margin_left = 53.0
 margin_right = 97.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="C3" type="Panel" parent="Control"]
-modulate = Color( 0, 1, 0, 1 )
 margin_left = 107.0
 margin_right = 150.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="C4" type="Panel" parent="Control"]
-modulate = Color( 0, 1, 0, 1 )
 margin_left = 160.0
 margin_right = 204.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="C5" type="Panel" parent="Control"]
-modulate = Color( 0, 1, 0, 1 )
 margin_left = 214.0
 margin_right = 257.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = ExtResource( 4 )
 
 [node name="C6" type="Panel" parent="Control"]
-modulate = Color( 0, 1, 0, 1 )
 margin_left = 267.0
 margin_right = 311.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="C7" type="Panel" parent="Control"]
-modulate = Color( 1, 0, 0, 1 )
 margin_left = 321.0
 margin_right = 364.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="C8" type="Panel" parent="Control"]
-modulate = Color( 1, 0, 0, 1 )
 margin_left = 374.0
 margin_right = 418.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="C9" type="Panel" parent="Control"]
-modulate = Color( 1, 0, 0, 1 )
 margin_left = 428.0
 margin_right = 471.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="C10" type="Panel" parent="Control"]
-modulate = Color( 1, 0, 0, 1 )
 margin_left = 481.0
 margin_right = 525.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )

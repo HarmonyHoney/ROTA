@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/autoload/Options/Volume.tscn" type="PackedScene" id=2]
@@ -124,13 +124,6 @@ script/source = "extends Control
 func act():
 	RemapMenu.is_gamepad = true
 	RemapMenu.show()
-"
-
-[sub_resource type="GDScript" id=20]
-script/source = "extends Control
-
-func act():
-	InputMap.load_from_globals()
 "
 
 [node name="OptionsMenu" type="CanvasLayer"]
@@ -645,83 +638,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Defaults" type="Control" parent="Control/Menu/List"]
+[node name="Test1" type="Control" parent="Control/Menu/List"]
 margin_top = 1360.0
 margin_right = 1024.0
 margin_bottom = 1440.0
-rect_min_size = Vector2( 0, 80 )
-script = SubResource( 20 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/Menu/List/Defaults"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
-text = "Reset to Defaults"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Test1" type="Control" parent="Control/Menu/List"]
-margin_top = 1440.0
-margin_right = 1024.0
-margin_bottom = 1520.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Control/Menu/List/Test1"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
-text = "Test"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Test2" type="Control" parent="Control/Menu/List"]
-margin_top = 1520.0
-margin_right = 1024.0
-margin_bottom = 1600.0
-rect_min_size = Vector2( 0, 80 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/Menu/List/Test2"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
-text = "Test"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Test3" type="Control" parent="Control/Menu/List"]
-margin_top = 1600.0
-margin_right = 1024.0
-margin_bottom = 1680.0
-rect_min_size = Vector2( 0, 80 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/Menu/List/Test3"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 25.0
