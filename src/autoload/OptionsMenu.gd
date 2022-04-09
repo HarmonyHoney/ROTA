@@ -8,20 +8,15 @@ onready var items_node = $Control/Menu/List
 var items := []
 
 var is_open := false
-var scroll := 0
 var cursor := 0 setget set_cursor
 
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
 
-var open = EaseMover.new()
+onready var open = EaseMover.new(control, 0.5, Vector2(0, 720), Vector2.ZERO)
 
 func _ready():
 	#control.visible = false
-
-	open.node = control
-	open.to = Vector2.ZERO
-	open.from = Vector2(0, 720)
 	
 	for i in items_node.get_children():
 		if !i.is_in_group("no_item"):
@@ -61,7 +56,7 @@ func _physics_process(delta):
 	if !is_open: return
 	
 	# cursor
-	cursor_node.rect_position = cursor_node.rect_position.linear_interpolate(items_node.rect_position + items[cursor - scroll].rect_position, 0.15)
+	cursor_node.rect_position = cursor_node.rect_position.linear_interpolate(items_node.rect_position + items[cursor].rect_position, 0.15)
 	cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size, 0.15)
 	
 	# scroll

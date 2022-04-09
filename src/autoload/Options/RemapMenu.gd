@@ -1,23 +1,20 @@
 extends CanvasLayer
 
 onready var control := $Control
-onready var cursor_node := $Control/Cursor
+onready var cursor_node := $Control/Menu/Cursor
+onready var menu := $Control/Menu
 
-onready var list_node := $Control/List
-onready var items_node := $Control/List/Items
-onready var items := items_node.get_children()
+onready var items_node := $Control/Menu/List
+var items := []
 
 var is_open := false
 var open = EaseMover.new()
 
 var scroll := 0
 var cursor := 0 setget set_cursor
-export var cursor_margin := Vector2(-50, 0)
 
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
-
-var grid := {}
 
 var actions = {"Move Left": "left",
 "Move Right": "right",
@@ -71,10 +68,13 @@ var is_button := false
 
 var events = {}
 
-onready var row := $Control/List/Base/Row
-onready var key := $Control/List/Base/Key
+onready var row := $Control/Menu/Base/Row
+onready var key := $Control/Menu/Base/Key
 
 export var is_gamepad := false
+
+onready var header_back := $Control/Header/Back
+onready var header := EaseMover.new(null, 0.2)
 
 func _ready():
 	open.from = Vector2(0, 720)
@@ -85,7 +85,7 @@ func _ready():
 	prompt.to = prompt.node.rect_position
 	prompt.from = Vector2(prompt.to.x, 720)
 	
-	$Control/List/Base.visible = false
+	$Control/Menu/Base.visible = false
 	
 	# create items
 	for i in actions.size():
@@ -145,8 +145,11 @@ func _physics_process(delta):
 			is_prompt = false
 	
 	# ease mover
-	open.move(delta, is_open)
-	prompt.move(delta, is_prompt)
+	open.count(delta, is_open)
+	control.modulate.a = lerp(0, 1, open.clock / open.time)
+	
+	prompt.count(delta, is_prompt)
+	prompt.node.modulate.a = lerp(0, 1, prompt.clock / prompt.time)
 	
 	if open.clock == 0: return
 	
@@ -154,16 +157,21 @@ func _physics_process(delta):
 	
 	# position
 	var cg = cursor_node.rect_global_position
-	cg = cg.linear_interpolate(target.rect_global_position - cursor_margin, 0.15)
+	cg = cg.linear_interpolate(target.rect_global_position, 0.15)
 	cursor_node.rect_global_position = cg
 	
 	# size
 	var cs = cursor_node.rect_size
-	cs = cs.linear_interpolate(target.rect_size + (cursor_margin * 2.0), 0.15)
+	cs = cs.linear_interpolate(target.rect_size, 0.15)
 	cursor_node.rect_size = cs
 	
 	# scroll
-	items_node.rect_position = items_node.rect_position.linear_interpolate(Vector2(0, 80) * -scroll, 0.15)
+	menu.rect_position.y = lerp(menu.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
+	
+	# header back
+	header.show  = items_node.rect_global_position.y < header_back.rect_global_position.y + header_back.rect_size.y
+	header.count(delta)
+	header_back.modulate.a = lerp(0, 0.75, header.frac())
 
 func show(arg := true):
 	is_open = arg
@@ -180,9 +188,6 @@ func show(arg := true):
 
 func set_cursor(arg := 0):
 	cursor = clamp(arg, 0, items.size() - 1)
-	
-	if cursor < scroll or cursor > 5 + scroll:
-		scroll = max(0, cursor - (0 if cursor < scroll else 5))
 
 func draw_key(key_node, event):
 	if !is_type(event): return
