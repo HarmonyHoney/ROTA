@@ -3,7 +3,7 @@
 [ext_resource path="res://media/font/OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 25
+size = 40
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )

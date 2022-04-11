@@ -15,6 +15,11 @@ corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id=22]
 bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -31,6 +36,7 @@ corner_radius_bottom_left = 50
 pause_mode = 2
 layer = 7
 script = ExtResource( 2 )
+cursor_margin = Vector2( 25, 0 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 1280.0
@@ -40,7 +46,7 @@ __meta__ = {
 }
 
 [node name="BG" type="ColorRect" parent="Control"]
-modulate = Color( 1, 1, 1, 0.6 )
+modulate = Color( 1, 1, 1, 0.8 )
 margin_right = 1280.0
 margin_bottom = 720.0
 color = Color( 0, 0, 0, 1 )
@@ -49,7 +55,8 @@ __meta__ = {
 }
 
 [node name="Menu" type="Control" parent="Control"]
-margin_right = 1280.0
+anchor_left = 0.2
+anchor_right = 0.8
 margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -69,16 +76,16 @@ __meta__ = {
 }
 
 [node name="Base" type="Control" parent="Control/Menu"]
-anchor_left = 0.2
-anchor_right = 0.8
+anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 115.0
+margin_bottom = 115.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Row" type="Control" parent="Control/Menu/Base"]
-margin_right = 1080.0
+anchor_right = 1.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
@@ -88,7 +95,6 @@ __meta__ = {
 [node name="Label" type="Label" parent="Control/Menu/Base/Row"]
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 25.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 4 )
@@ -108,8 +114,8 @@ __meta__ = {
 }
 
 [node name="Key" type="Control" parent="Control/Menu/Base"]
-margin_left = 324.0
-margin_right = 1080.0
+margin_left = 384.0
+margin_right = 684.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -125,9 +131,9 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="Control/Menu/Base/Key/CenterContainer"]
-margin_left = 378.0
+margin_left = 150.0
 margin_top = 40.0
-margin_right = 378.0
+margin_right = 150.0
 margin_bottom = 40.0
 
 [node name="Sprite" type="Sprite" parent="Control/Menu/Base/Key/CenterContainer/Control"]
@@ -145,24 +151,25 @@ custom_fonts/font = ExtResource( 1 )
 text = "W"
 align = 1
 valign = 1
-uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="List" type="VBoxContainer" parent="Control/Menu"]
-anchor_left = 0.2
-anchor_right = 0.8
+anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = 115.0
 custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Header" type="Control" parent="Control"]
-margin_left = 100.0
+anchor_left = 0.2
+anchor_right = 0.8
+margin_left = -10.0
 margin_top = 35.0
-margin_right = 1180.0
+margin_right = 10.0
 margin_bottom = 115.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
@@ -249,6 +256,84 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 4 )
 text = "5"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="ColorRect" parent="Control"]
+margin_left = 1500.0
+margin_top = 216.0
+margin_right = 2220.0
+margin_bottom = 296.0
+color = Color( 1, 1, 1, 0.443137 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Control/HBoxContainer"]
+margin_left = 603.0
+margin_top = 12.0
+margin_right = 628.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_horizontal = 10
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 4 )
+text = "A"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Control/Control/HBoxContainer"]
+margin_left = 632.0
+margin_top = 12.0
+margin_right = 658.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 4 )
+text = "B"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="Control/Control/HBoxContainer"]
+margin_left = 662.0
+margin_top = 12.0
+margin_right = 687.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 4 )
+text = "C"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="Control/Control/HBoxContainer"]
+margin_left = 691.0
+margin_top = 12.0
+margin_right = 720.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 4 )
+text = "D"
 align = 1
 valign = 1
 __meta__ = {

@@ -8,11 +8,11 @@ var is_reset := false
 var btn_reset := false
 
 onready var zoom_notch := $Control/Top/Zoom/Slider/Notch
+onready var zoom_circle := $Control/Top/Zoom/Circle
 var zoom_step := 0
 var zoom_steps := 3
-
-var zoom_clock = 0.0
-var zoom_time = 3.0
+var zoom_from := 0.0
+var zoom_to := 0.0
 
 onready var dpad_spin := $Control/Bottom/DPad/Spin
 
@@ -39,22 +39,22 @@ func _ready():
 	bottom.to = bottom.node.rect_position
 	bottom.from = bottom.to + Vector2(0, 200)
 	
+	reset.time = 1.0
+	
+	zoom.time = 0.25
+	zoom_circle.scale = Vector2.ZERO
+	
 	menu.node = $Control/Menu
 	menu.to = menu.node.rect_position
 	menu.from = menu.to + Vector2(0, 70)
 	menu.show = false
 	
-	zoom.node = $Control/Top/Zoom
-	zoom.to = zoom.node.rect_position
-	zoom.from = zoom.to - Vector2(0, 125)
-	zoom.show = false
 	
 	
 
 func _input(event):
 	if event.is_action_pressed("zoom"):
 		set_zoom(zoom_step + 1)
-		zoom_clock = zoom_time
 
 func _physics_process(delta):
 	gem.move(delta)
@@ -62,18 +62,19 @@ func _physics_process(delta):
 	bottom.move(delta)
 	menu.move(delta)
 	
-	zoom_clock = max(0, zoom_clock - delta)
-	
-	zoom.move(delta, zoom_clock > 0)
+	if zoom.clock != zoom.time:
+		zoom.count(delta)
+		zoom_circle.scale = Vector2.ONE * lerp(zoom_from, zoom_to, zoom.frac())
+		
 	
 	# reset
-#	if is_reset:
-#		is_reset = Input.is_action_pressed("reset")
-#	else:
-#		is_reset = Input.is_action_just_pressed("reset")
+	if is_reset:
+		is_reset = Input.is_action_pressed("reset")
+	else:
+		is_reset = Input.is_action_just_pressed("reset")
 	
 	var rs = reset.count(delta, is_reset)
-	reset_spinner.rotation = lerp(0, PI, rs)
+	reset_spinner.rotation = lerp(0, TAU, rs)
 	reset_cirlce.scale = Vector2.ONE * rs
 	
 	if reset.clock == reset.time:
@@ -86,6 +87,10 @@ func set_zoom(arg := 0):
 	zoom_step = posmod(arg, zoom_steps + 1)
 	var zf = float(zoom_step) / zoom_steps
 	zoom_notch.position.y = lerp(8, 56, zf)
+	
+	zoom_from = zoom_circle.scale.x
+	zoom_to = lerp(0.0, 1.0, zf)
+	zoom.clock = 0
 	
 	Cam.start_zoom(zf)
 	

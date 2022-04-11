@@ -12,6 +12,7 @@ var open = EaseMover.new()
 
 var scroll := 0
 var cursor := 0 setget set_cursor
+export var cursor_margin := Vector2.ZERO
 
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
@@ -71,8 +72,9 @@ onready var key := $Control/Menu/Base/Key
 
 export var is_gamepad := false
 
+onready var header := $Control/Header
 onready var header_back := $Control/Header/Back
-onready var header := EaseMover.new(null, 0.2)
+onready var header_ease := EaseMover.new(null, 0.2)
 
 var defaults := {}
 
@@ -110,8 +112,6 @@ func _ready():
 	# get default binds
 	for i in InputMap.get_actions():
 		defaults[i] = InputMap.get_action_list(i)
-	
-	
 
 func _input(event):
 	if !is_open: return
@@ -173,21 +173,24 @@ func _physics_process(delta):
 	
 	# position
 	var cg = cursor_node.rect_global_position
-	cg = cg.linear_interpolate(target.rect_global_position, 0.15)
+	cg = cg.linear_interpolate(target.rect_global_position - cursor_margin, 0.15)
 	cursor_node.rect_global_position = cg
 	
 	# size
 	var cs = cursor_node.rect_size
-	cs = cs.linear_interpolate(target.rect_size, 0.15)
+	cs = cs.linear_interpolate(target.rect_size + (cursor_margin * 2.0), 0.15)
 	cursor_node.rect_size = cs
 	
-	# scroll
+	# scroll menu
 	menu.rect_position.y = lerp(menu.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
 	
+	# header position
+	header.rect_global_position.y = clamp(items_node.rect_global_position.y - header.rect_size.y, 30, 1280)
+	
 	# header back
-	header.show  = items_node.rect_global_position.y < header_back.rect_global_position.y + header_back.rect_size.y
-	header.count(delta)
-	header_back.modulate.a = lerp(0, 0.75, header.frac())
+	header_ease.show  = header.rect_global_position.y == 30
+	header_ease.count(delta)
+	header_back.modulate.a = lerp(0, 1.0, header_ease.frac())
 
 func show(arg := true):
 	is_open = arg
@@ -233,12 +236,12 @@ func draw_key(key_node, event):
 	
 	# text over key
 	else:
-		label.text = s
+		label.text = s.to_lower().capitalize()
 		
 		if s.length() < 2:
 			sprite.texture = tex["KEY"]
 		else:
-			sprite.texture = tex["KEY_2"]
+			sprite.texture = tex["KEY_3"]
 
 func remove_keys(row := 0):
 	for i in items[row].get_node("Keys").get_children():
