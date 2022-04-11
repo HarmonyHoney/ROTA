@@ -59,8 +59,10 @@ func _input(event):
 			0:
 				press_pause()
 			1:
-				options()
+				Shared.reset()
 			2:
+				options()
+			3:
 				pass#exit()
 
 func _physics_process(delta):
@@ -77,6 +79,7 @@ func _physics_process(delta):
 func wipe_out():
 	if is_paused:
 		set_paused(false)
+		open.clock = 0
 	yield(get_tree().create_timer(0.7), "timeout")
 	set_process_input(true)
 
