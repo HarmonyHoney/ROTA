@@ -92,6 +92,8 @@ func set_paused(pause := true):
 	UI.top.show = !is_paused
 	
 	get_tree().paused = is_paused
+	
+	UI.menu.show = is_paused
 
 func press_pause():
 	set_paused(!is_paused)

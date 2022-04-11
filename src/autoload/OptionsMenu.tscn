@@ -1,13 +1,18 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/shader/outline2D_outer.shader" type="Shader" id=1]
 [ext_resource path="res://src/autoload/Options/Volume.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/autoload/OptionsMenu.gd" type="Script" id=3]
 [ext_resource path="res://media/audio/sfx/Randomize104.wav" type="AudioStream" id=4]
 [ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=5]
+[ext_resource path="res://media/font/OptionsItem.tres" type="DynamicFont" id=6]
 [ext_resource path="res://media/image/UI/Video.png" type="Texture" id=7]
 [ext_resource path="res://media/image/UI/Input.png" type="Texture" id=8]
 [ext_resource path="res://media/image/UI/Audio.png" type="Texture" id=9]
+[ext_resource path="res://media/font/OptionsHeader.tres" type="DynamicFont" id=10]
+[ext_resource path="res://src/autoload/Options/OnOff.gd" type="Script" id=11]
+[ext_resource path="res://src/autoload/Options/Resolution.gd" type="Script" id=12]
+[ext_resource path="res://src/autoload/Options/OpenRemap.gd" type="Script" id=13]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
@@ -17,119 +22,26 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="DynamicFont" id=23]
-size = 80
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 1 )
+[sub_resource type="ShaderMaterial" id=23]
+shader = ExtResource( 1 )
+shader_param/line_color = Color( 0, 0, 0, 1 )
+shader_param/line_thickness = 8.0
 
-[sub_resource type="GDScript" id=12]
-script/source = "extends Control
-
-onready var fill := $Control/Panel/Fill
+[sub_resource type="GDScript" id=24]
+script/source = "extends OnOff
 
 func _ready():
-	fill.visible = OS.window_fullscreen
+	is_on = OS.window_fullscreen
 
-func act():
-	fill.visible = !fill.visible
-	OS.window_fullscreen = fill.visible
-"
-
-[sub_resource type="DynamicFont" id=8]
-size = 50
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 1, 1, 1, 1 )
-draw_center = false
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="StyleBoxFlat" id=13]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="GDScript" id=14]
-script/source = "extends Control
-
-var list := [Vector2(640, 360), Vector2(960, 540), Vector2(1280, 720), Vector2(1600, 900),
-Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
-
-var cursor := 1
-
-onready var res := $Resolution
-
-func _ready():
-	var f = list.find(OS.window_size)
-	if f != -1:
-		cursor = f
-	
-	show()
-
-func show():
-	res.text = str(list[cursor].x) + \" x \" + str(list[cursor].y)
-
-func axis_x(arg := 1):
-	cursor = clamp(cursor + arg, 0, list.size() - 1)
-	show()
-	OS.window_size = list[cursor]
-
-func act():
-	axis_x(0)
-"
-
-[sub_resource type="GDScript" id=16]
-script/source = "extends Control
-
-onready var fill := $Control/Panel/Fill
-
-func act():
-	fill.visible = !fill.visible
-"
-
-[sub_resource type="GDScript" id=17]
-script/source = "extends Control
-
-func act():
-	RemapMenu.is_gamepad = false
-	RemapMenu.show()
-"
-
-[sub_resource type="DynamicFont" id=15]
-size = 50
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="GDScript" id=22]
-script/source = "extends Control
-
-func act():
-	RemapMenu.is_gamepad = true
-	RemapMenu.show()
+func set_value():
+	OS.window_fullscreen = is_on
 "
 
 [node name="OptionsMenu" type="CanvasLayer"]
 pause_mode = 2
 layer = 6
 script = ExtResource( 3 )
+cursor_margin = Vector2( 25, 0 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
@@ -139,7 +51,7 @@ __meta__ = {
 }
 
 [node name="BG" type="ColorRect" parent="Control"]
-modulate = Color( 1, 1, 1, 0.4 )
+modulate = Color( 1, 1, 1, 0.6 )
 margin_right = 1280.0
 margin_bottom = 720.0
 color = Color( 0, 0, 0, 1 )
@@ -165,8 +77,8 @@ __meta__ = {
 }
 
 [node name="List" type="VBoxContainer" parent="Control/Menu"]
-anchor_left = 0.1
-anchor_right = 0.9
+anchor_left = 0.25
+anchor_right = 0.75
 margin_bottom = 720.0
 custom_constants/separation = 0
 __meta__ = {
@@ -174,17 +86,17 @@ __meta__ = {
 }
 
 [node name="Spacer3" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_right = 1024.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 80 )
+margin_right = 640.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 70 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Header" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 80.0
-margin_right = 1024.0
-margin_bottom = 240.0
+margin_top = 70.0
+margin_right = 640.0
+margin_bottom = 230.0
 rect_min_size = Vector2( 0, 160 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -193,7 +105,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="Control/Menu/List/Header"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = ExtResource( 10 )
 text = "Options"
 align = 1
 valign = 1
@@ -201,279 +113,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HeaderAudio" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 240.0
-margin_right = 1024.0
-margin_bottom = 320.0
-rect_min_size = Vector2( 0, 80 )
-
-[node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderAudio"]
-anchor_right = 0.1
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 9 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/Menu/List/HeaderAudio"]
-anchor_left = 0.1
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = SubResource( 23 )
-text = "Audio"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Master" parent="Control/Menu/List" instance=ExtResource( 2 )]
-margin_top = 320.0
-margin_right = 1024.0
-margin_bottom = 400.0
-
-[node name="SFX" parent="Control/Menu/List" instance=ExtResource( 2 )]
-margin_top = 400.0
-margin_right = 1024.0
-margin_bottom = 480.0
-bus = 1
-
-[node name="Label" parent="Control/Menu/List/SFX" index="0"]
-text = "SFX Volume"
-
-[node name="C1" parent="Control/Menu/List/SFX/Control" index="0"]
-margin_right = 40.0
-
-[node name="C2" parent="Control/Menu/List/SFX/Control" index="1"]
-margin_left = 50.0
-margin_right = 91.0
-
-[node name="C3" parent="Control/Menu/List/SFX/Control" index="2"]
-margin_left = 101.0
-margin_right = 142.0
-
-[node name="C4" parent="Control/Menu/List/SFX/Control" index="3"]
-margin_left = 152.0
-margin_right = 192.0
-
-[node name="C5" parent="Control/Menu/List/SFX/Control" index="4"]
-margin_left = 202.0
-margin_right = 243.0
-
-[node name="C6" parent="Control/Menu/List/SFX/Control" index="5"]
-margin_left = 253.0
-margin_right = 294.0
-
-[node name="C7" parent="Control/Menu/List/SFX/Control" index="6"]
-margin_left = 304.0
-margin_right = 344.0
-
-[node name="C8" parent="Control/Menu/List/SFX/Control" index="7"]
-margin_left = 354.0
-margin_right = 395.0
-
-[node name="C9" parent="Control/Menu/List/SFX/Control" index="8"]
-margin_left = 405.0
-margin_right = 446.0
-
-[node name="C10" parent="Control/Menu/List/SFX/Control" index="9"]
-margin_left = 456.0
-margin_right = 497.0
-
-[node name="Audio" parent="Control/Menu/List/SFX" index="2"]
-stream = ExtResource( 4 )
-bus = "SFX"
-
-[node name="Music" parent="Control/Menu/List" instance=ExtResource( 2 )]
-margin_top = 480.0
-margin_right = 1024.0
-margin_bottom = 560.0
-bus = 1
-
-[node name="Label" parent="Control/Menu/List/Music" index="0"]
-text = "Music Volume"
-
-[node name="C1" parent="Control/Menu/List/Music/Control" index="0"]
-margin_right = 40.0
-
-[node name="C2" parent="Control/Menu/List/Music/Control" index="1"]
-margin_left = 50.0
-margin_right = 91.0
-
-[node name="C3" parent="Control/Menu/List/Music/Control" index="2"]
-margin_left = 101.0
-margin_right = 142.0
-
-[node name="C4" parent="Control/Menu/List/Music/Control" index="3"]
-margin_left = 152.0
-margin_right = 192.0
-
-[node name="C5" parent="Control/Menu/List/Music/Control" index="4"]
-margin_left = 202.0
-margin_right = 243.0
-
-[node name="C6" parent="Control/Menu/List/Music/Control" index="5"]
-margin_left = 253.0
-margin_right = 294.0
-
-[node name="C7" parent="Control/Menu/List/Music/Control" index="6"]
-margin_left = 304.0
-margin_right = 344.0
-
-[node name="C8" parent="Control/Menu/List/Music/Control" index="7"]
-margin_left = 354.0
-margin_right = 395.0
-
-[node name="C9" parent="Control/Menu/List/Music/Control" index="8"]
-margin_left = 405.0
-margin_right = 446.0
-
-[node name="C10" parent="Control/Menu/List/Music/Control" index="9"]
-margin_left = 456.0
-margin_right = 497.0
-
-[node name="Audio" parent="Control/Menu/List/Music" index="2"]
-stream = ExtResource( 5 )
-bus = "Music"
-
-[node name="Spacer" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 560.0
-margin_right = 1024.0
-margin_bottom = 640.0
-rect_min_size = Vector2( 0, 80 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HeaderVideo" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 640.0
-margin_right = 1024.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 0, 80 )
-
-[node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderVideo"]
-anchor_right = 0.1
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/Menu/List/HeaderVideo"]
-anchor_left = 0.1
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = SubResource( 23 )
-text = "Video"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Fullscreen" type="Control" parent="Control/Menu/List"]
-margin_top = 720.0
-margin_right = 1024.0
-margin_bottom = 800.0
-rect_min_size = Vector2( 0, 80 )
-script = SubResource( 12 )
-
-[node name="Label" type="Label" parent="Control/Menu/List/Fullscreen"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
-text = "Fullscreen"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control" type="Control" parent="Control/Menu/List/Fullscreen"]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="Control/Menu/List/Fullscreen/Control"]
-anchor_left = 0.35
-anchor_top = 0.25
-anchor_right = 0.65
-anchor_bottom = 0.75
-custom_styles/panel = SubResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
-[node name="Fill" type="Panel" parent="Control/Menu/List/Fullscreen/Control/Panel"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/panel = SubResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
-[node name="Resolution" type="Control" parent="Control/Menu/List"]
-margin_top = 800.0
-margin_right = 1024.0
-margin_bottom = 880.0
-rect_min_size = Vector2( 0, 80 )
-script = SubResource( 14 )
-
-[node name="Label" type="Label" parent="Control/Menu/List/Resolution"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
-text = "Window Resolution"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Resolution" type="Label" parent="Control/Menu/List/Resolution"]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
-text = "1280 x 720"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Spacer2" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 880.0
-margin_right = 1024.0
-margin_bottom = 960.0
-rect_min_size = Vector2( 0, 80 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="HeaderInput" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 960.0
-margin_right = 1024.0
-margin_bottom = 1040.0
-rect_min_size = Vector2( 0, 80 )
+margin_top = 230.0
+margin_right = 640.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 0, 70 )
 
 [node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderInput"]
+material = SubResource( 23 )
 anchor_right = 0.1
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -489,115 +136,89 @@ __meta__ = {
 anchor_left = 0.1
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = ExtResource( 10 )
 text = "Input"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Vibration" type="Control" parent="Control/Menu/List"]
-margin_top = 1040.0
-margin_right = 1024.0
-margin_bottom = 1120.0
-rect_min_size = Vector2( 0, 80 )
-script = SubResource( 16 )
+[node name="Vibrate" type="Control" parent="Control/Menu/List"]
+margin_top = 300.0
+margin_right = 640.0
+margin_bottom = 370.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Control/Menu/List/Vibration"]
+[node name="Label" type="Label" parent="Control/Menu/List/Vibrate"]
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 25.0
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 6 )
 text = "Controller Vibration"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="Control/Menu/List/Vibration"]
+[node name="Label2" type="Label" parent="Control/Menu/List/Vibrate"]
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="Control/Menu/List/Vibration/Control"]
-anchor_left = 0.35
-anchor_top = 0.25
-anchor_right = 0.65
-anchor_bottom = 0.75
-custom_styles/panel = SubResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
-[node name="Fill" type="Panel" parent="Control/Menu/List/Vibration/Control/Panel"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/panel = SubResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
-
-[node name="ToggleGrab" type="Control" parent="Control/Menu/List"]
-margin_top = 1120.0
-margin_right = 1024.0
-margin_bottom = 1200.0
-rect_min_size = Vector2( 0, 80 )
-script = SubResource( 16 )
-
-[node name="Label" type="Label" parent="Control/Menu/List/ToggleGrab"]
-anchor_right = 0.5
-anchor_bottom = 1.0
 margin_left = 25.0
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 8 )
-text = "Toggle Grab"
+custom_fonts/font = ExtResource( 6 )
+text = "< OFF >"
+align = 2
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="Control/Menu/List/ToggleGrab"]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Grab" type="Control" parent="Control/Menu/List"]
+margin_top = 370.0
+margin_right = 640.0
+margin_bottom = 440.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="Control/Menu/List/ToggleGrab/Control"]
-anchor_left = 0.35
-anchor_top = 0.25
-anchor_right = 0.65
-anchor_bottom = 0.75
-custom_styles/panel = SubResource( 11 )
+[node name="Label" type="Label" parent="Control/Menu/List/Grab"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+text = "Grab Toggle"
+valign = 1
 __meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
+"_edit_use_anchors_": false
 }
 
-[node name="Fill" type="Panel" parent="Control/Menu/List/ToggleGrab/Control/Panel"]
-visible = false
+[node name="Label2" type="Label" parent="Control/Menu/List/Grab"]
+anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 13 )
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+text = "< OFF >"
+align = 2
+valign = 1
 __meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
+"_edit_use_anchors_": false
 }
 
 [node name="Keyboard" type="Control" parent="Control/Menu/List"]
-margin_top = 1200.0
-margin_right = 1024.0
-margin_bottom = 1280.0
-rect_min_size = Vector2( 0, 80 )
-script = SubResource( 17 )
+margin_top = 440.0
+margin_right = 640.0
+margin_bottom = 510.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -605,60 +226,210 @@ __meta__ = {
 [node name="Label" type="Label" parent="Control/Menu/List/Keyboard"]
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 25.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = ExtResource( 6 )
 text = "Keyboard Setup"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Gamepad" type="Control" parent="Control/Menu/List"]
-margin_top = 1280.0
-margin_right = 1024.0
-margin_bottom = 1360.0
-rect_min_size = Vector2( 0, 80 )
-script = SubResource( 22 )
+[node name="Controller" type="Control" parent="Control/Menu/List"]
+margin_top = 510.0
+margin_right = 640.0
+margin_bottom = 580.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+is_gamepad = true
 
-[node name="Label" type="Label" parent="Control/Menu/List/Gamepad"]
+[node name="Label" type="Label" parent="Control/Menu/List/Controller"]
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 25.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
-text = "Gamepad Setup"
+custom_fonts/font = ExtResource( 6 )
+text = "Controller Setup"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Test1" type="Control" parent="Control/Menu/List"]
-margin_top = 1360.0
-margin_right = 1024.0
-margin_bottom = 1440.0
-rect_min_size = Vector2( 0, 80 )
+[node name="Spacer2" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 580.0
+margin_right = 640.0
+margin_bottom = 610.0
+rect_min_size = Vector2( 0, 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/Menu/List/Test1"]
-anchor_right = 0.5
+[node name="HeaderAudio" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 610.0
+margin_right = 640.0
+margin_bottom = 680.0
+rect_min_size = Vector2( 0, 70 )
+
+[node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderAudio"]
+material = SubResource( 23 )
+anchor_right = 0.1
 anchor_bottom = 1.0
-margin_left = 25.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
-text = "Test"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Menu/List/HeaderAudio"]
+anchor_left = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 10 )
+text = "Audio"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[editable path="Control/Menu/List/SFX"]
+[node name="Music" parent="Control/Menu/List" instance=ExtResource( 2 )]
+margin_top = 680.0
+margin_right = 640.0
+margin_bottom = 750.0
+rect_min_size = Vector2( 0, 70 )
+bus = 1
+
+[node name="Label" parent="Control/Menu/List/Music" index="0"]
+text = "Music"
+
+[node name="Audio" parent="Control/Menu/List/Music" index="2"]
+stream = ExtResource( 5 )
+bus = "Music"
+
+[node name="SFX" parent="Control/Menu/List" instance=ExtResource( 2 )]
+margin_top = 750.0
+margin_right = 640.0
+margin_bottom = 820.0
+rect_min_size = Vector2( 0, 70 )
+bus = 1
+
+[node name="Label" parent="Control/Menu/List/SFX" index="0"]
+text = "Sounds"
+
+[node name="Audio" parent="Control/Menu/List/SFX" index="2"]
+stream = ExtResource( 4 )
+bus = "SFX"
+
+[node name="Spacer" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 820.0
+margin_right = 640.0
+margin_bottom = 850.0
+rect_min_size = Vector2( 0, 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeaderVideo" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 850.0
+margin_right = 640.0
+margin_bottom = 920.0
+rect_min_size = Vector2( 0, 70 )
+
+[node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderVideo"]
+material = SubResource( 23 )
+anchor_right = 0.1
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Menu/List/HeaderVideo"]
+anchor_left = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 10 )
+text = "Video"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fullscreen" type="Control" parent="Control/Menu/List"]
+margin_top = 920.0
+margin_right = 640.0
+margin_bottom = 990.0
+rect_min_size = Vector2( 0, 70 )
+script = SubResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Menu/List/Fullscreen"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+text = "Fullscreen"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Control/Menu/List/Fullscreen"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+text = "< OFF >"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resolution" type="Control" parent="Control/Menu/List"]
+margin_top = 990.0
+margin_right = 640.0
+margin_bottom = 1060.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Control/Menu/List/Resolution"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+text = "Window Size"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resolution" type="Label" parent="Control/Menu/List/Resolution"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+text = "< 1280 x 720 >"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [editable path="Control/Menu/List/Music"]
+[editable path="Control/Menu/List/SFX"]

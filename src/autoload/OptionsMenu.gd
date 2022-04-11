@@ -15,6 +15,8 @@ var joy_last := Vector2.ZERO
 
 onready var open = EaseMover.new(control, 0.5, Vector2(0, 720), Vector2.ZERO)
 
+export var cursor_margin := Vector2.ZERO
+
 func _ready():
 	#control.visible = false
 	
@@ -56,8 +58,8 @@ func _physics_process(delta):
 	if !is_open: return
 	
 	# cursor
-	cursor_node.rect_position = cursor_node.rect_position.linear_interpolate(items_node.rect_position + items[cursor].rect_position, 0.15)
-	cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size, 0.15)
+	cursor_node.rect_position = cursor_node.rect_position.linear_interpolate(items_node.rect_position + items[cursor].rect_position - cursor_margin, 0.15)
+	cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size + (cursor_margin * 2.0), 0.15)
 	
 	# scroll
 	menu.rect_position.y = lerp(menu.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
@@ -75,7 +77,4 @@ func show(arg := true):
 
 func set_cursor(arg := 0):
 	cursor = clamp(arg, 0, items.size() - 1)
-
-	#if cursor < scroll or cursor > 4 + scroll:
-	#	scroll = max(0, cursor - (0 if cursor < scroll else 4))
 

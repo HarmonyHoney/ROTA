@@ -8,6 +8,7 @@
 [ext_resource path="res://media/image/keyhole.png" type="Texture" id=6]
 [ext_resource path="res://media/image/tiles/tile_0.png" type="Texture" id=7]
 
+
 [sub_resource type="Animation" id=6]
 length = 0.001
 tracks/0/type = "bezier"

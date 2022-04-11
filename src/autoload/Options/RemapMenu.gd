@@ -16,10 +16,10 @@ var cursor := 0 setget set_cursor
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
 
-var actions = {"Move Left": "left",
-"Move Right": "right",
-"Turn Box+": "up",
-"Turn Box-": "down",
+var actions = {"Left": "left",
+"Right": "right",
+"Up": "up",
+"Down": "down",
 "Jump": "jump",
 "Grab": "grab",
 "Zoom": "zoom",
@@ -199,8 +199,11 @@ func show(arg := true):
 		
 		# create keys
 		for i in items.size() - 1:
-			remove_keys(i)
+			#remove_keys(i)
 			create_keys(i)
+	else:
+		for i in items.size() - 1:
+			remove_keys(i)
 
 func set_cursor(arg := 0):
 	cursor = clamp(arg, 0, items.size() - 1)

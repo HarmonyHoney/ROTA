@@ -18,6 +18,7 @@ var gem = EaseMover.new()
 var top = EaseMover.new()
 var bottom = EaseMover.new()
 var reset = EaseMover.new()
+var menu = EaseMover.new()
 
 func _ready():
 	gem_label.text = str(Shared.gem_count)
@@ -35,6 +36,11 @@ func _ready():
 	bottom.to = bottom.node.rect_position
 	bottom.from = bottom.to + Vector2(0, 200)
 	
+	menu.node = $Control/Menu
+	menu.to = menu.node.rect_position
+	menu.from = menu.to + Vector2(0, 70)
+	menu.show = false
+	
 	
 
 func _input(event):
@@ -45,6 +51,7 @@ func _physics_process(delta):
 	gem.move(delta)
 	top.move(delta)
 	bottom.move(delta)
+	menu.move(delta)
 	
 	# reset
 	if is_reset:

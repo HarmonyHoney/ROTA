@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://media/font/RemapKey.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/autoload/Options/RemapMenu.gd" type="Script" id=2]
 [ext_resource path="res://media/image/box/round_rect200.png" type="Texture" id=3]
+[ext_resource path="res://media/font/OptionsItem.tres" type="DynamicFont" id=4]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
@@ -12,27 +13,12 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="DynamicFont" id=20]
-size = 50
-use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=16]
-size = 25
-use_filter = true
-font_data = ExtResource( 1 )
-
 [sub_resource type="StyleBoxFlat" id=22]
 bg_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
-
-[sub_resource type="DynamicFont" id=15]
-size = 50
-use_filter = true
-font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=21]
 bg_color = Color( 0, 0, 0, 1 )
@@ -54,7 +40,7 @@ __meta__ = {
 }
 
 [node name="BG" type="ColorRect" parent="Control"]
-modulate = Color( 1, 1, 1, 0.4 )
+modulate = Color( 1, 1, 1, 0.6 )
 margin_right = 1280.0
 margin_bottom = 720.0
 color = Color( 0, 0, 0, 1 )
@@ -83,10 +69,10 @@ __meta__ = {
 }
 
 [node name="Base" type="Control" parent="Control/Menu"]
-margin_left = 100.0
+anchor_left = 0.2
+anchor_right = 0.8
+anchor_bottom = 1.0
 margin_top = 115.0
-margin_right = 140.0
-margin_bottom = 155.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -105,7 +91,7 @@ anchor_bottom = 1.0
 margin_left = 25.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 20 )
+custom_fonts/font = ExtResource( 4 )
 text = "Up"
 valign = 1
 __meta__ = {
@@ -155,7 +141,7 @@ rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_horizontal = 6
 size_flags_vertical = 6
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = ExtResource( 1 )
 text = "W"
 align = 1
 valign = 1
@@ -165,8 +151,8 @@ __meta__ = {
 }
 
 [node name="List" type="VBoxContainer" parent="Control/Menu"]
-anchor_left = 0.1
-anchor_right = 0.9
+anchor_left = 0.2
+anchor_right = 0.8
 anchor_bottom = 1.0
 custom_constants/separation = 0
 __meta__ = {
@@ -196,50 +182,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = ExtResource( 4 )
 text = "Press X to add button, Del to clear"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Header"]
-visible = false
-anchor_left = 0.3
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/Header/HBoxContainer"]
-margin_left = 81.0
-margin_top = 11.0
-margin_right = 297.0
-margin_bottom = 69.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_horizontal = 6
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
-text = "Keyboard"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="Label" parent="Control/Header/HBoxContainer"]
-margin_left = 472.0
-margin_top = 11.0
-margin_right = 661.0
-margin_bottom = 69.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_horizontal = 6
-size_flags_vertical = 6
-custom_fonts/font = SubResource( 15 )
-text = "Gamepad"
 align = 1
 valign = 1
 __meta__ = {
@@ -273,7 +217,7 @@ margin_bottom = 109.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = ExtResource( 4 )
 text = "Press new key for:"
 align = 1
 valign = 1
@@ -288,7 +232,7 @@ margin_bottom = 218.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = ExtResource( 4 )
 text = "Up"
 align = 1
 valign = 1
@@ -303,7 +247,7 @@ margin_bottom = 328.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = ExtResource( 4 )
 text = "5"
 align = 1
 valign = 1

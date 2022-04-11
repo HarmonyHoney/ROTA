@@ -39,7 +39,9 @@ var volume = [100, 100, 100]
 
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
-	set_volume(0, 50)
+	#set_volume(0, 50)
+	set_volume(1, 50)
+	set_volume(2, 50)
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
