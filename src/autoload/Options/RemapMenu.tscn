@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://media/font/RemapKey.tres" type="DynamicFont" id=1]
+[ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/autoload/Options/RemapMenu.gd" type="Script" id=2]
-[ext_resource path="res://media/image/box/round_rect200.png" type="Texture" id=3]
 [ext_resource path="res://media/font/OptionsItem.tres" type="DynamicFont" id=4]
+[ext_resource path="res://src/autoload/Options/Key.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
@@ -12,6 +12,14 @@ corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
+
+[sub_resource type="DynamicFont" id=23]
+size = 60
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=22]
 bg_color = Color( 0, 0, 0, 1 )
@@ -55,8 +63,8 @@ __meta__ = {
 }
 
 [node name="Menu" type="Control" parent="Control"]
-anchor_left = 0.2
-anchor_right = 0.8
+anchor_left = 0.25
+anchor_right = 0.75
 margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -86,7 +94,8 @@ __meta__ = {
 
 [node name="Row" type="Control" parent="Control/Menu/Base"]
 anchor_right = 1.0
-margin_bottom = 80.0
+margin_top = 210.0
+margin_bottom = 290.0
 rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -108,49 +117,8 @@ __meta__ = {
 anchor_left = 0.3
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Key" type="Control" parent="Control/Menu/Base"]
-margin_left = 384.0
-margin_right = 684.0
-margin_bottom = 80.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="Control/Menu/Base/Key"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control" type="Control" parent="Control/Menu/Base/Key/CenterContainer"]
-margin_left = 150.0
-margin_top = 40.0
-margin_right = 150.0
-margin_bottom = 40.0
-
-[node name="Sprite" type="Sprite" parent="Control/Menu/Base/Key/CenterContainer/Control"]
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="Control/Menu/Base/Key"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_horizontal = 6
-size_flags_vertical = 6
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
-text = "W"
-align = 1
-valign = 1
+custom_constants/separation = 15
+alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -159,19 +127,29 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 115.0
-custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Header" type="Control" parent="Control"]
-anchor_left = 0.2
-anchor_right = 0.8
-margin_left = -10.0
-margin_top = 35.0
-margin_right = 10.0
-margin_bottom = 115.0
+anchor_left = 0.25
+anchor_right = 0.75
+margin_left = -60.0
+margin_top = 255.367
+margin_right = 60.0
+margin_bottom = 335.367
 rect_min_size = Vector2( 0, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Header"]
+anchor_right = 1.0
+margin_top = -140.0
+custom_fonts/font = SubResource( 23 )
+text = "Keyboard Setup"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -184,13 +162,68 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/Header"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Header"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/separation = 15
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Header/HBoxContainer"]
+margin_left = 33.0
+margin_top = 16.0
+margin_right = 135.0
+margin_bottom = 64.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_vertical = 6
 custom_fonts/font = ExtResource( 4 )
-text = "Press X to add button, Del to clear"
+text = "Press"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" parent="Control/Header/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 150.0
+margin_top = 15.0
+margin_right = 200.0
+margin_bottom = 65.0
+size_flags_vertical = 4
+text = "X"
+
+[node name="Label2" type="Label" parent="Control/Header/HBoxContainer"]
+margin_left = 215.0
+margin_top = 16.0
+margin_right = 462.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+custom_fonts/font = ExtResource( 4 )
+text = "to add button,"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key2" parent="Control/Header/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 477.0
+margin_top = 15.0
+margin_right = 577.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 100, 50 )
+size_flags_vertical = 4
+text = "DELETE"
+
+[node name="Label3" type="Label" parent="Control/Header/HBoxContainer"]
+margin_left = 592.0
+margin_top = 16.0
+margin_right = 726.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( -390.432, 251.663 )
+custom_fonts/font = ExtResource( 4 )
+text = "to clear"
 align = 1
 valign = 1
 __meta__ = {
@@ -198,6 +231,7 @@ __meta__ = {
 }
 
 [node name="Prompt" type="Panel" parent="Control"]
+visible = false
 self_modulate = Color( 0, 0, 0, 0.7 )
 anchor_left = 0.3
 anchor_top = 0.3
@@ -256,84 +290,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 4 )
 text = "5"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control" type="ColorRect" parent="Control"]
-margin_left = 1500.0
-margin_top = 216.0
-margin_right = 2220.0
-margin_bottom = 296.0
-color = Color( 1, 1, 1, 0.443137 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/Control/HBoxContainer"]
-margin_left = 603.0
-margin_top = 12.0
-margin_right = 628.0
-margin_bottom = 67.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_horizontal = 10
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 4 )
-text = "A"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="Label" parent="Control/Control/HBoxContainer"]
-margin_left = 632.0
-margin_top = 12.0
-margin_right = 658.0
-margin_bottom = 67.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 4 )
-text = "B"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label3" type="Label" parent="Control/Control/HBoxContainer"]
-margin_left = 662.0
-margin_top = 12.0
-margin_right = 687.0
-margin_bottom = 67.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 4 )
-text = "C"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label4" type="Label" parent="Control/Control/HBoxContainer"]
-margin_left = 691.0
-margin_top = 12.0
-margin_right = 720.0
-margin_bottom = 67.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 4 )
-text = "D"
 align = 1
 valign = 1
 __meta__ = {

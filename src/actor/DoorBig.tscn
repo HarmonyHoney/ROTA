@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/actor/DoorBig.gd" type="Script" id=1]
-[ext_resource path="res://media/font/ShareTechMono-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://media/image/door/bigdoor.png" type="Texture" id=3]
 [ext_resource path="res://src/actor/DoorBase.tscn" type="PackedScene" id=4]
 

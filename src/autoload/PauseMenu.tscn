@@ -84,13 +84,13 @@ __meta__ = {
 
 [node name="Resume" type="CenterContainer" parent="Control/Menu/List/Items"]
 margin_right = 512.0
-margin_bottom = 69.0
+margin_bottom = 60.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Control/Menu/List/Items/Resume"]
-margin_left = 162.0
-margin_right = 350.0
-margin_bottom = 69.0
+margin_left = 165.0
+margin_right = 346.0
+margin_bottom = 60.0
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
 text = "Resume"
@@ -101,15 +101,15 @@ __meta__ = {
 }
 
 [node name="Reset" type="CenterContainer" parent="Control/Menu/List/Items"]
-margin_top = 73.0
+margin_top = 64.0
 margin_right = 512.0
-margin_bottom = 142.0
+margin_bottom = 125.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Control/Menu/List/Items/Reset"]
-margin_left = 191.0
-margin_right = 320.0
-margin_bottom = 69.0
+margin_left = 193.0
+margin_right = 318.0
+margin_bottom = 60.0
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
 text = "Reset"
@@ -120,15 +120,15 @@ __meta__ = {
 }
 
 [node name="Options" type="CenterContainer" parent="Control/Menu/List/Items"]
-margin_top = 146.0
+margin_top = 129.0
 margin_right = 512.0
-margin_bottom = 215.0
+margin_bottom = 190.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Control/Menu/List/Items/Options"]
-margin_left = 163.0
-margin_right = 349.0
-margin_bottom = 69.0
+margin_left = 169.0
+margin_right = 342.0
+margin_bottom = 60.0
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
 text = "Options"
@@ -139,15 +139,15 @@ __meta__ = {
 }
 
 [node name="Exit" type="CenterContainer" parent="Control/Menu/List/Items"]
-margin_top = 219.0
+margin_top = 194.0
 margin_right = 512.0
-margin_bottom = 288.0
+margin_bottom = 255.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Control/Menu/List/Items/Exit"]
-margin_left = 213.0
-margin_right = 298.0
-margin_bottom = 69.0
+margin_left = 215.0
+margin_right = 296.0
+margin_bottom = 60.0
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
 text = "Exit"

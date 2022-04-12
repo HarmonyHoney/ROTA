@@ -14,11 +14,8 @@ var zoom_steps := 3
 var zoom_from := 0.0
 var zoom_to := 0.0
 
-onready var dpad_spin := $Control/Bottom/DPad/Spin
-
 var gem = EaseMover.new()
 var top = EaseMover.new()
-var bottom = EaseMover.new()
 var reset = EaseMover.new()
 var menu = EaseMover.new()
 var zoom = EaseMover.new()
@@ -35,10 +32,6 @@ func _ready():
 	top.to = top.node.rect_position
 	top.from = top.to - Vector2(0, 125)
 	
-	bottom.node = $Control/Bottom
-	bottom.to = bottom.node.rect_position
-	bottom.from = bottom.to + Vector2(0, 200)
-	
 	reset.time = 1.0
 	
 	zoom.time = 0.25
@@ -46,11 +39,8 @@ func _ready():
 	
 	menu.node = $Control/Menu
 	menu.to = menu.node.rect_position
-	menu.from = menu.to + Vector2(0, 70)
+	menu.from = menu.to + Vector2(0, 80)
 	menu.show = false
-	
-	
-	
 
 func _input(event):
 	if event.is_action_pressed("zoom"):
@@ -59,7 +49,6 @@ func _input(event):
 func _physics_process(delta):
 	gem.move(delta)
 	top.move(delta)
-	bottom.move(delta)
 	menu.move(delta)
 	
 	if zoom.clock != zoom.time:

@@ -63,11 +63,11 @@ UI="*res://src/autoload/UI.tscn"
 BG="*res://src/autoload/BG.tscn"
 Wipe="*res://src/autoload/Wipe.tscn"
 Guide="*res://src/actor/Guide.tscn"
-Boundary="*res://src/stage/Boundary.tscn"
+Boundary="*res://src/autoload/Boundary.tscn"
 CheatCode="*res://src/autoload/CheatCode.gd"
 Cutscene="*res://src/cutscene/Cutscene.tscn"
 PauseMenu="*res://src/autoload/PauseMenu.tscn"
-OptionsMenu="*res://src/autoload/OptionsMenu.tscn"
+OptionsMenu="*res://src/autoload/Options/OptionsMenu.tscn"
 RemapMenu="*res://src/autoload/Options/RemapMenu.tscn"
 
 [display]

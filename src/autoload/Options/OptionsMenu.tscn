@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/shader/outline2D_outer.shader" type="Shader" id=1]
 [ext_resource path="res://src/autoload/Options/Volume.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/autoload/OptionsMenu.gd" type="Script" id=3]
+[ext_resource path="res://src/autoload/Options/OptionsMenu.gd" type="Script" id=3]
 [ext_resource path="res://media/audio/sfx/Randomize104.wav" type="AudioStream" id=4]
 [ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=5]
 [ext_resource path="res://media/font/OptionsItem.tres" type="DynamicFont" id=6]
@@ -133,7 +133,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Control/Menu/List/HeaderInput"]
-anchor_left = 0.1
+anchor_left = 0.11
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 10 )
@@ -287,7 +287,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Control/Menu/List/HeaderAudio"]
-anchor_left = 0.1
+anchor_left = 0.11
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 10 )
@@ -354,7 +354,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Control/Menu/List/HeaderVideo"]
-anchor_left = 0.1
+anchor_left = 0.11
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 10 )

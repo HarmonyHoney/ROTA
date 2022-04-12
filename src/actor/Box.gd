@@ -277,6 +277,7 @@ func outside_boundary():
 		collision_shape.set_deferred("disabled", true)
 		area.set_deferred("monitorable", false)
 		
+		sprite.scale = Vector2.ZERO
 		sprite.modulate.a = 0.5
 		audio_fallout.play()
 

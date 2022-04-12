@@ -1,10 +1,5 @@
 extends Node
 
-var scene_splash := "res://src/menu/Splash.tscn"
-var scene_title := "res://src/menu/Title.tscn"
-var scene_select := "res://src/menu/WorldSelect.tscn"
-var scene_options := "res://src/menu/Options.tscn"
-
 var is_wipe := false
 
 onready var csfn := get_tree().current_scene.filename

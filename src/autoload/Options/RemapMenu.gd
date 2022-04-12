@@ -26,39 +26,6 @@ var actions = {"Left": "left",
 "Zoom": "zoom",
 "Reset": "reset",}
 
-var tex = {"JOY 0": preload("res://media/image/UI/btn_a.png"),
-"JOY 1": preload("res://media/image/UI/btn_b.png"),
-"JOY 2": preload("res://media/image/UI/btn_x.png"),
-"JOY 3": preload("res://media/image/UI/btn_y.png"),
-"JOY 10": preload("res://media/image/UI/btn_select.png"),
-"JOY 11": preload("res://media/image/UI/btn_start.png"),
-"JOY 12": preload("res://media/image/UI/dpad_up.png"),
-"JOY 13": preload("res://media/image/UI/dpad_up.png"),
-"JOY 14": preload("res://media/image/UI/dpad_up.png"),
-"JOY 15": preload("res://media/image/UI/dpad_up.png"),
-"AXIS 0-": preload("res://media/image/UI/l_stick_left.png"),
-"AXIS 0+": preload("res://media/image/UI/l_stick_right.png"),
-"AXIS 1-": preload("res://media/image/UI/l_stick_up.png"),
-"AXIS 1+": preload("res://media/image/UI/l_stick_down.png"),
-"AXIS 2-": preload("res://media/image/UI/r_stick_left.png"),
-"AXIS 2+": preload("res://media/image/UI/r_stick_right.png"),
-"AXIS 3-": preload("res://media/image/UI/r_stick_up.png"),
-"AXIS 3+": preload("res://media/image/UI/r_stick_down.png"),
-"KEY": preload("res://media/image/box/round_rect200.png"),
-"KEY_2": preload("res://media/image/UI/key_2.png"),
-"KEY_3": preload("res://media/image/UI/key_3.png"),
-"UP": preload("res://media/image/UI/key_up.png"),
-"DOWN": preload("res://media/image/UI/key_up.png"),
-"LEFT": preload("res://media/image/UI/key_up.png"),
-"RIGHT": preload("res://media/image/UI/key_up.png"),}
-
-var rotate = {"DOWN": 180,
-"LEFT": 270,
-"RIGHT": 90,
-"JOY 13": 180,
-"JOY 14": 270,
-"JOY 15": 90,}
-
 var prompt := EaseMover.new()
 var is_prompt := false
 onready var prompt_key := $Control/Prompt/VBoxContainer/Key
@@ -67,8 +34,8 @@ var prompt_clock := 0.0
 var prompt_time := 5.0
 var is_button := false
 
+onready var key = preload("res://src/autoload/Options/Key.tscn")
 onready var row := $Control/Menu/Base/Row
-onready var key := $Control/Menu/Base/Key
 
 export var is_gamepad := false
 
@@ -107,7 +74,6 @@ func _ready():
 	
 	# fill items
 	items = items_node.get_children()
-	
 	
 	# get default binds
 	for i in InputMap.get_actions():
@@ -166,6 +132,7 @@ func _physics_process(delta):
 	
 	prompt.count(delta, is_prompt)
 	prompt.node.modulate.a = lerp(0, 1, prompt.clock / prompt.time)
+	prompt.node.visible = prompt.clock > 0
 	
 	if open.clock == 0: return
 	
@@ -204,6 +171,10 @@ func show(arg := true):
 		for i in items.size() - 1:
 			#remove_keys(i)
 			create_keys(i)
+		
+		# header text
+		$Control/Header/Label.text = ("Controller" if is_gamepad else "Keyboard") + " Setup"
+		
 	else:
 		for i in items.size() - 1:
 			remove_keys(i)
@@ -214,34 +185,7 @@ func set_cursor(arg := 0):
 func draw_key(key_node, event):
 	if !is_type(event): return
 	
-	var label = key_node.get_node("Label")
-	var sprite = key_node.get_node("CenterContainer/Control/Sprite")
-	
-	var s = ""
-	if event is InputEventJoypadButton:
-		s = "JOY " + str(event.button_index)
-	elif event is InputEventJoypadMotion:
-		var sgn = "+" if event.axis_value > 0 else "-"
-		s = "AXIS " + str(event.axis) + sgn
-	elif event is InputEvent:
-		s = str(event.as_text().to_upper())
-	
-	# sprite
-	if tex.has(s):
-		label.visible = false
-		
-		sprite.texture = tex[s]
-		if rotate.has(s):
-			sprite.rotation_degrees = rotate[s]
-	
-	# text over key
-	else:
-		label.text = s.to_lower().capitalize()
-		
-		if s.length() < 2:
-			sprite.texture = tex["KEY"]
-		else:
-			sprite.texture = tex["KEY_3"]
+	key_node.parse_event(event)
 
 func remove_keys(row := 0):
 	for i in items[row].get_node("Keys").get_children():
@@ -271,7 +215,7 @@ func create_keys(row):
 	
 	for i in InputMap.get_action_list(action):
 		if is_type(i):
-			var k = key.duplicate()
+			var k = key.instance()
 			r.get_node("Keys").add_child(k)
 			
 			draw_key(k, i)

@@ -76,6 +76,7 @@ var jump_clock := 0.0
 var air_clock := 0.0
 
 var is_dead := false
+var is_fall_out := false
 
 var turn_clock := 0.0
 var turn_time := 0.2
@@ -359,8 +360,6 @@ func _physics_process(delta):
 			box.is_hold = false
 			box.pickup_clock = 0.0
 			
-			UI.dpad_spin.visible = false
-			
 			Guide.set_box(null)
 			
 			release_anim()
@@ -450,9 +449,6 @@ func _physics_process(delta):
 						push_from = position
 						push_clock = 0
 						
-						if box.can_spin:
-							UI.dpad_spin.visible = true
-						
 						Guide.set_box(box)
 						
 						# move to first child
@@ -504,8 +500,9 @@ func _physics_process(delta):
 			
 	
 	# check boundary
-	if Boundary.is_outside(global_position):
+	if !is_fall_out and Boundary.is_outside(global_position):
 		outside_boundary()
+		is_fall_out = true
 	
 	
 	# squash squish and stretch
