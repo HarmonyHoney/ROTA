@@ -27,10 +27,10 @@ var goal
 signal scene_changed
 var is_reload := false
 
-var volume_master := 100
-
 var volume = [100, 100, 100]
 
+var is_gamepad := false
+signal signal_gamepad(arg)
 
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
@@ -42,9 +42,16 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_F11:
 			toggle_fullscreen()
-		
-		elif event.scancode == KEY_MINUS or event.scancode == KEY_EQUAL:
-			set_volume(volume_master + (-10 if event.scancode == KEY_MINUS else 10))
+	
+	# gamepad signal
+	if event.is_pressed():
+		if is_gamepad and event is InputEventKey:
+			is_gamepad = false
+			emit_signal("signal_gamepad", is_gamepad)
+		elif !is_gamepad and (event is InputEventJoypadButton or event is InputEventJoypadMotion):
+			is_gamepad = true
+			emit_signal("signal_gamepad", is_gamepad)
+	
 
 func wipe_scene(arg):
 	if !is_wipe:

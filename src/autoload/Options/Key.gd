@@ -1,11 +1,11 @@
-tool
+#tool
 extends Control
 
 export var text := "" setget set_text
 export var action := "" setget set_action
-
-var event : InputEvent = null
-
+export var is_gamepad := false setget set_gamepad
+export var is_connect := false setget set_connect
+export var is_shrink := false setget set_shrink
 
 onready var offset := $Offset
 onready var sprite := $Offset/Sprite
@@ -49,12 +49,33 @@ var rotate = {"DOWN": 180,
 "JOY 14": 270,
 "JOY 15": 90,}
 
+var short = {KEY_CONTROL : "Ctrl",
+KEY_DELETE: "Del",
+KEY_BRACELEFT: "[",
+KEY_BRACERIGHT: "]",
+KEY_SEMICOLON: ";",
+KEY_APOSTROPHE: "'",
+KEY_BACKSLASH: "\\",
+KEY_SLASH: "/",
+KEY_QUOTELEFT: "`",
+KEY_MINUS: "-",
+KEY_EQUAL: "=",
+KEY_CAPSLOCK: "Caps",
+KEY_ESCAPE: "Esc",
+KEY_COMMA: ",",
+KEY_PERIOD: ".",}
+
 func _ready():
 	self.text = text
 
-func parse_event(_event : InputEvent):
-	event = _event
+func is_type(event):
+	var test = !is_gamepad and event is InputEventKey
+	if !test:
+		test = is_gamepad and (event is InputEventJoypadButton or event is InputEventJoypadMotion)
 	
+	return test
+
+func parse_event(event : InputEvent):
 	var s = " "
 	if event is InputEventJoypadButton:
 		s = "JOY " + str(event.button_index)
@@ -62,7 +83,10 @@ func parse_event(_event : InputEvent):
 		var sgn = "+" if event.axis_value > 0 else "-"
 		s = "AXIS " + str(event.axis) + sgn
 	elif event is InputEvent:
-		s = str(event.as_text().to_upper())
+		if event is InputEventKey and short.has(event.scancode):
+			s = short[event.scancode]
+		else:
+			s = str(event.as_text().to_upper())
 	
 	self.text = s
 
@@ -70,16 +94,22 @@ func set_text(arg := text):
 	text = arg
 	if !label: return
 	
+	offset.rect_scale = Vector2.ONE
+	
 	# sprite
 	if tex.has(text):
 		label.visible = false
 		
 		sprite.texture = tex[text]
-		if rotate.has(text):
-			sprite.rotation_degrees = rotate[text]
+		sprite.rotation_degrees = rotate[text] if rotate.has(text) else 0
+		
+		rect_min_size.x = 50
+		rect_size = rect_min_size
+		offset.rect_position.x = 25
 	
 	# text over key
 	else:
+		label.visible = true
 		label.text = text.to_lower().capitalize()
 		
 		var size = font.get_string_size(text)
@@ -88,15 +118,46 @@ func set_text(arg := text):
 		
 		var check = text.length() < 2
 		sprite.texture = tex_key if check else tex_key_2
+		sprite.rotation_degrees = 0
+		
 		rect_min_size.x = 50 if check else 100
 		rect_size = rect_min_size
 		offset.rect_position.x = 25 if check else 50
+		
+		if is_shrink and !check:
+			offset.rect_scale = Vector2.ONE * 0.5
+	
+	set_shrink()
 
 func set_action(arg := action):
 	action = arg
 	
 	if action != "" and InputMap.has_action(action):
 		var l = InputMap.get_action_list(action)
-		if l.size() > 0:
-			parse_event(l.back())
+		
+		# gamepad or keyboard
+		var e = null
+		for i in l:
+			if is_type(i):
+				e = i
+		if e:
+			parse_event(e)
+
+func set_gamepad(arg := is_gamepad):
+	is_gamepad = arg
+	set_action()
+
+func set_connect(arg := is_connect):
+	is_connect = arg
+	
+	if is_connect:
+		Shared.connect("signal_gamepad", self, "signal_gamepad")
+	else:
+		Shared.disconnect("signal_gamepad", self, "signal_gamepad")
+
+func signal_gamepad(arg):
+	set_gamepad(arg)
+
+func set_shrink(arg := is_shrink):
+	is_shrink = arg
 	

@@ -73,3 +73,5 @@ margin_right = 75.0
 margin_bottom = 75.0
 text = "R"
 action = "reset"
+is_connect = true
+is_shrink = true

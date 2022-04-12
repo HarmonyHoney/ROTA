@@ -17,15 +17,6 @@ export var cursor_margin := Vector2.ZERO
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
 
-var actions = {"Left": "left",
-"Right": "right",
-"Up": "up",
-"Down": "down",
-"Jump": "jump",
-"Grab": "grab",
-"Zoom": "zoom",
-"Reset": "reset",}
-
 var prompt := EaseMover.new()
 var is_prompt := false
 onready var prompt_key := $Control/Prompt/VBoxContainer/Key
@@ -35,13 +26,13 @@ var prompt_time := 5.0
 var is_button := false
 
 onready var key = preload("res://src/autoload/Options/Key.tscn")
-onready var row := $Control/Menu/Base/Row
 
 export var is_gamepad := false
 
 onready var header := $Control/Header
 onready var header_back := $Control/Header/Back
 onready var header_ease := EaseMover.new(null, 0.2)
+onready var header_track := $Control/Menu/List/Spacer
 
 var defaults := {}
 
@@ -54,26 +45,14 @@ func _ready():
 	prompt.to = prompt.node.rect_position
 	prompt.from = Vector2(prompt.to.x, 720)
 	
-	$Control/Menu/Base.visible = false
-	
-	# create items
-	for i in actions.size():
-		var r = row.duplicate()
-		items_node.add_child(r)
-		
-		r.get_node("Label").text = actions.keys()[i]
+	# fill items
+	for i in items_node.get_children():
+		if !i.is_in_group("no_item"):
+			items.append(i)
 	
 	# create keys
 	for i in items.size():
 		create_keys(i)
-	
-	# reset item
-	var r = row.duplicate()
-	items_node.add_child(r)
-	r.get_node("Label").text = "Reset to Defaults"
-	
-	# fill items
-	items = items_node.get_children()
 	
 	# get default binds
 	for i in InputMap.get_actions():
@@ -86,7 +65,7 @@ func _input(event):
 		if event.is_action_pressed("ui_pause"):
 			is_prompt = false
 		elif event.is_pressed() and is_type(event):
-			assign_key(actions.values()[cursor], event)
+			assign_key(items[cursor].action, event)
 			is_prompt = false
 			get_tree().set_input_as_handled()
 		
@@ -100,18 +79,17 @@ func _input(event):
 		
 		# open prompt
 		elif event.is_action_pressed("ui_accept"):
-			if cursor == items.size() - 1:
+			if items[cursor].is_in_group("reset"):
 				reset_to_defaults()
-			else:
+			elif items[cursor].is_in_group("remap"):
 				is_prompt = true
-				prompt_key.text = actions.keys()[cursor]
+				prompt_key.text = items[cursor].action
 				prompt_clock = prompt_time
 				get_tree().set_input_as_handled()
 		
 		# clear key
 		elif event.is_action_pressed("ui_end"):
 			clear_row(cursor)
-			pass
 		
 		# exit
 		elif event.is_action_pressed("ui_cancel"):
@@ -152,7 +130,7 @@ func _physics_process(delta):
 	menu.rect_position.y = lerp(menu.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
 	
 	# header position
-	header.rect_global_position.y = clamp(items_node.rect_global_position.y - header.rect_size.y, 30, 1280)
+	header.rect_global_position.y = clamp(header_track.rect_global_position.y, 30, 1280)
 	
 	# header back
 	header_ease.show  = header.rect_global_position.y == 30
@@ -168,15 +146,14 @@ func show(arg := true):
 		scroll = 0
 		
 		# create keys
-		for i in items.size() - 1:
-			#remove_keys(i)
+		for i in items.size():
 			create_keys(i)
 		
 		# header text
-		$Control/Header/Label.text = ("Controller" if is_gamepad else "Keyboard") + " Setup"
+		$Control/Menu/List/Title.text = ("Controller" if is_gamepad else "Keyboard") + " Setup"
 		
 	else:
-		for i in items.size() - 1:
+		for i in items.size():
 			remove_keys(i)
 
 func set_cursor(arg := 0):
@@ -188,37 +165,61 @@ func draw_key(key_node, event):
 	key_node.parse_event(event)
 
 func remove_keys(row := 0):
-	for i in items[row].get_node("Keys").get_children():
-		i.queue_free()
+	if items[row].is_in_group("remap"):
+		for i in items[row].get_node("Keys").get_children():
+			i.queue_free()
 
 func clear_row(row := 0):
-	remove_keys(row)
-	
-	var action = actions.values()[row]
-	
-	for i in InputMap.get_action_list(action):
-		if is_type(i):
+	if items[row].is_in_group("remap"):
+		remove_keys(row)
+		var action = items[row].action
+		
+		var list = []
+		for i in InputMap.get_action_list(action):
+			if is_type(i):
+				list.append(i)
+		
+		# keep one event for ui
+		if "ui_" in action:
+			list.pop_back()
+		
+		for i in list:
 			InputMap.action_erase_event(action, i)
-	
+		
+		create_keys(row)
+		
+		Shared.emit_signal("signal_gamepad", Shared.is_gamepad)
 
 func assign_key(action, event):
+	# keep size to 4
+	var list = []
+	for i in InputMap.get_action_list(action):
+		if is_type(i):
+			list.append(i)
+	
+	if list.size() > 3:
+		InputMap.action_erase_event(action, list[0])
+	
 	InputMap.action_add_event(action, event)
 	
 	create_keys(cursor)
+	
+	Shared.emit_signal("signal_gamepad", Shared.is_gamepad)
 
 func create_keys(row):
 	var r = items[row]
-	var action = actions.values()[row]
-	
-	for i in r.get_node("Keys").get_children():
-		i.queue_free()
-	
-	for i in InputMap.get_action_list(action):
-		if is_type(i):
-			var k = key.instance()
-			r.get_node("Keys").add_child(k)
-			
-			draw_key(k, i)
+	if r.is_in_group("remap"):
+		var action = items[row].action
+		
+		for i in r.get_node("Keys").get_children():
+			i.queue_free()
+		
+		for i in InputMap.get_action_list(action):
+			if is_type(i):
+				var k = key.instance()
+				r.get_node("Keys").add_child(k)
+				
+				draw_key(k, i)
 
 func is_type(event):
 	var test = !is_gamepad and event is InputEventKey
@@ -240,4 +241,5 @@ func reset_to_defaults():
 	
 	for i in items.size() - 1:
 		create_keys(i)
-
+	
+	Shared.emit_signal("signal_gamepad", Shared.is_gamepad)

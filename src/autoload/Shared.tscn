@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/autoload/Shared.gd" type="Script" id=1]
+
+[node name="Shared" type="Node"]
+pause_mode = 2
+script = ExtResource( 1 )

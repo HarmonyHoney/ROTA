@@ -200,9 +200,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Control/Menu/HBoxContainer"]
-margin_left = 176.0
+margin_left = 76.0
 margin_top = 24.0
-margin_right = 271.0
+margin_right = 171.0
 margin_bottom = 60.0
 custom_fonts/font = SubResource( 3 )
 text = "Accept"
@@ -213,22 +213,25 @@ __meta__ = {
 }
 
 [node name="Key" parent="Control/Menu/HBoxContainer" instance=ExtResource( 9 )]
-margin_left = 281.0
+margin_left = 181.0
 margin_top = 17.0
-margin_right = 331.0
+margin_right = 281.0
 margin_bottom = 67.0
-text = "X"
+rect_min_size = Vector2( 100, 50 )
+text = "ENTER"
+action = "ui_accept"
+is_connect = true
 
 [node name="Spacer" type="Control" parent="Control/Menu/HBoxContainer"]
-margin_left = 341.0
-margin_right = 346.0
+margin_left = 291.0
+margin_right = 296.0
 margin_bottom = 85.0
 rect_min_size = Vector2( 5, 0 )
 
 [node name="Label2" type="Label" parent="Control/Menu/HBoxContainer"]
-margin_left = 356.0
+margin_left = 306.0
 margin_top = 24.0
-margin_right = 422.0
+margin_right = 372.0
 margin_bottom = 60.0
 custom_fonts/font = SubResource( 3 )
 text = "Back"
@@ -239,8 +242,11 @@ __meta__ = {
 }
 
 [node name="Key2" parent="Control/Menu/HBoxContainer" instance=ExtResource( 9 )]
-margin_left = 432.0
+margin_left = 382.0
 margin_top = 17.0
 margin_right = 482.0
 margin_bottom = 67.0
-text = "C"
+rect_min_size = Vector2( 100, 50 )
+text = "ESCAPE"
+action = "ui_cancel"
+is_connect = true

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/autoload/Options/RemapMenu.gd" type="Script" id=2]
+[ext_resource path="res://src/autoload/Options/Row.tscn" type="PackedScene" id=3]
 [ext_resource path="res://media/font/OptionsItem.tres" type="DynamicFont" id=4]
 [ext_resource path="res://src/autoload/Options/Key.tscn" type="PackedScene" id=5]
 
@@ -15,6 +16,14 @@ corner_radius_bottom_left = 50
 
 [sub_resource type="DynamicFont" id=23]
 size = 60
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=24]
+size = 30
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
@@ -83,46 +92,6 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Base" type="Control" parent="Control/Menu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 115.0
-margin_bottom = 115.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Row" type="Control" parent="Control/Menu/Base"]
-anchor_right = 1.0
-margin_top = 210.0
-margin_bottom = 290.0
-rect_min_size = Vector2( 0, 80 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/Menu/Base/Row"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( -390.432, 251.663 )
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 4 )
-text = "Up"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Keys" type="HBoxContainer" parent="Control/Menu/Base/Row"]
-anchor_left = 0.3
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/separation = 15
-alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="List" type="VBoxContainer" parent="Control/Menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -131,25 +100,212 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Header" type="Control" parent="Control"]
-anchor_left = 0.25
-anchor_right = 0.75
-margin_left = -60.0
-margin_top = 255.367
-margin_right = 60.0
-margin_bottom = 335.367
-rect_min_size = Vector2( 0, 80 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/Header"]
-anchor_right = 1.0
-margin_top = -140.0
+[node name="Title" type="Label" parent="Control/Menu/List" groups=["no_item"]]
+margin_right = 640.0
+margin_bottom = 71.0
 custom_fonts/font = SubResource( 23 )
 text = "Keyboard Setup"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 75.0
+margin_right = 640.0
+margin_bottom = 195.0
+rect_min_size = Vector2( 0, 120 )
+
+[node name="Game" type="Label" parent="Control/Menu/List" groups=["no_item"]]
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+margin_top = 199.0
+margin_right = 640.0
+margin_bottom = 247.0
+custom_fonts/font = ExtResource( 4 )
+text = "Game"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 251.0
+margin_right = 640.0
+margin_bottom = 331.0
+action = "left"
+text = "Left"
+
+[node name="Row2" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 335.0
+margin_right = 640.0
+margin_bottom = 415.0
+action = "right"
+text = "Right"
+
+[node name="Row3" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 419.0
+margin_right = 640.0
+margin_bottom = 499.0
+action = "up"
+text = "Up"
+
+[node name="Row4" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 503.0
+margin_right = 640.0
+margin_bottom = 583.0
+action = "down"
+text = "Down"
+
+[node name="Row5" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 587.0
+margin_right = 640.0
+margin_bottom = 667.0
+action = "down"
+text = "Jump"
+
+[node name="Row6" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 671.0
+margin_right = 640.0
+margin_bottom = 751.0
+action = "jump"
+text = "Grab"
+
+[node name="Row7" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 755.0
+margin_right = 640.0
+margin_bottom = 835.0
+action = "zoom"
+text = "Zoom"
+
+[node name="Row8" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 839.0
+margin_right = 640.0
+margin_bottom = 919.0
+action = "reset"
+text = "Reset"
+
+[node name="Spacer2" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 923.0
+margin_right = 640.0
+margin_bottom = 963.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="Menu" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+margin_top = 967.0
+margin_right = 640.0
+margin_bottom = 1017.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Menu" type="Label" parent="Control/Menu/List/Menu"]
+margin_top = 4.0
+margin_right = 640.0
+margin_bottom = 52.0
+custom_fonts/font = ExtResource( 4 )
+text = "Menu"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu2" type="Label" parent="Control/Menu/List/Menu"]
+margin_top = 4.0
+margin_right = 640.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 24 )
+text = "Minimum one action"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row9" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 1021.0
+margin_right = 640.0
+margin_bottom = 1101.0
+action = "ui_left"
+text = "Left"
+
+[node name="Row10" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 1105.0
+margin_right = 640.0
+margin_bottom = 1185.0
+action = "ui_right"
+text = "Right"
+
+[node name="Row11" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 1189.0
+margin_right = 640.0
+margin_bottom = 1269.0
+action = "ui_up"
+text = "Up"
+
+[node name="Row12" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 1273.0
+margin_right = 640.0
+margin_bottom = 1353.0
+action = "ui_down"
+text = "Down"
+
+[node name="Row13" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 1357.0
+margin_right = 640.0
+margin_bottom = 1437.0
+action = "ui_accept"
+text = "Accept"
+
+[node name="Row14" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 1441.0
+margin_right = 640.0
+margin_bottom = 1521.0
+action = "ui_cancel"
+text = "Cancel"
+
+[node name="Row15" parent="Control/Menu/List" instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_top = 1525.0
+margin_right = 640.0
+margin_bottom = 1605.0
+action = "ui_pause"
+text = "Pause"
+
+[node name="Reset" type="Label" parent="Control/Menu/List" groups=["reset"]]
+margin_top = 1609.0
+margin_right = 640.0
+margin_bottom = 1689.0
+rect_min_size = Vector2( 0, 80 )
+custom_fonts/font = ExtResource( 4 )
+text = "Reset to Defaults"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="Control" parent="Control"]
+anchor_left = 0.25
+anchor_right = 0.75
+margin_left = -60.0
+margin_top = 75.0
+margin_right = 60.0
+margin_bottom = 155.0
+rect_min_size = Vector2( 0, 80 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -172,9 +328,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Control/Header/HBoxContainer"]
-margin_left = 33.0
+margin_left = 58.0
 margin_top = 16.0
-margin_right = 135.0
+margin_right = 160.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 custom_fonts/font = ExtResource( 4 )
@@ -186,17 +342,18 @@ __meta__ = {
 }
 
 [node name="Key" parent="Control/Header/HBoxContainer" instance=ExtResource( 5 )]
-margin_left = 150.0
+margin_left = 175.0
 margin_top = 15.0
-margin_right = 200.0
+margin_right = 225.0
 margin_bottom = 65.0
 size_flags_vertical = 4
-text = "X"
+action = "ui_accept"
+is_connect = true
 
 [node name="Label2" type="Label" parent="Control/Header/HBoxContainer"]
-margin_left = 215.0
+margin_left = 240.0
 margin_top = 16.0
-margin_right = 462.0
+margin_right = 487.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 custom_fonts/font = ExtResource( 4 )
@@ -208,18 +365,18 @@ __meta__ = {
 }
 
 [node name="Key2" parent="Control/Header/HBoxContainer" instance=ExtResource( 5 )]
-margin_left = 477.0
+margin_left = 502.0
 margin_top = 15.0
-margin_right = 577.0
+margin_right = 552.0
 margin_bottom = 65.0
-rect_min_size = Vector2( 100, 50 )
 size_flags_vertical = 4
-text = "DELETE"
+action = "ui_end"
+is_connect = true
 
 [node name="Label3" type="Label" parent="Control/Header/HBoxContainer"]
-margin_left = 592.0
+margin_left = 567.0
 margin_top = 16.0
-margin_right = 726.0
+margin_right = 701.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 custom_fonts/font = ExtResource( 4 )
