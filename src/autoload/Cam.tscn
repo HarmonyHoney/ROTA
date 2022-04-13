@@ -6,3 +6,4 @@
 rotating = true
 current = true
 script = ExtResource( 1 )
+zoom_min = 1.33

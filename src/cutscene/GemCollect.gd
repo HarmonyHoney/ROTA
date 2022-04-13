@@ -51,7 +51,7 @@ func begin():
 		if !is_instance_valid(i):
 			return
 	
-	Cutscene.is_playing = true
+	Cutscene.start()
 	
 	set_physics_process(true)
 	clock = 0.0
@@ -62,7 +62,8 @@ func begin():
 	door_dest.gem.set_color(false)
 
 func end():
-	Cutscene.is_playing = false
+	Cutscene.end()
+	
 	player.set_physics_process(true)
 	set_physics_process(false)
 	

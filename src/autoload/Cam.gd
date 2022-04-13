@@ -10,29 +10,38 @@ var is_moving := true
 var screen_size := Vector2(1280, 720)
 onready var start_offset = offset
 
-var turn_clock := 0.0
-var turn_time := 0.5
+var turn_ease := EaseMover.new()
 var turn_from := 0.0
 var turn_to := 0.0
 
 var is_zoom := false
-var zoom_clock := 0.0
-var zoom_time := 0.5
+
+var zoom_ease := EaseMover.new()
 var zoom_from := 1.0
 var zoom_to := 1.0
-var zoom_out := 2.5
+
+export var zoom_min := 1.2
+export var zoom_max := 2.5
+
+var zoom_step := 0
+var zoom_steps := 2
+
+func _ready():
+	zoom = Vector2.ONE * zoom_min
+
+func _input(event):
+	if event.is_action_pressed("zoom"):
+		start_zoom(zoom_step + 1)
 
 func _process(delta):
 	# rotation
 	if is_rotating:
-		turn_clock = min(turn_clock + delta, turn_time)
+		if turn_ease.clock < turn_ease.time:
+			rotation = lerp_angle(turn_from, turn_to, turn_ease.count(delta))
+			emit_signal("turning", rotation)
 		
-		var s = smoothstep(0, 1, turn_clock / turn_time)
-		rotation = lerp_angle(turn_from, turn_to, s)
-		emit_signal("turning", rotation)
-		
-		if start_offset != Vector2.ZERO:
-			offset = start_offset.rotated(rotation)
+			if start_offset != Vector2.ZERO:
+				offset = start_offset.rotated(rotation)
 	
 	# track target
 	if is_instance_valid(target_node):
@@ -44,24 +53,23 @@ func _process(delta):
 	
 	# zoom
 	if is_zoom:
-		zoom_clock = min(zoom_clock + delta, zoom_time)
-		var s = smoothstep(0, 1, zoom_clock / zoom_time)
-		
-		zoom = Vector2.ONE * lerp(zoom_from, zoom_to, s)
-		if zoom_clock == zoom_time:
+		zoom = Vector2.ONE * lerp(zoom_from, zoom_to, zoom_ease.count(delta))
+		if zoom_ease.is_complete:
 			is_zoom = false
 
 func turn(arg):
 	turn_from = rotation
 	turn_to = arg
-	turn_clock = 0.0
+	turn_ease.clock = 0.0
 
-func start_zoom(arg := 0.0):
-	var z = zoom_to
-	zoom_to = lerp(1.0, zoom_out, arg)
+func start_zoom(arg := 0):
+	zoom_step = posmod(arg, zoom_steps + 1)
 	
-	if zoom_to != z:
-		is_zoom = true
-		zoom_from = zoom.x
-		zoom_clock = 0.0
+	is_zoom = true
+	zoom_ease.clock = 0.0
+	zoom_from = zoom.x
+	var frac = float(zoom_step) / zoom_steps
+	zoom_to = lerp(zoom_min, zoom_max, frac)
+	
+	UI.set_zoom(frac)
 

@@ -9,8 +9,6 @@ var btn_reset := false
 
 onready var zoom_notch := $Control/Top/Zoom/Slider/Notch
 onready var zoom_circle := $Control/Top/Zoom/Circle
-var zoom_step := 0
-var zoom_steps := 3
 var zoom_from := 0.0
 var zoom_to := 0.0
 
@@ -42,10 +40,6 @@ func _ready():
 	menu.from = menu.to + Vector2(0, 80)
 	menu.show = false
 
-func _input(event):
-	if event.is_action_pressed("zoom"):
-		set_zoom(zoom_step + 1)
-
 func _physics_process(delta):
 	gem.move(delta)
 	top.move(delta)
@@ -54,7 +48,6 @@ func _physics_process(delta):
 	if zoom.clock != zoom.time:
 		zoom.count(delta)
 		zoom_circle.scale = Vector2.ONE * lerp(zoom_from, zoom_to, zoom.frac())
-		
 	
 	# reset
 	if is_reset:
@@ -72,14 +65,10 @@ func _physics_process(delta):
 		if is_instance_valid(Shared.player):
 			Shared.player.set_physics_process(false)
 
-func set_zoom(arg := 0):
-	zoom_step = posmod(arg, zoom_steps + 1)
-	var zf = float(zoom_step) / zoom_steps
-	zoom_notch.position.y = lerp(8, 56, zf)
+func set_zoom(frac := 0.0):
+	zoom_notch.position.y = lerp(8, 56, frac)
 	
 	zoom_from = zoom_circle.scale.x
-	zoom_to = lerp(0.0, 1.0, zf)
+	zoom_to = lerp(0.0, 1.0, frac)
 	zoom.clock = 0
-	
-	Cam.start_zoom(zf)
 	

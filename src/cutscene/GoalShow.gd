@@ -3,7 +3,6 @@ extends Node
 var step := 0
 var clock := 0.0
 
-var camera : Camera2D
 var player
 var goal
 
@@ -49,31 +48,30 @@ func next_step():
 	step += 1
 
 func begin():
-	camera = Cam
 	player = Shared.player
 	goal = Shared.goal
 	
-	for i in [camera, player, goal]:
+	for i in [player, goal]:
 		if !is_instance_valid(i):
 			return
 	
-	Cutscene.is_playing = true
+	Cutscene.start()
+	Cam.set_process(false)
+	player.set_physics_process(false)
 	
 	set_physics_process(true)
 	clock = 0.0
 	step = 0
-	
-	player.set_physics_process(false)
-	camera.set_process(false)
 
 func end():
-	Cutscene.is_playing = false
-	set_physics_process(false)
+	Cutscene.end()
+	Cam.set_process(true)
 	player.set_physics_process(true)
-	camera.set_process(true)
+	
+	set_physics_process(false)
 
 func cam_target(target):
-	cam_from = camera.global_position
+	cam_from = Cam.global_position
 	cam_to = target
 	
 	var d = cam_from.distance_to(cam_to) / 100.0
@@ -81,4 +79,4 @@ func cam_target(target):
 
 func cam_move():
 	var s = smoothstep(0, 1, min(clock, cam_time) / cam_time)
-	camera.global_position = cam_from.linear_interpolate(cam_to, s)
+	Cam.global_position = cam_from.linear_interpolate(cam_to, s)

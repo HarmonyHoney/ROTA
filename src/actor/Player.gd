@@ -149,7 +149,7 @@ func _ready():
 	camera.turn_from = turn_to
 	camera.turn_to = turn_to
 	camera.rotation = turn_to
-	camera.turn_clock = 99
+	camera.turn_ease.clock = 99
 	camera.position = position
 	#camera.zoom_in()
 	camera.reset_smoothing()
@@ -245,8 +245,8 @@ func _physics_process(delta):
 				goal_step += 1
 				goal_clock = 0.0
 				
-				if goal_step == 2:
-					goal.audio_coin.play()
+				#if goal_step == 2:
+				#	goal.audio_coin.play()
 				
 				# finished
 				if goal_step > 2:

@@ -51,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="gdRota"
-run/main_scene="res://src/map/worlds/0/0_hub.tscn"
+run/main_scene="res://src/map/worlds/1/0_start.tscn"
 config/icon="res://media/image/gobot.png"
 
 [autoload]

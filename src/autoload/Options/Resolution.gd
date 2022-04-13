@@ -21,6 +21,3 @@ func axis_x(arg := 1):
 	cursor = clamp(cursor + arg, 0, list.size() - 1)
 	show()
 	OS.window_size = list[cursor]
-
-func act():
-	axis_x(0)

@@ -54,6 +54,7 @@ func _input(event):
 	
 	if back:
 		press_pause()
+		get_tree().set_input_as_handled()
 	elif enter:
 		match cursor:
 			0:
@@ -63,7 +64,7 @@ func _input(event):
 			2:
 				options()
 			3:
-				pass#exit()
+				get_tree().quit()
 
 func _physics_process(delta):
 	#open.move(delta, is_paused)
