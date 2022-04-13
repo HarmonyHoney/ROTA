@@ -3,7 +3,6 @@ extends KinematicBody2D
 class_name Box
 
 onready var collision_shape : CollisionShape2D = $CollisionShape2D
-onready var standing_area : Area2D = $StandingArea
 onready var push_areas : Array = $PushAreas.get_children()
 onready var area_respawn := $RespawnArea
 onready var area := $Area2D
@@ -27,34 +26,33 @@ var tex_push = preload("res://media/image/box/box_push.png")
 var tex_both = preload("res://media/image/box/box_both.png")
 
 var tile := 100.0
-var is_floor := false
-var last_floor := false
-var move_clock := 0.0
-var move_time := 0.2
 var move_from := Vector2.ZERO
-var move_to := Vector2.ZERO
 
 var turn_from := 0.0
 var turn_to := 0.0
-var turn_clock := 0.0
-var turn_time := 0.2
-
-var is_push := false
 
 var start_dir := 0
 var start_pos := Vector2.ZERO
-var is_respawn := false
-var respawn_clock := 0.0
-var respawn_time := 0.4
 
-var is_hold := false
+var is_floor := false
+var last_floor := false
+var is_respawn := false
+var is_push := false
 var push_x := -1
+var is_hold := false
 var is_turn := false
 
-var pickup_clock := 0.0
-var pickup_time := 0.2
 var pickup_angle := 12.0
 
+onready var push_ease := EaseMover.new(null, 0.2)
+onready var turn_ease := EaseMover.new(null, 0.2)
+onready var respawn_ease := EaseMover.new(null, 1.0)
+onready var pickup_ease := EaseMover.new(null, 0.2)
+
+var velocity := 0.0
+export var start_velocity := 100.0
+export var gravity := 200.0
+var is_move := false
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -68,7 +66,7 @@ func _ready():
 	set_sprite()
 	if Engine.editor_hint: return
 	
-	turn_clock = 99
+	turn_ease.clock = 99
 	
 	# snap to grid
 	position = (Vector2.ONE * tile / 2) + (position / tile).floor() * tile
@@ -80,18 +78,14 @@ func _ready():
 	# check floor
 	is_floor = test_tile(dir, 1)
 	last_floor = is_floor
-	move_clock = move_time
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
 	if is_respawn:
-		respawn_clock = min(respawn_clock + delta, respawn_time)
+		sprite.scale = Vector2.ONE * respawn_ease.count(delta)
 		
-		var s = smoothstep(0, 1, respawn_clock / respawn_time)
-		sprite.scale = Vector2.ONE * s
-		
-		if respawn_clock == respawn_time and area_respawn.get_overlapping_bodies().size() == 0:
+		if respawn_ease.is_complete and area_respawn.get_overlapping_bodies().size() == 0:
 			is_respawn = false
 			
 			collision_shape.set_deferred("disabled", false)
@@ -101,59 +95,61 @@ func _physics_process(delta):
 			sprite.modulate.a = 1.0
 		return
 	
-	
-	# on floor
-	last_floor = is_floor
-	is_floor = test_tile(dir, 1)
-	
-	# move clock
-	if move_clock < move_time:
-		move_clock = min(move_clock + delta, move_time)
-		var smooth = smoothstep(0, 1, move_clock / move_time)
+	elif is_push:
+		var s = push_ease.count(delta)
 		# lerp sprite and update collision_sprite
-		sprite.position = move_from.linear_interpolate(Vector2.ZERO, smooth)
+		sprite.position = move_from.linear_interpolate(Vector2.ZERO, s)
 		collision_sprite.position = sprite.position
+		sprite.rotation = lerp_angle(turn_to + deg2rad(12 * -push_x), turn_to, abs(0.5 - s) * 2.0)
 		
-		if is_push:
-			sprite.rotation = lerp_angle(turn_to + deg2rad(12 * -push_x), turn_to, abs(0.5 - smooth) * 2.0)
-			#sprite.scale = Vector2.ONE *  lerp(0.9, 1.0, smooth)
-		
-		if move_clock == move_time and !is_hold and is_floor and !last_floor:
-			audio_land.pitch_scale = rand_range(0.7, 1.3)
-			audio_land.play()
+		if push_ease.is_complete:
+			is_push = false
 	
 	# turn clock
-	elif turn_clock != turn_time:
-		turn_clock = min(turn_clock + delta, turn_time)
-		var smooth = smoothstep(0, 1, turn_clock / turn_time)
-		sprite.rotation = lerp_angle(turn_from, turn_to, smooth)
-		sprite.scale = Vector2.ONE * lerp(0.8, 1.0, smooth)
+	elif is_turn:
+		var s = turn_ease.count(delta)
+		sprite.rotation = lerp_angle(turn_from, turn_to, s)
+		sprite.scale = Vector2.ONE * lerp(0.8, 1.0, s)
 		
-		if turn_clock == turn_time:
+		if turn_ease.is_complete:
 			is_turn = false
 	
 	# pickup clock
-	if pickup_clock != pickup_time:
-		pickup_clock = min(pickup_clock + delta, pickup_time)
-		var smooth = smoothstep(0, 1, pickup_clock / pickup_time)
-		sprite.scale = Vector2.ONE * lerp(1.1, 1.0, smooth)
+	elif pickup_ease.clock < pickup_ease.time:
+		sprite.scale = Vector2.ONE * lerp(1.1, 1.0, pickup_ease.count(delta))
 	
 	# movement
-	if move_clock == move_time:
-		if is_push:
-			is_push = false
+	elif is_move:
+		velocity += gravity * delta
+		sprite.position = sprite.position.move_toward(Vector2.ZERO, velocity * delta)
+		collision_sprite.position = sprite.position
 		
-		# move down
-		if !is_hold and !is_floor:
-			move_tile(dir, 1)
+		if sprite.position == Vector2.ZERO:
+			is_move = false
+			
+			if Boundary.is_outside(global_position):
+				outside_boundary()
+			else:
+				audio_land.pitch_scale = rand_range(0.7, 1.3)
+				audio_land.play()
+	
+	# start movement
+	elif !is_move:
+		# get floor
+		last_floor = is_floor
+		is_floor = test_tile()
+		
+		if !is_floor and !is_hold:
+			var move_count := 0
+			while !test_tile() and !Boundary.is_outside(global_position):
+				move_tile()
+				move_count += 1
+			
+			is_move = true
+			velocity = start_velocity
 			
 			audio_move.pitch_scale = rand_range(0.7, 1.3)
 			audio_move.play()
-	
-	# check boundary
-	if Boundary.is_outside(global_position):
-		outside_boundary()
-
 
 func set_dir(arg := dir):
 	dir_last = dir
@@ -162,7 +158,8 @@ func set_dir(arg := dir):
 	if is_instance_valid(sprite):
 		turn_from = sprite.rotation
 	turn_to = deg2rad(dir * 90)
-	turn_clock = 0.0
+	if turn_ease:
+		turn_ease.clock = 0.0
 	is_turn = true
 	
 	if Engine.editor_hint:
@@ -194,15 +191,6 @@ func test_tile(check_dir := dir, distance := 1) -> bool:
 	return result
 
 func move_tile(move_dir := dir, distance := 1):
-	# jump player
-	for i in standing_area.get_overlapping_bodies():
-		if i.is_in_group("player"):
-			i.standing_move()
-#			i.has_jumped = true
-#			if i.velocity.y > 0:
-#				i.velocity.y = 0
-	
-	# move
 	var last_pos = position
 	position += rot(Vector2.DOWN * distance * tile, move_dir)
 	position = Vector2(stepify(position.x, 50), stepify(position.y, 50))
@@ -212,9 +200,6 @@ func move_tile(move_dir := dir, distance := 1):
 	# move sprite
 	sprite.position -= position - last_pos
 	move_from = sprite.position
-	
-	# reset clock
-	move_clock = 0
 
 # start push at first box in line
 func start_push(push_dir := 0, _push_x := 1):
@@ -245,6 +230,7 @@ func push(push_dir := 0, _push_x := 1):
 	if result:
 		move_tile(push_dir, 1)
 		is_push = true
+		push_ease.clock = 0.0
 	
 	return result
 
@@ -268,9 +254,8 @@ func outside_boundary():
 		set_dir(start_dir)
 		position = start_pos
 		sprite.position = Vector2.ZERO
-		turn_clock = 0
-		move_clock = move_time
-		respawn_clock = 0.0
+		turn_ease.clock = 0.0
+		respawn_ease.clock = 0.0
 		
 		collision_shape.set_deferred("disabled", true)
 		area.set_deferred("monitorable", false)
@@ -291,4 +276,6 @@ func set_sprite():
 	if box_sprite:
 		box_sprite.texture = tex_both if can_spin else tex_push
 
+func pickup():
+	pickup_ease.clock = 0.0
 

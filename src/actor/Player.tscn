@@ -468,17 +468,6 @@ anims/release = SubResource( 9 )
 anims/walk = SubResource( 8 )
 next/jump = "jump"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-margin_left = -17.0
-margin_top = -17.0
-margin_right = 17.0
-margin_bottom = 17.0
-color = Color( 1, 1, 1, 0.360784 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Root" type="Node2D" parent="Sprites"]

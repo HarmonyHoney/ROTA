@@ -36,7 +36,6 @@ onready var cam_target := $CamTarget
 var peek_clock := 0.0
 var peek_time := 0.2
 
-
 export var is_input := true
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
@@ -110,8 +109,6 @@ var goal_start := Vector2.ZERO
 var squish_from := Vector2.ONE
 var squish_clock := 0.0
 var squish_time := 0.5
-
-var last_collision
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -360,7 +357,7 @@ func _physics_process(delta):
 			remove_collision_exception_with(box)
 			box.remove_collision_exception_with(self)
 			box.is_hold = false
-			box.pickup_clock = 0.0
+			box.pickup()
 			
 			Guide.set_box(null)
 			
@@ -446,7 +443,7 @@ func _physics_process(delta):
 						add_collision_exception_with(box)
 						box.add_collision_exception_with(self)
 						box.is_hold = true
-						box.pickup_clock = 0.0
+						box.pickup()
 						
 						push_from = position
 						push_clock = 0
@@ -499,9 +496,6 @@ func _physics_process(delta):
 			# move body
 			move_velocity = move_and_slide(rot(velocity))
 			velocity = rot(move_velocity, -dir)
-			last_collision = get_last_slide_collision()
-			#print(last_collision.collider)
-			
 	
 	# check boundary
 	if !is_fall_out and Boundary.is_outside(global_position):
@@ -704,11 +698,3 @@ func cheat_code(cheat):
 func enter_door():
 	set_physics_process(false)
 	anim.play("idle")
-
-func standing_move():
-	if !is_hold and is_floor:
-		print("standing_move")
-		has_jumped = true
-		set_physics_process(false)
-		yield(get_tree().create_timer(0.1), "timeout")
-		set_physics_process(true)
