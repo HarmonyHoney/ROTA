@@ -82,8 +82,8 @@ func change_scene():
 		csfn = next_scene
 		get_tree().change_scene(next_scene)
 		
-		UI.set_zoom(0)
-		Cam.zoom_clock = 99
+		#UI.set_zoom(0)
+		#Cam.zoom_clock = 99
 	
 	BG.set_colors(0)
 	

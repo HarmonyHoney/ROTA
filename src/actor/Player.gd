@@ -111,6 +111,8 @@ var squish_from := Vector2.ONE
 var squish_clock := 0.0
 var squish_time := 0.5
 
+var last_collision
+
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.player = self
@@ -497,6 +499,8 @@ func _physics_process(delta):
 			# move body
 			move_velocity = move_and_slide(rot(velocity))
 			velocity = rot(move_velocity, -dir)
+			last_collision = get_last_slide_collision()
+			#print(last_collision.collider)
 			
 	
 	# check boundary
@@ -700,3 +704,11 @@ func cheat_code(cheat):
 func enter_door():
 	set_physics_process(false)
 	anim.play("idle")
+
+func standing_move():
+	if !is_hold and is_floor:
+		print("standing_move")
+		has_jumped = true
+		set_physics_process(false)
+		yield(get_tree().create_timer(0.1), "timeout")
+		set_physics_process(true)

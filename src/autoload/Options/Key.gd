@@ -154,6 +154,8 @@ func set_connect(arg := is_connect):
 		Shared.connect("signal_gamepad", self, "signal_gamepad")
 	else:
 		Shared.disconnect("signal_gamepad", self, "signal_gamepad")
+	
+	self.is_gamepad = Shared.is_gamepad
 
 func signal_gamepad(arg):
 	set_gamepad(arg)

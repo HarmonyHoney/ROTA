@@ -40,8 +40,6 @@ var turn_clock := 0.0
 var turn_time := 0.2
 
 var is_push := false
-var push_clock := 0.0
-var push_time := 0.2
 
 var start_dir := 0
 var start_pos := Vector2.ZERO
@@ -109,10 +107,9 @@ func _physics_process(delta):
 	is_floor = test_tile(dir, 1)
 	
 	# move clock
-	var target = push_time if is_push else move_time
-	if move_clock < target:
-		move_clock = min(move_clock + delta, target)
-		var smooth = smoothstep(0, 1, move_clock / target)
+	if move_clock < move_time:
+		move_clock = min(move_clock + delta, move_time)
+		var smooth = smoothstep(0, 1, move_clock / move_time)
 		# lerp sprite and update collision_sprite
 		sprite.position = move_from.linear_interpolate(Vector2.ZERO, smooth)
 		collision_sprite.position = sprite.position
@@ -121,7 +118,7 @@ func _physics_process(delta):
 			sprite.rotation = lerp_angle(turn_to + deg2rad(12 * -push_x), turn_to, abs(0.5 - smooth) * 2.0)
 			#sprite.scale = Vector2.ONE *  lerp(0.9, 1.0, smooth)
 		
-		if move_clock == target and !is_hold and is_floor and !last_floor:
+		if move_clock == move_time and !is_hold and is_floor and !last_floor:
 			audio_land.pitch_scale = rand_range(0.7, 1.3)
 			audio_land.play()
 	
@@ -142,7 +139,7 @@ func _physics_process(delta):
 		sprite.scale = Vector2.ONE * lerp(1.1, 1.0, smooth)
 	
 	# movement
-	if move_clock == target:
+	if move_clock == move_time:
 		if is_push:
 			is_push = false
 		
@@ -200,9 +197,10 @@ func move_tile(move_dir := dir, distance := 1):
 	# jump player
 	for i in standing_area.get_overlapping_bodies():
 		if i.is_in_group("player"):
-			i.has_jumped = true
-			if i.velocity.y > 0:
-				i.velocity.y = 0
+			i.standing_move()
+#			i.has_jumped = true
+#			if i.velocity.y > 0:
+#				i.velocity.y = 0
 	
 	# move
 	var last_pos = position
@@ -241,7 +239,7 @@ func push(push_dir := 0, _push_x := 1):
 	if b.size() == 0:
 		if !test_tile(push_dir, 1):
 			result = true
-	elif b[0] != self and b[0].is_in_group("box") and b[0].is_floor and b[0].push(push_dir, _push_x):
+	elif b[0] != self and b[0].is_in_group("box") and b[0].push(push_dir, _push_x):
 		result = true
 	
 	if result:

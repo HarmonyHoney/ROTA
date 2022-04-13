@@ -54,26 +54,20 @@ scene_path = "res://src/map/worlds/2A/1.tscn"
 position = Vector2( 250, -250 )
 scene_path = "res://src/map/worlds/2A/2.tscn"
 
-[node name="Door3" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 550, 150 )
+[node name="Door4" parent="Actors" instance=ExtResource( 6 )]
+position = Vector2( 600, 150 )
 rotation = 3.14159
 dir = 2
-scene_path = "res://src/map/worlds/2A/3.tscn"
-
-[node name="Door4" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 250, 400 )
-rotation = 1.5708
-dir = 1
 scene_path = "res://src/map/worlds/2A/4.tscn"
 
 [node name="Door5" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 650, 950 )
+position = Vector2( 250, 400 )
+rotation = 1.5708
+dir = 1
 scene_path = "res://src/map/worlds/2A/5.tscn"
 
 [node name="Door6" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 1650, 450 )
-rotation = 1.5708
-dir = 1
+position = Vector2( 650, 950 )
 scene_path = "res://src/map/worlds/2A/6.tscn"
 
 [node name="Door7" parent="Actors" instance=ExtResource( 6 )]
