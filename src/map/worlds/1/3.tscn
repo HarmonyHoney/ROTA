@@ -36,31 +36,34 @@ position = Vector2( 700, 150 )
 
 [node name="Details" type="Node2D" parent="."]
 
-[node name="Rocks" type="Sprite" parent="Details"]
+[node name="Rocks" type="Node2D" parent="Details"]
+modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
+
+[node name="Rocks" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 1050, 350 )
 rotation = 1.57081
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 
-[node name="Rocks2" type="Sprite" parent="Details"]
+[node name="Rocks2" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 750, -50 )
 rotation = -1.57079
 scale = Vector2( 0.197489, 0.197489 )
 texture = ExtResource( 4 )
 
-[node name="Rock" type="Sprite" parent="Details"]
+[node name="Rock" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 500, 150 )
 rotation = 0.785397
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 5 )
 
-[node name="Rock2" type="Sprite" parent="Details"]
+[node name="Rock2" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 1350, -50 )
 rotation = 0.785397
 scale = Vector2( 0.150017, 0.150017 )
 texture = ExtResource( 5 )
 
-[node name="Rock3" type="Sprite" parent="Details"]
+[node name="Rock3" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 750, 350 )
 scale = Vector2( 0.191985, 0.191985 )
 texture = ExtResource( 5 )

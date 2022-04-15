@@ -216,7 +216,7 @@ scale = Vector2( 0.3, 0.3 )
 z_index = -5
 
 [node name="PineTree6" parent="Details" instance=ExtResource( 10 )]
-modulate = Color( 0.95, 0.95, 0.95, 1 )
+modulate = Color( 0.94902, 0.94902, 0.94902, 1 )
 position = Vector2( -300, 250 )
 rotation = -1.6045
 

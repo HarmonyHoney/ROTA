@@ -27,7 +27,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -400 )
 
 [node name="Light" type="Sprite" parent="Sprites"]
-modulate = Color( 0.996078, 1, 0.909804, 0.243137 )
+modulate = Color( 0.9955, 1, 0.91, 0.109804 )
 material = SubResource( 5 )
 position = Vector2( 0, -155 )
 z_index = 100

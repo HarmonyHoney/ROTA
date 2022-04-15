@@ -12,6 +12,7 @@
 [sub_resource type="DynamicFont" id=1]
 size = 88
 outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 4 )
 
@@ -54,6 +55,7 @@ __meta__ = {
 }
 
 [node name="Reset" type="Control" parent="Control/Top"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -171,7 +173,6 @@ margin_left = 120.0
 margin_top = 34.0
 margin_right = 216.0
 margin_bottom = 134.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "17"
 align = 1

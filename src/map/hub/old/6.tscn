@@ -26,9 +26,6 @@
 
 [node name="Camera2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 550, 550 )
-is_moving = true
-focal_influence = 0.25
-bg_palette = 1
 
 [node name="SolidTileMap4" parent="." instance=ExtResource( 5 )]
 tile_data = PoolIntArray( 327665, 0, 0, 327666, 0, 0, 327667, 0, 0, 327668, 0, 0, 327669, 0, 0, 327670, 0, 0, 327671, 0, 0, 327672, 0, 0, 327673, 0, 0, 327674, 0, 0, 262154, 0, 0, 393201, 0, 0, 393202, 0, 0, 393203, 0, 0, 393204, 0, 0, 393205, 0, 0, 393206, 0, 0, 393207, 0, 0, 393208, 0, 0, 393209, 0, 0, 393210, 0, 0, 458737, 0, 0, 458738, 0, 0, 458739, 0, 0, 458740, 0, 0, 458744, 0, 0, 458745, 0, 0, 458746, 0, 0, 524274, 0, 0, 524275, 0, 0, 458764, 0, 0, 786427, 0, 0, 786428, 0, 0, 786429, 0, 0, 786430, 0, 0, 786431, 0, 0, 720896, 0, 0, 720897, 0, 0, 917481, 0, 0, 983020, 0, 0, 917517, 0, 0, 1245171, 0, 0, 1245172, 0, 0, 1179658, 0, 0, 1310707, 0, 0, 1310708, 0, 0, 1310709, 0, 0, 1376244, 0, 0, 1376245, 0, 0, 1310733, 0, 0, 1310734, 0, 0, 1376270, 0, 0, 1507340, 0, 0, 1572876, 0, 0, 1703911, 0, 0 )
@@ -65,69 +62,49 @@ scene_path = "res://src/map/hub/5.tscn"
 position = Vector2( -1750, 650 )
 rotation = 1.5708
 dir = 1
-folder_path = "res://src/map/worlds/6/"
-scene_name = "1"
 
 [node name="Door2" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -1850, 1150 )
 rotation = 4.71239
 dir = 3
-folder_path = "res://src/map/worlds/6/"
-scene_name = "2"
 
 [node name="Door3" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -2550, 1450 )
 rotation = 1.5708
 dir = 1
-folder_path = "res://src/map/worlds/6/"
-scene_name = "3"
 
 [node name="Door4" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -2700, 2450 )
 rotation = 3.14159
 dir = 2
-folder_path = "res://src/map/worlds/6/"
-scene_name = "4"
 
 [node name="Door5" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -2350, 2900 )
 rotation = 4.71239
 dir = 3
-folder_path = "res://src/map/worlds/6/"
-scene_name = "5"
 
 [node name="Door6" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -1250, 2250 )
-folder_path = "res://src/map/worlds/6/"
-scene_name = "6"
 
 [node name="Door7" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -600, 1850 )
 rotation = 3.14159
 dir = 2
-folder_path = "res://src/map/worlds/6/"
-scene_name = "7"
 
 [node name="Door8" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -450, 2350 )
 rotation = 4.71239
 dir = 3
-folder_path = "res://src/map/worlds/6/"
-scene_name = "8"
 
 [node name="Door9" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 1650, 850 )
-folder_path = "res://src/map/worlds/6/"
-scene_name = "9"
 
 [node name="BigDoor2" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 550, 3000 )
 rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/hub/7.tscn"
-is_gem = true
 gem_count = 8
-gem_world = "res://src/map/worlds/6/"
 
 [node name="Rocks" type="Node2D" parent="."]
 

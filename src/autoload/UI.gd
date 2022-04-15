@@ -52,10 +52,10 @@ func _physics_process(delta):
 		zoom_circle.scale = Vector2.ONE * lerp(zoom_from, zoom_to, zoom.frac())
 	
 	# reset
-	if is_reset:
-		is_reset = Input.is_action_pressed("reset")
-	else:
-		is_reset = Input.is_action_just_pressed("reset")
+#	if is_reset:
+#		is_reset = Input.is_action_pressed("reset")
+#	else:
+#		is_reset = Input.is_action_just_pressed("reset")
 	
 	var rs = reset.count(delta, is_reset)
 	reset_spinner.rotation = lerp(0, TAU, rs)

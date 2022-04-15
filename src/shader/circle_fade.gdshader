@@ -1,4 +1,5 @@
 shader_type canvas_item;
+render_mode blend_add;
 
 uniform float width : hint_range(0.0, 0.5) = 0.1;
 
