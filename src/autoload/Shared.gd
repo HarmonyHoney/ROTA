@@ -174,6 +174,11 @@ func list_folders_and_files(path, is_ext := true):
 	dir.list_dir_end()
 	return [folders, files]
 
+func erase_data():
+	var file = File.new()
+	file.open("user://save_data.json", File.WRITE)
+	file.store_string("")
+	file.close()
 
 func save_data():
 	var data = {}
@@ -182,8 +187,6 @@ func save_data():
 	data ["last_scene"] = last_scene
 	
 	var j = JSON.print(data, "\t")
-	
-	#print(j)
 	
 	var file = File.new()
 	file.open("user://save_data.json", File.WRITE)

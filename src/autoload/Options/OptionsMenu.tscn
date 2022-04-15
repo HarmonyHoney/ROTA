@@ -45,7 +45,7 @@ script/source = "extends Control
 func act():
 	Shared.goals_collected = []
 	Shared.gem_count = 0
-	Shared.save_data()
+	Shared.erase_data()
 	UI.gem_label.text = \"0\"
 "
 

@@ -1,9 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://src/detail/Light.gd" type="Script" id=1]
 [ext_resource path="res://media/image/details/lamppost.png" type="Texture" id=2]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=3]
 [ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=4]
+[ext_resource path="res://media/image/box/round_rect400.png" type="Texture" id=5]
+[ext_resource path="res://src/shader/circle_fade.gdshader" type="Shader" id=6]
+[ext_resource path="res://src/detail/LightBase.gd" type="Script" id=7]
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 6 )
+shader_param/width = 0.05
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -20,13 +26,14 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -400 )
 
-[node name="Circle" type="Node2D" parent="Sprites"]
+[node name="Light" type="Sprite" parent="Sprites"]
 modulate = Color( 0.996078, 1, 0.909804, 0.243137 )
+material = SubResource( 5 )
 position = Vector2( 0, -155 )
 z_index = 100
 z_as_relative = false
-script = ExtResource( 1 )
-radius = 200.0
+texture = ExtResource( 5 )
+script = ExtResource( 7 )
 
 [node name="Spring" type="Node2D" parent="."]
 script = ExtResource( 3 )
