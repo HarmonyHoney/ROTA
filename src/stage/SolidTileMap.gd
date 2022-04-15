@@ -17,7 +17,8 @@ func _ready():
 	make_tiles()
 	
 	if !Engine.editor_hint:
-		Boundary.add_shape(get_used_rect(), cell_size)
+		if get_used_rect() != Rect2(0, 0, 0, 0):
+			Boundary.add_shape(get_used_rect(), cell_size)
 		
 		if bg_palette > 0:
 			BG.set_colors(bg_palette)

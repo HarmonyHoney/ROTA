@@ -81,111 +81,94 @@ scene_path = "res://src/map/worlds/2A/7.tscn"
 [node name="Rocks" type="Node2D" parent="Details"]
 
 [node name="Rock" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 50, 850 )
 rotation = -0.785397
 scale = Vector2( 0.566917, 0.566917 )
 texture = ExtResource( 7 )
 
 [node name="Rock2" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 350, -50 )
 rotation = -0.785397
 scale = Vector2( 0.314772, 0.314772 )
 texture = ExtResource( 7 )
 
 [node name="Rock3" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 1300, 4.1008e-05 )
 rotation = -0.785397
 scale = Vector2( 0.190054, 0.190054 )
 texture = ExtResource( 7 )
 
 [node name="Rock4" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 1450, 450 )
 rotation = -1.57079
 scale = Vector2( 0.392879, 0.392879 )
 texture = ExtResource( 7 )
 
 [node name="Rocks" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 100, 1200 )
 rotation = -3.14159
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 8 )
 
 [node name="Rocks5" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 1250, 700 )
 rotation = -3.14159
 scale = Vector2( 0.517075, 0.517075 )
 texture = ExtResource( 8 )
 
 [node name="Rocks6" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 1250, 850 )
 scale = Vector2( 0.517075, 0.517075 )
 texture = ExtResource( 8 )
 
 [node name="Rocks4" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 100, 400 )
 rotation = -4.71238
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 8 )
 
 [node name="Rocks2" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 700, 1100 )
 rotation = -6.28318
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 8 )
 
 [node name="Rocks3" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 rotation = -7.85397
 scale = Vector2( 0.45, 0.45 )
 texture = ExtResource( 8 )
 
 [node name="RoundRock4" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 250, 1100 )
 scale = Vector2( 0.333241, 0.333241 )
 texture = ExtResource( 9 )
 
 [node name="RoundRock5" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 550, 1200 )
 scale = Vector2( 0.214811, 0.214811 )
 texture = ExtResource( 9 )
 
 [node name="RoundRock6" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( -100, 400 )
 scale = Vector2( 0.383748, 0.383748 )
 texture = ExtResource( 9 )
 
 [node name="RoundRock7" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 200, 100 )
 scale = Vector2( 0.190304, 0.190304 )
 texture = ExtResource( 9 )
 
 [node name="RoundRock9" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 200, 700 )
 scale = Vector2( 0.190304, 0.190304 )
 texture = ExtResource( 9 )
 
 [node name="RoundRock8" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 600, -50 )
 scale = Vector2( 0.212826, 0.212826 )
 texture = ExtResource( 9 )
 
 [node name="RoundRock10" type="Sprite" parent="Details/Rocks"]
-modulate = Color( 100, 100, 100, 1 )
 position = Vector2( 1050, -150 )
 scale = Vector2( 0.436193, 0.436193 )
 texture = ExtResource( 9 )

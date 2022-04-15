@@ -21,7 +21,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -400 )
 
 [node name="Circle" type="Node2D" parent="Sprites"]
-modulate = Color( 0.996078, 1, 0.909804, 0.4 )
+modulate = Color( 0.996078, 1, 0.909804, 0.243137 )
 position = Vector2( 0, -155 )
 z_index = 100
 z_as_relative = false

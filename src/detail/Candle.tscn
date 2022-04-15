@@ -24,7 +24,7 @@ scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 3 )
 
 [node name="Circle" type="Node2D" parent="Sprites"]
-modulate = Color( 0.996078, 1, 0.909804, 0.4 )
+modulate = Color( 0.996078, 1, 0.909804, 0.243137 )
 position = Vector2( 0, -66 )
 z_index = 100
 z_as_relative = false

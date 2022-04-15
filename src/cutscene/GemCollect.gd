@@ -28,7 +28,7 @@ func _physics_process(delta):
 			if clock > 1.0:
 				next_step()
 				UI.gem_label.text = str(Shared.gem_count)
-				audio_coin.play()
+				#audio_coin.play()
 		2:
 			var limit = 0.5
 			var t = min(clock, limit)

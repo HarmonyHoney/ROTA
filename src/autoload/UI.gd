@@ -39,6 +39,8 @@ func _ready():
 	menu.to = menu.node.rect_position
 	menu.from = menu.to + Vector2(0, 80)
 	menu.show = false
+	
+	gem_label.text = str(Shared.gem_count)
 
 func _physics_process(delta):
 	gem.move(delta)

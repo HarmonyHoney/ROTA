@@ -37,6 +37,9 @@ func _ready():
 	#set_volume(0, 50)
 	set_volume(1, 50)
 	set_volume(2, 50)
+	
+	yield(get_tree(), "idle_frame")
+	load_data()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -81,20 +84,11 @@ func change_scene():
 	else:
 		csfn = next_scene
 		get_tree().change_scene(next_scene)
-		
-		#UI.set_zoom(0)
-		#Cam.zoom_clock = 99
 	
 	BG.set_colors(0)
 	
 	emit_signal("scene_changed")
-	
-#	match next_scene:
-#		scene_splash: UI.show("none")
-#		scene_title: UI.show("Title")
-#		scene_select: UI.show("Title")
-#		scene_options: UI.show("Title")
-#		_: UI.show("Game")
+	save_data()
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen
@@ -117,6 +111,8 @@ func collect_gem():
 		goals_collected.append(csfn)
 		gem_count = goals_collected.size()
 		Cutscene.is_collect = true
+		
+		save_data()
 
 
 ### Volume
@@ -178,3 +174,41 @@ func list_folders_and_files(path, is_ext := true):
 	dir.list_dir_end()
 	return [folders, files]
 
+
+func save_data():
+	var data = {}
+	data["goals_collected"] = goals_collected
+	data["csfn"] = csfn
+	data ["last_scene"] = last_scene
+	
+	var j = JSON.print(data, "\t")
+	
+	#print(j)
+	
+	var file = File.new()
+	file.open("user://save_data.json", File.WRITE)
+	file.store_string(j)
+	file.close()
+
+func load_data():
+	var file = File.new()
+	var j = ""
+	
+	if file.file_exists("user://save_data.json"):
+		file.open("user://save_data.json", File.READ)
+		j = file.get_as_text()
+	file.close()
+	
+	if j != "":
+		var p = JSON.parse(j)
+		
+		if typeof(p.result) == TYPE_DICTIONARY:
+			var data = p.result
+			if data.has("goals_collected"):
+				goals_collected = data["goals_collected"]
+				gem_count = goals_collected.size()
+				UI.gem_label.text = str(gem_count)
+			if data.has("csfn") and data.has("last_scene"):
+				next_scene = data["csfn"]
+				last_scene = data["last_scene"]
+				change_scene()

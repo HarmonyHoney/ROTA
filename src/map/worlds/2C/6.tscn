@@ -39,12 +39,12 @@ dir = 2
 can_spin = false
 
 [node name="Box3" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 2350, 750 )
+position = Vector2( 2350, 450 )
 dir = 1
 can_spin = false
 
 [node name="Box4" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 2350, 450 )
+position = Vector2( 2350, 750 )
 dir = 1
 can_spin = false
 

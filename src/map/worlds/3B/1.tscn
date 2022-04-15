@@ -15,7 +15,7 @@ detail = 3
 bg_palette = 1
 
 [node name="SpikeMap" parent="." instance=ExtResource( 6 )]
-tile_data = PoolIntArray( 458754, -1073741824, 0, 458758, -1610612736, 0, 524290, -1073741824, 0, 524294, -1610612736, 0 )
+tile_data = PoolIntArray( 65540, -1073741824, 0, 131076, -1073741824, 0, 458754, -1073741824, 0, 458758, -1610612736, 0, 524290, -1073741824, 0, 524294, -1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 

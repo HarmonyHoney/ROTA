@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/shader/outline2D_outer.shader" type="Shader" id=1]
 [ext_resource path="res://src/autoload/Options/Volume.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/autoload/Options/OnOff.gd" type="Script" id=11]
 [ext_resource path="res://src/autoload/Options/Resolution.gd" type="Script" id=12]
 [ext_resource path="res://src/autoload/Options/OpenRemap.gd" type="Script" id=13]
+[ext_resource path="res://media/image/UI/hand.png" type="Texture" id=14]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
@@ -25,7 +26,7 @@ corner_radius_bottom_left = 50
 [sub_resource type="ShaderMaterial" id=23]
 shader = ExtResource( 1 )
 shader_param/line_color = Color( 0, 0, 0, 1 )
-shader_param/line_thickness = 8.0
+shader_param/line_thickness = 2.0
 
 [sub_resource type="GDScript" id=24]
 script/source = "extends OnOff
@@ -34,7 +35,18 @@ func _ready():
 	is_on = OS.window_fullscreen
 
 func set_value():
-	OS.window_fullscreen = is_on
+	Shared.toggle_fullscreen()
+	#OS.window_fullscreen = is_on
+"
+
+[sub_resource type="GDScript" id=25]
+script/source = "extends Control
+
+func act():
+	Shared.goals_collected = []
+	Shared.gem_count = 0
+	Shared.save_data()
+	UI.gem_label.text = \"0\"
 "
 
 [node name="OptionsMenu" type="CanvasLayer"]
@@ -426,6 +438,66 @@ size_flags_vertical = 6
 custom_fonts/font = ExtResource( 6 )
 text = "< 1280 x 720 >"
 align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer4" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 1060.0
+margin_right = 640.0
+margin_bottom = 1090.0
+rect_min_size = Vector2( 0, 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeaderOther" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 1090.0
+margin_right = 640.0
+margin_bottom = 1160.0
+rect_min_size = Vector2( 0, 70 )
+
+[node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderOther"]
+material = SubResource( 23 )
+anchor_right = 0.1
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Menu/List/HeaderOther"]
+anchor_left = 0.11
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 10 )
+text = "Other"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClearSave" type="Control" parent="Control/Menu/List"]
+margin_top = 1160.0
+margin_right = 640.0
+margin_bottom = 1230.0
+rect_min_size = Vector2( 0, 70 )
+script = SubResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Menu/List/ClearSave"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+text = "Erase Save Data"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false

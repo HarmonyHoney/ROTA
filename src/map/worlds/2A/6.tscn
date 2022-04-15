@@ -11,30 +11,30 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 1 )]
-tile_data = PoolIntArray( 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 1610612736, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 1610612736, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 1610612736, 0, 393214, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 1610612736, 0, 327684, -1073741824, 0, 327685, -1073741824, 0, 327686, -1610612736, 0, 458744, 0, 0, 458745, 0, 0, 458746, 0, 0, 458747, 0, 0, 458750, 0, 0, 458751, 0, 0, 393216, 1610612736, 0, 524280, -1073741824, 0, 524281, -1073741824, 0, 524282, -1073741824, 0, 524283, -1073741824, 0, 524286, 0, 0, 524287, 0, 0, 589822, 1610612736, 0, 589823, 1610612736, 0, 655358, -1073741824, 0, 655359, -1073741824, 0, 720894, -1073741824, 0, 720895, -1073741824, 0 )
+tile_data = PoolIntArray( 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 393208, -1610612736, 0, 393209, -1610612736, 0, 393210, -1610612736, 0, 393211, -1610612736, 0, 393214, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 1610612736, 0, 327684, -1073741824, 0, 458744, 0, 0, 458745, 0, 0, 458746, 0, 0, 458747, 0, 0, 458750, 0, 0, 458751, 0, 0, 393216, 1610612736, 0, 524286, 0, 0, 524287, 0, 0, 589822, 1610612736, 0, 589823, 1610612736, 0, 655358, -1073741824, 0, 655359, -1073741824, 0 )
 detail = 2
 bg_palette = 2
 
 [node name="SpikeMap" parent="." instance=ExtResource( 8 )]
-tile_data = PoolIntArray( 65539, 0, 0, 196605, -1073741824, 0, 327687, -1610612736, 0, 655357, -1073741824, 0, 720893, -1073741824, 0 )
+tile_data = PoolIntArray( 65537, 0, 0, 196605, -1073741824, 0, 327685, -1610612736, 0, 589821, -1073741824, 0, 655357, -1073741824, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Door" parent="Actors" instance=ExtResource( 4 )]
-position = Vector2( 350, 650 )
+position = Vector2( 250, 650 )
 rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/worlds/2A/0_hub.tscn"
 
 [node name="Player" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 350, 650 )
+position = Vector2( 250, 650 )
 dir = 2
 
 [node name="Goal" parent="Actors" instance=ExtResource( 6 )]
-position = Vector2( 550, 350 )
+position = Vector2( 350, 350 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( -750, 550 )
+position = Vector2( -750, 450 )
 can_spin = false
 
 [node name="Box2" parent="Actors" instance=ExtResource( 3 )]
@@ -45,5 +45,5 @@ can_spin = false
 [node name="Details" type="Node2D" parent="."]
 
 [node name="Lamppost" parent="Details" instance=ExtResource( 7 )]
-position = Vector2( -600, 800 )
+position = Vector2( -600, 700 )
 rotation = -3.14159

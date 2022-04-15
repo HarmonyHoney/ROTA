@@ -224,7 +224,7 @@ func push(push_dir := 0, _push_x := 1):
 	if b.size() == 0:
 		if !test_tile(push_dir, 1):
 			result = true
-	elif b[0] != self and b[0].is_in_group("box") and b[0].push(push_dir, _push_x):
+	elif b[0] != self and (b[0].is_floor or b[0].is_hold) and b[0].push(push_dir, _push_x):
 		result = true
 	
 	if result:

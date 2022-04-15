@@ -15,7 +15,7 @@ detail = 3
 bg_palette = 1
 
 [node name="SpikeMap" parent="." instance=ExtResource( 6 )]
-tile_data = PoolIntArray( -5, -1073741824, 0, -65534, -1610612736, 0, 2, -1610612736, 0, 131071, 1610612736, 0 )
+tile_data = PoolIntArray( -5, -1073741824, 0, -65534, -1610612736, 0, 2, -1610612736, 0, 131071, 1610612736, 0, 589820, 1610612736, 0, 589821, 1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
@@ -33,9 +33,9 @@ scene_path = "res://src/map/worlds/3B/0_hub.tscn"
 position = Vector2( -100, -250 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( -250, 850 )
+position = Vector2( 50, 850 )
 dir = 2
 
 [node name="Box2" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 50, 850 )
+position = Vector2( 150, 850 )
 dir = 2

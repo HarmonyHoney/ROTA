@@ -85,6 +85,7 @@ scene_path = "res://src/map/worlds/3/7.tscn"
 [node name="Details" type="Node2D" parent="."]
 
 [node name="Rocks" type="Node2D" parent="Details"]
+modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
 
 [node name="Rock" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 950, 975 )
