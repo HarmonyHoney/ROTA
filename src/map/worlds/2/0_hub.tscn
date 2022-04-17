@@ -332,7 +332,7 @@ position = Vector2( -1750, 2750 )
 scale = Vector2( 0.9, 0.9 )
 
 [node name="TreeTop14" parent="Details" instance=ExtResource( 13 )]
-position = Vector2( -1500, 2750 )
+position = Vector2( -1450, 2750 )
 scale = Vector2( 0.9, 0.9 )
 
 [node name="TreeTop3" parent="Details" instance=ExtResource( 13 )]

@@ -23,7 +23,7 @@ detail = 2
 bg_palette = 1
 
 [node name="SpikeMap" parent="." instance=ExtResource( 5 )]
-tile_data = PoolIntArray( 393241, 0, 0, 393242, 0, 0 )
+tile_data = PoolIntArray( 393241, 0, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
