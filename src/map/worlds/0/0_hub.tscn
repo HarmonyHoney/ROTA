@@ -240,9 +240,6 @@ z_index = -5
 [node name="Flower" parent="Details/Bricks" instance=ExtResource( 12 )]
 position = Vector2( 3700, 1700 )
 rotation = 1.57079
-z_index = 1
-palette = 5
-is_pot = true
 
 [node name="Bench" parent="Details/Bricks" instance=ExtResource( 10 )]
 position = Vector2( 3450, 1775 )
@@ -273,8 +270,9 @@ z_index = -9
 [node name="FlowerPetals" parent="Details/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 3750, 2050 )
 z_index = -4
-palette = 3
+palette = 2
 
 [node name="FlowerPetals2" parent="Details/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 3650, 2150 )
 z_index = -4
+palette = 5

@@ -45,6 +45,7 @@ pitch_from = 0.25
 pitch_to = 0.5
 
 [node name="Area2D" type="Area2D" parent="Spring"]
+visible = false
 collision_layer = 0
 collision_mask = 6
 
