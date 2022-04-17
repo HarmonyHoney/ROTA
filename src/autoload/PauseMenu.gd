@@ -91,13 +91,7 @@ func set_paused(pause := true):
 	is_paused = pause
 	cursor = 0
 	
-	#menu.visible = is_paused
-	UI.gem.show = is_paused
-	UI.top.show = !is_paused
-	
 	get_tree().paused = is_paused
-	
-	UI.menu.show = is_paused
 
 func press_pause():
 	set_paused(!is_paused)

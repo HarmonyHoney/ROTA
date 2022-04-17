@@ -12,13 +12,15 @@ script = ExtResource( 1 )
 [node name="GemCollect" type="Node" parent="."]
 script = ExtResource( 2 )
 
-[node name="Coin" type="AudioStreamPlayer" parent="GemCollect"]
+[node name="GoalShow" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Coin" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 5 )
 bus = "SFX"
 
-[node name="Collect" type="AudioStreamPlayer" parent="GemCollect"]
+[node name="Collect" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 4 )
 bus = "SFX"
-
-[node name="GoalShow" type="Node" parent="."]
-script = ExtResource( 3 )

@@ -1,8 +1,5 @@
 extends Node
 
-onready var audio_coin := $Coin
-onready var audio_collect := $Collect
-
 var step := 0
 var clock := 0.0
 
@@ -20,8 +17,8 @@ func _physics_process(delta):
 			if clock > 0.15:
 				next_step()
 				door_dest.gem.fade_color()
-				audio_collect.pitch_scale = rand_range(0.8, 1.3)
-				audio_collect.play()
+				Cutscene.audio_collect.pitch_scale = rand_range(0.8, 1.3)
+				Cutscene.audio_collect.play()
 				
 				UI.gem.show = true
 		1:

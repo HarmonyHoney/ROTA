@@ -43,9 +43,10 @@ func _ready():
 	gem_label.text = str(Shared.gem_count)
 
 func _physics_process(delta):
-	gem.move(delta)
-	top.move(delta)
-	menu.move(delta)
+	var p = PauseMenu.is_paused
+	gem.move(delta, gem.show or p)
+	top.move(delta, p)
+	menu.move(delta, p)
 	
 	if zoom.clock != zoom.time:
 		zoom.count(delta)

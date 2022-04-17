@@ -70,7 +70,6 @@ func show(arg := true):
 	#control.visible = is_open
 
 	PauseMenu.is_paused = !is_open
-	UI.gem.show = !is_open
 
 	if is_open:
 		self.cursor = 0

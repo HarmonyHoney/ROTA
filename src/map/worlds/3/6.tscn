@@ -4,9 +4,9 @@
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/detail/PineTree.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
 
@@ -39,6 +39,6 @@ dir = 3
 
 [node name="Details" type="Node2D" parent="."]
 
-[node name="PineTree" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 1250, -300 )
-rotation = 3.40339
+[node name="Saguaro" parent="Details" instance=ExtResource( 5 )]
+position = Vector2( 1300, -300 )
+rotation = 3.5078

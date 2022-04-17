@@ -1,5 +1,7 @@
 extends Camera2D
 
+onready var audio_zoom := $Zoom
+
 signal turning(angle)
 
 var target_node
@@ -72,4 +74,7 @@ func start_zoom(arg := 0):
 	zoom_to = lerp(zoom_min, zoom_max, frac)
 	
 	UI.set_zoom(frac)
+	
+	audio_zoom.pitch_scale = rand_range(0.8, 1.2)
+	audio_zoom.play()
 

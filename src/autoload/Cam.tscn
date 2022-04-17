@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/autoload/Cam.gd" type="Script" id=1]
+[ext_resource path="res://media/audio/sfx/jump4.wav" type="AudioStream" id=2]
 
 [node name="Cam" type="Camera2D" groups=["game_camera"]]
 rotating = true
 current = true
 script = ExtResource( 1 )
 zoom_min = 1.33
+
+[node name="Zoom" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "SFX"

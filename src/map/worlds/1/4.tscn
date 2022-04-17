@@ -34,31 +34,34 @@ position = Vector2( 800, 300 )
 
 [node name="Details" type="Node2D" parent="."]
 
-[node name="Rocks" type="Sprite" parent="Details"]
+[node name="Rocks" type="Node2D" parent="Details"]
+modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
+
+[node name="Rocks" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 800, 800 )
 rotation = -1.57079
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 
-[node name="Rocks2" type="Sprite" parent="Details"]
+[node name="Rocks2" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 100, 100 )
 rotation = -1.57079
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 
-[node name="Rock" type="Sprite" parent="Details"]
+[node name="Rock" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 0, 900 )
 rotation = 1.57079
 scale = Vector2( 0.198843, 0.198843 )
 texture = ExtResource( 5 )
 
-[node name="Rock3" type="Sprite" parent="Details"]
+[node name="Rock3" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 450, 450 )
 rotation = 1.57079
 scale = Vector2( 0.14879, 0.14879 )
 texture = ExtResource( 5 )
 
-[node name="Rock2" type="Sprite" parent="Details"]
+[node name="Rock2" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 850, 50 )
 rotation = 0.785397
 scale = Vector2( 0.198843, 0.198843 )
@@ -97,12 +100,12 @@ rotation = -6.28318
 palette = 2
 
 [node name="Flower8" parent="Details" instance=ExtResource( 7 )]
-position = Vector2( 700, 900 )
+position = Vector2( 695, 895 )
 rotation = -7.06857
 palette = 4
 
 [node name="Flower9" parent="Details" instance=ExtResource( 7 )]
-position = Vector2( 900, 500 )
+position = Vector2( 895, 505 )
 rotation = -8.63937
 
 [node name="Flower2" parent="Details" instance=ExtResource( 7 )]
@@ -115,7 +118,7 @@ position = Vector2( 0, 300 )
 rotation = -4.71238
 
 [node name="Flower4" parent="Details" instance=ExtResource( 7 )]
-position = Vector2( 190, 710 )
+position = Vector2( 195, 705 )
 rotation = -5.49778
 palette = 0
 
