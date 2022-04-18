@@ -10,14 +10,8 @@
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/detail/SignZoom.tscn" type="PackedScene" id=10]
-
-[sub_resource type="StreamTexture" id=1]
-flags = 4
-load_path = "res://.import/rocks.png-a4fd18d88f1154f805637ec7983d321f.stex"
-
-[sub_resource type="StreamTexture" id=2]
-flags = 4
-load_path = "res://.import/rock.png-3b38d6b197ed3a878d6dbc45f40a3022.stex"
+[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=11]
+[ext_resource path="res://media/image/details/rock.png" type="Texture" id=12]
 
 [node name="Node2D" type="Node2D"]
 
@@ -45,18 +39,19 @@ position = Vector2( 1250, 50 )
 [node name="Details" type="Node2D" parent="."]
 
 [node name="Rocks" type="Node2D" parent="Details"]
+modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
 
 [node name="Rocks" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 200, 300 )
 rotation = -1.57079
 scale = Vector2( 0.25, 0.25 )
-texture = SubResource( 1 )
+texture = ExtResource( 11 )
 
 [node name="Rock" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 800, 800 )
 rotation = 0.785397
 scale = Vector2( 0.164516, 0.164516 )
-texture = SubResource( 2 )
+texture = ExtResource( 12 )
 
 [node name="RoundRock" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 1250, 350 )

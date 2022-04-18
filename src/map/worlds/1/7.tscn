@@ -36,54 +36,57 @@ position = Vector2( 1700, 800 )
 
 [node name="Details" type="Node2D" parent="."]
 
-[node name="Rocks" type="Sprite" parent="Details"]
+[node name="Rocks" type="Node2D" parent="Details"]
+modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
+
+[node name="Rocks" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 1100, 500 )
 rotation = 1.57079
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 
-[node name="Rocks3" type="Sprite" parent="Details"]
+[node name="Rocks3" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 500, 900 )
 rotation = 3.14159
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 
-[node name="Rocks2" type="Sprite" parent="Details"]
+[node name="Rocks2" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 1000, 1100 )
 rotation = -5.07036e-06
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 
-[node name="Rocks4" type="Sprite" parent="Details"]
+[node name="Rocks4" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 1950, 650 )
 rotation = -1.57079
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 
-[node name="Rock" type="Sprite" parent="Details"]
+[node name="Rock" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 500, 300 )
 rotation = 0.785397
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 5 )
 
-[node name="Rock2" type="Sprite" parent="Details"]
+[node name="Rock2" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 550, 550 )
 scale = Vector2( 0.141916, 0.141916 )
 texture = ExtResource( 5 )
 
-[node name="Rock3" type="Sprite" parent="Details"]
+[node name="Rock3" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 1100, 1000 )
 rotation = -0.785397
 scale = Vector2( 0.164638, 0.164638 )
 texture = ExtResource( 5 )
 
-[node name="Rock5" type="Sprite" parent="Details"]
+[node name="Rock5" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 1550, 650 )
 rotation = -0.785397
 scale = Vector2( 0.164638, 0.164638 )
 texture = ExtResource( 5 )
 
-[node name="Rock4" type="Sprite" parent="Details"]
+[node name="Rock4" type="Sprite" parent="Details/Rocks"]
 position = Vector2( 900, 300 )
 rotation = -1.57079
 scale = Vector2( 0.155142, 0.155142 )
