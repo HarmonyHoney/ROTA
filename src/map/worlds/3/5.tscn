@@ -1,11 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/actor/Circle.gd" type="Script" id=8]
+[ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=9]
+[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=10]
+[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=11]
+[ext_resource path="res://media/image/details/rock.png" type="Texture" id=12]
 
 [node name="Node2D" type="Node2D"]
 
@@ -35,3 +41,159 @@ position = Vector2( 1500, -950 )
 [node name="Box" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 950, -150 )
 dir = 2
+
+[node name="Details" type="Node2D" parent="."]
+
+[node name="Rocks" type="Node2D" parent="Details"]
+modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
+
+[node name="Rock" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 1050, -300 )
+rotation = -0.785397
+scale = Vector2( 0.168792, 0.168792 )
+texture = ExtResource( 12 )
+
+[node name="Rock2" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 1550, -650 )
+rotation = -1.57079
+scale = Vector2( 0.374386, 0.374386 )
+texture = ExtResource( 12 )
+
+[node name="Rocks" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 1300, -600 )
+rotation = -3.14159
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 10 )
+
+[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 1600, -100 )
+scale = Vector2( 0.201854, 0.201854 )
+texture = ExtResource( 11 )
+
+[node name="Saguaro" parent="Details" instance=ExtResource( 5 )]
+position = Vector2( 1500, -500 )
+rotation = -2.49048
+
+[node name="Saguaro4" parent="Details" instance=ExtResource( 5 )]
+position = Vector2( 1050, -400 )
+rotation = -0.321548
+
+[node name="Saguaro2" parent="Details" instance=ExtResource( 5 )]
+position = Vector2( 1700, -450 )
+rotation = 1.13373
+
+[node name="Saguaro5" parent="Details" instance=ExtResource( 5 )]
+position = Vector2( 1600, -800 )
+rotation = 0.436332
+
+[node name="Saguaro6" parent="Details" instance=ExtResource( 5 )]
+position = Vector2( 1400, -800 )
+rotation = -0.436332
+scale = Vector2( -0.4, 0.4 )
+
+[node name="Saguaro3" parent="Details" instance=ExtResource( 5 )]
+position = Vector2( 1700, -250 )
+rotation = 2.00713
+scale = Vector2( -0.4, 0.4 )
+
+[node name="FlowerPetals3" parent="Details" instance=ExtResource( 9 )]
+position = Vector2( 1750, -650 )
+rotation = 1.57079
+z_index = -2
+
+[node name="Node2D" type="Node2D" parent="Details/FlowerPetals3"]
+modulate = Color( 0, 1, 0.396078, 1 )
+position = Vector2( 0, 28.5 )
+z_index = -5
+script = ExtResource( 8 )
+radius = 35.0
+
+[node name="FlowerPetals10" parent="Details" instance=ExtResource( 9 )]
+position = Vector2( 1500, -850 )
+z_index = -2
+palette = 0
+
+[node name="Node2D" type="Node2D" parent="Details/FlowerPetals10"]
+modulate = Color( 0, 1, 0.396078, 1 )
+position = Vector2( 0, 28.5 )
+z_index = -5
+script = ExtResource( 8 )
+radius = 35.0
+
+[node name="FlowerPetals4" parent="Details" instance=ExtResource( 9 )]
+position = Vector2( 1750, -100 )
+rotation = 1.57079
+z_index = -2
+palette = 4
+
+[node name="Node2D" type="Node2D" parent="Details/FlowerPetals4"]
+modulate = Color( 0, 1, 0.396078, 1 )
+position = Vector2( 0, 28.5 )
+z_index = -5
+script = ExtResource( 8 )
+radius = 35.0
+
+[node name="FlowerPetals5" parent="Details" instance=ExtResource( 9 )]
+position = Vector2( 1600, 50 )
+rotation = 3.14159
+z_index = -2
+palette = 3
+
+[node name="Node2D" type="Node2D" parent="Details/FlowerPetals5"]
+modulate = Color( 0, 1, 0.396078, 1 )
+position = Vector2( 0, 28.5 )
+z_index = -5
+script = ExtResource( 8 )
+radius = 35.0
+
+[node name="FlowerPetals6" parent="Details" instance=ExtResource( 9 )]
+position = Vector2( 1450, -200 )
+rotation = 4.71238
+z_index = -2
+palette = 2
+
+[node name="Node2D" type="Node2D" parent="Details/FlowerPetals6"]
+modulate = Color( 0, 1, 0.396078, 1 )
+position = Vector2( 0, 28.5 )
+z_index = -5
+script = ExtResource( 8 )
+radius = 35.0
+
+[node name="FlowerPetals7" parent="Details" instance=ExtResource( 9 )]
+position = Vector2( 1100, -150 )
+rotation = 3.14159
+z_index = -2
+palette = 0
+
+[node name="Node2D" type="Node2D" parent="Details/FlowerPetals7"]
+modulate = Color( 0, 1, 0.396078, 1 )
+position = Vector2( 0, 28.5 )
+z_index = -5
+script = ExtResource( 8 )
+radius = 35.0
+
+[node name="FlowerPetals9" parent="Details" instance=ExtResource( 9 )]
+position = Vector2( 1150, -700 )
+rotation = 4.71238
+z_index = -2
+palette = 3
+
+[node name="Node2D" type="Node2D" parent="Details/FlowerPetals9"]
+modulate = Color( 0, 1, 0.396078, 1 )
+position = Vector2( 0, 28.5 )
+z_index = -5
+script = ExtResource( 8 )
+radius = 35.0
+
+[node name="FlowerPetals8" parent="Details" instance=ExtResource( 9 )]
+position = Vector2( 850, -300 )
+rotation = 4.71238
+z_index = -2
+palette = 5
+
+[node name="Node2D" type="Node2D" parent="Details/FlowerPetals8"]
+modulate = Color( 0, 1, 0.396078, 1 )
+position = Vector2( 0, 28.5 )
+z_index = -5
+script = ExtResource( 8 )
+radius = 35.0
