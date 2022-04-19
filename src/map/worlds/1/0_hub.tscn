@@ -454,35 +454,28 @@ scale = Vector2( 0.9, 0.9 )
 position = Vector2( 400, 300 )
 rotation = -0.785397
 palette = 4
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )
 
 [node name="FlowerPetals2" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1350, 1200 )
 palette = 4
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )
 
 [node name="FlowerPetals4" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1380, 1080 )
 rotation = -0.785397
 palette = 3
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )
 
 [node name="FlowerPetals3" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1500, 1050 )
 palette = 2
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )
 
 [node name="FlowerPetals5" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 2100, 1050 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )
 
 [node name="FlowerPetals6" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 2220, 1080 )
 rotation = 0.785397
 palette = 4
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )
 
 [node name="FlowerPetals7" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 2250, 1200 )
 palette = 5
-colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )

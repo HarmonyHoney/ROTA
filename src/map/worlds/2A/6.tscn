@@ -1,12 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=5]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=7]
+[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=7]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=8]
+[ext_resource path="res://media/image/details/rock.png" type="Texture" id=9]
+[ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/detail/PineTree.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=13]
 
 [node name="Node2D" type="Node2D"]
 
@@ -44,6 +50,93 @@ can_spin = false
 
 [node name="Details" type="Node2D" parent="."]
 
-[node name="Lamppost" parent="Details" instance=ExtResource( 7 )]
-position = Vector2( -600, 700 )
+[node name="Rocks" type="Node2D" parent="Details"]
+
+[node name="Rock" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 0.00012207, 400 )
+rotation = -0.785397
+scale = Vector2( 0.481466, 0.481466 )
+texture = ExtResource( 9 )
+
+[node name="Rocks" type="Sprite" parent="Details/Rocks"]
+position = Vector2( -100, 900 )
+rotation = 3.14159
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 7 )
+
+[node name="Rocks2" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 0, 600 )
+rotation = 1.57079
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 7 )
+
+[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+position = Vector2( -600, 600 )
+scale = Vector2( 0.251939, 0.251939 )
+texture = ExtResource( 5 )
+
+[node name="PineTree" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( -700, 700 )
+rotation = 2.84425
+
+[node name="PineTree4" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( -550, 500 )
+rotation = 0.313151
+
+[node name="PineTree2" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 0, 850 )
+rotation = 1.88229
+
+[node name="PineTree3" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 400, 600 )
+rotation = 2.88689
+
+[node name="Flower" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( -450, 700 )
+rotation = 3.14159
+palette = 2
+
+[node name="Flower2" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( -800, 600 )
+rotation = 4.71238
+
+[node name="Flower3" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 450, 500 )
+rotation = 6.28318
+
+[node name="Flower4" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 200, 250 )
+rotation = 7.85397
+palette = 3
+
+[node name="Flower5" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( -50, 200 )
+rotation = 6.28318
+palette = 4
+
+[node name="Flower8" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 0, 750 )
+rotation = 7.85397
+palette = 4
+
+[node name="Flower6" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( -200, 450 )
+rotation = 4.71238
+palette = 5
+
+[node name="Flower7" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( -750, 500 )
+rotation = 6.28318
+palette = 0
+
+[node name="Bench" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( -100, 1050 )
+rotation = 3.14159
+
+[node name="Candle" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 150, 600 )
 rotation = -3.14159
+
+[node name="Candle2" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( -400, 600 )
+rotation = -4.71238

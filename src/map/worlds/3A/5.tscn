@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=1]
+[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=2]
 [ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=8]
+[ext_resource path="res://media/image/details/rock.png" type="Texture" id=9]
 
 [node name="Node2D" type="Node2D"]
 
@@ -37,3 +40,24 @@ position = Vector2( 50, 150 )
 
 [node name="Goal" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 550, -450 )
+
+[node name="Details" type="Node2D" parent="."]
+
+[node name="Rocks" type="Node2D" parent="Details"]
+modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
+
+[node name="Rock" type="Sprite" parent="Details/Rocks"]
+position = Vector2( -950, 950 )
+rotation = -0.785397
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 9 )
+
+[node name="Rocks" type="Sprite" parent="Details/Rocks"]
+position = Vector2( -800, 950 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 8 )
+
+[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+position = Vector2( -600, 950 )
+scale = Vector2( 0.367848, 0.367848 )
+texture = ExtResource( 2 )
