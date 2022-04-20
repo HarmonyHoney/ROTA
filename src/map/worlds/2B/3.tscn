@@ -1,11 +1,19 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=3]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=7]
+[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=8]
+[ext_resource path="res://media/image/details/rock.png" type="Texture" id=9]
+[ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/detail/Fence.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=14]
 
 [node name="Node2D" type="Node2D"]
 
@@ -46,3 +54,168 @@ can_spin = false
 position = Vector2( 250, -350 )
 
 [node name="Details" type="Node2D" parent="."]
+
+[node name="Rocks" type="Node2D" parent="Details"]
+modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
+
+[node name="Rock" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 1150, -50 )
+rotation = -0.785397
+scale = Vector2( 0.279741, 0.279741 )
+texture = ExtResource( 9 )
+
+[node name="Rocks" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 910, 310 )
+rotation = 4.71238
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="Rocks2" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 1990, 390 )
+rotation = 7.85397
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 1450, 350 )
+scale = Vector2( 0.350536, 0.350536 )
+texture = ExtResource( 8 )
+
+[node name="TreeTop" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 1000, 400 )
+
+[node name="TreeTop3" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 1150, -200 )
+scale = Vector2( 0.864361, 0.864361 )
+
+[node name="TreeTop2" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 2000, 400 )
+
+[node name="FlowerPetals" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 1000, 550 )
+palette = 4
+
+[node name="FlowerPetals2" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 1100, 500 )
+rotation = -0.785397
+palette = 2
+
+[node name="FlowerPetals3" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 1150, 400 )
+palette = 3
+
+[node name="FlowerPetals7" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 1050, -300 )
+palette = 4
+
+[node name="FlowerPetals8" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 1250, -300 )
+palette = 2
+
+[node name="FlowerPetals4" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 1850, 400 )
+
+[node name="FlowerPetals5" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 2000, 550 )
+palette = 3
+
+[node name="FlowerPetals6" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 2150, 400 )
+palette = 5
+
+[node name="Fence" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 900, 800 )
+rotation = 1.57079
+
+[node name="Fence3" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 800, 450 )
+rotation = -1.57079
+length = 7
+
+[node name="Tree" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 900, 800 )
+rotation = 1.48198
+scale = Vector2( -1, 1 )
+palette = 5
+
+[node name="Fence2" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 1450, 500 )
+rotation = 3.14159
+
+[node name="Fence4" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 250, -100 )
+rotation = 3.14159
+length = 7
+
+[node name="Tree2" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 1450, 500 )
+rotation = 3.33898
+
+[node name="Fence5" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 1450, 200 )
+rotation = 6.28318
+
+[node name="Tree9" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 1450, 200 )
+rotation = 0.362726
+
+[node name="Tree4" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 800, 550 )
+rotation = -1.74533
+
+[node name="Tree8" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 350, -100 )
+rotation = -3.31613
+palette = 6
+
+[node name="Tree5" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 800, 350 )
+rotation = -1.39626
+palette = 3
+
+[node name="Tree7" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 150, -100 )
+rotation = -2.96706
+scale = Vector2( -1, 1 )
+palette = 5
+
+[node name="Tree3" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 800, 450 )
+rotation = -1.57079
+scale = Vector2( 0.9, 0.9 )
+z_index = -35
+palette = 2
+
+[node name="Tree6" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 250, -100 )
+rotation = -3.09654
+scale = Vector2( 0.9, 0.9 )
+z_index = -35
+palette = 2
+
+[node name="Flower" parent="Details" instance=ExtResource( 14 )]
+position = Vector2( 150, -200 )
+palette = 3
+
+[node name="Flower2" parent="Details" instance=ExtResource( 14 )]
+position = Vector2( 350, -200 )
+palette = 2
+
+[node name="Flower3" parent="Details" instance=ExtResource( 14 )]
+position = Vector2( 1000, -50 )
+rotation = -1.57079
+
+[node name="Flower4" parent="Details" instance=ExtResource( 14 )]
+position = Vector2( 1300, -50 )
+rotation = 1.57079
+palette = 3
+
+[node name="Flower5" parent="Details" instance=ExtResource( 14 )]
+position = Vector2( 1150, 100 )
+rotation = 3.14159
+palette = 5
+
+[node name="Flower6" parent="Details" instance=ExtResource( 14 )]
+position = Vector2( 1305, 495 )
+rotation = -2.35619
+palette = 0
