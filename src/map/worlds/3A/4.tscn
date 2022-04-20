@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=8]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=9]
+[ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=13]
 
 [node name="Node2D" type="Node2D"]
 
@@ -22,11 +26,11 @@ tile_data = PoolIntArray( 262145, 0, 0, 262152, 0, 0, 262153, 0, 0, 655372, -161
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 7 )]
-position = Vector2( 1050, 750 )
+position = Vector2( 1050, 850 )
 dir = 1
 
 [node name="Door" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 1050, 750 )
+position = Vector2( 1050, 850 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/3A/0_hub.tscn"
@@ -35,10 +39,10 @@ scene_path = "res://src/map/worlds/3A/0_hub.tscn"
 position = Vector2( 1000, 1350 )
 
 [node name="Box" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 650, 450 )
+position = Vector2( 550, 450 )
 
 [node name="Box2" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 550, 450 )
+position = Vector2( 450, 450 )
 
 [node name="Details" type="Node2D" parent="."]
 
@@ -46,17 +50,108 @@ position = Vector2( 550, 450 )
 modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
 
 [node name="Rock" type="Sprite" parent="Details/Rocks"]
-position = Vector2( -950, 950 )
+position = Vector2( 885, 615 )
 rotation = -0.785397
-scale = Vector2( 0.25, 0.25 )
+scale = Vector2( 0.234231, 0.234231 )
+texture = ExtResource( 9 )
+
+[node name="Rock2" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 1100, 1100 )
+scale = Vector2( 0.166827, 0.166827 )
+texture = ExtResource( 9 )
+
+[node name="Rock3" type="Sprite" parent="Details/Rocks"]
+position = Vector2( 500, 600 )
+scale = Vector2( 0.166827, 0.166827 )
 texture = ExtResource( 9 )
 
 [node name="Rocks" type="Sprite" parent="Details/Rocks"]
-position = Vector2( -800, 950 )
-scale = Vector2( 0.25, 0.25 )
+position = Vector2( 200, 600 )
+rotation = -1.57079
+scale = Vector2( 0.301826, 0.301826 )
 texture = ExtResource( 8 )
 
 [node name="RoundRock" type="Sprite" parent="Details/Rocks"]
-position = Vector2( -600, 950 )
-scale = Vector2( 0.367848, 0.367848 )
+position = Vector2( 915, 1085 )
+scale = Vector2( 0.283619, 0.283619 )
 texture = ExtResource( 1 )
+
+[node name="Lamppost" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 1000, 750 )
+rotation = 1.57079
+
+[node name="Lamppost2" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 500, 700 )
+rotation = 3.14159
+
+[node name="Lamppost3" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 100, 900 )
+rotation = 4.71238
+
+[node name="Tree" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 1000, 600 )
+rotation = 1.41588
+palette = 3
+
+[node name="Tree2" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 1100, 1200 )
+rotation = 2.82259
+
+[node name="Tree7" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 100, 750 )
+rotation = -1.39626
+palette = 2
+
+[node name="Tree3" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 300, 500 )
+rotation = -0.146757
+scale = Vector2( -0.9, 0.9 )
+palette = 6
+
+[node name="Tree6" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 700, 500 )
+rotation = 0.146608
+scale = Vector2( 0.9, 0.9 )
+
+[node name="Tree4" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 650, 700 )
+rotation = -3.28122
+palette = 5
+
+[node name="Tree5" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 350, 700 )
+rotation = -3.00197
+scale = Vector2( -1, 1 )
+palette = 2
+
+[node name="Flower" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 500, 500 )
+
+[node name="Flower2" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 1150, 1000 )
+palette = 3
+
+[node name="Flower3" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 100, 600 )
+rotation = -1.57079
+palette = 2
+
+[node name="Flower4" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 200, 1100 )
+rotation = 1.57079
+palette = 4
+
+[node name="Flower6" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 850, 1200 )
+rotation = 3.14159
+palette = 0
+
+[node name="Flower5" parent="Details" instance=ExtResource( 12 )]
+position = Vector2( 800, 1050 )
+rotation = -1.57079
+palette = 2
+
+[node name="Bench" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 50, 1000 )
+rotation = -1.57079
+scale = Vector2( -1, 1 )
