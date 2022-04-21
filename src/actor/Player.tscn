@@ -414,35 +414,10 @@ z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
 
-[node name="CamTarget" type="Node2D" parent="."]
-
-[node name="DebugCanvas" type="CanvasLayer" parent="."]
-
-[node name="Labels" type="Control" parent="DebugCanvas"]
-margin_left = 10.2806
-margin_top = 10.0
-margin_right = 50.2806
-margin_bottom = 50.0
-rect_scale = Vector2( 2, 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="DebugCanvas/Labels"]
-visible = false
-margin_right = 21.0
-margin_bottom = 14.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "debug text"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
 [node name="BodyArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 3
 collision_mask = 2184
 

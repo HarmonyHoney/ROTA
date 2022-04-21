@@ -92,7 +92,7 @@ func parse_event(event : InputEvent):
 
 func set_text(arg := text):
 	text = arg
-	if !label: return
+	if !label or text == "": return
 	
 	offset.rect_scale = Vector2.ONE
 	

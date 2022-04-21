@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/autoload/Options/Key.gd" type="Script" id=1]
+[ext_resource path="res://src/menu/Options/Key.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/round_rect200.png" type="Texture" id=2]
 [ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=3]
 
@@ -19,7 +19,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-text = "S"
 
 [node name="Offset" type="Control" parent="."]
 margin_left = 25.0

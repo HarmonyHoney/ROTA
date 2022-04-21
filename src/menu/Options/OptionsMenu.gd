@@ -7,6 +7,8 @@ onready var menu := $Control/Menu/
 onready var items_node = $Control/Menu/List
 var items := []
 
+onready var item_window_size := $Control/Menu/List/Resolution
+
 var is_open := false
 var cursor := 0 setget set_cursor
 
@@ -18,11 +20,7 @@ onready var open = EaseMover.new(control, 0.5, Vector2(0, 720), Vector2.ZERO)
 export var cursor_margin := Vector2.ZERO
 
 func _ready():
-	#control.visible = false
-	
-	for i in items_node.get_children():
-		if !i.is_in_group("no_item"):
-			items.append(i)
+	fill_items()
 
 func _input(event):
 	if !is_open: return
@@ -63,7 +61,17 @@ func _physics_process(delta):
 	
 	# scroll
 	menu.rect_position.y = lerp(menu.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
+
+func set_cursor(arg := 0):
+	cursor = clamp(arg, 0, items.size() - 1)
+
+func fill_items():
+	item_window_size.visible = !OS.window_fullscreen
 	
+	items = []
+	for i in items_node.get_children():
+		if !i.is_in_group("no_item") and i.visible:
+			items.append(i)
 
 func show(arg := true):
 	is_open = arg
@@ -73,7 +81,7 @@ func show(arg := true):
 
 	if is_open:
 		self.cursor = 0
+		
+		_ready()
 
-func set_cursor(arg := 0):
-	cursor = clamp(arg, 0, items.size() - 1)
 

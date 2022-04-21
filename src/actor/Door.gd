@@ -83,6 +83,8 @@ func enter_door():
 		if audio_open:
 			audio_open.pitch_scale = rand_range(0.9, 1.1)
 			audio_open.play()
+		
+		Cam.start_zoom(0, false)
 
 func on_enter():
 	pass

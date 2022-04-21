@@ -17,10 +17,6 @@ onready var spr_hand_r := $Sprites/HandR
 onready var spr_hands := [spr_hand_l, spr_hand_r]
 onready var hand_start : Vector2 = spr_hand_r.position
 
-onready var debug_label : Label = $DebugCanvas/Labels/Label
-export var is_debug := false setget set_debug
-var readout = []
-
 onready var audio_pickup := $Audio/Pickup
 onready var audio_drop := $Audio/Drop
 onready var audio_push := $Audio/Push
@@ -31,10 +27,6 @@ onready var audio_fallout := $Audio/FallOut
 onready var audio_spike := $Audio/Spike
 onready var audio_around := $Audio/Around
 onready var audio_peek := $Audio/Peek
-
-onready var cam_target := $CamTarget
-var peek_clock := 0.0
-var peek_time := 0.2
 
 export var is_input := true
 var joy := Vector2.ZERO
@@ -59,7 +51,6 @@ var move_velocity := Vector2.ZERO
 var dir_x := 1
 
 var walk_speed := 350.0
-#export var air_speed := 250.0
 var floor_accel := 12
 var air_accel := 7
 
@@ -138,8 +129,7 @@ func _ready():
 	
 	# set camera
 	camera = Cam
-	camera.target_node = cam_target
-	#camera.current = true
+	camera.target_node = self
 	
 	# turn
 	set_dir()
@@ -151,7 +141,6 @@ func _ready():
 	camera.rotation = turn_to
 	camera.turn_ease.clock = 99
 	camera.position = position
-	#camera.zoom_in()
 	camera.reset_smoothing()
 	camera.force_update_scroll()
 	camera.force_update_transform()
@@ -244,9 +233,6 @@ func _physics_process(delta):
 			if goal_clock == limit:
 				goal_step += 1
 				goal_clock = 0.0
-				
-				#if goal_step == 2:
-				#	goal.audio_coin.play()
 				
 				# finished
 				if goal_step > 2:
@@ -375,23 +361,6 @@ func _physics_process(delta):
 		
 		# in control
 		else:
-			
-#			# camera peek
-#			if joy.x == 0 and joy.y != 0 and joy.y == joy_last.y:
-#				peek_clock = min(peek_clock + delta, peek_time)
-#			else:
-#				peek_clock = 0.0
-#				cam_target.position = Vector2.ZERO
-#
-#			if peek_clock == peek_time and cam_target.position == Vector2.ZERO:
-#				audio_peek.pitch_scale = rand_range(0.9, 1.3)
-#				audio_peek.play()
-#				if joy.y == 1:
-#					cam_target.global_position = sprites.to_global(Vector2.DOWN * 250)
-#				elif joy.y == -1:
-#					cam_target.global_position = sprites.to_global(Vector2.UP * 250)
-			
-			
 			# dir_x
 			if joy.x != 0:
 				set_dir_x(joy.x)
@@ -499,46 +468,19 @@ func _physics_process(delta):
 	
 	# check boundary
 	if !is_fall_out and Boundary.is_outside(global_position):
-		outside_boundary()
-		is_fall_out = true
-	
+		fall_out()
 	
 	# squash squish and stretch
 	squish_clock = min(squish_clock + delta, squish_time)
 	var s = smoothstep(0, 1, squish_clock / squish_time)
 	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, s)
-	
-	
-	# debug label
-	if is_debug:
-		readout.resize(10)
-		readout[0] = "dir: " + str(dir)
-		readout[1] = "is_floor: " + str(is_floor)
-		readout[2] = "has_jumped: " + str(has_jumped)
-		readout[3] = "dir_x: " + str(dir_x)
-		readout[4] = "spr_root degrees: " + str(spr_root.rotation_degrees)
-		readout[5] = "spr_body degrees: " + str(spr_body.rotation_degrees)
-		
-		debug_label.text = ""
-		for i in readout:
-			if i != null:
-				debug_label.text += str(i) + "\n"
 
 func set_dir_x(arg := dir_x):
-	#if dir_x != sign(arg):
-	#	print("set_dir_x: ", sign(arg))
-	
 	dir_x = sign(arg)
 	areas.scale.x = dir_x
 	spr_body.scale.x = dir_x
-	#spr_root.scale.x = dir_x
-	
 	
 	anim.playback_speed = dir_x
-	
-	# hand depth
-	#for i in 2:
-	#	spr_hands[i].show_behind_parent = sign(i - 0.5) == dir_x
 
 func set_jump_height(arg):
 	jump_height = arg
@@ -557,13 +499,6 @@ func solve_jump():
 	jump_speed = -jump_gravity * jump_time
 	fall_gravity = jump_gravity * 2.0
 	#print("jump_speed: ", jump_speed, " / jump_gravity: ", jump_gravity, " / fall_gravity: ", fall_gravity)
-
-func set_debug(arg : bool):
-	is_debug = arg
-	if Engine.editor_hint: return
-	if !debug_label: debug_label = $DebugCanvas/Labels/Label
-	if debug_label:
-		debug_label.visible = is_debug
 
 func rot(arg : Vector2, _dir := dir):
 	return arg.rotated(deg2rad(_dir * 90))
@@ -591,30 +526,6 @@ func walk_around(right := false):
 	audio_around.pitch_scale = rand_range(0.9, 1.3)
 	audio_around.play()
 
-func hit_effector(pos : Vector2):
-	move_and_collide(pos - position)
-	velocity = Vector2.ZERO
-	is_floor = false
-	has_jumped = true
-	is_jump = false
-
-func spinner(right := false, pos := Vector2.ZERO):
-	set_dir(dir + (1 if right else -1))
-	hit_effector(pos)
-
-func arrow(arg, pos):
-	if dir != arg:
-		set_dir(arg)
-		hit_effector(pos)
-
-func portal(pos):
-	velocity = Vector2.ZERO
-	is_floor = false
-	has_jumped = true
-	is_jump = false
-	
-	position = pos
-
 func _on_BodyArea_area_entered(area):
 	var p = area.get_parent()
 	
@@ -636,6 +547,7 @@ func _on_BodyArea_area_entered(area):
 			hand_positions[i] = spr_hands[i].global_position
 
 func _on_BodyArea_body_entered(body):
+	# hit spike
 	if body.is_in_group("spike"):
 		print("hit spike")
 		die()
@@ -655,11 +567,9 @@ func die():
 	yield(get_tree().create_timer(0.7), "timeout")
 	Shared.reset()
 
-func outside_boundary():
-	print(name, " outside boundary")
-	fall_out()
-
 func fall_out():
+	print(name, " outside boundary")
+	is_fall_out = true
 	audio_fallout.play()
 	
 	Shared.reset()

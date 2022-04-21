@@ -1,9 +1,7 @@
-extends Node2D
+extends Node
 
 var rect := Rect2()
 var count := 0
-
-#var margin = 10.0
 
 func _ready():
 	Shared.connect("scene_changed", self, "scene_changed")
@@ -13,7 +11,6 @@ func scene_changed():
 
 func add_shape(add : Rect2, cell : Vector2):
 	var r = Rect2(add.position * cell, add.size * cell)
-	#r = r.grow(2.0 * 100)
 	
 	if count == 0:
 		rect = r

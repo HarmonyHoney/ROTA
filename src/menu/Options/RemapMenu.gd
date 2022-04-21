@@ -25,7 +25,7 @@ var prompt_clock := 0.0
 var prompt_time := 5.0
 var is_button := false
 
-onready var key = preload("res://src/autoload/Options/Key.tscn")
+onready var key = preload("res://src/menu/Options/Key.tscn")
 
 export var is_gamepad := false
 

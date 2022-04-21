@@ -64,7 +64,7 @@ func turn(arg):
 	turn_to = arg
 	turn_ease.clock = 0.0
 
-func start_zoom(arg := 0):
+func start_zoom(arg := 0, is_audio := true):
 	zoom_step = posmod(arg, zoom_steps + 1)
 	
 	is_zoom = true
@@ -75,6 +75,6 @@ func start_zoom(arg := 0):
 	
 	UI.set_zoom(frac)
 	
-	audio_zoom.pitch_scale = rand_range(0.8, 1.2)
-	audio_zoom.play()
-
+	if is_audio:
+		audio_zoom.pitch_scale = rand_range(0.8, 1.2)
+		audio_zoom.play()

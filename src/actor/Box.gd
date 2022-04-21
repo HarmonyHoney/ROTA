@@ -19,7 +19,7 @@ onready var audio_respawn := $Audio/Respawn
 export var dir := 0 setget set_dir
 var dir_last := 0
 
-var can_push := true setget set_can_push
+var can_push := true
 export var can_spin := true setget set_can_spin
 
 var tex_push = preload("res://media/image/box/box_push.png")
@@ -63,7 +63,8 @@ func _exit_tree():
 	Shared.boxes.erase(self)
 
 func _ready():
-	set_sprite()
+	set_can_spin()
+	
 	if Engine.editor_hint: return
 	
 	turn_ease.clock = 99
@@ -128,7 +129,7 @@ func _physics_process(delta):
 			is_move = false
 			
 			if Boundary.is_outside(global_position):
-				outside_boundary()
+				fall_out()
 			else:
 				audio_land.pitch_scale = rand_range(0.7, 1.3)
 				audio_land.play()
@@ -165,6 +166,11 @@ func set_dir(arg := dir):
 	if Engine.editor_hint:
 		$Sprites.rotation = turn_to
 
+func set_can_spin(arg := can_spin):
+	can_spin = arg
+	if box_sprite:
+		box_sprite.texture = tex_both if can_spin else tex_push
+
 func rot(arg : Vector2, _dir := dir, backwards := false):
 	return arg.rotated(deg2rad((-_dir if backwards else _dir) * 90))
 
@@ -194,7 +200,6 @@ func move_tile(move_dir := dir, distance := 1):
 	var last_pos = position
 	position += rot(Vector2.DOWN * distance * tile, move_dir)
 	position = Vector2(stepify(position.x, 50), stepify(position.y, 50))
-	
 	#print(name, ": ", last_pos, " - ", position)
 	
 	# move sprite
@@ -234,18 +239,7 @@ func push(push_dir := 0, _push_x := 1):
 	
 	return result
 
-func spinner(right := false):
-	set_dir(dir + (1 if right else 3))
-
-func arrow(arg):
-	if arg != dir:
-		set_dir(arg)
-
-func portal(pos):
-	position = pos
-	sprite.position = Vector2.ZERO
-
-func outside_boundary():
+func fall_out():
 	print(name, " outside boundary")
 	
 	if !is_respawn:
@@ -264,17 +258,6 @@ func outside_boundary():
 		sprite.modulate.a = 0.5
 		audio_fallout.play()
 
-func set_can_push(arg):
-	can_push = arg
-	set_sprite()
-
-func set_can_spin(arg):
-	can_spin = arg
-	set_sprite()
-
-func set_sprite():
-	if box_sprite:
-		box_sprite.texture = tex_both if can_spin else tex_push
 
 func pickup():
 	pickup_ease.clock = 0.0

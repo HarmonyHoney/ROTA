@@ -2,7 +2,7 @@
 
 [ext_resource path="res://media/font/OptionsItem.tres" type="DynamicFont" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
-[ext_resource path="res://src/autoload/Options/Volume.gd" type="Script" id=3]
+[ext_resource path="res://src/menu/Options/Volume.gd" type="Script" id=3]
 
 [node name="Volume" type="Control"]
 margin_right = 1080.0

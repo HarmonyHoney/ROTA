@@ -38,7 +38,7 @@ func _physics_process(delta):
 			
 			if clock > limit:
 				next_step()
-				cam_target(player.cam_target.global_position)
+				cam_target(player.global_position)
 		4:
 			cam_move()
 			if clock > cam_time:

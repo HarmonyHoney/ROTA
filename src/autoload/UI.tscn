@@ -3,7 +3,7 @@
 [ext_resource path="res://media/image/UI/magnify.png" type="Texture" id=1]
 [ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://media/image/UI/btn_b.png" type="Texture" id=8]
-[ext_resource path="res://src/autoload/Options/Key.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/menu/Options/Key.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/autoload/UI.gd" type="Script" id=10]
 [ext_resource path="res://src/actor/Circle.gd" type="Script" id=12]
 

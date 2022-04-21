@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/shader/outline2D_outer.shader" type="Shader" id=1]
-[ext_resource path="res://src/autoload/Options/Volume.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/autoload/Options/OptionsMenu.gd" type="Script" id=3]
+[ext_resource path="res://src/menu/Options/Volume.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/menu/Options/OptionsMenu.gd" type="Script" id=3]
 [ext_resource path="res://media/audio/sfx/Randomize104.wav" type="AudioStream" id=4]
 [ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=5]
 [ext_resource path="res://media/font/OptionsItem.tres" type="DynamicFont" id=6]
@@ -10,9 +10,9 @@
 [ext_resource path="res://media/image/UI/Input.png" type="Texture" id=8]
 [ext_resource path="res://media/image/UI/Audio.png" type="Texture" id=9]
 [ext_resource path="res://media/font/OptionsHeader.tres" type="DynamicFont" id=10]
-[ext_resource path="res://src/autoload/Options/OnOff.gd" type="Script" id=11]
-[ext_resource path="res://src/autoload/Options/Resolution.gd" type="Script" id=12]
-[ext_resource path="res://src/autoload/Options/OpenRemap.gd" type="Script" id=13]
+[ext_resource path="res://src/menu/Options/OnOff.gd" type="Script" id=11]
+[ext_resource path="res://src/menu/Options/Resolution.gd" type="Script" id=12]
+[ext_resource path="res://src/menu/Options/OpenRemap.gd" type="Script" id=13]
 [ext_resource path="res://media/image/UI/hand.png" type="Texture" id=14]
 
 [sub_resource type="StyleBoxFlat" id=18]
@@ -36,7 +36,7 @@ func _ready():
 
 func set_value():
 	Shared.toggle_fullscreen()
-	#OS.window_fullscreen = is_on
+	OptionsMenu.fill_items()
 "
 
 [sub_resource type="GDScript" id=25]
