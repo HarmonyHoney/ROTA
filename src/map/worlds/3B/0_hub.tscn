@@ -205,10 +205,10 @@ scale = Vector2( -0.4, 0.4 )
 z_index = -15
 
 [node name="Saguaro11" parent="Details" instance=ExtResource( 6 )]
-modulate = Color( 0.95, 0.95, 0.95, 1 )
+modulate = Color( 0.9, 0.9, 0.9, 1 )
 position = Vector2( 450, 1400 )
-rotation = 3.2434
-scale = Vector2( 0.3, 0.3 )
+rotation = 3.21573
+scale = Vector2( 0.35, 0.35 )
 z_index = -20
 
 [node name="Saguaro9" parent="Details" instance=ExtResource( 6 )]
