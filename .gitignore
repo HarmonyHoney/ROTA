@@ -1,14 +1,8 @@
-# Godot-specific ignores
-.import/
-
 # Imported translations (automatically generated from CSV files)
 *.translation
 
-# Mono-specific ignores
-.mono/
-data_*/
-
 # custom
+.import/
 *.import
 [Ee]xport/
 [Bb]uild/
