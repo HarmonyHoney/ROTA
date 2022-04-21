@@ -19,3 +19,8 @@ func start():
 func end():
 	is_playing = false
 	Cam.set_process_input(true)
+
+func end_all():
+	for i in [gem_collect, goal_show]:
+		if i.is_playing:
+			i.end()

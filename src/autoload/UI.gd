@@ -2,11 +2,6 @@ extends CanvasLayer
 
 onready var gem_label : Label = $Control/Gems/Label
 
-onready var reset_spinner := $Control/Top/Reset/Spinner
-onready var reset_cirlce := $Control/Top/Reset/Circle
-var is_reset := false
-var btn_reset := false
-
 onready var zoom_notch := $Control/Top/Zoom/Slider/Notch
 onready var zoom_circle := $Control/Top/Zoom/Circle
 var zoom_from := 0.0
@@ -14,7 +9,6 @@ var zoom_to := 0.0
 
 var gem = EaseMover.new()
 var top = EaseMover.new()
-var reset = EaseMover.new()
 var menu = EaseMover.new()
 var zoom = EaseMover.new()
 
@@ -30,8 +24,6 @@ func _ready():
 	top.to = top.node.rect_position
 	top.from = top.to - Vector2(0, 125)
 	
-	reset.time = 1.0
-	
 	zoom.time = 0.25
 	zoom_circle.scale = Vector2.ZERO
 	
@@ -46,27 +38,11 @@ func _physics_process(delta):
 	var p = PauseMenu.is_paused
 	gem.move(delta, gem.show or p)
 	top.move(delta, p)
-	menu.move(delta, p)
+	menu.move(delta)
 	
 	if zoom.clock != zoom.time:
 		zoom.count(delta)
 		zoom_circle.scale = Vector2.ONE * lerp(zoom_from, zoom_to, zoom.frac())
-	
-	# reset
-#	if is_reset:
-#		is_reset = Input.is_action_pressed("reset")
-#	else:
-#		is_reset = Input.is_action_just_pressed("reset")
-	
-	var rs = reset.count(delta, is_reset)
-	reset_spinner.rotation = lerp(0, TAU, rs)
-	reset_cirlce.scale = Vector2.ONE * rs
-	
-	if reset.clock == reset.time:
-		is_reset = false
-		Shared.reset()
-		if is_instance_valid(Shared.player):
-			Shared.player.set_physics_process(false)
 
 func set_zoom(frac := 0.0):
 	zoom_notch.position.y = lerp(8, 56, frac)

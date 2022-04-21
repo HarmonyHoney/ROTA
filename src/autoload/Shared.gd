@@ -54,7 +54,6 @@ func _input(event):
 		elif !is_gamepad and (event is InputEventJoypadButton or event is InputEventJoypadMotion):
 			is_gamepad = true
 			emit_signal("signal_gamepad", is_gamepad)
-	
 
 func wipe_scene(arg):
 	if !is_wipe:
@@ -77,6 +76,8 @@ func reset():
 func change_scene():
 	is_wipe = false
 	boxes.clear()
+	
+	Cutscene.end_all()
 	
 	is_reload = next_scene == csfn
 	if is_reload:

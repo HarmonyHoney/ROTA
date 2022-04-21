@@ -1,5 +1,6 @@
 extends Node
 
+var is_playing := false
 var step := 0
 var clock := 0.0
 
@@ -55,6 +56,7 @@ func begin():
 		if !is_instance_valid(i):
 			return
 	
+	is_playing = true
 	Cutscene.start()
 	Cam.set_process(false)
 	player.set_physics_process(false)
@@ -64,6 +66,7 @@ func begin():
 	step = 0
 
 func end():
+	is_playing = false
 	Cutscene.end()
 	Cam.set_process(true)
 	player.set_physics_process(true)

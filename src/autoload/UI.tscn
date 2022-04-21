@@ -1,8 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://media/image/UI/magnify.png" type="Texture" id=1]
-[ext_resource path="res://media/image/UI/reset.png" type="Texture" id=2]
-[ext_resource path="res://media/image/UI/btn_y.png" type="Texture" id=3]
 [ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://media/image/UI/btn_b.png" type="Texture" id=8]
 [ext_resource path="res://src/autoload/Options/Key.tscn" type="PackedScene" id=9]
@@ -53,35 +51,6 @@ margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Reset" type="Control" parent="Control/Top"]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Circle" type="Node2D" parent="Control/Top/Reset"]
-position = Vector2( 66.3236, 64 )
-script = ExtResource( 12 )
-radius = 36.5
-
-[node name="Circle2" type="Node2D" parent="Control/Top/Reset/Circle"]
-self_modulate = Color( 0, 0, 0, 1 )
-script = ExtResource( 12 )
-radius = 33.0
-
-[node name="Spinner" type="Sprite" parent="Control/Top/Reset"]
-position = Vector2( 66.3236, 64 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
-
-[node name="BtnY" type="Sprite" parent="Control/Top/Reset"]
-visible = false
-position = Vector2( 151.601, 64 )
-scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 3 )
 
 [node name="Zoom" type="Control" parent="Control/Top"]
 margin_left = 1280.0

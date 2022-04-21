@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://media/font/PauseHeader.tres" type="DynamicFont" id=1]
 [ext_resource path="res://media/font/PauseItem.tres" type="DynamicFont" id=2]
+[ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/autoload/PauseMenu.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=4]
@@ -58,7 +59,8 @@ __meta__ = {
 anchor_top = 0.35
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 1.52588e-05
+margin_top = -0.199997
+margin_bottom = 35.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -77,20 +79,17 @@ __meta__ = {
 [node name="Items" type="VBoxContainer" parent="Control/Menu/List"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -25.0
+margin_bottom = -64.0
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Resume" type="CenterContainer" parent="Control/Menu/List/Items"]
-margin_right = 512.0
-margin_bottom = 60.0
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="Control/Menu/List/Items/Resume"]
+[node name="Resume" type="Label" parent="Control/Menu/List/Items"]
 margin_left = 165.0
 margin_right = 346.0
 margin_bottom = 60.0
+size_flags_horizontal = 4
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
 text = "Resume"
@@ -100,16 +99,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="CenterContainer" parent="Control/Menu/List/Items"]
-margin_top = 64.0
-margin_right = 512.0
-margin_bottom = 125.0
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="Control/Menu/List/Items/Reset"]
+[node name="Reset" type="Label" parent="Control/Menu/List/Items"]
 margin_left = 193.0
+margin_top = 60.0
 margin_right = 318.0
-margin_bottom = 60.0
+margin_bottom = 120.0
+size_flags_horizontal = 4
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
 text = "Reset"
@@ -119,16 +114,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options" type="CenterContainer" parent="Control/Menu/List/Items"]
-margin_top = 129.0
-margin_right = 512.0
-margin_bottom = 190.0
-size_flags_vertical = 3
+[node name="Hub" type="Label" parent="Control/Menu/List/Items"]
+margin_left = 146.0
+margin_top = 120.0
+margin_right = 366.0
+margin_bottom = 180.0
+size_flags_horizontal = 4
+size_flags_vertical = 7
+custom_fonts/font = ExtResource( 2 )
+text = "Exit Stage"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="Control/Menu/List/Items/Options"]
+[node name="Options" type="Label" parent="Control/Menu/List/Items"]
 margin_left = 169.0
+margin_top = 180.0
 margin_right = 342.0
-margin_bottom = 60.0
+margin_bottom = 240.0
+size_flags_horizontal = 4
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
 text = "Options"
@@ -138,21 +144,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Exit" type="CenterContainer" parent="Control/Menu/List/Items"]
-margin_top = 194.0
-margin_right = 512.0
-margin_bottom = 255.0
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="Control/Menu/List/Items/Exit"]
-margin_left = 215.0
-margin_right = 296.0
-margin_bottom = 60.0
+[node name="Exit" type="Label" parent="Control/Menu/List/Items"]
+margin_left = 211.0
+margin_top = 240.0
+margin_right = 301.0
+margin_bottom = 300.0
+size_flags_horizontal = 4
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
-text = "Exit"
+text = "Quit"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Open" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 3 )
+volume_db = -6.0
+bus = "SFX"
