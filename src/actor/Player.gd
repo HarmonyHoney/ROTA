@@ -186,7 +186,7 @@ func _physics_process(delta):
 		holding_jump = (holding_jump + delta) if btn_jump else 0.0
 	
 	# check floor
-	is_floor = !is_jump and test_move(transform, rot(Vector2.DOWN * (50 if is_hold else 1)))
+	is_floor = !is_jump and velocity.y > -1 and test_move(transform, rot(Vector2.DOWN * (50 if is_hold else 1)))
 	if is_floor:
 		if air_clock > 0.4:
 			audio_land.pitch_scale = rand_range(0.7, 1.1)
@@ -277,7 +277,7 @@ func _physics_process(delta):
 			else:
 				# check floor
 				if !is_floor:
-					walk_around(push_dir == 1)
+					walk_around(sprites.to_local(box.position).x > 0)
 					is_release = true
 				
 				# check distance
