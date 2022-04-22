@@ -241,7 +241,7 @@ rotation = 0.928788
 [node name="PineTree19" parent="Details" instance=ExtResource( 10 )]
 position = Vector2( 1390.46, -94.7027 )
 rotation = 0.301479
-scale = Vector2( 0.35, 0.3 )
+scale = Vector2( 0.3, 0.3 )
 
 [node name="PineTree20" parent="Details" instance=ExtResource( 10 )]
 position = Vector2( 1400, 0 )
@@ -255,7 +255,6 @@ rotation = 3.93668
 [node name="PineTree13" parent="Details" instance=ExtResource( 10 )]
 position = Vector2( 300, 1300 )
 rotation = 3.27945
-scale = Vector2( 0.5, 0.4 )
 
 [node name="PineTree14" parent="Details" instance=ExtResource( 10 )]
 position = Vector2( -16.6855, 1116.02 )
@@ -278,10 +277,10 @@ rotation = -1.70267
 [node name="PineTree24" parent="Details" instance=ExtResource( 10 )]
 position = Vector2( 1100, 1100 )
 rotation = -2.1472
-scale = Vector2( 0.35, 0.3 )
+scale = Vector2( 0.3, 0.3 )
 
 [node name="PineTree23" parent="Details" instance=ExtResource( 10 )]
-modulate = Color( 0.95, 0.95, 0.95, 1 )
+modulate = Color( 0.94902, 0.94902, 0.94902, 1 )
 position = Vector2( 1100, 850 )
 rotation = -1.90138
 scale = Vector2( 0.35, 0.35 )
@@ -289,7 +288,7 @@ z_index = -30
 
 [node name="PineTree21" parent="Details" instance=ExtResource( 10 )]
 position = Vector2( 1400, 700 )
-rotation = -4.10271
+rotation = -4.18549
 
 [node name="PineTree22" parent="Details" instance=ExtResource( 10 )]
 position = Vector2( 1600, 550 )
@@ -307,7 +306,7 @@ rotation = -1.60969
 scale = Vector2( 0.3, 0.3 )
 
 [node name="PineTree4" parent="Details" instance=ExtResource( 10 )]
-modulate = Color( 0.95, 0.95, 0.95, 1 )
+modulate = Color( 0.94902, 0.94902, 0.94902, 1 )
 position = Vector2( -200, 1050 )
 rotation = -1.53031
 scale = Vector2( 0.3, 0.3 )

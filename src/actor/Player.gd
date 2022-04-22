@@ -48,7 +48,7 @@ var is_floor := false
 
 var velocity := Vector2.ZERO
 var move_velocity := Vector2.ZERO
-var dir_x := 1
+var dir_x := 1 setget set_dir_x
 
 var walk_speed := 350.0
 var floor_accel := 12
@@ -125,7 +125,7 @@ func _ready():
 	
 	# face left or right
 	randomize()
-	set_dir_x(1 if randf() > 0.5 else -1)
+	self.dir_x = 1 if randf() > 0.5 else -1
 	
 	# set camera
 	camera = Cam
@@ -277,7 +277,7 @@ func _physics_process(delta):
 			else:
 				# check floor
 				if !is_floor:
-					walk_around(sprites.to_local(box.position).x > 0)
+					walk_around(push_dir == 1)
 					is_release = true
 				
 				# check distance
@@ -363,7 +363,7 @@ func _physics_process(delta):
 		else:
 			# dir_x
 			if joy.x != 0:
-				set_dir_x(joy.x)
+				self.dir_x = joy.x
 			
 			# walking
 			if is_walk:
@@ -414,12 +414,17 @@ func _physics_process(delta):
 						box.is_hold = true
 						box.pickup()
 						
+						# dir_x double check
+						var check_x = sprites.to_local(box.global_position).x > 0
+						self.dir_x = 1 if check_x else -1
+						
 						push_from = position
 						push_clock = 0
+						push_dir = dir_x
 						
 						Guide.set_box(box)
 						
-						# move to first child
+						# move box to first child
 						var p = box.get_parent()
 						p.move_child(box, 0)
 						
@@ -428,10 +433,6 @@ func _physics_process(delta):
 						
 						audio_pickup.pitch_scale = rand_range(0.7, 1.3)
 						audio_pickup.play()
-						
-						# dir_x double check
-						var check_x = sprites.to_local(box.global_position).x > 0
-						set_dir_x(1 if check_x else -1)
 				
 			# in the air
 			else:
