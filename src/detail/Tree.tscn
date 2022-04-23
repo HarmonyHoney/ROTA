@@ -41,8 +41,8 @@ modulate = Color( 0.364706, 1, 0, 1 )
 [node name="Spring" type="Node2D" parent="."]
 script = ExtResource( 2 )
 sprites_path = NodePath("../Sprites")
-add_vel = 1.5
-weight = 4.0
+add_vel = 0.7
+weight = 6.0
 audio_path = NodePath("../Sprites/TreeTop/Audio/Hit")
 pitch_from = 0.25
 pitch_to = 0.5

@@ -17,8 +17,8 @@ __meta__ = {
 "_editor_description_": ""
 }
 sprites_path = NodePath("Sprites")
-add_vel = 1.25
-weight = 3.5
+add_vel = 0.5
+weight = 5.0
 audio_path = NodePath("Audio/Hit")
 pitch_from = 0.2
 pitch_to = 0.5

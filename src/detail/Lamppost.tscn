@@ -38,8 +38,8 @@ script = ExtResource( 7 )
 [node name="Spring" type="Node2D" parent="."]
 script = ExtResource( 3 )
 sprites_path = NodePath("../Sprites")
-add_vel = 1.25
-weight = 3.5
+add_vel = 0.6
+weight = 5.0
 audio_path = NodePath("Hit")
 pitch_from = 0.25
 pitch_to = 0.5

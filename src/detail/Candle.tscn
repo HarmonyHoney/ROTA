@@ -20,6 +20,8 @@ z_index = 1
 z_as_relative = false
 script = ExtResource( 1 )
 sprites_path = NodePath("Sprites")
+add_vel = 4.0
+weight = 4.0
 audio_path = NodePath("Audio/Hit")
 
 [node name="Sprites" type="Node2D" parent="."]

@@ -11,8 +11,9 @@ export var add_vel := 6.0
 export var weight := 2.0
 
 var cooldown_clock := 0.0
-export var cooldown_time := 0.6
+export var cooldown_time := 1.0
 
+export var is_audio := false
 export var audio_path : NodePath
 onready var audio_hit := get_node(audio_path)
 export var pitch_from := 0.7
@@ -35,7 +36,7 @@ func _physics_process(delta):
 func hit(scale := 1.0):
 	velocity += add_vel * scale
 	
-	if audio_hit:
+	if is_audio and audio_hit:
 		audio_hit.pitch_scale = rand_range(pitch_from, pitch_to)
 		audio_hit.play()
 

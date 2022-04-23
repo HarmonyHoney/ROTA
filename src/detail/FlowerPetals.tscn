@@ -19,6 +19,9 @@ sprite_path = NodePath("Sprites/Petals")
 [node name="Spring" type="Node2D" parent="."]
 script = ExtResource( 4 )
 sprites_path = NodePath("../Sprites")
+add_vel = 7.0
+weight = 2.5
+is_audio = true
 audio_path = NodePath("../Audio/Hit")
 
 [node name="Sprites" type="Node2D" parent="."]
