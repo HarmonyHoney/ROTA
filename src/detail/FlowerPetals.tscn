@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/detail/PaletteSwap.gd" type="Script" id=1]
 [ext_resource path="res://media/image/details/FlowerPetals.png" type="Texture" id=2]
-[ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=3]
+[ext_resource path="res://media/audio/sfx/piano_high.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -23,6 +23,8 @@ add_vel = 7.0
 weight = 2.5
 is_audio = true
 audio_path = NodePath("../Audio/Hit")
+pitch_from = 0.85
+pitch_to = 1.15
 
 [node name="Sprites" type="Node2D" parent="."]
 

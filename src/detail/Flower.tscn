@@ -4,7 +4,7 @@
 [ext_resource path="res://media/image/details/FlowerStem.png" type="Texture" id=2]
 [ext_resource path="res://src/detail/Flower.gd" type="Script" id=3]
 [ext_resource path="res://media/image/details/pot.png" type="Texture" id=4]
-[ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=5]
+[ext_resource path="res://media/audio/sfx/guitar_pluck.wav" type="AudioStream" id=5]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -26,6 +26,8 @@ add_vel = 5.0
 weight = 3.0
 is_audio = true
 audio_path = NodePath("../Audio/Hit")
+pitch_from = 0.8
+pitch_to = 1.2
 
 [node name="Sprites" type="Node2D" parent="."]
 scale = Vector2( 0.125, 0.125 )
