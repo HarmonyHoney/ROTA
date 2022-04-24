@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/detail/PaletteSwap.gd" type="Script" id=1]
 [ext_resource path="res://media/image/details/FlowerPetals.png" type="Texture" id=2]
-[ext_resource path="res://media/audio/sfx/piano_high.wav" type="AudioStream" id=3]
+[ext_resource path="res://media/audio/sfx/guitar_pluck.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
