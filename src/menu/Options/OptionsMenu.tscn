@@ -53,6 +53,10 @@ func act():
 pause_mode = 2
 layer = 6
 script = ExtResource( 3 )
+cursor_path = NodePath("Control/Menu/Cursor")
+items_path = NodePath("Control/Menu/List")
+is_scroll = true
+menu_path = NodePath("Control/Menu")
 cursor_margin = Vector2( 25, 0 )
 
 [node name="Control" type="Control" parent="."]
@@ -80,8 +84,7 @@ __meta__ = {
 
 [node name="Cursor" type="Panel" parent="Control/Menu"]
 anchor_right = 1.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 80 )
+rect_min_size = Vector2( 0, 50 )
 custom_styles/panel = SubResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false,

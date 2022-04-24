@@ -1,21 +1,8 @@
-extends CanvasLayer
+extends MenuBase
 
 onready var control := $Control
-onready var cursor_node := $Control/Menu/Cursor
-onready var menu := $Control/Menu
 
-onready var items_node := $Control/Menu/List
-var items := []
-
-var is_open := false
 var open = EaseMover.new()
-
-var scroll := 0
-var cursor := 0 setget set_cursor
-export var cursor_margin := Vector2.ZERO
-
-var joy := Vector2.ZERO
-var joy_last := Vector2.ZERO
 
 var prompt := EaseMover.new()
 var is_prompt := false
@@ -45,22 +32,13 @@ func _ready():
 	prompt.to = prompt.node.rect_position
 	prompt.from = Vector2(prompt.to.x, 720)
 	
-	# fill items
-	for i in items_node.get_children():
-		if !i.is_in_group("no_item"):
-			items.append(i)
-	
-	# create keys
-	for i in items.size():
-		create_keys(i)
-	
 	# get default binds
-	for i in InputMap.get_actions():
-		defaults[i] = InputMap.get_action_list(i)
+	defaults = Shared.default_keys.duplicate()
 
 func _input(event):
 	if !is_open: return
 	
+	# prompt input
 	if is_prompt:
 		if event.is_action_pressed("ui_pause"):
 			is_prompt = false
@@ -68,33 +46,12 @@ func _input(event):
 			assign_key(items[cursor].action, event)
 			is_prompt = false
 			get_tree().set_input_as_handled()
-		
+	# clear key
+	elif event.is_action_pressed("ui_end"):
+		clear_row(cursor)
+	# menu input
 	else:
-		joy_last = joy
-		joy = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").round()
-		
-		# move cursor
-		if joy.y != 0 and joy.y != joy_last.y:
-			self.cursor += joy.y
-		
-		# open prompt
-		elif event.is_action_pressed("ui_accept"):
-			if items[cursor].is_in_group("reset"):
-				reset_to_defaults()
-			elif items[cursor].is_in_group("remap"):
-				is_prompt = true
-				prompt_key.text = items[cursor].action
-				prompt_clock = prompt_time
-				get_tree().set_input_as_handled()
-		
-		# clear key
-		elif event.is_action_pressed("ui_end"):
-			clear_row(cursor)
-		
-		# exit
-		elif event.is_action_pressed("ui_cancel"):
-			get_tree().set_input_as_handled()
-			show(false)
+		menu_input(event)
 
 func _physics_process(delta):
 	if is_prompt:
@@ -114,20 +71,7 @@ func _physics_process(delta):
 	
 	if open.clock == 0: return
 	
-	var target = items[cursor]
-	
-	# position
-	var cg = cursor_node.rect_global_position
-	cg = cg.linear_interpolate(target.rect_global_position - cursor_margin, 0.15)
-	cursor_node.rect_global_position = cg
-	
-	# size
-	var cs = cursor_node.rect_size
-	cs = cs.linear_interpolate(target.rect_size + (cursor_margin * 2.0), 0.15)
-	cursor_node.rect_size = cs
-	
-	# scroll menu
-	menu.rect_position.y = lerp(menu.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
+	menu_process(delta)
 	
 	# header position
 	header.rect_global_position.y = clamp(header_track.rect_global_position.y, 30, 1280)
@@ -137,13 +81,24 @@ func _physics_process(delta):
 	header_ease.count(delta)
 	header_back.modulate.a = lerp(0, 1.0, header_ease.frac())
 
+func accept():
+	if items[cursor].is_in_group("reset"):
+		reset_to_defaults()
+	elif items[cursor].is_in_group("remap"):
+		is_prompt = true
+		prompt_key.text = items[cursor].text
+		prompt_clock = prompt_time
+		get_tree().set_input_as_handled()
+
+func back():
+	get_tree().set_input_as_handled()
+	show(false)
+
 func show(arg := true):
 	is_open = arg
-	OptionsMenu.is_open = !is_open
 	
 	if is_open:
-		cursor = 0
-		scroll = 0
+		self.cursor = 0
 		
 		# create keys
 		for i in items.size():
@@ -155,9 +110,8 @@ func show(arg := true):
 	else:
 		for i in items.size():
 			remove_keys(i)
-
-func set_cursor(arg := 0):
-	cursor = clamp(arg, 0, items.size() - 1)
+		
+		emit_signal("signal_close")
 
 func draw_key(key_node, event):
 	if !is_type(event): return
@@ -208,7 +162,7 @@ func assign_key(action, event):
 
 func create_keys(row):
 	var r = items[row]
-	if r.is_in_group("remap"):
+	if key and r.is_in_group("remap"):
 		var action = items[row].action
 		
 		for i in r.get_node("Keys").get_children():

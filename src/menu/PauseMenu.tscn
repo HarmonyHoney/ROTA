@@ -17,6 +17,9 @@ corner_radius_bottom_left = 50
 pause_mode = 2
 layer = 5
 script = ExtResource( 4 )
+cursor_path = NodePath("Control/Menu/List/Cursor")
+items_path = NodePath("Control/Menu/List/Items")
+menu_path = NodePath("Control/Menu")
 
 [node name="Control" type="Control" parent="."]
 margin_right = 1280.0

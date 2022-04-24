@@ -7,6 +7,7 @@ onready var last_scene := csfn
 onready var next_scene := csfn
 
 var worlds_path := "res://src/map/worlds/"
+var title_path := "res://src/menu/TitleMenu.tscn"
 
 var map_textures := {}
 var start_scale := 1.0
@@ -32,14 +33,17 @@ var volume = [100, 100, 100]
 var is_gamepad := false
 signal signal_gamepad(arg)
 
+var default_keys := {}
+
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
 	#set_volume(0, 50)
 	set_volume(1, 50)
 	set_volume(2, 50)
 	
-	yield(get_tree(), "idle_frame")
-	load_data()
+	# get default key binds
+	for i in InputMap.get_actions():
+		default_keys[i] = InputMap.get_action_list(i)
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
