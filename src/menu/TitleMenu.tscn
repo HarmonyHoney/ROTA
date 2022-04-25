@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://media/font/PauseItem.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/menu/TitleMenu.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/menu/AttractMode.gd" type="Script" id=5]
 [ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://src/menu/FileMenu.gd" type="Script" id=7]
+[ext_resource path="res://src/menu/FileCard.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
@@ -15,10 +17,17 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.3, 0.3, 0.3, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
 [sub_resource type="DynamicFont" id=2]
 size = 90
 outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 6 )
@@ -37,18 +46,16 @@ fade_path = NodePath("Canvas/Menu")
 
 [node name="Back" type="ColorRect" parent="Canvas"]
 visible = false
-margin_right = 1280.0
-margin_bottom = 720.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0.47, 0.47, 0.47, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Menu" type="Control" parent="Canvas"]
-margin_left = 9.0
-margin_top = 9.0
-margin_right = 1289.0
-margin_bottom = 729.0
+margin_right = 1280.0
+margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -133,6 +140,123 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FileMenu" type="Control" parent="Canvas"]
+margin_right = 1280.0
+margin_bottom = 720.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+cursor_path = NodePath("Cursor")
+items_path = NodePath("List")
+menu_path = NodePath(".")
+cursor_margin = Vector2( 0, 0 )
+is_fade = true
+fade_path = NodePath(".")
+axis_x = true
+
+[node name="Back" type="ColorRect" parent="Canvas/FileMenu"]
+modulate = Color( 1, 1, 1, 0.8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ListBack" type="HBoxContainer" parent="Canvas/FileMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 75
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="File1" type="Panel" parent="Canvas/FileMenu/ListBack"]
+margin_left = 115.0
+margin_top = 260.0
+margin_right = 415.0
+margin_bottom = 460.0
+rect_min_size = Vector2( 300, 200 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="File2" type="Panel" parent="Canvas/FileMenu/ListBack"]
+margin_left = 490.0
+margin_top = 260.0
+margin_right = 790.0
+margin_bottom = 460.0
+rect_min_size = Vector2( 300, 200 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="File3" type="Panel" parent="Canvas/FileMenu/ListBack"]
+margin_left = 865.0
+margin_top = 260.0
+margin_right = 1165.0
+margin_bottom = 460.0
+rect_min_size = Vector2( 300, 200 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Cursor" type="Panel" parent="Canvas/FileMenu"]
+anchor_right = 1.0
+anchor_bottom = 0.1
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="List" type="HBoxContainer" parent="Canvas/FileMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 75
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileCard" parent="Canvas/FileMenu/List" instance=ExtResource( 8 )]
+margin_left = 115.0
+margin_top = 260.0
+margin_right = 415.0
+margin_bottom = 460.0
+
+[node name="FileCard2" parent="Canvas/FileMenu/List" instance=ExtResource( 8 )]
+margin_left = 490.0
+margin_top = 260.0
+margin_right = 790.0
+margin_bottom = 460.0
+slot = 1
+
+[node name="FileCard3" parent="Canvas/FileMenu/List" instance=ExtResource( 8 )]
+margin_left = 865.0
+margin_top = 260.0
+margin_right = 1165.0
+margin_bottom = 460.0
+slot = 2
+
 [node name="Map" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -140,11 +264,13 @@ __meta__ = {
 
 [node name="SolidTileMap" parent="Map" instance=ExtResource( 3 )]
 tile_data = PoolIntArray( 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 393231, 0, 0, 393232, 0, 0, 393233, 0, 0, 393234, 0, 0, 393235, 0, 0, 393236, 0, 0, 458767, 0, 0, 458768, 0, 0, 458769, 0, 0, 458770, 0, 0, 458771, 0, 0, 458772, 0, 0 )
+detail = 4
+bg_palette = 1
 
 [node name="Actors" type="Node2D" parent="Map"]
 
 [node name="Player" parent="Map/Actors" instance=ExtResource( 4 )]
-position = Vector2( 1800, 50 )
+position = Vector2( 1800, 450 )
 is_input = false
 
 [node name="AttractMode" type="Node2D" parent="Map"]
@@ -156,6 +282,7 @@ margin_left = 1500.0
 margin_top = 500.0
 margin_right = 2100.0
 margin_bottom = 800.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Around
 the Edge"

@@ -1,5 +1,7 @@
 extends MenuBase
 
+onready var file_menu := $Canvas/FileMenu
+
 func _ready():
 	UI.menu.show = true
 
@@ -12,7 +14,8 @@ func _physics_process(delta):
 func accept():
 	match items[cursor].name.to_lower():
 		"play":
-			play()
+			sub_menu(file_menu)
+			#play()
 		"options":
 			sub_menu(OptionsMenu)
 		"exit":

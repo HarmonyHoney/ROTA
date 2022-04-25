@@ -31,6 +31,10 @@ signal signal_gamepad(arg)
 
 var default_keys := {}
 
+var save_slot := 0
+var save_dict := {0: {}, 1: {}, 2: {}}
+var save_time := 0.0
+
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
 	#set_volume(0, 50)
@@ -40,6 +44,8 @@ func _ready():
 	# get default key binds
 	for i in InputMap.get_actions():
 		default_keys[i] = InputMap.get_action_list(i)
+	
+	load_data()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -54,6 +60,9 @@ func _input(event):
 		elif !is_gamepad and (event is InputEventJoypadButton or event is InputEventJoypadMotion):
 			is_gamepad = true
 			emit_signal("signal_gamepad", is_gamepad)
+
+func _physics_process(delta):
+	save_time += delta
 
 func wipe_scene(arg, last := csfn):
 	if !is_wipe:
@@ -90,8 +99,7 @@ func change_scene():
 	
 	emit_signal("scene_changed")
 	
-	if "worlds" in csfn and "worlds" in last_scene:
-		save_data()
+	save_data()
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen
@@ -184,12 +192,15 @@ func erase_data():
 	file.close()
 
 func save_data():
-	var data = {}
-	data["goals_collected"] = goals_collected
-	data["csfn"] = csfn
-	data ["last_scene"] = last_scene
+	save_dict[save_slot]["goals_collected"] = goals_collected
+	save_dict[save_slot]["gem_count"] = gem_count
+	save_dict[save_slot]["time"] = int(save_time)
 	
-	var j = JSON.print(data, "\t")
+	if "worlds" in csfn and "worlds" in last_scene:
+		save_dict[save_slot]["csfn"] = csfn
+		save_dict[save_slot]["last_scene"] = last_scene
+	
+	var j = JSON.print(save_dict, "\t")
 	
 	var file = File.new()
 	file.open("user://save_data.json", File.WRITE)
@@ -210,10 +221,35 @@ func load_data():
 		
 		if typeof(p.result) == TYPE_DICTIONARY:
 			var data = p.result
-			if data.has("goals_collected"):
-				goals_collected = data["goals_collected"]
-				gem_count = goals_collected.size()
-				UI.gem_label.text = str(gem_count)
-			if data.has("csfn") and data.has("last_scene"):
-				next_scene = data["csfn"]
-				last_scene = data["last_scene"]
+			# convert keys to int
+			for i in data.keys():
+				save_dict[int(i)] = data[i]
+
+func load_slot(arg := 0):
+	save_slot = clamp(arg, 0, 2)
+	print("Shared.save_slot: ", save_slot)
+	
+	if save_dict[save_slot].has("csfn"):
+		next_scene = save_dict[save_slot]["csfn"]
+		
+		if save_dict[save_slot].has("last_scene"):
+			last_scene = save_dict[save_slot]["last_scene"]
+		
+		if save_dict[save_slot].has("gem_count"):
+			gem_count = save_dict[save_slot]["gem_count"]
+			UI.gem_label.text = str(gem_count)
+		
+		if save_dict[save_slot].has("goals_collected"):
+			goals_collected = save_dict[save_slot]["goals_collected"]
+		
+		if save_dict[save_slot].has("time"):
+			save_time = save_dict[save_slot]["time"]
+	else:
+		Shared.next_scene = Shared.start_path
+		Shared.last_scene = Shared.start_path
+		Cutscene.is_start_game = true
+	
+	Shared.wipe_scene(Shared.next_scene, Shared.last_scene)
+
+func erase_slot(arg := 0):
+	pass

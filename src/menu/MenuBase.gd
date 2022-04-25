@@ -31,6 +31,8 @@ var joy_clock := 0.0
 var joy_wait := 0.3
 var joy_repeat := 0.2
 
+export var axis_x := false
+
 func _ready():
 	fill_items()
 	self.cursor = 0
@@ -51,10 +53,17 @@ func menu_input(event):
 	elif accept and event.is_pressed():
 		accept()
 	elif joy.y != 0 and joy.y != joy_last.y:
-		self.cursor = wrapi(cursor + joy.y, 0, items.size())
-		joy_clock = 0.0
+		if axis_x:
+			joy_y(joy.y)
+		else:
+			self.cursor = wrapi(cursor + joy.y, 0, items.size())
+			joy_clock = 0.0
 	elif joy.x != 0 and joy.x != joy_last.x:
-		joy_x(joy.x)
+		if axis_x:
+			self.cursor = wrapi(cursor + joy.x, 0, items.size())
+			joy_clock = 0.0
+		else:
+			joy_x(joy.x)
 
 func menu_process(delta):
 	if is_fade:
@@ -62,11 +71,11 @@ func menu_process(delta):
 	
 	if is_open:
 		# hold up/down repeat
-		if joy.y != 0:
+		if (joy.y != 0 and !axis_x) or (joy.x != 0 and axis_x):
 			joy_clock += delta
 			if joy_clock > joy_wait + joy_repeat:
 				joy_clock = joy_wait
-				self.cursor += joy.y
+				self.cursor += joy.x if axis_x else joy.y
 		
 		# move cursor
 		cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(items[cursor].rect_global_position - cursor_margin, 0.15)
@@ -111,6 +120,9 @@ func back():
 	pass
 
 func joy_x(arg := 1):
+	pass
+
+func joy_y(arg := 1):
 	pass
 
 func sub_menu(arg : MenuBase):

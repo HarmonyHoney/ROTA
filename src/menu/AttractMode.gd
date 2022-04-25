@@ -5,13 +5,15 @@ onready var p : Player = Shared.player
 
 func _ready():
 	Cam.target_node = self
-	Cam.position = position
-	#Cam.offset = Vector2(-300, 0)
-	#Cam.turn_offset = Cam.offset
-	
-	randomize()
-	yield(get_tree().create_timer(6.0), "timeout")
-	attract()
+#	Cam.position = position
+#	Cam.offset = Vector2(-300, 0)
+#	Cam.turn_offset = Cam.offset
+#
+#	Cam.set_process(false)
+#
+#	randomize()
+#	yield(get_tree().create_timer(6.0), "timeout")
+#	attract()
 	
 
 func attract():
