@@ -158,6 +158,11 @@ func _ready():
 		if is_instance_valid(Shared.door_destination):
 			Cutscene.gem_collect.begin()
 		Cutscene.is_collect = false
+	
+	elif Cutscene.is_start_game:
+		anim.play("jump")
+		Cutscene.start_game.begin()
+		Cutscene.is_start_game = false
 
 func _physics_process(delta):
 	if Engine.editor_hint: return

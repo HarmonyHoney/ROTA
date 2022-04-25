@@ -1,18 +1,14 @@
 extends Node
 
+var worlds_path := "res://src/map/worlds/"
+var title_path := "res://src/menu/TitleMenu.tscn"
+var start_path := "res://src/map/worlds/1/0_start.tscn"
+
 var is_wipe := false
 
 onready var csfn := get_tree().current_scene.filename
 onready var last_scene := csfn
 onready var next_scene := csfn
-
-var worlds_path := "res://src/map/worlds/"
-var title_path := "res://src/menu/TitleMenu.tscn"
-
-var map_textures := {}
-var start_scale := 1.0
-var last_orb_radius := 0.0
-var last_orb_pos := Vector2.ZERO
 
 var screenshot_texture : ImageTexture
 
@@ -59,12 +55,12 @@ func _input(event):
 			is_gamepad = true
 			emit_signal("signal_gamepad", is_gamepad)
 
-func wipe_scene(arg):
+func wipe_scene(arg, last := csfn):
 	if !is_wipe:
 		is_wipe = true
 		
 		if arg != csfn:
-			last_scene = csfn
+			last_scene = last
 			next_scene = arg
 		
 		Wipe.start()
@@ -93,7 +89,9 @@ func change_scene():
 	BG.set_colors(0)
 	
 	emit_signal("scene_changed")
-	save_data()
+	
+	if "worlds" in csfn and "worlds" in last_scene:
+		save_data()
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen
@@ -219,4 +217,3 @@ func load_data():
 			if data.has("csfn") and data.has("last_scene"):
 				next_scene = data["csfn"]
 				last_scene = data["last_scene"]
-				change_scene()

@@ -10,7 +10,7 @@ var is_rotating := true
 var is_moving := true
 
 var screen_size := Vector2(1280, 720)
-onready var start_offset = offset
+var turn_offset := Vector2.ZERO
 
 var turn_ease := EaseMover.new()
 var turn_from := 0.0
@@ -42,8 +42,8 @@ func _process(delta):
 			rotation = lerp_angle(turn_from, turn_to, turn_ease.count(delta))
 			emit_signal("turning", rotation)
 		
-			if start_offset != Vector2.ZERO:
-				offset = start_offset.rotated(rotation)
+			if turn_offset != Vector2.ZERO:
+				offset = turn_offset.rotated(rotation)
 	
 	# track target
 	if is_instance_valid(target_node):

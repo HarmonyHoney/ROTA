@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://media/font/PauseItem.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/menu/TitleMenu.gd" type="Script" id=2]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/menu/AttractMode.gd" type="Script" id=5]
+[ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
@@ -11,27 +15,40 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="DynamicFont" id=2]
+size = 90
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 6 )
+
 [node name="TitleMenu" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 2 )
 cursor_path = NodePath("Canvas/Menu/Cursor")
 items_path = NodePath("Canvas/Menu/List")
 menu_path = NodePath("Canvas/Menu")
 is_open = true
+is_fade = true
+fade_path = NodePath("Canvas/Menu")
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
 [node name="Back" type="ColorRect" parent="Canvas"]
+visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
+color = Color( 0.47, 0.47, 0.47, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Menu" type="Control" parent="Canvas"]
-margin_left = 100.0
-margin_top = 200.0
-margin_right = 350.0
-margin_bottom = 600.0
+margin_left = 9.0
+margin_top = 9.0
+margin_right = 1289.0
+margin_bottom = 729.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -46,19 +63,21 @@ __meta__ = {
 }
 
 [node name="List" type="VBoxContainer" parent="Canvas/Menu"]
-anchor_right = 1.0
+anchor_right = 0.3
 anchor_bottom = 1.0
-margin_right = -127.0
-margin_bottom = -260.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_constants/separation = 0
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Play" type="Label" parent="Canvas/Menu/List"]
-margin_left = 39.0
-margin_right = 134.0
-margin_bottom = 60.0
+margin_left = 144.0
+margin_top = 240.0
+margin_right = 239.0
+margin_bottom = 300.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -70,9 +89,10 @@ __meta__ = {
 }
 
 [node name="Options" type="Label" parent="Canvas/Menu/List"]
-margin_top = 60.0
-margin_right = 173.0
-margin_bottom = 120.0
+margin_left = 105.0
+margin_top = 300.0
+margin_right = 278.0
+margin_bottom = 360.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -84,10 +104,10 @@ __meta__ = {
 }
 
 [node name="Credits" type="Label" parent="Canvas/Menu/List"]
-margin_left = 7.0
-margin_top = 120.0
-margin_right = 165.0
-margin_bottom = 180.0
+margin_left = 113.0
+margin_top = 360.0
+margin_right = 271.0
+margin_bottom = 420.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -99,14 +119,46 @@ __meta__ = {
 }
 
 [node name="Exit" type="Label" parent="Canvas/Menu/List"]
-margin_left = 41.0
-margin_top = 180.0
-margin_right = 131.0
-margin_bottom = 240.0
+margin_left = 147.0
+margin_top = 420.0
+margin_right = 237.0
+margin_bottom = 480.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
 text = "Quit"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Map" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SolidTileMap" parent="Map" instance=ExtResource( 3 )]
+tile_data = PoolIntArray( 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 393231, 0, 0, 393232, 0, 0, 393233, 0, 0, 393234, 0, 0, 393235, 0, 0, 393236, 0, 0, 458767, 0, 0, 458768, 0, 0, 458769, 0, 0, 458770, 0, 0, 458771, 0, 0, 458772, 0, 0 )
+
+[node name="Actors" type="Node2D" parent="Map"]
+
+[node name="Player" parent="Map/Actors" instance=ExtResource( 4 )]
+position = Vector2( 1800, 50 )
+is_input = false
+
+[node name="AttractMode" type="Node2D" parent="Map"]
+position = Vector2( 1800, 650 )
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Map"]
+margin_left = 1500.0
+margin_top = 500.0
+margin_right = 2100.0
+margin_bottom = 800.0
+custom_fonts/font = SubResource( 2 )
+text = "Around
+the Edge"
 align = 1
 valign = 1
 __meta__ = {

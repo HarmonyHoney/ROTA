@@ -1,18 +1,9 @@
 extends MenuBase
 
-onready var control := $Control
-
 onready var hub_label := $Control/Menu/List/Items/Hub
 onready var audio_open := $Audio/Open
 
-var open = EaseMover.new()
-
 func _ready():
-	open.node = $Control
-	open.from = Vector2(0, 720)
-	open.to = Vector2.ZERO
-	open.time = 0.25
-	
 	Wipe.connect("start_wipe_out", self, "start_wipe_out")
 	Wipe.connect("wipe_out", self, "wipe_out")
 	Wipe.connect("wipe_in", self, "wipe_in")
@@ -20,13 +11,10 @@ func _ready():
 func _input(event):
 	if is_open:
 		menu_input(event)
-	elif event.is_action_pressed("ui_pause") and !OptionsMenu.is_open and !RemapMenu.is_open and Shared.csfn != Shared.title_path:
-		set_paused(true)
+	elif event.is_action_pressed("ui_pause") and !is_sub_menu and Shared.csfn != Shared.title_path:
+		self.is_open = true
 
 func _physics_process(delta):
-	open.count(delta, is_open)
-	control.modulate.a = lerp(0.0, 1.0, open.clock / open.time)
-	
 	menu_process(delta)
 
 func accept():
@@ -40,10 +28,10 @@ func accept():
 		"options":
 			sub_menu(OptionsMenu)
 		"exit":
-			get_tree().quit()
+			Shared.wipe_scene(Shared.title_path)
 
 func back():
-	set_paused(false)
+	self.is_open = false
 	get_tree().set_input_as_handled()
 
 func start_wipe_out():
@@ -52,15 +40,14 @@ func start_wipe_out():
 func wipe_out():
 	# close menu
 	if is_open:
-		set_paused(false)
-		open.clock = 0
+		self.is_open = false
+		fade_ease.clock = 0
 
 func wipe_in():
 	set_process_input(true)
 
-func set_paused(pause := true):
-	is_open = pause
-	self.cursor = 0
+func set_open(arg := is_open):
+	.set_open(arg)
 	
 	get_tree().paused = is_open
 	

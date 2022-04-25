@@ -2,9 +2,7 @@ extends MenuBase
 
 onready var control := $Control
 
-var open = EaseMover.new()
-
-var prompt := EaseMover.new()
+onready var prompt_ease := EaseMover.new($Control/Prompt)
 var is_prompt := false
 onready var prompt_key := $Control/Prompt/VBoxContainer/Key
 onready var prompt_timer_label := $Control/Prompt/VBoxContainer/Timer
@@ -24,14 +22,6 @@ onready var header_track := $Control/Menu/List/Spacer
 var defaults := {}
 
 func _ready():
-	open.from = Vector2(0, 720)
-	open.to = Vector2.ZERO
-	open.node = control
-	
-	prompt.node = $Control/Prompt
-	prompt.to = prompt.node.rect_position
-	prompt.from = Vector2(prompt.to.x, 720)
-	
 	# get default binds
 	defaults = Shared.default_keys.duplicate()
 
@@ -54,6 +44,8 @@ func _input(event):
 		menu_input(event)
 
 func _physics_process(delta):
+	menu_process(delta)
+	
 	if is_prompt:
 		prompt_clock -= delta
 		prompt_timer_label.text = str(ceil(max(0, prompt_clock)))
@@ -61,17 +53,11 @@ func _physics_process(delta):
 		if prompt_clock < 0:
 			is_prompt = false
 	
-	# ease mover
-	open.count(delta, is_open)
-	control.modulate.a = lerp(0, 1, open.clock / open.time)
+	prompt_ease.count(delta, is_prompt)
+	prompt_ease.node.modulate.a = lerp(0, 1, prompt_ease.clock / prompt_ease.time)
+	prompt_ease.node.visible = prompt_ease.clock > 0
 	
-	prompt.count(delta, is_prompt)
-	prompt.node.modulate.a = lerp(0, 1, prompt.clock / prompt.time)
-	prompt.node.visible = prompt.clock > 0
-	
-	if open.clock == 0: return
-	
-	menu_process(delta)
+	#if !is_open: return
 	
 	# header position
 	header.rect_global_position.y = clamp(header_track.rect_global_position.y, 30, 1280)
@@ -92,26 +78,23 @@ func accept():
 
 func back():
 	get_tree().set_input_as_handled()
-	show(false)
+	self.is_open = false
 
-func show(arg := true):
-	is_open = arg
+func set_open(arg := is_open):
+	.set_open(arg)
 	
 	if is_open:
-		self.cursor = 0
-		
 		# create keys
 		for i in items.size():
 			create_keys(i)
 		
 		# header text
 		$Control/Menu/List/Title.text = ("Controller" if is_gamepad else "Keyboard") + " Setup"
-		
 	else:
+		# remove keys
 		for i in items.size():
 			remove_keys(i)
-		
-		emit_signal("signal_close")
+
 
 func draw_key(key_node, event):
 	if !is_type(event): return

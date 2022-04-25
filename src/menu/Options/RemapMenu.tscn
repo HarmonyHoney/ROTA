@@ -58,6 +58,8 @@ items_path = NodePath("Control/Menu/List")
 is_scroll = true
 menu_path = NodePath("Control/Menu")
 cursor_margin = Vector2( 25, 0 )
+is_fade = true
+fade_path = NodePath("Control")
 
 [node name="Control" type="Control" parent="."]
 margin_right = 1280.0

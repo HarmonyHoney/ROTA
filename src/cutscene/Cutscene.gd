@@ -5,11 +5,14 @@ onready var audio_collect := $Audio/Collect
 
 var is_playing := false
 
+onready var goal_show := $GoalShow
 var is_show_goal := false
-var is_collect := false
 
 onready var gem_collect := $GemCollect
-onready var goal_show := $GoalShow
+var is_collect := false
+
+onready var start_game := $StartGame
+var is_start_game := false
 
 
 func start():
@@ -21,6 +24,6 @@ func end():
 	Cam.set_process_input(true)
 
 func end_all():
-	for i in [gem_collect, goal_show]:
+	for i in [gem_collect, goal_show, start_game]:
 		if i.is_playing:
 			i.end()
