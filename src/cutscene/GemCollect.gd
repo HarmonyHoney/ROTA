@@ -18,7 +18,7 @@ func _physics_process(delta):
 			if clock > 0.15:
 				next_step()
 				door_dest.gem.fade_color()
-				Cutscene.audio_collect.pitch_scale = rand_range(0.8, 1.3)
+				Cutscene.audio_collect.pitch_scale = 0.8
 				Cutscene.audio_collect.play()
 				
 				UI.gem.show = true

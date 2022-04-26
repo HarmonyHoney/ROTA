@@ -17,9 +17,8 @@ corner_radius_bottom_left = 50
 pause_mode = 2
 layer = 5
 script = ExtResource( 4 )
-cursor_path = NodePath("Control/Menu/List/Cursor")
 items_path = NodePath("Control/Menu/List/Items")
-is_fade = true
+cursor_path = NodePath("Control/Menu/List/Cursor")
 fade_path = NodePath("Control")
 
 [node name="Control" type="Control" parent="."]

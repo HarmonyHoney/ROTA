@@ -42,12 +42,10 @@ func set_value():
 pause_mode = 2
 layer = 6
 script = ExtResource( 3 )
-cursor_path = NodePath("Control/Menu/Cursor")
 items_path = NodePath("Control/Menu/List")
-is_scroll = true
-scroll_path = NodePath("Control/Menu")
+cursor_path = NodePath("Control/Menu/Cursor")
 cursor_margin = Vector2( 25, 0 )
-is_fade = true
+scroll_path = NodePath("Control/Menu")
 fade_path = NodePath("Control")
 
 [node name="Control" type="Control" parent="."]

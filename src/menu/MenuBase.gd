@@ -1,28 +1,27 @@
 extends Node
 class_name MenuBase
 
-export var cursor_path : NodePath
-onready var cursor_node = get_node(cursor_path)
-
+var items = []
 export var items_path : NodePath
 onready var items_node = get_node(items_path)
 
-export var is_scroll := false
-export var scroll_path : NodePath
-onready var scroll_node = get_node(scroll_path) if is_scroll else null
-
-var items = []
+export var cursor_path : NodePath
+onready var cursor_node = get_node(cursor_path)
 var cursor := 0 setget set_cursor
 export var cursor_margin := Vector2(30, 0)
+
+export var scroll_path : NodePath
+onready var is_scroll : bool = scroll_path != ""
+onready var scroll_node = get_node(scroll_path) if scroll_path else null
+
+export var fade_path : NodePath
+onready var is_fade = fade_path != ""
+onready var fade_node = get_node(fade_path) if fade_path else null
+onready var fade_ease := EaseMover.new()
 
 export var is_open := false setget set_open
 signal signal_close(arg)
 var is_sub_menu := false
-
-export var is_fade := false
-export var fade_path : NodePath
-onready var fade_node = get_node(fade_path) if is_fade else null
-onready var fade_ease := EaseMover.new()
 
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
@@ -41,7 +40,7 @@ func _ready():
 	reset_cursor()
 
 func menu_input(event):
-	if !is_open or is_sub_menu: return
+	if !is_open or is_sub_menu or (is_fade and fade_ease.frac() < 0.4): return
 	
 	var accept = event.is_action_pressed("ui_accept")
 	var back = event.is_action_pressed("ui_cancel")
@@ -71,6 +70,7 @@ func menu_input(event):
 func menu_process(delta):
 	if is_fade:
 		fade_node.modulate.a = fade_ease.count(delta, is_open)
+		fade_node.visible = fade_ease.clock > 0
 	
 	if is_open:
 		# hold up/down repeat
@@ -90,7 +90,6 @@ func menu_process(delta):
 
 func set_cursor(arg := 0):
 	cursor = clamp(arg, 0, items.size() - 1)
-	#cursor = wrapi(arg, 0, items.size() - 1)
 
 func reset_cursor():
 	cursor_node.rect_global_position = items[0].rect_global_position - cursor_margin

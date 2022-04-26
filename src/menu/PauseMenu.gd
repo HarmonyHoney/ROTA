@@ -11,7 +11,7 @@ func _ready():
 func _input(event):
 	if is_open:
 		menu_input(event)
-	elif event.is_action_pressed("ui_pause") and !is_sub_menu and Shared.csfn != Shared.title_path:
+	elif event.is_action_pressed("ui_pause") and !is_sub_menu and "world" in Shared.csfn and !Cutscene.is_playing:
 		self.is_open = true
 
 func _physics_process(delta):

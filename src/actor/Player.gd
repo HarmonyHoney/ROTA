@@ -145,6 +145,8 @@ func _ready():
 	camera.force_update_scroll()
 	camera.force_update_transform()
 	
+	anim.play("idle")
+	
 	set_physics_process(false)
 	yield(get_tree(), "idle_frame")
 	set_physics_process(true)

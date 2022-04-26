@@ -37,11 +37,10 @@ font_data = ExtResource( 6 )
 [node name="TitleMenu" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 2 )
-cursor_path = NodePath("Canvas/Menu/Cursor")
 items_path = NodePath("Canvas/Menu/List")
-is_open = true
-is_fade = true
+cursor_path = NodePath("Canvas/Menu/Cursor")
 fade_path = NodePath("Canvas/Menu")
+is_open = true
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
@@ -63,7 +62,7 @@ __meta__ = {
 
 [node name="Cursor" type="Panel" parent="Canvas/Menu"]
 anchor_right = 1.0
-anchor_bottom = 0.25
+anchor_bottom = 0.1
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -142,16 +141,16 @@ __meta__ = {
 }
 
 [node name="FileMenu" type="Control" parent="Canvas"]
+visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-cursor_path = NodePath("Cursor")
 items_path = NodePath("List")
+cursor_path = NodePath("Cursor")
 cursor_margin = Vector2( 0, 0 )
-is_fade = true
 fade_path = NodePath(".")
 axis_x = true
 sub_stay_open = true
@@ -265,18 +264,15 @@ script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-cursor_path = NodePath("Cursor")
 items_path = NodePath("List")
+cursor_path = NodePath("Cursor")
 cursor_margin = Vector2( 15, 0 )
-is_fade = true
 fade_path = NodePath(".")
 sub_path = NodePath("../FileDelete")
 
 [node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileOpen"]
 anchor_right = 1.0
-anchor_bottom = 0.25
-margin_top = -300.0
-margin_bottom = -300.0
+anchor_bottom = 0.1
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -332,15 +328,14 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-cursor_path = NodePath("Cursor")
 items_path = NodePath("List")
-is_fade = true
+cursor_path = NodePath("Cursor")
 fade_path = NodePath(".")
 open_path = NodePath("../FileOpen")
 
 [node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileDelete"]
 anchor_right = 1.0
-anchor_bottom = 0.25
+anchor_bottom = 0.1
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false,
