@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/menu/TitleMenu.gd" type="Script" id=2]
@@ -10,6 +10,14 @@
 [ext_resource path="res://src/menu/FileCard.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/menu/FileOpen.gd" type="Script" id=9]
 [ext_resource path="res://src/menu/FileDelete.gd" type="Script" id=10]
+[ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/menu/BootMenu.gd" type="Script" id=18]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
@@ -28,19 +36,30 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [sub_resource type="DynamicFont" id=4]
-size = 80
+size = 185
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
+extra_spacing_bottom = -20
 font_data = ExtResource( 6 )
 
 [node name="TitleMenu" type="Node2D"]
 pause_mode = 2
-script = ExtResource( 2 )
-items_path = NodePath("Canvas/Menu/List")
-cursor_path = NodePath("Canvas/Menu/Cursor")
-fade_path = NodePath("Canvas/Menu")
+script = ExtResource( 18 )
+items_path = NodePath("Items")
 is_open = true
+sub_path = NodePath("Canvas/MainMenu")
+
+[node name="Items" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Items"]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
@@ -53,14 +72,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Menu" type="Control" parent="Canvas"]
+[node name="MainMenu" type="Control" parent="Canvas"]
 margin_right = 1280.0
 margin_bottom = 720.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+items_path = NodePath("List")
+cursor_path = NodePath("Cursor")
+cursor_margin = Vector2( 20, 3 )
+fade_path = NodePath(".")
+sub_path = NodePath("../FileMenu")
 
-[node name="Cursor" type="Panel" parent="Canvas/Menu"]
+[node name="Cursor" type="Panel" parent="Canvas/MainMenu"]
 anchor_right = 1.0
 anchor_bottom = 0.1
 custom_styles/panel = SubResource( 1 )
@@ -69,22 +94,22 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="List" type="VBoxContainer" parent="Canvas/Menu"]
+[node name="List" type="VBoxContainer" parent="Canvas/MainMenu"]
 anchor_right = 0.3
 anchor_bottom = 1.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-custom_constants/separation = 0
+custom_constants/separation = 5
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Play" type="Label" parent="Canvas/Menu/List"]
+[node name="Play" type="Label" parent="Canvas/MainMenu/List"]
 margin_left = 135.0
-margin_top = 258.0
+margin_top = 250.0
 margin_right = 249.0
-margin_bottom = 309.0
+margin_bottom = 301.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -95,11 +120,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options" type="Label" parent="Canvas/Menu/List"]
+[node name="Options" type="Label" parent="Canvas/MainMenu/List"]
 margin_left = 91.0
-margin_top = 309.0
+margin_top = 306.0
 margin_right = 292.0
-margin_bottom = 360.0
+margin_bottom = 357.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -110,11 +135,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Credits" type="Label" parent="Canvas/Menu/List"]
+[node name="Credits" type="Label" parent="Canvas/MainMenu/List"]
 margin_left = 97.0
-margin_top = 360.0
+margin_top = 362.0
 margin_right = 286.0
-margin_bottom = 411.0
+margin_bottom = 413.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -125,11 +150,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Exit" type="Label" parent="Canvas/Menu/List"]
+[node name="Exit" type="Label" parent="Canvas/MainMenu/List"]
 margin_left = 134.0
-margin_top = 411.0
+margin_top = 418.0
 margin_right = 249.0
-margin_bottom = 462.0
+margin_bottom = 469.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -412,8 +437,9 @@ bg_palette = 1
 [node name="Actors" type="Node2D" parent="Map"]
 
 [node name="Player" parent="Map/Actors" instance=ExtResource( 4 )]
-position = Vector2( 1800, 450 )
+position = Vector2( 1825, 0 )
 is_input = false
+is_cam = false
 
 [node name="AttractMode" type="Node2D" parent="Map"]
 position = Vector2( 1800, 650 )
@@ -424,12 +450,95 @@ margin_left = 1500.0
 margin_top = 500.0
 margin_right = 2100.0
 margin_bottom = 800.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.25, 0.25, 0.25, 1 )
 custom_fonts/font = SubResource( 4 )
-text = "Around
-the Edge"
+text = "ROTA"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Details" type="Node2D" parent="Map"]
+
+[node name="Tree" parent="Map/Details" instance=ExtResource( 12 )]
+position = Vector2( 1750, 500 )
+rotation = -0.174533
+scale = Vector2( -1, 1 )
+palette = 3
+
+[node name="Tree2" parent="Map/Details" instance=ExtResource( 12 )]
+position = Vector2( 1850, 800 )
+rotation = 2.96706
+scale = Vector2( -1, 1 )
+palette = 5
+
+[node name="Tree3" parent="Map/Details" instance=ExtResource( 12 )]
+position = Vector2( 1550, 800 )
+rotation = -2.96706
+palette = 2
+
+[node name="Lamppost" parent="Map/Details" instance=ExtResource( 11 )]
+position = Vector2( 1900, 500 )
+
+[node name="Lamppost2" parent="Map/Details" instance=ExtResource( 11 )]
+position = Vector2( 1700, 800 )
+rotation = 3.14159
+
+[node name="Bench" parent="Map/Details" instance=ExtResource( 13 )]
+position = Vector2( 2000, 446 )
+
+[node name="Flower3" parent="Map/Details" instance=ExtResource( 14 )]
+position = Vector2( 2100, 550 )
+rotation = 1.5708
+palette = 5
+
+[node name="Flower5" parent="Map/Details" instance=ExtResource( 14 )]
+position = Vector2( 1500, 750 )
+rotation = 4.71239
+palette = 2
+
+[node name="Flower6" parent="Map/Details" instance=ExtResource( 14 )]
+position = Vector2( 1775, 800 )
+rotation = 3.14159
+palette = 3
+
+[node name="Candle" parent="Map/Details" instance=ExtResource( 15 )]
+position = Vector2( 1500, 650 )
+rotation = -1.57079
+
+[node name="Candle2" parent="Map/Details" instance=ExtResource( 15 )]
+position = Vector2( 2100, 650 )
+rotation = -4.71238
+
+[node name="TreeTop" parent="Map/Details" instance=ExtResource( 17 )]
+position = Vector2( 2050, 750 )
+scale = Vector2( 0.8, 0.8 )
+
+[node name="TreeTop2" parent="Map/Details" instance=ExtResource( 17 )]
+position = Vector2( 1550, 550 )
+scale = Vector2( 0.8, 0.8 )
+
+[node name="FlowerPetals" parent="Map/Details" instance=ExtResource( 16 )]
+position = Vector2( 2050, 865 )
+palette = 2
+
+[node name="FlowerPetals2" parent="Map/Details" instance=ExtResource( 16 )]
+position = Vector2( 2165, 750 )
+palette = 4
+
+[node name="FlowerPetals4" parent="Map/Details" instance=ExtResource( 16 )]
+position = Vector2( 1435, 550 )
+palette = 5
+
+[node name="FlowerPetals5" parent="Map/Details" instance=ExtResource( 16 )]
+position = Vector2( 1550, 435 )
+palette = 3
+
+[node name="FlowerPetals6" parent="Map/Details" instance=ExtResource( 16 )]
+position = Vector2( 1460, 460 )
+rotation = -0.785397
+
+[node name="FlowerPetals3" parent="Map/Details" instance=ExtResource( 16 )]
+position = Vector2( 2140, 840 )
+rotation = 0.784805

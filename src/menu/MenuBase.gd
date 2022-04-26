@@ -6,6 +6,7 @@ export var items_path : NodePath
 onready var items_node = get_node(items_path)
 
 export var cursor_path : NodePath
+onready var is_cursor : bool = cursor_path != ""
 onready var cursor_node = get_node(cursor_path)
 var cursor := 0 setget set_cursor
 export var cursor_margin := Vector2(30, 0)
@@ -81,23 +82,25 @@ func menu_process(delta):
 				self.cursor += joy.x if axis_x else joy.y
 		
 		# move cursor
-		cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(items[cursor].rect_global_position - cursor_margin, 0.15)
-		cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size + (cursor_margin * 2.0), 0.15)
-		
-		# scroll
-		if is_scroll:
-			scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
+		if is_cursor:
+			cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(items[cursor].rect_global_position - cursor_margin, 0.15)
+			cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size + (cursor_margin * 2.0), 0.15)
+			
+			# scroll
+			if is_scroll:
+				scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
 
 func set_cursor(arg := 0):
 	cursor = clamp(arg, 0, items.size() - 1)
 
 func reset_cursor():
-	cursor_node.rect_global_position = items[0].rect_global_position - cursor_margin
-	cursor_node.rect_size = items[0].rect_size + (cursor_margin * 2.0)
-	
-	# scroll
-	if is_scroll:
-		scroll_node.rect_position.y = (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0)
+	if is_cursor:
+		cursor_node.rect_global_position = items[0].rect_global_position - cursor_margin
+		cursor_node.rect_size = items[0].rect_size + (cursor_margin * 2.0)
+		
+		# scroll
+		if is_scroll:
+			scroll_node.rect_position.y = (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0)
 
 func set_open(arg := is_open):
 	is_open = arg

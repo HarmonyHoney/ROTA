@@ -38,7 +38,7 @@ var holding_jump := 0.0
 var btn_push := false
 var btnp_push := false
 
-var camera : Camera2D
+export var is_cam := true
 
 export var dir := 0 setget set_dir
 
@@ -128,22 +128,23 @@ func _ready():
 	self.dir_x = 1 if randf() > 0.5 else -1
 	
 	# set camera
-	camera = Cam
-	camera.target_node = self
+	if is_cam:
+		Cam.target_node = self
 	
 	# turn
 	set_dir()
 	sprites.rotation = turn_to
 	turn_clock = turn_time
 	
-	camera.turn_from = turn_to
-	camera.turn_to = turn_to
-	camera.rotation = turn_to
-	camera.turn_ease.clock = 99
-	camera.position = position
-	camera.reset_smoothing()
-	camera.force_update_scroll()
-	camera.force_update_transform()
+	if is_cam:
+		Cam.turn_from = turn_to
+		Cam.turn_to = turn_to
+		Cam.rotation = turn_to
+		Cam.turn_ease.clock = 99
+		Cam.position = position
+		Cam.reset_smoothing()
+		Cam.force_update_scroll()
+		Cam.force_update_transform()
 	
 	anim.play("idle")
 	
@@ -520,8 +521,8 @@ func set_dir(arg := dir):
 	
 	if Engine.editor_hint:
 		$Sprites.rotation = turn_to
-	elif camera:
-		camera.turn(turn_to)
+	elif is_cam:
+		Cam.turn(turn_to)
 	
 	if areas:
 		areas.rotation = turn_to

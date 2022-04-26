@@ -1,12 +1,13 @@
 extends MenuBase
 
-onready var file_menu := $Canvas/FileMenu
+export var sub_path : NodePath
+onready var file_menu = get_node(sub_path)
 
-func _ready():
-	UI.menu.show = true
-
-func _exit_tree():
-	UI.menu.show = false
+#func _ready():
+#	UI.menu.show = true
+#
+#func _exit_tree():
+#	UI.menu.show = false
 
 func _input(event):
 	menu_input(event)
@@ -22,3 +23,6 @@ func accept():
 			sub_menu(OptionsMenu)
 		"exit":
 			get_tree().quit()
+
+func back():
+	self.is_open = false
