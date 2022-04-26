@@ -1,5 +1,7 @@
 extends MenuBase
-	
+
+onready var file_open := $FileOpen
+
 func _input(event):
 	menu_input(event)
 
@@ -10,4 +12,7 @@ func back():
 	self.is_open = false
 
 func accept():
-	Shared.load_slot(cursor)
+	if items[cursor].is_new:
+		Shared.load_slot(cursor)
+	else:
+		sub_menu(file_open)

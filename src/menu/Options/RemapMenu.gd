@@ -32,7 +32,7 @@ func _input(event):
 	if is_prompt:
 		if event.is_action_pressed("ui_pause"):
 			is_prompt = false
-		elif event.is_pressed() and is_type(event):
+		elif event.is_pressed() and is_type(event) and !event.is_action("ui_end"):
 			assign_key(items[cursor].action, event)
 			is_prompt = false
 			get_tree().set_input_as_handled()
@@ -128,16 +128,20 @@ func clear_row(row := 0):
 		Shared.emit_signal("signal_gamepad", Shared.is_gamepad)
 
 func assign_key(action, event):
-	# keep size to 4
+	# remove event if present
+	if InputMap.action_has_event(action, event):
+		InputMap.action_erase_event(action, event)
+	# add event to action, will bring to front of list if present
+	InputMap.action_add_event(action, event)
+	
+	# keep action size to 4 events of type
 	var list = []
 	for i in InputMap.get_action_list(action):
 		if is_type(i):
 			list.append(i)
 	
-	if list.size() > 3:
+	if list.size() > 4:
 		InputMap.action_erase_event(action, list[0])
-	
-	InputMap.action_add_event(action, event)
 	
 	create_keys(cursor)
 	

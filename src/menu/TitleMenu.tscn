@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://media/font/PauseItem.tres" type="DynamicFont" id=1]
+[ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/menu/TitleMenu.gd" type="Script" id=2]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/menu/AttractMode.gd" type="Script" id=5]
-[ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://src/menu/FileMenu.gd" type="Script" id=7]
 [ext_resource path="res://src/menu/FileCard.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/menu/FileOpen.gd" type="Script" id=9]
+[ext_resource path="res://src/menu/FileDelete.gd" type="Script" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
@@ -25,9 +27,9 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="DynamicFont" id=2]
-size = 90
-outline_size = 2
+[sub_resource type="DynamicFont" id=4]
+size = 80
+outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 6 )
@@ -37,7 +39,6 @@ pause_mode = 2
 script = ExtResource( 2 )
 cursor_path = NodePath("Canvas/Menu/Cursor")
 items_path = NodePath("Canvas/Menu/List")
-menu_path = NodePath("Canvas/Menu")
 is_open = true
 is_fade = true
 fade_path = NodePath("Canvas/Menu")
@@ -81,10 +82,10 @@ __meta__ = {
 }
 
 [node name="Play" type="Label" parent="Canvas/Menu/List"]
-margin_left = 144.0
-margin_top = 240.0
-margin_right = 239.0
-margin_bottom = 300.0
+margin_left = 135.0
+margin_top = 258.0
+margin_right = 249.0
+margin_bottom = 309.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -96,9 +97,9 @@ __meta__ = {
 }
 
 [node name="Options" type="Label" parent="Canvas/Menu/List"]
-margin_left = 105.0
-margin_top = 300.0
-margin_right = 278.0
+margin_left = 91.0
+margin_top = 309.0
+margin_right = 292.0
 margin_bottom = 360.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
@@ -111,10 +112,10 @@ __meta__ = {
 }
 
 [node name="Credits" type="Label" parent="Canvas/Menu/List"]
-margin_left = 113.0
+margin_left = 97.0
 margin_top = 360.0
-margin_right = 271.0
-margin_bottom = 420.0
+margin_right = 286.0
+margin_bottom = 411.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -126,10 +127,10 @@ __meta__ = {
 }
 
 [node name="Exit" type="Label" parent="Canvas/Menu/List"]
-margin_left = 147.0
-margin_top = 420.0
-margin_right = 237.0
-margin_bottom = 480.0
+margin_left = 134.0
+margin_top = 411.0
+margin_right = 249.0
+margin_bottom = 462.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -149,11 +150,11 @@ __meta__ = {
 }
 cursor_path = NodePath("Cursor")
 items_path = NodePath("List")
-menu_path = NodePath(".")
 cursor_margin = Vector2( 0, 0 )
 is_fade = true
 fade_path = NodePath(".")
 axis_x = true
+sub_stay_open = true
 
 [node name="Back" type="ColorRect" parent="Canvas/FileMenu"]
 modulate = Color( 1, 1, 1, 0.8 )
@@ -257,6 +258,152 @@ margin_right = 1165.0
 margin_bottom = 460.0
 slot = 2
 
+[node name="FileOpen" type="Control" parent="Canvas/FileMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+cursor_path = NodePath("Cursor")
+items_path = NodePath("List")
+cursor_margin = Vector2( 15, 0 )
+is_fade = true
+fade_path = NodePath(".")
+sub_path = NodePath("../FileDelete")
+
+[node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileOpen"]
+anchor_right = 1.0
+anchor_bottom = 0.25
+margin_top = -300.0
+margin_bottom = -300.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="List" type="VBoxContainer" parent="Canvas/FileMenu/FileOpen"]
+anchor_top = 0.635
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="Label" parent="Canvas/FileMenu/FileOpen/List"]
+margin_left = 524.0
+margin_top = 70.0
+margin_right = 755.0
+margin_bottom = 121.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 1 )
+text = "Continue"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Delete" type="Label" parent="Canvas/FileMenu/FileOpen/List"]
+margin_left = 559.0
+margin_top = 141.0
+margin_right = 720.0
+margin_bottom = 192.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 1 )
+text = "Delete"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDelete" type="Control" parent="Canvas/FileMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+cursor_path = NodePath("Cursor")
+items_path = NodePath("List")
+is_fade = true
+fade_path = NodePath(".")
+open_path = NodePath("../FileOpen")
+
+[node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileDelete"]
+anchor_right = 1.0
+anchor_bottom = 0.25
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="List" type="VBoxContainer" parent="Canvas/FileMenu/FileDelete"]
+anchor_top = 0.635
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="Label" parent="Canvas/FileMenu/FileDelete/List" groups=["no_item"]]
+margin_left = 412.0
+margin_top = 34.0
+margin_right = 867.0
+margin_bottom = 85.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 1 )
+text = "Delete Save File?"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Yes" type="Label" parent="Canvas/FileMenu/FileDelete/List"]
+margin_left = 595.0
+margin_top = 105.0
+margin_right = 684.0
+margin_bottom = 156.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 1 )
+text = "Yes"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="No" type="Label" parent="Canvas/FileMenu/FileDelete/List"]
+margin_left = 604.0
+margin_top = 176.0
+margin_right = 675.0
+margin_bottom = 227.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 1 )
+text = "No"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Map" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -283,7 +430,7 @@ margin_top = 500.0
 margin_right = 2100.0
 margin_bottom = 800.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Around
 the Edge"
 align = 1

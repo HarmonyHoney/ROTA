@@ -5,7 +5,7 @@ onready var p : Player = Shared.player
 
 func _ready():
 	Cam.target_node = self
-#	Cam.position = position
+	Cam.position = position
 #	Cam.offset = Vector2(-300, 0)
 #	Cam.turn_offset = Cam.offset
 #

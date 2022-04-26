@@ -13,6 +13,8 @@ var menu = EaseMover.new()
 var zoom = EaseMover.new()
 
 func _ready():
+	Shared.connect("scene_changed", self, "scene_changed")
+	
 	gem_label.text = str(Shared.gem_count)
 	
 	gem.node = $Control/Gems
@@ -50,4 +52,6 @@ func set_zoom(frac := 0.0):
 	zoom_from = zoom_circle.scale.x
 	zoom_to = lerp(0.0, 1.0, frac)
 	zoom.clock = 0
-	
+
+func scene_changed():
+	UI.gem.clock = 0.0

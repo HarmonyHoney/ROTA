@@ -8,20 +8,20 @@ export var items_path : NodePath
 onready var items_node = get_node(items_path)
 
 export var is_scroll := false
-export var menu_path : NodePath
-onready var menu_node = get_node(menu_path)
+export var scroll_path : NodePath
+onready var scroll_node = get_node(scroll_path) if is_scroll else null
 
 var items = []
 var cursor := 0 setget set_cursor
 export var cursor_margin := Vector2(30, 0)
 
 export var is_open := false setget set_open
-signal signal_close
+signal signal_close(arg)
 var is_sub_menu := false
 
 export var is_fade := false
 export var fade_path : NodePath
-onready var fade_node = get_node(fade_path)
+onready var fade_node = get_node(fade_path) if is_fade else null
 onready var fade_ease := EaseMover.new()
 
 var joy := Vector2.ZERO
@@ -32,6 +32,7 @@ var joy_wait := 0.3
 var joy_repeat := 0.2
 
 export var axis_x := false
+export var sub_stay_open := false
 
 func _ready():
 	fill_items()
@@ -40,7 +41,7 @@ func _ready():
 	reset_cursor()
 
 func menu_input(event):
-	if !is_open: return
+	if !is_open or is_sub_menu: return
 	
 	var accept = event.is_action_pressed("ui_accept")
 	var back = event.is_action_pressed("ui_cancel")
@@ -50,8 +51,10 @@ func menu_input(event):
 	
 	if back and event.is_pressed():
 		back()
+		get_tree().set_input_as_handled()
 	elif accept and event.is_pressed():
 		accept()
+		get_tree().set_input_as_handled()
 	elif joy.y != 0 and joy.y != joy_last.y:
 		if axis_x:
 			joy_y(joy.y)
@@ -71,7 +74,7 @@ func menu_process(delta):
 	
 	if is_open:
 		# hold up/down repeat
-		if (joy.y != 0 and !axis_x) or (joy.x != 0 and axis_x):
+		if !is_sub_menu and ((joy.y != 0 and !axis_x) or (joy.x != 0 and axis_x)):
 			joy_clock += delta
 			if joy_clock > joy_wait + joy_repeat:
 				joy_clock = joy_wait
@@ -83,19 +86,19 @@ func menu_process(delta):
 		
 		# scroll
 		if is_scroll:
-			menu_node.rect_position.y = lerp(menu_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
+			scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
 
 func set_cursor(arg := 0):
 	cursor = clamp(arg, 0, items.size() - 1)
 	#cursor = wrapi(arg, 0, items.size() - 1)
 
 func reset_cursor():
-	cursor_node.rect_global_position = items[cursor].rect_global_position - cursor_margin
-	cursor_node.rect_size = items[cursor].rect_size + (cursor_margin * 2.0)
+	cursor_node.rect_global_position = items[0].rect_global_position - cursor_margin
+	cursor_node.rect_size = items[0].rect_size + (cursor_margin * 2.0)
 	
 	# scroll
 	if is_scroll:
-		menu_node.rect_position.y = (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0)
+		scroll_node.rect_position.y = (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0)
 
 func set_open(arg := is_open):
 	is_open = arg
@@ -104,7 +107,7 @@ func set_open(arg := is_open):
 		self.cursor = 0
 		fill_items()
 	else:
-		emit_signal("signal_close")
+		emit_signal("signal_close", self)
 
 func fill_items():
 	items = []
@@ -127,10 +130,12 @@ func joy_y(arg := 1):
 
 func sub_menu(arg : MenuBase):
 	is_sub_menu = true
-	is_open = false
+	is_open = sub_stay_open
 	
 	arg.is_open = true 
-	yield(arg, "signal_close")
-	
+	arg.connect("signal_close", self, "sub_close")
+
+func sub_close(arg):
 	is_sub_menu = false
 	is_open = true
+	arg.disconnect("signal_close", self, "sub_close")

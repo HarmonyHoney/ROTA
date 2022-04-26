@@ -5,11 +5,11 @@
 [ext_resource path="res://src/menu/Options/OptionsMenu.gd" type="Script" id=3]
 [ext_resource path="res://media/audio/sfx/Randomize104.wav" type="AudioStream" id=4]
 [ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=5]
-[ext_resource path="res://media/font/OptionsItem.tres" type="DynamicFont" id=6]
+[ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=6]
 [ext_resource path="res://media/image/UI/Video.png" type="Texture" id=7]
 [ext_resource path="res://media/image/UI/Input.png" type="Texture" id=8]
 [ext_resource path="res://media/image/UI/Audio.png" type="Texture" id=9]
-[ext_resource path="res://media/font/OptionsHeader.tres" type="DynamicFont" id=10]
+[ext_resource path="res://media/font/profile/OptionsHeader.tres" type="DynamicFont" id=10]
 [ext_resource path="res://src/menu/Options/OnOff.gd" type="Script" id=11]
 [ext_resource path="res://src/menu/Options/Resolution.gd" type="Script" id=12]
 [ext_resource path="res://src/menu/Options/OpenRemap.gd" type="Script" id=13]
@@ -45,7 +45,7 @@ script = ExtResource( 3 )
 cursor_path = NodePath("Control/Menu/Cursor")
 items_path = NodePath("Control/Menu/List")
 is_scroll = true
-menu_path = NodePath("Control/Menu")
+scroll_path = NodePath("Control/Menu")
 cursor_margin = Vector2( 25, 0 )
 is_fade = true
 fade_path = NodePath("Control")
@@ -424,7 +424,7 @@ __meta__ = {
 }
 
 [node name="Resolution" type="Label" parent="Control/Menu/List/Resolution"]
-anchor_left = 0.5
+anchor_left = 0.25
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 25.0

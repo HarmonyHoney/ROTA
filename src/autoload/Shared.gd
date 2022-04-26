@@ -35,6 +35,8 @@ var save_slot := 0
 var save_dict := {0: {}, 1: {}, 2: {}}
 var save_time := 0.0
 
+signal signal_erase_slot(arg)
+
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
 	#set_volume(0, 50)
@@ -245,11 +247,17 @@ func load_slot(arg := 0):
 		if save_dict[save_slot].has("time"):
 			save_time = save_dict[save_slot]["time"]
 	else:
-		Shared.next_scene = Shared.start_path
-		Shared.last_scene = Shared.start_path
 		Cutscene.is_start_game = true
+		
+		next_scene = start_path
+		last_scene = start_path
+		gem_count = 0
+		UI.gem_label.text = str(gem_count)
+		goals_collected = []
+		save_time = 0.0
 	
 	Shared.wipe_scene(Shared.next_scene, Shared.last_scene)
 
 func erase_slot(arg := 0):
-	pass
+	save_dict[arg] = {}
+	emit_signal("signal_erase_slot", arg)

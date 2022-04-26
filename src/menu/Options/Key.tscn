@@ -1,14 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/menu/Options/Key.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/round_rect200.png" type="Texture" id=2]
-[ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=3]
-
-[sub_resource type="DynamicFont" id=24]
-size = 40
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 3 )
+[ext_resource path="res://media/font/profile/RemapKey.tres" type="DynamicFont" id=3]
 
 [node name="Key" type="Control"]
 margin_right = 50.0
@@ -41,7 +35,7 @@ margin_top = -50.0
 margin_right = 200.0
 margin_bottom = 50.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 24 )
+custom_fonts/font = ExtResource( 3 )
 text = "S"
 align = 1
 valign = 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://media/font/PauseHeader.tres" type="DynamicFont" id=1]
-[ext_resource path="res://media/font/PauseItem.tres" type="DynamicFont" id=2]
+[ext_resource path="res://media/font/profile/PauseHeader.tres" type="DynamicFont" id=1]
+[ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/menu/PauseMenu.gd" type="Script" id=4]
 
@@ -19,7 +19,6 @@ layer = 5
 script = ExtResource( 4 )
 cursor_path = NodePath("Control/Menu/List/Cursor")
 items_path = NodePath("Control/Menu/List/Items")
-menu_path = NodePath("Control/Menu")
 is_fade = true
 fade_path = NodePath("Control")
 
@@ -91,9 +90,9 @@ __meta__ = {
 }
 
 [node name="Resume" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 165.0
-margin_right = 346.0
-margin_bottom = 60.0
+margin_left = 162.0
+margin_right = 349.0
+margin_bottom = 51.0
 size_flags_horizontal = 4
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
@@ -105,10 +104,10 @@ __meta__ = {
 }
 
 [node name="Reset" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 193.0
-margin_top = 60.0
-margin_right = 318.0
-margin_bottom = 120.0
+margin_left = 185.0
+margin_top = 51.0
+margin_right = 326.0
+margin_bottom = 102.0
 size_flags_horizontal = 4
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
@@ -120,10 +119,10 @@ __meta__ = {
 }
 
 [node name="Hub" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 146.0
-margin_top = 120.0
-margin_right = 366.0
-margin_bottom = 180.0
+margin_left = 119.0
+margin_top = 102.0
+margin_right = 392.0
+margin_bottom = 153.0
 size_flags_horizontal = 4
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
@@ -135,10 +134,10 @@ __meta__ = {
 }
 
 [node name="Options" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 169.0
-margin_top = 180.0
-margin_right = 342.0
-margin_bottom = 240.0
+margin_left = 155.0
+margin_top = 153.0
+margin_right = 356.0
+margin_bottom = 204.0
 size_flags_horizontal = 4
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
@@ -150,10 +149,10 @@ __meta__ = {
 }
 
 [node name="Exit" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 131.0
-margin_top = 240.0
-margin_right = 380.0
-margin_bottom = 300.0
+margin_left = 115.0
+margin_top = 204.0
+margin_right = 397.0
+margin_bottom = 255.0
 size_flags_horizontal = 4
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )

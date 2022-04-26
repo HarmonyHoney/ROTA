@@ -1,10 +1,9 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://media/font/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 
 [resource]
 size = 50
-outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
