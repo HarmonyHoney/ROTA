@@ -46,20 +46,8 @@ font_data = ExtResource( 6 )
 [node name="TitleMenu" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 18 )
-items_path = NodePath("Items")
 is_open = true
 sub_path = NodePath("Canvas/MainMenu")
-
-[node name="Items" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control" type="Control" parent="Items"]
-margin_right = 40.0
-margin_bottom = 40.0
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
