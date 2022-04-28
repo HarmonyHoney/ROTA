@@ -74,6 +74,7 @@ Cutscene="*res://src/cutscene/Cutscene.tscn"
 PauseMenu="*res://src/menu/PauseMenu.tscn"
 OptionsMenu="*res://src/menu/Options/OptionsMenu.tscn"
 RemapMenu="*res://src/menu/Options/RemapMenu.tscn"
+Music="*res://src/autoload/Music.tscn"
 
 [display]
 

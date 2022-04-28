@@ -339,6 +339,7 @@ text = "Sounds"
 
 [node name="Audio" parent="Control/Menu/List/SFX" index="2"]
 stream = ExtResource( 4 )
+volume_db = -5.0
 bus = "SFX"
 
 [node name="Spacer" type="Control" parent="Control/Menu/List" groups=["no_item"]]
