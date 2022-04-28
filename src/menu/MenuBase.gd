@@ -7,7 +7,7 @@ onready var items_node = get_node(items_path)
 
 export var cursor_path : NodePath
 onready var is_cursor : bool = cursor_path != ""
-onready var cursor_node = get_node(cursor_path)
+onready var cursor_node = get_node(cursor_path) if cursor_path else null
 var cursor := 0 setget set_cursor
 export var cursor_margin := Vector2(30, 0)
 
@@ -91,7 +91,7 @@ func menu_process(delta):
 				scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
 
 func set_cursor(arg := 0):
-	cursor = clamp(arg, 0, items.size() - 1)
+	cursor = clamp(arg, 0, max(items.size() - 1, 0))
 
 func reset_cursor():
 	if is_cursor:

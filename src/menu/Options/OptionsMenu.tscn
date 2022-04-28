@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/shader/outline2D_outer.shader" type="Shader" id=1]
 [ext_resource path="res://src/menu/Options/Volume.tscn" type="PackedScene" id=2]
@@ -32,10 +32,22 @@ script/source = "extends OnOff
 
 func _ready():
 	is_on = OS.window_fullscreen
+	set_label()
 
 func set_value():
 	Shared.toggle_fullscreen()
 	OptionsMenu.fill_items()
+"
+
+[sub_resource type="GDScript" id=25]
+script/source = "extends OnOff
+
+func _ready():
+	is_on = OS.vsync_enabled
+	set_label()
+
+func set_value():
+	OS.vsync_enabled = is_on
 "
 
 [node name="OptionsMenu" type="CanvasLayer"]
@@ -409,6 +421,9 @@ margin_right = 640.0
 margin_bottom = 1060.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="Control/Menu/List/Resolution"]
 anchor_right = 0.5
@@ -429,6 +444,41 @@ margin_left = 25.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 6 )
 text = "< 1280 x 720 >"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vsync" type="Control" parent="Control/Menu/List"]
+margin_top = 1060.0
+margin_right = 640.0
+margin_bottom = 1130.0
+rect_min_size = Vector2( 0, 70 )
+script = SubResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Menu/List/Vsync"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+text = "V-Sync"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Control/Menu/List/Vsync"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 6 )
+text = "< OFF >"
 align = 2
 valign = 1
 __meta__ = {

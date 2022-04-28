@@ -21,7 +21,6 @@ script = ExtResource( 4 )
 sprites_path = NodePath("../Sprites")
 add_vel = 7.0
 weight = 2.5
-is_audio = true
 audio_path = NodePath("../Audio/Hit")
 pitch_from = 0.85
 pitch_to = 1.15
