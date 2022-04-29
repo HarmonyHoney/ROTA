@@ -1,7 +1,7 @@
 extends Node2D
 
 export var sprites_path : NodePath
-onready var sprites := get_node(sprites_path)
+onready var sprites := get_node_or_null(sprites_path)
 export var is_scale := false
 var angle := 0.0
 var velocity := 0.0
@@ -15,7 +15,7 @@ export var cooldown_time := 1.0
 
 export var is_audio := false
 export var audio_path : NodePath
-onready var audio_hit := get_node(audio_path)
+onready var audio_hit := get_node_or_null(audio_path)
 export var pitch_from := 0.7
 export var pitch_to := 1.3
 

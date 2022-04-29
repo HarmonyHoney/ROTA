@@ -1,7 +1,7 @@
 extends MenuBase
 
 export var sub_path : NodePath
-onready var delete_menu = get_node(sub_path)
+onready var delete_menu = get_node_or_null(sub_path)
 
 func _input(event):
 	menu_input(event)

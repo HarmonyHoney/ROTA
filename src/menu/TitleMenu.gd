@@ -1,13 +1,7 @@
 extends MenuBase
 
 export var sub_path : NodePath
-onready var file_menu = get_node(sub_path)
-
-#func _ready():
-#	UI.menu.show = true
-#
-#func _exit_tree():
-#	UI.menu.show = false
+onready var file_menu = get_node_or_null(sub_path)
 
 func _input(event):
 	menu_input(event)

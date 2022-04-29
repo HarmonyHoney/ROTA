@@ -1,7 +1,7 @@
 extends MenuBase
 
 export var open_path : NodePath
-onready var open_menu = get_node(open_path)
+onready var open_menu = get_node_or_null(open_path)
 
 func _input(event):
 	menu_input(event)

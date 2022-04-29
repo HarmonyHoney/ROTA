@@ -1,7 +1,7 @@
 extends MenuBase
 
 export var sub_path : NodePath
-onready var main_menu = get_node(sub_path)
+onready var main_menu = get_node_or_null(sub_path)
 
 var pos = [Vector2(1800, 650), Vector2(1650, 650)]
 

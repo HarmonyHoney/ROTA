@@ -318,7 +318,7 @@ margin_top = 680.0
 margin_right = 640.0
 margin_bottom = 750.0
 rect_min_size = Vector2( 0, 70 )
-bus = 1
+bus = 2
 
 [node name="Label" parent="Control/Menu/List/Music" index="0"]
 text = "Music"
