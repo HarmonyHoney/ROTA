@@ -27,9 +27,9 @@ audio_path = NodePath("Audio/Hit")
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Sprites"]
-position = Vector2( 0, -62.5 )
-scale = Vector2( 0.125, 0.125 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
+offset = Vector2( 0, -200 )
 
 [node name="Light" type="Sprite" parent="Sprites"]
 modulate = Color( 0.996078, 1, 0.909804, 0.109804 )

@@ -12,12 +12,13 @@ modulate = Color( 0.486275, 0.466667, 0.568627, 1 )
 z_index = -5
 z_as_relative = false
 script = ExtResource( 3 )
+length = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 2 )
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 2 )
-offset = Vector2( 0, -100 )
+offset = Vector2( 0, -50 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 600, 200 )
+region_rect = Rect2( 0, 0, 200, 100 )
 region_filter_clip = true

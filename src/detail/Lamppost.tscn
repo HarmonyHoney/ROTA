@@ -22,9 +22,9 @@ z_as_relative = false
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Sprites"]
-scale = Vector2( 0.25, 0.25 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
-offset = Vector2( 0, -400 )
+offset = Vector2( 0, -200 )
 
 [node name="Light" type="Sprite" parent="Sprites"]
 modulate = Color( 0.9955, 1, 0.91, 0.109804 )

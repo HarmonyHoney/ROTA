@@ -29,7 +29,7 @@ pitch_to = 1.15
 
 [node name="Petals" type="Sprite" parent="Sprites"]
 modulate = Color( 1, 0, 0, 1 )
-scale = Vector2( 0.125, 0.125 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
