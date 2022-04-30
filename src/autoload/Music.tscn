@@ -10,9 +10,6 @@
 pause_mode = 2
 bus = "Music"
 script = ExtResource( 1 )
-ost1 = ExtResource( 2 )
-ost2 = ExtResource( 3 )
-ost3 = ExtResource( 4 )
-ost4 = ExtResource( 5 )
+ost = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
 
 [connection signal="finished" from="." to="." method="_on_Music_finished"]

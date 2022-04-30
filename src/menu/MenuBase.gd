@@ -151,4 +151,4 @@ func audio_accept():
 	Audio.play(Audio.menu_accept, 0.8, 1.2)
 
 func audio_back():
-	Audio.play(Audio.menu_cancel, 0.8, 1.2)
+	Audio.play(Audio.menu_cancel, 0.6, 0.9)

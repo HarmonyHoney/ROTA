@@ -8,10 +8,10 @@ onready var menu_pause := $Menu/Pause
 onready var gem_collect := $Gem/Collect
 onready var gem_show := $Gem/Show
 
-func play(arg : AudioStreamPlayer, from := 1.0, to := -1):
+func play(arg : AudioStreamPlayer, from := 1.0, to := -1.0):
 	if !is_instance_valid(arg): return
 	
-	if to == -1:
+	if to < 0:
 		arg.pitch_scale = from
 	else:
 		arg.pitch_scale = rand_range(from, to)
