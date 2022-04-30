@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://media/font/profile/PauseHeader.tres" type="DynamicFont" id=1]
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
-[ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=3]
-[ext_resource path="res://src/menu/PauseMenu.gd" type="Script" id=4]
+[ext_resource path="res://src/menu/MenuPause.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
@@ -161,10 +160,3 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Audio" type="Node" parent="."]
-
-[node name="Open" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 3 )
-volume_db = -6.0
-bus = "SFX"

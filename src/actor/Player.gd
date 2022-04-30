@@ -17,7 +17,7 @@ onready var spr_hand_r := $Sprites/HandR
 onready var spr_hands := [spr_hand_l, spr_hand_r]
 onready var hand_start : Vector2 = spr_hand_r.position
 
-onready var audio_pickup := $Audio/Pickup
+onready var audio_grab := $Audio/Grab
 onready var audio_drop := $Audio/Drop
 onready var audio_push := $Audio/Push
 onready var audio_turn := $Audio/Turn
@@ -357,8 +357,8 @@ func _physics_process(delta):
 			
 			release_anim()
 			
-			audio_pickup.pitch_scale = rand_range(0.7, 1.3)
-			audio_pickup.play()
+			audio_grab.pitch_scale = rand_range(0.7, 1.3)
+			audio_grab.play()
 	
 	# not holding
 	else:
@@ -439,8 +439,8 @@ func _physics_process(delta):
 						#anim.play("RESET")
 						anim.stop()
 						
-						audio_pickup.pitch_scale = rand_range(0.7, 1.3)
-						audio_pickup.play()
+						audio_grab.pitch_scale = rand_range(0.7, 1.3)
+						audio_grab.play()
 				
 			# in the air
 			else:

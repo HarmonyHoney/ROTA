@@ -9,11 +9,13 @@ func _input(event):
 func _physics_process(delta):
 	menu_process(delta)
 
-func back():
-	self.is_open = false
-
 func accept():
+	audio_accept()
 	if cursor == 0:
 		Shared.load_slot(get_parent().cursor)
 	elif cursor == 1:
 		sub_menu(delete_menu)
+
+func back():
+	audio_back()
+	self.is_open = false

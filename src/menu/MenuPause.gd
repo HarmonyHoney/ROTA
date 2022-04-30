@@ -1,7 +1,6 @@
 extends MenuBase
 
 onready var hub_label := $Control/Menu/List/Items/Hub
-onready var audio_open := $Audio/Open
 
 func _ready():
 	Wipe.connect("start_wipe_out", self, "start_wipe_out")
@@ -18,6 +17,7 @@ func _physics_process(delta):
 	menu_process(delta)
 
 func accept():
+	audio_accept()
 	match items[cursor].name.to_lower():
 		"resume":
 			back()
@@ -26,7 +26,7 @@ func accept():
 		"hub":
 			back_to_hub()
 		"options":
-			sub_menu(OptionsMenu)
+			sub_menu(MenuOptions)
 		"exit":
 			Shared.wipe_scene(Shared.title_path)
 
@@ -40,13 +40,13 @@ func start_wipe_out():
 func wipe_out():
 	# close menu
 	if is_open:
-		self.is_open = false
+		set_open(false, false)
 		fade_ease.clock = 0
 
 func wipe_in():
 	set_process_input(true)
 
-func set_open(arg := is_open):
+func set_open(arg := is_open, is_audio := true):
 	.set_open(arg)
 	
 	get_tree().paused = is_open
@@ -60,8 +60,8 @@ func set_open(arg := is_open):
 			if i.visible:
 				items.append(i)
 	
-	audio_open.pitch_scale = 1.0 if is_open else 0.75
-	audio_open.play()
+	if is_audio:
+		Audio.play(Audio.menu_pause, 1.0 if is_open else 0.75)
 	
 	UI.menu.show = is_open
 

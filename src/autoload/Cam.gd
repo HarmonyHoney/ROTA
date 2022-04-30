@@ -78,3 +78,9 @@ func start_zoom(arg := 0, is_audio := true):
 	if is_audio:
 		audio_zoom.pitch_scale = rand_range(0.8, 1.2)
 		audio_zoom.play()
+
+func reset_zoom():
+	is_zoom = false
+	zoom_step = 0
+	zoom = Vector2.ONE * zoom_min
+	zoom_to = zoom_min

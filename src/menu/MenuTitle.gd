@@ -10,13 +10,15 @@ func _physics_process(delta):
 	menu_process(delta)
 
 func accept():
+	audio_accept()
 	match items[cursor].name.to_lower():
 		"play":
 			sub_menu(file_menu)
 		"options":
-			sub_menu(OptionsMenu)
+			sub_menu(MenuOptions)
 		"exit":
 			get_tree().quit()
 
 func back():
+	audio_back()
 	self.is_open = false

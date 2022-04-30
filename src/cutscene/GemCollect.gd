@@ -18,15 +18,13 @@ func _physics_process(delta):
 			if clock > 0.15:
 				next_step()
 				door_dest.gem.fade_color()
-				Cutscene.audio_collect.pitch_scale = 0.8
-				Cutscene.audio_collect.play()
+				Audio.play(Audio.gem_collect, 0.8)
 				
 				UI.gem.show = true
 		1:
 			if clock > 1.0:
 				next_step()
 				UI.gem_label.text = str(Shared.gem_count)
-				#audio_coin.play()
 		2:
 			var limit = 0.5
 			var t = min(clock, limit)

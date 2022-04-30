@@ -20,6 +20,7 @@ func _input(event):
 	menu_input(event)
 
 func accept():
+	audio_accept()
 	sub_menu(main_menu)
 	Cam.target_pos = pos[1]
 	UI.boot_menu(false)

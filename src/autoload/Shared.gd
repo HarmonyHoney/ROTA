@@ -1,7 +1,7 @@
 extends Node
 
 var worlds_path := "res://src/map/worlds/"
-var title_path := "res://src/menu/TitleMenu.tscn"
+var title_path := "res://src/menu/MenuTitle.tscn"
 var start_path := "res://src/map/worlds/1/0_start.tscn"
 
 var is_wipe := false
@@ -96,6 +96,7 @@ func change_scene():
 	else:
 		csfn = next_scene
 		get_tree().change_scene(next_scene)
+		Cam.reset_zoom()
 	
 	BG.set_colors(0)
 	

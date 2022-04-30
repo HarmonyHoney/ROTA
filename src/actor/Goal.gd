@@ -4,8 +4,6 @@ onready var sprites = $Sprites
 onready var gem := $Sprites/Gem
 onready var area = $Area2D
 onready var start_pos := position
-onready var audio_coin := $Audio/Coin
-onready var audio_collect := $Audio/Collect
 
 var player = null
 var is_collected := false
@@ -46,7 +44,7 @@ func pickup(ply):
 	start_pos = position
 	#area.monitorable = false
 	
-	audio_collect.play()
+	Audio.play(Audio.gem_collect)
 
 func cheat_code(cheat):
 	if "collect" in cheat:

@@ -9,6 +9,7 @@ export var cursor_path : NodePath
 onready var cursor_node = get_node_or_null(cursor_path)
 var cursor := 0 setget set_cursor
 export var cursor_margin := Vector2(30, 0)
+export var is_audio_cursor := true
 
 export var scroll_path : NodePath
 onready var scroll_node = get_node_or_null(scroll_path)
@@ -33,7 +34,7 @@ export var sub_stay_open := false
 
 func _ready():
 	fill_items()
-	self.cursor = 0
+	cursor = 0
 	
 	reset_cursor()
 
@@ -72,11 +73,12 @@ func menu_process(delta):
 	
 	if is_open:
 		# hold up/down repeat
-		if !is_sub_menu and ((joy.y != 0 and !axis_x) or (joy.x != 0 and axis_x)):
+		var diff = joy.x if axis_x else joy.y
+		if !is_sub_menu and diff != 0:
 			joy_clock += delta
-			if joy_clock > joy_wait + joy_repeat:
+			if joy_clock > joy_wait + joy_repeat and cursor + diff > -1 and cursor + diff < items.size():
 				joy_clock = joy_wait
-				self.cursor += joy.x if axis_x else joy.y
+				self.cursor += diff
 		
 		# move cursor
 		if items_node and cursor_node:
@@ -89,8 +91,11 @@ func menu_process(delta):
 
 func set_cursor(arg := 0):
 	cursor = clamp(arg, 0, max(items.size() - 1, 0))
+	if is_audio_cursor:
+		audio_cursor()
 
 func reset_cursor():
+	cursor = 0
 	if items_node and cursor_node:
 		cursor_node.rect_global_position = items[0].rect_global_position - cursor_margin
 		cursor_node.rect_size = items[0].rect_size + (cursor_margin * 2.0)
@@ -103,7 +108,7 @@ func set_open(arg := is_open):
 	is_open = arg
 	
 	if is_open:
-		self.cursor = 0
+		cursor = 0
 		fill_items()
 	else:
 		emit_signal("signal_close", self)
@@ -138,3 +143,12 @@ func sub_close(arg):
 	is_sub_menu = false
 	is_open = true
 	arg.disconnect("signal_close", self, "sub_close")
+
+func audio_cursor():
+	Audio.play(Audio.menu_cursor, 0.8, 1.2)
+
+func audio_accept():
+	Audio.play(Audio.menu_accept, 0.8, 1.2)
+
+func audio_back():
+	Audio.play(Audio.menu_cancel, 0.8, 1.2)

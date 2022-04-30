@@ -37,7 +37,7 @@ func _ready():
 	gem_label.text = str(Shared.gem_count)
 
 func _physics_process(delta):
-	var p = PauseMenu.is_open
+	var p = MenuPause.is_open
 	gem.move(delta, gem.show or p)
 	top.move(delta, p)
 	menu.move(delta)

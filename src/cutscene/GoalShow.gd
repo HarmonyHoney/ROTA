@@ -29,7 +29,7 @@ func _physics_process(delta):
 		2:
 			if clock > 0.1:
 				next_step()
-				Cutscene.audio_coin.play()
+				Audio.play(Audio.gem_show)
 		3:
 			var limit = 0.8
 			var t = min(clock, limit)

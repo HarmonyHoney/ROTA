@@ -36,9 +36,11 @@ func _input(event):
 			assign_key(items[cursor].action, event)
 			is_prompt = false
 			get_tree().set_input_as_handled()
+			audio_accept()
 	# clear key
 	elif event.is_action_pressed("ui_end"):
 		clear_row(cursor)
+		Audio.play(Audio.menu_accept, 0.8, 1.2)
 	# menu input
 	else:
 		menu_input(event)
@@ -68,6 +70,7 @@ func _physics_process(delta):
 	header_back.modulate.a = lerp(0, 1.0, header_ease.frac())
 
 func accept():
+	audio_accept()
 	if items[cursor].is_in_group("reset"):
 		reset_to_defaults()
 	elif items[cursor].is_in_group("remap"):
@@ -77,6 +80,7 @@ func accept():
 		get_tree().set_input_as_handled()
 
 func back():
+	audio_back()
 	get_tree().set_input_as_handled()
 	self.is_open = false
 

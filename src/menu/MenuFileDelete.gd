@@ -12,15 +12,17 @@ func _physics_process(delta):
 func set_open(arg := is_open):
 	.set_open(arg)
 	
-	self.cursor = 1
-
-func back():
-	self.is_open = false
+	cursor = 1
 
 func accept():
+	audio_accept()
 	if cursor == 0:
 		Shared.erase_slot(get_parent().cursor)
-		back()
-		open_menu.back()
+		self.is_open = false
+		open_menu.is_open = false
 	elif cursor == 1:
-		back()
+		self.is_open = false
+
+func back():
+	audio_back()
+	self.is_open = false

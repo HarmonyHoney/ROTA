@@ -10,5 +10,6 @@ script = ExtResource( 1 )
 zoom_min = 1.33
 
 [node name="Zoom" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 2 )
 bus = "SFX"

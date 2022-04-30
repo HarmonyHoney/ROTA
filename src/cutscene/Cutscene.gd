@@ -1,8 +1,5 @@
 extends Node
 
-onready var audio_coin := $Audio/Coin
-onready var audio_collect := $Audio/Collect
-
 var is_playing := false
 
 onready var goal_show := $GoalShow

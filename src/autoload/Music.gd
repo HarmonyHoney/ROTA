@@ -5,7 +5,7 @@ export var ost2: AudioStream
 export var ost3 : AudioStream
 export var ost4 : AudioStream
 
-var last_song := 3
+var last_song := -1
 var array = []
 
 func _ready():

@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/actor/Goal.gd" type="Script" id=1]
-[ext_resource path="res://media/audio/sfx/shine_get.wav" type="AudioStream" id=2]
-[ext_resource path="res://media/audio/sfx/shine_sparkle.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 35, 35 )
@@ -38,13 +36,3 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 4 )
-
-[node name="Audio" type="Node2D" parent="."]
-
-[node name="Coin" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 3 )
-bus = "SFX"
-
-[node name="Collect" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource( 2 )
-bus = "SFX"

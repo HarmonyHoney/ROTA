@@ -537,7 +537,7 @@ shape = SubResource( 14 )
 
 [node name="Audio" type="Node2D" parent="."]
 
-[node name="Pickup" type="AudioStreamPlayer" parent="Audio"]
+[node name="Grab" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 5 )
 bus = "SFX"
 

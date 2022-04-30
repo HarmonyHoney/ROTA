@@ -15,9 +15,11 @@ func fill_items():
 
 func accept():
 	if items[cursor].has_method("act"):
+		audio_accept()
 		items[cursor].act()
 
 func back():
+	audio_back()
 	get_tree().set_input_as_handled()
 	self.is_open = false
 
@@ -26,5 +28,5 @@ func joy_x(arg := 1):
 		items[cursor].axis_x(arg)
 
 func open_remap(is_gamepad := false):
-	RemapMenu.is_gamepad = is_gamepad
-	sub_menu(RemapMenu)
+	MenuRemap.is_gamepad = is_gamepad
+	sub_menu(MenuRemap)
