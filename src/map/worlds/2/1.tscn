@@ -83,7 +83,7 @@ texture = ExtResource( 16 )
 
 [node name="SignGrab" parent="Details" instance=ExtResource( 1 )]
 position = Vector2( -100, -250 )
-rotation = 1.57079
+rotation = 1.65806
 
 [node name="Lamppost" parent="Details" instance=ExtResource( 5 )]
 position = Vector2( 150, 0 )

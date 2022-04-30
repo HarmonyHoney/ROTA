@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/actor/Circle.gd" type="Script" id=2]
+[ext_resource path="res://src/detail/BarrelCacti.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/DoorBig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
@@ -112,59 +112,27 @@ position = Vector2( 3400, 2500 )
 rotation = 3.01069
 z_index = -15
 
-[node name="FlowerPetals" parent="Details/Cacti" instance=ExtResource( 7 )]
-position = Vector2( 2950, 2400 )
-rotation = -1.57079
-z_index = -2
-palette = 2
-
-[node name="Node2D" type="Node2D" parent="Details/Cacti/FlowerPetals"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 2 )
-radius = 35.0
-
-[node name="FlowerPetals3" parent="Details/Cacti" instance=ExtResource( 7 )]
-position = Vector2( 3100, 2250 )
-z_index = -2
-palette = 4
-
-[node name="Node2D" type="Node2D" parent="Details/Cacti/FlowerPetals3"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 2 )
-radius = 35.0
-
-[node name="FlowerPetals4" parent="Details/Cacti" instance=ExtResource( 7 )]
-position = Vector2( 3350, 2250 )
-z_index = -2
-palette = 5
-
-[node name="Node2D" type="Node2D" parent="Details/Cacti/FlowerPetals4"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 2 )
-radius = 35.0
-
-[node name="FlowerPetals2" parent="Details/Cacti" instance=ExtResource( 7 )]
-position = Vector2( 3550, 2400 )
-rotation = 1.57079
-z_index = -2
-
-[node name="Node2D" type="Node2D" parent="Details/Cacti/FlowerPetals2"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 2 )
-radius = 35.0
-
 [node name="Saguaro3" parent="Details/Cacti" instance=ExtResource( 1 )]
 position = Vector2( 3250, 2300 )
 rotation = -0.304029
 scale = Vector2( 0.3, 0.3 )
+
+[node name="BarrelCacti" parent="Details/Cacti" instance=ExtResource( 2 )]
+position = Vector2( 3550, 2400 )
+rotation = 1.57079
+
+[node name="BarrelCacti2" parent="Details/Cacti" instance=ExtResource( 2 )]
+position = Vector2( 3350, 2250 )
+palette = 5
+
+[node name="BarrelCacti3" parent="Details/Cacti" instance=ExtResource( 2 )]
+position = Vector2( 3100, 2250 )
+palette = 4
+
+[node name="BarrelCacti4" parent="Details/Cacti" instance=ExtResource( 2 )]
+position = Vector2( 2950, 2400 )
+rotation = -1.57079
+palette = 2
 
 [node name="Snow" type="Node2D" parent="Details"]
 
@@ -231,28 +199,30 @@ scale = Vector2( 0.7, 0.7 )
 position = Vector2( 3250, 1450 )
 scale = Vector2( 0.7, 0.7 )
 
-[node name="Flower" parent="Details/Grass" instance=ExtResource( 12 )]
-position = Vector2( 2800, 1550 )
-rotation = -1.57079
-
-[node name="Flower3" parent="Details/Grass" instance=ExtResource( 12 )]
-position = Vector2( 2850, 1600 )
-rotation = -3.14159
-palette = 5
-
-[node name="Flower4" parent="Details/Grass" instance=ExtResource( 12 )]
-position = Vector2( 3300, 1450 )
-rotation = -4.71238
-palette = 3
-
 [node name="Flower5" parent="Details/Grass" instance=ExtResource( 12 )]
 position = Vector2( 3295, 1595 )
 rotation = -3.92699
 palette = 4
 
+[node name="Flower6" parent="Details/Grass" instance=ExtResource( 12 )]
+position = Vector2( 2805, 1405 )
+rotation = -0.785398
+palette = 2
+
 [node name="Candle" parent="Details/Grass" instance=ExtResource( 15 )]
 position = Vector2( 3050, 1600 )
 rotation = 3.14159
+
+[node name="FlowerPetals" parent="Details/Grass" instance=ExtResource( 7 )]
+position = Vector2( 2750, 1550 )
+
+[node name="FlowerPetals2" parent="Details/Grass" instance=ExtResource( 7 )]
+position = Vector2( 2850, 1650 )
+palette = 5
+
+[node name="FlowerPetals3" parent="Details/Grass" instance=ExtResource( 7 )]
+position = Vector2( 3350, 1450 )
+palette = 3
 
 [node name="Bricks" type="Node2D" parent="Details"]
 

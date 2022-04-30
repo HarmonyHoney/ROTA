@@ -6,7 +6,6 @@
 [ext_resource path="res://src/actor/DoorBig.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/actor/Circle.gd" type="Script" id=7]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=10]
@@ -16,6 +15,7 @@
 [ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=14]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=15]
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=16]
+[ext_resource path="res://src/detail/BarrelCacti.tscn" type="PackedScene" id=17]
 
 [node name="Map" type="Node2D"]
 
@@ -223,144 +223,6 @@ rotation = 0.0721879
 scale = Vector2( 0.35, 0.35 )
 z_index = -15
 
-[node name="FlowerPetals" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 650, 250 )
-z_index = -2
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
-[node name="FlowerPetals10" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 250, 1300 )
-rotation = -1.57079
-z_index = -2
-palette = 2
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals10"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
-[node name="FlowerPetals11" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 650, 1300 )
-rotation = -4.71238
-z_index = -2
-palette = 5
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals11"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
-[node name="FlowerPetals12" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( -150, 650 )
-rotation = -3.14159
-z_index = -2
-palette = 5
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals12"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
-[node name="FlowerPetals13" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( -250, 550 )
-rotation = -1.57079
-z_index = -2
-palette = 2
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals13"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
-[node name="FlowerPetals14" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( -250, -100 )
-rotation = -1.57079
-z_index = -2
-palette = 4
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals14"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
-[node name="FlowerPetals3" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 1150, 250 )
-z_index = -2
-palette = 4
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals3"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
-[node name="FlowerPetals4" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 1450, 400 )
-rotation = 1.57079
-z_index = -2
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals4"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
-[node name="FlowerPetals5" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 1150, 850 )
-rotation = 1.57079
-z_index = -2
-palette = 5
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals5"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
-[node name="FlowerPetals9" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 550, 550 )
-rotation = 3.14159
-z_index = -2
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals9"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
-[node name="FlowerPetals2" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 450, 200 )
-rotation = 1.57079
-z_index = -2
-palette = 2
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals2"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 7 )
-radius = 35.0
-
 [node name="Candle" parent="Details" instance=ExtResource( 9 )]
 position = Vector2( 1325, 300 )
 
@@ -454,3 +316,53 @@ palette = 4
 position = Vector2( 770, 930 )
 rotation = -0.785397
 palette = 2
+
+[node name="BarrelCacti" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( 650, 250 )
+
+[node name="BarrelCacti2" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( 450, 200 )
+rotation = 1.57079
+palette = 2
+
+[node name="BarrelCacti3" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( 1150, 250 )
+palette = 4
+
+[node name="BarrelCacti4" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( 1450, 400 )
+rotation = 1.57079
+
+[node name="BarrelCacti5" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( 1150, 850 )
+rotation = 1.57079
+palette = 5
+
+[node name="BarrelCacti6" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( 550, 550 )
+rotation = 3.14159
+
+[node name="BarrelCacti7" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( 650, 1300 )
+rotation = 1.57079
+palette = 5
+
+[node name="BarrelCacti8" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( 250, 1300 )
+rotation = 4.71238
+palette = 2
+
+[node name="BarrelCacti9" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( -150, 650 )
+rotation = 3.14159
+palette = 5
+
+[node name="BarrelCacti10" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( -250, 550 )
+rotation = 4.71238
+palette = 2
+
+[node name="BarrelCacti11" parent="Details" instance=ExtResource( 17 )]
+position = Vector2( -250, -100 )
+rotation = 4.71238
+palette = 4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=2]
@@ -9,8 +9,7 @@
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=7]
 [ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=8]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=9]
-[ext_resource path="res://src/actor/Circle.gd" type="Script" id=10]
-[ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/detail/BarrelCacti.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=14]
@@ -83,82 +82,6 @@ position = Vector2( 200, 800 )
 position = Vector2( 200, 1000 )
 rotation = 3.14159
 
-[node name="FlowerPetals" parent="Details" instance=ExtResource( 11 )]
-position = Vector2( 650, 750 )
-z_index = -2
-palette = 5
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 10 )
-radius = 35.0
-
-[node name="FlowerPetals2" parent="Details" instance=ExtResource( 11 )]
-position = Vector2( -350, 900 )
-rotation = -1.57079
-z_index = -2
-palette = 2
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals2"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 10 )
-radius = 35.0
-
-[node name="FlowerPetals3" parent="Details" instance=ExtResource( 11 )]
-position = Vector2( -350, 1200 )
-rotation = -1.57079
-z_index = -2
-palette = 3
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals3"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 10 )
-radius = 35.0
-
-[node name="FlowerPetals4" parent="Details" instance=ExtResource( 11 )]
-position = Vector2( 350, 1050 )
-rotation = -2.35619
-z_index = -2
-palette = 4
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals4"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 10 )
-radius = 35.0
-
-[node name="FlowerPetals6" parent="Details" instance=ExtResource( 11 )]
-position = Vector2( 450, 1250 )
-rotation = -3.14159
-z_index = -2
-palette = 0
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals6"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 10 )
-radius = 35.0
-
-[node name="FlowerPetals5" parent="Details" instance=ExtResource( 11 )]
-position = Vector2( 50, 1150 )
-rotation = -4.71238
-z_index = -2
-
-[node name="Node2D" type="Node2D" parent="Details/FlowerPetals5"]
-modulate = Color( 0, 1, 0.396078, 1 )
-position = Vector2( 0, 28.5 )
-z_index = -5
-script = ExtResource( 10 )
-radius = 35.0
-
 [node name="Saguaro" parent="Details" instance=ExtResource( 13 )]
 position = Vector2( 300, 800 )
 rotation = 0.261799
@@ -207,3 +130,31 @@ rotation = 1.57079
 [node name="Bench" parent="Details" instance=ExtResource( 15 )]
 position = Vector2( 750, 1100 )
 rotation = 1.57079
+
+[node name="BarrelCacti" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 650, 750 )
+palette = 5
+
+[node name="BarrelCacti2" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 450, 1250 )
+rotation = -3.14159
+palette = 0
+
+[node name="BarrelCacti3" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 350, 1050 )
+rotation = -2.35619
+palette = 4
+
+[node name="BarrelCacti4" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 50, 1150 )
+rotation = -4.71238
+
+[node name="BarrelCacti5" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( -350, 1200 )
+rotation = -1.57079
+palette = 3
+
+[node name="BarrelCacti6" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( -350, 900 )
+rotation = -1.57079
+palette = 2
