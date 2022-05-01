@@ -18,6 +18,9 @@ export var fade_path : NodePath
 onready var fade_node = get_node_or_null(fade_path)
 onready var fade_ease := EaseMover.new()
 
+export var text_accept := "Accept"
+export var text_cancel := "Back"
+
 export var is_open := false setget set_open
 signal signal_close(arg)
 var is_sub_menu := false
@@ -49,10 +52,8 @@ func menu_input(event):
 	
 	if back and event.is_pressed():
 		back()
-		get_tree().set_input_as_handled()
 	elif accept and event.is_pressed():
 		accept()
-		get_tree().set_input_as_handled()
 	elif joy.y != 0 and joy.y != joy_last.y:
 		if axis_x:
 			joy_y(joy.y)
@@ -110,6 +111,7 @@ func set_open(arg := is_open):
 	if is_open:
 		cursor = 0
 		fill_items()
+		UI.menu_keys(text_accept, text_cancel)
 	else:
 		emit_signal("signal_close", self)
 
@@ -143,6 +145,7 @@ func sub_close(arg):
 	is_sub_menu = false
 	is_open = true
 	arg.disconnect("signal_close", self, "sub_close")
+	UI.menu_keys(text_accept, text_cancel)
 
 func audio_cursor():
 	Audio.play(Audio.menu_cursor, 0.8, 1.2)

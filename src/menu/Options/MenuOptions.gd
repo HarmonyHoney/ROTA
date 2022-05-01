@@ -20,7 +20,6 @@ func accept():
 
 func back():
 	audio_back()
-	get_tree().set_input_as_handled()
 	self.is_open = false
 
 func joy_x(arg := 1):

@@ -31,11 +31,14 @@ signal signal_gamepad(arg)
 
 var default_keys := {}
 
-var save_slot := 0
+var save_slot := -1
 var save_dict := {0: {}, 1: {}, 2: {}}
 var save_time := 0.0
 
 signal signal_erase_slot(arg)
+
+var auto_save_clock := 0.0
+var auto_save_time := 60.0
 
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
@@ -50,7 +53,7 @@ func _ready():
 	load_data()
 
 func _input(event):
-	if event is InputEventKey and event.pressed:
+	if event is InputEventKey and event.pressed and !event.is_echo():
 		if event.scancode == KEY_F11:
 			toggle_fullscreen()
 	
@@ -59,12 +62,21 @@ func _input(event):
 		if is_gamepad and event is InputEventKey:
 			is_gamepad = false
 			emit_signal("signal_gamepad", is_gamepad)
+			print("signal_gamepad")
 		elif !is_gamepad and (event is InputEventJoypadButton or event is InputEventJoypadMotion):
 			is_gamepad = true
 			emit_signal("signal_gamepad", is_gamepad)
+			print("signal_gamepad")
 
 func _physics_process(delta):
+	# recorded time
 	save_time += delta
+	
+	# auto save
+	auto_save_clock += delta
+	if auto_save_clock > auto_save_time:
+		auto_save_clock = 0.0
+		save_data()
 
 func wipe_scene(arg, last := csfn):
 	if !is_wipe:
@@ -137,6 +149,16 @@ func set_volume(bus = 0, vol = 0):
 	#print("volume[", bus, "] ",AudioServer.get_bus_name(bus) ," : ", volume[bus])
 
 
+### Exit Game
+
+func quit():
+	save_data()
+	get_tree().quit()
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		quit()
+
 ### Files and Directory Funcs ###
 
 func list_folder(path, include_extension := true):
@@ -195,6 +217,8 @@ func erase_data():
 	file.close()
 
 func save_data():
+	if save_slot < 0: return
+	
 	save_dict[save_slot]["goals_collected"] = goals_collected
 	save_dict[save_slot]["gem_count"] = gem_count
 	save_dict[save_slot]["time"] = int(save_time)
@@ -209,6 +233,8 @@ func save_data():
 	file.open("user://save_data.json", File.WRITE)
 	file.store_string(j)
 	file.close()
+	
+	auto_save_clock = 0.0
 
 func load_data():
 	var file = File.new()

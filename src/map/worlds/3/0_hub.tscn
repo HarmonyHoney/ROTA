@@ -370,11 +370,11 @@ palette = 4
 [node name="BarrelCacti13" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1150, 1275 )
 rotation = -4.71238
-palette = 4
 
 [node name="BarrelCacti14" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1350, 1050 )
 rotation = -3.14159
+palette = 5
 
 [node name="BarrelCacti15" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1450, 1350 )
@@ -383,9 +383,11 @@ palette = 2
 
 [node name="BarrelCacti16" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1450, 1650 )
+palette = 5
 
 [node name="BarrelCacti17" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1750, 1650 )
+palette = 3
 
 [node name="BarrelCacti18" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1950, 1650 )

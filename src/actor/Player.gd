@@ -194,19 +194,19 @@ func _physics_process(delta):
 		holding_jump = (holding_jump + delta) if btn_jump else 0.0
 	
 	# check floor
-	is_floor = !is_jump and velocity.y > -1 and test_move(transform, rot(Vector2.DOWN * (50 if is_hold else 1)))
-	if is_floor:
-		if air_clock > 0.4:
-			audio_land.pitch_scale = rand_range(0.7, 1.1)
-			audio_land.play()
-			
-			squish_from = Vector2(1.3, 0.7)
-			squish_clock = 0.0
-		
-		air_clock = 0.0
-		has_jumped = false
-	else:
-		air_clock += delta
+#	is_floor = !is_jump and velocity.y > -1 and test_move(transform, rot(Vector2.DOWN * (50 if is_hold else 1)))
+#	if is_floor:
+#		if air_clock > 0.4:
+#			audio_land.pitch_scale = rand_range(0.7, 1.1)
+#			audio_land.play()
+#
+#			squish_from = Vector2(1.3, 0.7)
+#			squish_clock = 0.0
+#
+#		air_clock = 0.0
+#		has_jumped = false
+#	else:
+#		air_clock += delta
 
 	# pickup goal
 	if is_goal:
@@ -228,8 +228,7 @@ func _physics_process(delta):
 					var move_to = goal_start.linear_interpolate(goal.start_pos, s)
 					var diff = move_to - position
 					
-					move_and_collide(Vector2(diff.x, 0))
-					move_and_collide(Vector2(0, diff.y))
+					move(diff, 0)
 				1:
 					goal.position = goal.start_pos.linear_interpolate(position + rot(Vector2(0, -100)), s)
 					spr_hand_l.global_position = p1
@@ -266,13 +265,12 @@ func _physics_process(delta):
 			if push_clock < push_time:
 				push_clock = min(push_clock + delta, push_time)
 				
-				hold_pos = box.position + rot(Vector2(88 * -dir_x, 49 - collider_size.y))
+				hold_pos = box.position + rot(Vector2(88 * -dir_x, 50 - collider_size.y))
 				var smooth = smoothstep(0, 1, push_clock / push_time)
 				var move_to = push_from.linear_interpolate(hold_pos, smooth)
 				var diff = move_to - position
 				
-				move_and_collide(Vector2(diff.x, 0))
-				move_and_collide(Vector2(0, diff.y))
+				move(diff, 0)
 				
 				# wobble body
 				spr_root.rotation = lerp_angle(deg2rad(12 * -push_dir), 0, abs(0.5 - smooth) * 2.0)
@@ -284,6 +282,7 @@ func _physics_process(delta):
 			# not pushing or turning
 			else:
 				# check floor
+				is_floor = test_move(transform, rot(Vector2.DOWN * 50))
 				if !is_floor:
 					walk_around(push_dir == 1)
 					is_release = true
@@ -471,18 +470,32 @@ func _physics_process(delta):
 			# gravity
 			velocity.y += (jump_gravity if is_jump else fall_gravity) * delta
 			
-			# move body
-			move_velocity = move_and_slide(rot(velocity))
-			velocity = rot(move_velocity, -dir)
+			# move
+			move(velocity * delta)
 	
 	# check boundary
 	if !is_fall_out and Boundary.is_outside(global_position):
 		fall_out()
 	
+	# air clock
+	if is_floor:
+		if air_clock > 0.4:
+			audio_land.pitch_scale = rand_range(0.7, 1.1)
+			audio_land.play()
+
+			squish_from = Vector2(1.3, 0.7)
+			squish_clock = 0.0
+
+		air_clock = 0.0
+	else:
+		air_clock += delta
+	
 	# squash squish and stretch
 	squish_clock = min(squish_clock + delta, squish_time)
 	var s = smoothstep(0, 1, squish_clock / squish_time)
 	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, s)
+
+### SetGet
 
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
@@ -499,18 +512,11 @@ func set_jump_time(arg):
 	jump_time = arg
 	solve_jump()
 
+# Sebastian Lague's formula
 func solve_jump():
-	# Sebastian Lague's formula
-	#gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-	#jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-	
 	jump_gravity = (2 * jump_height) / pow(jump_time, 2)
 	jump_speed = -jump_gravity * jump_time
 	fall_gravity = jump_gravity * 2.0
-	#print("jump_speed: ", jump_speed, " / jump_gravity: ", jump_gravity, " / fall_gravity: ", fall_gravity)
-
-func rot(arg : Vector2, _dir := dir):
-	return arg.rotated(deg2rad(_dir * 90))
 
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)
@@ -527,13 +533,53 @@ func set_dir(arg := dir):
 	if areas:
 		areas.rotation = turn_to
 
+### Movement
+
+func rot(vec : Vector2, _dir := dir) -> Vector2:
+	_dir = posmod(_dir, 4)
+	match _dir:
+		1:
+			return Vector2(-vec.y, vec.x)
+		2:
+			return Vector2(-vec.x, -vec.y)
+		3:
+			return Vector2(vec.y, -vec.x)
+	
+	return vec
+
+func move(_vel := Vector2.ZERO, _dir := dir):
+	# Move X
+	var move_x = rot(_vel * Vector2(1, 0), _dir)
+	var is_x = test_move(transform, move_x)
+	move_and_collide(move_x)
+	
+	# Wall
+	if is_x:
+		velocity.x = 0.0
+	
+	# Move Y
+	var move_y = rot(_vel * Vector2(0, 1), _dir)
+	var is_y = test_move(transform, move_y)
+	move_and_collide(move_y)
+	
+	if is_y:
+		velocity.y = 0.0
+	
+	# Floor
+	is_floor = is_y and _vel.y > 0
+	if is_floor:
+		velocity.y = 0
+		has_jumped = false
+
 func walk_around(right := false):
 	move_and_collide(rot(Vector2.DOWN))
-	set_dir(dir + (1 if right else 3))
+	self.dir += 1 if right else 3
 	velocity.x = (walk_speed if right else -walk_speed) * 0.72
 	
 	audio_around.pitch_scale = rand_range(0.9, 1.3)
 	audio_around.play()
+
+### Area
 
 func _on_BodyArea_area_entered(area):
 	var p = area.get_parent()
@@ -617,3 +663,4 @@ func cheat_code(cheat):
 func enter_door():
 	set_physics_process(false)
 	anim.play("idle")
+	

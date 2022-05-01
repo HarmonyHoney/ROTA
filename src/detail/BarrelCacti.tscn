@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=1]
-[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=2]
+[ext_resource path="res://media/image/details/circle200.png" type="Texture" id=2]
 [ext_resource path="res://src/detail/BarrelCacti.gd" type="Script" id=3]
 
 [node name="BarrelCacti" type="Node2D"]
@@ -11,9 +11,9 @@ script = ExtResource( 3 )
 palette = 1
 
 [node name="Circle" type="Sprite" parent="."]
-modulate = Color( 0, 1, 0.396078, 1 )
+modulate = Color( 0.364706, 1, 0, 1 )
 position = Vector2( 0, 28.5 )
-scale = Vector2( 0.175, 0.175 )
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 2 )
 
 [node name="FlowerPetals" parent="." instance=ExtResource( 1 )]

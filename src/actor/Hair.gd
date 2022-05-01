@@ -2,8 +2,8 @@ tool
 extends Node2D
 
 export var color := Color("00fff9") # 00fff9 ff007e
-export var width := 50.0
-export var end_scale := 0.75
+export var width := 50.0 setget set_width
+export var end_scale := 0.75 setget set_end
 export var length = 25.0
 export var sitting_angle = 15.0
 
@@ -15,6 +15,10 @@ export var point_count := 3 setget set_points
 var points = []
 var last_pos := Vector2.ZERO
 var hair_end = Vector2(-150, 150)
+
+export var tex : Texture
+
+var sprites := []
 
 func _ready():
 	set_points()
@@ -43,23 +47,38 @@ func _physics_process(delta):
 	
 	
 	last_pos = to_global(hair_end)
-	update()
-
-func _draw():
-	for i in points.size():
-		var w = (width * 0.5) * lerp(1.0, end_scale, i / float(points.size() - 1))
-		draw_circle(points[i], w, color) 
 	
-	if Engine.editor_hint:
-		for i in points.size():
-			draw_circle(points[i], 1, Color.white)
+	# set sprites
+	for i in points.size():
+		sprites[i].position = points[i]
 
 func set_points(arg := point_count):
 	point_count = max(2, arg)
 	
+	sprites = []
+	for i in get_children():
+		i.queue_free()
+	
 	points = []
 	for i in point_count:
 		points.append(Vector2.ZERO)
+		
+		var s = Sprite.new()
+		add_child(s)
+		s.texture = tex
+		sprites.append(s)
 	
-	update()
+	sprite_scale()
 
+func sprite_scale():
+	for i in sprites.size():
+		var w = (width / 100.0) * lerp(1.0, end_scale, i / float(point_count - 1))
+		sprites[i].scale = Vector2.ONE * w
+
+func set_width(arg := width):
+	width = arg
+	sprite_scale()
+
+func set_end(arg := end_scale):
+	end_scale = arg
+	sprite_scale()

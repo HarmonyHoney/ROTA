@@ -32,7 +32,7 @@ func _input(event):
 	if is_prompt:
 		if event.is_action_pressed("ui_pause"):
 			is_prompt = false
-		elif event.is_pressed() and is_type(event) and !event.is_action("ui_end"):
+		elif event.is_pressed() and is_type(event) and !event.is_action("ui_end") and !event.is_echo():
 			assign_key(items[cursor].action, event)
 			is_prompt = false
 			get_tree().set_input_as_handled()
@@ -81,7 +81,6 @@ func accept():
 
 func back():
 	audio_back()
-	get_tree().set_input_as_handled()
 	self.is_open = false
 
 func set_open(arg := is_open):

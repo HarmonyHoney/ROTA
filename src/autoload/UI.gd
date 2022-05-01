@@ -56,10 +56,19 @@ func set_zoom(frac := 0.0):
 func scene_changed():
 	UI.gem.clock = 0.0
 
-
-func boot_menu(arg := false):
+func menu_keys(accept := "", cancel := ""):
 	var c = $Control/Menu/Items.get_children()
-	c[0].text = "Start" if arg else "Accept"
-	c[2].visible = !arg # spacer
-	c[3].visible = !arg # label2
-	c[4].visible = !arg # key2
+	
+	# accept
+	var is_a = accept != ""
+	c[0].visible = is_a # label
+	c[0].text = accept
+	c[1].visible = is_a # key
+	
+	# cancel
+	var is_c = cancel != ""
+	c[2].visible = is_c # spacer
+	c[3].visible = is_c # label
+	c[3].text = cancel
+	c[4].visible = is_c # key
+	

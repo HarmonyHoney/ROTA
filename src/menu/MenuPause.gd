@@ -31,8 +31,7 @@ func accept():
 			Shared.wipe_scene(Shared.title_path)
 
 func back():
-	self.is_open = false
-	get_tree().set_input_as_handled()
+	self.is_open = false	
 
 func start_wipe_out():
 	set_process_input(false)

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/actor/Hair.gd" type="Script" id=1]
+[ext_resource path="res://media/image/details/circle100.png" type="Texture" id=2]
 
 [node name="Hair" type="Node2D"]
+modulate = Color( 0, 1, 0.976471, 1 )
 script = ExtResource( 1 )
+tex = ExtResource( 2 )

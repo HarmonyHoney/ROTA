@@ -22,7 +22,7 @@ func accept():
 		"credits":
 			sub_menu(credits_menu)
 		"exit":
-			get_tree().quit()
+			Shared.quit()
 
 func back():
 	audio_back()
