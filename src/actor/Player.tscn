@@ -494,6 +494,7 @@ position = Vector2( 0, -44.2 )
 width = 20.0
 sitting_angle = 70.0
 point_count = 6
+tex = ExtResource( 1 )
 
 [node name="HandL" type="Node2D" parent="Sprites"]
 use_parent_material = true

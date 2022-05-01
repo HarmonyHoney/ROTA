@@ -193,21 +193,6 @@ func _physics_process(delta):
 		# jump hold time
 		holding_jump = (holding_jump + delta) if btn_jump else 0.0
 	
-	# check floor
-#	is_floor = !is_jump and velocity.y > -1 and test_move(transform, rot(Vector2.DOWN * (50 if is_hold else 1)))
-#	if is_floor:
-#		if air_clock > 0.4:
-#			audio_land.pitch_scale = rand_range(0.7, 1.1)
-#			audio_land.play()
-#
-#			squish_from = Vector2(1.3, 0.7)
-#			squish_clock = 0.0
-#
-#		air_clock = 0.0
-#		has_jumped = false
-#	else:
-#		air_clock += delta
-
 	# pickup goal
 	if is_goal:
 		
@@ -663,4 +648,3 @@ func cheat_code(cheat):
 func enter_door():
 	set_physics_process(false)
 	anim.play("idle")
-	

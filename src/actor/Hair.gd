@@ -71,8 +71,10 @@ func set_points(arg := point_count):
 	sprite_scale()
 
 func sprite_scale():
+	var tw = tex.get_width() if tex else 100.0
+	
 	for i in sprites.size():
-		var w = (width / 100.0) * lerp(1.0, end_scale, i / float(point_count - 1))
+		var w = (width / tw) * lerp(1.0, end_scale, i / float(point_count - 1))
 		sprites[i].scale = Vector2.ONE * w
 
 func set_width(arg := width):
