@@ -38,7 +38,6 @@ func pickup(ply):
 	if is_collected: return
 	player = ply
 	is_collected = true
-	gem.z_as_relative = true
 	area.set_deferred("monitorable", false)
 	
 	start_pos = position

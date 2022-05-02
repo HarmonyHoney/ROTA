@@ -10,6 +10,9 @@ func _ready():
 func _input(event):
 	if is_open:
 		menu_input(event)
+		if event.is_action_pressed("ui_pause") and !is_sub_menu and (fade_ease.frac() > 0.5):
+			self.is_open = false
+		
 	elif event.is_action_pressed("ui_pause") and !is_sub_menu and "world" in Shared.csfn and !Cutscene.is_playing:
 		self.is_open = true
 
@@ -31,7 +34,7 @@ func accept():
 			Shared.wipe_scene(Shared.title_path)
 
 func back():
-	self.is_open = false	
+	self.is_open = false
 
 func start_wipe_out():
 	set_process_input(false)

@@ -42,7 +42,7 @@ func _ready():
 	reset_cursor()
 
 func menu_input(event):
-	if !is_open or is_sub_menu or (fade_node and fade_ease.frac() < 0.4): return
+	if !is_open or is_sub_menu or (fade_node and fade_ease.frac() < 0.5): return
 	
 	var accept = event.is_action_pressed("ui_accept")
 	var back = event.is_action_pressed("ui_cancel")
@@ -52,8 +52,10 @@ func menu_input(event):
 	
 	if back and event.is_pressed():
 		back()
+		get_tree().set_input_as_handled()
 	elif accept and event.is_pressed():
 		accept()
+		get_tree().set_input_as_handled()
 	elif joy.y != 0 and joy.y != joy_last.y:
 		if axis_x:
 			joy_y(joy.y)

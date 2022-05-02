@@ -16,7 +16,6 @@ __meta__ = {
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Gem" type="Node2D" parent="Sprites"]
-z_as_relative = false
 
 [node name="Polygon2D" type="Polygon2D" parent="Sprites/Gem"]
 scale = Vector2( 0.6, 0.6 )
