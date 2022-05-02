@@ -65,6 +65,7 @@ func set_points(arg := point_count):
 		
 		var s = Sprite.new()
 		add_child(s)
+		s.owner = owner
 		s.texture = tex
 		sprites.append(s)
 	
