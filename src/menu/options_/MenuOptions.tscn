@@ -1,18 +1,18 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/shader/outline2D_outer.shader" type="Shader" id=1]
-[ext_resource path="res://src/menu/Options/Volume.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/menu/Options/MenuOptions.gd" type="Script" id=3]
-[ext_resource path="res://media/audio/sfx/Randomize104.wav" type="AudioStream" id=4]
-[ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=5]
-[ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=6]
-[ext_resource path="res://media/image/UI/Video.png" type="Texture" id=7]
+[ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=2]
+[ext_resource path="res://media/font/profile/OptionsHeader.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/menu/options_/MenuOptions.gd" type="Script" id=4]
+[ext_resource path="res://src/menu/options_/OpenRemap.gd" type="Script" id=5]
+[ext_resource path="res://src/menu/options_/Resolution.gd" type="Script" id=6]
+[ext_resource path="res://src/menu/options_/onoff/OnOff.gd" type="Script" id=7]
 [ext_resource path="res://media/image/UI/Input.png" type="Texture" id=8]
 [ext_resource path="res://media/image/UI/Audio.png" type="Texture" id=9]
-[ext_resource path="res://media/font/profile/OptionsHeader.tres" type="DynamicFont" id=10]
-[ext_resource path="res://src/menu/Options/OnOff.gd" type="Script" id=11]
-[ext_resource path="res://src/menu/Options/Resolution.gd" type="Script" id=12]
-[ext_resource path="res://src/menu/Options/OpenRemap.gd" type="Script" id=13]
+[ext_resource path="res://media/audio/sfx/Randomize104.wav" type="AudioStream" id=10]
+[ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=11]
+[ext_resource path="res://media/image/UI/Video.png" type="Texture" id=12]
+[ext_resource path="res://src/menu/options_/Volume.tscn" type="PackedScene" id=13]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
@@ -53,7 +53,7 @@ func set_value():
 [node name="OptionsMenu" type="CanvasLayer"]
 pause_mode = 2
 layer = 6
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 items_path = NodePath("Control/Menu/List")
 cursor_path = NodePath("Control/Menu/Cursor")
 cursor_margin = Vector2( 25, 0 )
@@ -121,7 +121,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="Control/Menu/List/Header"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 10 )
+custom_fonts/font = ExtResource( 3 )
 text = "Options"
 align = 1
 valign = 1
@@ -152,7 +152,7 @@ __meta__ = {
 anchor_left = 0.11
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 10 )
+custom_fonts/font = ExtResource( 3 )
 text = "Input"
 valign = 1
 __meta__ = {
@@ -164,7 +164,7 @@ margin_top = 300.0
 margin_right = 640.0
 margin_bottom = 370.0
 rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 11 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -173,7 +173,7 @@ __meta__ = {
 anchor_right = 0.5
 anchor_bottom = 1.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "Controller Vibration"
 valign = 1
 __meta__ = {
@@ -186,7 +186,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 25.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "< OFF >"
 align = 2
 valign = 1
@@ -199,7 +199,7 @@ margin_top = 370.0
 margin_right = 640.0
 margin_bottom = 440.0
 rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 11 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -208,7 +208,7 @@ __meta__ = {
 anchor_right = 0.5
 anchor_bottom = 1.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "Grab Toggle"
 valign = 1
 __meta__ = {
@@ -221,7 +221,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 25.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "< OFF >"
 align = 2
 valign = 1
@@ -234,7 +234,7 @@ margin_top = 440.0
 margin_right = 640.0
 margin_bottom = 510.0
 rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 13 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -244,7 +244,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "Keyboard Setup"
 valign = 1
 __meta__ = {
@@ -256,7 +256,7 @@ margin_top = 510.0
 margin_right = 640.0
 margin_bottom = 580.0
 rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 13 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -267,7 +267,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "Controller Setup"
 valign = 1
 __meta__ = {
@@ -306,14 +306,14 @@ __meta__ = {
 anchor_left = 0.11
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 10 )
+custom_fonts/font = ExtResource( 3 )
 text = "Audio"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Music" parent="Control/Menu/List" instance=ExtResource( 2 )]
+[node name="Music" parent="Control/Menu/List" instance=ExtResource( 13 )]
 margin_top = 680.0
 margin_right = 640.0
 margin_bottom = 750.0
@@ -324,10 +324,10 @@ bus = 2
 text = "Music"
 
 [node name="Audio" parent="Control/Menu/List/Music" index="2"]
-stream = ExtResource( 5 )
+stream = ExtResource( 11 )
 bus = "Music"
 
-[node name="SFX" parent="Control/Menu/List" instance=ExtResource( 2 )]
+[node name="SFX" parent="Control/Menu/List" instance=ExtResource( 13 )]
 margin_top = 750.0
 margin_right = 640.0
 margin_bottom = 820.0
@@ -338,7 +338,7 @@ bus = 1
 text = "Sounds"
 
 [node name="Audio" parent="Control/Menu/List/SFX" index="2"]
-stream = ExtResource( 4 )
+stream = ExtResource( 10 )
 volume_db = -5.0
 bus = "SFX"
 
@@ -363,7 +363,7 @@ anchor_right = 0.1
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 7 )
+texture = ExtResource( 12 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -374,7 +374,7 @@ __meta__ = {
 anchor_left = 0.11
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 10 )
+custom_fonts/font = ExtResource( 3 )
 text = "Video"
 valign = 1
 __meta__ = {
@@ -395,7 +395,7 @@ __meta__ = {
 anchor_right = 0.5
 anchor_bottom = 1.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "Fullscreen"
 valign = 1
 __meta__ = {
@@ -408,7 +408,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 25.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "< OFF >"
 align = 2
 valign = 1
@@ -421,7 +421,7 @@ margin_top = 990.0
 margin_right = 640.0
 margin_bottom = 1060.0
 rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 12 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -430,7 +430,7 @@ __meta__ = {
 anchor_right = 0.5
 anchor_bottom = 1.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "Window Size"
 valign = 1
 __meta__ = {
@@ -443,7 +443,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 25.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "< 1280 x 720 >"
 align = 2
 valign = 1
@@ -465,7 +465,7 @@ __meta__ = {
 anchor_right = 0.5
 anchor_bottom = 1.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "V-Sync"
 valign = 1
 __meta__ = {
@@ -478,7 +478,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 25.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 2 )
 text = "< OFF >"
 align = 2
 valign = 1

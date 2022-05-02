@@ -2,7 +2,7 @@
 
 [ext_resource path="res://media/image/UI/btn_x.png" type="Texture" id=1]
 [ext_resource path="res://media/image/UI/hand.png" type="Texture" id=2]
-[ext_resource path="res://src/menu/Options/Key.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/menu/options_/Key.tscn" type="PackedScene" id=3]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 1 )

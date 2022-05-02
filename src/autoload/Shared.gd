@@ -50,7 +50,9 @@ func _ready():
 	for i in InputMap.get_actions():
 		default_keys[i] = InputMap.get_action_list(i)
 	
+	load_options()
 	load_data()
+	load_keys()
 
 func _input(event):
 	if event is InputEventKey and event.pressed and !event.is_echo():
@@ -210,11 +212,26 @@ func list_folders_and_files(path, is_ext := true):
 	dir.list_dir_end()
 	return [folders, files]
 
-func erase_data():
+func file_save(path : String, content : String):
 	var file = File.new()
-	file.open("user://save_data.json", File.WRITE)
-	file.store_string("")
+	file.open(path, File.WRITE)
+	file.store_string(content)
 	file.close()
+
+func file_save_json(path : String, dict : Dictionary):
+	var j = JSON.print(dict, "\t")
+	file_save(path, j)
+
+func file_load(path : String) -> String:
+	var content = ""
+	
+	var file = File.new()
+	if file.file_exists(path):
+		file.open(path, File.READ)
+		content = file.get_as_text()
+	file.close()
+	
+	return content
 
 func save_data():
 	if save_slot < 0: return
@@ -227,27 +244,14 @@ func save_data():
 		save_dict[save_slot]["csfn"] = csfn
 		save_dict[save_slot]["last_scene"] = last_scene
 	
-	var j = JSON.print(save_dict, "\t")
-	
-	var file = File.new()
-	file.open("user://save_data.json", File.WRITE)
-	file.store_string(j)
-	file.close()
+	file_save_json("user://save_data.json", save_dict)
 	
 	auto_save_clock = 0.0
 
 func load_data():
-	var file = File.new()
-	var j = ""
-	
-	if file.file_exists("user://save_data.json"):
-		file.open("user://save_data.json", File.READ)
-		j = file.get_as_text()
-	file.close()
-	
+	var j = file_load("user://save_data.json")
 	if j != "":
 		var p = JSON.parse(j)
-		
 		if typeof(p.result) == TYPE_DICTIONARY:
 			var data = p.result
 			# convert keys to int
@@ -288,3 +292,52 @@ func load_slot(arg := 0):
 func erase_slot(arg := 0):
 	save_dict[arg] = {}
 	emit_signal("signal_erase_slot", arg)
+
+func save_options():
+	var o := {}
+	
+	o["sounds"] = int(volume[1] / 10)
+	o["music"] = int(volume[2] / 10)
+	o["fullscreen"] = int(OS.window_fullscreen)
+	o["vsync"] = int(OS.vsync_enabled)
+	o["size_x"] = OS.window_size.x
+	o["size_y"] = OS.window_size.y
+	
+	file_save_json("user://options.json", o)
+
+func load_options():
+	var j = file_load("user://options.json")
+	if j != "":
+		var p = JSON.parse(j)
+		if typeof(p.result) == TYPE_DICTIONARY:
+			var data : Dictionary = p.result
+			
+			if data.has("sounds"):
+				set_volume(1, int(data["sounds"]) * 10)
+			if data.has("music"):
+				set_volume(2, int(data["music"]) * 10)
+			if data.has("fullscreen"):
+				OS.window_fullscreen = bool(int(data["fullscreen"]))
+			if data.has("vsync"):
+				OS.vsync_enabled = bool(int(data["vsync"]))
+			if data.has("size_x") and data.has("size_y"):
+				OS.window_size = Vector2(float(data["size_x"]), float(data["size_y"]))
+
+func save_keys():
+	var s_keys = SaveDict.new()
+	for a in InputMap.get_actions():
+		s_keys.dict[a] = InputMap.get_action_list(a)
+	
+	ResourceSaver.save("user://keys.tres", s_keys)
+
+func load_keys(path := "user://keys.tres"):
+	if !ResourceLoader.exists(path): return
+	var r = load(path)
+	
+	if is_instance_valid(r) and r.has_meta("dict") and typeof(r.dict) == TYPE_DICTIONARY:
+		for a in r.dict.keys():
+			InputMap.action_erase_events(a)
+			
+			for e in r.dict[a]:
+				InputMap.action_add_event(a, e)
+

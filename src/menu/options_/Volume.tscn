@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=1]
-[ext_resource path="res://src/menu/Options/OnOff.gd" type="Script" id=2]
+[ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
+[ext_resource path="res://src/menu/options_/Volume.gd" type="Script" id=3]
 
-[node name="OnOff" type="Control"]
-margin_top = 610.0
-margin_right = 1024.0
-margin_bottom = 680.0
-rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 2 )
+[node name="Volume" type="Control"]
+margin_right = 1080.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -18,7 +18,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 1 )
-text = "Label"
+text = "Master Volume"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -31,9 +31,12 @@ anchor_bottom = 1.0
 margin_left = 25.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 1 )
-text = "< OFF >"
+text = "< 5 >"
 align = 2
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )

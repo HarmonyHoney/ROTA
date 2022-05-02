@@ -82,6 +82,7 @@ func accept():
 func back():
 	audio_back()
 	self.is_open = false
+	Shared.save_keys()
 
 func set_open(arg := is_open):
 	.set_open(arg)
@@ -97,7 +98,6 @@ func set_open(arg := is_open):
 		# remove keys
 		for i in items.size():
 			remove_keys(i)
-
 
 func draw_key(key_node, event):
 	if !is_type(event): return

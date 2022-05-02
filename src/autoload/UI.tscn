@@ -4,7 +4,7 @@
 [ext_resource path="res://media/font/profile/UI_Keys.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/font/profile/UI_gem.tres" type="DynamicFont" id=3]
 [ext_resource path="res://media/image/UI/btn_b.png" type="Texture" id=8]
-[ext_resource path="res://src/menu/Options/Key.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/menu/options_/Key.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/autoload/UI.gd" type="Script" id=10]
 [ext_resource path="res://src/actor/Circle.gd" type="Script" id=12]
 

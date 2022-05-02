@@ -21,6 +21,8 @@ func accept():
 func back():
 	audio_back()
 	self.is_open = false
+	
+	Shared.save_options()
 
 func joy_x(arg := 1):
 	if items[cursor].has_method("axis_x"):
