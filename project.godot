@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "OnOff",
 "language": "GDScript",
-"path": "res://src/menu/options_/onoff/OnOff.gd"
+"path": "res://src/menu/options/onoff/OnOff.gd"
 }, {
 "base": "Node2D",
 "class": "PaletteSwap",
@@ -78,8 +78,8 @@ Boundary="*res://src/autoload/Boundary.tscn"
 CheatCode="*res://src/autoload/CheatCode.gd"
 Cutscene="*res://src/cutscene/Cutscene.tscn"
 MenuPause="*res://src/menu/MenuPause.tscn"
-MenuOptions="*res://src/menu/options_/MenuOptions.tscn"
-MenuRemap="*res://src/menu/options_/MenuRemap.tscn"
+MenuOptions="*res://src/menu/options/MenuOptions.tscn"
+MenuRemap="*res://src/menu/options/MenuRemap.tscn"
 Music="*res://src/autoload/Music.tscn"
 Audio="*res://src/autoload/Audio.tscn"
 

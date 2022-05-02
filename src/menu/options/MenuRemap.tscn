@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/menu/options_/Key.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/menu/options/Key.tscn" type="PackedScene" id=1]
 [ext_resource path="res://media/font/profile/OptionsHeader2.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=3]
 [ext_resource path="res://media/font/profile/OptionsHeader.tres" type="DynamicFont" id=4]
-[ext_resource path="res://src/menu/options_/MenuRemap.gd" type="Script" id=5]
-[ext_resource path="res://src/menu/options_/Row.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/menu/options/MenuRemap.gd" type="Script" id=5]
+[ext_resource path="res://src/menu/options/Row.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
