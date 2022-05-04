@@ -53,24 +53,28 @@ func _ready():
 	load_options()
 	load_data()
 	load_keys()
+	
+	if OS.window_fullscreen:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _input(event):
 	if event is InputEventKey and event.pressed and !event.is_echo():
 		if event.scancode == KEY_F11:
 			toggle_fullscreen()
-		elif event.scancode == KEY_F12:
-			take_screenshot()
+	
+#	if Input.is_action_just_pressed("ui_end"):
+#		burst_screenshot()
 	
 	# gamepad signal
 	if event.is_pressed():
 		if is_gamepad and event is InputEventKey:
 			is_gamepad = false
 			emit_signal("signal_gamepad", is_gamepad)
-			print("signal_gamepad")
+			print("signal_gamepad: ", is_gamepad)
 		elif !is_gamepad and (event is InputEventJoypadButton or event is InputEventJoypadMotion):
 			is_gamepad = true
 			emit_signal("signal_gamepad", is_gamepad)
-			print("signal_gamepad")
+			print("signal_gamepad: ", is_gamepad)
 
 func _physics_process(delta):
 	# recorded time
@@ -124,21 +128,29 @@ func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
 
-func take_screenshot():
+func burst_screenshot():
 	var dir := Directory.new()
 	if !dir.dir_exists("user://snap"):
 		dir.make_dir("user://snap")
 	
 	var images = []
 	
-	for i in 10:
+	for i in 30:
 		var image = get_tree().root.get_texture().get_data()
 		image.flip_y()
 		images.append(image)
 		yield(get_tree(), "idle_frame")
 	
+	var d = OS.get_datetime()
+	d.erase("dst")
+	var s = ""
+	
+	for i in (d.values()):
+		s += str(i) + " "
+	
 	for i in images.size():
-		images[i].save_png("user://snap/snap" + str(i) + ".png")
+		images[i].save_png("user://snap/" + s + "snap" + str(i) + ".png")
+		yield(get_tree(), "idle_frame")
 
 ### Gems
 

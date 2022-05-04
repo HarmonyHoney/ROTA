@@ -13,6 +13,9 @@ func _ready():
 	Cam.position = Cam.target_pos
 	
 	Shared.save_slot = -1
+	
+	randomize()
+	Music.play_song()
 
 func _exit_tree():
 	UI.menu.show = false

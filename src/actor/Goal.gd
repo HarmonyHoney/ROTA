@@ -46,5 +46,5 @@ func pickup(ply):
 	Audio.play(Audio.gem_collect)
 
 func cheat_code(cheat):
-	if "collect" in cheat:
-		pickup(Shared.player)
+	if "konami" in cheat:
+		pass#pickup(Shared.player)

@@ -474,7 +474,7 @@ scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 14 )
 
 [node name="EyeL" type="Line2D" parent="Sprites/Root/Body/Head"]
-position = Vector2( -24.2854, -19.2299 )
+position = Vector2( -25, -16 )
 points = PoolVector2Array( 0, 0, 0, 15 )
 width = 20.0
 default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
@@ -482,7 +482,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="EyeR" type="Line2D" parent="Sprites/Root/Body/Head"]
-position = Vector2( 26.2695, -16.1473 )
+position = Vector2( 25, -16 )
 points = PoolVector2Array( 0, 0, 0, 15 )
 width = 20.0
 default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
@@ -526,6 +526,7 @@ position = Vector2( 0, -15 )
 shape = SubResource( 14 )
 
 [node name="Audio" type="Node2D" parent="."]
+position = Vector2( 0, -17 )
 
 [node name="Grab" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 5 )

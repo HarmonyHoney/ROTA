@@ -108,8 +108,6 @@ func _enter_tree():
 func _ready():
 	if Engine.editor_hint: return
 	
-	CheatCode.connect("activate", self, "cheat_code")
-	
 	solve_jump()
 	
 	# go to last door
@@ -182,8 +180,7 @@ func _physics_process(delta):
 	# input
 	if is_input:
 		joy_last = joy
-		joy = Vector2(Input.get_action_strength("right") - Input.get_action_strength("left"),
-			Input.get_action_strength("down") - Input.get_action_strength("up")).round()
+		joy = Input.get_vector("left", "right", "up", "down").round()
 		
 		btn_jump = Input.is_action_pressed("jump")
 		btnp_jump = Input.is_action_just_pressed("jump")
@@ -635,15 +632,6 @@ func release_anim():
 	
 	anim.add_animation("release", rel)
 	anim.play("release")
-
-func cheat_code(cheat):
-	if "big hair" in cheat:
-		$Sprites/Root/Body/HairBack.scale = Vector2.ONE * 2
-		$Sprites/Root/Body/HairFront.scale = Vector2.ONE * 2
-	elif "moon jump" in cheat:
-		jump_height = 500.0
-		jump_time = 1.5
-		solve_jump()
 
 func enter_door():
 	set_physics_process(false)

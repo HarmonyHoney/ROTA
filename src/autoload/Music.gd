@@ -5,9 +5,9 @@ export (Array, AudioStream) var ost = []
 var last_song := -1
 var array = []
 
-func _ready():
-	randomize()
-	play_song()
+#func _ready():
+#	randomize()
+#	play_song()
 
 func _on_Music_finished():
 	play_song()
