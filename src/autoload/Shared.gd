@@ -58,6 +58,8 @@ func _input(event):
 	if event is InputEventKey and event.pressed and !event.is_echo():
 		if event.scancode == KEY_F11:
 			toggle_fullscreen()
+		elif event.scancode == KEY_F12:
+			take_screenshot()
 	
 	# gamepad signal
 	if event.is_pressed():
@@ -123,14 +125,20 @@ func toggle_fullscreen():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
 
 func take_screenshot():
-	var image = get_tree().root.get_texture().get_data()
-	image.flip_y()
+	var dir := Directory.new()
+	if !dir.dir_exists("user://snap"):
+		dir.make_dir("user://snap")
 	
-	var it = ImageTexture.new()
-	it.create_from_image(image)
+	var images = []
 	
-	screenshot_texture = it
-	return screenshot_texture
+	for i in 10:
+		var image = get_tree().root.get_texture().get_data()
+		image.flip_y()
+		images.append(image)
+		yield(get_tree(), "idle_frame")
+	
+	for i in images.size():
+		images[i].save_png("user://snap/snap" + str(i) + ".png")
 
 ### Gems
 

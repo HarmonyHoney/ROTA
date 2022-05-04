@@ -22,7 +22,7 @@ var zoom_ease := EaseMover.new()
 var zoom_from := 1.0
 var zoom_to := 1.0
 
-export var zoom_min := 1.2
+export var zoom_min := 1.33
 export var zoom_max := 2.5
 
 var zoom_step := 0

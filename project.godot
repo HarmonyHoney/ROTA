@@ -62,8 +62,11 @@ _global_script_class_icons={
 
 [application]
 
-config/name="gdRota"
+config/name="ROTA"
+config/description="by Harmony Honey"
 run/main_scene="res://src/menu/MenuTitle.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="ROTA"
 config/icon="res://media/image/gobot.png"
 
 [autoload]
