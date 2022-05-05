@@ -1,7 +1,6 @@
 tool
 extends Node2D
 
-export var color := Color("00fff9") # 00fff9 ff007e
 export var width := 50.0 setget set_width
 export var end_scale := 0.75 setget set_end
 export var length = 25.0

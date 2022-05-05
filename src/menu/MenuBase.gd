@@ -142,6 +142,9 @@ func sub_menu(arg : MenuBase):
 	
 	arg.is_open = true 
 	arg.connect("signal_close", self, "sub_close")
+	
+	joy = Vector2.ZERO
+	joy_last = Vector2.ZERO
 
 func sub_close(arg):
 	is_sub_menu = false

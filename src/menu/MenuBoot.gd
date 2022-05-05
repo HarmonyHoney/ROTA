@@ -14,8 +14,9 @@ func _ready():
 	
 	Shared.save_slot = -1
 	
-	randomize()
-	Music.play_song()
+	if !Music.playing:
+		randomize()
+		Music.play_song()
 
 func _exit_tree():
 	UI.menu.show = false
