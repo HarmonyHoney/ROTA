@@ -13,6 +13,7 @@
 [ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=11]
 [ext_resource path="res://media/image/UI/Video.png" type="Texture" id=12]
 [ext_resource path="res://src/menu/options/Volume.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/menu/options/onoff/Fullscreen.gd" type="Script" id=14]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
@@ -26,18 +27,6 @@ corner_radius_bottom_left = 50
 shader = ExtResource( 1 )
 shader_param/line_color = Color( 0, 0, 0, 1 )
 shader_param/line_thickness = 2.0
-
-[sub_resource type="GDScript" id=24]
-script/source = "extends OnOff
-
-func _ready():
-	is_on = OS.window_fullscreen
-	set_label()
-
-func set_value():
-	Shared.toggle_fullscreen()
-	MenuOptions.fill_items()
-"
 
 [sub_resource type="GDScript" id=25]
 script/source = "extends OnOff
@@ -386,7 +375,7 @@ margin_top = 920.0
 margin_right = 640.0
 margin_bottom = 990.0
 rect_min_size = Vector2( 0, 70 )
-script = SubResource( 24 )
+script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

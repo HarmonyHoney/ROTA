@@ -101,6 +101,9 @@ var squish_from := Vector2.ONE
 var squish_clock := 0.0
 var squish_time := 0.5
 
+var is_unpause := false
+var unpause_tick := 0
+
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.player = self
@@ -164,6 +167,8 @@ func _ready():
 		anim.play("jump")
 		Cutscene.start_game.begin()
 		Cutscene.is_start_game = false
+	
+	MenuPause.connect("signal_close", self, "unpause")
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
@@ -182,10 +187,18 @@ func _physics_process(delta):
 		joy_last = joy
 		joy = Input.get_vector("left", "right", "up", "down").round()
 		
-		btn_jump = Input.is_action_pressed("jump")
 		btnp_jump = Input.is_action_just_pressed("jump")
-		btn_push = Input.is_action_pressed("grab")
 		btnp_push = Input.is_action_just_pressed("grab")
+		
+		# avoid jumping or grabbing when exiting menu
+		if is_unpause:
+			unpause_tick += 1
+			if unpause_tick > 1 and (btnp_jump or btnp_push):
+				is_unpause = false
+		
+		if !is_unpause:
+			btn_jump = Input.is_action_pressed("jump")
+			btn_push = Input.is_action_pressed("grab")
 		
 		# jump hold time
 		holding_jump = (holding_jump + delta) if btn_jump else 0.0
@@ -636,3 +649,13 @@ func release_anim():
 func enter_door():
 	set_physics_process(false)
 	anim.play("idle")
+
+func unpause(arg):
+	print("unpause")
+	unpause_tick = 0
+	is_unpause = true
+	btn_jump = false
+	btn_push = false
+	
+	#btnp_jump = false
+	#btnp_push = false

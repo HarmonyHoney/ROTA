@@ -67,8 +67,8 @@ config/description="by Harmony Honey"
 run/main_scene="res://src/menu/MenuTitle.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="ROTA-Harmony"
-boot_splash/image="res://media/image/UI/title.png"
-boot_splash/fullsize=false
+config/project_settings_override="user://override.cfg"
+boot_splash/image="res://media/image/UI/boot_splash.png"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://media/image/gobot.png"
 

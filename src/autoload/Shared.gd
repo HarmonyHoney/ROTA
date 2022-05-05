@@ -40,6 +40,10 @@ signal signal_erase_slot(arg)
 var auto_save_clock := 0.0
 var auto_save_time := 60.0
 
+var win_size := Vector2(1280, 720)
+var win_sizes := [Vector2(640, 360), Vector2(960, 540), Vector2(1280, 720), Vector2(1600, 900),
+Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
+
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
 	#set_volume(0, 50)
@@ -54,8 +58,15 @@ func _ready():
 	load_data()
 	load_keys()
 	
+	# setup window
 	if OS.window_fullscreen:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	else:
+		if OS.window_size in win_sizes:
+			win_size = OS.window_size
+		
+		# center window
+		set_window_size()
 
 func _input(event):
 	if event is InputEventKey and event.pressed and !event.is_echo():
@@ -127,6 +138,14 @@ func change_scene():
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN if OS.window_fullscreen else Input.MOUSE_MODE_VISIBLE)
+	if !OS.window_fullscreen:
+		set_window_size()
+
+func set_window_size(arg : Vector2 = win_size):
+	win_size = arg
+	OS.window_size = arg
+	
+	OS.window_position = (OS.get_screen_size() * 0.5) - (OS.window_size * 0.5)
 
 func burst_screenshot():
 	var dir := Directory.new()
@@ -175,6 +194,7 @@ func set_volume(bus = 0, vol = 0):
 
 func quit():
 	save_data()
+	save_options()
 	get_tree().quit()
 
 func _notification(what):
@@ -325,13 +345,23 @@ func save_options():
 	
 	o["sounds"] = int(volume[1] / 10)
 	o["music"] = int(volume[2] / 10)
-	o["fullscreen"] = int(OS.window_fullscreen)
-	o["vsync"] = int(OS.vsync_enabled)
-	if !OS.window_fullscreen:
-		o["size_x"] = OS.window_size.x
-		o["size_y"] = OS.window_size.y
+#	o["fullscreen"] = int(OS.window_fullscreen)
+#	o["vsync"] = int(OS.vsync_enabled)
+#	if !OS.window_fullscreen:
+#		o["size_x"] = OS.window_size.x
+#		o["size_y"] = OS.window_size.y
 	
 	file_save_json("user://options.json", o)
+	
+	# override
+	var s = "[display/window]\n\n"
+	s += "size/test_width=" + str(win_size.x) + "\n"
+	s += "size/test_height=" + str(win_size.y) + "\n"
+	s += "size/fullscreen=" + str(OS.window_fullscreen).to_lower() + "\n"
+	s += "vsync/use_vsync=" + str(OS.vsync_enabled).to_lower() + "\n"
+	
+	file_save("user://override.cfg", s)
+	
 
 func load_options():
 	var d = file_load_json_dict("user://options.json")
@@ -340,12 +370,12 @@ func load_options():
 		set_volume(1, int(d["sounds"]) * 10)
 	if d.has("music"):
 		set_volume(2, int(d["music"]) * 10)
-	if d.has("fullscreen"):
-		OS.window_fullscreen = bool(int(d["fullscreen"]))
-	if d.has("vsync"):
-		OS.vsync_enabled = bool(int(d["vsync"]))
-	if d.has("size_x") and d.has("size_y"):
-		OS.window_size = Vector2(float(d["size_x"]), float(d["size_y"]))
+#	if d.has("fullscreen"):
+#		OS.window_fullscreen = bool(int(d["fullscreen"]))
+#	if d.has("vsync"):
+#		OS.vsync_enabled = bool(int(d["vsync"]))
+#	if d.has("size_x") and d.has("size_y"):
+#		OS.window_size = Vector2(float(d["size_x"]), float(d["size_y"]))
 
 func save_keys(path := "user://keys.tres"):
 	var s_keys = SaveDict.new()
