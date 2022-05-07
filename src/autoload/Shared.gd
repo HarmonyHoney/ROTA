@@ -147,15 +147,15 @@ func set_window_size(arg : Vector2 = win_size):
 	
 	OS.window_position = (OS.get_screen_size() * 0.5) - (OS.window_size * 0.5)
 
-func burst_screenshot():
+func burst_screenshot(count := 30, viewport := get_tree().root):
 	var dir := Directory.new()
 	if !dir.dir_exists("user://snap"):
 		dir.make_dir("user://snap")
 	
 	var images = []
 	
-	for i in 30:
-		var image = get_tree().root.get_texture().get_data()
+	for i in count:
+		var image = viewport.get_texture().get_data()
 		image.flip_y()
 		images.append(image)
 		yield(get_tree(), "idle_frame")

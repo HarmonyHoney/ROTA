@@ -6,12 +6,9 @@
 script = ExtResource( 1 )
 
 [node name="Back" type="Polygon2D" parent="."]
-scale = Vector2( 0.5, 0.5 )
 color = Color( 0.686275, 0, 1, 1 )
-offset = Vector2( 80, 0 )
-polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
+polygon = PoolVector2Array( -30, 0, 0, -30, 30, 0, 0, 30 )
 
 [node name="Fill" type="Polygon2D" parent="Back"]
 color = Color( 1, 0, 0.913725, 1 )
-offset = Vector2( 50, 0 )
-polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
+polygon = PoolVector2Array( -20, 0, 0, -20, 20, 0, 0, 20 )

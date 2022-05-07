@@ -15,18 +15,13 @@ __meta__ = {
 
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="Gem" type="Node2D" parent="Sprites"]
-
-[node name="Polygon2D" type="Polygon2D" parent="Sprites/Gem"]
-scale = Vector2( 0.6, 0.6 )
+[node name="Gem" type="Polygon2D" parent="Sprites"]
 color = Color( 1, 0.866667, 0, 1 )
-offset = Vector2( 80, 0 )
-polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
+polygon = PoolVector2Array( -36, 0, 0, -36, 36, 0, 0, 36 )
 
-[node name="Polygon2D" type="Polygon2D" parent="Sprites/Gem/Polygon2D"]
+[node name="Fill" type="Polygon2D" parent="Sprites/Gem"]
 color = Color( 1, 0.984314, 0, 1 )
-offset = Vector2( 50, 0 )
-polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
+polygon = PoolVector2Array( -24, 0, 0, -24, 24, 0, 0, 24 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

@@ -2,6 +2,7 @@ extends Node2D
 
 onready var p : Player = Shared.player
 
+export var is_active := true
 export var is_trailer := false
 
 var clock := 0.0
@@ -13,8 +14,12 @@ func _ready():
 	p.anim.play("jump")
 	if is_trailer:
 		p.dir_x = -1
+	elif !is_active:
+		p.dir_x = 1
 
 func _physics_process(delta):
+	if !is_active: return
+	
 	clock += delta
 	if clock > time:
 		clock = 0.0
