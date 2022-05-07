@@ -12,6 +12,7 @@ func accept():
 	audio_accept()
 	if items[cursor].is_new:
 		Shared.load_slot(cursor)
+		is_open = false
 	else:
 		sub_menu(file_open)
 

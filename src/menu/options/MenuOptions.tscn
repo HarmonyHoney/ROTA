@@ -149,6 +149,7 @@ __meta__ = {
 }
 
 [node name="Vibrate" type="Control" parent="Control/Menu/List"]
+visible = false
 margin_top = 300.0
 margin_right = 640.0
 margin_bottom = 370.0
@@ -184,9 +185,10 @@ __meta__ = {
 }
 
 [node name="Grab" type="Control" parent="Control/Menu/List"]
-margin_top = 370.0
+visible = false
+margin_top = 300.0
 margin_right = 640.0
-margin_bottom = 440.0
+margin_bottom = 370.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 7 )
 __meta__ = {
@@ -219,9 +221,9 @@ __meta__ = {
 }
 
 [node name="Keyboard" type="Control" parent="Control/Menu/List"]
-margin_top = 440.0
+margin_top = 300.0
 margin_right = 640.0
-margin_bottom = 510.0
+margin_bottom = 370.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 5 )
 __meta__ = {
@@ -241,9 +243,9 @@ __meta__ = {
 }
 
 [node name="Controller" type="Control" parent="Control/Menu/List"]
-margin_top = 510.0
+margin_top = 370.0
 margin_right = 640.0
-margin_bottom = 580.0
+margin_bottom = 440.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 5 )
 __meta__ = {
@@ -264,18 +266,18 @@ __meta__ = {
 }
 
 [node name="Spacer2" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 580.0
+margin_top = 440.0
 margin_right = 640.0
-margin_bottom = 610.0
+margin_bottom = 470.0
 rect_min_size = Vector2( 0, 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HeaderAudio" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 610.0
+margin_top = 470.0
 margin_right = 640.0
-margin_bottom = 680.0
+margin_bottom = 540.0
 rect_min_size = Vector2( 0, 70 )
 
 [node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderAudio"]
@@ -303,9 +305,9 @@ __meta__ = {
 }
 
 [node name="Music" parent="Control/Menu/List" instance=ExtResource( 13 )]
-margin_top = 680.0
+margin_top = 540.0
 margin_right = 640.0
-margin_bottom = 750.0
+margin_bottom = 610.0
 rect_min_size = Vector2( 0, 70 )
 bus = 2
 
@@ -317,9 +319,9 @@ stream = ExtResource( 11 )
 bus = "Music"
 
 [node name="SFX" parent="Control/Menu/List" instance=ExtResource( 13 )]
-margin_top = 750.0
+margin_top = 610.0
 margin_right = 640.0
-margin_bottom = 820.0
+margin_bottom = 680.0
 rect_min_size = Vector2( 0, 70 )
 bus = 1
 
@@ -332,18 +334,18 @@ volume_db = -5.0
 bus = "SFX"
 
 [node name="Spacer" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 820.0
+margin_top = 680.0
 margin_right = 640.0
-margin_bottom = 850.0
+margin_bottom = 710.0
 rect_min_size = Vector2( 0, 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HeaderVideo" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 850.0
+margin_top = 710.0
 margin_right = 640.0
-margin_bottom = 920.0
+margin_bottom = 780.0
 rect_min_size = Vector2( 0, 70 )
 
 [node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderVideo"]
@@ -371,9 +373,9 @@ __meta__ = {
 }
 
 [node name="Fullscreen" type="Control" parent="Control/Menu/List"]
-margin_top = 920.0
+margin_top = 780.0
 margin_right = 640.0
-margin_bottom = 990.0
+margin_bottom = 850.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 14 )
 __meta__ = {
@@ -406,9 +408,9 @@ __meta__ = {
 }
 
 [node name="Resolution" type="Control" parent="Control/Menu/List"]
-margin_top = 990.0
+margin_top = 850.0
 margin_right = 640.0
-margin_bottom = 1060.0
+margin_bottom = 920.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 6 )
 __meta__ = {
@@ -441,9 +443,9 @@ __meta__ = {
 }
 
 [node name="Vsync" type="Control" parent="Control/Menu/List"]
-margin_top = 1060.0
+margin_top = 920.0
 margin_right = 640.0
-margin_bottom = 1130.0
+margin_bottom = 990.0
 rect_min_size = Vector2( 0, 70 )
 script = SubResource( 25 )
 __meta__ = {

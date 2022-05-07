@@ -13,6 +13,7 @@ func accept():
 	audio_accept()
 	if cursor == 0:
 		Shared.load_slot(get_parent().cursor)
+		is_open = false
 	elif cursor == 1:
 		sub_menu(delete_menu)
 
