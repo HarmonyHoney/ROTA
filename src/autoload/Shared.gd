@@ -355,8 +355,9 @@ func save_options():
 	
 	# override
 	var s = "[display/window]\n\n"
-	s += "size/test_width=" + str(win_size.x) + "\n"
-	s += "size/test_height=" + str(win_size.y) + "\n"
+	if win_size != Vector2(1280, 720):
+		s += "size/test_width=" + str(win_size.x) + "\n"
+		s += "size/test_height=" + str(win_size.y) + "\n"
 	s += "size/fullscreen=" + str(OS.window_fullscreen).to_lower() + "\n"
 	s += "vsync/use_vsync=" + str(OS.vsync_enabled).to_lower() + "\n"
 	

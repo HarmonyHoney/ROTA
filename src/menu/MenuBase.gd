@@ -116,6 +116,8 @@ func set_open(arg := is_open):
 		UI.menu_keys(text_accept, text_cancel)
 	else:
 		emit_signal("signal_close", self)
+	
+	reset_joy()
 
 func fill_items():
 	items = []
@@ -142,15 +144,14 @@ func sub_menu(arg : MenuBase):
 	
 	arg.is_open = true 
 	arg.connect("signal_close", self, "sub_close")
-	
-	joy = Vector2.ZERO
-	joy_last = Vector2.ZERO
 
 func sub_close(arg):
 	is_sub_menu = false
 	is_open = true
 	arg.disconnect("signal_close", self, "sub_close")
 	UI.menu_keys(text_accept, text_cancel)
+	
+	reset_joy()
 
 func audio_cursor():
 	Audio.play(Audio.menu_cursor, 0.8, 1.2)
@@ -160,3 +161,8 @@ func audio_accept():
 
 func audio_back():
 	Audio.play(Audio.menu_cancel, 0.6, 0.9)
+
+func reset_joy():
+	joy_last = Vector2.ZERO
+	joy = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").round()
+	joy_clock = 0.0

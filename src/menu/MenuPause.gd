@@ -21,6 +21,7 @@ func _physics_process(delta):
 
 func accept():
 	audio_accept()
+	joy = Vector2.ZERO
 	match items[cursor].name.to_lower():
 		"resume":
 			back()

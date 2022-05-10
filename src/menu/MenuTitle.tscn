@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://src/menu/MenuBoot.gd" type="Script" id=18]
 [ext_resource path="res://media/image/UI/title.png" type="Texture" id=19]
 [ext_resource path="res://src/menu/MenuCredits.gd" type="Script" id=20]
+[ext_resource path="res://media/font/profile/PatchNumber.tres" type="DynamicFont" id=21]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
@@ -461,6 +462,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Patch" type="Label" parent="Canvas/Credits"]
+modulate = Color( 1, 1, 1, 0.25 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_bottom = -10.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 21 )
+text = "Patch 1"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Map" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -477,6 +493,7 @@ bg_palette = 1
 position = Vector2( 1825, 0 )
 is_input = false
 is_cam = false
+release_time = 0.1
 
 [node name="AttractMode" type="Node2D" parent="Map"]
 position = Vector2( 1800, 650 )

@@ -104,6 +104,9 @@ var squish_time := 0.5
 var is_unpause := false
 var unpause_tick := 0
 
+var release_clock := 0.0
+export var release_time := 0.04
+
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.player = self
@@ -183,6 +186,8 @@ func _physics_process(delta):
 		return
 	
 	# input
+	release_clock = max(release_clock - delta, 0)
+	
 	if is_input:
 		joy_last = joy
 		joy = Input.get_vector("left", "right", "up", "down").round()
@@ -197,7 +202,7 @@ func _physics_process(delta):
 				is_unpause = false
 		
 		if !is_unpause:
-			btn_jump = Input.is_action_pressed("jump")
+			btn_jump = Input.is_action_pressed("jump") and release_clock == 0
 			btn_push = Input.is_action_pressed("grab")
 		
 		# jump hold time
@@ -353,6 +358,8 @@ func _physics_process(delta):
 			
 			audio_grab.pitch_scale = rand_range(0.7, 1.3)
 			audio_grab.play()
+			
+			release_clock = release_time
 	
 	# not holding
 	else:
@@ -656,6 +663,3 @@ func unpause(arg):
 	is_unpause = true
 	btn_jump = false
 	btn_push = false
-	
-	#btnp_jump = false
-	#btnp_push = false
