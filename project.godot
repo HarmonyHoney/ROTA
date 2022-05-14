@@ -48,6 +48,71 @@ _global_script_classes=[ {
 "class": "SaveDict",
 "language": "GDScript",
 "path": "res://src/class/SaveDict.gd"
+}, {
+"base": "",
+"class": "SteamAPI",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_api.gdns"
+}, {
+"base": "",
+"class": "SteamCallback",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_callback.gdns"
+}, {
+"base": "",
+"class": "SteamFriends",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_friends.gdns"
+}, {
+"base": "Node",
+"class": "SteamI",
+"language": "GDScript",
+"path": "res://addons/steam_api/steam_i.gd"
+}, {
+"base": "",
+"class": "SteamId",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_id.gdns"
+}, {
+"base": "",
+"class": "SteamLeaderboard",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_leaderboard.gdns"
+}, {
+"base": "",
+"class": "SteamLeaderboardEntries",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_leaderboard_entries.gdns"
+}, {
+"base": "",
+"class": "SteamLeaderboardEntry",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_leaderboard_entry.gdns"
+}, {
+"base": "",
+"class": "SteamLeaderboardFindResult",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_find_leaderboard_result.gdns"
+}, {
+"base": "",
+"class": "SteamLeaderboardScoreUploaded",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_leaderboard_uploaded.gdns"
+}, {
+"base": "",
+"class": "SteamLeaderboardScoresDownloaded",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_leaderboard_scores_downloaded.gdns"
+}, {
+"base": "",
+"class": "SteamUser",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_user.gdns"
+}, {
+"base": "",
+"class": "SteamUserStats",
+"language": "NativeScript",
+"path": "res://addons/steam_api/steam_user_stats.gdns"
 } ]
 _global_script_class_icons={
 "Box": "",
@@ -57,7 +122,20 @@ _global_script_class_icons={
 "OnOff": "",
 "PaletteSwap": "",
 "Player": "",
-"SaveDict": ""
+"SaveDict": "",
+"SteamAPI": "",
+"SteamCallback": "",
+"SteamFriends": "",
+"SteamI": "",
+"SteamId": "",
+"SteamLeaderboard": "",
+"SteamLeaderboardEntries": "",
+"SteamLeaderboardEntry": "",
+"SteamLeaderboardFindResult": "",
+"SteamLeaderboardScoreUploaded": "",
+"SteamLeaderboardScoresDownloaded": "",
+"SteamUser": "",
+"SteamUserStats": ""
 }
 
 [application]
@@ -89,6 +167,7 @@ MenuOptions="*res://src/menu/options/MenuOptions.tscn"
 MenuRemap="*res://src/menu/options/MenuRemap.tscn"
 Music="*res://src/autoload/Music.tscn"
 Audio="*res://src/autoload/Audio.tscn"
+Steam="*res://addons/steam_api/steam.gd"
 
 [display]
 
@@ -97,6 +176,10 @@ window/size/height=720
 window/size/fullscreen=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/steam_api/plugin.cfg" )
 
 [input]
 

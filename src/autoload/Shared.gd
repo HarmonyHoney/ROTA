@@ -130,10 +130,9 @@ func change_scene():
 		Cam.reset_zoom()
 	
 	BG.set_colors(0)
-	
 	emit_signal("scene_changed")
-	
 	save_data()
+	try_achievement()
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen
@@ -396,3 +395,38 @@ func load_keys(path := "user://keys.tres"):
 			for e in r.dict[a]:
 				InputMap.action_add_event(a, e)
 
+
+### Steam ###
+
+func try_achievement():
+	if !Steam.is_init(): return
+	
+	var map := ""
+	
+	match csfn:
+		"res://src/map/worlds/1/0_hub.tscn":
+			map = "grass1"
+		"res://src/map/worlds/2/0_hub.tscn":
+			map = "stone1"
+		"res://src/map/worlds/3/0_hub.tscn":
+			map = "cacti1"
+		"res://src/map/worlds/2A/0_hub.tscn":
+			map = "snow1"
+		
+		"res://src/map/worlds/3A/0_hub.tscn":
+			map = "grass2"
+		"res://src/map/worlds/2B/0_hub.tscn":
+			map = "stone2"
+		"res://src/map/worlds/3B/0_hub.tscn":
+			map = "cacti2"
+		"res://src/map/worlds/2C/0_hub.tscn":
+			map = "snow2"
+	
+	if map != "":
+		Steam.set_achievement(map)
+	
+	if gem_count > 49:
+		Steam.set_achievement("gem50")
+	
+	if csfn == "res://src/menu/Ending.tscn" and save_time < 3600:
+		Steam.set_achievement("speedrun")
