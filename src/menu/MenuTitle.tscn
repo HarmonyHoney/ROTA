@@ -471,7 +471,7 @@ margin_bottom = -10.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 21 )
-text = "Patch 1"
+text = "Patch 2"
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -493,7 +493,6 @@ bg_palette = 1
 position = Vector2( 1825, 0 )
 is_input = false
 is_cam = false
-release_time = 0.1
 
 [node name="AttractMode" type="Node2D" parent="Map"]
 position = Vector2( 1800, 650 )

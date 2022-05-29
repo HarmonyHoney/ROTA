@@ -44,7 +44,7 @@ position = Vector2( 250, -750 )
 can_spin = false
 
 [node name="Goal" parent="Actors" instance=ExtResource( 7 )]
-position = Vector2( 200, -500 )
+position = Vector2( 200, -550 )
 
 [node name="Details" type="Node2D" parent="."]
 

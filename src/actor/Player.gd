@@ -105,7 +105,7 @@ var is_unpause := false
 var unpause_tick := 0
 
 var release_clock := 0.0
-export var release_time := 0.04
+var release_time := 0.2
 
 func _enter_tree():
 	if Engine.editor_hint: return
