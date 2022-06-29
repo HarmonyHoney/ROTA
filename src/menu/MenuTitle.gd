@@ -21,6 +21,8 @@ func accept():
 			sub_menu(MenuOptions)
 		"credits":
 			sub_menu(credits_menu)
+		"store":
+			Shared.store_page()
 		"exit":
 			Shared.quit()
 

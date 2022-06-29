@@ -31,6 +31,8 @@ func accept():
 			back_to_hub()
 		"options":
 			sub_menu(MenuOptions)
+		"store":
+			Shared.store_page()
 		"exit":
 			Shared.wipe_scene(Shared.title_path)
 

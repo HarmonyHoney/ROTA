@@ -19,6 +19,7 @@ var arrow_time := 0.3
 
 var open_clock := 0.0
 var open_time := 0.5
+var open_last := 0.0
 
 var start_clock := 0.0
 var start_time := 0.5
@@ -50,6 +51,7 @@ func _physics_process(delta):
 	arrow.modulate.a = smoothstep(0, 1, arrow_clock / arrow_time)
 	
 	# open door
+	open_last = open_clock
 	var open = Input.is_action_pressed("up") and is_active and !is_locked and player != null and !player.is_hold and player.dir == dir and player.is_floor
 	open_clock = clamp(open_clock + (delta if open else -delta), 0, open_time)
 	
@@ -57,7 +59,7 @@ func _physics_process(delta):
 		var os = smoothstep(0, 1, open_clock / open_time)
 		arrow_sprite_mat.set_shader_param("fill_y", os)
 		
-		if open_clock == open_time:
+		if open_clock == open_time and open_last != open_time:
 			enter_door()
 
 func set_dir(arg):
@@ -74,9 +76,8 @@ func _on_Area2D_body_exited(body):
 	on_active()
 
 func enter_door():
-	if scene_path != "":
+	if scene_path != "" and Shared.wipe_scene(scene_path):
 		player.enter_door()
-		Shared.wipe_scene(scene_path)
 		set_physics_process(false)
 		on_enter()
 		
@@ -92,3 +93,11 @@ func on_enter():
 func on_active():
 	pass
 
+# set is_locked if scene not found
+func try_path():
+	var f = File.new()
+	var fe = f.file_exists(scene_path)
+	
+	if !fe:
+		scene_path = ""
+		is_locked = true

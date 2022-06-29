@@ -12,6 +12,7 @@ func _ready():
 	
 	CheatCode.connect("activate", self, "cheat_code")
 	is_locked = Shared.gem_count < gem_count
+	try_path()
 
 func set_gem(arg := gem_count):
 	gem_count = max(arg, 0)

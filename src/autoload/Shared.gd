@@ -44,6 +44,8 @@ var win_size := Vector2(1280, 720)
 var win_sizes := [Vector2(640, 360), Vector2(960, 540), Vector2(1280, 720), Vector2(1600, 900),
 Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
 
+var is_demo := false
+
 func _ready():
 	Wipe.connect("wipe_out", self, "wipe_out")
 	#set_volume(0, 50)
@@ -67,6 +69,12 @@ func _ready():
 		
 		# center window
 		set_window_size()
+	
+	# demo check
+	var f = File.new()
+	var fe = f.file_exists("res://src/map/worlds/2A/0_hub.tscn")
+	f.close()
+	is_demo = !fe
 
 func _input(event):
 	if event is InputEventKey and event.pressed and !event.is_echo():
@@ -98,7 +106,11 @@ func _physics_process(delta):
 		save_data()
 
 func wipe_scene(arg, last := csfn):
-	if !is_wipe:
+	var f = File.new()
+	var fe = f.file_exists(arg)
+	f.close()
+	
+	if !is_wipe and fe:
 		is_wipe = true
 		
 		if arg != csfn:
@@ -106,6 +118,9 @@ func wipe_scene(arg, last := csfn):
 			next_scene = arg
 		
 		Wipe.start()
+		return true
+	
+	return false
 
 func wipe_out():
 	if is_wipe:
@@ -337,7 +352,7 @@ func load_slot(arg := 0):
 		goals_collected = []
 		save_time = 0.0
 	
-	Shared.wipe_scene(Shared.next_scene, Shared.last_scene)
+	return Shared.wipe_scene(Shared.next_scene, Shared.last_scene)
 
 func save_options():
 	var o := {}
@@ -430,3 +445,11 @@ func try_achievement():
 	
 	if csfn == "res://src/menu/Ending.tscn" and save_time < 3600:
 		Steam.set_achievement("speedrun")
+
+
+### Demo ###
+func store_page():
+	if Steam.is_init:
+		Steam.friends.activate_game_overlay_to_store(1993830, Steam.OverlayToStoreFlag.None)
+	else:
+		OS.shell_open("https://store.steampowered.com/app/1993830/ROTA/")

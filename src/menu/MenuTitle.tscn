@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://media/image/UI/title.png" type="Texture" id=19]
 [ext_resource path="res://src/menu/MenuCredits.gd" type="Script" id=20]
 [ext_resource path="res://media/font/profile/PatchNumber.tres" type="DynamicFont" id=21]
+[ext_resource path="res://src/menu/DemoShow.gd" type="Script" id=22]
+[ext_resource path="res://src/menu/MenuFileDemo.gd" type="Script" id=23]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
@@ -40,6 +42,14 @@ corner_radius_bottom_left = 50
 
 [sub_resource type="DynamicFont" id=4]
 size = 185
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_bottom = -20
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 40
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
@@ -70,9 +80,6 @@ __meta__ = {
 margin_right = 1280.0
 margin_bottom = 720.0
 script = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 items_path = NodePath("List")
 cursor_path = NodePath("Cursor")
 cursor_margin = Vector2( 20, 3 )
@@ -96,15 +103,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_constants/separation = 5
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Play" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 135.0
-margin_top = 250.0
+margin_top = 222.0
 margin_right = 249.0
-margin_bottom = 301.0
+margin_bottom = 273.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
@@ -117,9 +121,9 @@ __meta__ = {
 
 [node name="Options" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 91.0
-margin_top = 306.0
+margin_top = 278.0
 margin_right = 292.0
-margin_bottom = 357.0
+margin_bottom = 329.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
@@ -132,9 +136,9 @@ __meta__ = {
 
 [node name="Credits" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 97.0
-margin_top = 362.0
+margin_top = 334.0
 margin_right = 286.0
-margin_bottom = 413.0
+margin_bottom = 385.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
@@ -145,11 +149,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Store" type="Label" parent="Canvas/MenuTitle/List"]
+margin_left = 48.0
+margin_top = 390.0
+margin_right = 336.0
+margin_bottom = 441.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
+text = "Store Page"
+align = 1
+valign = 1
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Exit" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 134.0
-margin_top = 418.0
+margin_top = 446.0
 margin_right = 249.0
-margin_bottom = 469.0
+margin_bottom = 497.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
@@ -161,7 +181,6 @@ __meta__ = {
 }
 
 [node name="FileMenu" type="Control" parent="Canvas"]
-visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
 script = ExtResource( 14 )
@@ -289,6 +308,7 @@ cursor_path = NodePath("Cursor")
 cursor_margin = Vector2( 15, 0 )
 fade_path = NodePath(".")
 sub_path = NodePath("../FileDelete")
+demo_path = NodePath("../FileDemo")
 
 [node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileOpen"]
 anchor_right = 1.0
@@ -345,9 +365,6 @@ __meta__ = {
 margin_right = 1280.0
 margin_bottom = 720.0
 script = ExtResource( 16 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 items_path = NodePath("List")
 cursor_path = NodePath("Cursor")
 fade_path = NodePath(".")
@@ -419,6 +436,65 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FileDemo" type="Control" parent="Canvas/FileMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+script = ExtResource( 23 )
+items_path = NodePath("List")
+cursor_path = NodePath("Cursor")
+fade_path = NodePath(".")
+
+[node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileDemo"]
+anchor_right = 1.0
+anchor_bottom = 0.1
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="List" type="VBoxContainer" parent="Canvas/FileMenu/FileDemo"]
+anchor_top = 0.635
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="Label" parent="Canvas/FileMenu/FileDemo/List" groups=["no_item"]]
+margin_left = 357.0
+margin_top = 70.0
+margin_right = 923.0
+margin_bottom = 121.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
+text = "File outside of Demo!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ok" type="Label" parent="Canvas/FileMenu/FileDemo/List"]
+margin_left = 579.0
+margin_top = 141.0
+margin_right = 700.0
+margin_bottom = 192.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Credits" type="Control" parent="Canvas"]
 visible = false
 margin_right = 1280.0
@@ -471,7 +547,7 @@ margin_bottom = -10.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 21 )
-text = "Patch 2"
+text = "Patch 3"
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -518,6 +594,18 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Demo" type="Label" parent="Map"]
+margin_left = 1500.0
+margin_top = 700.0
+margin_right = 2100.0
+margin_bottom = 800.0
+custom_colors/font_color = Color( 0.55, 0.55, 0.55, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "DEMO"
+align = 1
+valign = 1
+script = ExtResource( 22 )
 
 [node name="Details" type="Node2D" parent="Map"]
 

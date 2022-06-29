@@ -10,6 +10,8 @@ func _ready():
 		gem.visible = false
 	elif Shared.goals_collected.has(scene_path):
 		gem.set_color()
+	
+	try_path()
 
 # acquire goal
 func on_enter():
