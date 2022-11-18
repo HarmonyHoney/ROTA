@@ -157,9 +157,10 @@ func toggle_fullscreen():
 
 func set_window_size(arg : Vector2 = win_size):
 	win_size = arg
-	OS.window_size = arg
-	
-	OS.window_position = (OS.get_screen_size() * 0.5) - (OS.window_size * 0.5)
+	# specific fix for borderless fullscreen
+	var b = OS.window_borderless and win_size == OS.get_screen_size()
+	OS.window_size = win_size + Vector2(0, 1 if b else 0)
+	OS.window_position = Vector2.ZERO if b else (OS.get_screen_size() * 0.5) - (OS.window_size * 0.5)
 
 func burst_screenshot(count := 30, viewport := get_tree().root):
 	var dir := Directory.new()
@@ -195,14 +196,12 @@ func collect_gem():
 		
 		save_data()
 
-
 ### Volume
 
 func set_volume(bus = 0, vol = 0):
 	volume[bus] = clamp(vol, 0, 100)
 	AudioServer.set_bus_volume_db(bus, linear2db(volume[bus] / 100.0))
 	#print("volume[", bus, "] ",AudioServer.get_bus_name(bus) ," : ", volume[bus])
-
 
 ### Exit Game
 
@@ -359,11 +358,6 @@ func save_options():
 	
 	o["sounds"] = int(volume[1] / 10)
 	o["music"] = int(volume[2] / 10)
-#	o["fullscreen"] = int(OS.window_fullscreen)
-#	o["vsync"] = int(OS.vsync_enabled)
-#	if !OS.window_fullscreen:
-#		o["size_x"] = OS.window_size.x
-#		o["size_y"] = OS.window_size.y
 	
 	file_save_json("user://options.json", o)
 	
@@ -372,11 +366,11 @@ func save_options():
 	if win_size != Vector2(1280, 720):
 		s += "size/test_width=" + str(win_size.x) + "\n"
 		s += "size/test_height=" + str(win_size.y) + "\n"
+	s += "size/borderless=" + str(OS.window_borderless).to_lower() + "\n"
 	s += "size/fullscreen=" + str(OS.window_fullscreen).to_lower() + "\n"
 	s += "vsync/use_vsync=" + str(OS.vsync_enabled).to_lower() + "\n"
 	
 	file_save("user://override.cfg", s)
-	
 
 func load_options():
 	var d = file_load_json_dict("user://options.json")
@@ -385,12 +379,6 @@ func load_options():
 		set_volume(1, int(d["sounds"]) * 10)
 	if d.has("music"):
 		set_volume(2, int(d["music"]) * 10)
-#	if d.has("fullscreen"):
-#		OS.window_fullscreen = bool(int(d["fullscreen"]))
-#	if d.has("vsync"):
-#		OS.vsync_enabled = bool(int(d["vsync"]))
-#	if d.has("size_x") and d.has("size_y"):
-#		OS.window_size = Vector2(float(d["size_x"]), float(d["size_y"]))
 
 func save_keys(path := "user://keys.tres"):
 	var s_keys = SaveDict.new()
@@ -409,7 +397,6 @@ func load_keys(path := "user://keys.tres"):
 			
 			for e in r.dict[a]:
 				InputMap.action_add_event(a, e)
-
 
 ### Steam ###
 
@@ -446,8 +433,8 @@ func try_achievement():
 	if csfn == "res://src/menu/Ending.tscn" and save_time < 3600:
 		Steam.set_achievement("speedrun")
 
-
 ### Demo ###
+
 func store_page():
 	if Steam.is_init:
 		Steam.friends.activate_game_overlay_to_store(1993830, Steam.OverlayToStoreFlag.None)

@@ -1,6 +1,5 @@
 extends MenuBase
 
-onready var item_window_size := $Control/Menu/List/Resolution
 onready var bg := $Control/BG
 
 func _input(event):
@@ -10,8 +9,10 @@ func _physics_process(delta):
 	menu_process(delta)
 
 func fill_items():
-	if item_window_size:
-		item_window_size.visible = !OS.window_fullscreen
+	for i in items_node.get_children():
+		if i.is_in_group("window"):
+			i.visible = !OS.window_fullscreen
+	
 	.fill_items()
 
 func open():

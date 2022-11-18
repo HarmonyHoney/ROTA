@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/font/profile/OptionsHeader.tres" type="DynamicFont" id=3]
@@ -21,6 +21,18 @@ corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
+
+[sub_resource type="GDScript" id=26]
+script/source = "extends OnOff
+
+func _ready():
+	is_on = OS.window_borderless
+	set_label()
+
+func set_value():
+	OS.window_borderless = is_on
+
+"
 
 [sub_resource type="GDScript" id=25]
 script/source = "extends OnOff
@@ -395,10 +407,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Resolution" type="Control" parent="Control/Menu/List"]
+[node name="Borderless" type="Control" parent="Control/Menu/List" groups=["window"]]
 margin_top = 850.0
 margin_right = 640.0
 margin_bottom = 920.0
+rect_min_size = Vector2( 0, 70 )
+script = SubResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Menu/List/Borderless"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "Borderless"
+valign = 1
+
+[node name="Label2" type="Label" parent="Control/Menu/List/Borderless"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "< OFF >"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resolution" type="Control" parent="Control/Menu/List" groups=["window"]]
+margin_top = 920.0
+margin_right = 640.0
+margin_bottom = 990.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 6 )
 __meta__ = {
@@ -431,9 +475,9 @@ __meta__ = {
 }
 
 [node name="Vsync" type="Control" parent="Control/Menu/List"]
-margin_top = 920.0
+margin_top = 990.0
 margin_right = 640.0
-margin_bottom = 990.0
+margin_bottom = 1060.0
 rect_min_size = Vector2( 0, 70 )
 script = SubResource( 25 )
 __meta__ = {
@@ -447,9 +491,6 @@ size_flags_vertical = 6
 custom_fonts/font = ExtResource( 2 )
 text = "V-Sync"
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label2" type="Label" parent="Control/Menu/List/Vsync"]
 anchor_left = 0.5
