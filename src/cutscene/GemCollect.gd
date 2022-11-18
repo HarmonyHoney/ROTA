@@ -4,6 +4,7 @@ var is_playing := false
 var step := 0
 var clock := 0.0
 var easy := EaseMover.new(0.5)
+var is_clock := false
 
 var door_dest
 var player
@@ -19,14 +20,14 @@ func _physics_process(delta):
 			if clock > 0.15:
 				next_step()
 				
-				if !Cutscene.is_clock:
+				if !is_clock:
 					door_dest.gem.fade_color()
 				
 				Audio.play(Audio.gem_collect, 0.8)
 				UI.gem.show = true
 				easy.clock = 0
 		1:
-			if Cutscene.is_clock:
+			if is_clock:
 				door_dest.clock.scale = Vector2.ONE * easy.count(delta)
 				door_dest.gem.scale = Vector2.ONE * (1 - easy.smooth())
 			
@@ -55,6 +56,7 @@ func begin():
 	
 	is_playing = true
 	Cutscene.start()
+	is_clock = Cutscene.is_clock
 	
 	set_physics_process(true)
 	clock = 0.0
@@ -62,7 +64,7 @@ func begin():
 	
 	player.set_physics_process(false)
 	player.visible = false
-	if Cutscene.is_clock:
+	if is_clock:
 		door_dest.clock.scale = Vector2.ZERO
 		door_dest.gem.visible = true
 	else:

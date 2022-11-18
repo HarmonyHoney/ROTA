@@ -15,30 +15,33 @@ var screenshot_texture : ImageTexture
 
 var gem_count := 0
 var goals := {}
+var is_speedrun := false
+enum SPEED {OFF, MAP, FILE, BOTH}
+var clock_show := 0
+var clock_alpha := 0.5
 var speedruns := {
-	"1/2": 60,
-	"1/3": 60,
-	"1/4": 60,
-	"1/5": 60,
-	"1/6": 60,
-	"1/7": 60,
+	"1/2": 10,
+	"1/3": 17.5,
+	"1/4": 17.5,
+	"1/5": 13.5,
+	"1/6": 16.5,
+	"1/7": 17.5,
 	
-	"2/1": 60,
-	"2/2": 60,
-	"2/3": 60,
-	"2/4": 60,
-	"2/5": 60,
+	"2/1": 16.5,
+	"2/2": 23.5,
+	"2/3": 19.5,
+	"2/4": 25.5,
+	"2/5": 27.5,
 	
-	"2A/1": 60,
-	"2A/2": 60,
-	"2A/3": 60,
-	"2A/4": 60,
-	"2A/5": 60,
-	"2A/6": 60,
-	"2A/7": 60,
+	"2A/1": 19,
+	"2A/2": 26.5,
+	"2A/4": 16.5,
+	"2A/5": 40.5,
+	"2A/6": 32.5,
+	"2A/7": 28.5,
 	
-	"2B/1": 60,
-	"2B/2": 60,
+	"2B/1": 34,
+	"2B/2": 41.5,
 	"2B/3": 60,
 	"2B/4": 60,
 	"2B/5": 60,
@@ -51,20 +54,20 @@ var speedruns := {
 	"2C/5": 60,
 	"2C/6": 60,
 	
-	"3/1": 60,
-	"3/2": 60,
-	"3/3": 60,
-	"3/4": 60,
-	"3/5": 60,
-	"3/6": 60,
-	"3/7": 60,
+	"3/1": 25.5,
+	"3/2": 27,
+	"3/3": 28,
+	"3/4": 37.5,
+	"3/5": 28,
+	"3/6": 38.5,
+	"3/7": 30.5,
 	
-	"3A/1": 60,
-	"3A/2": 60,
-	"3A/3": 60,
-	"3A/4": 60,
-	"3A/5": 60,
-	"3A/6": 60,
+	"3A/1": 25,
+	"3A/2": 28.5,
+	"3A/3": 28.5,
+	"3A/4": 53.5,
+	"3A/5": 26.5,
+	"3A/6": 53.5,
 	
 	"3B/1": 60,
 	"3B/2": 60,
@@ -160,13 +163,26 @@ func _input(event):
 func _physics_process(delta):
 	# recorded time
 	save_time += delta
-	map_clock += delta
+	if !get_tree().paused and !Cutscene.is_playing:
+		map_clock += delta
+	
+	# clock label
+	UI.clock_file.text = time_string(save_time, true)
+	UI.clock_map.text = time_string(map_clock, true)
 	
 	# auto save
 	auto_save_clock += delta
 	if auto_save_clock > auto_save_time:
 		auto_save_clock = 0.0
 		save_data()
+
+func time_string(t := 0.0, is_decimal = false, is_min := false, is_hour := false):
+	# time
+	var s_hour = str(int(t) / 3600) + ":" if is_hour or t > 3600 else ""
+	var s_min = str((int(t) / 60) % 60).pad_zeros(2 if s_hour else 0) + ":" if is_min or t > 60 else ""
+	var s_sec = str(fmod(t, 60)).pad_zeros(2).pad_decimals(2 if is_decimal else 0)
+	
+	return s_hour + s_min + s_sec
 
 func wipe_scene(arg, last := csfn):
 	var f = File.new()
@@ -256,9 +272,9 @@ func burst_screenshot(count := 30, viewport := get_tree().root):
 
 func collect_gem():
 	if is_instance_valid(goal) and goal.is_collected:
-		Cutscene.is_clock = !goals.has(map_name) or (goals[map_name] == 0 or map_clock < goals[map_name])
-		Cutscene.is_collect = !goals.has(map_name) or Cutscene.is_clock
-		if Cutscene.is_collect:
+		Cutscene.is_collect = !goals.has(map_name)
+		Cutscene.is_clock = speedruns.has(map_name) and map_clock < speedruns[map_name]
+		if !goals.has(map_name) or map_clock < goals[map_name]:
 			goals[map_name] = map_clock
 		
 		gem_count = goals.size()
@@ -434,6 +450,8 @@ func save_options():
 	o["sounds"] = int(volume[1] / 10)
 	o["music"] = int(volume[2] / 10)
 	o["mouse"] = bool(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
+	o["clock_show"] = int(clock_show)
+	o["clock_alpha"] = float(clock_alpha)
 	
 	file_save_json("user://options.json", o)
 	
@@ -457,6 +475,10 @@ func load_options():
 		set_volume(2, int(d["music"]) * 10)
 	if d.has("mouse"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if bool(d["mouse"]) else Input.MOUSE_MODE_HIDDEN
+	if d.has("clock_show"):
+		clock_show = int(d["clock_show"])
+	if d.has("clock_alpha"):
+		clock_alpha = float(d["clock_alpha"])
 
 func save_keys(path := "user://keys.tres"):
 	var s_keys = SaveDict.new()

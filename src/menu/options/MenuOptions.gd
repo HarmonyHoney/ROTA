@@ -13,6 +13,8 @@ func fill_items():
 		if i.is_in_group("window"):
 			i.visible = !OS.window_fullscreen
 			i._ready()
+		if i.is_in_group("speed"):
+			i.visible = Shared.clock_show > 0
 	
 	.fill_items()
 

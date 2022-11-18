@@ -12,15 +12,14 @@ var is_clock := true
 onready var start_game := $StartGame
 var is_start_game := false
 
-
 func start():
 	is_playing = true
 	Cam.set_process_input(false)
+	Shared.map_clock = 0.0
 
 func end():
 	is_playing = false
 	Cam.set_process_input(true)
-	Shared.map_clock = 0.0
 
 func end_all():
 	for i in [gem_collect, goal_show, start_game]:

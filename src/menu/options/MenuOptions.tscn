@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
+[ext_resource path="res://media/image/UI/clock.png" type="Texture" id=1]
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/font/profile/OptionsHeader.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/menu/options/MenuOptions.gd" type="Script" id=4]
@@ -13,6 +14,8 @@
 [ext_resource path="res://media/image/UI/Video.png" type="Texture" id=12]
 [ext_resource path="res://src/menu/options/Volume.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/menu/options/onoff/Fullscreen.gd" type="Script" id=14]
+[ext_resource path="res://src/menu/options/scroll/SpeedClock.gd" type="Script" id=15]
+[ext_resource path="res://src/menu/options/scroll/SpeedAlpha.gd" type="Script" id=16]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
@@ -71,9 +74,6 @@ fade_path = NodePath("Control")
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BG" type="ColorRect" parent="Control"]
 modulate = Color( 1, 1, 1, 0.8 )
@@ -102,9 +102,6 @@ anchor_left = 0.25
 anchor_right = 0.75
 margin_bottom = 720.0
 custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Spacer3" type="Control" parent="Control/Menu/List" groups=["no_item"]]
 margin_right = 640.0
@@ -130,9 +127,6 @@ custom_fonts/font = ExtResource( 3 )
 text = "Options"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HeaderInput" type="Control" parent="Control/Menu/List" groups=["no_item"]]
 margin_top = 230.0
@@ -154,11 +148,8 @@ anchor_left = 0.11
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 3 )
-text = "Input"
+text = "Play"
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Vibrate" type="Control" parent="Control/Menu/List"]
 visible = false
@@ -544,6 +535,101 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Spacer4" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 1130.0
+margin_right = 640.0
+margin_bottom = 1160.0
+rect_min_size = Vector2( 0, 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HeaderSpeed" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 1160.0
+margin_right = 640.0
+margin_bottom = 1230.0
+rect_min_size = Vector2( 0, 70 )
+
+[node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderSpeed"]
+anchor_right = 0.1
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Control/Menu/List/HeaderSpeed"]
+anchor_left = 0.11
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 3 )
+text = "Speedrun"
+valign = 1
+
+[node name="Speedrun" type="Control" parent="Control/Menu/List"]
+margin_top = 1230.0
+margin_right = 640.0
+margin_bottom = 1300.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+list = PoolStringArray( "OFF", "MAP", "FILE", "BOTH" )
+
+[node name="Label" type="Label" parent="Control/Menu/List/Speedrun"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "Clock"
+valign = 1
+
+[node name="Label2" type="Label" parent="Control/Menu/List/Speedrun"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "< OFF >"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Speedrun2" type="Control" parent="Control/Menu/List" groups=["speed"]]
+margin_top = 1300.0
+margin_right = 640.0
+margin_bottom = 1370.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+list = PoolStringArray( "LESS", "HALF", "MORE", "FULL" )
+
+[node name="Label" type="Label" parent="Control/Menu/List/Speedrun2"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "Opacity"
+valign = 1
+
+[node name="Label2" type="Label" parent="Control/Menu/List/Speedrun2"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "< HALF >"
+align = 2
+valign = 1
 
 [editable path="Control/Menu/List/Music"]
 [editable path="Control/Menu/List/SFX"]

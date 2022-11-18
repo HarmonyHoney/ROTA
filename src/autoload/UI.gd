@@ -2,15 +2,18 @@ extends CanvasLayer
 
 onready var gem_label : Label = $Control/Gems/Label
 
-onready var zoom_notch := $Control/Top/Zoom/Slider/Notch
-onready var zoom_circle := $Control/Top/Zoom/Circle
+onready var zoom_notch := $Control/Zoom/Slider/Notch
+onready var zoom_circle := $Control/Zoom/Circle
 var zoom_from := 0.0
 var zoom_to := 0.0
 
 var gem = EaseMover.new()
-var top = EaseMover.new()
 var menu = EaseMover.new()
 var zoom = EaseMover.new()
+
+onready var clock := $Control/Clock
+onready var clock_file := $Control/Clock/File
+onready var clock_map := $Control/Clock/Map
 
 func _ready():
 	Shared.connect("scene_changed", self, "scene_changed")
@@ -22,10 +25,6 @@ func _ready():
 	gem.from = gem.to - Vector2(0, 120)
 	gem.show = false
 	
-	top.node = $Control/Top
-	top.to = top.node.rect_position
-	top.from = top.to - Vector2(0, 125)
-	
 	zoom.time = 0.25
 	zoom_circle.scale = Vector2.ZERO
 	
@@ -35,11 +34,13 @@ func _ready():
 	menu.show = false
 	
 	gem_label.text = str(Shared.gem_count)
+	
+	scene_changed()
+	clock.modulate.a = Shared.clock_alpha
 
 func _physics_process(delta):
 	var p = MenuPause.is_open
 	gem.move(delta, gem.show or p)
-	top.move(delta, p)
 	menu.move(delta)
 	
 	if zoom.clock != zoom.time:
@@ -55,6 +56,10 @@ func set_zoom(frac := 0.0):
 
 func scene_changed():
 	UI.gem.clock = 0.0
+	var m = Shared.map_name != ""
+	var b = Shared.clock_show == Shared.SPEED.BOTH
+	clock_file.visible = m and (b or Shared.clock_show == Shared.SPEED.FILE)
+	clock_map.visible = not "hub" in Shared.map_name and m and (b or Shared.clock_show == Shared.SPEED.MAP)
 
 func menu_keys(accept := "", cancel := ""):
 	var c = $Control/Menu/Items.get_children()

@@ -161,10 +161,11 @@ func _ready():
 			Cutscene.goal_show.begin()
 		Cutscene.is_show_goal = false
 	
-	elif Cutscene.is_collect:
+	elif Cutscene.is_collect or Cutscene.is_clock:
 		if is_instance_valid(Shared.door_destination):
 			Cutscene.gem_collect.begin()
 		Cutscene.is_collect = false
+		Cutscene.is_clock = false
 	
 	elif Cutscene.is_start_game:
 		anim.play("jump")
@@ -658,7 +659,7 @@ func enter_door():
 	anim.play("idle")
 
 func unpause(arg):
-	print("unpause")
+	#print("unpause")
 	unpause_tick = 0
 	is_unpause = true
 	btn_jump = false

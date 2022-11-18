@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/class/SaveDict.gd"
 }, {
+"base": "Control",
+"class": "Scroll",
+"language": "GDScript",
+"path": "res://src/menu/options/scroll/Scroll.gd"
+}, {
 "base": "",
 "class": "SteamAPI",
 "language": "NativeScript",
@@ -123,6 +128,7 @@ _global_script_class_icons={
 "PaletteSwap": "",
 "Player": "",
 "SaveDict": "",
+"Scroll": "",
 "SteamAPI": "",
 "SteamCallback": "",
 "SteamFriends": "",

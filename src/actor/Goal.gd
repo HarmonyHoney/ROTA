@@ -22,8 +22,8 @@ func _ready():
 	Cam.connect("turning", self, "turning")
 	
 	if Shared.goals.has(Shared.map_name):
-		#is_collected = true
-		sprites.modulate.a = 0.25
+		var c = 0.0
+		sprites.modulate = Color(c,c,c, 0.2)
 
 func _physics_process(delta):
 	# follow player

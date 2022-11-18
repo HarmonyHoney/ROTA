@@ -25,13 +25,7 @@ func set_card():
 		gem_label.text = str(d[slot]["goals"].size() if d[slot].has("goals") else d[slot]["gem_count"])
 		
 		# time
-		var t = int(d[slot]["time"])
-		
-		var s_hour = str(t / 3600)
-		var s_min = str((t / 60) % 60).pad_zeros(2)
-		var s_sec = str(t % 60).pad_zeros(2)
-		
-		time_label.text = s_hour + ":" + s_min + ":" + s_sec
+		time_label.text = Shared.time_string(d[slot]["time"], false, true)
 	else:
 		is_new = true
 	
