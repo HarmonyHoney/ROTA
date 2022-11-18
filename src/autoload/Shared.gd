@@ -358,6 +358,7 @@ func save_options():
 	
 	o["sounds"] = int(volume[1] / 10)
 	o["music"] = int(volume[2] / 10)
+	o["mouse"] = bool(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
 	
 	file_save_json("user://options.json", o)
 	
@@ -379,6 +380,8 @@ func load_options():
 		set_volume(1, int(d["sounds"]) * 10)
 	if d.has("music"):
 		set_volume(2, int(d["music"]) * 10)
+	if d.has("mouse"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if bool(d["mouse"]) else Input.MOUSE_MODE_HIDDEN
 
 func save_keys(path := "user://keys.tres"):
 	var s_keys = SaveDict.new()

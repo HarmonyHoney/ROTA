@@ -12,6 +12,7 @@ func fill_items():
 	for i in items_node.get_children():
 		if i.is_in_group("window"):
 			i.visible = !OS.window_fullscreen
+			i._ready()
 	
 	.fill_items()
 

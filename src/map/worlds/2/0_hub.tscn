@@ -16,6 +16,7 @@
 [ext_resource path="res://src/actor/DoorLittle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=15]
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=16]
+[ext_resource path="res://src/menu/DemoLabel.gd" type="Script" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -23,24 +24,6 @@ outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 5 )
-
-[sub_resource type="GDScript" id=2]
-script/source = "extends CanvasItem
-
-var is_active := false
-
-var fade = EaseMover.new()
-
-func _physics_process(delta):
-	fade.count(delta, is_active)
-	modulate.a = fade.smooth()
-
-func _on_Area2D_area_entered(area):
-	is_active = true
-
-func _on_Area2D_area_exited(area):
-	is_active = false
-"
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 350, 200 )
@@ -69,6 +52,7 @@ position = Vector2( -500, 1600 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/0/0_hub.tscn"
+gem_count = 0
 
 [node name="BigDoor2" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( -1600, 2900 )
@@ -119,7 +103,7 @@ Available on Steam and itch.io
 - Harmony Honey <3"
 align = 1
 valign = 1
-script = SubResource( 2 )
+script = ExtResource( 17 )
 
 [node name="Area2D" type="Area2D" parent="Details/DemoLabel"]
 position = Vector2( 649.998, 250.004 )

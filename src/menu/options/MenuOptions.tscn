@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/font/profile/OptionsHeader.tres" type="DynamicFont" id=3]
@@ -31,6 +31,19 @@ func _ready():
 
 func set_value():
 	OS.window_borderless = is_on
+	Shared.set_window_size()
+
+"
+
+[sub_resource type="GDScript" id=27]
+script/source = "extends OnOff
+
+func _ready():
+	is_on = Input.mouse_mode == Input.MOUSE_MODE_VISIBLE
+	set_label()
+
+func set_value():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if is_on else Input.MOUSE_MODE_HIDDEN
 
 "
 
@@ -74,9 +87,6 @@ __meta__ = {
 [node name="Menu" type="Control" parent="Control"]
 margin_right = 1280.0
 margin_bottom = 720.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Cursor" type="Panel" parent="Control/Menu"]
 anchor_right = 1.0
@@ -470,14 +480,43 @@ custom_fonts/font = ExtResource( 2 )
 text = "< 1280 x 720 >"
 align = 2
 valign = 1
+
+[node name="Mouse" type="Control" parent="Control/Menu/List" groups=["window"]]
+margin_top = 990.0
+margin_right = 640.0
+margin_bottom = 1060.0
+rect_min_size = Vector2( 0, 70 )
+script = SubResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Menu/List/Mouse"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "Mouse"
+valign = 1
+
+[node name="Label2" type="Label" parent="Control/Menu/List/Mouse"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "< OFF >"
+align = 2
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Vsync" type="Control" parent="Control/Menu/List"]
-margin_top = 990.0
+margin_top = 1060.0
 margin_right = 640.0
-margin_bottom = 1060.0
+margin_bottom = 1130.0
 rect_min_size = Vector2( 0, 70 )
 script = SubResource( 25 )
 __meta__ = {
