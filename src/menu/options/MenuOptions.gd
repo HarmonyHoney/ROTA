@@ -1,6 +1,7 @@
 extends MenuBase
 
 onready var item_window_size := $Control/Menu/List/Resolution
+onready var bg := $Control/BG
 
 func _input(event):
 	menu_input(event)
@@ -12,6 +13,9 @@ func fill_items():
 	if item_window_size:
 		item_window_size.visible = !OS.window_fullscreen
 	.fill_items()
+
+func open():
+	bg.visible = Shared.csfn != Shared.title_path
 
 func accept():
 	if items[cursor].has_method("act"):

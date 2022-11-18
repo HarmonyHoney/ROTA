@@ -24,6 +24,7 @@ export var text_cancel := "Back"
 export var is_open := false setget set_open
 signal signal_close(arg)
 var is_sub_menu := false
+var sub_ease := EaseMover.new()
 
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
@@ -42,7 +43,7 @@ func _ready():
 	reset_cursor()
 
 func menu_input(event):
-	if !is_open or is_sub_menu or (fade_node and fade_ease.frac() < 0.5): return
+	if !is_open or is_sub_menu or sub_ease.frac() > 0.5 or (fade_node and fade_ease.frac() < 0.5): return
 	
 	var accept = event.is_action_pressed("ui_accept")
 	var back = event.is_action_pressed("ui_cancel")
@@ -73,6 +74,8 @@ func menu_process(delta):
 	if fade_node:
 		fade_node.modulate.a = fade_ease.count(delta, is_open)
 		fade_node.visible = fade_ease.clock > 0
+	
+	sub_ease.count(delta, is_sub_menu)
 	
 	if is_open:
 		# hold up/down repeat
@@ -114,8 +117,10 @@ func set_open(arg := is_open):
 		cursor = 0
 		fill_items()
 		UI.menu_keys(text_accept, text_cancel)
+		open()
 	else:
 		emit_signal("signal_close", self)
+		close()
 	
 	reset_joy()
 
@@ -125,6 +130,12 @@ func fill_items():
 		for i in items_node.get_children():
 			if !i.is_in_group("no_item") and i.visible:
 				items.append(i)
+
+func open():
+	pass
+
+func close():
+	pass
 
 func accept():
 	pass
@@ -152,6 +163,7 @@ func sub_close(arg):
 	UI.menu_keys(text_accept, text_cancel)
 	
 	reset_joy()
+	open()
 
 func audio_cursor():
 	Audio.play(Audio.menu_cursor, 0.8, 1.2)

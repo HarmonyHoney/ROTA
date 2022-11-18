@@ -1,6 +1,5 @@
 extends MenuBase
 
-
 func _input(event):
 	menu_input(event)
 

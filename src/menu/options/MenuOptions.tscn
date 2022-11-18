@@ -1,6 +1,5 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://src/shader/outline2D_outer.shader" type="Shader" id=1]
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/font/profile/OptionsHeader.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/menu/options/MenuOptions.gd" type="Script" id=4]
@@ -22,11 +21,6 @@ corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
-
-[sub_resource type="ShaderMaterial" id=23]
-shader = ExtResource( 1 )
-shader_param/line_color = Color( 0, 0, 0, 1 )
-shader_param/line_thickness = 2.0
 
 [sub_resource type="GDScript" id=25]
 script/source = "extends OnOff
@@ -125,7 +119,6 @@ margin_bottom = 300.0
 rect_min_size = Vector2( 0, 70 )
 
 [node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderInput"]
-material = SubResource( 23 )
 anchor_right = 0.1
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -133,9 +126,6 @@ size_flags_vertical = 3
 texture = ExtResource( 8 )
 expand = true
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Control/Menu/List/HeaderInput"]
 anchor_left = 0.11
@@ -281,7 +271,6 @@ margin_bottom = 540.0
 rect_min_size = Vector2( 0, 70 )
 
 [node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderAudio"]
-material = SubResource( 23 )
 anchor_right = 0.1
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -349,7 +338,6 @@ margin_bottom = 780.0
 rect_min_size = Vector2( 0, 70 )
 
 [node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderVideo"]
-material = SubResource( 23 )
 anchor_right = 0.1
 anchor_bottom = 1.0
 size_flags_horizontal = 3
