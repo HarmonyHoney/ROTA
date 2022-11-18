@@ -21,7 +21,7 @@ func _enter_tree():
 func _ready():
 	Cam.connect("turning", self, "turning")
 	
-	if Shared.goals_collected.has(Shared.csfn):
+	if Shared.goals.has(Shared.map_name):
 		#is_collected = true
 		sprites.modulate.a = 0.25
 

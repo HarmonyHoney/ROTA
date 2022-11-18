@@ -8,17 +8,15 @@ export var from_back := Color("af00ff")
 export var to_fill := Color("fffb00")
 export var to_back := Color("ffdd00")
 
-var fade_clock := 0.0
-var fade_time := 0.7
+var fade_ease = EaseMover.new(0.7)
 var is_change := false
 
 func _physics_process(delta):
 	if is_change:
-		if fade_clock < fade_time:
-			fade_clock = min(fade_clock + delta, fade_time)
-			var s = smoothstep(0, 1, fade_clock / fade_time)
-			gem_back.color = from_back.linear_interpolate(to_back, s)
-			gem_fill.color = from_fill.linear_interpolate(to_fill, s)
+		if !fade_ease.is_complete:
+			fade_ease.count(delta)
+			gem_back.color = from_back.linear_interpolate(to_back, fade_ease.smooth())
+			gem_fill.color = from_fill.linear_interpolate(to_fill, fade_ease.smooth())
 		else:
 			is_change = false
 

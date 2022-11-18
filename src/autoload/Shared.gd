@@ -9,11 +9,72 @@ var is_wipe := false
 onready var csfn := get_tree().current_scene.filename
 onready var last_scene := csfn
 onready var next_scene := csfn
+var map_name := ""
 
 var screenshot_texture : ImageTexture
 
-var goals_collected := []
 var gem_count := 0
+var goals := {}
+var speedruns := {
+	"1/2": 60,
+	"1/3": 60,
+	"1/4": 60,
+	"1/5": 60,
+	"1/6": 60,
+	"1/7": 60,
+	
+	"2/1": 60,
+	"2/2": 60,
+	"2/3": 60,
+	"2/4": 60,
+	"2/5": 60,
+	
+	"2A/1": 60,
+	"2A/2": 60,
+	"2A/3": 60,
+	"2A/4": 60,
+	"2A/5": 60,
+	"2A/6": 60,
+	"2A/7": 60,
+	
+	"2B/1": 60,
+	"2B/2": 60,
+	"2B/3": 60,
+	"2B/4": 60,
+	"2B/5": 60,
+	"2B/6": 60,
+	
+	"2C/1": 60,
+	"2C/2": 60,
+	"2C/3": 60,
+	"2C/4": 60,
+	"2C/5": 60,
+	"2C/6": 60,
+	
+	"3/1": 60,
+	"3/2": 60,
+	"3/3": 60,
+	"3/4": 60,
+	"3/5": 60,
+	"3/6": 60,
+	"3/7": 60,
+	
+	"3A/1": 60,
+	"3A/2": 60,
+	"3A/3": 60,
+	"3A/4": 60,
+	"3A/5": 60,
+	"3A/6": 60,
+	
+	"3B/1": 60,
+	"3B/2": 60,
+	"3B/3": 60,
+	"3B/4": 60,
+	"3B/5": 60,
+	"3B/6": 60,
+	"3B/7": 60,
+	"3B/8": 60,
+}
 
 var boxes := []
 
@@ -34,6 +95,7 @@ var default_keys := {}
 var save_slot := -1
 var save_dict := {0: {}, 1: {}, 2: {}}
 var save_time := 0.0
+var map_clock := 0.0
 
 signal signal_erase_slot(arg)
 
@@ -98,6 +160,7 @@ func _input(event):
 func _physics_process(delta):
 	# recorded time
 	save_time += delta
+	map_clock += delta
 	
 	# auto save
 	auto_save_clock += delta
@@ -144,10 +207,13 @@ func change_scene():
 		get_tree().change_scene(next_scene)
 		Cam.reset_zoom()
 	
+	map_name = csfn.lstrip(worlds_path).rstrip(".tscn") if csfn.begins_with(worlds_path) else ""
+	
 	BG.set_colors(0)
 	emit_signal("scene_changed")
 	save_data()
 	try_achievement()
+	map_clock = 0.0
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen
@@ -189,11 +255,13 @@ func burst_screenshot(count := 30, viewport := get_tree().root):
 ### Gems
 
 func collect_gem():
-	if is_instance_valid(goal) and goal.is_collected and !goals_collected.has(csfn):
-		goals_collected.append(csfn)
-		gem_count = goals_collected.size()
-		Cutscene.is_collect = true
+	if is_instance_valid(goal) and goal.is_collected:
+		Cutscene.is_clock = !goals.has(map_name) or (goals[map_name] == 0 or map_clock < goals[map_name])
+		Cutscene.is_collect = !goals.has(map_name) or Cutscene.is_clock
+		if Cutscene.is_collect:
+			goals[map_name] = map_clock
 		
+		gem_count = goals.size()
 		save_data()
 
 ### Volume
@@ -299,18 +367,19 @@ func file_load_json_dict(path : String):
 
 func save_data():
 	if save_slot < 0: return
+	auto_save_clock = 0.0
 	
-	save_dict[save_slot]["goals_collected"] = goals_collected
-	save_dict[save_slot]["gem_count"] = gem_count
 	save_dict[save_slot]["time"] = int(save_time)
-	
 	if "worlds" in csfn and "worlds" in last_scene:
 		save_dict[save_slot]["csfn"] = csfn
 		save_dict[save_slot]["last_scene"] = last_scene
+	save_dict[save_slot]["goals"] = goals
+	
+	for i in save_dict[save_slot].keys():
+		if not i in "time, csfn, last_scene, goals":
+			save_dict[save_slot].erase(i)
 	
 	file_save_json("user://save_data.json", save_dict)
-	
-	auto_save_clock = 0.0
 
 func load_data():
 	var d = file_load_json_dict("user://save_data.json")
@@ -332,12 +401,18 @@ func load_slot(arg := 0):
 		if save_dict[save_slot].has("last_scene"):
 			last_scene = save_dict[save_slot]["last_scene"]
 		
-		if save_dict[save_slot].has("gem_count"):
-			gem_count = save_dict[save_slot]["gem_count"]
-			UI.gem_label.text = str(gem_count)
+		goals = {}
+		# open new saves
+		if save_dict[save_slot].has("goals"):
+			goals = save_dict[save_slot]["goals"]
+		# convert old saves
+		elif save_dict[save_slot].has("goals_collected"):
+			for i in save_dict[save_slot]["goals_collected"]:
+				goals[i.lstrip(worlds_path).rstrip(".tscn")] = 0.0
 		
-		if save_dict[save_slot].has("goals_collected"):
-			goals_collected = save_dict[save_slot]["goals_collected"]
+		# gems
+		gem_count = goals.size()
+		UI.gem_label.text = str(gem_count)
 		
 		if save_dict[save_slot].has("time"):
 			save_time = save_dict[save_slot]["time"]
@@ -348,7 +423,7 @@ func load_slot(arg := 0):
 		last_scene = start_path
 		gem_count = 0
 		UI.gem_label.text = str(gem_count)
-		goals_collected = []
+		goals = {}
 		save_time = 0.0
 	
 	return Shared.wipe_scene(Shared.next_scene, Shared.last_scene)

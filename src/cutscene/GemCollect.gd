@@ -3,6 +3,7 @@ extends Node
 var is_playing := false
 var step := 0
 var clock := 0.0
+var easy := EaseMover.new(0.5)
 
 var door_dest
 var player
@@ -17,22 +18,27 @@ func _physics_process(delta):
 		0:
 			if clock > 0.15:
 				next_step()
-				door_dest.gem.fade_color()
-				Audio.play(Audio.gem_collect, 0.8)
 				
+				if !Cutscene.is_clock:
+					door_dest.gem.fade_color()
+				
+				Audio.play(Audio.gem_collect, 0.8)
 				UI.gem.show = true
+				easy.clock = 0
 		1:
+			if Cutscene.is_clock:
+				door_dest.clock.scale = Vector2.ONE * easy.count(delta)
+				door_dest.gem.scale = Vector2.ONE * (1 - easy.smooth())
+			
 			if clock > 1.0:
 				next_step()
 				UI.gem_label.text = str(Shared.gem_count)
+				easy.clock = 0
 		2:
-			var limit = 0.5
-			var t = min(clock, limit)
-			var s = smoothstep(0, 1, t / limit)
 			player.visible = true
-			player.modulate.a = s
+			player.modulate.a = easy.count(delta)
 			
-			if clock > limit:
+			if clock > 0.5:
 				end()
 
 func next_step():
@@ -56,7 +62,11 @@ func begin():
 	
 	player.set_physics_process(false)
 	player.visible = false
-	door_dest.gem.set_color(false)
+	if Cutscene.is_clock:
+		door_dest.clock.scale = Vector2.ZERO
+		door_dest.gem.visible = true
+	else:
+		door_dest.gem.set_color(false)
 
 func end():
 	is_playing = false

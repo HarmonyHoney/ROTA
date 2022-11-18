@@ -16,3 +16,26 @@ texture = ExtResource( 2 )
 
 [node name="Gem" parent="." index="4" instance=ExtResource( 6 )]
 position = Vector2( 0, -5 )
+
+[node name="Clock" type="Line2D" parent="." index="5"]
+position = Vector2( 0, -5 )
+points = PoolVector2Array( 0, 0, 0, 0.001 )
+width = 50.0
+default_color = Color( 1, 0.772549, 0, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Fill" type="Line2D" parent="Clock" index="0"]
+points = PoolVector2Array( 0, 0, 0, 0.001 )
+width = 40.0
+default_color = Color( 1, 0.984314, 0, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Hand" type="Line2D" parent="Clock" index="1"]
+points = PoolVector2Array( 0, -11, 0, 0, 7, 7 )
+width = 6.5
+default_color = Color( 1, 0.772549, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2

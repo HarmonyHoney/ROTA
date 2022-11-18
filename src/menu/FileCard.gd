@@ -18,11 +18,11 @@ func _ready():
 func set_card():
 	var d = Shared.save_dict
 	
-	if d.has(slot) and d[slot].has("gem_count") and d[slot].has("time"):
+	if d.has(slot) and (d[slot].has("goals") or d[slot].has("gem_count")) and d[slot].has("time"):
 		is_new = false
 		
 		# gem
-		gem_label.text = str(d[slot]["gem_count"])
+		gem_label.text = str(d[slot]["goals"].size() if d[slot].has("goals") else d[slot]["gem_count"])
 		
 		# time
 		var t = int(d[slot]["time"])
