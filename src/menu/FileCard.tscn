@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://src/actor/Clock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/menu/FileCard.gd" type="Script" id=2]
 [ext_resource path="res://media/image/UI/clock.png" type="Texture" id=3]
 [ext_resource path="res://media/font/profile/FileCard.tres" type="DynamicFont" id=4]
@@ -7,7 +8,7 @@
 [node name="FileCard" type="Control"]
 margin_right = 320.0
 margin_bottom = 175.0
-rect_min_size = Vector2( 320, 175 )
+rect_min_size = Vector2( 350, 175 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource( 2 )
@@ -29,24 +30,44 @@ __meta__ = {
 [node name="Items" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Goals" type="HBoxContainer" parent="Items"]
+margin_left = 58.0
+margin_top = 17.0
+margin_right = 291.0
+margin_bottom = 77.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 25
+alignment = 1
+
+[node name="Gems" type="HBoxContainer" parent="Items/Goals"]
+margin_right = 104.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 9
+alignment = 2
+
+[node name="Label" type="Label" parent="Items/Goals/Gems"]
+margin_top = 4.0
+margin_right = 35.0
+margin_bottom = 55.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 4 )
+text = "0"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Gem" type="HBoxContainer" parent="Items"]
-margin_right = 320.0
-margin_bottom = 87.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 9
-alignment = 1
-
-[node name="Image" type="Control" parent="Items/Gem"]
-margin_left = 108.0
-margin_top = 13.0
-margin_right = 168.0
-margin_bottom = 73.0
+[node name="Image" type="Control" parent="Items/Goals/Gems"]
+margin_left = 44.0
+margin_right = 104.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -54,25 +75,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Gem" type="Node2D" parent="Items/Gem/Image"]
+[node name="Gem" type="Node2D" parent="Items/Goals/Gems/Image"]
 position = Vector2( 30, 30 )
 
-[node name="Back" type="Polygon2D" parent="Items/Gem/Image/Gem"]
+[node name="Back" type="Polygon2D" parent="Items/Goals/Gems/Image/Gem"]
 scale = Vector2( 0.5, 0.5 )
 color = Color( 1, 0.866667, 0, 1 )
 offset = Vector2( 80, 0 )
 polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
 
-[node name="Fill" type="Polygon2D" parent="Items/Gem/Image/Gem/Back"]
+[node name="Fill" type="Polygon2D" parent="Items/Goals/Gems/Image/Gem/Back"]
 color = Color( 1, 0.984314, 0, 1 )
 offset = Vector2( 50, 0 )
 polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
 
-[node name="Label" type="Label" parent="Items/Gem"]
-margin_left = 177.0
-margin_top = 18.0
-margin_right = 212.0
-margin_bottom = 69.0
+[node name="Clocks" type="HBoxContainer" parent="Items/Goals"]
+margin_left = 129.0
+margin_right = 233.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 9
+
+[node name="Image" type="Control" parent="Items/Goals/Clocks"]
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Clock" parent="Items/Goals/Clocks/Image" instance=ExtResource( 1 )]
+position = Vector2( 30, 30 )
+
+[node name="Label" type="Label" parent="Items/Goals/Clocks"]
+margin_left = 69.0
+margin_top = 4.0
+margin_right = 104.0
+margin_bottom = 55.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 4 )
 text = "0"
@@ -83,19 +125,18 @@ __meta__ = {
 }
 
 [node name="Time" type="HBoxContainer" parent="Items"]
-margin_top = 87.0
-margin_right = 320.0
-margin_bottom = 175.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+margin_left = 37.0
+margin_top = 97.0
+margin_right = 313.0
+margin_bottom = 157.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_constants/separation = 9
 alignment = 1
 
 [node name="Image" type="Control" parent="Items/Time"]
-margin_left = 22.0
-margin_top = 14.0
-margin_right = 82.0
-margin_bottom = 74.0
+margin_right = 60.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -113,10 +154,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Items/Time"]
-margin_left = 91.0
-margin_top = 18.0
-margin_right = 298.0
-margin_bottom = 69.0
+margin_left = 69.0
+margin_top = 4.0
+margin_right = 276.0
+margin_bottom = 55.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 4 )
 text = "0:00:00"

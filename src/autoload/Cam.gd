@@ -73,8 +73,6 @@ func start_zoom(arg := 0, is_audio := true):
 	var frac = float(zoom_step) / zoom_steps
 	zoom_to = lerp(zoom_min, zoom_max, frac)
 	
-	UI.set_zoom(frac)
-	
 	if is_audio:
 		audio_zoom.pitch_scale = rand_range(0.8, 1.2)
 		audio_zoom.play()

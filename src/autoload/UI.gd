@@ -1,15 +1,11 @@
 extends CanvasLayer
 
-onready var gem_label : Label = $Control/Gems/Label
+onready var gem_label : Label = $Control/Top/Label
+onready var clock_label := $Control/Down/Label
 
-onready var zoom_notch := $Control/Zoom/Slider/Notch
-onready var zoom_circle := $Control/Zoom/Circle
-var zoom_from := 0.0
-var zoom_to := 0.0
-
-var gem = EaseMover.new()
-var menu = EaseMover.new()
-var zoom = EaseMover.new()
+var up = EaseMover.new()
+var down = EaseMover.new()
+var keys = EaseMover.new()
 
 onready var clock := $Control/Clock
 onready var clock_file := $Control/Clock/File
@@ -20,49 +16,39 @@ func _ready():
 	
 	gem_label.text = str(Shared.gem_count)
 	
-	gem.node = $Control/Gems
-	gem.to = gem.node.rect_position
-	gem.from = gem.to - Vector2(0, 120)
-	gem.show = false
+	up.node = $Control/Top
+	up.to = up.node.rect_position
+	up.from = up.to - Vector2(0, 120)
+	up.show = false
 	
-	zoom.time = 0.25
-	zoom_circle.scale = Vector2.ZERO
+	down.node = $Control/Down
+	down.to = down.node.rect_position
+	down.from = down.to + Vector2(0, 120)
+	down.show = false
 	
-	menu.node = $Control/Menu
-	menu.to = menu.node.rect_position
-	menu.from = menu.to + Vector2(0, 80)
-	menu.show = false
-	
-	gem_label.text = str(Shared.gem_count)
+	keys.node = $Control/Keys
+	keys.to = keys.node.rect_position
+	keys.from = keys.to + Vector2(0, 80)
+	keys.show = false
 	
 	scene_changed()
 	clock.modulate.a = Shared.clock_alpha
 
 func _physics_process(delta):
 	var p = MenuPause.is_open
-	gem.move(delta, gem.show or p)
-	menu.move(delta)
-	
-	if zoom.clock != zoom.time:
-		zoom.count(delta)
-		zoom_circle.scale = Vector2.ONE * lerp(zoom_from, zoom_to, zoom.frac())
-
-func set_zoom(frac := 0.0):
-	zoom_notch.position.y = lerp(8, 56, frac)
-	
-	zoom_from = zoom_circle.scale.x
-	zoom_to = lerp(0.0, 1.0, frac)
-	zoom.clock = 0
+	up.move(delta, up.show or p)
+	down.move(delta, down.show or p)
+	keys.move(delta)
 
 func scene_changed():
-	UI.gem.clock = 0.0
+	up.clock = 0.0
 	var m = Shared.map_name != ""
 	var b = Shared.clock_show == Shared.SPEED.BOTH
 	clock_file.visible = m and (b or Shared.clock_show == Shared.SPEED.FILE)
 	clock_map.visible = not "hub" in Shared.map_name and m and (b or Shared.clock_show == Shared.SPEED.MAP)
 
 func menu_keys(accept := "", cancel := ""):
-	var c = $Control/Menu/Items.get_children()
+	var c = $Control/Keys/List.get_children()
 	
 	# accept
 	var is_a = accept != ""

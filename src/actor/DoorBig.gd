@@ -32,4 +32,4 @@ func unlock():
 	print(name, " unlocked")
 
 func on_active():
-	UI.gem.show = is_active and gem_count > 0
+	UI.up.show = is_active and gem_count > 0

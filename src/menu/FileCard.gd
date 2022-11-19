@@ -5,7 +5,8 @@ export var slot := 0
 onready var new_game := $NewGame
 onready var items := $Items
 
-onready var gem_label := $Items/Gem/Label
+onready var gem_label := $Items/Goals/Gems/Label
+onready var clock_label := $Items/Goals/Clocks/Label
 onready var time_label := $Items/Time/Label
 
 var is_new := true
@@ -18,11 +19,11 @@ func _ready():
 func set_card():
 	var d = Shared.save_dict
 	
-	if d.has(slot) and (d[slot].has("goals") or d[slot].has("gem_count")) and d[slot].has("time"):
+	if d.has(slot) and d[slot].has("goals") and d[slot].has("time"):
 		is_new = false
 		
-		# gem
-		gem_label.text = str(d[slot]["goals"].size() if d[slot].has("goals") else d[slot]["gem_count"])
+		gem_label.text = str(d[slot]["goals"].size())
+		clock_label.text = str(Shared.collect_clocks(d[slot]["goals"]))
 		
 		# time
 		time_label.text = Shared.time_string(d[slot]["time"], false, true)

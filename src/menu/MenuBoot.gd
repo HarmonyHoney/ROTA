@@ -4,7 +4,7 @@ export var sub_path : NodePath
 onready var main_menu = get_node_or_null(sub_path)
 
 func _ready():
-	UI.menu.show = true
+	UI.keys.show = true
 	
 	Cam.rotation = 0
 	Cam.target_pos = main_menu.pos
@@ -17,7 +17,7 @@ func _ready():
 		Music.play_song()
 
 func _exit_tree():
-	UI.menu.show = false
+	UI.keys.show = false
 
 func _input(event):
 	menu_input(event)

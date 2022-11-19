@@ -218,11 +218,11 @@ custom_constants/separation = 20
 alignment = 1
 
 [node name="File1" type="Panel" parent="Canvas/FileMenu/Lists/ListBack"]
-margin_left = 160.0
+margin_left = 145.0
 margin_top = 52.0
-margin_right = 480.0
+margin_right = 495.0
 margin_bottom = 227.0
-rect_min_size = Vector2( 320, 175 )
+rect_min_size = Vector2( 350, 175 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_styles/panel = SubResource( 3 )
@@ -232,11 +232,11 @@ __meta__ = {
 }
 
 [node name="File2" type="Panel" parent="Canvas/FileMenu/Lists/ListBack"]
-margin_left = 160.0
+margin_left = 145.0
 margin_top = 247.0
-margin_right = 480.0
+margin_right = 495.0
 margin_bottom = 422.0
-rect_min_size = Vector2( 320, 175 )
+rect_min_size = Vector2( 350, 175 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_styles/panel = SubResource( 3 )
@@ -246,11 +246,11 @@ __meta__ = {
 }
 
 [node name="File3" type="Panel" parent="Canvas/FileMenu/Lists/ListBack"]
-margin_left = 160.0
+margin_left = 145.0
 margin_top = 442.0
-margin_right = 480.0
+margin_right = 495.0
 margin_bottom = 617.0
-rect_min_size = Vector2( 320, 175 )
+rect_min_size = Vector2( 350, 175 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_styles/panel = SubResource( 3 )
@@ -276,22 +276,22 @@ custom_constants/separation = 20
 alignment = 1
 
 [node name="FileCard" parent="Canvas/FileMenu/Lists/List" instance=ExtResource( 5 )]
-margin_left = 160.0
+margin_left = 145.0
 margin_top = 52.0
-margin_right = 480.0
+margin_right = 495.0
 margin_bottom = 227.0
 
 [node name="FileCard2" parent="Canvas/FileMenu/Lists/List" instance=ExtResource( 5 )]
-margin_left = 160.0
+margin_left = 145.0
 margin_top = 247.0
-margin_right = 480.0
+margin_right = 495.0
 margin_bottom = 422.0
 slot = 1
 
 [node name="FileCard3" parent="Canvas/FileMenu/Lists/List" instance=ExtResource( 5 )]
-margin_left = 160.0
+margin_left = 145.0
 margin_top = 442.0
-margin_right = 480.0
+margin_right = 495.0
 margin_bottom = 617.0
 slot = 2
 

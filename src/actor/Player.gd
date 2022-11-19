@@ -2,7 +2,6 @@ tool
 extends KinematicBody2D
 class_name Player
 
-onready var body_area : Area2D = $BodyArea
 onready var areas : Node2D = $Areas
 onready var hit_area : Area2D = $Areas/HitArea
 onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
@@ -15,10 +14,8 @@ onready var spr_body := $Sprites/Root/Body
 onready var spr_hand_l := $Sprites/HandL
 onready var spr_hand_r := $Sprites/HandR
 onready var spr_hands := [spr_hand_l, spr_hand_r]
-onready var hand_start : Vector2 = spr_hand_r.position
 
 onready var audio_grab := $Audio/Grab
-onready var audio_drop := $Audio/Drop
 onready var audio_push := $Audio/Push
 onready var audio_turn := $Audio/Turn
 onready var audio_jump := $Audio/Jump
@@ -26,7 +23,6 @@ onready var audio_land := $Audio/Land
 onready var audio_fallout := $Audio/FallOut
 onready var audio_spike := $Audio/Spike
 onready var audio_around := $Audio/Around
-onready var audio_peek := $Audio/Peek
 
 export var is_input := true
 var joy := Vector2.ZERO
@@ -39,7 +35,6 @@ var btn_push := false
 var btnp_push := false
 
 export var is_cam := true
-
 export var dir := 0 setget set_dir
 
 var is_move := true
@@ -47,7 +42,6 @@ var is_walk := true
 var is_floor := false
 
 var velocity := Vector2.ZERO
-var move_velocity := Vector2.ZERO
 var dir_x := 1 setget set_dir_x
 
 var walk_speed := 350.0
@@ -75,19 +69,14 @@ var turn_to := 0.0
 
 var is_hold := false
 var is_release := false
-var box 
-var hold_pos := Vector2.ZERO
+var box
 var push_clock := 0.0
 var push_time := 0.2
 var push_from := Vector2.ZERO
 var push_dir := 1
-var box_turn := 1
 
 var hold_clock := 0.0
 var hold_cooldown := 0.2
-
-onready var start_pos = position
-onready var last_pos = position
 
 var is_goal := false
 var goal
@@ -177,9 +166,6 @@ func _ready():
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
-	#last pos
-	last_pos = position
-	
 	if is_dead:
 		sprites.position += rot(velocity) * delta
 		sprites.rotate(deg2rad(-dir_x * 240) * delta)
@@ -266,7 +252,7 @@ func _physics_process(delta):
 			if push_clock < push_time:
 				push_clock = min(push_clock + delta, push_time)
 				
-				hold_pos = box.position + rot(Vector2(88 * -dir_x, 50 - collider_size.y))
+				var hold_pos = box.position + rot(Vector2(88 * -dir_x, 50 - collider_size.y))
 				var smooth = smoothstep(0, 1, push_clock / push_time)
 				var move_to = push_from.linear_interpolate(hold_pos, smooth)
 				var diff = move_to - position
@@ -312,8 +298,7 @@ func _physics_process(delta):
 				
 				# turn box
 				elif box.can_spin and joy_q.y != 0:
-					box_turn = joy_q.y * -dir_x
-					box.dir += box_turn
+					box.dir += joy_q.y * -dir_x
 					
 					audio_turn.pitch_scale = rand_range(0.9, 1.3)
 					audio_turn.play()

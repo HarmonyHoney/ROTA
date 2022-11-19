@@ -16,6 +16,9 @@
 [ext_resource path="res://src/menu/options/onoff/Fullscreen.gd" type="Script" id=14]
 [ext_resource path="res://src/menu/options/scroll/SpeedClock.gd" type="Script" id=15]
 [ext_resource path="res://src/menu/options/scroll/SpeedAlpha.gd" type="Script" id=16]
+[ext_resource path="res://src/menu/options/onoff/Vsync.gd" type="Script" id=17]
+[ext_resource path="res://src/menu/options/onoff/Mouse.gd" type="Script" id=18]
+[ext_resource path="res://src/menu/options/onoff/Borderless.gd" type="Script" id=19]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
@@ -24,42 +27,6 @@ corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
-
-[sub_resource type="GDScript" id=26]
-script/source = "extends OnOff
-
-func _ready():
-	is_on = OS.window_borderless
-	set_label()
-
-func set_value():
-	OS.window_borderless = is_on
-	Shared.set_window_size()
-
-"
-
-[sub_resource type="GDScript" id=27]
-script/source = "extends OnOff
-
-func _ready():
-	is_on = Input.mouse_mode == Input.MOUSE_MODE_VISIBLE
-	set_label()
-
-func set_value():
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if is_on else Input.MOUSE_MODE_HIDDEN
-
-"
-
-[sub_resource type="GDScript" id=25]
-script/source = "extends OnOff
-
-func _ready():
-	is_on = OS.vsync_enabled
-	set_label()
-
-func set_value():
-	OS.vsync_enabled = is_on
-"
 
 [node name="OptionsMenu" type="CanvasLayer"]
 pause_mode = 2
@@ -148,7 +115,7 @@ anchor_left = 0.11
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 3 )
-text = "Play"
+text = "Input"
 valign = 1
 
 [node name="Vibrate" type="Control" parent="Control/Menu/List"]
@@ -413,7 +380,7 @@ margin_top = 850.0
 margin_right = 640.0
 margin_bottom = 920.0
 rect_min_size = Vector2( 0, 70 )
-script = SubResource( 26 )
+script = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -477,7 +444,7 @@ margin_top = 990.0
 margin_right = 640.0
 margin_bottom = 1060.0
 rect_min_size = Vector2( 0, 70 )
-script = SubResource( 27 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -509,7 +476,7 @@ margin_top = 1060.0
 margin_right = 640.0
 margin_bottom = 1130.0
 rect_min_size = Vector2( 0, 70 )
-script = SubResource( 25 )
+script = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -68,7 +68,7 @@ func set_open(arg := is_open, is_audio := true):
 	if is_audio:
 		Audio.play(Audio.menu_pause, 1.0 if is_open else 0.75)
 	
-	UI.menu.show = is_open
+	UI.keys.show = is_open
 
 func back_to_hub():
 	if !("hub" in Shared.csfn) and "hub" in Shared.last_scene:

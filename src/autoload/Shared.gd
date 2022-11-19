@@ -15,7 +15,7 @@ var screenshot_texture : ImageTexture
 
 var gem_count := 0
 var goals := {}
-var is_speedrun := false
+var clock_rank := 0
 enum SPEED {OFF, MAP, FILE, BOTH}
 var clock_show := 0
 var clock_alpha := 0.5
@@ -278,7 +278,15 @@ func collect_gem():
 			goals[map_name] = map_clock
 		
 		gem_count = goals.size()
+		clock_rank = collect_clocks()
 		save_data()
+
+func collect_clocks(g := goals):
+	var c = 0
+	for i in g.keys():
+		if g[i] != 0 and speedruns.has(i) and g[i] < speedruns[i]:
+			c += 1
+	return c
 
 ### Volume
 
@@ -429,6 +437,9 @@ func load_slot(arg := 0):
 		# gems
 		gem_count = goals.size()
 		UI.gem_label.text = str(gem_count)
+		
+		clock_rank = collect_clocks()
+		UI.clock_label.text = str(clock_rank)
 		
 		if save_dict[save_slot].has("time"):
 			save_time = save_dict[save_slot]["time"]
