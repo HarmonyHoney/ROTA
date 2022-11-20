@@ -42,10 +42,10 @@ var speedruns := {
 	
 	"2B/1": 34,
 	"2B/2": 41.5,
-	"2B/3": 60,
-	"2B/4": 60,
-	"2B/5": 60,
-	"2B/6": 60,
+	"2B/3": 51.5,
+	"2B/4": 36.5,
+	"2B/5": 38,
+	"2B/6": 46,
 	
 	"2C/1": 60,
 	"2C/2": 60,
@@ -69,8 +69,8 @@ var speedruns := {
 	"3A/5": 26.5,
 	"3A/6": 53.5,
 	
-	"3B/1": 60,
-	"3B/2": 60,
+	"3B/1": 13,
+	"3B/2": 55.5,
 	"3B/3": 60,
 	"3B/4": 60,
 	"3B/5": 60,
@@ -272,13 +272,16 @@ func burst_screenshot(count := 30, viewport := get_tree().root):
 
 func collect_gem():
 	if is_instance_valid(goal) and goal.is_collected:
-		Cutscene.is_collect = !goals.has(map_name)
-		Cutscene.is_clock = speedruns.has(map_name) and map_clock < speedruns[map_name]
 		if !goals.has(map_name) or map_clock < goals[map_name]:
-			goals[map_name] = map_clock
+			goals[map_name] = map_clock	
 		
+		var o = [gem_count, clock_rank]
 		gem_count = goals.size()
 		clock_rank = collect_clocks()
+		
+		Cutscene.is_collect = gem_count > o[0]
+		Cutscene.is_clock = clock_rank > o[1]
+		
 		save_data()
 
 func collect_clocks(g := goals):
