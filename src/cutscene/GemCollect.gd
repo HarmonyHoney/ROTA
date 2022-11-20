@@ -34,6 +34,9 @@ func _physics_process(delta):
 			if is_clock:
 				door_dest.clock.scale = Vector2.ONE * easy.count(delta)
 				door_dest.gem.scale = Vector2.ONE * (1 - easy.smooth())
+				
+				door_dest.clock.rotation_degrees = easy.smooth() * 720
+				door_dest.gem.rotation_degrees = easy.smooth() * -720
 			
 			if clock > 1.0:
 				next_step()

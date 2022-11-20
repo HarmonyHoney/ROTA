@@ -71,11 +71,11 @@ var speedruns := {
 	
 	"3B/1": 13,
 	"3B/2": 55.5,
-	"3B/3": 60,
-	"3B/4": 60,
-	"3B/5": 60,
-	"3B/6": 60,
-	"3B/7": 60,
+	"3B/3": 30.5,
+	"3B/4": 43.5,
+	"3B/5": 36.5,
+	"3B/6": 42.5,
+	"3B/7": 50.5,
 	"3B/8": 60,
 }
 
@@ -163,7 +163,7 @@ func _input(event):
 func _physics_process(delta):
 	# recorded time
 	save_time += delta
-	if !get_tree().paused and !Cutscene.is_playing:
+	if !is_wipe and !get_tree().paused and !Cutscene.is_playing:
 		map_clock += delta
 	
 	# clock label

@@ -19,6 +19,7 @@ texture = ExtResource( 2 )
 position = Vector2( 0, -5 )
 
 [node name="Clock" parent="." index="5" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 0, -5 )
 
 [editable path="Clock"]
