@@ -32,7 +32,7 @@ func _ready():
 	zoom = Vector2.ONE * zoom_min
 
 func _input(event):
-	if event.is_action_pressed("zoom") and !Cutscene.is_playing and "world" in Shared.csfn:
+	if event.is_action_pressed("zoom") and !Shared.is_wipe and !Cutscene.is_playing and "world" in Shared.csfn:
 		start_zoom(zoom_step + 1)
 
 func _process(delta):

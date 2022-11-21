@@ -60,6 +60,7 @@ var jump_clock := 0.0
 var air_clock := 0.0
 
 var is_dead := false
+var dead_clock := 0.0
 var is_fall_out := false
 
 var turn_clock := 0.0
@@ -170,6 +171,13 @@ func _physics_process(delta):
 		sprites.position += rot(velocity) * delta
 		sprites.rotate(deg2rad(-dir_x * 240) * delta)
 		velocity.y += fall_gravity * delta
+		
+		if dead_clock < 0.7:
+			dead_clock += delta
+			if dead_clock > 0.7:
+				Shared.reset()
+				Cutscene.end()
+		
 		return
 	
 	# input
@@ -598,17 +606,16 @@ func _on_BodyArea_body_entered(body):
 func die():
 	if is_dead: return
 	is_dead = true
+	Cutscene.start()
+	
+	velocity = Vector2(-350 * dir_x, -800)
 	if is_hold:
 		release_anim()
 		Guide.set_box(null)
 	anim.play("jump")
-	velocity = Vector2(-350 * dir_x, -800)
 	
 	audio_spike.play()
 	audio_fallout.play()
-
-	yield(get_tree().create_timer(0.7), "timeout")
-	Shared.reset()
 
 func fall_out():
 	print(name, " outside boundary")
