@@ -28,9 +28,13 @@ export var is_input := true
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
 var joy_q := Vector2.ZERO
+var joy_buffer := 0.1
+var hold_x := 0.0
+var hold_y := 0.0
 var btn_jump := false
 var btnp_jump := false
-var holding_jump := 0.0
+var hold_jump := 0.0
+var jump_buffer := 0.3
 var btn_push := false
 var btnp_push := false
 
@@ -199,9 +203,11 @@ func _physics_process(delta):
 		if !is_unpause:
 			btn_jump = Input.is_action_pressed("jump") and release_clock == 0
 			btn_push = Input.is_action_pressed("grab")
-		
-		# jump hold time
-		holding_jump = (holding_jump + delta) if btn_jump else 0.0
+	
+	# holding input
+	hold_x = (hold_x + delta) if joy.x == joy_last.x and joy.x != 0 else 0.0
+	hold_y = (hold_y + delta) if joy.y == joy_last.y and joy.y != 0 else 0.0
+	hold_jump = (hold_jump + delta) if btn_jump else 0.0
 	
 	# pickup goal
 	if is_goal:
@@ -251,10 +257,12 @@ func _physics_process(delta):
 		
 		if !is_release:
 			# joy queue
-			if joy.x != 0 and joy_last.x == 0:
+			if joy.x != 0 and hold_x < joy_buffer:
 				joy_q.x = joy.x
-			elif joy.y != 0 and joy_last.y == 0:
+				hold_x = 1
+			elif joy.y != 0 and hold_y < joy_buffer:
 				joy_q.y = joy.y
+				hold_y = 1
 			
 			# during push
 			if push_clock < push_time:
@@ -378,7 +386,6 @@ func _physics_process(delta):
 			if is_floor:
 				
 				# animation
-				#var anim_last = anim.current_animation
 				anim.play("idle" if joy.x == 0 else "walk")
 				
 				# hold cooldown
@@ -386,7 +393,7 @@ func _physics_process(delta):
 					hold_clock = min(hold_clock + delta, hold_cooldown)
 				
 				# start jump
-				if btn_jump and holding_jump < 0.3:
+				if btn_jump and hold_jump < jump_buffer:
 					is_floor = false
 					anim.play("jump")
 					
@@ -431,7 +438,6 @@ func _physics_process(delta):
 						var p = box.get_parent()
 						p.move_child(box, 0)
 						
-						#anim.play("RESET")
 						anim.stop()
 						
 						audio_grab.pitch_scale = rand_range(0.7, 1.3)
