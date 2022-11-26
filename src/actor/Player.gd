@@ -114,7 +114,6 @@ func _ready():
 	solve_jump()
 	
 	# go to last door
-	print("is_instance_valid(Shared.door_in)", is_instance_valid(Shared.door_in))
 	if is_instance_valid(Shared.door_in):
 		var d = Shared.door_in
 		position = d.position

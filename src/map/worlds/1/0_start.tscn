@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/actor/door/DoorSpawn.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/actor/door/Arrow.tscn" type="PackedScene" id=11]
 
 [node name="Node2D" type="Node2D"]
 
@@ -29,10 +30,13 @@ position = Vector2( 500, 150 )
 position = Vector2( 500, 700 )
 rotation = 3.14159
 dir = 2
-scene_path = "ares://src/map/worlds/1/0_hub.tscn"
+scene_path = "res://src/map/worlds/1/0_hub.tscn"
 
 [node name="Spawn" parent="Actors" instance=ExtResource( 10 )]
 position = Vector2( 500, 150 )
+
+[node name="Arrow" parent="Actors" instance=ExtResource( 11 )]
+position = Vector2( 350, 150 )
 
 [node name="Details" type="Node2D" parent="."]
 

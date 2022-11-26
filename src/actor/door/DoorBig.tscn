@@ -5,24 +5,23 @@
 [ext_resource path="res://media/image/door/bigdoor.png" type="Texture" id=3]
 [ext_resource path="res://src/actor/door/DoorBig.gd" type="Script" id=4]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 100, 100 )
 
 [node name="Door" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
-dir = 0
-scene_path = ""
-is_locked = false
 gem_count = 0
 
-[node name="CollisionShape2D" parent="Area2D" index="0"]
-scale = Vector2( 0.996662, 1 )
-shape = SubResource( 2 )
+[node name="Area2D" parent="Arrow" index="0"]
+collision_layer = 0
 
-[node name="Arrow" parent="." index="1"]
+[node name="CollisionShape2D" parent="Arrow/Area2D" index="0"]
+shape = SubResource( 1 )
+
+[node name="Image" parent="Arrow" index="1"]
 position = Vector2( 0, -150 )
 
-[node name="Sprites" type="Node2D" parent="." index="3"]
+[node name="Sprites" type="Node2D" parent="." index="2"]
 
 [node name="Door" type="Sprite" parent="Sprites" index="0"]
 scale = Vector2( 0.334, 0.334 )
@@ -54,3 +53,5 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[editable path="Arrow"]

@@ -11,8 +11,8 @@ func _ready():
 	if Engine.editor_hint: return
 	
 	CheatCode.connect("activate", self, "cheat_code")
-	if !is_locked:
-		is_locked = Shared.gem_count < gem_count
+	if arrow.is_locked:
+		arrow.is_locked = Shared.gem_count < gem_count
 
 func set_gem(arg := gem_count):
 	gem_count = max(arg, 0)
@@ -23,13 +23,13 @@ func set_gem(arg := gem_count):
 
 # unlock cheat
 func cheat_code(cheat):
-	if "konami" in cheat and is_locked and is_active:
+	if "konami" in cheat and arrow.is_locked and arrow.is_active:
 		unlock()
 
 func unlock():
-	is_locked = false
+	arrow.is_locked = false
 	arrow.visible = true
 	print(name, " unlocked")
 
 func on_active():
-	UI.up.show = is_active and gem_count > 0
+	UI.up.show = arrow.is_active and gem_count > 0
