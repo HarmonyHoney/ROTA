@@ -80,9 +80,10 @@ var speedruns := {
 }
 
 var boxes := []
+var doors := []
 
 var player
-var door_destination
+var door_in
 var goal
 
 signal scene_changed
@@ -220,16 +221,27 @@ func change_scene():
 		get_tree().reload_current_scene()
 	else:
 		csfn = next_scene
+		map_name = csfn.lstrip(worlds_path).rstrip(".tscn") if csfn.begins_with(worlds_path) else ""
 		get_tree().change_scene(next_scene)
 		Cam.reset_zoom()
 	
-	map_name = csfn.lstrip(worlds_path).rstrip(".tscn") if csfn.begins_with(worlds_path) else ""
-	
 	BG.set_colors(0)
-	emit_signal("scene_changed")
 	save_data()
 	try_achievement()
 	map_clock = 0.0
+	
+	yield(get_tree(), "idle_frame")
+	
+	for y in 3:
+		
+		for i in doors:
+			if y == 2 or (y == 0 and i.scene_path == last_scene) or i.scene_path == "spawn":
+				door_in = i
+				break
+	
+	
+	emit_signal("scene_changed")
+	
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen

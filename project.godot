@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Door",
 "language": "GDScript",
-"path": "res://src/actor/Door.gd"
+"path": "res://src/actor/door/Door.gd"
 }, {
 "base": "Reference",
 "class": "EaseMover",

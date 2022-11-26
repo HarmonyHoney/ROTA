@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://media/font/profile/PatchNumber.tres" type="DynamicFont" id=21]
 [ext_resource path="res://src/menu/DemoShow.gd" type="Script" id=22]
 [ext_resource path="res://src/menu/MenuFileDemo.gd" type="Script" id=23]
+[ext_resource path="res://src/actor/door/DoorSpawn.tscn" type="PackedScene" id=24]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
@@ -599,6 +600,9 @@ detail = 4
 bg_palette = 1
 
 [node name="Actors" type="Node2D" parent="Map"]
+
+[node name="Spawn" parent="Map/Actors" instance=ExtResource( 24 )]
+position = Vector2( 1825, 0 )
 
 [node name="Player" parent="Map/Actors" instance=ExtResource( 13 )]
 position = Vector2( 1825, 0 )

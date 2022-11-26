@@ -26,10 +26,15 @@ var start_time := 0.5
 
 func _enter_tree():
 	if Engine.editor_hint: return
+	Shared.doors.append(self)
 	
-	# set destination
-	if scene_path != "" and Shared.last_scene == scene_path:
-		Shared.door_destination = self
+	# set is_locked if scene not found
+	var f = File.new()
+	is_locked = !f.file_exists(scene_path)
+
+func _exit_tree():
+	if Engine.editor_hint: return
+	Shared.doors.erase(self)
 
 func _ready():
 	if Engine.editor_hint: return
@@ -92,12 +97,3 @@ func on_enter():
 
 func on_active():
 	pass
-
-# set is_locked if scene not found
-func try_path():
-	var f = File.new()
-	var fe = f.file_exists(scene_path)
-	
-	if !fe:
-		scene_path = ""
-		is_locked = true

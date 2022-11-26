@@ -1,15 +1,19 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://src/actor/DoorBig.gd" type="Script" id=1]
+[ext_resource path="res://src/actor/door/DoorBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://media/font/profile/DoorLabel.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/image/door/bigdoor.png" type="Texture" id=3]
-[ext_resource path="res://src/actor/DoorBase.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actor/door/DoorBig.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 100, 100 )
 
-[node name="Door" instance=ExtResource( 4 )]
-script = ExtResource( 1 )
+[node name="Door" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+dir = 0
+scene_path = ""
+is_locked = false
+gem_count = 0
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
 scale = Vector2( 0.996662, 1 )
@@ -25,6 +29,7 @@ scale = Vector2( 0.334, 0.334 )
 texture = ExtResource( 3 )
 
 [node name="Gem" type="Node2D" parent="Sprites" index="1"]
+visible = false
 
 [node name="Back" type="Polygon2D" parent="Sprites/Gem" index="0"]
 scale = Vector2( 1.25, 1.25 )
@@ -43,7 +48,7 @@ margin_top = -75.0
 margin_right = 75.0
 margin_bottom = 75.0
 custom_fonts/font = ExtResource( 2 )
-text = "35"
+text = "0"
 align = 1
 valign = 1
 __meta__ = {

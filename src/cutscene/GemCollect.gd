@@ -56,7 +56,7 @@ func next_step():
 
 func begin():
 	player = Shared.player
-	door_dest = Shared.door_destination
+	door_dest = Shared.door_in
 	
 	for i in [player, door_dest]:
 		if !is_instance_valid(i):

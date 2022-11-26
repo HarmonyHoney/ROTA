@@ -37,7 +37,7 @@ func _ready():
 func _physics_process(delta):
 	var p = MenuPause.is_open
 	up.move(delta, up.show or p)
-	down.move(delta, down.show or p)
+	down.move(delta, Shared.clock_rank > 0 and (down.show or p))
 	keys.move(delta)
 
 func scene_changed():

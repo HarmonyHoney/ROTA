@@ -11,8 +11,8 @@ func _ready():
 	if Engine.editor_hint: return
 	
 	CheatCode.connect("activate", self, "cheat_code")
-	is_locked = Shared.gem_count < gem_count
-	try_path()
+	if !is_locked:
+		is_locked = Shared.gem_count < gem_count
 
 func set_gem(arg := gem_count):
 	gem_count = max(arg, 0)

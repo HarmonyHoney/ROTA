@@ -15,8 +15,6 @@ func _ready():
 		gem.visible = false
 	elif Shared.goals.has(m):
 		gem.set_color()
-	
-	try_path()
 
 # acquire goal
 func on_enter():

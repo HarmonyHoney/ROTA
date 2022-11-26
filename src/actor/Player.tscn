@@ -441,6 +441,7 @@ use_parent_material = true
 use_parent_material = true
 
 [node name="HairBack" parent="Sprites/Root/Body" instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0.539063, 1 )
 position = Vector2( 0, -25 )
 end_scale = 0.8
 
@@ -449,13 +450,13 @@ position = Vector2( 0, -9.5 )
 points = PoolVector2Array( 0, 0, 0, 20 )
 width = 22.0
 width_curve = SubResource( 13 )
-default_color = Color( 1, 0.341176, 0.72549, 1 )
+default_color = Color( 1, 0.84375, 0, 1 )
 
 [node name="LegL" type="Line2D" parent="Sprites/Root/Body"]
 position = Vector2( -5, -9.5 )
 rotation = 0.387463
 points = PoolVector2Array( 0, 0, 0, 26 )
-default_color = Color( 1, 0.341176, 0.72549, 1 )
+default_color = Color( 1, 0.84375, 0, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
@@ -463,12 +464,12 @@ end_cap_mode = 2
 position = Vector2( 5, -9.5 )
 rotation = -0.387463
 points = PoolVector2Array( 0, 0, 0, 26 )
-default_color = Color( 1, 0.34, 0.725, 1 )
+default_color = Color( 1, 0.84375, 0, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Head" type="Sprite" parent="Sprites/Root/Body"]
-modulate = Color( 1, 0.717647, 0.717647, 1 )
+modulate = Color( 0.48, 0.2496, 0.4224, 1 )
 position = Vector2( 0, -25 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 14 )
@@ -477,7 +478,7 @@ texture = ExtResource( 14 )
 position = Vector2( -10, -31.5 )
 points = PoolVector2Array( 0, 0, 0, 6 )
 width = 8.0
-default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
+default_color = Color( 0, 0, 0, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
@@ -485,11 +486,12 @@ end_cap_mode = 2
 position = Vector2( 10, -31.5 )
 points = PoolVector2Array( 0, 0, 0, 6 )
 width = 8.0
-default_color = Color( 0.180392, 0.180392, 0.180392, 1 )
+default_color = Color( 0, 0, 0, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="HairFront" parent="Sprites/Root/Body" instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0.539063, 1 )
 position = Vector2( 0, -44.2 )
 width = 20.0
 sitting_angle = 70.0
@@ -502,7 +504,7 @@ position = Vector2( -25, 5 )
 z_index = 15
 
 [node name="Circle" type="Sprite" parent="Sprites/HandL"]
-modulate = Color( 1, 0.717647, 0.717647, 1 )
+modulate = Color( 0.48, 0.2496, 0.4224, 1 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
 
@@ -512,7 +514,7 @@ position = Vector2( 25, 5 )
 z_index = 15
 
 [node name="Circle" type="Sprite" parent="Sprites/HandR"]
-modulate = Color( 1, 0.717647, 0.717647, 1 )
+modulate = Color( 0.48, 0.2496, 0.4224, 1 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
 

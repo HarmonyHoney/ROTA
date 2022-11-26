@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/actor/door/DoorBase.tscn" type="PackedScene" id=1]
+
+[node name="Spawn" instance=ExtResource( 1 )]
+scene_path = "spawn"
+is_locked = true
+
+[node name="Arrow" parent="." index="1"]
+position = Vector2( 0, 0 )
+z_index = 0
+
+[node name="Sprite" parent="Arrow" index="0"]
+modulate = Color( 0, 1, 0, 1 )

@@ -104,6 +104,9 @@ var release_time := 0.2
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.player = self
+	
+	MenuPause.connect("signal_close", self, "unpause")
+	Shared.connect("scene_changed", self, "_ready")
 
 func _ready():
 	if Engine.editor_hint: return
@@ -111,8 +114,9 @@ func _ready():
 	solve_jump()
 	
 	# go to last door
-	if is_instance_valid(Shared.door_destination):
-		var d = Shared.door_destination
+	print("is_instance_valid(Shared.door_in)", is_instance_valid(Shared.door_in))
+	if is_instance_valid(Shared.door_in):
+		var d = Shared.door_in
 		position = d.position
 		dir = d.dir
 	
@@ -156,7 +160,7 @@ func _ready():
 		Cutscene.is_show_goal = false
 	
 	elif Cutscene.is_collect or Cutscene.is_clock:
-		if is_instance_valid(Shared.door_destination):
+		if is_instance_valid(Shared.door_in):
 			Cutscene.gem_collect.begin()
 		Cutscene.is_collect = false
 		Cutscene.is_clock = false
@@ -165,8 +169,6 @@ func _ready():
 		anim.play("jump")
 		Cutscene.start_game.begin()
 		Cutscene.is_start_game = false
-	
-	MenuPause.connect("signal_close", self, "unpause")
 
 func _physics_process(delta):
 	if Engine.editor_hint: return

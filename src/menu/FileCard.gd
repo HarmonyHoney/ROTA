@@ -6,6 +6,7 @@ onready var new_game := $NewGame
 onready var items := $Items
 
 onready var gem_label := $Items/Goals/Gems/Label
+onready var clocks := $Items/Goals/Clocks
 onready var clock_label := $Items/Goals/Clocks/Label
 onready var time_label := $Items/Time/Label
 
@@ -24,6 +25,7 @@ func set_card():
 		
 		gem_label.text = str(d[slot]["goals"].size())
 		clock_label.text = str(Shared.collect_clocks(d[slot]["goals"]))
+		clocks.visible = clock_label.text != "0"
 		
 		# time
 		time_label.text = Shared.time_string(d[slot]["time"], false, true)
