@@ -106,6 +106,7 @@ func _enter_tree():
 	Shared.player = self
 	
 	MenuPause.connect("signal_close", self, "unpause")
+	UI.connect("dialog_close", self, "unpause")
 	Shared.connect("scene_changed", self, "_ready")
 
 func _ready():
@@ -202,7 +203,7 @@ func _physics_process(delta):
 				is_unpause = false
 		
 		if !is_unpause:
-			btn_jump = Input.is_action_pressed("jump") and release_clock == 0
+			btn_jump = Input.is_action_pressed("jump") and release_clock == 0 and !UI.dialog_menu.is_open
 			btn_push = Input.is_action_pressed("grab")
 	
 	# holding input
@@ -657,7 +658,7 @@ func enter_door():
 	set_physics_process(false)
 	anim.play("idle")
 
-func unpause(arg):
+func unpause(arg := null):
 	#print("unpause")
 	unpause_tick = 0
 	is_unpause = true

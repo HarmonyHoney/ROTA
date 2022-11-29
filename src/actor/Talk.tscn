@@ -21,6 +21,7 @@ z_as_relative = false
 script = ExtResource( 3 )
 clips = [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ) ]
 text = [ "Good Day!", "Lovely weather isn't it?", "I do adore the flowers..." ]
+menu = [ "Talk", "Shop" ]
 
 [node name="Arrow" parent="." instance=ExtResource( 2 )]
 

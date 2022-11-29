@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://src/menu/MenuDialog.gd" type="Script" id=1]
 [ext_resource path="res://media/font/profile/UI_Keys.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/font/profile/UI_gem.tres" type="DynamicFont" id=3]
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=4]
@@ -16,6 +17,28 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 4 )
 
 [node name="UI" type="CanvasLayer"]
@@ -218,3 +241,103 @@ margin_right = 500.0
 margin_bottom = 106.0
 custom_fonts/font = SubResource( 1 )
 text = "3:57"
+
+[node name="Dialog" type="Control" parent="Control"]
+anchor_left = 0.4
+anchor_top = 0.5
+anchor_right = 0.6
+anchor_bottom = 0.9
+rect_pivot_offset = Vector2( -618, -18 )
+script = ExtResource( 1 )
+items_path = NodePath("Center/List")
+cursor_path = NodePath("Center/Cursor")
+fade_path = NodePath(".")
+
+[node name="Center" type="CenterContainer" parent="Control/Dialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="Control/Dialog/Center"]
+modulate = Color( 0, 0, 0, 0.5 )
+margin_left = 3.0
+margin_top = 44.0
+margin_right = 253.0
+margin_bottom = 244.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 250, 200 )
+custom_styles/panel = SubResource( 5 )
+
+[node name="Cursor" type="Panel" parent="Control/Dialog/Center"]
+margin_left = 128.0
+margin_top = 144.0
+margin_right = 128.0
+margin_bottom = 144.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="List" type="VBoxContainer" parent="Control/Dialog/Center"]
+margin_left = 67.0
+margin_top = 63.0
+margin_right = 189.0
+margin_bottom = 224.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/Dialog/Center/List"]
+margin_left = 6.0
+margin_right = 116.0
+margin_bottom = 51.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 3 )
+text = "Talk"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="Control/Dialog/Center/List"]
+margin_top = 55.0
+margin_right = 122.0
+margin_bottom = 106.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 3 )
+text = "Shop"
+align = 1
+valign = 1
+
+[node name="Label3" type="Label" parent="Control/Dialog/Center/List"]
+visible = false
+margin_top = 110.0
+margin_right = 153.0
+margin_bottom = 161.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 3 )
+text = "Other"
+align = 1
+valign = 1
+
+[node name="Label4" type="Label" parent="Control/Dialog/Center/List"]
+visible = false
+margin_top = 110.0
+margin_right = 127.0
+margin_bottom = 161.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 3 )
+text = "More"
+align = 1
+valign = 1
+
+[node name="Bye" type="Label" parent="Control/Dialog/Center/List" groups=["bye"]]
+margin_left = 15.0
+margin_top = 110.0
+margin_right = 107.0
+margin_bottom = 161.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 3 )
+text = "Bye"
+align = 1
+valign = 1

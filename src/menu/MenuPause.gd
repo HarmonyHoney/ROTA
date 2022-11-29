@@ -13,7 +13,7 @@ func _input(event):
 		if event.is_action_pressed("ui_pause") and !is_sub_menu and (fade_ease.frac() > 0.5):
 			self.is_open = false
 		
-	elif event.is_action_pressed("ui_pause") and !is_sub_menu and "world" in Shared.csfn and !Cutscene.is_playing:
+	elif event.is_action_pressed("ui_pause") and !is_sub_menu and "world" in Shared.csfn and !Cutscene.is_playing and !UI.dialog_menu.is_open:
 		self.is_open = true
 
 func _physics_process(delta):

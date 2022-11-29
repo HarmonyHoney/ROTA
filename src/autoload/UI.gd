@@ -13,6 +13,11 @@ onready var clock_file := $Control/Clock/File
 onready var clock_map := $Control/Clock/Map
 
 onready var caption_label := $Control/Caption
+onready var dialog_menu := $Control/Dialog
+
+signal dialog_accept
+signal dialog_bye
+signal dialog_close
 
 func _ready():
 	Shared.connect("scene_changed", self, "scene_changed")
