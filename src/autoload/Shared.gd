@@ -86,6 +86,7 @@ var player
 var door_in
 var goal
 
+signal scene_before
 signal scene_changed
 var is_reload := false
 
@@ -141,6 +142,9 @@ func _ready():
 	var fe = f.file_exists("res://src/map/worlds/2A/0_hub.tscn")
 	f.close()
 	is_demo = !fe
+	
+	yield(get_tree(), "idle_frame")
+	change_scene()
 
 func _input(event):
 	if event is InputEventKey and event.pressed and !event.is_echo():
@@ -164,7 +168,7 @@ func _input(event):
 func _physics_process(delta):
 	# recorded time
 	save_time += delta
-	if !is_wipe and !get_tree().paused and !Cutscene.is_playing:
+	if !get_tree().paused and !Wipe.is_wipe and!Cutscene.is_playing:
 		map_clock += delta
 	
 	# clock label
@@ -215,6 +219,8 @@ func change_scene():
 	boxes.clear()
 	
 	Cutscene.end_all()
+	emit_signal("scene_before")
+	
 	
 	is_reload = next_scene == csfn
 	if is_reload:
@@ -233,10 +239,11 @@ func change_scene():
 	yield(get_tree(), "idle_frame")
 	
 	for y in 3:
-		for i in doors:
-			if y == 2 or (y == 0 and i.scene_path == last_scene) or i.scene_path == "spawn":
-				door_in = i
-				break
+		if !is_instance_valid(door_in):
+			for i in doors:
+				if y == 2 or (y == 0 and i.scene_path == last_scene) or i.scene_path == "spawn":
+					door_in = i
+					break
 	
 	
 	emit_signal("scene_changed")

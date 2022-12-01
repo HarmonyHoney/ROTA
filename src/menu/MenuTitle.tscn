@@ -504,11 +504,16 @@ __meta__ = {
 }
 
 [node name="Credits" type="Control" parent="Canvas"]
-visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
 script = ExtResource( 20 )
+fade_path = NodePath(".")
+text_accept = ""
+is_input = true
+is_process = true
 is_back_close = true
+is_audio_cursor = false
+is_audio_accept = false
 
 [node name="Patch" type="Label" parent="Canvas/Credits"]
 modulate = Color( 1, 1, 1, 0.25 )

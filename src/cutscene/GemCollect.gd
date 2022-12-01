@@ -71,7 +71,6 @@ func begin():
 	clock = 0.0
 	step = 0
 	
-	player.set_physics_process(false)
 	player.visible = false
 	if is_clock:
 		door_dest.clock.scale = Vector2.ZERO
@@ -82,8 +81,6 @@ func begin():
 func end():
 	is_playing = false
 	Cutscene.end()
-	
-	player.set_physics_process(true)
 	set_physics_process(false)
 	
 	UI.up.show = false

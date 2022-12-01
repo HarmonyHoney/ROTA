@@ -107,68 +107,39 @@ func _enter_tree():
 	
 	MenuPause.connect("signal_close", self, "unpause")
 	UI.connect("dialog_close", self, "unpause")
-	Shared.connect("scene_changed", self, "_ready")
+	Shared.connect("scene_changed", self, "scene")
 
 func _ready():
 	if Engine.editor_hint: return
-	
 	solve_jump()
-	
+
+func scene():
 	# go to last door
 	if is_instance_valid(Shared.door_in):
 		var d = Shared.door_in
 		position = d.position
-		dir = d.dir
+		self.dir = d.dir
+		sprites.rotation = turn_to
+		turn_clock = turn_time
+	
+	velocity = Vector2.ZERO
+	joy_last = Vector2.ZERO
+	joy = Vector2.ZERO
+	is_fall_out = false
+	is_jump = true
 	
 	# snap to floor
 	var test = rot(Vector2.DOWN * 150)
 	if test_move(transform, test):
 		move_and_collide(test)
+		is_floor = true
+		anim.play("idle")
+	else:
+		anim.play("jump")
 	
 	# face left or right
 	randomize()
 	self.dir_x = 1 if randf() > 0.5 else -1
-	
-	# set camera
-	if is_cam:
-		Cam.target_node = self
-	
-	# turn
-	set_dir()
-	sprites.rotation = turn_to
-	turn_clock = turn_time
-	
-	if is_cam:
-		Cam.turn_from = turn_to
-		Cam.turn_to = turn_to
-		Cam.rotation = turn_to
-		Cam.turn_ease.clock = 99
-		Cam.position = position
-		Cam.reset_smoothing()
-		Cam.force_update_scroll()
-		Cam.force_update_transform()
-	
-	anim.play("idle")
-	
-	set_physics_process(false)
-	yield(get_tree(), "idle_frame")
-	set_physics_process(true)
-	
-	if Cutscene.is_show_goal:
-		if is_instance_valid(Shared.goal):
-			Cutscene.goal_show.begin()
-		Cutscene.is_show_goal = false
-	
-	elif Cutscene.is_collect or Cutscene.is_clock:
-		if is_instance_valid(Shared.door_in):
-			Cutscene.gem_collect.begin()
-		Cutscene.is_collect = false
-		Cutscene.is_clock = false
-	
-	elif Cutscene.is_start_game:
-		anim.play("jump")
-		Cutscene.start_game.begin()
-		Cutscene.is_start_game = false
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
@@ -189,7 +160,7 @@ func _physics_process(delta):
 	# input
 	release_clock = max(release_clock - delta, 0)
 	
-	if is_input:
+	if is_input and !Cutscene.is_playing and !Wipe.is_wipe:
 		joy_last = joy
 		joy = Input.get_vector("left", "right", "up", "down").round()
 		
@@ -531,7 +502,7 @@ func set_dir(arg := dir):
 	
 	if Engine.editor_hint:
 		$Sprites.rotation = turn_to
-	elif is_cam:
+	elif Cam.target_node == self:
 		Cam.turn(turn_to)
 	
 	if areas:
@@ -631,7 +602,6 @@ func fall_out():
 	audio_fallout.play()
 	
 	Shared.reset()
-	is_input = false
 
 func release_anim():
 	# set animation keys
@@ -655,8 +625,8 @@ func release_anim():
 	anim.play("release")
 
 func enter_door():
-	set_physics_process(false)
 	anim.play("idle")
+	joy = Vector2.ZERO
 
 func unpause(arg := null):
 	#print("unpause")

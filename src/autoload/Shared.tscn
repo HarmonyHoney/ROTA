@@ -8,3 +8,4 @@ pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+pause_mode = 1

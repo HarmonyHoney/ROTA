@@ -16,8 +16,6 @@ func _physics_process(delta):
 		0:
 			if clock > 0.5:
 				next_step()
-				
-				player.set_physics_process(true)
 		1:
 			if clock > 0.6:
 				next_step()
@@ -39,9 +37,8 @@ func begin():
 	is_playing = true
 	Cutscene.start()
 	Cam.set_process(false)
-	player.is_input = false
-	player.set_physics_process(false)
 	player.move_and_collide(Vector2(0, -900))
+	player.anim.play("jump")
 	Cam.position += Vector2(0, -400)
 	
 	set_physics_process(true)
@@ -52,7 +49,6 @@ func end():
 	is_playing = false
 	Cutscene.end()
 	Cam.set_process(true)
-	player.is_input = true
 	
 	set_physics_process(false)
 

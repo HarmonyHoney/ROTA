@@ -9,10 +9,10 @@ func _ready():
 
 func _input(event):
 	if is_open:
-		menu_input(event)
 		if event.is_action_pressed("ui_pause") and !is_sub_menu and (fade_ease.frac() > 0.5):
 			self.is_open = false
-		
+		else:
+			menu_input(event)
 	elif event.is_action_pressed("ui_pause") and !is_sub_menu and "world" in Shared.csfn and !Cutscene.is_playing and !UI.dialog_menu.is_open:
 		self.is_open = true
 
@@ -20,7 +20,7 @@ func accept():
 	joy = Vector2.ZERO
 	match items[cursor].name.to_lower():
 		"resume":
-			back()
+			self.is_open = false
 		"reset":
 			Shared.reset()
 		"hub":

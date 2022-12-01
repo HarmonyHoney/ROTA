@@ -5,11 +5,8 @@ onready var main_menu = get_node_or_null(sub_path)
 
 func _ready():
 	UI.keys.show = true
-	
-	Cam.rotation = 0
-	Cam.target_pos = main_menu.pos
-	Cam.position = Cam.target_pos
-	
+	Cam.target_node = null
+	Cam.snap_to(main_menu.pos, 0)
 	Shared.save_slot = -1
 	
 	if !Music.playing:
@@ -18,6 +15,7 @@ func _ready():
 
 func _exit_tree():
 	UI.keys.show = false
+	Cam.target_node = Shared.player
 
 func accept():
 	sub_menu(main_menu)

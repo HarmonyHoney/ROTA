@@ -59,7 +59,6 @@ func begin():
 	is_playing = true
 	Cutscene.start()
 	Cam.set_process(false)
-	player.set_physics_process(false)
 	
 	set_physics_process(true)
 	clock = 0.0
@@ -69,8 +68,6 @@ func end():
 	is_playing = false
 	Cutscene.end()
 	Cam.set_process(true)
-	player.set_physics_process(true)
-	
 	set_physics_process(false)
 
 func cam_target(target):

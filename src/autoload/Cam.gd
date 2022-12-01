@@ -28,6 +28,9 @@ export var zoom_max := 2.5
 var zoom_step := 0
 var zoom_steps := 2
 
+func _enter_tree():
+	Shared.connect("scene_changed", self, "scene_changed")
+
 func _ready():
 	zoom = Vector2.ONE * zoom_min
 
@@ -82,3 +85,18 @@ func reset_zoom():
 	zoom_step = 0
 	zoom = Vector2.ONE * zoom_min
 	zoom_to = zoom_min
+
+func scene_changed():
+	if is_instance_valid(target_node):
+		snap_to(target_node.position, target_node.turn_to)
+
+func snap_to(pos, turn):
+	position = pos
+	target_pos = pos
+	turn_from = turn
+	turn_to = turn
+	rotation = turn
+	turn_ease.clock = 99
+	reset_smoothing()
+	force_update_scroll()
+	force_update_transform()

@@ -12,10 +12,15 @@ var step = -1
 
 func _ready():
 	p.anim.play("jump")
+	p.is_input = false
+	
 	if is_trailer:
 		p.dir_x = -1
 	elif !is_active:
 		p.dir_x = 1
+
+func _exit_tree():
+	p.is_input = true
 
 func _physics_process(delta):
 	if !is_active: return
