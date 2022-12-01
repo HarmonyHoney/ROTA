@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=9]
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,10 +14,6 @@ bg_palette = 1
 [node name="SpikeMap" parent="." instance=ExtResource( 6 )]
 
 [node name="Actors" type="Node2D" parent="."]
-
-[node name="Player" parent="Actors" instance=ExtResource( 9 )]
-position = Vector2( 250, 250 )
-dir = 1
 
 [node name="Box4" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -350, -150 )

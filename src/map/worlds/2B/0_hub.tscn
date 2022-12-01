@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/detail/Fence.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
@@ -29,48 +28,39 @@ tile_data = PoolIntArray( -1, 0, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Player" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 550, 300 )
-
 [node name="BigDoor" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 550, 300 )
 scene_path = "res://src/map/worlds/2/0_hub.tscn"
 
 [node name="Door1" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 1350, 150 )
-scale = Vector2( 1, 1 )
 scene_path = "res://src/map/worlds/2B/1.tscn"
 
 [node name="Door2" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 1250, 750 )
 rotation = 3.14159
-scale = Vector2( 1, 1 )
 dir = 2
 scene_path = "res://src/map/worlds/2B/2.tscn"
 
 [node name="Door3" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 500, 1150 )
-scale = Vector2( 1, 1 )
 scene_path = "res://src/map/worlds/2B/3.tscn"
 
 [node name="Door4" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 600, 750 )
 rotation = 3.14159
-scale = Vector2( 1, 1 )
 dir = 2
 scene_path = "res://src/map/worlds/2B/4.tscn"
 
 [node name="Door5" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( -100, 650 )
 rotation = 3.14159
-scale = Vector2( 1, 1 )
 dir = 2
 scene_path = "res://src/map/worlds/2B/5.tscn"
 
 [node name="Door6" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( -350, 150 )
 rotation = 4.71239
-scale = Vector2( 1, 1 )
 dir = 3
 scene_path = "res://src/map/worlds/2B/6.tscn"
 

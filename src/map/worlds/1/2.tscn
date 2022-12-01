@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=12]
 [ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=13]
@@ -22,10 +21,6 @@ tile_data = PoolIntArray( -65529, -1073741824, 0, -65528, -1073741824, 0, 7, 161
 [node name="SpikeMap" parent="." instance=ExtResource( 11 )]
 
 [node name="Actors" type="Node2D" parent="."]
-
-[node name="Player" parent="Actors" instance=ExtResource( 10 )]
-position = Vector2( 450, 450 )
-dir = 3
 
 [node name="Door" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 450, 450 )

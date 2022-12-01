@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/detail/BarrelCacti.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=12]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=13]
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=14]
@@ -22,9 +21,6 @@ bg_palette = 3
 tile_data = PoolIntArray( 327695, -1610612736, 0, 393231, -1610612736, 0, 458767, -1610612736, 0, 524303, -1610612736, 0, 589830, 1610612736, 0, 786430, 0, 0, 786431, 0, 0, 720896, 0, 0, 720903, -1610612736, 0, 851965, -1073741824, 0, 786433, -1610612736, 0, 786439, -1610612736, 0, 917501, -1073741824, 0, 851969, -1610612736, 0, 851975, -1073741824, 0, 983037, -1073741824, 0, 917511, -1073741824, 0, 1048574, 1610612736, 0, 1048575, 1610612736, 0, 1179664, -1073741824, 0, 1310724, 1610612736, 0, 1572864, 0, 0, 1703935, -1073741824, 0, 1638401, -1610612736, 0, 1703936, 1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
-
-[node name="Player" parent="Actors" instance=ExtResource( 11 )]
-position = Vector2( 900, 750 )
 
 [node name="BigDoor" parent="Actors" instance=ExtResource( 6 )]
 position = Vector2( 900, 700 )

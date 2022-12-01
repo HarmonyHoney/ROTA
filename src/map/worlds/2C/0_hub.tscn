@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/detail/PineTree.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
@@ -29,9 +28,6 @@ bg_palette = 1
 tile_data = PoolIntArray( 393241, 0, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
-
-[node name="Player" parent="Actors" instance=ExtResource( 2 )]
-position = Vector2( 1800, 1000 )
 
 [node name="BigDoor" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 1800, 1000 )
@@ -74,7 +70,6 @@ scene_path = "res://src/map/worlds/2C/6.tscn"
 [node name="BigDoor2" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 2200, 1600 )
 rotation = 3.14159
-scale = Vector2( 1, 1 )
 dir = 2
 scene_path = "res://src/menu/Ending.tscn"
 gem_count = 50

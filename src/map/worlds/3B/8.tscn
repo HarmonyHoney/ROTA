@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=8]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=9]
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=12]
@@ -14,7 +13,6 @@
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/detail/SignZoom.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/detail/BarrelCacti.tscn" type="PackedScene" id=16]
-
 
 [node name="Node2D" type="Node2D"]
 
@@ -27,9 +25,6 @@ bg_palette = 1
 tile_data = PoolIntArray( -262149, -1610612736, 0, -196613, -1610612736, 0, -131077, -1610612736, 0, -65544, 1610612736, 0, -65543, 1610612736, 0, -65542, 1610612736, 0, 851971, 0, 0, 851972, 0, 0, 917506, -1073741824, 0, 983042, -1073741824, 0, 1048578, -1073741824, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
-
-[node name="Player" parent="Actors" instance=ExtResource( 7 )]
-position = Vector2( -650, -550 )
 
 [node name="Door" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( -650, -550 )

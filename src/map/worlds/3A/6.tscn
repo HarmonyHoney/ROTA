@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://media/image/details/rocks.png" type="Texture" id=8]
 [ext_resource path="res://media/image/details/rock.png" type="Texture" id=9]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=10]
@@ -16,7 +15,6 @@
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=16]
-
 
 [node name="Node2D" type="Node2D"]
 
@@ -28,10 +26,6 @@ bg_palette = 1
 tile_data = PoolIntArray( -327680, -1073741824, 0, -262144, -1073741824, 0, 262141, -1073741824, 0, 327677, -1073741824, 0, 262151, -1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
-
-[node name="Player" parent="Actors" instance=ExtResource( 7 )]
-position = Vector2( 750, 150 )
-dir = 1
 
 [node name="Door" parent="Actors" instance=ExtResource( 3 )]
 position = Vector2( 750, 150 )

@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=8]
@@ -24,10 +23,6 @@ tile_data = PoolIntArray( 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0
 tile_data = PoolIntArray( 720890, -1073741824, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
-
-[node name="Player" parent="Actors" instance=ExtResource( 5 )]
-position = Vector2( -150, 650 )
-dir = 3
 
 [node name="Talk" parent="Actors" instance=ExtResource( 14 )]
 position = Vector2( 350, 350 )

@@ -233,7 +233,6 @@ func change_scene():
 	yield(get_tree(), "idle_frame")
 	
 	for y in 3:
-		
 		for i in doors:
 			if y == 2 or (y == 0 and i.scene_path == last_scene) or i.scene_path == "spawn":
 				door_in = i

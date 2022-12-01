@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=4]
@@ -22,9 +21,6 @@ bg_palette = 1
 [node name="SpikeMap" parent="." instance=ExtResource( 9 )]
 
 [node name="Actors" type="Node2D" parent="."]
-
-[node name="Player" parent="Actors" instance=ExtResource( 1 )]
-position = Vector2( 500, 150 )
 
 [node name="Door" parent="Actors" instance=ExtResource( 2 )]
 position = Vector2( 500, 700 )

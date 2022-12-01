@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/menu/MenuFile.gd" type="Script" id=14]
 [ext_resource path="res://src/menu/MenuTitle.gd" type="Script" id=15]
 [ext_resource path="res://src/menu/MenuFileDelete.gd" type="Script" id=16]
@@ -620,11 +619,6 @@ bg_palette = 1
 
 [node name="Spawn" parent="Map/Actors" instance=ExtResource( 24 )]
 position = Vector2( 1825, 0 )
-
-[node name="Player" parent="Map/Actors" instance=ExtResource( 13 )]
-position = Vector2( 1825, 0 )
-is_input = false
-is_cam = false
 
 [node name="AttractMode" type="Node2D" parent="Map"]
 position = Vector2( 1800, 650 )

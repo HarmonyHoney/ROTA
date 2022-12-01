@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=4]
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=6]
@@ -43,16 +42,11 @@ tile_data = PoolIntArray( 1310717, -1610612736, 0 )
 
 [node name="Actors" type="Node2D" parent="."]
 
-[node name="Player" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( -550, 1600 )
-dir = 1
-
 [node name="BigDoor" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( -500, 1600 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/0/0_hub.tscn"
-gem_count = 0
 
 [node name="BigDoor2" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( -1600, 2900 )
