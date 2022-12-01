@@ -252,6 +252,9 @@ script = ExtResource( 1 )
 items_path = NodePath("Center/List")
 cursor_path = NodePath("Center/Cursor")
 fade_path = NodePath(".")
+is_input = true
+is_process = true
+is_back_close = true
 
 [node name="Center" type="CenterContainer" parent="Control/Dialog"]
 anchor_right = 1.0

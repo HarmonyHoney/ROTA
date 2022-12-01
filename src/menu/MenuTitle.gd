@@ -8,14 +8,7 @@ onready var credits_menu = get_node_or_null(credits_path)
 
 var pos = Vector2(1800, 650)
 
-func _input(event):
-	menu_input(event)
-
-func _physics_process(delta):
-	menu_process(delta)
-
 func accept():
-	audio_accept()
 	match items[cursor].name.to_lower():
 		"play":
 			sub_menu(file_menu)
@@ -34,7 +27,6 @@ func accept():
 func open():
 	Cam.target_pos = pos - Vector2(150, 0)
 
-func back():
-	audio_back()
-	self.is_open = false
+func close():
 	Cam.target_pos = pos
+

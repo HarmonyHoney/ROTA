@@ -17,11 +17,11 @@ var leash_range := 300.0
 func _enter_tree():
 	UI.connect("dialog_accept", self, "accept")
 	UI.connect("dialog_close", self, "close")
-	UI.connect("dialog_bye", self, "bye")
 
 func _physics_process(delta):
 	if is_talking and is_instance_valid(player) and global_position.distance_to(player.global_position) > leash_range:
-		bye()
+		is_talking = false
+		close()
 
 func _on_Arrow_open():
 	arrow.is_locked = true
@@ -32,6 +32,7 @@ func _on_Arrow_open():
 func close():
 	is_talking = false
 	arrow.is_locked = false
+	say_line(0)
 
 func accept():
 	match menu[UI.dialog_menu.cursor]:
@@ -65,8 +66,4 @@ func pick_line():
 		queue.shuffle()
 	
 	say_line(queue.pop_back())
-
-func bye():
-	is_talking = false
-	say_line(0)
 

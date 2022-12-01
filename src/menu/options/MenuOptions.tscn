@@ -37,6 +37,9 @@ cursor_path = NodePath("Control/Menu/Cursor")
 cursor_margin = Vector2( 25, 0 )
 scroll_path = NodePath("Control/Menu")
 fade_path = NodePath("Control")
+is_input = true
+is_process = true
+is_back_close = true
 
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0

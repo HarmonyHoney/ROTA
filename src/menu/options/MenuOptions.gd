@@ -2,12 +2,6 @@ extends MenuBase
 
 onready var bg := $Control/BG
 
-func _input(event):
-	menu_input(event)
-
-func _physics_process(delta):
-	menu_process(delta)
-
 func fill_items():
 	for i in items_node.get_children():
 		if i.is_in_group("window"):
@@ -21,16 +15,12 @@ func fill_items():
 func open():
 	bg.visible = Shared.csfn != Shared.title_path
 
+func close():
+	Shared.save_options()
+
 func accept():
 	if items[cursor].has_method("act"):
-		audio_accept()
 		items[cursor].act()
-
-func back():
-	audio_back()
-	self.is_open = false
-	
-	Shared.save_options()
 
 func joy_x(arg := 1):
 	if items[cursor].has_method("axis_x"):

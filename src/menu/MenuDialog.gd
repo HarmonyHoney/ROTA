@@ -2,23 +2,11 @@ extends MenuBase
 
 onready var panel := $Center/Panel
 
-func _input(event):
-	menu_input(event)
-
-func _physics_process(delta):
-	menu_process(delta)
-
 func accept():
 	if items[cursor].is_in_group("bye"):
-		back()
+		self.is_open = false
 	else:
-		audio_accept()
 		UI.emit_signal("dialog_accept")
-
-func back():
-	audio_back()
-	UI.emit_signal("dialog_bye")
-	self.is_open = false
 
 func open():
 	UI.keys.show = true

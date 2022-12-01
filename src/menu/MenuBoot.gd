@@ -19,9 +19,5 @@ func _ready():
 func _exit_tree():
 	UI.keys.show = false
 
-func _input(event):
-	menu_input(event)
-
 func accept():
-	audio_accept()
 	sub_menu(main_menu)

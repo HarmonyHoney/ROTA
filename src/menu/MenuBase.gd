@@ -9,7 +9,6 @@ export var cursor_path : NodePath
 onready var cursor_node = get_node_or_null(cursor_path)
 var cursor := 0 setget set_cursor
 export var cursor_margin := Vector2(30, 0)
-export var is_audio_cursor := true
 
 export var scroll_path : NodePath
 onready var scroll_node = get_node_or_null(scroll_path)
@@ -21,7 +20,11 @@ onready var fade_ease := EaseMover.new()
 export var text_accept := "Accept"
 export var text_cancel := "Back"
 
+export var is_input := false
+export var is_process := false
 export var is_open := false setget set_open
+export var is_accept_close := false
+export var is_back_close := false
 signal signal_close(arg)
 var is_sub_menu := false
 var sub_ease := EaseMover.new()
@@ -36,11 +39,21 @@ var joy_repeat := 0.2
 export var axis_x := false
 export var sub_stay_open := false
 
+export var is_audio_cursor := true
+export var is_audio_accept := true
+export var is_audio_back := true
+
 func _ready():
 	fill_items()
-	cursor = 0
-	
 	reset_cursor()
+
+func _input(event):
+	if is_input:
+		menu_input(event)
+
+func _physics_process(delta):
+	if is_process:
+		menu_process(delta)
 
 func menu_input(event):
 	if !is_open or is_sub_menu or sub_ease.frac() > 0.5 or (fade_node and fade_ease.frac() < 0.5): return
@@ -52,10 +65,22 @@ func menu_input(event):
 	joy = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").round()
 	
 	if back and event.is_pressed():
-		back()
+		if is_back_close:
+			self.is_open = false
+		else:
+			back()
+		
+		if is_audio_back:
+			audio_back()
 		get_tree().set_input_as_handled()
 	elif accept and event.is_pressed():
-		accept()
+		if is_accept_close:
+			self.is_open = false
+		else:
+			accept()
+		
+		if is_audio_accept:
+			audio_accept()
 		get_tree().set_input_as_handled()
 	elif joy.y != 0 and joy.y != joy_last.y:
 		if axis_x:
@@ -165,8 +190,10 @@ func sub_close(arg):
 	reset_joy()
 	open()
 
-func audio_cursor():
-	Audio.play(Audio.menu_cursor, 0.8, 1.2)
+func reset_joy():
+	joy_last = Vector2.ZERO
+	joy = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").round()
+	joy_clock = 0.0
 
 func audio_accept():
 	Audio.play(Audio.menu_accept, 0.8, 1.2)
@@ -174,7 +201,5 @@ func audio_accept():
 func audio_back():
 	Audio.play(Audio.menu_cancel, 0.6, 0.9)
 
-func reset_joy():
-	joy_last = Vector2.ZERO
-	joy = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").round()
-	joy_clock = 0.0
+func audio_cursor():
+	Audio.play(Audio.menu_cursor, 0.8, 1.2)

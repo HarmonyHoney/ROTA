@@ -18,6 +18,7 @@ onready var header := $Control/Header
 onready var header_back := $Control/Header/Back
 onready var header_ease := EaseMover.new(null, 0.2)
 onready var header_track := $Control/Menu/List/Spacer
+onready var title_label := $Control/Menu/List/Title
 
 var defaults := {}
 
@@ -32,6 +33,7 @@ func _input(event):
 	if is_prompt:
 		if event.is_action_pressed("ui_pause"):
 			is_prompt = false
+			audio_back()
 		elif event.is_pressed() and is_type(event) and !event.is_action("ui_end") and !event.is_echo():
 			assign_key(items[cursor].action, event)
 			is_prompt = false
@@ -40,14 +42,12 @@ func _input(event):
 	# clear key
 	elif event.is_action_pressed("ui_end"):
 		clear_row(cursor)
-		Audio.play(Audio.menu_accept, 0.8, 1.2)
+		audio_accept()
 	# menu input
 	else:
 		menu_input(event)
 
 func _physics_process(delta):
-	menu_process(delta)
-	
 	if is_prompt:
 		prompt_clock -= delta
 		prompt_timer_label.text = str(ceil(max(0, prompt_clock)))
@@ -70,7 +70,6 @@ func _physics_process(delta):
 	header_back.modulate.a = lerp(0, 1.0, header_ease.frac())
 
 func accept():
-	audio_accept()
 	if items[cursor].is_in_group("reset"):
 		reset_to_defaults()
 	elif items[cursor].is_in_group("remap"):
@@ -79,25 +78,19 @@ func accept():
 		prompt_clock = prompt_time
 		get_tree().set_input_as_handled()
 
-func back():
-	audio_back()
-	self.is_open = false
-	Shared.save_keys()
-
-func set_open(arg := is_open):
-	.set_open(arg)
+func open():
+	# create keys
+	for i in items.size():
+		create_keys(i)
 	
-	if is_open:
-		# create keys
-		for i in items.size():
-			create_keys(i)
-		
-		# header text
-		$Control/Menu/List/Title.text = ("Controller" if is_gamepad else "Keyboard") + " Setup"
-	else:
-		# remove keys
-		for i in items.size():
-			remove_keys(i)
+	# header text
+	title_label.text = ("Controller" if is_gamepad else "Keyboard") + " Setup"
+
+func close():
+	Shared.save_keys()
+	# remove keys
+	for i in items.size():
+		remove_keys(i)
 
 func draw_key(key_node, event):
 	if !is_type(event): return
