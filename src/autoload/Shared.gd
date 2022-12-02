@@ -1,7 +1,8 @@
 extends Node
 
-var worlds_path := "res://src/map/worlds/"
+var splash_path := "res://src/menu/Splash.tscn"
 var title_path := "res://src/menu/MenuTitle.tscn"
+var worlds_path := "res://src/map/worlds/"
 var start_path := "res://src/map/worlds/1/0_start.tscn"
 
 var is_wipe := false
@@ -142,9 +143,6 @@ func _ready():
 	var fe = f.file_exists("res://src/map/worlds/2A/0_hub.tscn")
 	f.close()
 	is_demo = !fe
-	
-	yield(get_tree(), "idle_frame")
-	change_scene()
 
 func _input(event):
 	if event is InputEventKey and event.pressed and !event.is_echo():

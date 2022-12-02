@@ -1,7 +1,7 @@
-extends Node2D
-
-onready var logo := $Logo
+extends Node
 
 func _ready():
-	yield(get_tree().create_timer(1.0), "timeout")
-	Shared.wipe_scene(Shared.scene_title)
+	yield(get_tree(), "idle_frame")
+	$AudioStreamPlayer.play()
+	yield(get_tree().create_timer(1.25), "timeout")
+	Shared.wipe_scene(Shared.title_path)

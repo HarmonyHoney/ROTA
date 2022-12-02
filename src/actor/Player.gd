@@ -448,7 +448,7 @@ func _physics_process(delta):
 			move(velocity * delta)
 	
 	# check boundary
-	if !is_fall_out and Boundary.is_outside(global_position):
+	if !Wipe.is_wipe and !is_fall_out and Boundary.is_outside(global_position):
 		fall_out()
 	
 	# air clock

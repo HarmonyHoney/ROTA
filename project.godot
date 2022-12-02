@@ -155,7 +155,7 @@ _global_script_class_icons={
 config/name="ROTA"
 config/description="ROTA by Harmony Honey
 hhoney.net"
-run/main_scene="res://src/menu/MenuTitle.tscn"
+run/main_scene="res://src/menu/Splash.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="ROTA-Harmony"
 config/project_settings_override="user://override.cfg"
