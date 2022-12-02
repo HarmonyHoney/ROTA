@@ -16,7 +16,7 @@ var leash_range := 300.0
 
 func _enter_tree():
 	UI.connect("dialog_accept", self, "accept")
-	UI.connect("dialog_close", self, "close")
+	UI.connect("dialog_closed", self, "close")
 
 func _physics_process(delta):
 	if is_talking and is_instance_valid(player) and global_position.distance_to(player.global_position) > leash_range:

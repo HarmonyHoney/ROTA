@@ -104,9 +104,8 @@ var release_time := 0.2
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.player = self
-	
-	MenuPause.connect("signal_close", self, "unpause")
-	UI.connect("dialog_close", self, "unpause")
+	MenuPause.connect("closed", self, "unpause")
+	UI.connect("dialog_closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")
 
 func _ready():
@@ -628,7 +627,7 @@ func enter_door():
 	anim.play("idle")
 	joy = Vector2.ZERO
 
-func unpause(arg := null):
+func unpause():
 	#print("unpause")
 	unpause_tick = 0
 	is_unpause = true

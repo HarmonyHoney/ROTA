@@ -13,7 +13,7 @@ func open():
 
 func close():
 	UI.keys.show = false
-	UI.emit_signal("dialog_close")
+	UI.emit_signal("dialog_closed")
 
 func write(arg := []):
 	var c = items_node.get_children()

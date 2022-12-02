@@ -25,7 +25,7 @@ export var is_process := false
 export var is_open := false setget set_open
 export var is_accept_close := false
 export var is_back_close := false
-signal signal_close(arg)
+signal closed
 var is_sub_menu := false
 var sub_ease := EaseMover.new()
 
@@ -144,7 +144,9 @@ func set_open(arg := is_open):
 		UI.menu_keys(text_accept, text_cancel)
 		open()
 	else:
-		emit_signal("signal_close", self)
+		emit_signal("closed")
+		for i in get_signal_connection_list("closed"):
+			disconnect("closed", i.target, i.method)
 		close()
 	
 	reset_joy()
@@ -179,12 +181,11 @@ func sub_menu(arg : MenuBase):
 	is_open = sub_stay_open
 	
 	arg.is_open = true 
-	arg.connect("signal_close", self, "sub_close")
+	arg.connect("closed", self, "sub_close")
 
-func sub_close(arg):
+func sub_close():
 	is_sub_menu = false
 	is_open = true
-	arg.disconnect("signal_close", self, "sub_close")
 	UI.menu_keys(text_accept, text_cancel)
 	
 	reset_joy()

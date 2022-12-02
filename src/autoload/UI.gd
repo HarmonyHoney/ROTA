@@ -17,7 +17,7 @@ onready var dialog_menu := $Control/Dialog
 
 signal dialog_accept
 signal dialog_bye
-signal dialog_close
+signal dialog_closed
 
 func _ready():
 	Shared.connect("scene_changed", self, "scene_changed")
