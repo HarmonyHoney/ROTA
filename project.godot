@@ -181,6 +181,7 @@ MenuRemap="*res://src/menu/options/MenuRemap.tscn"
 Music="*res://src/autoload/Music.tscn"
 Audio="*res://src/autoload/Audio.tscn"
 Steam="*res://addons/steam_api/steam.gd"
+MenuMakeover="*res://src/menu/MenuMakeover.tscn"
 
 [display]
 

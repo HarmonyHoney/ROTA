@@ -101,6 +101,11 @@ var unpause_tick := 0
 var release_clock := 0.0
 var release_time := 0.2
 
+onready var color_hair := [$Sprites/Root/Body/HairFront, $Sprites/Root/Body/HairBack]
+onready var color_skin := [$Sprites/Root/Body/Head, $Sprites/HandL/Circle, $Sprites/HandR/Circle]
+onready var color_fit := [$Sprites/Root/Body/Torso, $Sprites/Root/Body/LegL, $Sprites/Root/Body/LegR]
+onready var color_eye := [$Sprites/Root/Body/EyeL, $Sprites/Root/Body/EyeR]
+
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.player = self

@@ -9,3 +9,5 @@ func set_value():
 		
 		for i in a:
 			i.modulate = MenuMakeover.palette[cursor]
+			label.modulate = i.modulate
+

@@ -628,6 +628,7 @@ position = Vector2( 1825, 0 )
 [node name="AttractMode" type="Node2D" parent="Map"]
 position = Vector2( 1800, 650 )
 script = ExtResource( 3 )
+is_active = false
 
 [node name="Title" type="Sprite" parent="Map"]
 modulate = Color( 0.25098, 0.25098, 0.25098, 1 )
