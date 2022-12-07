@@ -13,7 +13,6 @@ var step = -1
 func _ready():
 	p.anim.play("jump")
 	p.is_input = false
-	MenuMakeover.attract = self
 	
 	if is_trailer:
 		p.dir_x = -1

@@ -7,6 +7,9 @@ func accept():
 		self.is_open = false
 	else:
 		UI.emit_signal("dialog_accept")
+		match items[cursor].text:
+			"Makeover":
+				sub_menu(MenuMakeover)
 
 func open():
 	UI.keys.show = true
@@ -26,4 +29,3 @@ func write(arg := []):
 	fill_items()
 	
 	panel.rect_min_size = items_node.rect_size + Vector2(100, 50)
-	

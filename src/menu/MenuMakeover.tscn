@@ -78,9 +78,9 @@ __meta__ = {
 
 [node name="Line" type="Panel" parent="Dialog"]
 margin_left = 342.0
-margin_top = 100.0
+margin_top = 35.0
 margin_right = 412.0
-margin_bottom = 465.0
+margin_bottom = 400.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""
@@ -96,27 +96,44 @@ size_flags_vertical = 4
 alignment = 1
 
 [node name="Color" parent="Dialog/List" instance=ExtResource( 4 )]
-margin_top = 134.0
+margin_top = 69.0
 margin_right = 560.0
-margin_bottom = 204.0
+margin_bottom = 139.0
 
 [node name="Color2" parent="Dialog/List" instance=ExtResource( 4 )]
-margin_top = 208.0
+margin_top = 143.0
 margin_right = 560.0
-margin_bottom = 278.0
+margin_bottom = 213.0
 part = "skin"
 
 [node name="Color3" parent="Dialog/List" instance=ExtResource( 4 )]
-margin_top = 282.0
+margin_top = 217.0
 margin_right = 560.0
-margin_bottom = 352.0
+margin_bottom = 287.0
 part = "fit"
 
 [node name="Color4" parent="Dialog/List" instance=ExtResource( 4 )]
-margin_top = 356.0
+margin_top = 291.0
 margin_right = 560.0
-margin_bottom = 426.0
+margin_bottom = 361.0
 part = "eye"
+
+[node name="Spacer" type="Control" parent="Dialog/List" groups=["no_item"]]
+margin_top = 365.0
+margin_right = 560.0
+margin_bottom = 435.0
+rect_min_size = Vector2( 0, 70 )
+
+[node name="Random" type="Label" parent="Dialog/List"]
+margin_left = 179.0
+margin_top = 439.0
+margin_right = 381.0
+margin_bottom = 490.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 3 )
+text = "Random"
+align = 1
+valign = 1
 
 [node name="Bye" type="Label" parent="Dialog/List" groups=["bye"]]
 visible = false

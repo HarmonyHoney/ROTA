@@ -26,6 +26,7 @@ tile_data = PoolIntArray( 720890, -1073741824, 0 )
 
 [node name="Talk" parent="Actors" instance=ExtResource( 14 )]
 position = Vector2( 350, 350 )
+menu = [ "Talk" ]
 
 [node name="DoorBig3" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( -200, 650 )

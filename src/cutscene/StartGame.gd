@@ -37,9 +37,13 @@ func begin():
 	is_playing = true
 	Cutscene.start()
 	Cam.set_process(false)
-	player.move_and_collide(Vector2(0, -900))
+	player.move_and_collide(Vector2(0, -850))
 	player.anim.play("jump")
 	Cam.position += Vector2(0, -400)
+	MenuMakeover.pale()
+	if is_instance_valid(Shared.door_in):
+		Shared.door_in.visible = false
+		Shared.door_in.arrow.is_locked = false
 	
 	set_physics_process(true)
 	clock = 0.0

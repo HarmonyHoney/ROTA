@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://media/image/details/circle50.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://media/audio/sfx/fallout3.wav" type="AudioStream" id=11]
 [ext_resource path="res://media/audio/sfx/slap2.wav" type="AudioStream" id=12]
 [ext_resource path="res://media/audio/sfx/jump3.wav" type="AudioStream" id=13]
-[ext_resource path="res://media/image/details/circle100.png" type="Texture" id=14]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17, 17 )
@@ -484,17 +483,9 @@ width = 25.0
 width_curve = SubResource( 13 )
 default_color = Color( 1, 1, 1, 1 )
 
-[node name="HeadOld" type="Sprite" parent="Sprites/Root/Body"]
-visible = false
-modulate = Color( 0.00784314, 1, 0, 1 )
-position = Vector2( 0, -25 )
-scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 14 )
-
 [node name="Head" type="Node2D" parent="Sprites/Root/Body"]
 modulate = Color( 0.00784314, 1, 0, 1 )
 position = Vector2( 0, -25 )
-scale = Vector2( 1, 1 )
 script = ExtResource( 3 )
 radius = 20.0
 

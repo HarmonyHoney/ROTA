@@ -14,6 +14,8 @@ var player
 var is_talking := false
 var leash_range := 300.0
 
+onready var door := get_parent().get_node_or_null("Door")
+
 func _enter_tree():
 	UI.connect("dialog_accept", self, "accept")
 	UI.connect("dialog_closed", self, "close")
@@ -42,6 +44,9 @@ func accept():
 		"Shop":
 			say_line(0)
 			is_talking = true
+		"Makeover":
+			door.visible = true
+			door.arrow.is_locked = false
 
 func say_line(arg := 0):
 	audio.stream = clips[arg]

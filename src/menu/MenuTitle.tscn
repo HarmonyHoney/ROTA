@@ -125,9 +125,9 @@ alignment = 1
 
 [node name="Play" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 135.0
-margin_top = 194.0
+margin_top = 222.0
 margin_right = 249.0
-margin_bottom = 245.0
+margin_bottom = 273.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
@@ -139,6 +139,7 @@ __meta__ = {
 }
 
 [node name="Makeover" type="Label" parent="Canvas/MenuTitle/List"]
+visible = false
 margin_left = 68.0
 margin_top = 250.0
 margin_right = 316.0
@@ -152,9 +153,9 @@ valign = 1
 
 [node name="Options" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 91.0
-margin_top = 306.0
+margin_top = 278.0
 margin_right = 292.0
-margin_bottom = 357.0
+margin_bottom = 329.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
@@ -167,9 +168,9 @@ __meta__ = {
 
 [node name="Credits" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 97.0
-margin_top = 362.0
+margin_top = 334.0
 margin_right = 286.0
-margin_bottom = 413.0
+margin_bottom = 385.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
@@ -182,9 +183,9 @@ __meta__ = {
 
 [node name="Store" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 48.0
-margin_top = 418.0
+margin_top = 390.0
 margin_right = 336.0
-margin_bottom = 469.0
+margin_bottom = 441.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
@@ -198,9 +199,9 @@ __meta__ = {
 
 [node name="Exit" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 134.0
-margin_top = 474.0
+margin_top = 446.0
 margin_right = 249.0
-margin_bottom = 525.0
+margin_bottom = 497.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
