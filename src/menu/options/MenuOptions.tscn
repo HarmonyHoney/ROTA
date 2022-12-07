@@ -40,6 +40,8 @@ fade_path = NodePath("Control")
 is_input = true
 is_process = true
 is_back_close = true
+is_joy_x = true
+is_act = true
 
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
@@ -328,9 +330,6 @@ size_flags_vertical = 3
 texture = ExtResource( 12 )
 expand = true
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Control/Menu/List/HeaderVideo"]
 anchor_left = 0.11

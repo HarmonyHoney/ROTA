@@ -2,8 +2,7 @@
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/menu/MenuMakeover.gd" type="Script" id=2]
-[ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=3]
-[ext_resource path="res://src/menu/options/scroll/Color.gd" type="Script" id=5]
+[ext_resource path="res://src/menu/options/scroll/Color.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -12,8 +11,16 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -34,34 +41,46 @@ cursor_path = NodePath("Dialog/Cursor")
 fade_path = NodePath("Dialog")
 is_input = true
 is_process = true
-is_open = true
 is_back_close = true
-palette = PoolColorArray( 0, 0, 0, 1, 0.180392, 0.180392, 0.180392, 1, 0.478431, 0.25098, 0.423529, 1, 1, 0.717647, 0.717647, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.498039, 0, 1, 1, 1, 0, 1, 0.498039, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0.498039, 1, 0, 1, 1, 1, 0, 0.498039, 1, 1, 0, 0, 1, 1, 0.498039, 0, 1, 1, 1, 0, 1, 1, 1, 0.341176, 0.72549, 1, 1, 0, 0.498039, 1 )
+is_joy_x = true
+palette = PoolColorArray( 0.14902, 0.14902, 0.14902, 1, 0.423529, 0.423529, 0.501961, 1, 0.85098, 0.945098, 1, 1, 0.921569, 0.921569, 0.921569, 1, 1, 0.717647, 0.717647, 1, 0.478431, 0.25098, 0.423529, 1, 0.498039, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0.498039, 1, 0, 1, 1, 1, 0, 0.498039, 1, 1, 0, 0, 1, 1, 0.498039, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.498039, 1, 1, 0, 0, 1, 1, 0.498039, 0, 1, 1, 1, 0, 1 )
 
 [node name="Dialog" type="Control" parent="."]
-anchor_left = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 50.0
-margin_top = 50.0
-margin_right = -50.0
-margin_bottom = -50.0
+margin_left = 80.0
+margin_top = 80.0
+margin_bottom = -80.0
 rect_pivot_offset = Vector2( -618, -18 )
 
 [node name="Panel" type="Panel" parent="Dialog"]
 modulate = Color( 0, 0, 0, 0.5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -30.0
+margin_top = -30.0
+margin_right = 30.0
+margin_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 250, 200 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="Cursor" type="Panel" parent="Dialog"]
-margin_left = 128.0
-margin_top = 144.0
-margin_right = 128.0
-margin_bottom = 144.0
+margin_left = 33.0
+margin_top = 18.0
+margin_right = 103.0
+margin_bottom = 88.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Line" type="Panel" parent="Dialog"]
+margin_left = 342.0
+margin_top = 100.0
+margin_right = 412.0
+margin_bottom = 465.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""
@@ -70,156 +89,41 @@ __meta__ = {
 [node name="List" type="VBoxContainer" parent="Dialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 50.0
-margin_top = 50.0
-margin_right = -50.0
-margin_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="Color" type="Control" parent="Dialog/List"]
-margin_top = 86.0
-margin_right = 440.0
-margin_bottom = 156.0
-rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-count = 17
+[node name="Color" parent="Dialog/List" instance=ExtResource( 4 )]
+margin_top = 134.0
+margin_right = 560.0
+margin_bottom = 204.0
 
-[node name="Label" type="Label" parent="Dialog/List/Color"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 3 )
-text = "Hair"
-valign = 1
-
-[node name="Label2" type="Label" parent="Dialog/List/Color"]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 3 )
-text = "< OFF >"
-align = 2
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Color2" type="Control" parent="Dialog/List"]
-margin_top = 160.0
-margin_right = 440.0
-margin_bottom = 230.0
-rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-count = 17
+[node name="Color2" parent="Dialog/List" instance=ExtResource( 4 )]
+margin_top = 208.0
+margin_right = 560.0
+margin_bottom = 278.0
 part = "skin"
 
-[node name="Label" type="Label" parent="Dialog/List/Color2"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 3 )
-text = "Skin"
-valign = 1
-
-[node name="Label2" type="Label" parent="Dialog/List/Color2"]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 3 )
-text = "< OFF >"
-align = 2
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Color3" type="Control" parent="Dialog/List"]
-margin_top = 234.0
-margin_right = 440.0
-margin_bottom = 304.0
-rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-count = 17
+[node name="Color3" parent="Dialog/List" instance=ExtResource( 4 )]
+margin_top = 282.0
+margin_right = 560.0
+margin_bottom = 352.0
 part = "fit"
 
-[node name="Label" type="Label" parent="Dialog/List/Color3"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 3 )
-text = "Fit"
-valign = 1
-
-[node name="Label2" type="Label" parent="Dialog/List/Color3"]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 3 )
-text = "< OFF >"
-align = 2
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Color4" type="Control" parent="Dialog/List"]
-margin_top = 308.0
-margin_right = 440.0
-margin_bottom = 378.0
-rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-count = 17
+[node name="Color4" parent="Dialog/List" instance=ExtResource( 4 )]
+margin_top = 356.0
+margin_right = 560.0
+margin_bottom = 426.0
 part = "eye"
 
-[node name="Label" type="Label" parent="Dialog/List/Color4"]
-anchor_right = 0.5
-anchor_bottom = 1.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 3 )
-text = "Eye"
-valign = 1
-
-[node name="Label2" type="Label" parent="Dialog/List/Color4"]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 25.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 3 )
-text = "< OFF >"
-align = 2
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Bye" type="Label" parent="Dialog/List" groups=["bye"]]
-margin_left = 159.0
-margin_top = 382.0
-margin_right = 280.0
-margin_bottom = 433.0
+visible = false
+margin_left = 219.0
+margin_top = 402.0
+margin_right = 340.0
+margin_bottom = 453.0
 size_flags_horizontal = 4
 custom_fonts/font = SubResource( 3 )
 text = "Back"

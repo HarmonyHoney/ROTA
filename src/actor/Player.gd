@@ -11,8 +11,8 @@ onready var sprites := $Sprites
 onready var spr_root := $Sprites/Root
 onready var spr_body := $Sprites/Root/Body
 
-onready var spr_hand_l := $Sprites/HandL
-onready var spr_hand_r := $Sprites/HandR
+onready var spr_hand_l := $Sprites/Hands/Left
+onready var spr_hand_r := $Sprites/Hands/Right
 onready var spr_hands := [spr_hand_l, spr_hand_r]
 
 onready var audio_grab := $Audio/Grab
@@ -101,10 +101,10 @@ var unpause_tick := 0
 var release_clock := 0.0
 var release_time := 0.2
 
-onready var color_hair := [$Sprites/Root/Body/HairFront, $Sprites/Root/Body/HairBack]
-onready var color_skin := [$Sprites/Root/Body/Head, $Sprites/HandL/Circle, $Sprites/HandR/Circle]
-onready var color_fit := [$Sprites/Root/Body/Torso, $Sprites/Root/Body/LegL, $Sprites/Root/Body/LegR]
-onready var color_eye := [$Sprites/Root/Body/EyeL, $Sprites/Root/Body/EyeR]
+onready var color_hair := [$Sprites/Root/Body/Hair]
+onready var color_skin := [$Sprites/Root/Body/Head, $Sprites/Hands]
+onready var color_fit := [$Sprites/Root/Body/Fit]
+onready var color_eye := [$Sprites/Root/Body/Eyes]
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -633,7 +633,7 @@ func enter_door():
 	joy = Vector2.ZERO
 
 func unpause():
-	#print("unpause")
+	print("unpause")
 	unpause_tick = 0
 	is_unpause = true
 	btn_jump = false

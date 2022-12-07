@@ -13,6 +13,8 @@ func accept():
 		"play":
 			sub_menu(file_menu)
 			Cam.target_pos = pos + Vector2(350, 0)
+		"makeover":
+			sub_menu(MenuMakeover)
 		"options":
 			sub_menu(MenuOptions)
 			Cam.target_pos = pos + Vector2(950, 0)
@@ -26,6 +28,7 @@ func accept():
 
 func open():
 	Cam.target_pos = pos - Vector2(150, 0)
+	Cam.turn(0)
 
 func close():
 	Cam.target_pos = pos
