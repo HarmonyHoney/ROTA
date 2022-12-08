@@ -12,7 +12,7 @@
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=12]
-[ext_resource path="res://media/image/UI/HarmonyHoneyLogo2x.png" type="Texture" id=13]
+[ext_resource path="res://media/image/UI/HarmonyHoneyLogo.svg" type="Texture" id=13]
 [ext_resource path="res://src/menu/MenuFile.gd" type="Script" id=14]
 [ext_resource path="res://src/menu/MenuTitle.gd" type="Script" id=15]
 [ext_resource path="res://src/menu/MenuFileDelete.gd" type="Script" id=16]
@@ -22,7 +22,7 @@
 [ext_resource path="res://src/menu/MenuBase.gd" type="Script" id=20]
 [ext_resource path="res://media/font/profile/PatchNumber.tres" type="DynamicFont" id=21]
 [ext_resource path="res://src/menu/DemoShow.gd" type="Script" id=22]
-[ext_resource path="res://media/image/UI/godot_logo_white.png" type="Texture" id=23]
+[ext_resource path="res://media/image/UI/godot_logo.svg" type="Texture" id=23]
 [ext_resource path="res://src/actor/door/DoorSpawn.tscn" type="PackedScene" id=24]
 
 [sub_resource type="StyleBoxFlat" id=1]
