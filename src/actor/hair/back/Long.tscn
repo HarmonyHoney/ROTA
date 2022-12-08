@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/actor/Hair.tscn" type="PackedScene" id=1]
+
+[node name="Back" type="Node2D"]
+
+[node name="Hair" parent="." instance=ExtResource( 1 )]
+end_scale = 0.8

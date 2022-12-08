@@ -12,15 +12,17 @@ export var lerp_weight := 0.2
 export var point_count := 3 setget set_points
 
 var points = []
+var sizes = []
 var last_pos := Vector2.ZERO
 var hair_end = Vector2(-150, 150)
 
-export var tex : Texture
-
-var sprites := []
-
 func _ready():
 	set_points()
+
+func _draw():
+	# set sprites
+	for i in points.size():
+		draw_circle(points[i], sizes[i], Color.white)
 
 func _physics_process(delta):
 	# move end
@@ -46,36 +48,20 @@ func _physics_process(delta):
 	
 	
 	last_pos = to_global(hair_end)
-	
-	# set sprites
-	for i in points.size():
-		sprites[i].position = points[i]
+	update()
 
 func set_points(arg := point_count):
 	point_count = max(2, arg)
-	
-	sprites = []
-	for i in get_children():
-		i.queue_free()
-	
 	points = []
 	for i in point_count:
 		points.append(Vector2.ZERO)
-		
-		var s = Sprite.new()
-		add_child(s)
-		s.owner = self
-		s.texture = tex
-		sprites.append(s)
-	
 	sprite_scale()
 
 func sprite_scale():
-	var tw = tex.get_width() if tex else 100.0
-	
-	for i in sprites.size():
-		var w = (width / tw) * lerp(1.0, end_scale, i / float(point_count - 1))
-		sprites[i].scale = Vector2.ONE * w
+	sizes = []
+	for i in points.size():
+		sizes.append(width * 0.5 * lerp(1.0, end_scale, i / float(point_count - 1)))
+	update()
 
 func set_width(arg := width):
 	width = arg

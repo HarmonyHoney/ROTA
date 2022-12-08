@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/menu/MenuMakeover.gd" type="Script" id=2]
+[ext_resource path="res://src/menu/options/scroll/Scroll.gd" type="Script" id=3]
 [ext_resource path="res://src/menu/options/scroll/Color.tscn" type="PackedScene" id=4]
+[ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -76,11 +78,11 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Line" type="Panel" parent="Dialog"]
+[node name="w" type="Panel" parent="Dialog"]
 margin_left = 342.0
-margin_top = 35.0
+margin_top = 140.0
 margin_right = 412.0
-margin_bottom = 400.0
+margin_bottom = 505.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""
@@ -95,40 +97,107 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="Color" parent="Dialog/List" instance=ExtResource( 4 )]
-margin_top = 69.0
+[node name="HairBack" type="Control" parent="Dialog/List"]
 margin_right = 560.0
-margin_bottom = 139.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+is_loop = true
+list = PoolStringArray( "long", "medium", "short", "braids" )
+
+[node name="Label" type="Label" parent="Dialog/List/HairBack"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 5 )
+text = "Hair Back"
+valign = 1
+
+[node name="Label2" type="Label" parent="Dialog/List/HairBack"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 5 )
+text = "< OFF >"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HairFront" type="Control" parent="Dialog/List"]
+margin_top = 74.0
+margin_right = 560.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+is_loop = true
+list = PoolStringArray( "one", "two", "bun", "buns" )
+
+[node name="Label" type="Label" parent="Dialog/List/HairFront"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 5 )
+text = "Hair Front"
+valign = 1
+
+[node name="Label2" type="Label" parent="Dialog/List/HairFront"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 5 )
+text = "< OFF >"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Color" parent="Dialog/List" instance=ExtResource( 4 )]
+margin_top = 148.0
+margin_right = 560.0
+margin_bottom = 218.0
 
 [node name="Color2" parent="Dialog/List" instance=ExtResource( 4 )]
-margin_top = 143.0
+margin_top = 222.0
 margin_right = 560.0
-margin_bottom = 213.0
+margin_bottom = 292.0
 part = "skin"
 
 [node name="Color3" parent="Dialog/List" instance=ExtResource( 4 )]
-margin_top = 217.0
+margin_top = 296.0
 margin_right = 560.0
-margin_bottom = 287.0
+margin_bottom = 366.0
 part = "fit"
 
 [node name="Color4" parent="Dialog/List" instance=ExtResource( 4 )]
-margin_top = 291.0
+margin_top = 370.0
 margin_right = 560.0
-margin_bottom = 361.0
+margin_bottom = 440.0
 part = "eye"
 
 [node name="Spacer" type="Control" parent="Dialog/List" groups=["no_item"]]
-margin_top = 365.0
+margin_top = 444.0
 margin_right = 560.0
-margin_bottom = 435.0
+margin_bottom = 514.0
 rect_min_size = Vector2( 0, 70 )
 
 [node name="Random" type="Label" parent="Dialog/List"]
 margin_left = 179.0
-margin_top = 439.0
+margin_top = 518.0
 margin_right = 381.0
-margin_bottom = 490.0
+margin_bottom = 569.0
 size_flags_horizontal = 4
 custom_fonts/font = SubResource( 3 )
 text = "Random"
