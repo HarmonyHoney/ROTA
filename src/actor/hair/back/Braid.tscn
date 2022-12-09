@@ -15,12 +15,3 @@ end_scale = 0.8
 length = 50.0
 sitting_angle = 50.0
 point_count = 6
-
-[node name="Hair3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, -14 )
-scale = Vector2( -1, 1 )
-width = 20.0
-end_scale = 0.8
-length = 50.0
-sitting_angle = 50.0
-point_count = 6

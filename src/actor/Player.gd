@@ -106,6 +106,15 @@ onready var color_skin := [$Sprites/Root/Body/Head, $Sprites/Hands]
 onready var color_fit := [$Sprites/Root/Body/Fit]
 onready var color_eye := [$Sprites/Root/Body/Eyes]
 
+onready var hair_node := $Sprites/Root/Body/Hair
+onready var hair_back := $Sprites/Root/Body/Hair/Back
+onready var hair_front := $Sprites/Root/Body/Hair/Front
+export (Array, String, FILE) var hair_backs := []
+export (Array, String, FILE) var hair_fronts := []
+
+export var hairstyle_back := 0 setget set_hair_back
+export var hairstyle_front := 0 setget set_hair_front
+
 func _enter_tree():
 	if Engine.editor_hint: return
 	Shared.player = self
@@ -116,6 +125,8 @@ func _enter_tree():
 func _ready():
 	if Engine.editor_hint: return
 	solve_jump()
+	set_hair_back()
+	set_hair_front()
 
 func scene():
 	# go to last door
@@ -474,12 +485,27 @@ func _physics_process(delta):
 	var s = smoothstep(0, 1, squish_clock / squish_time)
 	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, s)
 
-### SetGet
+### Set Get
+
+func set_dir(arg := dir):
+	dir = posmod(arg, 4)
+	turn_to = deg2rad(dir * 90)
+	
+	turn_clock = 0
+	turn_from = sprites.rotation if sprites else 0
+	
+	if Engine.editor_hint:
+		$Sprites.rotation = turn_to
+	elif Cam.target_node == self:
+		Cam.turn(turn_to)
+	
+	if areas:
+		areas.rotation = turn_to
 
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
 	areas.scale.x = dir_x
-	spr_body.scale.x = dir_x
+	#hair_node.scale.x = dir_x
 	
 	anim.playback_speed = dir_x
 
@@ -497,20 +523,25 @@ func solve_jump():
 	jump_speed = -jump_gravity * jump_time
 	fall_gravity = jump_gravity * 2.0
 
-func set_dir(arg := dir):
-	dir = posmod(arg, 4)
-	turn_to = deg2rad(dir * 90)
+func set_hair_back(arg := hairstyle_back):
+	hairstyle_back = posmod(arg, hair_backs.size())
 	
-	turn_clock = 0
-	turn_from = sprites.rotation if sprites else 0
+	if hair_back:
+		for i in hair_back.get_children():
+			i.queue_free()
+		
+		var h = load(hair_backs[hairstyle_back]).instance()
+		hair_back.add_child(h)
+
+func set_hair_front(arg := hairstyle_front):
+	hairstyle_front = posmod(arg, hair_fronts.size())
 	
-	if Engine.editor_hint:
-		$Sprites.rotation = turn_to
-	elif Cam.target_node == self:
-		Cam.turn(turn_to)
-	
-	if areas:
-		areas.rotation = turn_to
+	if hair_front:
+		for i in hair_front.get_children():
+			i.queue_free()
+		
+		var h = load(hair_fronts[hairstyle_front]).instance()
+		hair_front.add_child(h)
 
 ### Movement
 

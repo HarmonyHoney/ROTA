@@ -34,7 +34,7 @@ func _physics_process(delta):
 	# keep hair behind back
 	var a = rad2deg(hair_end.angle()) - 90
 	if abs(a) < sitting_angle:
-		var diff = (sitting_angle - abs(a)) * global_scale.x
+		var diff = (sitting_angle - abs(a))
 		var l = lerp(0,  deg2rad(diff), lerp_weight)
 		hair_end = hair_end.rotated(l)
 	

@@ -51,7 +51,7 @@ func set_open(arg := is_open, is_audio := true):
 	
 	# setup items
 	if is_open:
-		hub_label.visible = !("hub" in Shared.csfn) and "hub" in Shared.last_scene
+		hub_label.visible = !("hub" in Shared.csfn or "start" in Shared.csfn) and "hub" in Shared.last_scene
 		
 		items = []
 		for i in items_node.get_children():
