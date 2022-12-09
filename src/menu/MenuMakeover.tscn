@@ -2,9 +2,9 @@
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/menu/MenuMakeover.gd" type="Script" id=2]
-[ext_resource path="res://src/menu/options/scroll/Scroll.gd" type="Script" id=3]
 [ext_resource path="res://src/menu/options/scroll/Color.tscn" type="PackedScene" id=4]
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=5]
+[ext_resource path="res://src/menu/HairStyle.gd" type="Script" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -101,12 +101,13 @@ alignment = 1
 margin_right = 560.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 is_loop = true
 list = PoolStringArray( "long", "medium", "short", "braids" )
+scenes = [ "res://src/actor/hair/back/Long.tscn", "res://src/actor/hair/back/Medium.tscn", "res://src/actor/hair/back/Short.tscn", "res://src/actor/hair/back/Braids.tscn" ]
 
 [node name="Label" type="Label" parent="Dialog/List/HairBack"]
 anchor_right = 0.5
@@ -135,12 +136,14 @@ margin_top = 74.0
 margin_right = 560.0
 margin_bottom = 144.0
 rect_min_size = Vector2( 0, 70 )
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 is_loop = true
 list = PoolStringArray( "one", "two", "bun", "buns" )
+order = "Front"
+scenes = [ "res://src/actor/hair/front/one_front.tscn", "res://src/actor/hair/front/two_front.tscn", "res://src/actor/hair/front/top_bun.tscn", "res://src/actor/hair/front/Buns.tscn" ]
 
 [node name="Label" type="Label" parent="Dialog/List/HairFront"]
 anchor_right = 0.5
