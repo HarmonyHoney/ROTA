@@ -407,8 +407,8 @@ dye = {
 "hair": 8,
 "skin": 5
 }
-hair_backs = [ "res://src/actor/hair/back/Long.tscn", "res://src/actor/hair/back/Medium.tscn", "res://src/actor/hair/back/Short.tscn", "res://src/actor/hair/back/Braid.tscn", "res://src/actor/hair/back/Braids.tscn" ]
-hair_fronts = [ "res://src/actor/hair/front/one_front.tscn", "res://src/actor/hair/front/two_front.tscn", "res://src/actor/hair/front/top_bun.tscn", "res://src/actor/hair/front/Buns.tscn" ]
+hair_backs = [ "", "res://src/actor/hair/back/Long.tscn", "res://src/actor/hair/back/Medium.tscn", "res://src/actor/hair/back/Short.tscn", "res://src/actor/hair/back/Braid.tscn", "res://src/actor/hair/back/Braids.tscn" ]
+hair_fronts = [ "", "res://src/actor/hair/front/one_front.tscn", "res://src/actor/hair/front/two_front.tscn", "res://src/actor/hair/front/top_bun.tscn", "res://src/actor/hair/front/Buns.tscn", "res://src/actor/hair/front/Mohawk.tscn" ]
 hairstyle_back = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

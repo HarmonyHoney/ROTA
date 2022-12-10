@@ -538,10 +538,11 @@ func set_hair_back(arg := hairstyle_back):
 		for i in hair_back.get_children():
 			i.queue_free()
 		
-		var h = load(hair_backs[hairstyle_back]).instance()
-		hair_back.add_child(h)
-		for i in h.get_children():
-			connect("scale_x", i, "scale_x")
+		if hairstyle_back > 0:
+			var h = load(hair_backs[hairstyle_back]).instance()
+			hair_back.add_child(h)
+			for i in h.get_children():
+				connect("scale_x", i, "scale_x")
 
 func set_hair_front(arg := hairstyle_front):
 	hairstyle_front = posmod(arg, hair_fronts.size())
@@ -550,10 +551,11 @@ func set_hair_front(arg := hairstyle_front):
 		for i in hair_front.get_children():
 			i.queue_free()
 		
-		var h = load(hair_fronts[hairstyle_front]).instance()
-		hair_front.add_child(h)
-		for i in h.get_children():
-			connect("scale_x", i, "scale_x")
+		if hairstyle_front > 0:
+			var h = load(hair_fronts[hairstyle_front]).instance()
+			hair_front.add_child(h)
+			for i in h.get_children():
+				connect("scale_x", i, "scale_x")
 
 ### Movement
 
