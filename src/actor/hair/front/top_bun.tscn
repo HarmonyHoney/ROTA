@@ -10,5 +10,5 @@ position = Vector2( 0, -25 )
 width = 17.0
 end_scale = 0.9
 length = 3.0
-sitting_angle = 90.0
+sitting_angle = 160.0
 point_count = 6

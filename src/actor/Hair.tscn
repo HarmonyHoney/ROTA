@@ -4,3 +4,4 @@
 
 [node name="Hair" type="Node2D"]
 script = ExtResource( 1 )
+sitting_angle = 45.0

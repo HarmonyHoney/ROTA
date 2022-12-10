@@ -7,22 +7,22 @@ z_index = 1
 
 [node name="Hair" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -19.2 )
-scale = Vector2( 1, -1 )
 width = 20.0
+sitting_angle = 180.0
 point_count = 6
 
 [node name="Hair2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -19.2 )
-scale = Vector2( 1, -1 )
+z_index = -2
 width = 20.0
 length = 20.0
-sitting_angle = 45.0
+sitting_angle = 150.0
 point_count = 6
 
 [node name="Hair3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -19.2 )
-scale = Vector2( 1, -1 )
+z_index = -2
 width = 20.0
 length = 15.0
-sitting_angle = 90.0
+sitting_angle = 120.0
 point_count = 6

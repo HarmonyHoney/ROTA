@@ -5,11 +5,8 @@ export var width := 50.0 setget set_width
 export var end_scale := 0.75 setget set_end
 export var length = 25.0
 export var sitting_angle = 15.0
-
-export var gravity = 190.0
-export var lerp_weight := 0.2
-
 export var point_count := 3 setget set_points
+export var gravity = 190.0
 
 var points = []
 var sizes = []
@@ -32,14 +29,7 @@ func _physics_process(delta):
 	hair_end -= hair_end - to_local(last_pos)
 	
 	# gravity
-	hair_end += Vector2.DOWN * gravity * delta
-	
-	# keep hair behind back
-	var a = rad2deg(hair_end.angle()) - 90
-	if abs(a) < sitting_angle:
-		var diff = (sitting_angle - abs(a))
-		var l = lerp(0,  deg2rad(diff), lerp_weight)
-		hair_end = hair_end.rotated(l)
+	hair_end += Vector2.DOWN.rotated(deg2rad(sitting_angle)) * gravity * delta
 	
 	# keep length
 	if hair_end.length() > length:
@@ -48,7 +38,6 @@ func _physics_process(delta):
 	# set points
 	for i in points.size():
 		points[i] = hair_end.normalized() * hair_end.length() * (float(i) / (points.size() - 1))
-	
 	
 	last_pos = to_global(hair_end)
 	update()
