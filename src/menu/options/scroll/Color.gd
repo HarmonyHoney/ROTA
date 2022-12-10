@@ -20,9 +20,7 @@ func set_value():
 	
 	if label_value: label_value.modulate = p[1]
 	
-	var a = Shared.player.get("color_" + part)
-	for i in a:
-		i.modulate = p[2]
+	Shared.player.dye[part] = cursor
 
 func set_part(arg := part):
 	part = arg

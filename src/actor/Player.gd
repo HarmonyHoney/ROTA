@@ -47,6 +47,7 @@ var is_floor := false
 
 var velocity := Vector2.ZERO
 var dir_x := 1 setget set_dir_x
+signal scale_x
 
 var walk_speed := 350.0
 var floor_accel := 12
@@ -101,12 +102,11 @@ var unpause_tick := 0
 var release_clock := 0.0
 var release_time := 0.2
 
-onready var color_hair := [$Sprites/Root/Body/Hair]
-onready var color_skin := [$Sprites/Root/Body/Head, $Sprites/Hands]
-onready var color_fit := [$Sprites/Root/Body/Fit]
-onready var color_eye := [$Sprites/Root/Body/Eyes]
+onready var colors := {"hair": [$Sprites/Root/Body/Hair], "skin": [$Sprites/Root/Body/Head, $Sprites/Hands],
+"fit": [$Sprites/Root/Body/Fit], "eye": [$Sprites/Root/Body/Eyes]}
+export(Array, Color) var palette := []
+export var dye := {"hair": 0, "skin": 0, "fit": 0, "eye": 0} setget set_dye
 
-onready var hair_node := $Sprites/Root/Body/Hair
 onready var hair_back := $Sprites/Root/Body/Hair/Back
 onready var hair_front := $Sprites/Root/Body/Hair/Front
 export (Array, String, FILE) var hair_backs := []
@@ -123,10 +123,10 @@ func _enter_tree():
 	Shared.connect("scene_changed", self, "scene")
 
 func _ready():
-	if Engine.editor_hint: return
-	solve_jump()
 	set_hair_back()
 	set_hair_front()
+	if Engine.editor_hint: return
+	solve_jump()
 
 func scene():
 	# go to last door
@@ -505,9 +505,8 @@ func set_dir(arg := dir):
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
 	areas.scale.x = dir_x
-	#hair_node.scale.x = dir_x
-	
 	anim.playback_speed = dir_x
+	emit_signal("scale_x", dir_x)
 
 func set_jump_height(arg):
 	jump_height = arg
@@ -523,6 +522,15 @@ func solve_jump():
 	jump_speed = -jump_gravity * jump_time
 	fall_gravity = jump_gravity * 2.0
 
+func set_dye(arg):
+	dye = arg
+	for i in dye.keys():
+		dye[i] = posmod(dye[i], palette.size())
+		
+		if colors and colors.has(i):
+			for y in colors[i]:
+				y.modulate = palette[dye[i]]
+
 func set_hair_back(arg := hairstyle_back):
 	hairstyle_back = posmod(arg, hair_backs.size())
 	
@@ -532,6 +540,8 @@ func set_hair_back(arg := hairstyle_back):
 		
 		var h = load(hair_backs[hairstyle_back]).instance()
 		hair_back.add_child(h)
+		for i in h.get_children():
+			connect("scale_x", i, "scale_x")
 
 func set_hair_front(arg := hairstyle_front):
 	hairstyle_front = posmod(arg, hair_fronts.size())
@@ -542,6 +552,8 @@ func set_hair_front(arg := hairstyle_front):
 		
 		var h = load(hair_fronts[hairstyle_front]).instance()
 		hair_front.add_child(h)
+		for i in h.get_children():
+			connect("scale_x", i, "scale_x")
 
 ### Movement
 

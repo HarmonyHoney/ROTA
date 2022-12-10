@@ -16,6 +16,9 @@ var sizes = []
 var last_pos := Vector2.ZERO
 var hair_end = Vector2(-150, 150)
 
+onready var start_x := scale.x
+export var is_scale_x := true
+
 func _ready():
 	set_points()
 
@@ -70,3 +73,7 @@ func set_width(arg := width):
 func set_end(arg := end_scale):
 	end_scale = arg
 	sprite_scale()
+
+func scale_x(arg):
+	if is_scale_x:
+		scale.x = start_x * arg
