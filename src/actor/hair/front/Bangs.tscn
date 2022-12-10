@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/actor/Hair.tscn" type="PackedScene" id=1]
+
+[node name="Front" type="Node2D"]
+z_index = 1
+
+[node name="Hair" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -20 )
+width = 20.0
+end_scale = 0.9
+length = 5.0
+sitting_angle = 25.0
+point_count = 6
+
+[node name="Hair2" parent="." instance=ExtResource( 1 )]
+position = Vector2( -11, -20 )
+width = 20.0
+end_scale = 0.9
+length = 4.0
+sitting_angle = 25.0
+point_count = 6
+
+[node name="Hair3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 11, -20 )
+width = 20.0
+end_scale = 0.9
+length = 4.0
+sitting_angle = 25.0
+point_count = 6

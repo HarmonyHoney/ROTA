@@ -97,7 +97,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="HairBack" type="Control" parent="Dialog/List"]
+[node name="HairBack" type="Control" parent="Dialog/List" groups=["hair"]]
 margin_right = 560.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
@@ -106,7 +106,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 is_loop = true
-list = PoolStringArray( "None", "Long", "Medium", "Short", "Braid", "Braids" )
+list = PoolStringArray( "None", "Short", "Medium", "Long", "Braid", "Braids", "Afro" )
 
 [node name="Label" type="Label" parent="Dialog/List/HairBack"]
 anchor_right = 0.5
@@ -120,7 +120,6 @@ valign = 1
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 25.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 5 )
 text = "< OFF >"
@@ -130,7 +129,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HairFront" type="Control" parent="Dialog/List"]
+[node name="HairFront" type="Control" parent="Dialog/List" groups=["hair"]]
 margin_top = 74.0
 margin_right = 560.0
 margin_bottom = 144.0
@@ -140,7 +139,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 is_loop = true
-list = PoolStringArray( "none", "one", "two", "bun", "buns", "Mohawk" )
+list = PoolStringArray( "none", "Short", "Long", "Two Short", "Two Long", "Bun", "Buns", "Mohawk", "Flat Top", "Bangs" )
 order = "front"
 
 [node name="Label" type="Label" parent="Dialog/List/HairFront"]
@@ -155,15 +154,11 @@ valign = 1
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 25.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 5 )
 text = "< OFF >"
 align = 2
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Color" parent="Dialog/List" instance=ExtResource( 4 )]
 margin_top = 148.0

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actor/Circle.gd" type="Script" id=1]
+[ext_resource path="res://src/actor/Hair.tscn" type="PackedScene" id=2]
+
+[node name="Front" type="Node2D"]
+script = ExtResource( 1 )
+radius = 20.0
+
+[node name="Hair" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -8 )
+width = 70.0
+end_scale = 0.95
+length = 8.0
+sitting_angle = 180.0
+point_count = 6

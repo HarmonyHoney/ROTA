@@ -8,7 +8,7 @@ func _ready():
 	Cam.target_node = null
 	Cam.snap_to(main_menu.pos, 0)
 	Shared.save_slot = -1
-	MenuMakeover.random()
+	MenuMakeover.preset()
 	
 	if !Music.playing:
 		randomize()

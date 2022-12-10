@@ -6,9 +6,7 @@
 z_index = 1
 
 [node name="Hair" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -25 )
-width = 17.0
-end_scale = 0.9
-length = 3.0
-sitting_angle = 160.0
-point_count = 6
+position = Vector2( 0, -19.2 )
+width = 20.0
+length = 15.0
+sitting_angle = 60.0

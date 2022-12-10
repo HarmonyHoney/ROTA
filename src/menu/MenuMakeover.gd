@@ -4,6 +4,8 @@ export var palette : PoolColorArray = []
 
 var player
 
+var pale = [3,2,2,1,0,16]
+
 func open():
 	print("open makeover")
 	
@@ -31,13 +33,22 @@ func random():
 	l.shuffle()
 	
 	for i in items:
-		if i.is_in_group("color"):
-			i.cursor = l.pop_back()
-			i.set_value()
+		if i.is_in_group("color") or i.is_in_group("hair"):
+			i.cursor = l.pop_back() if i.is_in_group("color") else randi() % i.list.size()
 
-func pale():
-	var l = [2,1,0,16]
-	
+func outfit(l := pale):
 	for i in l.size():
 		items[i].cursor = l[i]
-		items[i].set_value()
+
+func preset(l := pale):
+	var h = [[0,8], [1,9], [2,3], [2,7], [3,2], [3,4], [4,1], [5,1], [6,5]]
+	h.shuffle()
+	
+	var skin = [3,4,5,6]
+	skin.shuffle()
+	
+	var c = range(palette.size())
+	c.erase(skin[0])
+	c.shuffle()
+	
+	outfit([h[0][0], h[0][1], c[0], skin[0], c[1], c[2]])

@@ -127,6 +127,22 @@ func _ready():
 	set_hair_front()
 	if Engine.editor_hint: return
 	solve_jump()
+	
+#	randomize()
+#	set_hair_back(randi())
+#	set_hair_front(randi())
+#
+#	var colors = palette.duplicate()
+#	var skin = [3,4,5]
+#	for i in skin:
+#		colors.erase(i)
+#
+#	colors.shuffle()
+#	skin.shuffle()
+#
+#	for i in dye.keys():
+#		dye[i] = skin[0] if i == "skin" else colors.pop_back()
+	
 
 func scene():
 	# go to last door

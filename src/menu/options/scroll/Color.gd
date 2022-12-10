@@ -5,9 +5,6 @@ export (String, "hair", "skin", "fit", "eye") var part := "hair" setget set_part
 onready var swatch := $HBoxContainer.get_children()
 
 func _ready():
-	randomize()
-	cursor = randi() % MenuMakeover.palette.size()
-	set_value()
 	set_part()
 
 func set_value():
