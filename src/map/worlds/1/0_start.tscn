@@ -1,6 +1,5 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/actor/Talk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=4]
@@ -9,10 +8,7 @@
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=9]
-
-[sub_resource type="RectangleShape2D" id=1]
-resource_local_to_scene = true
-extents = Vector2( 140, 50 )
+[ext_resource path="res://src/actor/Mirror.tscn" type="PackedScene" id=10]
 
 [node name="Node2D" type="Node2D"]
 
@@ -29,15 +25,11 @@ bg_palette = 1
 position = Vector2( 500, 100 )
 scene_path = "res://src/map/worlds/1/0_hub.tscn"
 
-[node name="Talk" parent="Actors" instance=ExtResource( 1 )]
-position = Vector2( 500, 650 )
+[node name="Mirror" parent="Actors" instance=ExtResource( 10 )]
+position = Vector2( 500, 700 )
 rotation = 3.14159
-
-[node name="Arrow" parent="Actors/Talk" index="0"]
 dir = 2
-
-[node name="CollisionShape2D" parent="Actors/Talk/Arrow/Area2D" index="0"]
-shape = SubResource( 1 )
+door_path = NodePath("../Door")
 
 [node name="Details" type="Node2D" parent="."]
 
@@ -103,6 +95,3 @@ rotation = -3.14159
 [node name="Candle2" parent="Details" instance=ExtResource( 7 )]
 position = Vector2( 350, 600 )
 rotation = -3.14159
-
-[editable path="Actors/Talk"]
-[editable path="Actors/Talk/Arrow"]

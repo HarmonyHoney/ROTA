@@ -20,6 +20,7 @@ script = ExtResource( 4 )
 items_path = NodePath("Control/Menu/List/Items")
 cursor_path = NodePath("Control/Menu/List/Cursor")
 fade_path = NodePath("Control")
+is_ui_keys = true
 is_process = true
 is_back_close = true
 is_audio_back = false

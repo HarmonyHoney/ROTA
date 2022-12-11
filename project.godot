@@ -161,7 +161,7 @@ config/custom_user_dir_name="ROTA-Harmony"
 config/project_settings_override="user://override.cfg"
 boot_splash/image="res://media/image/UI/title_splash.png"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
-config/icon="res://media/image/icon/icon128.png"
+config/icon="res://media/image/box/box_push.png"
 config/windows_native_icon="res://media/image/icon/rota.ico"
 
 [autoload]

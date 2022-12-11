@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/actor/Mirror.gd" type="Script" id=1]
+[ext_resource path="res://src/actor/door/Arrow.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 1, 1, 1, 1, 0, 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+resource_local_to_scene = true
+extents = Vector2( 50, 100 )
+
+[node name="Mirror" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2( 0, -50 )
+points = PoolVector2Array( 0, 0, 0, 120 )
+width = 90.0
+default_color = Color( 0.4, 0.501961, 1, 1 )
+gradient = SubResource( 1 )
+
+[node name="Arrow" parent="." instance=ExtResource( 2 )]
+
+[node name="Area2D" parent="Arrow" index="0"]
+visible = true
+
+[node name="CollisionShape2D" parent="Arrow/Area2D" index="0"]
+shape = SubResource( 2 )
+
+[connection signal="open" from="Arrow" to="." method="_on_Arrow_open"]
+
+[editable path="Arrow"]

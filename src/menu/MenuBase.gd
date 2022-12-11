@@ -19,6 +19,7 @@ onready var fade_ease := EaseMover.new()
 
 export var text_accept := "Accept"
 export var text_cancel := "Back"
+export var is_ui_keys := false
 
 export var is_input := false
 export var is_process := false
@@ -146,9 +147,10 @@ func set_open(arg := is_open):
 		open()
 	else:
 		emit_signal("closed")
-#		for i in get_signal_connection_list("closed"):
-#			disconnect("closed", i.target, i.method)
 		close()
+	
+	if is_ui_keys:
+		UI.keys.show = is_open
 	
 	reset_joy()
 

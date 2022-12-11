@@ -11,11 +11,7 @@ func accept():
 			"Makeover":
 				sub_menu(MenuMakeover)
 
-func open():
-	UI.keys.show = true
-
 func close():
-	UI.keys.show = false
 	UI.emit_signal("dialog_closed")
 
 func write(arg := []):

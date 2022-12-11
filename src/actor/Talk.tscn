@@ -130,15 +130,6 @@ collision_mask = 0
 position = Vector2( 0, -15 )
 shape = SubResource( 17 )
 
-[node name="Image" type="Node2D" parent="."]
-position = Vector2( 0, 30.5 )
-
-[node name="Root" type="Node2D" parent="Image"]
-use_parent_material = true
-
-[node name="Body" type="Node2D" parent="Image/Root"]
-use_parent_material = true
-
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 bus = "SFX"
 

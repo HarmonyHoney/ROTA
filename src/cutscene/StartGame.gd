@@ -43,7 +43,7 @@ func begin():
 	MenuMakeover.outfit(MenuMakeover.pale)
 	if is_instance_valid(Shared.door_in):
 		Shared.door_in.visible = false
-		Shared.door_in.arrow.is_locked = false
+		Shared.door_in.arrow.is_locked = true
 	
 	set_physics_process(true)
 	clock = 0.0
