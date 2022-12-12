@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/detail/PaletteSwap.gd" type="Script" id=1]
-[ext_resource path="res://media/image/details/FlowerPetals.png" type="Texture" id=2]
 [ext_resource path="res://media/audio/sfx/guitar_pluck.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=4]
 
@@ -14,23 +13,37 @@ z_as_relative = false
 script = ExtResource( 1 )
 palette = 1
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )
-sprite_path = NodePath("Sprites/Petals")
+sprite_path = NodePath("Images")
 
 [node name="Spring" type="Node2D" parent="."]
 script = ExtResource( 4 )
-sprites_path = NodePath("../Sprites")
+sprites_path = NodePath("../Images")
 add_vel = 7.0
 weight = 2.5
 audio_path = NodePath("../Audio/Hit")
 pitch_from = 0.85
 pitch_to = 1.15
 
-[node name="Sprites" type="Node2D" parent="."]
-
-[node name="Petals" type="Sprite" parent="Sprites"]
+[node name="Images" type="Node2D" parent="."]
 modulate = Color( 1, 0, 0, 1 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+
+[node name="Line2D" type="Line2D" parent="Images"]
+rotation = -0.785397
+points = PoolVector2Array( 0, 17, 0, -17 )
+width = 17.0
+default_color = Color( 1, 1, 1, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="Images"]
+rotation = 0.785397
+points = PoolVector2Array( 0, 17, 0, -17 )
+width = 17.0
+default_color = Color( 1, 1, 1, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
