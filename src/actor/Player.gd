@@ -215,7 +215,7 @@ func _physics_process(delta):
 	hold_jump = (hold_jump + delta) if btn_jump else 0.0
 	
 	# pickup goal
-	if is_goal:
+	if is_goal and is_instance_valid(goal):
 		
 		var offset = Vector2(20, 20)
 		var p1 = goal.sprites.to_global(offset * Vector2(-1, 1))

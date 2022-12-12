@@ -289,7 +289,7 @@ func burst_screenshot(count := 30, viewport := get_tree().root):
 func collect_gem():
 	if is_instance_valid(goal) and goal.is_collected:
 		if !goals.has(map_name) or map_clock < goals[map_name]:
-			goals[map_name] = map_clock	
+			goals[map_name] = map_clock
 		
 		var o = [gem_count, clock_rank]
 		gem_count = goals.size()
