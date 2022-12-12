@@ -117,7 +117,8 @@ export var hairstyle_front := 0 setget set_hair_front
 
 func _enter_tree():
 	if Engine.editor_hint: return
-	Shared.player = self
+	if get_parent() == Shared:
+		Shared.player = self
 	MenuPause.connect("closed", self, "unpause")
 	UI.connect("dialog_closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")

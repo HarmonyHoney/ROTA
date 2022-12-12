@@ -26,7 +26,7 @@ position = Vector2( 500, 100 )
 scene_path = "res://src/map/worlds/1/0_hub.tscn"
 
 [node name="Mirror" parent="Actors" instance=ExtResource( 10 )]
-position = Vector2( 500, 700 )
+position = Vector2( 500, 702 )
 rotation = 3.14159
 dir = 2
 door_path = NodePath("../Door")
