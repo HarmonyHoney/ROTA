@@ -40,7 +40,7 @@ func begin():
 	player.move_and_collide(Vector2(0, -850))
 	player.anim.play("jump")
 	Cam.position += Vector2(0, -400)
-	MenuMakeover.outfit(MenuMakeover.pale)
+	#MenuMakeover.outfit(MenuMakeover.pale)
 	if is_instance_valid(Shared.door_in):
 		Shared.door_in.visible = false
 		Shared.door_in.arrow.is_locked = true

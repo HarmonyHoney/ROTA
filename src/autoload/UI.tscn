@@ -250,17 +250,21 @@ margin_right = 600.0
 margin_bottom = 570.0
 size_flags_vertical = 3
 
-[node name="Best" type="Label" parent="Control/Clock"]
+[node name="Down" type="VBoxContainer" parent="Control/Clock"]
 margin_top = 574.0
 margin_right = 600.0
-margin_bottom = 625.0
+margin_bottom = 680.0
+
+[node name="Best" type="Label" parent="Control/Clock/Down"]
+margin_right = 600.0
+margin_bottom = 51.0
 custom_fonts/font = SubResource( 1 )
 text = "Best 4:38"
 
-[node name="Goal" type="Label" parent="Control/Clock"]
-margin_top = 629.0
+[node name="Goal" type="Label" parent="Control/Clock/Down"]
+margin_top = 55.0
 margin_right = 600.0
-margin_bottom = 680.0
+margin_bottom = 106.0
 custom_fonts/font = SubResource( 1 )
 text = "Goal 2:16"
 

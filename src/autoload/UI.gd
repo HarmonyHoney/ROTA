@@ -11,8 +11,10 @@ var caption = EaseMover.new()
 onready var clock := $Control/Clock
 onready var clock_file := $Control/Clock/File
 onready var clock_map := $Control/Clock/Map
-onready var clock_best := $Control/Clock/Best
-onready var clock_goal := $Control/Clock/Goal
+onready var clock_down := $Control/Clock/Down
+onready var clock_best := $Control/Clock/Down/Best
+onready var clock_goal := $Control/Clock/Down/Goal
+onready var clock_ease := EaseMover.new()
 
 onready var caption_label := $Control/Caption
 onready var dialog_menu := $Control/Dialog
@@ -53,6 +55,7 @@ func _physics_process(delta):
 	keys.move(delta)
 	
 	caption_label.modulate.a = caption.count(delta)
+	clock_down.modulate.a = clock_ease.count(delta)
 
 func scene_changed():
 	up.clock = 0.0
@@ -60,8 +63,7 @@ func scene_changed():
 	var b = Shared.clock_show == Shared.SPEED.BOTH
 	clock_file.visible = m and (b or Shared.clock_show == Shared.SPEED.FILE)
 	clock_map.visible = not "hub" in Shared.map_name and m and (b or Shared.clock_show == Shared.SPEED.MAP)
-	clock_best.visible = false
-	clock_goal.visible = false
+	clock_ease.show = false
 
 func menu_keys(accept := "", cancel := ""):
 	var c = $Control/Keys/List.get_children()
