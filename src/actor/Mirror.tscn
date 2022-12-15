@@ -41,7 +41,7 @@ z_index = 4
 
 [node name="ColorRect" type="ColorRect" parent="Wall"]
 material = SubResource( 4 )
-margin_left = -175.0
+margin_left = -225.0
 margin_top = -100.0
 margin_right = -75.0
 margin_bottom = 100.0
@@ -53,7 +53,7 @@ rect_min_size = Vector2( 100, 200 )
 material = SubResource( 4 )
 margin_left = 75.0
 margin_top = -100.0
-margin_right = 175.0
+margin_right = 225.0
 margin_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -61,9 +61,9 @@ rect_min_size = Vector2( 100, 200 )
 
 [node name="ColorRect3" type="ColorRect" parent="Wall"]
 material = SubResource( 4 )
-margin_left = -175.0
-margin_top = -200.0
-margin_right = 175.0
+margin_left = -225.0
+margin_top = -250.0
+margin_right = 225.0
 margin_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -71,10 +71,10 @@ rect_min_size = Vector2( 350, 100 )
 
 [node name="ColorRect4" type="ColorRect" parent="Wall"]
 material = SubResource( 4 )
-margin_left = -175.0
+margin_left = -225.0
 margin_top = 100.0
-margin_right = 175.0
-margin_bottom = 200.0
+margin_right = 225.0
+margin_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 350, 100 )

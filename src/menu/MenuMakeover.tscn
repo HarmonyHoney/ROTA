@@ -83,7 +83,7 @@ __meta__ = {
 margin_left = 342.0
 margin_top = 140.0
 margin_right = 412.0
-margin_bottom = 505.0
+margin_bottom = 440.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""

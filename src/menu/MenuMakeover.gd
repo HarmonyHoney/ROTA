@@ -44,7 +44,7 @@ func preset(l := pale):
 	var h = [[0,8], [1,9], [2,3], [2,7], [3,2], [3,4], [4,1], [5,1], [6,5]]
 	h.shuffle()
 	
-	var skin = [3,4,5,6]
+	var skin = [4,5,6]
 	skin.shuffle()
 	
 	var c = range(palette.size())
