@@ -391,6 +391,8 @@ func _physics_process(delta):
 				if btn_jump and hold_jump < jump_buffer:
 					is_floor = false
 					anim.play("jump")
+					if dir_x > 0:
+						anim.advance(anim.current_animation_length / 2.0)
 					
 					is_jump = true
 					has_jumped = true
