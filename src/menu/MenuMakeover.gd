@@ -33,7 +33,7 @@ func random():
 	
 	for i in items:
 		if i.is_in_group("color") or i.is_in_group("hair"):
-			i.cursor = l.pop_back() if i.is_in_group("color") else randi() % i.list.size()
+			i.cursor = l.pop_back() if i.is_in_group("color") else randi() % (i.count + 1)
 
 func outfit(l := pale):
 	for i in l.size():

@@ -17,7 +17,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 1 )
-text = "Hair"
+text = "Color"
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

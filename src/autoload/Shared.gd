@@ -284,6 +284,12 @@ func burst_screenshot(count := 30, viewport := get_tree().root):
 		images[i].save_png("user://snap/" + s + "snap" + str(i) + ".png")
 		yield(get_tree(), "idle_frame")
 
+func get_all_children(n, a := []):
+	a.append(n)
+	for i in n.get_children():
+		a = get_all_children(i, a)
+	return a
+
 ### Gems
 
 func collect_gem():

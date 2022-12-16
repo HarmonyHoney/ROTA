@@ -21,6 +21,8 @@ export var dist_scale := Vector2(0.9, 0.9)
 export var offset := Vector2(100, 0)
 var dir_x := 1.0
 
+export var hide_distance := 50.0
+
 func _ready():
 	MenuMakeover.connect("closed", self, "closed")
 	get_tree().connect("idle_frame", self, "idle_frame")
@@ -58,15 +60,9 @@ func create_rig():
 		from.append(i[0])
 		to.append(i[1])
 	
-	for i in get_all_children(sprites.get_node("Root/Body/Hair")):
+	for i in Shared.get_all_children(sprites.get_node("Root/Body/Hair")):
 		if i.has_method("scale_x"):
 			p.connect("scale_x", i, "scale_x")
-
-func get_all_children(in_node, arr := []):
-	arr.push_back(in_node)
-	for child in in_node.get_children():
-		arr = get_all_children(child, arr)
-	return arr
 
 func _on_Arrow_open():
 	MenuMakeover.is_open = true
@@ -89,7 +85,7 @@ func idle_frame():
 	
 	dist = to_local(p.global_position)
 	rig.position = dist + (offset * dir_x)
-	rig.visible = color_rect.get_rect().grow(40).has_point(rig.position)
+	rig.visible = color_rect.get_rect().grow(hide_distance).has_point(rig.position)
 	
 	if abs(dist.x) > 200:
 		dir_x = -sign(dist.x)
