@@ -7,7 +7,7 @@ export var dir := 0
 export var door_path : NodePath
 onready var door_node := get_node_or_null(door_path)
 
-onready var color_rect := $Back
+onready var color_rect := $Back/ColorRect
 onready var rig := $Rig
 onready var rig_ease := EaseMover.new()
 
@@ -57,6 +57,16 @@ func create_rig():
 	for i in combo:
 		from.append(i[0])
 		to.append(i[1])
+	
+	for i in get_all_children(sprites.get_node("Root/Body/Hair")):
+		if i.has_method("scale_x"):
+			p.connect("scale_x", i, "scale_x")
+
+func get_all_children(in_node, arr := []):
+	arr.push_back(in_node)
+	for child in in_node.get_children():
+		arr = get_all_children(child, arr)
+	return arr
 
 func _on_Arrow_open():
 	MenuMakeover.is_open = true

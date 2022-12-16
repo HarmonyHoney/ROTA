@@ -7,8 +7,7 @@ var player
 var pale = [3,2,2,1,0,16]
 
 func open():
-	print("open makeover")
-	
+	#print("open makeover")
 	Cam.turn_offset = Vector2(-100, -10)
 	Cam.start_zoom(0, true, 0.4)
 	player = Shared.player
@@ -16,7 +15,7 @@ func open():
 	player.is_input = false
 
 func close():
-	print("close makeover")
+	#print("close makeover")
 	Cam.turn_offset = Vector2.ZERO
 	Cam.start_zoom(0)
 	

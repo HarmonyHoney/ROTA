@@ -27,8 +27,15 @@ shape = SubResource( 1 )
 [node name="Image" parent="Arrow" index="1"]
 position = Vector2( 0, -170 )
 
-[node name="Back" type="ColorRect" parent="."]
+[node name="Back" type="Node2D" parent="."]
+z_index = -5
+
+[node name="ColorRect" type="ColorRect" parent="Back"]
 modulate = Color( 0.7, 1, 1, 1 )
+margin_left = -75.0
+margin_top = -100.0
+margin_right = 75.0
+margin_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 150, 200 )
