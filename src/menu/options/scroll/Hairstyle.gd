@@ -10,7 +10,7 @@ var items := []
 var styles := []
 
 func _ready():
-	label_desc.text = order.capitalize()
+	label_desc.text = "Hair" if order == "front" else ""
 	for i in scenes.size():
 		if i == 0: continue
 		

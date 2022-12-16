@@ -13,6 +13,10 @@ func fill_items():
 	
 	.fill_items()
 
+func set_cursor(a := cursor):
+	.set_cursor(a)
+	is_audio_joy = cursor > 3
+
 func open():
 	bg.visible = Shared.csfn != Shared.title_path
 

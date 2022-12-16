@@ -36,6 +36,7 @@ use_filter = true
 font_data = ExtResource( 1 )
 
 [node name="MenuMakeover" type="CanvasLayer"]
+pause_mode = 2
 script = ExtResource( 2 )
 items_path = NodePath("Dialog/List")
 cursor_path = NodePath("Dialog/Cursor")
@@ -45,6 +46,7 @@ is_input = true
 is_process = true
 is_back_close = true
 is_joy_x = true
+is_audio_joy = true
 palette = PoolColorArray( 0.14902, 0.14902, 0.14902, 1, 0.423529, 0.423529, 0.501961, 1, 0.85098, 0.945098, 1, 1, 0.921569, 0.921569, 0.921569, 1, 1, 0.717647, 0.717647, 1, 0.478431, 0.25098, 0.423529, 1, 1, 0.498039, 0, 1, 1, 1, 0, 1, 0.498039, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0.498039, 1, 0, 1, 1, 1, 0, 0.498039, 1, 1, 0, 0, 1, 1, 0.498039, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.498039, 1, 1, 0, 0, 1 )
 
 [node name="Dialog" type="Control" parent="."]
@@ -99,20 +101,20 @@ size_flags_vertical = 4
 custom_constants/separation = 10
 alignment = 1
 
-[node name="HairBack" parent="Dialog/List" instance=ExtResource( 3 )]
+[node name="HairFront" parent="Dialog/List" instance=ExtResource( 3 )]
 margin_top = 2.0
 margin_bottom = 72.0
-list = PoolStringArray(  )
-
-[node name="HairFront" parent="Dialog/List" instance=ExtResource( 3 )]
-margin_top = 82.0
-margin_bottom = 152.0
 __meta__ = {
 "_editor_description_": ""
 }
 count = 9
 order = "front"
 scenes = [ "", "res://src/actor/hair/front/OneShort.tscn", "res://src/actor/hair/front/OneLong.tscn", "res://src/actor/hair/front/TwoShort.tscn", "res://src/actor/hair/front/TwoLong.tscn", "res://src/actor/hair/front/Bun.tscn", "res://src/actor/hair/front/Buns.tscn", "res://src/actor/hair/front/Mohawk.tscn", "res://src/actor/hair/front/FlatTop.tscn", "res://src/actor/hair/front/Bangs.tscn" ]
+
+[node name="HairBack" parent="Dialog/List" instance=ExtResource( 3 )]
+margin_top = 82.0
+margin_bottom = 152.0
+list = PoolStringArray(  )
 
 [node name="Color" parent="Dialog/List" instance=ExtResource( 4 )]
 margin_top = 162.0

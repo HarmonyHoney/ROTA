@@ -7,3 +7,4 @@
 [node name="Hair" parent="." instance=ExtResource( 1 )]
 end_scale = 0.8
 length = 7.0
+sitting_angle = 15.0

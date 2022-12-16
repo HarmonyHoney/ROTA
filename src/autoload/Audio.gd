@@ -4,6 +4,7 @@ onready var menu_cursor := $Menu/Cursor
 onready var menu_accept := $Menu/Accept
 onready var menu_cancel := $Menu/Cancel
 onready var menu_pause := $Menu/Pause
+onready var menu_joy := $Menu/Joy
 
 onready var gem_collect := $Gem/Collect
 onready var gem_show := $Gem/Show

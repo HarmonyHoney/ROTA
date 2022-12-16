@@ -17,7 +17,7 @@ export var fade_path : NodePath
 onready var fade_node = get_node_or_null(fade_path)
 onready var fade_ease := EaseMover.new()
 
-export var text_accept := "Accept"
+export var text_accept := "Act"
 export var text_cancel := "Back"
 export var is_ui_keys := false
 
@@ -45,6 +45,7 @@ export var sub_stay_open := false
 export var is_audio_cursor := true
 export var is_audio_accept := true
 export var is_audio_back := true
+export var is_audio_joy := false
 
 func _ready():
 	fill_items()
@@ -61,6 +62,7 @@ func _physics_process(delta):
 func menu_input(event):
 	if !is_open or is_sub_menu or sub_ease.frac() > 0.5 or (fade_node and fade_ease.frac() < 0.5): return
 	
+	var last_open = is_open
 	var accept = event.is_action_pressed("ui_accept")
 	var back = event.is_action_pressed("ui_cancel")
 	
@@ -75,7 +77,6 @@ func menu_input(event):
 		
 		if is_audio_back:
 			audio_back()
-		#get_tree().set_input_as_handled()
 	elif accept and event.is_pressed():
 		if is_accept_close:
 			self.is_open = false
@@ -84,11 +85,13 @@ func menu_input(event):
 		
 		if is_audio_accept:
 			audio_accept()
-		#get_tree().set_input_as_handled()
 	elif joy.y != 0 and joy.y != joy_last.y:
 		self.cursor = wrapi(cursor + joy.y, 0, items.size())
 	elif joy.x != 0 and joy.x != joy_last.x:
 		joy_x(joy.x)
+	
+	if is_open != last_open:
+		get_tree().set_input_as_handled()
 
 func menu_process(delta):
 	if fade_node:
@@ -177,6 +180,9 @@ func back():
 func joy_x(arg := 1):
 	if is_joy_x and items[cursor].has_method("axis_x"):
 		items[cursor].axis_x(arg)
+	
+	if is_audio_joy:
+		audio_joy()
 
 func joy_y(arg := 1):
 	if is_joy_y and items[cursor].has_method("axis_y"):
@@ -211,3 +217,6 @@ func audio_back():
 
 func audio_cursor():
 	Audio.play(Audio.menu_cursor, 0.8, 1.2)
+
+func audio_joy():
+	Audio.play(Audio.menu_joy, 0.7, 1.5)

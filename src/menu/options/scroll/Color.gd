@@ -21,4 +21,4 @@ func set_value():
 
 func set_part(arg := part):
 	part = arg
-	if label_desc: label_desc.text = part.capitalize()
+	if label_desc: label_desc.text = "" if part == "hair" else part.capitalize()

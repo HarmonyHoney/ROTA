@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://media/audio/sfx/shine_get.wav" type="AudioStream" id=5]
 [ext_resource path="res://media/audio/sfx/shine_sparkle.wav" type="AudioStream" id=6]
 [ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=7]
+[ext_resource path="res://media/audio/sfx/Randomize104.wav" type="AudioStream" id=8]
 
 [node name="Audio" type="Node"]
 script = ExtResource( 1 )
@@ -29,6 +30,14 @@ bus = "SFX"
 [node name="Pause" type="AudioStreamPlayer" parent="Menu"]
 stream = ExtResource( 7 )
 volume_db = -6.0
+bus = "SFX"
+
+[node name="Joy" type="AudioStreamPlayer" parent="Menu"]
+stream = ExtResource( 7 )
+bus = "SFX"
+
+[node name="Joy2" type="AudioStreamPlayer" parent="Menu"]
+stream = ExtResource( 8 )
 bus = "SFX"
 
 [node name="Gem" type="Node" parent="."]

@@ -48,6 +48,7 @@ var is_floor := false
 var velocity := Vector2.ZERO
 var dir_x := 1 setget set_dir_x
 signal scale_x
+var idle_dir := "idle"
 
 var walk_speed := 350.0
 var floor_accel := 12
@@ -129,21 +130,10 @@ func _ready():
 	if Engine.editor_hint: return
 	solve_jump()
 	
-#	randomize()
-#	set_hair_back(randi())
-#	set_hair_front(randi())
-#
-#	var colors = palette.duplicate()
-#	var skin = [3,4,5]
-#	for i in skin:
-#		colors.erase(i)
-#
-#	colors.shuffle()
-#	skin.shuffle()
-#
-#	for i in dye.keys():
-#		dye[i] = skin[0] if i == "skin" else colors.pop_back()
-	
+	var l = anim.get_animation("idle").duplicate()
+	for i in 3:
+		l.bezier_track_set_key_value(2, i, -l.bezier_track_get_key_value(2, i))
+	anim.add_animation("idle_left", l)
 
 func scene():
 	# go to last door
@@ -165,7 +155,7 @@ func scene():
 	if test_move(transform, test):
 		move_and_collide(test)
 		is_floor = true
-		anim.play("idle")
+		anim.play(idle_dir)
 	else:
 		anim.play("jump")
 	
@@ -391,7 +381,7 @@ func _physics_process(delta):
 			if is_floor:
 				
 				# animation
-				anim.play("idle" if joy.x == 0 else "walk")
+				anim.play(idle_dir if joy.x == 0 else "walk")
 				
 				# hold cooldown
 				if hold_clock < hold_cooldown:
@@ -522,6 +512,7 @@ func set_dir(arg := dir):
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
 	areas.scale.x = dir_x
+	idle_dir = "idle" if dir_x > 0 else "idle_left"
 	anim.playback_speed = dir_x
 	emit_signal("scale_x", dir_x)
 
@@ -635,8 +626,6 @@ func _on_BodyArea_area_entered(area):
 		is_floor = false
 		velocity = Vector2.ZERO
 		goal_start = position
-		
-		#anim.play("idle")
 		anim.stop()
 		
 		for i in spr_hands.size():
@@ -691,7 +680,7 @@ func release_anim():
 	anim.play("release")
 
 func enter_door():
-	anim.play("idle")
+	anim.play(idle_dir)
 	joy = Vector2.ZERO
 
 func unpause():
