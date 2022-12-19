@@ -4,6 +4,7 @@ onready var sprites = $Sprites
 onready var gem := $Sprites/Gem
 onready var area = $Area2D
 onready var start_pos := position
+var shine_easy := EaseMover.new(0.8)
 
 var player = null
 var is_collected := false
@@ -26,6 +27,10 @@ func _ready():
 		sprites.modulate = Color(c,c,c, 0.2)
 
 func _physics_process(delta):
+	if shine_easy.clock > 0:
+		shine_easy.count(delta, false)
+		sprites.scale = Vector2.ONE * lerp(1.0, 1.8, shine_easy.smooth())
+	
 	# follow player
 	if is_collected and player != null and is_follow:
 		var target = player.position + player.rot(Vector2.UP * 20)
@@ -36,15 +41,16 @@ func turning(angle):
 
 func pickup(ply):
 	if is_collected: return
-	player = ply
 	is_collected = true
-	area.set_deferred("monitorable", false)
-	
+	player = ply
 	start_pos = position
-	#area.monitorable = false
-	
+	area.set_deferred("monitorable", false)
 	Audio.play(Audio.gem_collect)
 
 func cheat_code(cheat):
 	if "konami" in cheat:
 		pass#pickup(Shared.player)
+
+func shine():
+	shine_easy.clock = shine_easy.time
+	Audio.play(Audio.gem_show)

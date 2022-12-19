@@ -11,7 +11,7 @@ func _ready():
 	if Engine.editor_hint: return
 	
 	CheatCode.connect("activate", self, "cheat_code")
-	if arrow.is_locked:
+	if !arrow.is_locked:
 		arrow.is_locked = Shared.gem_count < gem_count
 
 func set_gem(arg := gem_count):

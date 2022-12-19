@@ -6,7 +6,7 @@ var box : Box = null
 var is_deploy := false
 var last_deploy := false
 
-var easy := EaseMover.new(0.3)
+var easy := EaseMover.new()
 
 var _delta := 1.0 / 60.0
 

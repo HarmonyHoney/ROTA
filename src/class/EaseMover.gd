@@ -10,11 +10,11 @@ var node
 
 var is_complete setget , get_complete
 
-func _init(_node := node, _time := time, _from := from, _to := to):
-	node = _node
+func _init(_time := time, _from := from, _to := to, _node := node):
 	time = _time
 	from = _from
 	to = _to
+	node = _node
 
 func count(delta, arg := show):
 	clock = clamp(clock + (delta if arg else -delta), 0, time)
@@ -24,7 +24,7 @@ func move(delta, arg := show):
 	count(delta, arg)
 	current = from.linear_interpolate(to, smooth())
 	
-	if node:
+	if is_instance_valid(node):
 		node.rect_position = current
 	
 	return current

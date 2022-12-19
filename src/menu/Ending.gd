@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 onready var label := $Label
-onready var label_ease := EaseMover.new(null, 1.5)
+onready var label_ease := EaseMover.new(1.5)
 var is_start := false
 var is_back := false
 

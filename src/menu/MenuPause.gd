@@ -3,11 +3,11 @@ extends MenuBase
 onready var hub_label := $Control/Menu/List/Items/Hub
 
 func _ready():
-	Wipe.connect("start_wipe_out", self, "start_wipe_out")
-	Wipe.connect("wipe_out", self, "wipe_out")
-	Wipe.connect("wipe_in", self, "wipe_in")
+	Wipe.connect("complete", self, "wipe_complete")
 
 func _input(event):
+	if Wipe.is_wipe: return
+	
 	if is_open:
 		if event.is_action_pressed("ui_pause") and !is_sub_menu and (fade_ease.frac() > 0.5):
 			self.is_open = false
@@ -32,17 +32,11 @@ func accept():
 		"exit":
 			Shared.wipe_scene(Shared.title_path)
 
-func start_wipe_out():
-	set_process_input(false)
-
-func wipe_out():
-	# close menu
+func wipe_complete(arg):
 	if is_open:
+		# close menu
 		set_open(false, false)
 		fade_ease.clock = 0
-
-func wipe_in():
-	set_process_input(true)
 
 func set_open(arg := is_open, is_audio := true):
 	.set_open(arg)

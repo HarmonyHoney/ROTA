@@ -10,6 +10,7 @@ onready var anim : AnimationPlayer = $AnimationPlayer
 onready var sprites := $Sprites
 onready var spr_root := $Sprites/Root
 onready var spr_body := $Sprites/Root/Body
+var spr_easy := EaseMover.new()
 
 onready var spr_hand_l := $Sprites/Hands/Left
 onready var spr_hand_r := $Sprites/Hands/Right
@@ -123,6 +124,7 @@ func _enter_tree():
 	MenuPause.connect("closed", self, "unpause")
 	UI.connect("dialog_closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")
+	Wipe.connect("start", self, "wipe_start")
 
 func _ready():
 	set_hair_back()
@@ -134,6 +136,9 @@ func _ready():
 	for i in 3:
 		l.bezier_track_set_key_value(2, i, -l.bezier_track_get_key_value(2, i))
 	anim.add_animation("idle_left", l)
+
+func wipe_start(arg):
+	spr_easy.show = arg
 
 func scene():
 	# go to last door
@@ -165,6 +170,8 @@ func scene():
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
+	
+	sprites.modulate.a = spr_easy.count(delta)
 	
 	if is_dead:
 		sprites.position += rot(velocity) * delta
@@ -239,6 +246,7 @@ func _physics_process(delta):
 				
 				# finished
 				if goal_step > 2:
+					goal_step = 0
 					is_goal = false
 					goal.gem.z_as_relative = false
 					goal.is_follow = true
@@ -678,7 +686,6 @@ func release_anim():
 	rel.bezier_track_set_key_value(rh, 0, spr_hand_r.position.x)
 	rel.bezier_track_set_key_value(rh + 1, 0, spr_hand_r.position.y)
 	
-	anim.add_animation("release", rel)
 	anim.play("release")
 
 func enter_door():

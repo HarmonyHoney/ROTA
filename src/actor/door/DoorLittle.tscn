@@ -4,7 +4,7 @@
 [ext_resource path="res://media/image/door/door.png" type="Texture" id=2]
 [ext_resource path="res://src/actor/door/DoorLittle.gd" type="Script" id=3]
 [ext_resource path="res://src/actor/Clock.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/actor/Gem.gd" type="Script" id=5]
 
 [node name="Door" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -15,8 +15,17 @@ scale = Vector2( 0.1, 0.1 )
 [node name="Door" type="Sprite" parent="Sprites" index="0"]
 texture = ExtResource( 2 )
 
-[node name="Gem" parent="." index="3" instance=ExtResource( 6 )]
+[node name="Gem" type="Node2D" parent="." index="3"]
 position = Vector2( 0, -5 )
+script = ExtResource( 5 )
+
+[node name="Back" type="Polygon2D" parent="Gem" index="0"]
+color = Color( 0.686275, 0, 1, 1 )
+polygon = PoolVector2Array( -30, 0, 0, -30, 30, 0, 0, 30 )
+
+[node name="Fill" type="Polygon2D" parent="Gem/Back" index="0"]
+color = Color( 1, 0, 0.913725, 1 )
+polygon = PoolVector2Array( -20, 0, 0, -20, 20, 0, 0, 20 )
 
 [node name="Clock" parent="." index="4" instance=ExtResource( 4 )]
 visible = false

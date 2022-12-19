@@ -44,10 +44,10 @@ var is_turn := false
 
 var pickup_angle := 12.0
 
-onready var push_ease := EaseMover.new(null, 0.2)
-onready var turn_ease := EaseMover.new(null, 0.2)
-onready var respawn_ease := EaseMover.new(null, 1.0)
-onready var pickup_ease := EaseMover.new(null, 0.2)
+onready var push_ease := EaseMover.new(0.2)
+onready var turn_ease := EaseMover.new(0.2)
+onready var respawn_ease := EaseMover.new(1.0)
+onready var pickup_ease := EaseMover.new(0.2)
 
 var velocity := 0.0
 export var start_velocity := 100.0

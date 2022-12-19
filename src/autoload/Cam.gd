@@ -30,6 +30,11 @@ var zoom_steps := 2
 
 var rot_offset := Vector2.ZERO
 
+var is_pan := false
+var pan_ease := EaseMover.new(1.0)
+signal pan_complete
+
+
 func _enter_tree():
 	Shared.connect("scene_changed", self, "scene_changed")
 
@@ -41,25 +46,32 @@ func _input(event):
 		start_zoom(zoom_step + 1)
 
 func _process(delta):
+	# zoom
+	if is_zoom:
+		zoom = Vector2.ONE * lerp(zoom_from, zoom_to, zoom_ease.count(delta))
+		if zoom_ease.is_complete:
+			is_zoom = false
+	
 	# rotation
 	if is_rotating:
 		if turn_ease.clock < turn_ease.time:
 			rotation = lerp_angle(turn_from, turn_to, turn_ease.count(delta))
 			emit_signal("turning", rotation)
 	
-	# track target
-	if is_instance_valid(target_node):
-		target_pos = target_node.global_position
-	
-	# position
-	if is_moving:
-		global_position = global_position.linear_interpolate(target_pos + turn_offset.rotated(rotation), 0.08)
-	
-	# zoom
-	if is_zoom:
-		zoom = Vector2.ONE * lerp(zoom_from, zoom_to, zoom_ease.count(delta))
-		if zoom_ease.is_complete:
-			is_zoom = false
+	if is_pan:
+		global_position = pan_ease.move(delta)
+		if pan_ease.is_complete:
+			emit_signal("pan_complete")
+			#print("pan_complete")
+			is_pan = false
+	else:
+		# track target
+		if is_instance_valid(target_node):
+			target_pos = target_node.global_position
+		
+		# position
+		if is_moving:
+			global_position = global_position.linear_interpolate(target_pos + turn_offset.rotated(rotation), 0.08)
 
 func turn(arg):
 	turn_from = rotation
@@ -99,3 +111,11 @@ func snap_to(pos, turn):
 	reset_smoothing()
 	force_update_scroll()
 	force_update_transform()
+
+func pan(pos : Vector2):
+	pan_ease.clock = 0
+	is_pan = true
+	target_pos = pos
+	pan_ease.from = global_position
+	pan_ease.to = target_pos
+	pan_ease.time = lerp(0.3, 1.0, clamp(pan_ease.from.distance_to(pan_ease.to) / 100.0, 0, 20) / 20)

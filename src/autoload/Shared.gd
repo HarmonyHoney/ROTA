@@ -115,7 +115,7 @@ Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
 var is_demo := false
 
 func _ready():
-	Wipe.connect("wipe_out", self, "wipe_out")
+	Wipe.connect("complete", self, "wipe_complete")
 	#set_volume(0, 50)
 	set_volume(1, 50)
 	set_volume(2, 50)
@@ -204,10 +204,11 @@ func wipe_scene(arg, last := csfn):
 	
 	return false
 
-func wipe_out():
+func wipe_complete(arg):
 	if is_wipe:
-		Wipe.start(true)
+		is_wipe = false
 		change_scene()
+		Wipe.start(true)
 
 func reset():
 	wipe_scene(csfn)
@@ -216,9 +217,7 @@ func change_scene():
 	is_wipe = false
 	boxes.clear()
 	
-	Cutscene.end_all()
 	emit_signal("scene_before")
-	
 	
 	is_reload = next_scene == csfn
 	if is_reload:

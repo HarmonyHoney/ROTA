@@ -1,58 +1,22 @@
 extends Node
 
-var is_playing := false
-var step := 0
-var clock := 0.0
-
-var player
-
-func _ready():
-	set_physics_process(false)
-
-func _physics_process(delta):
-	clock += delta
-	
-	match step:
-		0:
-			if clock > 0.5:
-				next_step()
-		1:
-			if clock > 0.6:
-				next_step()
-				
-				Cam.set_process(true)
-		2:
-			if clock > 0.3:
-				end()
-
-func next_step():
-	clock = 0.0
-	step += 1
-
-func begin():
-	player = Shared.player
-	if !is_instance_valid(player):
-		return
-	
-	is_playing = true
-	Cutscene.start()
+func act():
+	Cutscene.is_playing = true
 	Cam.set_process(false)
-	player.move_and_collide(Vector2(0, -850))
-	player.anim.play("jump")
 	Cam.position += Vector2(0, -400)
-	#MenuMakeover.outfit(MenuMakeover.pale)
+	
+	if is_instance_valid(Shared.player):
+		var p = Shared.player
+		p.move_and_collide(Vector2(0, -850))
+		p.is_floor = false
+		p.has_jumped = true
+		p.anim.play("jump")
+		
 	if is_instance_valid(Shared.door_in):
 		Shared.door_in.visible = false
 		Shared.door_in.arrow.is_locked = true
 	
-	set_physics_process(true)
-	clock = 0.0
-	step = 0
-
-func end():
-	is_playing = false
-	Cutscene.end()
+	yield(get_tree().create_timer(1.2), "timeout")
 	Cam.set_process(true)
-	
-	set_physics_process(false)
-
+	yield(get_tree().create_timer(0.2), "timeout")
+	Cutscene.is_playing = false

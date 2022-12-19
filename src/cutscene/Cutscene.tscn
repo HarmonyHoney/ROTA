@@ -8,11 +8,13 @@
 [node name="Cutscene" type="Node"]
 script = ExtResource( 1 )
 
-[node name="GemCollect" type="Node" parent="."]
-script = ExtResource( 2 )
+[node name="StartGame" type="Node" parent="."]
+script = ExtResource( 6 )
 
 [node name="GoalShow" type="Node" parent="."]
 script = ExtResource( 3 )
 
-[node name="StartGame" type="Node" parent="."]
-script = ExtResource( 6 )
+[node name="GemCollect" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Clock" type="Node" parent="."]
