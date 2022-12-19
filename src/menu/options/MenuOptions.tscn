@@ -5,20 +5,20 @@
 [ext_resource path="res://media/font/profile/OptionsHeader.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/menu/options/MenuOptions.gd" type="Script" id=4]
 [ext_resource path="res://src/menu/options/OpenRemap.gd" type="Script" id=5]
-[ext_resource path="res://src/menu/options/Resolution.gd" type="Script" id=6]
-[ext_resource path="res://src/menu/options/onoff/OnOff.gd" type="Script" id=7]
+[ext_resource path="res://src/menu/options/scroll/Resolution.gd" type="Script" id=6]
+[ext_resource path="res://src/menu/options/scroll/Scroll.gd" type="Script" id=7]
 [ext_resource path="res://media/image/UI/Input.png" type="Texture" id=8]
 [ext_resource path="res://media/image/UI/Audio.png" type="Texture" id=9]
 [ext_resource path="res://media/audio/sfx/Randomize104.wav" type="AudioStream" id=10]
 [ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=11]
 [ext_resource path="res://media/image/UI/Video.png" type="Texture" id=12]
-[ext_resource path="res://src/menu/options/Volume.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/menu/options/onoff/Fullscreen.gd" type="Script" id=14]
+[ext_resource path="res://src/menu/options/scroll/Volume.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/menu/options/scroll/Fullscreen.gd" type="Script" id=14]
 [ext_resource path="res://src/menu/options/scroll/SpeedClock.gd" type="Script" id=15]
 [ext_resource path="res://src/menu/options/scroll/SpeedAlpha.gd" type="Script" id=16]
-[ext_resource path="res://src/menu/options/onoff/Vsync.gd" type="Script" id=17]
-[ext_resource path="res://src/menu/options/onoff/Mouse.gd" type="Script" id=18]
-[ext_resource path="res://src/menu/options/onoff/Borderless.gd" type="Script" id=19]
+[ext_resource path="res://src/menu/options/scroll/Vsync.gd" type="Script" id=17]
+[ext_resource path="res://src/menu/options/scroll/Mouse.gd" type="Script" id=18]
+[ext_resource path="res://src/menu/options/scroll/Borderless.gd" type="Script" id=19]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
@@ -360,9 +360,6 @@ size_flags_vertical = 6
 custom_fonts/font = ExtResource( 2 )
 text = "Fullscreen"
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label2" type="Label" parent="Control/Menu/List/Fullscreen"]
 anchor_left = 0.5
@@ -427,11 +424,8 @@ size_flags_vertical = 6
 custom_fonts/font = ExtResource( 2 )
 text = "Window Size"
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Resolution" type="Label" parent="Control/Menu/List/Resolution"]
+[node name="Label2" type="Label" parent="Control/Menu/List/Resolution"]
 anchor_left = 0.25
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -126,12 +126,18 @@ func menu_process(delta):
 				scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
 
 func set_cursor(arg := 0):
+	select(false)
 	cursor = clamp(arg, 0, max(items.size() - 1, 0))
+	select(true)
 	if is_audio_cursor:
 		audio_cursor()
 
+func select(_is_select := true, _cursor := cursor):
+	if _cursor < items.size() and items[_cursor].has_method("select"):
+		items[_cursor].select(_is_select)
+
 func reset_cursor():
-	cursor = 0
+	self.cursor = 0
 	if items_node and cursor_node:
 		cursor_node.rect_global_position = items[0].rect_global_position - cursor_margin
 		cursor_node.rect_size = items[0].rect_size + (cursor_margin * 2.0)

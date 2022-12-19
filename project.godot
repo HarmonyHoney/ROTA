@@ -34,11 +34,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/menu/MenuBase.gd"
 }, {
-"base": "Control",
-"class": "OnOff",
-"language": "GDScript",
-"path": "res://src/menu/options/onoff/OnOff.gd"
-}, {
 "base": "Node2D",
 "class": "PaletteSwap",
 "language": "GDScript",
@@ -130,7 +125,6 @@ _global_script_class_icons={
 "Door": "",
 "EaseMover": "",
 "MenuBase": "",
-"OnOff": "",
 "PaletteSwap": "",
 "Player": "",
 "SaveDict": "",
@@ -345,4 +339,19 @@ reset={
 2d_physics/layer_1="solid"
 2d_physics/layer_2="player"
 2d_physics/layer_3="box"
-2d_physics/layer_4="spik
+2d_physics/layer_4="spike"
+2d_physics/layer_5="spinner"
+2d_physics/layer_6="arrow"
+2d_physics/layer_7="portal"
+2d_physics/layer_8="exit"
+2d_physics/layer_11="door"
+2d_physics/layer_12="goal"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0, 0.741176, 1, 1 )
+environment/default_environment="res://default_env.tres"
