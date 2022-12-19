@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/menu/MenuMakeover.gd" type="Script" id=2]
 [ext_resource path="res://src/menu/options/scroll/Hairstyle.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/menu/options/scroll/Color.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actor/Hair.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actor/Circle.gd" type="Script" id=6]
+[ext_resource path="res://media/image/UI/hand.png" type="Texture" id=7]
+[ext_resource path="res://src/menu/options/scroll/Color.gd" type="Script" id=8]
+[ext_resource path="res://media/image/UI/eye.svg" type="Texture" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -28,6 +32,9 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0.418182 ), 0.0, 0.581818, 0, 1, Vector2( 1, 1 ), 0.581818, 0.0, 1, 0 ]
+
 [sub_resource type="DynamicFont" id=3]
 size = 50
 outline_color = Color( 0, 0, 0, 1 )
@@ -47,13 +54,14 @@ is_process = true
 is_back_close = true
 is_joy_x = true
 is_audio_joy = true
-palette = PoolColorArray( 0.14902, 0.14902, 0.14902, 1, 0.423529, 0.423529, 0.501961, 1, 0.85098, 0.945098, 1, 1, 0.921569, 0.921569, 0.921569, 1, 1, 0.717647, 0.717647, 1, 0.478431, 0.25098, 0.423529, 1, 1, 0.498039, 0, 1, 1, 1, 0, 1, 0.498039, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0.498039, 1, 0, 1, 1, 1, 0, 0.498039, 1, 1, 0, 0, 1, 1, 0.498039, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.498039, 1, 1, 0, 0, 1 )
+palette = [ Color( 0.14902, 0.14902, 0.14902, 1 ), Color( 0.423529, 0.423529, 0.501961, 1 ), Color( 0.85098, 0.945098, 1, 1 ), Color( 0.921569, 0.921569, 0.921569, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ), Color( 1, 0.498039, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 0.498039, 1, 0, 1 ), Color( 0, 1, 0, 1 ), Color( 0, 1, 0.498039, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 0.498039, 1, 1 ), Color( 0, 0, 1, 1 ), Color( 0.498039, 0, 1, 1 ), Color( 1, 0, 1, 1 ), Color( 1, 0, 0.498039, 1 ), Color( 1, 0, 0, 1 ) ]
 
 [node name="Dialog" type="Control" parent="."]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 80.0
 margin_top = 80.0
+margin_right = -150.0
 margin_bottom = -80.0
 rect_pivot_offset = Vector2( -618, -18 )
 
@@ -82,10 +90,13 @@ __meta__ = {
 
 [node name="w" type="Panel" parent="Dialog"]
 modulate = Color( 0.74902, 0.376471, 0.380392, 1 )
-margin_left = 342.0
-margin_top = -20.0
-margin_right = 412.0
-margin_bottom = 495.0
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -35.0
+margin_top = -25.0
+margin_right = 35.0
+margin_bottom = -65.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""
@@ -101,8 +112,9 @@ size_flags_vertical = 4
 custom_constants/separation = 10
 alignment = 1
 
-[node name="HairFront" parent="Dialog/List" instance=ExtResource( 3 )]
+[node name="Front" parent="Dialog/List" instance=ExtResource( 3 )]
 margin_top = 2.0
+margin_right = 410.0
 margin_bottom = 72.0
 __meta__ = {
 "_editor_description_": ""
@@ -111,44 +123,560 @@ count = 9
 order = "front"
 scenes = [ "", "res://src/actor/hair/front/OneShort.tscn", "res://src/actor/hair/front/OneLong.tscn", "res://src/actor/hair/front/TwoShort.tscn", "res://src/actor/hair/front/TwoLong.tscn", "res://src/actor/hair/front/Bun.tscn", "res://src/actor/hair/front/Buns.tscn", "res://src/actor/hair/front/Mohawk.tscn", "res://src/actor/hair/front/FlatTop.tscn", "res://src/actor/hair/front/Bangs.tscn" ]
 
-[node name="HairBack" parent="Dialog/List" instance=ExtResource( 3 )]
+[node name="Back" parent="Dialog/List" instance=ExtResource( 3 )]
 margin_top = 82.0
+margin_right = 410.0
 margin_bottom = 152.0
 list = PoolStringArray(  )
 
-[node name="Color" parent="Dialog/List" instance=ExtResource( 4 )]
+[node name="Hair" type="Control" parent="Dialog/List" groups=["color"]]
 margin_top = 162.0
-margin_right = 560.0
+margin_right = 410.0
 margin_bottom = 232.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 8 )
+is_loop = true
+count = 17
 
-[node name="Color2" parent="Dialog/List" instance=ExtResource( 4 )]
+[node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Hair"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="Circle" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
+modulate = Color( 0, 1, 0, 1 )
+margin_left = 22.0
+margin_right = 92.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle" instance=ExtResource( 4 )]
+position = Vector2( 45, 32 )
+scale = Vector2( 1.5, 1.5 )
+width = 20.0
+length = 15.0
+sitting_angle = 60.0
+
+[node name="Circle2" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 96.0
+margin_right = 166.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle2" instance=ExtResource( 4 )]
+position = Vector2( 45, 32 )
+scale = Vector2( 1.75, 1.75 )
+width = 20.0
+length = 15.0
+sitting_angle = 60.0
+
+[node name="Circle3" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
+modulate = Color( 0, 0, 1, 1 )
+margin_left = 170.0
+margin_right = 240.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle3" instance=ExtResource( 4 )]
+position = Vector2( 45, 32 )
+scale = Vector2( 2, 2 )
+width = 20.0
+length = 15.0
+sitting_angle = 60.0
+
+[node name="Circle4" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
+margin_left = 244.0
+margin_right = 314.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle4" instance=ExtResource( 4 )]
+position = Vector2( 45, 32 )
+scale = Vector2( 1.75, 1.75 )
+width = 20.0
+length = 15.0
+sitting_angle = 60.0
+
+[node name="Circle5" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 318.0
+margin_right = 388.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle5" instance=ExtResource( 4 )]
+position = Vector2( 45, 32 )
+scale = Vector2( 1.5, 1.5 )
+width = 20.0
+length = 15.0
+sitting_angle = 60.0
+
+[node name="Eye" type="Control" parent="Dialog/List" groups=["color"]]
 margin_top = 242.0
-margin_right = 560.0
+margin_right = 410.0
 margin_bottom = 312.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 8 )
+is_loop = true
+count = 17
+part = "eye"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Eye"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="Circle" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
+modulate = Color( 0, 1, 0, 1 )
+margin_left = 22.0
+margin_right = 92.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle"]
+position = Vector2( 35, 35 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="Left" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle/Eyes"]
+position = Vector2( -9, 0 )
+points = PoolVector2Array( 0, -3, 0, 3 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Right" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle/Eyes"]
+position = Vector2( 9, 0 )
+points = PoolVector2Array( 0, -3, 0, 3 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Circle2" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 96.0
+margin_right = 166.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle2"]
+position = Vector2( 35, 35 )
+scale = Vector2( 1.75, 1.75 )
+
+[node name="Left" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle2/Eyes"]
+position = Vector2( -9, 0 )
+points = PoolVector2Array( 0, -3, 0, 3 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Right" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle2/Eyes"]
+position = Vector2( 9, 0 )
+points = PoolVector2Array( 0, -3, 0, 3 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Circle3" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
+modulate = Color( 0, 0, 1, 1 )
+margin_left = 170.0
+margin_right = 240.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+
+[node name="TextureRect" type="TextureRect" parent="Dialog/List/Eye/HBoxContainer/Circle3"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle3"]
+position = Vector2( 35, 35 )
+scale = Vector2( 2, 2 )
+
+[node name="Left" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle3/Eyes"]
+position = Vector2( -9, 0 )
+points = PoolVector2Array( 0, -3, 0, 3 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Right" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle3/Eyes"]
+position = Vector2( 9, 0 )
+points = PoolVector2Array( 0, -3, 0, 3 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Circle4" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
+margin_left = 244.0
+margin_right = 314.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle4"]
+position = Vector2( 35, 35 )
+scale = Vector2( 1.75, 1.75 )
+
+[node name="Left" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle4/Eyes"]
+position = Vector2( -9, 0 )
+points = PoolVector2Array( 0, -3, 0, 3 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Right" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle4/Eyes"]
+position = Vector2( 9, 0 )
+points = PoolVector2Array( 0, -3, 0, 3 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Circle5" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 318.0
+margin_right = 388.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle5"]
+position = Vector2( 35, 35 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="Left" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle5/Eyes"]
+position = Vector2( -9, 0 )
+points = PoolVector2Array( 0, -3, 0, 3 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Right" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle5/Eyes"]
+position = Vector2( 9, 0 )
+points = PoolVector2Array( 0, -3, 0, 3 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Skin" type="Control" parent="Dialog/List" groups=["color"]]
+margin_top = 322.0
+margin_right = 410.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 8 )
+is_loop = true
+count = 17
 part = "skin"
 
-[node name="Color3" parent="Dialog/List" instance=ExtResource( 4 )]
-margin_top = 322.0
-margin_right = 560.0
-margin_bottom = 392.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Skin"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="Circle" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
+modulate = Color( 0, 1, 0, 1 )
+margin_left = 22.0
+margin_right = 92.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 25.0
+offset = Vector2( 35, 35 )
+
+[node name="Circle2" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 96.0
+margin_right = 166.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 30.0
+offset = Vector2( 35, 35 )
+
+[node name="Circle3" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
+modulate = Color( 0, 0, 1, 1 )
+margin_left = 170.0
+margin_right = 240.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 30.0
+offset = Vector2( 35, 35 )
+
+[node name="TextureRect" type="TextureRect" parent="Dialog/List/Skin/HBoxContainer/Circle3"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="Circle4" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
+margin_left = 244.0
+margin_right = 314.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 30.0
+offset = Vector2( 35, 35 )
+
+[node name="Circle5" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 318.0
+margin_right = 388.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 25.0
+offset = Vector2( 35, 35 )
+
+[node name="Fit" type="Control" parent="Dialog/List" groups=["color"]]
+margin_top = 402.0
+margin_right = 410.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 8 )
+is_loop = true
+count = 17
 part = "fit"
 
-[node name="Color4" parent="Dialog/List" instance=ExtResource( 4 )]
-margin_top = 402.0
-margin_right = 560.0
-margin_bottom = 472.0
-part = "eye"
+[node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Fit"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="Circle" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
+modulate = Color( 0, 1, 0, 1 )
+margin_left = 22.0
+margin_right = 92.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle"]
+position = Vector2( 35, 35 )
+scale = Vector2( 1.333, 1.333 )
+
+[node name="LegL" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle/Fit"]
+position = Vector2( -5, -9.5 )
+rotation = 0.387463
+points = PoolVector2Array( 0, 0, 0, 26 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LegR" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle/Fit"]
+position = Vector2( 5, -9.5 )
+rotation = -0.387463
+points = PoolVector2Array( 0, 0, 0, 26 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Torso" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle/Fit"]
+position = Vector2( 0, -9.5 )
+points = PoolVector2Array( 0, -5, 0, 20 )
+width = 25.0
+width_curve = SubResource( 5 )
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Circle2" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 96.0
+margin_right = 166.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle2"]
+position = Vector2( 35, 35 )
+scale = Vector2( 1.444, 1.444 )
+
+[node name="LegL" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
+position = Vector2( -5, -9.5 )
+rotation = 0.387463
+points = PoolVector2Array( 0, 0, 0, 26 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LegR" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
+position = Vector2( 5, -9.5 )
+rotation = -0.387463
+points = PoolVector2Array( 0, 0, 0, 26 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Torso" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
+position = Vector2( 0, -9.5 )
+points = PoolVector2Array( 0, -5, 0, 20 )
+width = 25.0
+width_curve = SubResource( 5 )
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Circle3" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
+modulate = Color( 0, 0, 1, 1 )
+margin_left = 170.0
+margin_right = 240.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle3"]
+position = Vector2( 35, 35 )
+scale = Vector2( 1.667, 1.667 )
+
+[node name="LegL" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
+position = Vector2( -5, -9.5 )
+rotation = 0.387463
+points = PoolVector2Array( 0, 0, 0, 26 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LegR" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
+position = Vector2( 5, -9.5 )
+rotation = -0.387463
+points = PoolVector2Array( 0, 0, 0, 26 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Torso" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
+position = Vector2( 0, -9.5 )
+points = PoolVector2Array( 0, -5, 0, 20 )
+width = 25.0
+width_curve = SubResource( 5 )
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Circle4" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
+margin_left = 244.0
+margin_right = 314.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle4"]
+position = Vector2( 35, 35 )
+scale = Vector2( 1.444, 1.444 )
+
+[node name="LegL" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
+position = Vector2( -5, -9.5 )
+rotation = 0.387463
+points = PoolVector2Array( 0, 0, 0, 26 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LegR" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
+position = Vector2( 5, -9.5 )
+rotation = -0.387463
+points = PoolVector2Array( 0, 0, 0, 26 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Torso" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
+position = Vector2( 0, -9.5 )
+points = PoolVector2Array( 0, -5, 0, 20 )
+width = 25.0
+width_curve = SubResource( 5 )
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Circle5" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 318.0
+margin_right = 388.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 70, 70 )
+script = ExtResource( 6 )
+radius = 0.0
+offset = Vector2( 35, 35 )
+
+[node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle5"]
+position = Vector2( 35, 35 )
+scale = Vector2( 1.333, 1.333 )
+
+[node name="LegL" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
+position = Vector2( -5, -9.5 )
+rotation = 0.387463
+points = PoolVector2Array( 0, 0, 0, 26 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LegR" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
+position = Vector2( 5, -9.5 )
+rotation = -0.387463
+points = PoolVector2Array( 0, 0, 0, 26 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Torso" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
+position = Vector2( 0, -9.5 )
+points = PoolVector2Array( 0, -5, 0, 20 )
+width = 25.0
+width_curve = SubResource( 5 )
+default_color = Color( 1, 1, 1, 1 )
 
 [node name="Spacer" type="Control" parent="Dialog/List" groups=["no_item"]]
 margin_top = 482.0
-margin_right = 560.0
+margin_right = 410.0
 margin_bottom = 497.0
 rect_min_size = Vector2( 0, 15 )
 
 [node name="Random" type="Label" parent="Dialog/List"]
-margin_left = 179.0
+margin_left = 104.0
 margin_top = 507.0
-margin_right = 381.0
+margin_right = 306.0
 margin_bottom = 558.0
 size_flags_horizontal = 4
 custom_fonts/font = SubResource( 3 )

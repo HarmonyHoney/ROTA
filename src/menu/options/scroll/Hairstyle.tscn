@@ -14,6 +14,7 @@ count = 6
 scenes = [ "", "res://src/actor/hair/back/Short.tscn", "res://src/actor/hair/back/Medium.tscn", "res://src/actor/hair/back/Long.tscn", "res://src/actor/hair/back/Braid.tscn", "res://src/actor/hair/back/Braids.tscn", "res://src/actor/hair/back/Afro.tscn" ]
 
 [node name="Label" type="Label" parent="."]
+visible = false
 anchor_right = 0.5
 anchor_bottom = 1.0
 size_flags_vertical = 6
@@ -38,12 +39,12 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-alignment = 2
+alignment = 1
 
 [node name="Circle" type="Control" parent="HBoxContainer"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 490.0
-margin_right = 560.0
+margin_left = 245.0
+margin_right = 315.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 1 )
