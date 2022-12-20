@@ -32,7 +32,7 @@ bus = "SFX"
 
 [node name="Pause" type="AudioStreamPlayer" parent="Menu"]
 stream = ExtResource( 7 )
-volume_db = -6.0
+volume_db = -3.0
 bus = "SFX"
 
 [node name="Joy" type="AudioStreamPlayer" parent="Menu"]

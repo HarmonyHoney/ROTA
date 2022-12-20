@@ -6,8 +6,22 @@ var player
 
 var pale = [3,2,2,1,0,16]
 
+onready var arrows := $Dialog/Arrows.get_children()
+export var arrow_margin := Vector2.ZERO
+
+func _ready():
+	palette = Shared.player.palette
+
+func row():
+	if !arrows: return
+	var c = items[cursor]
+	arrows[0].rect_position = c.rect_position - Vector2(30, 0) + (arrow_margin * Vector2(-1, 1))
+	arrows[1].rect_position = c.rect_position + Vector2(c.rect_size.x, 0) + arrow_margin
+	
+	for i in arrows:
+		i.visible = cursor < items.size() - 1
+
 func open():
-	#print("open makeover")
 	Cam.turn_offset = Vector2(-100, -10)
 	Cam.start_zoom(0, true, 0.4)
 	player = Shared.player
@@ -15,7 +29,6 @@ func open():
 	player.is_input = false
 
 func close():
-	#print("close makeover")
 	Cam.turn_offset = Vector2.ZERO
 	Cam.start_zoom(0)
 	

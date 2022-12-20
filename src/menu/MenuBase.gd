@@ -129,6 +129,7 @@ func set_cursor(arg := 0):
 	select(false)
 	cursor = clamp(arg, 0, max(items.size() - 1, 0))
 	select(true)
+	row()
 	if is_audio_cursor:
 		audio_cursor()
 
@@ -138,6 +139,7 @@ func select(_is_select := true, _cursor := cursor):
 
 func reset_cursor():
 	self.cursor = 0
+	row()
 	if items_node and cursor_node:
 		cursor_node.rect_global_position = items[0].rect_global_position - cursor_margin
 		cursor_node.rect_size = items[0].rect_size + (cursor_margin * 2.0)
@@ -169,6 +171,9 @@ func fill_items():
 		for i in items_node.get_children():
 			if !i.is_in_group("no_item") and i.visible:
 				items.append(i)
+
+func row():
+	pass
 
 func open():
 	pass

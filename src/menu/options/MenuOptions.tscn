@@ -371,9 +371,6 @@ custom_fonts/font = ExtResource( 2 )
 text = "< OFF >"
 align = 2
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Borderless" type="Control" parent="Control/Menu/List" groups=["window"]]
 margin_top = 850.0

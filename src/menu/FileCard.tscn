@@ -20,12 +20,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 4 )
-text = "New Game"
+text = "New"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Items" type="VBoxContainer" parent="."]
 anchor_right = 1.0
