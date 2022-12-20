@@ -512,6 +512,7 @@ end_cap_mode = 2
 
 [node name="Hands" type="Node2D" parent="Sprites"]
 modulate = Color( 1, 0.717647, 0.717647, 1 )
+z_index = 2
 
 [node name="Left" type="Node2D" parent="Sprites/Hands"]
 use_parent_material = true

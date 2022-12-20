@@ -68,7 +68,7 @@ var air_clock := 0.0
 
 var is_dead := false
 var dead_clock := 0.0
-var is_fall_out := false
+var dead_time := 0.7
 
 var turn_clock := 0.0
 var turn_time := 0.2
@@ -88,11 +88,12 @@ var hold_cooldown := 0.2
 
 var is_goal := false
 var goal
-var goal_clock := 0.0
-var goal_times := [0.2, 0.3, 0.5]
 var goal_step := 0
+var goal_times := [0.2, 0.3, 0.5]
+var goal_easy := EaseMover.new()
 var hand_positions := [Vector2.ZERO, Vector2.ZERO]
 var goal_start := Vector2.ZERO
+var goal_grab := Vector2.ZERO
 
 var squish_from := Vector2.ONE
 var squish_clock := 0.0
@@ -152,8 +153,9 @@ func scene():
 	velocity = Vector2.ZERO
 	joy_last = Vector2.ZERO
 	joy = Vector2.ZERO
-	is_fall_out = false
 	is_jump = true
+	is_dead = false
+	sprites.position = Vector2.ZERO
 	
 	# snap to floor
 	var test = rot(Vector2.DOWN * 150)
@@ -178,11 +180,11 @@ func _physics_process(delta):
 		sprites.rotate(deg2rad(-dir_x * 240) * delta)
 		velocity.y += fall_gravity * delta
 		
-		if dead_clock < 0.7:
+		if dead_clock < dead_time:
 			dead_clock += delta
-			if dead_clock > 0.7:
+			if dead_clock > dead_time:
+				Cutscene.is_playing = false
 				Shared.reset()
-				Cutscene.end()
 		
 		return
 	
@@ -213,47 +215,43 @@ func _physics_process(delta):
 	
 	# pickup goal
 	if is_goal and is_instance_valid(goal):
+		var s = goal_easy.count(delta)
 		
-		var offset = Vector2(20, 20)
-		var p1 = goal.sprites.to_global(offset * Vector2(-1, 1))
-		var p2 = goal.sprites.to_global(offset)
+		var offset = Vector2(20, 20) * goal.sprites.scale
+		var p1 = goal.to_global(offset * Vector2(-1, 1))
+		var p2 = goal.to_global(offset)
 		
-		if goal_step < goal_times.size():
-			var limit = goal_times[goal_step]
-			goal_clock = min(goal_clock + delta, limit)
-			var s = smoothstep(0, 1, goal_clock / limit)
-			
-			match goal_step:
-				0:
-					spr_hand_l.global_position = hand_positions[0].linear_interpolate(p1, s)
-					spr_hand_r.global_position = hand_positions[1].linear_interpolate(p2, s)
-					
-					var move_to = goal_start.linear_interpolate(goal.start_pos, s)
-					var diff = move_to - position
-					
-					move(diff, 0)
-				1:
-					goal.position = goal.start_pos.linear_interpolate(position + rot(Vector2(0, -100)), s)
-					spr_hand_l.global_position = p1
-					spr_hand_r.global_position = p2
-				2:
-					goal.sprites.scale = Vector2.ONE * lerp(2.0, 1.0, s)
-			
-			# next step
-			if goal_clock == limit:
-				goal_step += 1
-				goal_clock = 0.0
+		spr_hand_l.global_position = p1
+		spr_hand_r.global_position = p2
+		
+		match goal_step:
+			0:
+				spr_hand_l.global_position = hand_positions[0].linear_interpolate(p1, s)
+				spr_hand_r.global_position = hand_positions[1].linear_interpolate(p2, s)
 				
-				# finished
-				if goal_step > 2:
-					goal_step = 0
-					is_goal = false
-					goal.sprites.z_as_relative = false
-					goal.is_follow = true
-					release_anim()
-					
-					has_jumped = true
-					is_floor = false
+				move(goal_start.linear_interpolate(goal_grab, s) - position, 0)
+			1:
+				goal.position = goal_grab.linear_interpolate(position + rot(Vector2(0, -100)), s)
+			
+		# next step
+		if goal_easy.is_complete:
+			goal_easy.clock = 0.0
+			goal_step += 1
+			
+			if goal_step < goal_times.size():
+				goal_easy.time = goal_times[goal_step]
+			
+			if goal_step == 2:
+				goal.shine(false)
+			# finished
+			elif goal_step > 2:
+				is_goal = false
+				is_floor = false
+				has_jumped = true
+				release_anim()
+				
+				goal.z_index = 0
+				goal.target = self
 	
 	# holding box
 	elif is_hold:
@@ -481,8 +479,9 @@ func _physics_process(delta):
 			move(velocity * delta)
 	
 	# check boundary
-	if !Wipe.is_wipe and !is_fall_out and Boundary.is_outside(global_position):
-		fall_out()
+	if !Wipe.is_wipe and Boundary.is_outside(global_position):
+		print(name, " outside boundary")
+		die()
 	
 	# air clock
 	if is_floor:
@@ -628,20 +627,28 @@ func _on_BodyArea_area_entered(area):
 	
 	# pickup goal
 	if !is_goal and p.is_in_group("goal") and !p.is_collected:
+		area.set_deferred("monitorable", false)
 		goal = p
-		goal.pickup(self)
+		goal.is_collected = true
+		goal.z_index = z_index + 1
+		goal_grab = goal.position
+		goal_start = position
+		goal_step = 0
+		goal_easy.time = goal_times[0]
 		
 		is_goal = true
 		has_jumped = true
 		is_floor = false
 		velocity = Vector2.ZERO
-		goal_start = position
-		anim.stop()
 		
+		anim.stop()
 		for i in spr_hands.size():
 			hand_positions[i] = spr_hands[i].global_position
+		Audio.play("gem_collect")
 
 func _on_BodyArea_body_entered(body):
+	if Wipe.is_wipe: return
+	
 	# hit spike
 	if body.is_in_group("spike"):
 		print("hit spike")
@@ -650,7 +657,8 @@ func _on_BodyArea_body_entered(body):
 func die():
 	if is_dead: return
 	is_dead = true
-	Cutscene.start()
+	dead_clock = 0.0
+	Cutscene.is_playing = true
 	
 	velocity = Vector2(-350 * dir_x, -800)
 	if is_hold:
@@ -660,13 +668,6 @@ func die():
 	
 	audio_spike.play()
 	audio_fallout.play()
-
-func fall_out():
-	print(name, " outside boundary")
-	is_fall_out = true
-	audio_fallout.play()
-	
-	Shared.reset()
 
 func release_anim():
 	# set animation keys

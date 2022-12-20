@@ -39,7 +39,7 @@ func outfit(l := pale):
 	for i in l.size():
 		items[i].cursor = l[i]
 
-func preset(l := pale):
+func preset():
 	var h = [[0,8], [1,9], [2,3], [2,7], [3,2], [3,4], [4,1], [5,1], [6,5]]
 	h.shuffle()
 	
