@@ -2,7 +2,15 @@ tool
 extends Door
 
 onready var gem := $Gem
+onready var gem_fill := $Gem/Fill
+var is_gem := false
+var gem_easy := EaseMover.new()
+export var colors : PoolColorArray = ["af00ff", "ff00e9", "fffb00", "ffdd00"]
+
 onready var clock := $Clock
+var is_clock := false
+var clock_easy := EaseMover.new()
+
 
 func _ready():
 	if Engine.editor_hint: return
@@ -16,7 +24,26 @@ func _ready():
 	if "hub" in scene_path:
 		gem.visible = false
 	elif Shared.goals.has(m):
-		gem.set_color()
+		gem_color(2)
+
+func _physics_process(delta):
+	if is_gem:
+		gem_easy.count(delta)
+		gem.color = colors[1].linear_interpolate(colors[2], gem_easy.smooth())
+		gem_fill.color = colors[0].linear_interpolate(colors[3], gem_easy.smooth())
+		if gem_easy.clock == 0 or gem_easy.is_complete:
+			is_gem = false
+	elif is_clock:
+		var c = clock_easy.count(delta)
+		
+		gem.rotation = TAU * 2 * c
+		gem.scale = Vector2.ONE * lerp(1.0, 0.0, c)
+		
+		clock.rotation = -gem.rotation
+		clock.scale = Vector2.ONE * lerp(0.0, 1.0, c)
+		
+		if clock_easy.is_complete:
+			is_clock = false
 
 func activate():
 	if not "hub" in scene_path and scene_path.begins_with(Shared.worlds_path):
@@ -30,6 +57,14 @@ func activate():
 		if UI.clock_goal.visible:
 			UI.clock_goal.text = "Goal: " + Shared.time_string(Shared.speedruns[m], true)
 
-# acquire goal
 func on_enter():
 	Shared.collect_gem()
+
+func gem_color(arg := 0):
+	gem.color = colors[arg]
+	gem_fill.color = colors[arg + 1]
+
+func gem_fade(arg := true):
+	is_gem = arg
+	gem_easy.show = arg
+	gem_easy.clock = 0 if arg else gem_easy.time

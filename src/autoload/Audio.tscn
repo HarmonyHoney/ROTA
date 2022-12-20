@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://media/audio/sfx/shine_sparkle.wav" type="AudioStream" id=6]
 [ext_resource path="res://media/audio/sfx/jump2.wav" type="AudioStream" id=7]
 [ext_resource path="res://media/audio/sfx/Randomize104.wav" type="AudioStream" id=8]
+[ext_resource path="res://media/audio/sfx/hit0.wav" type="AudioStream" id=9]
+[ext_resource path="res://media/audio/sfx/fallout0.wav" type="AudioStream" id=10]
+[ext_resource path="res://media/audio/sfx/jump4.wav" type="AudioStream" id=11]
 
 [node name="Audio" type="Node"]
 script = ExtResource( 1 )
@@ -48,4 +51,23 @@ bus = "SFX"
 
 [node name="Show" type="AudioStreamPlayer" parent="Gem"]
 stream = ExtResource( 6 )
+bus = "SFX"
+
+[node name="Clock" type="Node" parent="."]
+
+[node name="Collect" type="AudioStreamPlayer" parent="Clock"]
+stream = ExtResource( 10 )
+bus = "SFX"
+
+[node name="Door" type="Node" parent="."]
+
+[node name="Open" type="AudioStreamPlayer" parent="Door"]
+stream = ExtResource( 9 )
+bus = "SFX"
+
+[node name="Cam" type="Node" parent="."]
+
+[node name="Zoom" type="AudioStreamPlayer" parent="Cam"]
+pause_mode = 2
+stream = ExtResource( 11 )
 bus = "SFX"

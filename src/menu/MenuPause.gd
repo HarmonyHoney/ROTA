@@ -53,7 +53,7 @@ func set_open(arg := is_open, is_audio := true):
 				items.append(i)
 	
 	if is_audio:
-		Audio.play(Audio.menu_pause, 1.0 if is_open else 0.75)
+		Audio.play("menu_pause", 1.0 if is_open else 0.75)
 
 func back_to_hub():
 	if !("hub" in Shared.csfn) and "hub" in Shared.last_scene:

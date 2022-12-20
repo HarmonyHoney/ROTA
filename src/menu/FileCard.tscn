@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/actor/Clock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/menu/FileCard.gd" type="Script" id=2]
 [ext_resource path="res://media/image/UI/clock.png" type="Texture" id=3]
 [ext_resource path="res://media/font/profile/FileCard.tres" type="DynamicFont" id=4]
+[ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=5]
 
 [node name="FileCard" type="Control"]
 margin_right = 320.0
@@ -74,19 +75,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Gem" type="Node2D" parent="Items/Goals/Gems/Image"]
+[node name="Gem" parent="Items/Goals/Gems/Image" instance=ExtResource( 5 )]
 position = Vector2( 30, 30 )
-
-[node name="Back" type="Polygon2D" parent="Items/Goals/Gems/Image/Gem"]
-scale = Vector2( 0.5, 0.5 )
-color = Color( 1, 0.866667, 0, 1 )
-offset = Vector2( 80, 0 )
-polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
-
-[node name="Fill" type="Polygon2D" parent="Items/Goals/Gems/Image/Gem/Back"]
-color = Color( 1, 0.984314, 0, 1 )
-offset = Vector2( 50, 0 )
-polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
 
 [node name="Clocks" type="HBoxContainer" parent="Items/Goals"]
 margin_left = 129.0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/menu/MenuDialog.gd" type="Script" id=1]
 [ext_resource path="res://media/font/profile/UI_Keys.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/font/profile/UI_gem.tres" type="DynamicFont" id=3]
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://src/actor/Clock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/menu/options/Key.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/autoload/UI.gd" type="Script" id=10]
 
@@ -85,20 +86,8 @@ margin_left = 30.0
 margin_top = 30.0
 margin_right = 30.0
 margin_bottom = 30.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Back" type="Polygon2D" parent="Control/Top/Image/Gem"]
-scale = Vector2( 0.5, 0.5 )
-color = Color( 1, 0.866667, 0, 1 )
-offset = Vector2( 80, 0 )
-polygon = PoolVector2Array( -140, 0, -80, -60, -20, 0, -80, 60 )
-
-[node name="Fill" type="Polygon2D" parent="Control/Top/Image/Gem/Back"]
-color = Color( 1, 0.984314, 0, 1 )
-offset = Vector2( 50, 0 )
-polygon = PoolVector2Array( -90, 0, -50, -40, -10, 0, -50, 40 )
+[node name="Gem" parent="Control/Top/Image/Gem" instance=ExtResource( 6 )]
 
 [node name="Label" type="Label" parent="Control/Top"]
 margin_left = 613.0

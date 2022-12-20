@@ -216,13 +216,13 @@ func reset_joy():
 	joy_clock = 0.0
 
 func audio_accept():
-	Audio.play(Audio.menu_accept, 0.8, 1.2)
+	Audio.play("menu_accept", 0.8, 1.2)
 
 func audio_back():
-	Audio.play(Audio.menu_cancel, 0.6, 0.9)
+	Audio.play("menu_cancel", 0.6, 0.9)
 
 func audio_cursor():
-	Audio.play(Audio.menu_cursor, 0.8, 1.2)
+	Audio.play("menu_cursor", 0.8, 1.2)
 
 func audio_joy():
-	Audio.play(Audio.menu_joy, 0.7, 1.5)
+	Audio.play("menu_joy", 0.7, 1.5)

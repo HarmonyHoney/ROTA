@@ -5,7 +5,8 @@ func act():
 	
 	Cutscene.is_playing = true
 	Cam.target_node = null
-	yield(Wipe, "complete")
+	if Wipe.is_wipe:
+		yield(Wipe, "complete")
 	
 	Cam.pan(Shared.goal.global_position)
 	yield(Cam, "pan_complete")

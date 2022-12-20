@@ -1,7 +1,5 @@
 extends Camera2D
 
-onready var audio_zoom := $Zoom
-
 signal turning(angle)
 
 var target_node
@@ -42,7 +40,7 @@ func _ready():
 	zoom = Vector2.ONE * zoom_min
 
 func _input(event):
-	if event.is_action_pressed("zoom") and !Shared.is_wipe and !Cutscene.is_playing and "world" in Shared.csfn:
+	if event.is_action_pressed("zoom") and !Shared.is_wipe and !Cutscene.is_playing and !MenuMakeover.is_open and "world" in Shared.csfn:
 		start_zoom(zoom_step + 1)
 
 func _process(delta):
@@ -87,9 +85,8 @@ func start_zoom(arg := 0, is_audio := true, _zmin = zoom_min, _zmax = zoom_max):
 	var frac = float(zoom_step) / zoom_steps
 	zoom_to = lerp(_zmin, _zmax, frac)
 	
-	if is_audio and audio_zoom:
-		audio_zoom.pitch_scale = rand_range(0.8, 1.2)
-		audio_zoom.play()
+	if is_audio:
+		Audio.play("cam_zoom", 0.8, 1.2)
 
 func reset_zoom():
 	is_zoom = false

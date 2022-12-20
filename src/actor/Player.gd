@@ -237,7 +237,7 @@ func _physics_process(delta):
 					spr_hand_l.global_position = p1
 					spr_hand_r.global_position = p2
 				2:
-					goal.gem.scale = Vector2.ONE * lerp(2.0, 1.0, s)
+					goal.sprites.scale = Vector2.ONE * lerp(2.0, 1.0, s)
 			
 			# next step
 			if goal_clock == limit:
@@ -248,7 +248,7 @@ func _physics_process(delta):
 				if goal_step > 2:
 					goal_step = 0
 					is_goal = false
-					goal.gem.z_as_relative = false
+					goal.sprites.z_as_relative = false
 					goal.is_follow = true
 					release_anim()
 					

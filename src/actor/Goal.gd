@@ -1,7 +1,6 @@
 extends Node2D
 
 onready var sprites = $Sprites
-onready var gem := $Sprites/Gem
 onready var area = $Area2D
 onready var start_pos := position
 var shine_easy := EaseMover.new(0.8)
@@ -45,7 +44,7 @@ func pickup(ply):
 	player = ply
 	start_pos = position
 	area.set_deferred("monitorable", false)
-	Audio.play(Audio.gem_collect)
+	Audio.play("gem_collect")
 
 func cheat_code(cheat):
 	if "konami" in cheat:
@@ -53,4 +52,4 @@ func cheat_code(cheat):
 
 func shine():
 	shine_easy.clock = shine_easy.time
-	Audio.play(Audio.gem_show)
+	Audio.play("gem_show")

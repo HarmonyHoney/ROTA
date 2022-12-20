@@ -8,7 +8,7 @@ var is_show_goal := false
 onready var gem_collect := $GemCollect
 var is_collect := false
 
-onready var clock_collect := $Clock
+onready var clock := $Clock
 var is_clock := false
 
 onready var start_game := $StartGame
@@ -28,10 +28,9 @@ func scene_changed():
 		is_collect = false
 		gem_collect.act()
 		
-#	elif is_clock:
-#		is_clock = false
-#		if is_instance_valid(Shared.door_in):
-#			gem_collect.begin()
+	elif is_clock:
+		is_clock = false
+		clock.act()
 		
 	elif is_start_game:
 		is_start_game = false

@@ -7,7 +7,6 @@ export var dir := 0 setget set_dir
 export(String, FILE) var scene_path := ""
 
 onready var arrow := $Arrow
-onready var audio_open := $Audio/Open
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -34,10 +33,7 @@ func enter_door():
 		arrow.is_locked = true
 		on_enter()
 		
-		if audio_open:
-			audio_open.pitch_scale = rand_range(0.9, 1.1)
-			audio_open.play()
-		
+		Audio.play("door_open", 0.9, 1.1)
 		Cam.start_zoom(0, false)
 
 func on_enter():

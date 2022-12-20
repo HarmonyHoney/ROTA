@@ -45,6 +45,7 @@ func create_rig():
 		i.queue_free()
 	
 	var sprites = p.sprites.duplicate()
+	sprites.modulate.a = 1
 	rig.add_child(sprites)
 	rig.global_rotation = 0
 	

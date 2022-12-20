@@ -1,20 +1,14 @@
 extends Node
 
-onready var menu_cursor := $Menu/Cursor
-onready var menu_accept := $Menu/Accept
-onready var menu_cancel := $Menu/Cancel
-onready var menu_pause := $Menu/Pause
-onready var menu_joy := $Menu/Joy
+var dict = {}
 
-onready var gem_collect := $Gem/Collect
-onready var gem_show := $Gem/Show
+func _ready():
+	for i in Shared.get_all_children(self):
+		dict[str(get_path_to(i)).to_lower().replace("/", "_")] = i
+	#print(dict)
 
-func play(arg : AudioStreamPlayer, from := 1.0, to := -1.0):
-	if !is_instance_valid(arg): return
-	
-	if to < 0:
-		arg.pitch_scale = from
-	else:
-		arg.pitch_scale = rand_range(from, to)
-	
-	arg.play()
+func play(arg := "menu_cursor", from := 1.0, to := -1.0):
+	if dict.has(arg):
+		var a = dict[arg]
+		a.pitch_scale = from if to < 0 else rand_range(from, to)
+		a.play()
