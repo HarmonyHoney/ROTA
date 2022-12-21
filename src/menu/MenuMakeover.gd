@@ -1,16 +1,12 @@
 extends MenuBase
 
-export var palette : PoolColorArray = []
-
+onready var palette : PoolColorArray = Shared.player.palette
 var player
 
 var pale = [3,2,2,1,0,16]
 
 onready var arrows := $Dialog/Arrows.get_children()
 export var arrow_margin := Vector2.ZERO
-
-func _ready():
-	palette = Shared.player.palette
 
 func row():
 	if !arrows: return

@@ -31,7 +31,9 @@ modulate = Color( 0.494118, 0.890196, 0.337255, 1 )
 self_modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 1 )
 
-[node name="Line2D" type="Line2D" parent="Sprite"]
+[node name="Lines" type="Node2D" parent="Sprite"]
+
+[node name="Line2D" type="Line2D" parent="Sprite/Lines"]
 points = PoolVector2Array( 0, -130, 0, 130 )
 width = 140.0
 default_color = Color( 1, 1, 1, 1 )
@@ -41,7 +43,7 @@ end_cap_mode = 2
 round_precision = 12
 antialiased = true
 
-[node name="Line2D2" type="Line2D" parent="Sprite"]
+[node name="Line2D2" type="Line2D" parent="Sprite/Lines"]
 points = PoolVector2Array( -130, 0, 130, 0 )
 width = 140.0
 default_color = Color( 1, 1, 1, 1 )
@@ -51,7 +53,7 @@ end_cap_mode = 2
 round_precision = 12
 antialiased = true
 
-[node name="Line2D3" type="Line2D" parent="Sprite"]
+[node name="Line2D3" type="Line2D" parent="Sprite/Lines"]
 points = PoolVector2Array( -100, -100, 100, 100 )
 width = 140.0
 default_color = Color( 1, 1, 1, 1 )
@@ -61,7 +63,7 @@ end_cap_mode = 2
 round_precision = 12
 antialiased = true
 
-[node name="Line2D4" type="Line2D" parent="Sprite"]
+[node name="Line2D4" type="Line2D" parent="Sprite/Lines"]
 points = PoolVector2Array( 100, -100, -100, 100 )
 width = 140.0
 default_color = Color( 1, 1, 1, 1 )

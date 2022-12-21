@@ -156,6 +156,7 @@ func set_open(arg := is_open):
 		fill_items()
 		UI.menu_keys(text_accept, text_cancel)
 		open()
+		row()
 	else:
 		emit_signal("closed")
 		close()

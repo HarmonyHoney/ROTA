@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/menu/MenuMakeover.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://src/actor/Hair.tscn" type="PackedScene" id=4]
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=5]
 [ext_resource path="res://src/actor/Circle.gd" type="Script" id=6]
-[ext_resource path="res://media/image/UI/hand.png" type="Texture" id=7]
 [ext_resource path="res://src/menu/options/scroll/Color.gd" type="Script" id=8]
 [ext_resource path="res://media/image/UI/eye.svg" type="Texture" id=9]
 
@@ -178,6 +177,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle" instance=ExtResource( 4 )]
 position = Vector2( 45, 32 )
@@ -195,6 +195,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle2" instance=ExtResource( 4 )]
 position = Vector2( 45, 32 )
@@ -212,6 +213,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle3" instance=ExtResource( 4 )]
 position = Vector2( 45, 32 )
@@ -228,6 +230,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle4" instance=ExtResource( 4 )]
 position = Vector2( 45, 32 )
@@ -245,6 +248,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle5" instance=ExtResource( 4 )]
 position = Vector2( 45, 32 )
@@ -277,6 +281,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle"]
 position = Vector2( 35, 35 )
@@ -307,6 +312,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle2"]
 position = Vector2( 35, 35 )
@@ -371,6 +377,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle4"]
 position = Vector2( 35, 35 )
@@ -401,6 +408,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle5"]
 position = Vector2( 35, 35 )
@@ -467,14 +475,6 @@ script = ExtResource( 6 )
 radius = 30.0
 offset = Vector2( 35, 35 )
 
-[node name="TextureRect" type="TextureRect" parent="Dialog/List/Skin/HBoxContainer/Circle3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 5
-
 [node name="Circle4" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
 margin_left = 244.0
 margin_right = 314.0
@@ -518,6 +518,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle"]
 position = Vector2( 35, 35 )
@@ -555,6 +556,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle2"]
 position = Vector2( 35, 35 )
@@ -592,6 +594,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle3"]
 position = Vector2( 35, 35 )
@@ -628,6 +631,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle4"]
 position = Vector2( 35, 35 )
@@ -665,6 +669,7 @@ rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
 offset = Vector2( 35, 35 )
+points = 8
 
 [node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle5"]
 position = Vector2( 35, 35 )

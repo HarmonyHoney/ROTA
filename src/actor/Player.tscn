@@ -489,6 +489,7 @@ modulate = Color( 1, 0.717647, 0.717647, 1 )
 position = Vector2( 0, -25 )
 script = ExtResource( 3 )
 radius = 20.0
+points = 24
 
 [node name="Eyes" type="Node2D" parent="Sprites/Root/Body"]
 modulate = Color( 0.498039, 0, 1, 1 )
@@ -519,12 +520,14 @@ use_parent_material = true
 position = Vector2( -25, 5 )
 script = ExtResource( 3 )
 radius = 7.5
+points = 12
 
 [node name="Right" type="Node2D" parent="Sprites/Hands"]
 use_parent_material = true
 position = Vector2( 25, 5 )
 script = ExtResource( 3 )
 radius = 7.5
+points = 12
 
 [node name="SpriteArea" type="Area2D" parent="Sprites"]
 visible = false
