@@ -1,7 +1,7 @@
 [gd_scene format=2]
 
 [node name="Gem" type="Polygon2D"]
-color = Color( 1, 0.984314, 0, 1 )
+color = Color( 1, 1, 0, 1 )
 polygon = PoolVector2Array( -30, 0, 0, -30, 30, 0, 0, 30 )
 
 [node name="Fill" type="Polygon2D" parent="."]

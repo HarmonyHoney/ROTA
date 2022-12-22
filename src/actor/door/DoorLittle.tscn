@@ -8,7 +8,7 @@
 
 [node name="Door" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-colors = PoolColorArray( 0.686275, 0, 1, 1, 1, 0, 0.913725, 1, 1, 0.984314, 0, 1, 1, 0.866667, 0, 1 )
+colors = PoolColorArray( 0.686275, 0, 1, 1, 1, 0, 0.913725, 1, 1, 1, 0, 1, 1, 0.866667, 0, 1 )
 
 [node name="Sprites" type="Node2D" parent="." index="1"]
 scale = Vector2( 0.1, 0.1 )

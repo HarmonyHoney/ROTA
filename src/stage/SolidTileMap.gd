@@ -21,7 +21,7 @@ func _ready():
 			Boundary.add_shape(get_used_rect(), cell_size)
 		
 		if bg_palette > 0:
-			BG.set_colors(bg_palette)
+			BG.colors = bg_palette
 
 func set_tileset(arg := detail):
 	detail = posmod(int(arg), 6)

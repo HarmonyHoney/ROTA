@@ -228,7 +228,7 @@ func change_scene():
 		get_tree().change_scene(next_scene)
 		Cam.reset_zoom()
 	
-	BG.set_colors(0)
+	BG.colors = 0
 	save_data()
 	try_achievement()
 	map_clock = 0.0
@@ -416,15 +416,19 @@ func save_data():
 	if save_slot < 0: return
 	auto_save_clock = 0.0
 	
-	save_dict[save_slot]["time"] = int(save_time)
-	if "worlds" in csfn and "worlds" in last_scene:
-		save_dict[save_slot]["csfn"] = csfn
-		save_dict[save_slot]["last_scene"] = last_scene
-	save_dict[save_slot]["goals"] = goals
+	var s = save_dict[save_slot]
 	
-	for i in save_dict[save_slot].keys():
-		if not i in "time, csfn, last_scene, goals":
-			save_dict[save_slot].erase(i)
+	s["time"] = int(save_time)
+	if "worlds" in csfn and "worlds" in last_scene:
+		s["csfn"] = csfn
+		s["last_scene"] = last_scene
+	s["goals"] = goals.duplicate()
+	s["dye"] = Shared.player.dye.duplicate()
+	s["hair"] = [Shared.player.hairstyle_back, Shared.player.hairstyle_front]
+	
+	for i in s.keys():
+		if not i in "time, csfn, last_scene, goals, dye, hair":
+			s.erase(i)
 	
 	file_save_json("user://save_data.json", save_dict)
 
@@ -442,19 +446,21 @@ func load_slot(arg := 0):
 	save_slot = clamp(arg, 0, 2)
 	print("Shared.save_slot: ", save_slot)
 	
-	if save_dict[save_slot].has("csfn"):
-		next_scene = save_dict[save_slot]["csfn"]
+	var s = save_dict[save_slot]
+	
+	if s.has("csfn"):
+		next_scene = s["csfn"]
 		
-		if save_dict[save_slot].has("last_scene"):
-			last_scene = save_dict[save_slot]["last_scene"]
+		if s.has("last_scene"):
+			last_scene = s["last_scene"]
 		
 		goals = {}
 		# open new saves
-		if save_dict[save_slot].has("goals"):
-			goals = save_dict[save_slot]["goals"]
+		if s.has("goals"):
+			goals = s["goals"].duplicate()
 		# convert old saves
-		elif save_dict[save_slot].has("goals_collected"):
-			for i in save_dict[save_slot]["goals_collected"]:
+		elif s.has("goals_collected"):
+			for i in s["goals_collected"]:
 				goals[i.lstrip(worlds_path).rstrip(".tscn")] = 0.0
 		
 		# gems
@@ -464,8 +470,9 @@ func load_slot(arg := 0):
 		clock_rank = collect_clocks()
 		UI.clock_label.text = str(clock_rank)
 		
-		if save_dict[save_slot].has("time"):
-			save_time = save_dict[save_slot]["time"]
+		if s.has("time"):
+			save_time = s["time"]
+		
 	else:
 		Cutscene.is_start_game = true
 		
@@ -477,6 +484,14 @@ func load_slot(arg := 0):
 		save_time = 0.0
 	
 	return Shared.wipe_scene(Shared.next_scene, Shared.last_scene)
+
+func load_slot_style(arg := 0):
+	var s = save_dict[clamp(arg, 0, 2)]
+	if s.has("dye"):
+			Shared.player.dye = s["dye"].duplicate()
+	if s.has("hair"):
+		Shared.player.hairstyle_back = s["hair"][0]
+		Shared.player.hairstyle_front = s["hair"][1]
 
 func save_options():
 	var o := {}

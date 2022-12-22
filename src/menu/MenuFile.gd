@@ -20,3 +20,6 @@ func accept():
 		is_open = false
 	else:
 		sub_menu(file_open)
+
+func row():
+	Shared.load_slot_style(cursor)

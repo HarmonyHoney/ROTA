@@ -48,6 +48,8 @@ default_color = Color( 1, 1, 1, 1 )
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="Line2D2" type="Line2D" parent="Images/Petals"]
 rotation = 0.785397
@@ -57,6 +59,8 @@ default_color = Color( 1, 1, 1, 1 )
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

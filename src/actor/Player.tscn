@@ -464,10 +464,12 @@ modulate = Color( 0.498039, 1, 0, 1 )
 [node name="LegL" type="Line2D" parent="Sprites/Root/Body/Fit"]
 position = Vector2( -5, -9.5 )
 rotation = 0.387463
-points = PoolVector2Array( 0, 0, 0, 26 )
+points = PoolVector2Array( 0, 0, -7.62939e-06, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="LegR" type="Line2D" parent="Sprites/Root/Body/Fit"]
 position = Vector2( 5, -9.5 )
@@ -476,6 +478,8 @@ points = PoolVector2Array( 0, 0, 0, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="Torso" type="Line2D" parent="Sprites/Root/Body/Fit"]
 position = Vector2( 0, -9.5 )
@@ -502,6 +506,8 @@ width = 8.0
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="Right" type="Line2D" parent="Sprites/Root/Body/Eyes"]
 position = Vector2( 10, 0 )
@@ -510,6 +516,8 @@ width = 8.0
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="Hands" type="Node2D" parent="Sprites"]
 modulate = Color( 1, 0.717647, 0.717647, 1 )

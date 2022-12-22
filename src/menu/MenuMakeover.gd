@@ -59,4 +59,4 @@ func preset():
 	c.erase(skin[0])
 	c.shuffle()
 	
-	outfit([h[0][0], h[0][1], c[0], skin[0], c[1], c[2]])
+	outfit([h[0][0], h[0][1], c[0], c[1], skin[0], c[2]])
