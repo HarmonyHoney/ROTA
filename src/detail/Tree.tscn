@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://media/image/details/TreeBark.png" type="Texture" id=1]
+[ext_resource path="res://media/image/details/TreeBark.svg" type="Texture" id=1]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=2]
 [ext_resource path="res://src/detail/PaletteSwap.gd" type="Script" id=3]
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=5]
@@ -21,6 +21,7 @@ sprite_path = NodePath("Sprites/TreeTop/Sprite")
 scale = Vector2( 0.5, 0.5 )
 
 [node name="TreeBark" type="Sprite" parent="Sprites"]
+modulate = Color( 1, 0.592157, 0, 1 )
 position = Vector2( 0, -200 )
 texture = ExtResource( 1 )
 
