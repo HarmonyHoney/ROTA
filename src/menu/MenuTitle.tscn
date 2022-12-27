@@ -780,9 +780,9 @@ position = Vector2( 1550, 435 )
 palette = 3
 
 [node name="FlowerPetals6" parent="Map/Details" instance=ExtResource( 10 )]
-position = Vector2( 1460, 460 )
+position = Vector2( 1465, 465 )
 rotation = -0.785397
 
 [node name="FlowerPetals3" parent="Map/Details" instance=ExtResource( 10 )]
-position = Vector2( 2140, 840 )
+position = Vector2( 2135, 835 )
 rotation = 0.784805
