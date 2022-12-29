@@ -24,11 +24,13 @@ position = Vector2( 0, -150 )
 
 [node name="Sprites" type="Node2D" parent="." index="1"]
 
-[node name="Door" type="Node2D" parent="Sprites" index="0"]
+[node name="Door" type="Polygon2D" parent="Sprites" index="0"]
 modulate = Color( 0.898039, 0.615686, 0.341176, 1 )
+polygon = PoolVector2Array( 100, 100, -100, 100, -100, -50, -98.7464, -61.126, -95.0484, -71.6942, -89.0916, -81.1745, -81.1745, -89.0916, -71.6942, -95.0484, -61.126, -98.7464, -50, -100, 50, -100, 61.1261, -98.7464, 71.6942, -95.0484, 81.1745, -89.0916, 89.0916, -81.1745, 95.0484, -71.6942, 98.7464, -61.126, 100, -50 )
 script = ExtResource( 5 )
 size = Vector2( 100, 100 )
 radius = Plane( 0, 0, 50, 50 )
+poly_path = NodePath(".")
 
 [node name="Line" type="Node2D" parent="Sprites" index="1"]
 modulate = Color( 0.713726, 0.345098, 0.156863, 1 )

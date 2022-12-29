@@ -13,17 +13,19 @@ colors = PoolColorArray( 0.686275, 0, 1, 1, 1, 0, 0.913725, 1, 1, 1, 0, 1, 1, 0.
 
 [node name="Sprites" type="Node2D" parent="." index="1"]
 
-[node name="Door" type="Node2D" parent="Sprites" index="0"]
+[node name="Door" type="Polygon2D" parent="Sprites" index="0"]
 modulate = Color( 0.898039, 0.615686, 0.341176, 1 )
 position = Vector2( 0, 5 )
+polygon = PoolVector2Array( 40, 50, -40, 50, -40, -30, -39.0211, -36.1803, -36.1803, -41.7557, -31.7557, -46.1803, -26.1803, -49.0211, -20, -50, 20, -50, 26.1803, -49.0211, 31.7557, -46.1803, 36.1803, -41.7557, 39.0211, -36.1803, 40, -30 )
 script = ExtResource( 2 )
 size = Vector2( 40, 50 )
 radius = Plane( 0, 0, 20, 20 )
+points = 6
+poly_path = NodePath(".")
 
 [node name="Knob" type="Node2D" parent="Sprites" index="1"]
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 25, 25 )
-scale = Vector2( 1, 1 )
 script = ExtResource( 6 )
 radius = 7.5
 points = 12

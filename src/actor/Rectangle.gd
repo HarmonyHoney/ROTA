@@ -8,6 +8,10 @@ export var offset := Vector2.ZERO setget set_offset
 export var radius := Plane() setget set_radius
 export var points := 8 setget set_points
 
+export var poly_path : NodePath setget set_poly
+onready var poly := get_node_or_null(poly_path)
+
+
 func u():
 	gon = []
 	
@@ -26,10 +30,14 @@ func u():
 		else:
 			gon.append(offset + vec[i] * size)
 	
+	if !poly: poly = get_node_or_null(poly_path)
+	if poly:
+		poly.polygon = gon
+	
 	update()
 
 func _draw():
-	draw_colored_polygon(gon, Color.white, PoolVector2Array(), null, null, true)
+	if !poly: draw_colored_polygon(gon, Color.white, PoolVector2Array(), null, null, true)
  
 func set_offset(arg := offset):
 	offset = arg
@@ -45,4 +53,8 @@ func set_size(arg := size):
 
 func set_radius(arg := radius):
 	radius = arg
+	u()
+
+func set_poly(arg := poly_path):
+	poly_path = arg
 	u()

@@ -1,5 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://src/actor/Petals.gd" type="Script" id=1]
+[ext_resource path="res://src/actor/Rectangle.gd" type="Script" id=2]
 [ext_resource path="res://src/detail/PaletteSwap.gd" type="Script" id=3]
 [ext_resource path="res://media/audio/sfx/piano_high.wav" type="AudioStream" id=5]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=6]
@@ -27,40 +29,24 @@ pitch_to = 1.2
 
 [node name="Images" type="Node2D" parent="."]
 
-[node name="Stem" type="Line2D" parent="Images"]
-position = Vector2( 0, -50 )
-points = PoolVector2Array( 0, 0, 0, 50 )
-width = 13.0
-default_color = Color( 0.137255, 1, 0, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+[node name="Stem" type="Polygon2D" parent="Images"]
+modulate = Color( 0.137255, 1, 0, 1 )
+position = Vector2( 0, -25 )
+polygon = PoolVector2Array( 6.5, 25.01, 5.6305, 28.255, 3.255, 30.6305, 0.00999994, 31.5, -0.0100005, 31.5, -3.255, 30.6305, -5.6305, 28.255, -6.5, 25.01, -6.5, -31.5, 6.5, -31.5 )
+script = ExtResource( 2 )
+size = Vector2( 6.5, 31.5 )
+radius = Plane( 6.49, -1, 0, 0 )
+points = 4
+poly_path = NodePath(".")
 
-[node name="Petals" type="Sprite" parent="Images"]
+[node name="Petals" type="Polygon2D" parent="Images"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0, -50 )
-
-[node name="Line2D" type="Line2D" parent="Images/Petals"]
-rotation = -0.785397
-points = PoolVector2Array( 0, 17, 0, -17 )
-width = 17.0
-default_color = Color( 1, 1, 1, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-round_precision = 6
-antialiased = true
-
-[node name="Line2D2" type="Line2D" parent="Images/Petals"]
-rotation = 0.785397
-points = PoolVector2Array( 0, 17, 0, -17 )
-width = 17.0
-default_color = Color( 1, 1, 1, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-round_precision = 6
-antialiased = true
+rotation = 0.785398
+scale = Vector2( 1, 1 )
+polygon = PoolVector2Array( 8.5, -8.5, 17, -8.5, 21.9962, -6.87664, 25.084, -2.62664, 25.084, 2.62664, 21.9962, 6.87664, 17, 8.5, 8.5, 8.5, 8.5, 17, 6.87664, 21.9962, 2.62664, 25.084, -2.62665, 25.084, -6.87665, 21.9962, -8.5, 17, -8.5, 8.5, -17, 8.5, -21.9962, 6.87664, -25.084, 2.62664, -25.084, -2.62665, -21.9962, -6.87665, -17, -8.5, -8.5, -8.5, -8.5, -17, -6.87664, -21.9962, -2.62665, -25.084, 2.62665, -25.084, 6.87664, -21.9962, 8.5, -17 )
+script = ExtResource( 1 )
+poly_path = NodePath(".")
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

@@ -11,7 +11,6 @@ var gon := PoolVector2Array()
 export var poly_path : NodePath setget set_poly
 onready var poly := get_node_or_null(poly_path)
 
-
 export var is_draw_debug := false setget set_debug
 var _draw_me := Vector2.ZERO
 var _draw_circle := Vector2.ZERO
@@ -22,6 +21,7 @@ func u():
 	var s = Vector2(dist, 0)
 	var r = PI*(1.0/leaves)
 	var line = Vector2(dist * 3.0, 0).rotated(r)
+	radius = max(radius, Vector2(dist, 0).distance_to(Vector2(dist, 0).rotated(r)))
 	
 	var seg = Geometry.segment_intersects_circle(line, Vector2.ZERO, s, radius)
 	var l = line * (1.0 - seg)
@@ -34,7 +34,7 @@ func u():
 	for i in leaves:
 		var a = (float(i) / leaves) * TAU
 		for y in points:
-			gon.append(draw_offset + s.rotated(a) + Vector2(radius, 0).rotated(a + lerp_angle(-ang, ang, float(y) / points)))
+			gon.append(draw_offset + s.rotated(a) + Vector2(radius, 0).rotated(a + lerp(-ang, ang, float(y) / points)))
 	
 	if !poly: poly = get_node_or_null(poly_path)
 	if poly:
@@ -42,7 +42,6 @@ func u():
 	
 	if Engine.editor_hint:
 		property_list_changed_notify()
-	
 	update()
 
 func _draw():
@@ -54,10 +53,6 @@ func _draw():
 		draw_circle(_draw_me, 10, c)
 		draw_circle(_draw_circle, radius, c)
 
-func set_radius(arg := radius):
-	radius = arg
-	u()
-
 func set_leaves(arg := leaves):
 	leaves = max(1, arg)
 	u()
@@ -66,12 +61,16 @@ func set_dist(arg := dist):
 	dist = abs(arg)
 	u()
 
-func set_offset(arg := draw_offset):
-	draw_offset = arg
+func set_radius(arg := radius):
+	radius = arg
 	u()
 
 func set_points(arg := points):
 	points = max(arg, 1)
+	u()
+
+func set_offset(arg := draw_offset):
+	draw_offset = arg
 	u()
 
 func set_poly(arg := poly_path):
