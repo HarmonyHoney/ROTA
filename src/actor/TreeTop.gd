@@ -1,31 +1,40 @@
 tool
 extends CanvasItem
 
-export var start_dist := 170.0 setget set_start
-export var distance := 130.0 setget set_distance
-export var circle_offset := Vector2.ZERO setget set_offset
+export var leaves := 8 setget set_leaves
+export var dist := 130.0 setget set_dist
+export var radius := 70.0 setget set_radius
+export var points := 8 setget set_points
+export var draw_offset := Vector2.ZERO setget set_offset
 
-export var gon := PoolVector2Array()
-export var points := 16 setget set_points
-
+var gon := PoolVector2Array()
 export var poly_path : NodePath setget set_poly
 onready var poly := get_node_or_null(poly_path)
+
+
+export var is_draw_debug := false setget set_debug
+var _draw_me := Vector2.ZERO
+var _draw_circle := Vector2.ZERO
 
 func u():
 	gon = []
 	
-	for i in 8:
-		var start = Vector2(start_dist, 0).rotated(deg2rad((i * 45) - 22.5))
-		var end = Vector2(start_dist, 0).rotated(deg2rad((i * 45) + 22.5))
-		
-		var center = start.linear_interpolate(end, 0.5).normalized() * distance
-		var r = center.distance_to(start)
-		var a1 = center.angle_to_point(start)
-		var a2 = center.angle_to_point(end)
-		#print("a1: ", rad2deg(a1), " a2: ", rad2deg(a2), " r: ", r)
-		
+	var s = Vector2(dist, 0)
+	var r = PI*(1.0/leaves)
+	var line = Vector2(dist * 3.0, 0).rotated(r)
+	
+	var seg = Geometry.segment_intersects_circle(line, Vector2.ZERO, s, radius)
+	var l = line * (1.0 - seg)
+	var ang = (l - s).angle()
+	
+	#print("r: ", rad2deg(r), " leaves: ", leaves, " line: ", line, "seg: ", seg, " l: ", l, " ang: ", rad2deg(ang))
+	_draw_me = l
+	_draw_circle = s
+	
+	for i in leaves:
+		var a = (float(i) / leaves) * TAU
 		for y in points:
-			gon.append(circle_offset + center + Vector2(r, 0).rotated(lerp_angle(a2 + deg2rad(45), a1 + deg2rad(45), -float(y) / points)))
+			gon.append(draw_offset + s.rotated(a) + Vector2(radius, 0).rotated(a + lerp_angle(-ang, ang, float(y) / points)))
 	
 	if !poly: poly = get_node_or_null(poly_path)
 	if poly:
@@ -38,17 +47,27 @@ func u():
 
 func _draw():
 	if !poly: draw_colored_polygon(gon, Color.white, PoolVector2Array(), null, null, true)
+	if is_draw_debug:
+		var c = Color(0,0,0, 0.5)
+		draw_line(Vector2.ZERO, Vector2(dist * 2, 0), c, 5.0)
+		draw_line(Vector2.ZERO, _draw_me, c, 5.0)
+		draw_circle(_draw_me, 10, c)
+		draw_circle(_draw_circle, radius, c)
 
-func set_start(arg := start_dist):
-	start_dist = arg
+func set_radius(arg := radius):
+	radius = arg
 	u()
 
-func set_distance(arg := distance):
-	distance = abs(arg)
+func set_leaves(arg := leaves):
+	leaves = max(1, arg)
 	u()
 
-func set_offset(arg := circle_offset):
-	circle_offset = arg
+func set_dist(arg := dist):
+	dist = abs(arg)
+	u()
+
+func set_offset(arg := draw_offset):
+	draw_offset = arg
 	u()
 
 func set_points(arg := points):
@@ -57,4 +76,8 @@ func set_points(arg := points):
 
 func set_poly(arg := poly_path):
 	poly_path = arg
+	u()
+
+func set_debug(arg := is_draw_debug):
+	is_draw_debug = arg
 	u()
