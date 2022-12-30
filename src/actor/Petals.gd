@@ -26,7 +26,7 @@ func u():
 			gon.append(s + Vector2(width, 0).rotated(r + lerp(-PI*.5, PI*.5, float(y) / points)))
 	
 	if !poly: poly = get_node_or_null(poly_path)
-	if poly:
+	if poly and "polygon" in poly:
 		poly.polygon = gon
 	
 	if Engine.editor_hint:

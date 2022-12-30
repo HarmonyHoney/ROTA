@@ -37,7 +37,7 @@ func u():
 			gon.append(draw_offset + s.rotated(a) + Vector2(radius, 0).rotated(a + lerp(-ang, ang, float(y) / points)))
 	
 	if !poly: poly = get_node_or_null(poly_path)
-	if poly:
+	if poly and "polygon" in poly:
 		poly.polygon = gon
 	
 	if Engine.editor_hint:

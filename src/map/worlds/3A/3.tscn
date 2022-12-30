@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=1]
+[ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=8]
-[ext_resource path="res://media/image/details/rock.png" type="Texture" id=9]
+[ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=12]
@@ -44,21 +44,18 @@ z_index = -5
 [node name="Rocks" type="Node2D" parent="Details"]
 modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
 
-[node name="Rock" type="Sprite" parent="Details/Rocks"]
+[node name="Square" parent="Details/Rocks" instance=ExtResource( 1 )]
 position = Vector2( 750, 50 )
 scale = Vector2( 0.166619, 0.166619 )
-texture = ExtResource( 9 )
 
-[node name="Rocks" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks2" parent="Details/Rocks" instance=ExtResource( 7 )]
 position = Vector2( 300, 100 )
 rotation = -1.57079
 scale = Vector2( 0.306503, 0.306503 )
-texture = ExtResource( 8 )
 
-[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+[node name="Circle" parent="Details/Rocks" instance=ExtResource( 8 )]
 position = Vector2( 450, 350 )
 scale = Vector2( 0.443415, 0.443415 )
-texture = ExtResource( 1 )
 
 [node name="Lamppost" parent="Details" instance=ExtResource( 10 )]
 position = Vector2( 450, 0 )

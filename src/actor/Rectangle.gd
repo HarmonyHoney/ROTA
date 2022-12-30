@@ -31,9 +31,11 @@ func u():
 			gon.append(offset + vec[i] * size)
 	
 	if !poly: poly = get_node_or_null(poly_path)
-	if poly:
+	if poly and "polygon" in poly:
 		poly.polygon = gon
 	
+	if Engine.editor_hint:
+		property_list_changed_notify()
 	update()
 
 func _draw():

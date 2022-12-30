@@ -1,6 +1,7 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/detail/PineTree.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
@@ -8,9 +9,8 @@
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=9]
-[ext_resource path="res://media/image/details/rock.png" type="Texture" id=10]
-[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=11]
-[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=12]
+[ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/detail/Snowman.tscn" type="PackedScene" id=14]
 
@@ -78,67 +78,55 @@ gem_count = 50
 
 [node name="Rocks" type="Node2D" parent="Details"]
 
-[node name="Rock" type="Sprite" parent="Details/Rocks"]
+[node name="Square" parent="Details/Rocks" instance=ExtResource( 10 )]
 position = Vector2( 1500, 1300 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 10 )
 
-[node name="Rock5" type="Sprite" parent="Details/Rocks"]
+[node name="Square2" parent="Details/Rocks" instance=ExtResource( 10 )]
 position = Vector2( 1800, 1300 )
 rotation = -2.35619
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 10 )
 
-[node name="Rock7" type="Sprite" parent="Details/Rocks"]
+[node name="Square3" parent="Details/Rocks" instance=ExtResource( 10 )]
 position = Vector2( 3000, 1400 )
 rotation = -2.35619
 scale = Vector2( 0.172698, 0.172698 )
-texture = ExtResource( 10 )
 
-[node name="Rock6" type="Sprite" parent="Details/Rocks"]
+[node name="Square4" parent="Details/Rocks" instance=ExtResource( 10 )]
 position = Vector2( 1850, 2000 )
 rotation = -2.35619
 scale = Vector2( 0.197116, 0.197116 )
-texture = ExtResource( 10 )
 
-[node name="Rocks" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks6" parent="Details/Rocks" instance=ExtResource( 2 )]
 position = Vector2( 2600, 800 )
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 11 )
 
-[node name="Rocks2" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks7" parent="Details/Rocks" instance=ExtResource( 2 )]
 position = Vector2( 1800, 1600 )
 rotation = -3.14159
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 11 )
 
-[node name="Rocks3" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks8" parent="Details/Rocks" instance=ExtResource( 2 )]
 position = Vector2( 2300, 1300 )
 rotation = -3.14159
 scale = Vector2( 0.6, 0.6 )
-texture = ExtResource( 11 )
 
-[node name="Rocks4" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks9" parent="Details/Rocks" instance=ExtResource( 2 )]
 position = Vector2( 2100, 1300 )
-rotation = -6.28318
 scale = Vector2( 0.6, 0.6 )
-texture = ExtResource( 11 )
 
-[node name="Rocks5" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks10" parent="Details/Rocks" instance=ExtResource( 2 )]
 position = Vector2( 2350, 2085 )
-rotation = -3.92699
+rotation = 2.3562
 scale = Vector2( 0.31534, 0.31534 )
-texture = ExtResource( 11 )
 
-[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+[node name="Circle" parent="Details/Rocks" instance=ExtResource( 11 )]
 position = Vector2( 2550, 1150 )
 scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 12 )
 
-[node name="RoundRock2" type="Sprite" parent="Details/Rocks"]
+[node name="Circle2" parent="Details/Rocks" instance=ExtResource( 11 )]
 position = Vector2( 2785, 1815 )
 scale = Vector2( 0.262608, 0.262608 )
-texture = ExtResource( 12 )
 
 [node name="PineTree" parent="Details" instance=ExtResource( 1 )]
 position = Vector2( 1650, 1100 )

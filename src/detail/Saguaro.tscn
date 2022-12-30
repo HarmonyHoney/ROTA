@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://media/image/details/saguaro.png" type="Texture" id=1]
+[ext_resource path="res://media/image/details/saguaro.svg" type="Texture" id=1]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=2]
 [ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=3]
 

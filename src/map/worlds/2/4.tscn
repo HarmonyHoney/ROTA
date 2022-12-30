@@ -8,12 +8,12 @@
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=12]
-[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=13]
-[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=14]
-[ext_resource path="res://media/image/details/rock.png" type="Texture" id=15]
+[ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=14]
 
 [node name="Node2D" type="Node2D"]
 
@@ -45,28 +45,24 @@ position = Vector2( -750, 450 )
 [node name="Rocks" type="Node2D" parent="Details"]
 modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
 
-[node name="Rock" type="Sprite" parent="Details/Rocks"]
+[node name="Square" parent="Details/Rocks" instance=ExtResource( 13 )]
 position = Vector2( -500, 125 )
 rotation = -0.785397
 scale = Vector2( 0.223317, 0.223317 )
-texture = ExtResource( 15 )
 
-[node name="Rock2" type="Sprite" parent="Details/Rocks"]
+[node name="Square2" parent="Details/Rocks" instance=ExtResource( 13 )]
 position = Vector2( -500, 600 )
 rotation = -1.57079
 scale = Vector2( 0.207487, 0.207487 )
-texture = ExtResource( 15 )
 
-[node name="Rocks" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks2" parent="Details/Rocks" instance=ExtResource( 14 )]
 position = Vector2( -700, 100 )
 rotation = -1.57079
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 13 )
 
-[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+[node name="Circle" parent="Details/Rocks" instance=ExtResource( 9 )]
 position = Vector2( 100, -200 )
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 14 )
 
 [node name="Lamppost" parent="Details" instance=ExtResource( 1 )]
 position = Vector2( -600, 300 )

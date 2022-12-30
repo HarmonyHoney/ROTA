@@ -5,11 +5,11 @@
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/BarrelCacti.tscn" type="PackedScene" id=8]
-[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=10]
-[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=11]
-[ext_resource path="res://media/image/details/rock.png" type="Texture" id=12]
+[ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=10]
 
 [node name="Node2D" type="Node2D"]
 
@@ -41,28 +41,24 @@ dir = 2
 [node name="Rocks" type="Node2D" parent="Details"]
 modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
 
-[node name="Rock" type="Sprite" parent="Details/Rocks"]
+[node name="Square" parent="Details/Rocks" instance=ExtResource( 6 )]
 position = Vector2( 1050, -300 )
 rotation = -0.785397
 scale = Vector2( 0.168792, 0.168792 )
-texture = ExtResource( 12 )
 
-[node name="Rock2" type="Sprite" parent="Details/Rocks"]
+[node name="Square2" parent="Details/Rocks" instance=ExtResource( 6 )]
 position = Vector2( 1550, -650 )
 rotation = -1.57079
 scale = Vector2( 0.374386, 0.374386 )
-texture = ExtResource( 12 )
 
-[node name="Rocks" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks2" parent="Details/Rocks" instance=ExtResource( 9 )]
 position = Vector2( 1300, -600 )
 rotation = -3.14159
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 10 )
 
-[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+[node name="Circle" parent="Details/Rocks" instance=ExtResource( 10 )]
 position = Vector2( 1600, -100 )
 scale = Vector2( 0.201854, 0.201854 )
-texture = ExtResource( 11 )
 
 [node name="Saguaro" parent="Details" instance=ExtResource( 5 )]
 position = Vector2( 1500, -500 )

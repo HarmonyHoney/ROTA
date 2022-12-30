@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=2]
 
+[ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=4]
-[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=5]
+[ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=7]
-[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=8]
-[ext_resource path="res://media/image/details/rock.png" type="Texture" id=9]
+[ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/detail/PineTree.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=12]
@@ -61,22 +61,19 @@ position = Vector2( 2950, -50 )
 
 [node name="Rocks" type="Node2D" parent="Details"]
 
-[node name="Rock" type="Sprite" parent="Details/Rocks"]
+[node name="Square" parent="Details/Rocks" instance=ExtResource( 8 )]
 position = Vector2( 2100, 650 )
 rotation = -0.785397
 scale = Vector2( 0.507202, 0.507202 )
-texture = ExtResource( 9 )
 
-[node name="Rocks" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks2" parent="Details/Rocks" instance=ExtResource( 1 )]
 position = Vector2( 2700, -30 )
 rotation = -0.785397
 scale = Vector2( 0.341742, 0.341742 )
-texture = ExtResource( 8 )
 
-[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+[node name="Circle" parent="Details/Rocks" instance=ExtResource( 5 )]
 position = Vector2( 2600, 1250 )
 scale = Vector2( 0.210269, 0.210269 )
-texture = ExtResource( 5 )
 
 [node name="PineTree" parent="Details" instance=ExtResource( 10 )]
 position = Vector2( 2700, 1150 )

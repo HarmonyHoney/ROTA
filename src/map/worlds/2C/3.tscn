@@ -1,5 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
+[ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=4]
@@ -7,7 +8,6 @@
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/PineTree.tscn" type="PackedScene" id=8]
-[ext_resource path="res://media/image/details/rock.png" type="Texture" id=9]
 [ext_resource path="res://src/detail/Snowman.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=12]
@@ -59,11 +59,10 @@ position = Vector2( 2300, -250 )
 
 [node name="Rocks" type="Node2D" parent="Details"]
 
-[node name="Rock" type="Sprite" parent="Details/Rocks"]
+[node name="Square" parent="Details/Rocks" instance=ExtResource( 1 )]
 position = Vector2( 2100, 600 )
 rotation = 0.785397
 scale = Vector2( 0.480133, 0.480133 )
-texture = ExtResource( 9 )
 
 [node name="Lamppost" parent="Details" instance=ExtResource( 5 )]
 position = Vector2( 2800, 450 )

@@ -1,19 +1,19 @@
 [gd_scene load_steps=16 format=2]
 
+[ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=13]
-[ext_resource path="res://media/image/details/round_rock.png" type="Texture" id=14]
-[ext_resource path="res://media/image/details/rock.png" type="Texture" id=15]
-[ext_resource path="res://media/image/details/rocks.png" type="Texture" id=16]
+[ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/detail/BarrelCacti.tscn" type="PackedScene" id=17]
 
 [node name="Map" type="Node2D"]
@@ -81,67 +81,56 @@ scene_path = "res://src/map/worlds/3B/8.tscn"
 [node name="Rocks" type="Node2D" parent="Details"]
 modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
 
-[node name="Rock" type="Sprite" parent="Details/Rocks"]
+[node name="Square" parent="Details/Rocks" instance=ExtResource( 7 )]
 position = Vector2( 1300, 500 )
 rotation = -0.785397
 scale = Vector2( 0.210238, 0.210238 )
-texture = ExtResource( 15 )
 
-[node name="Rock3" type="Sprite" parent="Details/Rocks"]
+[node name="Square2" parent="Details/Rocks" instance=ExtResource( 7 )]
 position = Vector2( 450, 1300 )
 rotation = -1.57079
 scale = Vector2( 0.185535, 0.185535 )
-texture = ExtResource( 15 )
 
-[node name="Rock2" type="Sprite" parent="Details/Rocks"]
+[node name="Square3" parent="Details/Rocks" instance=ExtResource( 7 )]
 position = Vector2( 250, 200 )
 rotation = -1.57079
 scale = Vector2( 0.17978, 0.17978 )
-texture = ExtResource( 15 )
 
-[node name="Rock4" type="Sprite" parent="Details/Rocks"]
+[node name="Square4" parent="Details/Rocks" instance=ExtResource( 7 )]
 position = Vector2( 150, 550 )
 rotation = -2.35619
 scale = Vector2( 0.342462, 0.342462 )
-texture = ExtResource( 15 )
 
-[node name="Rocks3" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks" parent="Details/Rocks" instance=ExtResource( 1 )]
 position = Vector2( 800, 400 )
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 16 )
 
-[node name="Rocks5" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks2" parent="Details/Rocks" instance=ExtResource( 1 )]
 position = Vector2( 1000, 1300 )
 rotation = 1.57079
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 16 )
 
-[node name="Rocks6" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks7" parent="Details/Rocks" instance=ExtResource( 1 )]
 position = Vector2( 150, 900 )
 rotation = 3.14159
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 16 )
 
-[node name="Rocks4" type="Sprite" parent="Details/Rocks"]
+[node name="Rocks8" parent="Details/Rocks" instance=ExtResource( 1 )]
 position = Vector2( 450, 400 )
 rotation = -3.14159
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 16 )
 
-[node name="RoundRock" type="Sprite" parent="Details/Rocks"]
+[node name="Circle" parent="Details/Rocks" instance=ExtResource( 14 )]
 position = Vector2( 950, 700 )
 scale = Vector2( 0.45, 0.45 )
-texture = ExtResource( 14 )
 
-[node name="RoundRock3" type="Sprite" parent="Details/Rocks"]
+[node name="Circle2" parent="Details/Rocks" instance=ExtResource( 14 )]
 position = Vector2( -100, 500 )
 scale = Vector2( 0.17611, 0.17611 )
-texture = ExtResource( 14 )
 
-[node name="RoundRock2" type="Sprite" parent="Details/Rocks"]
+[node name="Circle3" parent="Details/Rocks" instance=ExtResource( 14 )]
 position = Vector2( 85, -85 )
 scale = Vector2( 0.225524, 0.225524 )
-texture = ExtResource( 14 )
 
 [node name="Saguaro" parent="Details" instance=ExtResource( 6 )]
 position = Vector2( 750, 300 )
