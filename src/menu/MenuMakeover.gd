@@ -23,6 +23,7 @@ func open():
 	player = Shared.player
 	player.joy = Vector2.ZERO
 	player.is_input = false
+	palette = Shared.player.palette
 
 func close():
 	Cam.turn_offset = Vector2.ZERO
@@ -52,7 +53,7 @@ func preset():
 	var h = [[0,8], [1,9], [2,3], [2,7], [3,2], [3,4], [4,1], [5,1], [6,5]]
 	h.shuffle()
 	
-	var skin = [4,5,6]
+	var skin = [16, 17, 18, 19]
 	skin.shuffle()
 	
 	var c = range(palette.size())

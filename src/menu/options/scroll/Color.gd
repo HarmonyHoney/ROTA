@@ -6,11 +6,13 @@ onready var swatch := $HBoxContainer.get_children()
 
 func _ready():
 	set_part()
+	count = Shared.player.palette.size() - 1
 
 func set_value():
 	var p = []
+	var pal = Shared.player.palette
 	for i in [-2, -1, 0, 1, 2]:
-		p.append(MenuMakeover.palette[posmod(cursor + i, MenuMakeover.palette.size())])
+		p.append(pal[posmod(cursor + i, pal.size())])
 	
 	for i in p.size():
 		swatch[i].modulate = p[i]

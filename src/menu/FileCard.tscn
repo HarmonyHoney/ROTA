@@ -95,6 +95,7 @@ __meta__ = {
 
 [node name="Clock" parent="Items/Goals/Clocks/Image" instance=ExtResource( 1 )]
 position = Vector2( 30, 30 )
+polygon = PoolVector2Array( 25, 0, 23.097, 9.56709, 17.6777, 17.6777, 9.56709, 23.097, -1.09278e-06, 25, -9.56709, 23.097, -17.6777, 17.6777, -23.097, 9.56709, -25, -2.18557e-06, -23.097, -9.56709, -17.6777, -17.6777, -9.56709, -23.097, 2.98122e-07, -25, 9.56709, -23.097, 17.6777, -17.6777, 23.097, -9.56709 )
 
 [node name="Label" type="Label" parent="Items/Goals/Clocks"]
 margin_left = 69.0

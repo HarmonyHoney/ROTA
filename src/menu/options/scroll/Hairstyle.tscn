@@ -49,4 +49,4 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 1 )
 radius = 20.0
-offset = Vector2( 35, 35 )
+circle_offset = Vector2( 35, 35 )

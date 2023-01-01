@@ -126,6 +126,7 @@ func _enter_tree():
 	UI.connect("dialog_closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")
 	Wipe.connect("start", self, "wipe_start")
+	get_tree().connect("physics_frame", self, "physics_frame")
 
 func _ready():
 	set_hair_back()
@@ -322,26 +323,6 @@ func _physics_process(delta):
 				
 				joy_q = Vector2.ZERO
 		
-		# hold animation
-		if !is_release:
-			# hands
-			var box_angle = turn_to
-			var smooth = 0.2
-			if box.is_turn or box.is_push:
-				box_angle += box.sprite.rotation - (box.turn_from if box.is_turn else box.turn_to)
-				smooth = 1.0
-			
-			var box_edge = box.sprite.global_position - Vector2(50 * dir_x, 0).rotated(box_angle)
-			# move hands
-			for i in 2:
-				var offset = Vector2(0, 20  * (-1 if sign(dir_x + 1) == i else 1))
-				var goto = box_edge + offset.rotated(box_angle)
-				spr_hands[i].global_position = spr_hands[i].global_position.linear_interpolate(goto, smooth)
-			
-			# body
-			spr_body.rotation = lerp_angle(spr_body.rotation, 0, 0.1)
-			spr_body.position.y = lerp(spr_body.position.y, 0, 0.1)
-		
 		# release box
 		if is_release:
 			is_hold = false
@@ -500,6 +481,27 @@ func _physics_process(delta):
 	squish_clock = min(squish_clock + delta, squish_time)
 	var s = smoothstep(0, 1, squish_clock / squish_time)
 	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, s)
+
+func physics_frame():
+	# hold animation
+	if is_hold:
+		# hands
+		var box_angle = turn_to
+		var smooth = 0.2
+		if box.is_turn or box.is_push:
+			box_angle += box.sprite.rotation - (box.turn_from if box.is_turn else box.turn_to)
+			smooth = 1.0
+		
+		var box_edge = box.sprite.global_position - Vector2(50 * dir_x, 0).rotated(box_angle)
+		# move hands
+		for i in 2:
+			var offset = Vector2(0, 20  * (-1 if sign(dir_x + 1) == i else 1))
+			var goto = box_edge + offset.rotated(box_angle)
+			spr_hands[i].global_position = spr_hands[i].global_position.linear_interpolate(goto, smooth)
+		
+		# body
+		spr_body.rotation = lerp_angle(spr_body.rotation, 0, 0.1)
+		spr_body.position.y = lerp(spr_body.position.y, 0, 0.1)
 
 ### Set Get
 

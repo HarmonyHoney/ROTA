@@ -45,7 +45,7 @@ func u():
 	update()
 
 func _draw():
-	if !poly: draw_colored_polygon(gon, Color.white, PoolVector2Array(), null, null, true)
+	if !poly and gon.size() > 2: draw_colored_polygon(gon, Color.white, PoolVector2Array(), null, null, true)
 	if is_draw_debug:
 		var c = Color(0,0,0, 0.5)
 		draw_line(Vector2.ZERO, Vector2(dist * 2, 0), c, 5.0)

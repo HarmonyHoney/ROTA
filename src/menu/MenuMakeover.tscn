@@ -161,7 +161,7 @@ margin_bottom = 232.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 8 )
 is_loop = true
-count = 17
+count = 18
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Hair"]
 anchor_right = 1.0
@@ -176,7 +176,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle" instance=ExtResource( 4 )]
@@ -194,7 +193,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle2" instance=ExtResource( 4 )]
@@ -212,7 +210,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle3" instance=ExtResource( 4 )]
@@ -229,7 +226,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle4" instance=ExtResource( 4 )]
@@ -247,7 +243,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle5" instance=ExtResource( 4 )]
@@ -264,7 +259,7 @@ margin_bottom = 312.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 8 )
 is_loop = true
-count = 17
+count = 18
 part = "eye"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Eye"]
@@ -280,7 +275,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle"]
@@ -311,7 +305,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle2"]
@@ -376,7 +369,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle4"]
@@ -407,7 +399,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle5"]
@@ -437,7 +428,7 @@ margin_bottom = 392.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 8 )
 is_loop = true
-count = 17
+count = 18
 part = "skin"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Skin"]
@@ -453,7 +444,7 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 25.0
-offset = Vector2( 35, 35 )
+circle_offset = Vector2( 35, 35 )
 
 [node name="Circle2" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 1, 0, 0, 1 )
@@ -463,7 +454,7 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 30.0
-offset = Vector2( 35, 35 )
+circle_offset = Vector2( 35, 35 )
 
 [node name="Circle3" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 0, 0, 1, 1 )
@@ -473,7 +464,7 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 30.0
-offset = Vector2( 35, 35 )
+circle_offset = Vector2( 35, 35 )
 
 [node name="Circle4" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
 margin_left = 244.0
@@ -482,7 +473,7 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 30.0
-offset = Vector2( 35, 35 )
+circle_offset = Vector2( 35, 35 )
 
 [node name="Circle5" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
@@ -492,7 +483,7 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 25.0
-offset = Vector2( 35, 35 )
+circle_offset = Vector2( 35, 35 )
 
 [node name="Fit" type="Control" parent="Dialog/List" groups=["color"]]
 margin_top = 402.0
@@ -501,7 +492,7 @@ margin_bottom = 472.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 8 )
 is_loop = true
-count = 17
+count = 18
 part = "fit"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Fit"]
@@ -517,7 +508,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle"]
@@ -555,7 +545,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle2"]
@@ -593,7 +582,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle3"]
@@ -630,7 +618,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle4"]
@@ -668,7 +655,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
 radius = 0.0
-offset = Vector2( 35, 35 )
 points = 8
 
 [node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle5"]

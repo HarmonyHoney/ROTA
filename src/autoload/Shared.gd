@@ -487,11 +487,12 @@ func load_slot(arg := 0):
 
 func load_slot_style(arg := 0):
 	var s = save_dict[clamp(arg, 0, 2)]
-	if s.has("dye"):
-			Shared.player.dye = s["dye"].duplicate()
-	if s.has("hair"):
+	if s.has("dye") and s.has("hair"):
+		Shared.player.dye = s["dye"].duplicate()
 		Shared.player.hairstyle_back = s["hair"][0]
 		Shared.player.hairstyle_front = s["hair"][1]
+	else:
+		MenuMakeover.preset()
 
 func save_options():
 	var o := {}
