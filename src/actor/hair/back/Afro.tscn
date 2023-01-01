@@ -14,3 +14,4 @@ end_scale = 0.95
 length = 8.0
 sitting_angle = 180.0
 point_count = 6
+vertices = 24

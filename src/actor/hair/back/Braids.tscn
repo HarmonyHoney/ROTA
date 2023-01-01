@@ -7,6 +7,7 @@
 [node name="Hair" parent="." instance=ExtResource( 2 )]
 end_scale = 0.8
 length = 1.0
+vertices = 24
 
 [node name="Hair2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -15, 0 )

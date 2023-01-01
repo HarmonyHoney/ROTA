@@ -6,10 +6,10 @@ export var end_scale := 0.75 setget set_end
 export var length = 25.0
 export var sitting_angle = 15.0
 export var point_count := 3 setget set_points
+export var vertices := 16 setget set_vertices
 export var gravity = 190.0
 
-var points = []
-var sizes = []
+var gons = []
 var last_pos := Vector2.ZERO
 var hair_end = Vector2(-150, 150)
 
@@ -17,12 +17,23 @@ onready var start_x := scale.x
 export var is_scale_x := true
 
 func _ready():
-	set_points()
+	u()
 
-func _draw():
-	# set sprites
-	for i in points.size():
-		draw_circle(points[i], sizes[i], Color.white)
+func u():
+	for i in get_children():
+		i.queue_free()
+	gons = []
+	
+	for p in point_count:
+		var s = width * 0.5 * lerp(1.0, end_scale, p / float(point_count - 1))
+		var a = []
+		for i in vertices:
+			a.append(s * Vector2.RIGHT.rotated(TAU * (float(i) / vertices)))
+		
+		var g = Polygon2D.new()
+		g.polygon = a
+		add_child(g)
+		gons.append(g)
 
 func _physics_process(delta):
 	# move end
@@ -34,34 +45,27 @@ func _physics_process(delta):
 	# keep length
 	if hair_end.length() > length:
 		hair_end = hair_end.normalized() * length
+	last_pos = to_global(hair_end)
 	
 	# set points
-	for i in points.size():
-		points[i] = hair_end.normalized() * hair_end.length() * (float(i) / (points.size() - 1))
-	
-	last_pos = to_global(hair_end)
-	update()
+	for i in gons.size():
+		gons[i].position = hair_end.normalized() * hair_end.length() * (float(i) / (gons.size() - 1))
 
 func set_points(arg := point_count):
 	point_count = max(2, arg)
-	points = []
-	for i in point_count:
-		points.append(Vector2.ZERO)
-	sprite_scale()
+	u()
 
-func sprite_scale():
-	sizes = []
-	for i in points.size():
-		sizes.append(width * 0.5 * lerp(1.0, end_scale, i / float(point_count - 1)))
-	update()
+func set_vertices(arg := vertices):
+	vertices = max(3, arg)
+	u()
 
 func set_width(arg := width):
 	width = arg
-	sprite_scale()
+	u()
 
 func set_end(arg := end_scale):
 	end_scale = arg
-	sprite_scale()
+	u()
 
 func scale_x(arg):
 	if is_scale_x:
