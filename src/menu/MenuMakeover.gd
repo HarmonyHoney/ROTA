@@ -53,11 +53,17 @@ func preset():
 	var h = [[0,8], [1,9], [2,3], [2,7], [3,2], [3,4], [4,1], [5,1], [6,5]]
 	h.shuffle()
 	
-	var skin = [16, 17, 18, 19]
-	skin.shuffle()
+	var skin = [16, 17, 18, 19][randi() % 4]
+	var r = [skin]
+	var pairs = [[3, 16], [10, 19], [14, 17], [16, 17]]
+	for i in pairs:
+		if skin == i[0]: r.append(i[1])
+		if skin == i[1]: r.append(i[0])
+	r.sort()
 	
 	var c = range(palette.size())
-	c.erase(skin[0])
+	for i in r.size():
+		c.erase(r.pop_back())
 	c.shuffle()
 	
-	outfit([h[0][0], h[0][1], c[0], c[1], skin[0], c[2]])
+	outfit([h[0][0], h[0][1], c[0], c[1], skin, c[2]])

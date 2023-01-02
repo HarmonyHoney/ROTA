@@ -1,16 +1,17 @@
 extends Scroll
 
 export(String, "back", "front") var order = "back"
-
-export(Array, String, FILE) var scenes := []
-
 onready var hbox := $HBoxContainer
 onready var circle := $HBoxContainer/Circle
+
+var scenes := []
 var items := []
-var styles := []
 
 func _ready():
 	label_desc.text = "Hair" if order == "front" else ""
+	scenes = Shared.player.get("hair_" + order + "s")
+	count = scenes.size() - 1
+	
 	for i in scenes.size():
 		if i == 0: continue
 		

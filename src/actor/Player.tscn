@@ -402,12 +402,12 @@ z_index = 50
 z_as_relative = false
 collision_layer = 3
 script = ExtResource( 2 )
-palette = [ Color( 0.14902, 0.14902, 0.14902, 1 ), Color( 0.505882, 0.505882, 0.6, 1 ), Color( 0.721569, 0.803922, 0.85098, 1 ), Color( 0.921569, 0.921569, 0.921569, 1 ), Color( 0.623529, 1, 0.25098, 1 ), Color( 0, 1, 0, 1 ), Color( 0, 1, 0.498039, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 0.498039, 1, 1 ), Color( 0.160784, 0.160784, 1, 1 ), Color( 0.576471, 0.14902, 1, 1 ), Color( 1, 0, 1, 1 ), Color( 1, 0, 0.498039, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.501961, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.675, 0.35, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ) ]
+palette = [ Color( 0.14902, 0.14902, 0.14902, 1 ), Color( 0.505882, 0.505882, 0.6, 1 ), Color( 0.721569, 0.803922, 0.85098, 1 ), Color( 0.87, 0.87, 0.87, 1 ), Color( 0.623529, 1, 0.25098, 1 ), Color( 0, 1, 0, 1 ), Color( 0, 1, 0.498039, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 0.498039, 1, 1 ), Color( 0.160784, 0.160784, 1, 1 ), Color( 0.576471, 0.14902, 1, 1 ), Color( 1, 0, 1, 1 ), Color( 1, 0, 0.498039, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.501961, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.675, 0.35, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ) ]
 dye = {
-"eye": 14,
-"fit": 8,
-"hair": 15,
-"skin": 4
+"eye": 11,
+"fit": 4,
+"hair": 10,
+"skin": 19
 }
 hair_backs = [ "", "res://src/actor/hair/back/Short.tscn", "res://src/actor/hair/back/Medium.tscn", "res://src/actor/hair/back/Long.tscn", "res://src/actor/hair/back/Braid.tscn", "res://src/actor/hair/back/Braids.tscn", "res://src/actor/hair/back/Afro.tscn" ]
 hair_fronts = [ "", "res://src/actor/hair/front/OneShort.tscn", "res://src/actor/hair/front/OneLong.tscn", "res://src/actor/hair/front/TwoShort.tscn", "res://src/actor/hair/front/TwoLong.tscn", "res://src/actor/hair/front/Bun.tscn", "res://src/actor/hair/front/Buns.tscn", "res://src/actor/hair/front/Mohawk.tscn", "res://src/actor/hair/front/FlatTop.tscn", "res://src/actor/hair/front/Bangs.tscn" ]
@@ -453,7 +453,7 @@ use_parent_material = true
 use_parent_material = true
 
 [node name="Hair" type="Node2D" parent="Sprites/Root/Body"]
-modulate = Color( 1, 0, 1, 1 )
+modulate = Color( 0.576471, 0.14902, 1, 1 )
 position = Vector2( 0, -25 )
 
 [node name="Back" type="Node2D" parent="Sprites/Root/Body/Hair"]
@@ -461,7 +461,7 @@ position = Vector2( 0, -25 )
 [node name="Front" type="Node2D" parent="Sprites/Root/Body/Hair"]
 
 [node name="Fit" type="Node2D" parent="Sprites/Root/Body"]
-modulate = Color( 0.498039, 1, 0, 1 )
+modulate = Color( 0.623529, 1, 0.25098, 1 )
 
 [node name="LegL" type="Line2D" parent="Sprites/Root/Body/Fit"]
 position = Vector2( -5, -9.5 )
@@ -491,7 +491,7 @@ width_curve = SubResource( 13 )
 default_color = Color( 1, 1, 1, 1 )
 
 [node name="Head" type="Polygon2D" parent="Sprites/Root/Body"]
-modulate = Color( 1, 0.717647, 0.717647, 1 )
+modulate = Color( 0.478431, 0.25098, 0.423529, 1 )
 position = Vector2( 0, -25 )
 polygon = PoolVector2Array( 20, 0, 19.3185, 5.17638, 17.3205, 10, 14.1421, 14.1421, 10, 17.3205, 5.17638, 19.3185, -8.74228e-07, 20, -5.17638, 19.3185, -10, 17.3205, -14.1421, 14.1421, -17.3205, 10, -19.3185, 5.17638, -20, -1.74846e-06, -19.3185, -5.17638, -17.3205, -10, -14.1421, -14.1421, -10, -17.3205, -5.17638, -19.3185, 2.38498e-07, -20, 5.17638, -19.3185, 10, -17.3205, 14.1421, -14.1421, 17.3205, -10, 19.3185, -5.17638 )
 script = ExtResource( 3 )
@@ -500,7 +500,7 @@ points = 24
 poly_path = NodePath(".")
 
 [node name="Eyes" type="Node2D" parent="Sprites/Root/Body"]
-modulate = Color( 0.498039, 0, 1, 1 )
+modulate = Color( 1, 0, 1, 1 )
 position = Vector2( 0, -28.5 )
 
 [node name="Left" type="Polygon2D" parent="Sprites/Root/Body/Eyes"]
@@ -522,7 +522,7 @@ points = 4
 poly_path = NodePath(".")
 
 [node name="Hands" type="Node2D" parent="Sprites"]
-modulate = Color( 1, 0.717647, 0.717647, 1 )
+modulate = Color( 0.478431, 0.25098, 0.423529, 1 )
 z_index = 2
 
 [node name="Left" type="Polygon2D" parent="Sprites/Hands"]

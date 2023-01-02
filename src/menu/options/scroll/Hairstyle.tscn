@@ -10,8 +10,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 3 )
 is_loop = true
-count = 6
-scenes = [ "", "res://src/actor/hair/back/Short.tscn", "res://src/actor/hair/back/Medium.tscn", "res://src/actor/hair/back/Long.tscn", "res://src/actor/hair/back/Braid.tscn", "res://src/actor/hair/back/Braids.tscn", "res://src/actor/hair/back/Afro.tscn" ]
 
 [node name="Label" type="Label" parent="."]
 visible = false

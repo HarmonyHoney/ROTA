@@ -144,15 +144,12 @@ margin_bottom = 72.0
 __meta__ = {
 "_editor_description_": ""
 }
-count = 9
 order = "front"
-scenes = [ "", "res://src/actor/hair/front/OneShort.tscn", "res://src/actor/hair/front/OneLong.tscn", "res://src/actor/hair/front/TwoShort.tscn", "res://src/actor/hair/front/TwoLong.tscn", "res://src/actor/hair/front/Bun.tscn", "res://src/actor/hair/front/Buns.tscn", "res://src/actor/hair/front/Mohawk.tscn", "res://src/actor/hair/front/FlatTop.tscn", "res://src/actor/hair/front/Bangs.tscn" ]
 
 [node name="Back" parent="Dialog/List" instance=ExtResource( 3 )]
 margin_top = 82.0
 margin_right = 410.0
 margin_bottom = 152.0
-list = PoolStringArray(  )
 
 [node name="Hair" type="Control" parent="Dialog/List" groups=["color"]]
 margin_top = 162.0
