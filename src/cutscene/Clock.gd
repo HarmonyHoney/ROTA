@@ -12,7 +12,7 @@ func act():
 		yield(Wipe, "complete")
 	
 	d.is_clock = true
-	Audio.play("clock_collect", 0.8)
+	Audio.play("clock_collect", 0.9, 1.1)
 	UI.down.show = true
 	yield(get_tree().create_timer(1.0), "timeout")
 	
