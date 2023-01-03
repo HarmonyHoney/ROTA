@@ -21,7 +21,7 @@ enum SPEED {OFF, MAP, FILE, BOTH}
 var clock_show := 0
 var clock_alpha := 0.5
 var speedruns := {
-	"1/2": 10,
+	"1/2": 11,
 	"1/3": 17.5,
 	"1/4": 17.5,
 	"1/5": 13.5,
@@ -187,7 +187,7 @@ func time_string(t := 0.0, is_decimal = false, is_min := false, is_hour := false
 	
 	return s_hour + s_min + s_sec
 
-func wipe_scene(arg, last := csfn):
+func wipe_scene(arg, last := csfn, delay := 0.0):
 	var f = File.new()
 	var fe = f.file_exists(arg)
 	f.close()
@@ -199,7 +199,7 @@ func wipe_scene(arg, last := csfn):
 			last_scene = last
 			next_scene = arg
 		
-		Wipe.start()
+		Wipe.start(false, delay)
 		return true
 	
 	return false

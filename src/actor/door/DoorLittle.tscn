@@ -11,7 +11,19 @@
 script = ExtResource( 3 )
 colors = PoolColorArray( 0.686275, 0, 1, 1, 1, 0, 0.913725, 1, 1, 1, 0, 1, 1, 0.866667, 0, 1 )
 
-[node name="Sprites" type="Node2D" parent="." index="1"]
+[node name="Back" type="Polygon2D" parent="." index="1"]
+visible = false
+modulate = Color( 0.898039, 0.615686, 0.341176, 1 )
+position = Vector2( 0, 5 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 40, 50, -40, 50, -40, -30, -39.0211, -36.1803, -36.1803, -41.7557, -31.7557, -46.1803, -26.1803, -49.0211, -20, -50, 20, -50, 26.1803, -49.0211, 31.7557, -46.1803, 36.1803, -41.7557, 39.0211, -36.1803, 40, -30 )
+script = ExtResource( 2 )
+size = Vector2( 40, 50 )
+radius = Plane( 0, 0, 20, 20 )
+points = 6
+poly_path = NodePath(".")
+
+[node name="Sprites" type="Node2D" parent="." index="2"]
 
 [node name="Door" type="Polygon2D" parent="Sprites" index="0"]
 modulate = Color( 0.898039, 0.615686, 0.341176, 1 )
@@ -23,22 +35,25 @@ radius = Plane( 0, 0, 20, 20 )
 points = 6
 poly_path = NodePath(".")
 
-[node name="Knob" type="Node2D" parent="Sprites" index="1"]
+[node name="Knob" type="Polygon2D" parent="Sprites" index="1"]
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 25, 25 )
+polygon = PoolVector2Array( 7.5, 0, 6.49519, 3.75, 3.75, 6.49519, -3.27835e-07, 7.5, -3.75, 6.49519, -6.49519, 3.75, -7.5, -6.55671e-07, -6.49519, -3.75, -3.75, -6.49519, 8.94366e-08, -7.5, 3.75, -6.49519, 6.49519, -3.75 )
 script = ExtResource( 6 )
 radius = 7.5
 points = 12
+poly_path = NodePath(".")
 
-[node name="Gem" parent="." index="2" instance=ExtResource( 5 )]
+[node name="Gem" parent="Sprites" index="2" instance=ExtResource( 5 )]
 position = Vector2( 0, -5 )
 color = Color( 0.686275, 0, 1, 1 )
 
-[node name="Fill" parent="Gem" index="0"]
+[node name="Fill" parent="Sprites/Gem" index="0"]
 color = Color( 1, 0, 0.913725, 1 )
 
-[node name="Clock" parent="." index="3" instance=ExtResource( 4 )]
+[node name="Clock" parent="Sprites" index="3" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( 0, -5 )
+polygon = PoolVector2Array( 25, 0, 23.097, 9.56709, 17.6777, 17.6777, 9.56709, 23.097, -1.09278e-06, 25, -9.56709, 23.097, -17.6777, 17.6777, -23.097, 9.56709, -25, -2.18557e-06, -23.097, -9.56709, -17.6777, -17.6777, -9.56709, -23.097, 2.98122e-07, -25, 9.56709, -23.097, 17.6777, -17.6777, 23.097, -9.56709 )
 
-[editable path="Gem"]
+[editable path="Sprites/Gem"]

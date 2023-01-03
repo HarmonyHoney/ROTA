@@ -1,13 +1,14 @@
 tool
 extends Door
 
-onready var gem := $Gem
-onready var gem_fill := $Gem/Fill
+onready var sprites := $Sprites
+onready var gem := $Sprites/Gem
+onready var gem_fill := $Sprites/Gem/Fill
 var is_gem := false
 var gem_easy := EaseMover.new()
 export var colors : PoolColorArray = ["af00ff", "ff00e9", "fffb00", "ffdd00"]
 
-onready var clock := $Clock
+onready var clock := $Sprites/Clock
 var is_clock := false
 var clock_easy := EaseMover.new()
 
@@ -59,6 +60,12 @@ func activate():
 
 func on_enter():
 	Shared.collect_gem()
+	#sprites.visible = false
+	
+	for i in sprites.get_children():
+		if i.name == "Door":
+			i.modulate = Color.black
+		else: i.visible = false
 
 func gem_color(arg := 0):
 	gem.color = colors[arg]

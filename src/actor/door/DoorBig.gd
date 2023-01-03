@@ -33,3 +33,11 @@ func unlock():
 
 func on_active():
 	UI.up.show = arrow.is_active and gem_count > 0
+
+func on_enter():
+	$Sprites/Back.modulate = Color.black
+	$Sprites/Line.visible = false
+	$Sprites/Open.visible = true
+	$Sprites/Knob.position.x = -55
+	$Sprites/Knob2.position.x = 55
+	gem.visible = false
