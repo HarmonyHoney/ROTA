@@ -2,13 +2,16 @@ tool
 extends Door
 
 onready var sprites := $Sprites
-onready var gem := $Sprites/Gem
-onready var gem_fill := $Sprites/Gem/Fill
+onready var open := $Sprites/Open
+onready var door_mat : ShaderMaterial = $Sprites/Door.material
+
+onready var gem := $Sprites/Open/Gem
+onready var gem_fill := $Sprites/Open/Gem/Fill
 var is_gem := false
 var gem_easy := EaseMover.new()
 export var colors : PoolColorArray = ["af00ff", "ff00e9", "fffb00", "ffdd00"]
 
-onready var clock := $Sprites/Clock
+onready var clock := $Sprites/Open/Clock
 var is_clock := false
 var clock_easy := EaseMover.new()
 
@@ -28,12 +31,20 @@ func _ready():
 		gem_color(2)
 
 func _physics_process(delta):
-	if is_gem:
+	if open_close:
+		var s = open_easy.count(delta, open_close > 0)
+		door_mat.set_shader_param("line", lerp(0.9, 0.1, s))
+		open.scale.x = lerp(1.0, 0.0, s)
+		if open_easy.clock == 0.0 or open_easy.is_complete:
+			open_close = 0
+		
+	elif is_gem:
 		gem_easy.count(delta)
 		gem.color = colors[1].linear_interpolate(colors[2], gem_easy.smooth())
 		gem_fill.color = colors[0].linear_interpolate(colors[3], gem_easy.smooth())
 		if gem_easy.clock == 0 or gem_easy.is_complete:
 			is_gem = false
+		
 	elif is_clock:
 		var c = clock_easy.count(delta)
 		
@@ -60,12 +71,6 @@ func activate():
 
 func on_enter():
 	Shared.collect_gem()
-	#sprites.visible = false
-	
-	for i in sprites.get_children():
-		if i.name == "Door":
-			i.modulate = Color.black
-		else: i.visible = false
 
 func gem_color(arg := 0):
 	gem.color = colors[arg]

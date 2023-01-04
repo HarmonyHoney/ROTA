@@ -3,6 +3,7 @@ extends Node2D
 onready var sprites = $Sprites
 onready var area = $Area2D
 var shine_easy := EaseMover.new()
+var fade_easy := EaseMover.new()
 
 var target = null
 var is_collected := false
@@ -25,8 +26,10 @@ func _ready():
 
 func _physics_process(delta):
 	if shine_easy.clock > 0:
-		shine_easy.count(delta, false)
-		sprites.scale = Vector2.ONE * lerp(1.0, 2.0, shine_easy.smooth())
+		sprites.scale = Vector2.ONE * lerp(1.0, 2.0, shine_easy.count(delta, false))
+	
+	if fade_easy.clock > 0:
+		modulate.a = fade_easy.count(delta, false)
 	
 	# follow target
 	if is_instance_valid(target):

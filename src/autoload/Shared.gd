@@ -301,6 +301,7 @@ func collect_gem():
 		
 		Cutscene.is_collect = gem_count > o[0]
 		Cutscene.is_clock = clock_rank > o[1]
+		goal.fade_easy.clock = goal.fade_easy.time
 		
 		save_data()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/actor/door/DoorBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://media/font/profile/DoorLabel.tres" type="DynamicFont" id=2]
@@ -6,13 +6,24 @@
 [ext_resource path="res://src/actor/door/DoorBig.gd" type="Script" id=4]
 [ext_resource path="res://src/actor/Rectangle.gd" type="Script" id=5]
 [ext_resource path="res://src/actor/Circle.gd" type="Script" id=6]
+[ext_resource path="res://src/shader/door_big.gdshader" type="Shader" id=7]
+[ext_resource path="res://media/image/box/round_rect100.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 100, 100 )
 
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 7 )
+shader_param/col_fill = Color( 0.898039, 0.615686, 0.341176, 1 )
+shader_param/col_back = Color( 0, 0, 0, 1 )
+shader_param/col_line = Color( 0.713726, 0.345098, 0.156863, 1 )
+shader_param/line_width = 0.035
+shader_param/line = 0.0
+
 [node name="Door" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
-audio_range = Vector2( 0.6, 0.9 )
+audio_range = Vector2( 0.7, 0.9 )
 gem_count = 0
 
 [node name="Area2D" parent="Arrow" index="0"]
@@ -26,78 +37,37 @@ position = Vector2( 0, -150 )
 
 [node name="Sprites" type="Node2D" parent="." index="1"]
 
-[node name="Back" type="Polygon2D" parent="Sprites" index="0"]
-modulate = Color( 0.898039, 0.615686, 0.341176, 1 )
+[node name="Door" type="Polygon2D" parent="Sprites" index="0"]
+material = SubResource( 2 )
+texture = ExtResource( 8 )
 polygon = PoolVector2Array( 100, 100, -100, 100, -100, -50, -98.7464, -61.126, -95.0484, -71.6942, -89.0916, -81.1745, -81.1745, -89.0916, -71.6942, -95.0484, -61.126, -98.7464, -50, -100, 50, -100, 61.1261, -98.7464, 71.6942, -95.0484, 81.1745, -89.0916, 89.0916, -81.1745, 95.0484, -71.6942, 98.7464, -61.126, 100, -50 )
 script = ExtResource( 5 )
 size = Vector2( 100, 100 )
 radius = Plane( 0, 0, 50, 50 )
 poly_path = NodePath(".")
 
-[node name="Line" type="Polygon2D" parent="Sprites" index="1"]
-modulate = Color( 0.713726, 0.345098, 0.156863, 1 )
-polygon = PoolVector2Array( 3.5, 100, -3.5, 100, -3.5, -100, 3.5, -100 )
-script = ExtResource( 5 )
-size = Vector2( 3.5, 100 )
-poly_path = NodePath(".")
-
-[node name="Open" type="Node2D" parent="Sprites" index="2"]
-visible = false
-
-[node name="Door" type="Polygon2D" parent="Sprites/Open" index="0"]
-modulate = Color( 0.898039, 0.615686, 0.341176, 1 )
-position = Vector2( -70, 0 )
-polygon = PoolVector2Array( 30, 100, -30, 100, -30, -50, -28.7464, -61.126, -25.0484, -71.6942, -19.0916, -81.1745, -11.1745, -89.0916, -1.69419, -95.0484, 8.87395, -98.7464, 20, -100, 30, -100 )
-script = ExtResource( 5 )
-size = Vector2( 30, 100 )
-radius = Plane( 0, 0, 50, 0 )
-poly_path = NodePath(".")
-
-[node name="Door2" type="Polygon2D" parent="Sprites/Open" index="1"]
-modulate = Color( 0.898039, 0.615686, 0.341176, 1 )
-position = Vector2( 70, 0 )
-polygon = PoolVector2Array( 30, 100, -30, 100, -30, -100, -20, -100, -8.87395, -98.7464, 1.69419, -95.0484, 11.1745, -89.0916, 19.0916, -81.1745, 25.0484, -71.6942, 28.7464, -61.126, 30, -50 )
-script = ExtResource( 5 )
-size = Vector2( 30, 100 )
-radius = Plane( 0, 0, 0, 50 )
-poly_path = NodePath(".")
-
-[node name="Line" type="Polygon2D" parent="Sprites/Open" index="2"]
-modulate = Color( 0.713726, 0.345098, 0.156863, 1 )
-position = Vector2( -40, 0 )
-polygon = PoolVector2Array( 2.5, 100, -2.5, 100, -2.5, -100, 2.5, -100 )
-script = ExtResource( 5 )
-size = Vector2( 2.5, 100 )
-poly_path = NodePath(".")
-
-[node name="Line2" type="Polygon2D" parent="Sprites/Open" index="3"]
-modulate = Color( 0.713726, 0.345098, 0.156863, 1 )
-position = Vector2( 40, 0 )
-polygon = PoolVector2Array( 2.5, 100, -2.5, 100, -2.5, -100, 2.5, -100 )
-script = ExtResource( 5 )
-size = Vector2( 2.5, 100 )
-poly_path = NodePath(".")
-
-[node name="Knob" type="Polygon2D" parent="Sprites" index="3"]
+[node name="Knob" type="Polygon2D" parent="Sprites" index="1"]
 modulate = Color( 1, 1, 0, 1 )
-position = Vector2( -25, 60 )
-polygon = PoolVector2Array( 7.5, 0, 6.49519, 3.75, 3.75, 6.49519, -3.27835e-07, 7.5, -3.75, 6.49519, -6.49519, 3.75, -7.5, -6.55671e-07, -6.49519, -3.75, -3.75, -6.49519, 8.94366e-08, -7.5, 3.75, -6.49519, 6.49519, -3.75 )
+position = Vector2( -100, 65 )
+polygon = PoolVector2Array( 82.5, 0, 81.4952, 3.75, 78.75, 6.49519, 75, 7.5, 71.25, 6.49519, 68.5048, 3.75, 67.5, -6.55671e-07, 68.5048, -3.75, 71.25, -6.49519, 75, -7.5, 78.75, -6.49519, 81.4952, -3.75 )
 script = ExtResource( 6 )
 radius = 7.5
+circle_offset = Vector2( 75, 0 )
 points = 12
 poly_path = NodePath(".")
 
-[node name="Knob2" type="Polygon2D" parent="Sprites" index="4"]
+[node name="Knob2" type="Polygon2D" parent="Sprites" index="2"]
 modulate = Color( 1, 1, 0, 1 )
-position = Vector2( 25, 60 )
-polygon = PoolVector2Array( 7.5, 0, 6.49519, 3.75, 3.75, 6.49519, -3.27835e-07, 7.5, -3.75, 6.49519, -6.49519, 3.75, -7.5, -6.55671e-07, -6.49519, -3.75, -3.75, -6.49519, 8.94366e-08, -7.5, 3.75, -6.49519, 6.49519, -3.75 )
+position = Vector2( 100, 65 )
+polygon = PoolVector2Array( -67.5, 0, -68.5048, 3.75, -71.25, 6.49519, -75, 7.5, -78.75, 6.49519, -81.4952, 3.75, -82.5, -6.55671e-07, -81.4952, -3.75, -78.75, -6.49519, -75, -7.5, -71.25, -6.49519, -68.5048, -3.75 )
 script = ExtResource( 6 )
 radius = 7.5
+circle_offset = Vector2( -75, 0 )
 points = 12
 poly_path = NodePath(".")
 
-[node name="Gem" type="Node2D" parent="Sprites" index="5"]
-visible = false
+[node name="Gem" type="Node2D" parent="Sprites" index="3"]
+position = Vector2( 0, -10 )
 
 [node name="Gem" parent="Sprites/Gem" index="0" instance=ExtResource( 3 )]
 scale = Vector2( 2.5, 2.5 )
