@@ -122,7 +122,10 @@ func clear_row(row := 0):
 		
 		create_keys(row)
 		
-		Shared.emit_signal("signal_gamepad", Shared.is_gamepad)
+		emit_gamepad()
+
+func emit_gamepad():
+	Shared.emit_signal("gamepad_input", Shared.is_gamepad)
 
 func assign_key(action, event):
 	# remove event if present
@@ -142,7 +145,7 @@ func assign_key(action, event):
 	
 	create_keys(cursor)
 	
-	Shared.emit_signal("signal_gamepad", Shared.is_gamepad)
+	emit_gamepad()
 
 func create_keys(row):
 	var r = items[row]
@@ -180,4 +183,4 @@ func reset_to_defaults():
 	for i in items.size() - 1:
 		create_keys(i)
 	
-	Shared.emit_signal("signal_gamepad", Shared.is_gamepad)
+	emit_gamepad()

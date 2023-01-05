@@ -19,9 +19,8 @@ is_scale_x = false
 
 [node name="Hair3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 15, 0 )
-scale = Vector2( -1, 1 )
 width = 15.0
 end_scale = 1.0
-sitting_angle = 50.0
+sitting_angle = -50.0
 point_count = 4
 is_scale_x = false

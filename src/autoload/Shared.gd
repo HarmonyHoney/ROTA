@@ -5,14 +5,14 @@ var title_path := "res://src/menu/MenuTitle.tscn"
 var worlds_path := "res://src/map/worlds/"
 var start_path := "res://src/map/worlds/1/0_start.tscn"
 
-var is_wipe := false
-
 onready var csfn := get_tree().current_scene.filename
 onready var last_scene := csfn
 onready var next_scene := csfn
 var map_name := ""
-
-var screenshot_texture : ImageTexture
+var is_change := false
+var is_reload := false
+signal scene_before
+signal scene_changed
 
 var gem_count := 0
 var goals := {}
@@ -87,27 +87,19 @@ var player
 var door_in
 var goal
 
-signal scene_before
-signal scene_changed
-var is_reload := false
-
-var volume = [100, 100, 100]
-
-var is_gamepad := false
-signal signal_gamepad(arg)
-
-var default_keys := {}
-
 var save_slot := -1
 var save_dict := {0: {}, 1: {}, 2: {}}
+signal slot_erased(arg)
 var save_time := 0.0
 var map_clock := 0.0
-
-signal signal_erase_slot(arg)
-
 var auto_save_clock := 0.0
 var auto_save_time := 60.0
 
+var default_keys := {}
+var is_gamepad := false
+signal gamepad_input(arg)
+
+var volume = [100, 100, 100]
 var win_size := Vector2(1280, 720)
 var win_sizes := [Vector2(640, 360), Vector2(960, 540), Vector2(1280, 720), Vector2(1600, 900),
 Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
@@ -154,19 +146,20 @@ func _input(event):
 	
 	# gamepad signal
 	if event.is_pressed():
+		var g = is_gamepad
 		if is_gamepad and event is InputEventKey:
 			is_gamepad = false
-			emit_signal("signal_gamepad", is_gamepad)
-			print("signal_gamepad: ", is_gamepad)
 		elif !is_gamepad and (event is InputEventJoypadButton or event is InputEventJoypadMotion):
 			is_gamepad = true
-			emit_signal("signal_gamepad", is_gamepad)
-			print("signal_gamepad: ", is_gamepad)
+		
+		if g != is_gamepad:
+			emit_signal("gamepad_input", is_gamepad)
+			print("gamepad_input: ", is_gamepad)
 
 func _physics_process(delta):
 	# recorded time
 	save_time += delta
-	if !get_tree().paused and !Wipe.is_wipe and!Cutscene.is_playing:
+	if !get_tree().paused and !Wipe.is_wipe and !Cutscene.is_playing:
 		map_clock += delta
 	
 	# clock label
@@ -192,8 +185,8 @@ func wipe_scene(arg, last := csfn, delay := 0.0):
 	var fe = f.file_exists(arg)
 	f.close()
 	
-	if !is_wipe and fe:
-		is_wipe = true
+	if !is_change and fe:
+		is_change = true
 		
 		if arg != csfn:
 			last_scene = last
@@ -205,8 +198,7 @@ func wipe_scene(arg, last := csfn, delay := 0.0):
 	return false
 
 func wipe_complete(arg):
-	if is_wipe:
-		is_wipe = false
+	if is_change:
 		change_scene()
 		Wipe.start(true)
 
@@ -214,7 +206,7 @@ func reset():
 	wipe_scene(csfn)
 
 func change_scene():
-	is_wipe = false
+	is_change = false
 	boxes.clear()
 	
 	emit_signal("scene_before")
@@ -236,12 +228,12 @@ func change_scene():
 	yield(get_tree(), "idle_frame")
 	
 	for y in 3:
-		if !is_instance_valid(door_in):
-			for i in doors:
-				if y == 2 or (y == 0 and i.scene_path == last_scene) or i.scene_path == "spawn":
-					door_in = i
-					print("door_in = ", i)
-					break
+		for i in doors:
+			if y == 2 or (y == 0 and i.scene_path == last_scene) or i.scene_path == "spawn":
+				door_in = i
+				print("door_in = ", i)
+				break
+		if is_instance_valid(door_in): break
 	
 	emit_signal("scene_changed")
 
@@ -441,7 +433,8 @@ func load_data():
 
 func erase_slot(arg := 0):
 	save_dict[arg] = {}
-	emit_signal("signal_erase_slot", arg)
+	MenuMakeover.preset()
+	emit_signal("slot_erased", arg)
 
 func load_slot(arg := 0):
 	save_slot = clamp(arg, 0, 2)

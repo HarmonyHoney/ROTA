@@ -151,14 +151,11 @@ func set_connect(arg := is_connect):
 	is_connect = arg
 	
 	if is_connect:
-		Shared.connect("signal_gamepad", self, "signal_gamepad")
+		Shared.connect("gamepad_input", self, "set_gamepad")
 	else:
-		Shared.disconnect("signal_gamepad", self, "signal_gamepad")
+		Shared.disconnect("gamepad_input", self, "set_gamepad")
 	
 	self.is_gamepad = Shared.is_gamepad
-
-func signal_gamepad(arg):
-	set_gamepad(arg)
 
 func set_shrink(arg := is_shrink):
 	is_shrink = arg

@@ -8,13 +8,11 @@ export var sitting_angle = 15.0
 export var point_count := 3 setget set_points
 export var vertices := 16 setget set_vertices
 export var gravity = 190.0
+export var is_scale_x := true
 
 var gons = []
 var last_pos := Vector2.ZERO
 var hair_end = Vector2(-150, 150)
-
-onready var start_x := scale.x
-export var is_scale_x := true
 
 func _ready():
 	u()
@@ -68,5 +66,4 @@ func set_end(arg := end_scale):
 	u()
 
 func scale_x(arg):
-	if is_scale_x:
-		scale.x = start_x * arg
+	if is_scale_x: scale.x = arg

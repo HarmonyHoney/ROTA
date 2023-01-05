@@ -15,7 +15,7 @@ var is_new := true
 func _ready():
 	set_card()
 	
-	Shared.connect("signal_erase_slot", self, "erase_slot")
+	Shared.connect("slot_erased", self, "slot_erased")
 
 func set_card():
 	var d = Shared.save_dict
@@ -35,5 +35,5 @@ func set_card():
 	new_game.visible = is_new
 	items.visible = !is_new
 
-func erase_slot(arg):
-	set_card()
+func slot_erased(arg):
+	if arg == slot: set_card()

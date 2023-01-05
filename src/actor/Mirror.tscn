@@ -16,7 +16,6 @@ shader_param/col2 = Color( 0, 0.92, 1, 1 )
 [node name="Mirror" type="Node2D"]
 z_index = -5
 script = ExtResource( 1 )
-dist_scale = Vector2( 0.7, 1 )
 offset = Vector2( 70, 0 )
 hide_distance = 100.0
 
