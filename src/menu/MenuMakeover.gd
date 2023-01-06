@@ -35,6 +35,8 @@ func accept():
 	match items[cursor].name.to_lower():
 		"random":
 			random()
+		"preset":
+			preset()
 
 func random():
 	var l = range(palette.size())

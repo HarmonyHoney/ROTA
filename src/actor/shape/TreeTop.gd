@@ -10,12 +10,14 @@ export var draw_offset := Vector2.ZERO setget set_offset
 var gon := PoolVector2Array()
 export var poly_path : NodePath setget set_poly
 onready var poly := get_node_or_null(poly_path)
+export var is_baked := false
 
 export var is_draw_debug := false setget set_debug
 var _draw_me := Vector2.ZERO
 var _draw_circle := Vector2.ZERO
 
 func u():
+	if is_baked: return
 	gon = []
 	
 	var s = Vector2(dist, 0)

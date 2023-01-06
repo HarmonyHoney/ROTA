@@ -1,9 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/detail/PaletteSwap.gd" type="Script" id=1]
-[ext_resource path="res://src/actor/Petals.gd" type="Script" id=2]
+[ext_resource path="res://src/actor/shape/Petals.gd" type="Script" id=2]
 [ext_resource path="res://media/audio/sfx/guitar_pluck.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=4]
+
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 35.0
@@ -33,6 +34,7 @@ rotation = 0.785397
 polygon = PoolVector2Array( 8.5, -8.5, 17, -8.5, 21.9962, -6.87664, 25.084, -2.62664, 25.084, 2.62664, 21.9962, 6.87664, 17, 8.5, 8.5, 8.5, 8.5, 17, 6.87664, 21.9962, 2.62664, 25.084, -2.62665, 25.084, -6.87665, 21.9962, -8.5, 17, -8.5, 8.5, -17, 8.5, -21.9962, 6.87664, -25.084, 2.62664, -25.084, -2.62665, -21.9962, -6.87665, -17, -8.5, -8.5, -8.5, -8.5, -17, -6.87664, -21.9962, -2.62665, -25.084, 2.62665, -25.084, 6.87664, -21.9962, 8.5, -17 )
 script = ExtResource( 2 )
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

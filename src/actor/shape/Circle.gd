@@ -9,8 +9,10 @@ export var points := 16 setget set_points
 
 export var poly_path : NodePath setget set_poly
 onready var poly := get_node_or_null(poly_path)
+export var is_baked := false
 
 func u():
+	if is_baked: return
 	gon = []
 	
 	for i in points:

@@ -1,14 +1,25 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/actor/Mirror.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/door/Arrow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/shader/sky_screen.gdshader" type="Shader" id=3]
+[ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
 extents = Vector2( 75, 100 )
 
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 3 )
+shader_param/col1 = Color( 0, 0.380392, 1, 1 )
+shader_param/col2 = Color( 0, 0.921569, 1, 1 )
+
 [sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 3 )
+shader_param/col1 = Color( 0, 0.38, 1, 1 )
+shader_param/col2 = Color( 0, 0.92, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )
 shader_param/col1 = Color( 0, 0.38, 1, 1 )
 shader_param/col2 = Color( 0, 0.92, 1, 1 )
@@ -27,18 +38,14 @@ shape = SubResource( 1 )
 [node name="Image" parent="Arrow" index="1"]
 position = Vector2( 0, -170 )
 
-[node name="Back" type="Node2D" parent="."]
+[node name="Back" type="Polygon2D" parent="."]
+material = SubResource( 5 )
 z_index = -25
-
-[node name="ColorRect" type="ColorRect" parent="Back"]
-modulate = Color( 0.7, 1, 1, 1 )
-margin_left = -75.0
-margin_top = -100.0
-margin_right = 75.0
-margin_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_min_size = Vector2( 150, 200 )
+polygon = PoolVector2Array( 75, 100, -75, 100, -75, -100, 75, -100 )
+script = ExtResource( 4 )
+size = Vector2( 75, 100 )
+poly_path = NodePath(".")
+is_baked = true
 
 [node name="Rig" type="Node2D" parent="."]
 light_mask = 4
@@ -95,6 +102,14 @@ default_color = Color( 1, 1, 0, 1 )
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
+
+[node name="Stage" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 6 )
+z_index = 40
+z_as_relative = false
+script = ExtResource( 4 )
+size = Vector2( 1000, 1000 )
 
 [connection signal="open" from="Arrow" to="." method="_on_Arrow_open"]
 

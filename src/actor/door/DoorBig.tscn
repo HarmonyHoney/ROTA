@@ -4,8 +4,8 @@
 [ext_resource path="res://media/font/profile/DoorLabel.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/door/DoorBig.gd" type="Script" id=4]
-[ext_resource path="res://src/actor/Rectangle.gd" type="Script" id=5]
-[ext_resource path="res://src/actor/Circle.gd" type="Script" id=6]
+[ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=5]
+[ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=6]
 [ext_resource path="res://src/shader/door_big.gdshader" type="Shader" id=7]
 [ext_resource path="res://media/image/box/round_rect100.png" type="Texture" id=8]
 
@@ -45,6 +45,7 @@ script = ExtResource( 5 )
 size = Vector2( 100, 100 )
 radius = Plane( 0, 0, 50, 50 )
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="Knob" type="Polygon2D" parent="Sprites" index="1"]
 modulate = Color( 1, 1, 0, 1 )
@@ -55,6 +56,7 @@ radius = 7.5
 circle_offset = Vector2( 75, 0 )
 points = 12
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="Knob2" type="Polygon2D" parent="Sprites" index="2"]
 modulate = Color( 1, 1, 0, 1 )
@@ -65,8 +67,10 @@ radius = 7.5
 circle_offset = Vector2( -75, 0 )
 points = 12
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="Gem" type="Node2D" parent="Sprites" index="3"]
+visible = false
 position = Vector2( 0, -10 )
 
 [node name="Gem" parent="Sprites/Gem" index="0" instance=ExtResource( 3 )]

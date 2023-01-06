@@ -1,8 +1,8 @@
 [gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://src/actor/Rectangle.gd" type="Script" id=1]
+[ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
-[ext_resource path="res://src/actor/Circle.gd" type="Script" id=3]
+[ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=3]
 [ext_resource path="res://media/audio/sfx/btn3.wav" type="AudioStream" id=5]
 [ext_resource path="res://media/audio/sfx/Randomize105.wav" type="AudioStream" id=6]
 [ext_resource path="res://media/audio/sfx/player_jump.wav" type="AudioStream" id=7]
@@ -498,6 +498,7 @@ script = ExtResource( 3 )
 radius = 20.0
 points = 24
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="Eyes" type="Node2D" parent="Sprites/Root/Body"]
 modulate = Color( 1, 0, 1, 1 )
@@ -511,6 +512,7 @@ size = Vector2( 4, 7 )
 radius = Plane( 4, -1, -1, -1 )
 points = 4
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="Right" type="Polygon2D" parent="Sprites/Root/Body/Eyes"]
 position = Vector2( 10, 0 )
@@ -520,6 +522,7 @@ size = Vector2( 4, 7 )
 radius = Plane( 4, -1, -1, -1 )
 points = 4
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="Hands" type="Node2D" parent="Sprites"]
 modulate = Color( 0.478431, 0.25098, 0.423529, 1 )
@@ -533,6 +536,7 @@ script = ExtResource( 3 )
 radius = 7.5
 points = 12
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="Right" type="Polygon2D" parent="Sprites/Hands"]
 use_parent_material = true
@@ -542,6 +546,7 @@ script = ExtResource( 3 )
 radius = 7.5
 points = 12
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="SpriteArea" type="Area2D" parent="Sprites"]
 visible = false

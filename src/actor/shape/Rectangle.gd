@@ -10,9 +10,11 @@ export var points := 8 setget set_points
 
 export var poly_path : NodePath setget set_poly
 onready var poly := get_node_or_null(poly_path)
+export var is_baked := false
 
 
 func u():
+	if is_baked: return
 	gon = []
 	
 	var vec = [Vector2.ONE, Vector2(-1, 1), -Vector2.ONE, Vector2(1, -1)]
@@ -60,3 +62,6 @@ func set_radius(arg := radius):
 func set_poly(arg := poly_path):
 	poly_path = arg
 	u()
+
+func get_rect():
+	return Rect2(offset - size, size * 2.0)

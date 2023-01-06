@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/menu/MenuMakeover.gd" type="Script" id=2]
 [ext_resource path="res://src/menu/options/scroll/Hairstyle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Hair.tscn" type="PackedScene" id=4]
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=5]
-[ext_resource path="res://src/actor/Circle.gd" type="Script" id=6]
+[ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=6]
+[ext_resource path="res://media/image/UI/reset.svg" type="Texture" id=7]
 [ext_resource path="res://src/menu/options/scroll/Color.gd" type="Script" id=8]
 [ext_resource path="res://media/image/UI/eye.svg" type="Texture" id=9]
 
@@ -17,30 +17,17 @@ corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
-border_color = Color( 1, 1, 1, 1 )
+bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 1 )
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
 
 [sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 0.418182 ), 0.0, 0.581818, 0, 1, Vector2( 1, 1 ), 0.581818, 0.0, 1, 0 ]
-
-[sub_resource type="DynamicFont" id=3]
-size = 50
-outline_color = Color( 0, 0, 0, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 1 )
 
 [node name="MenuMakeover" type="CanvasLayer"]
 pause_mode = 2
@@ -59,14 +46,14 @@ arrow_margin = Vector2( -10, 0 )
 [node name="Dialog" type="Control" parent="."]
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 80.0
-margin_top = 80.0
-margin_right = -150.0
-margin_bottom = -80.0
+margin_left = 120.0
+margin_top = 35.0
+margin_right = -100.0
 rect_pivot_offset = Vector2( -618, -18 )
 
 [node name="Panel" type="Panel" parent="Dialog"]
-modulate = Color( 0, 0, 0, 0.4 )
+visible = false
+modulate = Color( 0.7, 1, 1, 0.8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -30.0
@@ -79,25 +66,26 @@ rect_min_size = Vector2( 250, 200 )
 custom_styles/panel = SubResource( 1 )
 
 [node name="Cursor" type="Panel" parent="Dialog"]
+modulate = Color( 1, 1, 1, 0.25 )
 margin_left = 33.0
 margin_top = 18.0
-margin_right = 103.0
-margin_bottom = 88.0
+margin_right = 83.0
+margin_bottom = 68.0
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="w" type="Panel" parent="Dialog"]
-modulate = Color( 0.74902, 0.376471, 0.380392, 1 )
+[node name="Column" type="Panel" parent="Dialog"]
+modulate = Color( 1, 1, 1, 0.25 )
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -35.0
-margin_top = -25.0
+margin_top = -150.0
 margin_right = 35.0
-margin_bottom = -65.0
-custom_styles/panel = SubResource( 2 )
+margin_bottom = 150.0
+custom_styles/panel = SubResource( 6 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -138,23 +126,23 @@ custom_constants/separation = 10
 alignment = 1
 
 [node name="Front" parent="Dialog/List" instance=ExtResource( 3 )]
-margin_top = 2.0
-margin_right = 410.0
-margin_bottom = 72.0
+margin_top = 67.0
+margin_right = 420.0
+margin_bottom = 137.0
 __meta__ = {
 "_editor_description_": ""
 }
 order = "front"
 
 [node name="Back" parent="Dialog/List" instance=ExtResource( 3 )]
-margin_top = 82.0
-margin_right = 410.0
-margin_bottom = 152.0
+margin_top = 147.0
+margin_right = 420.0
+margin_bottom = 217.0
 
 [node name="Hair" type="Control" parent="Dialog/List" groups=["color"]]
-margin_top = 162.0
-margin_right = 410.0
-margin_bottom = 232.0
+margin_top = 227.0
+margin_right = 420.0
+margin_bottom = 297.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 8 )
 is_loop = true
@@ -167,8 +155,8 @@ alignment = 1
 
 [node name="Circle" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
 modulate = Color( 0, 1, 0, 1 )
-margin_left = 22.0
-margin_right = 92.0
+margin_left = 27.0
+margin_right = 97.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -184,8 +172,8 @@ sitting_angle = 60.0
 
 [node name="Circle2" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 96.0
-margin_right = 166.0
+margin_left = 101.0
+margin_right = 171.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -201,8 +189,8 @@ sitting_angle = 60.0
 
 [node name="Circle3" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
 modulate = Color( 0, 0, 1, 1 )
-margin_left = 170.0
-margin_right = 240.0
+margin_left = 175.0
+margin_right = 245.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -217,8 +205,8 @@ length = 15.0
 sitting_angle = 60.0
 
 [node name="Circle4" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
-margin_left = 244.0
-margin_right = 314.0
+margin_left = 249.0
+margin_right = 319.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -234,8 +222,8 @@ sitting_angle = 60.0
 
 [node name="Circle5" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 318.0
-margin_right = 388.0
+margin_left = 323.0
+margin_right = 393.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -250,9 +238,9 @@ length = 15.0
 sitting_angle = 60.0
 
 [node name="Eye" type="Control" parent="Dialog/List" groups=["color"]]
-margin_top = 242.0
-margin_right = 410.0
-margin_bottom = 312.0
+margin_top = 307.0
+margin_right = 420.0
+margin_bottom = 377.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 8 )
 is_loop = true
@@ -266,8 +254,8 @@ alignment = 1
 
 [node name="Circle" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
 modulate = Color( 0, 1, 0, 1 )
-margin_left = 22.0
-margin_right = 92.0
+margin_left = 27.0
+margin_right = 97.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -296,8 +284,8 @@ end_cap_mode = 2
 
 [node name="Circle2" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 96.0
-margin_right = 166.0
+margin_left = 101.0
+margin_right = 171.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -326,8 +314,8 @@ end_cap_mode = 2
 
 [node name="Circle3" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
 modulate = Color( 0, 0, 1, 1 )
-margin_left = 170.0
-margin_right = 240.0
+margin_left = 175.0
+margin_right = 245.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 
@@ -360,8 +348,8 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Circle4" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
-margin_left = 244.0
-margin_right = 314.0
+margin_left = 249.0
+margin_right = 319.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -390,8 +378,8 @@ end_cap_mode = 2
 
 [node name="Circle5" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 318.0
-margin_right = 388.0
+margin_left = 323.0
+margin_right = 393.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -419,9 +407,9 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Skin" type="Control" parent="Dialog/List" groups=["color"]]
-margin_top = 322.0
-margin_right = 410.0
-margin_bottom = 392.0
+margin_top = 387.0
+margin_right = 420.0
+margin_bottom = 457.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 8 )
 is_loop = true
@@ -435,8 +423,8 @@ alignment = 1
 
 [node name="Circle" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 0, 1, 0, 1 )
-margin_left = 22.0
-margin_right = 92.0
+margin_left = 27.0
+margin_right = 97.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -445,8 +433,8 @@ circle_offset = Vector2( 35, 35 )
 
 [node name="Circle2" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 96.0
-margin_right = 166.0
+margin_left = 101.0
+margin_right = 171.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -455,8 +443,8 @@ circle_offset = Vector2( 35, 35 )
 
 [node name="Circle3" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 0, 0, 1, 1 )
-margin_left = 170.0
-margin_right = 240.0
+margin_left = 175.0
+margin_right = 245.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -464,8 +452,8 @@ radius = 30.0
 circle_offset = Vector2( 35, 35 )
 
 [node name="Circle4" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
-margin_left = 244.0
-margin_right = 314.0
+margin_left = 249.0
+margin_right = 319.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -474,8 +462,8 @@ circle_offset = Vector2( 35, 35 )
 
 [node name="Circle5" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 318.0
-margin_right = 388.0
+margin_left = 323.0
+margin_right = 393.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -483,9 +471,9 @@ radius = 25.0
 circle_offset = Vector2( 35, 35 )
 
 [node name="Fit" type="Control" parent="Dialog/List" groups=["color"]]
-margin_top = 402.0
-margin_right = 410.0
-margin_bottom = 472.0
+margin_top = 467.0
+margin_right = 420.0
+margin_bottom = 537.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 8 )
 is_loop = true
@@ -499,8 +487,8 @@ alignment = 1
 
 [node name="Circle" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
 modulate = Color( 0, 1, 0, 1 )
-margin_left = 22.0
-margin_right = 92.0
+margin_left = 27.0
+margin_right = 97.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -536,8 +524,8 @@ default_color = Color( 1, 1, 1, 1 )
 
 [node name="Circle2" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 96.0
-margin_right = 166.0
+margin_left = 101.0
+margin_right = 171.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -573,8 +561,8 @@ default_color = Color( 1, 1, 1, 1 )
 
 [node name="Circle3" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
 modulate = Color( 0, 0, 1, 1 )
-margin_left = 170.0
-margin_right = 240.0
+margin_left = 175.0
+margin_right = 245.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -609,8 +597,8 @@ width_curve = SubResource( 5 )
 default_color = Color( 1, 1, 1, 1 )
 
 [node name="Circle4" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
-margin_left = 244.0
-margin_right = 314.0
+margin_left = 249.0
+margin_right = 319.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -646,8 +634,8 @@ default_color = Color( 1, 1, 1, 1 )
 
 [node name="Circle5" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 318.0
-margin_right = 388.0
+margin_left = 323.0
+margin_right = 393.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 script = ExtResource( 6 )
@@ -681,31 +669,13 @@ width = 25.0
 width_curve = SubResource( 5 )
 default_color = Color( 1, 1, 1, 1 )
 
-[node name="Spacer" type="Control" parent="Dialog/List" groups=["no_item"]]
-margin_top = 482.0
-margin_right = 410.0
-margin_bottom = 497.0
-rect_min_size = Vector2( 0, 15 )
-
-[node name="Random" type="Label" parent="Dialog/List"]
-margin_left = 104.0
-margin_top = 507.0
-margin_right = 306.0
-margin_bottom = 558.0
+[node name="Random" type="TextureRect" parent="Dialog/List"]
+margin_left = 175.0
+margin_top = 547.0
+margin_right = 245.0
+margin_bottom = 617.0
+rect_min_size = Vector2( 70, 70 )
 size_flags_horizontal = 4
-custom_fonts/font = SubResource( 3 )
-text = "Random"
-align = 1
-valign = 1
-
-[node name="Bye" type="Label" parent="Dialog/List" groups=["bye"]]
-visible = false
-margin_left = 219.0
-margin_top = 402.0
-margin_right = 340.0
-margin_bottom = 453.0
-size_flags_horizontal = 4
-custom_fonts/font = SubResource( 3 )
-text = "Back"
-align = 1
-valign = 1
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 5

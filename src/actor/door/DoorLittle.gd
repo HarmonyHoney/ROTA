@@ -15,7 +15,6 @@ onready var clock := $Sprites/Open/Clock
 var is_clock := false
 var clock_easy := EaseMover.new()
 
-
 func _ready():
 	if Engine.editor_hint: return
 	

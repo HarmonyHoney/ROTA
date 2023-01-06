@@ -4,13 +4,15 @@ onready var arrow := $Arrow
 export var dir := 0
 export var door_path : NodePath
 onready var door_node := get_node_or_null(door_path)
-onready var color_rect := $Back/ColorRect
+onready var p = Shared.player
+onready var back_rect : Rect2 = $Back.get_rect()
 onready var rig := $Rig
 onready var rig_ease := EaseMover.new()
-onready var p = Shared.player
+onready var stage := $Stage
 
-var from = []
-var to = []
+var from := []
+var to := []
+onready var lights := get_tree().get_nodes_in_group("light")
 
 var dist := Vector2.ZERO
 export var offset := Vector2(100, 0)
@@ -23,6 +25,7 @@ func _ready():
 	
 	arrow.dir = posmod(dir, 4)
 	rig.global_rotation = 0
+	rig_ease.clock = rig_ease.time
 	create_rig()
 	
 	var sm = $Wall/ColorRect.material
@@ -30,7 +33,11 @@ func _ready():
 		sm.set_shader_param(i, BG.mat.get_shader_param(i))
 
 func _physics_process(delta):
-	rig.modulate.a = rig_ease.count(delta)
+	var s = rig_ease.count(delta)
+	rig.modulate.a = s
+	stage.modulate.a = 1.0 - s
+	for i in lights:
+		i.self_modulate.a = s
 
 func create_rig():
 	for i in rig.get_children():
@@ -44,10 +51,10 @@ func create_rig():
 	to = []
 	var list = [p.sprites, p.spr_root, p.spr_body, p.spr_hand_l, p.spr_hand_r]
 	for i in list:
-		var path = p.get_path_to(i)
-		if rig.has_node(path):
+		var path = p.sprites.get_path_to(i)
+		if s.has_node(path):
 			from.append(i)
-			to.append(rig.get_node(path))
+			to.append(s.get_node(path))
 	
 	for i in Shared.get_all_children(s.get_node("Root/Body/Hair")):
 		if i.has_method("scale_x"):
@@ -70,11 +77,12 @@ func closed():
 func idle_frame():
 	# animate
 	for i in from.size():
-		to[i].transform = from[i].transform
+		if is_instance_valid(to[i]) and is_instance_valid(from[i]):
+			to[i].transform = from[i].transform
 	
 	dist = to_local(p.global_position)
 	rig.position = dist + (offset * dir_x)
-	rig.visible = color_rect.get_rect().grow(hide_distance).has_point(rig.position)
+	rig.visible =  back_rect.grow(hide_distance).has_point(rig.position)
 	
 	if abs(dist.x) > 200:
 		dir_x = -sign(dist.x)

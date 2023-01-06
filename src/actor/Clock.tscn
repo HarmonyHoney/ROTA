@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/actor/Circle.gd" type="Script" id=1]
+[ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=1]
 
 [node name="Clock" type="Polygon2D"]
 self_modulate = Color( 1, 0.984314, 0, 1 )
@@ -8,6 +8,7 @@ polygon = PoolVector2Array( 25, 0, 23.097, 9.56709, 17.6777, 17.6777, 9.56709, 2
 script = ExtResource( 1 )
 radius = 25.0
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="Fill" type="Polygon2D" parent="."]
 modulate = Color( 1, 0.866667, 0, 1 )
@@ -15,6 +16,7 @@ polygon = PoolVector2Array( 20, 0, 18.4776, 7.65367, 14.1421, 14.1421, 7.65367, 
 script = ExtResource( 1 )
 radius = 20.0
 poly_path = NodePath(".")
+is_baked = true
 
 [node name="Hand" type="Line2D" parent="."]
 points = PoolVector2Array( 0, -11, 0, 0, 7, 7 )
