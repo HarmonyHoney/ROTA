@@ -3,6 +3,5 @@
 
 # custom
 .import/
-*.import
 [Ee]xport/
 [Bb]uild/

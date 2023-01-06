@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/btn0.wav-cc43b0baff08c93f0425b3a99180aac5.sample"
+
+[deps]
+
+source_file="res://media/audio/sfx/btn0.wav"
+dest_files=[ "res://.import/btn0.wav-cc43b0baff08c93f0425b3a99180aac5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

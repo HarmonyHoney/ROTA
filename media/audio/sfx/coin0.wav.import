@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/coin0.wav-52f7b2297be4ae4a3c103cec1d2e56f8.sample"
+
+[deps]
+
+source_file="res://media/audio/sfx/coin0.wav"
+dest_files=[ "res://.import/coin0.wav-52f7b2297be4ae4a3c103cec1d2e56f8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

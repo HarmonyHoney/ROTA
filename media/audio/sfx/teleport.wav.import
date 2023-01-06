@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/teleport.wav-22a7152e24700684c263e3163320d8c2.sample"
+
+[deps]
+
+source_file="res://media/audio/sfx/teleport.wav"
+dest_files=[ "res://.import/teleport.wav-22a7152e24700684c263e3163320d8c2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
