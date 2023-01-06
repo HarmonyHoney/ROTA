@@ -16,8 +16,6 @@ position = Vector2( 0, 28.5 )
 polygon = PoolVector2Array( 35, 0, 32.3358, 13.3939, 24.7487, 24.7487, 13.3939, 32.3358, -1.5299e-06, 35, -13.3939, 32.3358, -24.7487, 24.7487, -32.3358, 13.3939, -35, -3.0598e-06, -32.3358, -13.3939, -24.7487, -24.7487, -13.3939, -32.3358, 4.17371e-07, -35, 13.3939, -32.3358, 24.7487, -24.7487, 32.3358, -13.3939 )
 script = ExtResource( 4 )
 radius = 35.0
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="FlowerPetals" parent="." instance=ExtResource( 1 )]
 z_index = 0

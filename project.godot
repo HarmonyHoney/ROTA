@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/actor/Player.gd"
 }, {
+"base": "CanvasItem",
+"class": "PolyShape",
+"language": "GDScript",
+"path": "res://src/actor/shape/PolyShape.gd"
+}, {
 "base": "Resource",
 "class": "SaveDict",
 "language": "GDScript",
@@ -127,6 +132,7 @@ _global_script_class_icons={
 "MenuBase": "",
 "PaletteSwap": "",
 "Player": "",
+"PolyShape": "",
 "SaveDict": "",
 "Scroll": "",
 "SteamAPI": "",

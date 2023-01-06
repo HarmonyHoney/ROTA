@@ -497,8 +497,6 @@ polygon = PoolVector2Array( 20, 0, 19.3185, 5.17638, 17.3205, 10, 14.1421, 14.14
 script = ExtResource( 3 )
 radius = 20.0
 points = 24
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="Eyes" type="Node2D" parent="Sprites/Root/Body"]
 modulate = Color( 1, 0, 1, 1 )
@@ -511,8 +509,6 @@ script = ExtResource( 1 )
 size = Vector2( 4, 7 )
 radius = Plane( 4, -1, -1, -1 )
 points = 4
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="Right" type="Polygon2D" parent="Sprites/Root/Body/Eyes"]
 position = Vector2( 10, 0 )
@@ -521,8 +517,6 @@ script = ExtResource( 1 )
 size = Vector2( 4, 7 )
 radius = Plane( 4, -1, -1, -1 )
 points = 4
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="Hands" type="Node2D" parent="Sprites"]
 modulate = Color( 0.478431, 0.25098, 0.423529, 1 )
@@ -535,8 +529,6 @@ polygon = PoolVector2Array( 7.5, 0, 6.49519, 3.75, 3.75, 6.49519, -3.27835e-07, 
 script = ExtResource( 3 )
 radius = 7.5
 points = 12
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="Right" type="Polygon2D" parent="Sprites/Hands"]
 use_parent_material = true
@@ -545,8 +537,6 @@ polygon = PoolVector2Array( 7.5, 0, 6.49519, 3.75, 3.75, 6.49519, -3.27835e-07, 
 script = ExtResource( 3 )
 radius = 7.5
 points = 12
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="SpriteArea" type="Area2D" parent="Sprites"]
 visible = false

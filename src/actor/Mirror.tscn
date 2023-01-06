@@ -44,8 +44,6 @@ z_index = -25
 polygon = PoolVector2Array( 75, 100, -75, 100, -75, -100, 75, -100 )
 script = ExtResource( 4 )
 size = Vector2( 75, 100 )
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="Rig" type="Node2D" parent="."]
 light_mask = 4
@@ -103,11 +101,11 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Stage" type="Node2D" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+[node name="Stage" type="Polygon2D" parent="."]
 material = SubResource( 6 )
 z_index = 40
 z_as_relative = false
+polygon = PoolVector2Array( 1000, 1000, -1000, 1000, -1000, -1000, 1000, -1000 )
 script = ExtResource( 4 )
 size = Vector2( 1000, 1000 )
 

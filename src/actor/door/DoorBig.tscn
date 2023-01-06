@@ -44,8 +44,6 @@ polygon = PoolVector2Array( 100, 100, -100, 100, -100, -50, -98.7464, -61.126, -
 script = ExtResource( 5 )
 size = Vector2( 100, 100 )
 radius = Plane( 0, 0, 50, 50 )
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="Knob" type="Polygon2D" parent="Sprites" index="1"]
 modulate = Color( 1, 1, 0, 1 )
@@ -55,8 +53,6 @@ script = ExtResource( 6 )
 radius = 7.5
 circle_offset = Vector2( 75, 0 )
 points = 12
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="Knob2" type="Polygon2D" parent="Sprites" index="2"]
 modulate = Color( 1, 1, 0, 1 )
@@ -66,8 +62,6 @@ script = ExtResource( 6 )
 radius = 7.5
 circle_offset = Vector2( -75, 0 )
 points = 12
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="Gem" type="Node2D" parent="Sprites" index="3"]
 visible = false

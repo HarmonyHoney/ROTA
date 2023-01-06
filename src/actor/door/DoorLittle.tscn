@@ -35,8 +35,6 @@ script = ExtResource( 2 )
 size = Vector2( 40, 50 )
 radius = Plane( 0, 0, 20, 20 )
 points = 6
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="Open" type="Node2D" parent="Sprites" index="1"]
 position = Vector2( -40, 0 )
@@ -48,8 +46,6 @@ polygon = PoolVector2Array( 7.5, 0, 6.49519, 3.75, 3.75, 6.49519, -3.27835e-07, 
 script = ExtResource( 6 )
 radius = 7.5
 points = 12
-poly_path = NodePath(".")
-is_baked = true
 
 [node name="Gem" parent="Sprites/Open" index="1" instance=ExtResource( 5 )]
 position = Vector2( 40, -5 )
@@ -61,6 +57,6 @@ color = Color( 1, 0, 0.913725, 1 )
 [node name="Clock" parent="Sprites/Open" index="2" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( 40, -5 )
-polygon = PoolVector2Array( 25, 0, 23.097, 9.56709, 17.6777, 17.6777, 9.56709, 23.097, -1.09278e-06, 25, -9.56709, 23.097, -17.6777, 17.6777, -23.097, 9.56709, -25, -2.18557e-06, -23.097, -9.56709, -17.6777, -17.6777, -9.56709, -23.097, 2.98122e-07, -25, 9.56709, -23.097, 17.6777, -17.6777, 23.097, -9.56709 )
+polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
 
 [editable path="Sprites/Open/Gem"]
