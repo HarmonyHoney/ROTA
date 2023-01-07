@@ -57,6 +57,5 @@ color = Color( 1, 0, 0.913725, 1 )
 [node name="Clock" parent="Sprites/Open" index="2" instance=ExtResource( 4 )]
 visible = false
 position = Vector2( 40, -5 )
-polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
 
 [editable path="Sprites/Open/Gem"]

@@ -58,7 +58,7 @@ func _physics_process(delta):
 
 func activate():
 	if not "hub" in scene_path and scene_path.begins_with(Shared.worlds_path):
-		UI.clock_ease.show = arrow.is_active
+		UI.clock_ease.show = arrow.is_active and Shared.clock_show > 0
 		var m = scene_path.lstrip(Shared.worlds_path).rstrip(".tscn")
 		UI.clock_best.visible = Shared.goals.has(m)
 		if UI.clock_best.visible:

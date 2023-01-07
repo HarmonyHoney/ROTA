@@ -45,42 +45,76 @@ script = ExtResource( 5 )
 size = Vector2( 100, 100 )
 radius = Plane( 0, 0, 50, 50 )
 
-[node name="Knob" type="Polygon2D" parent="Sprites" index="1"]
-modulate = Color( 1, 1, 0, 1 )
-position = Vector2( -100, 65 )
-polygon = PoolVector2Array( 82.5, 0, 81.4952, 3.75, 78.75, 6.49519, 75, 7.5, 71.25, 6.49519, 68.5048, 3.75, 67.5, -6.55671e-07, 68.5048, -3.75, 71.25, -6.49519, 75, -7.5, 78.75, -6.49519, 81.4952, -3.75 )
-script = ExtResource( 6 )
-radius = 7.5
-circle_offset = Vector2( 75, 0 )
-points = 12
+[node name="Left" type="Node2D" parent="Sprites" index="1"]
+position = Vector2( -100, 0 )
 
-[node name="Knob2" type="Polygon2D" parent="Sprites" index="2"]
-modulate = Color( 1, 1, 0, 1 )
-position = Vector2( 100, 65 )
-polygon = PoolVector2Array( -67.5, 0, -68.5048, 3.75, -71.25, 6.49519, -75, 7.5, -78.75, 6.49519, -81.4952, 3.75, -82.5, -6.55671e-07, -81.4952, -3.75, -78.75, -6.49519, -75, -7.5, -71.25, -6.49519, -68.5048, -3.75 )
-script = ExtResource( 6 )
-radius = 7.5
-circle_offset = Vector2( -75, 0 )
-points = 12
-
-[node name="Gem" type="Node2D" parent="Sprites" index="3"]
-visible = false
-position = Vector2( 0, -10 )
-
-[node name="Gem" parent="Sprites/Gem" index="0" instance=ExtResource( 3 )]
+[node name="Gem" parent="Sprites/Left" index="0" instance=ExtResource( 3 )]
+position = Vector2( 100, -10 )
 scale = Vector2( 2.5, 2.5 )
+polygon = PoolVector2Array( -30, 0, 0, -30, 0, 30 )
 
-[node name="Label" type="Label" parent="Sprites/Gem" index="1"]
-margin_left = -75.0
-margin_top = -75.0
-margin_right = 75.0
-margin_bottom = 75.0
+[node name="Fill" parent="Sprites/Left/Gem" index="0"]
+polygon = PoolVector2Array( -20, 0, 0, -20, 0, 20 )
+
+[node name="Knob" type="Polygon2D" parent="Sprites/Left" index="1"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( 75, 65 )
+polygon = PoolVector2Array( 7.5, 0, 6.49519, 3.75, 3.75, 6.49519, -3.27835e-07, 7.5, -3.75, 6.49519, -6.49519, 3.75, -7.5, -6.55671e-07, -6.49519, -3.75, -3.75, -6.49519, 8.94366e-08, -7.5, 3.75, -6.49519, 6.49519, -3.75 )
+script = ExtResource( 6 )
+radius = 7.5
+points = 12
+
+[node name="Control" type="Control" parent="Sprites/Left" index="2"]
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+rect_clip_content = true
+
+[node name="Label" type="Label" parent="Sprites/Left/Control" index="0"]
+margin_left = 25.0
+margin_top = 15.0
+margin_right = 175.0
+margin_bottom = 165.0
 custom_fonts/font = ExtResource( 2 )
 text = "0"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="Right" type="Node2D" parent="Sprites" index="2"]
+position = Vector2( 100, 0 )
+
+[node name="Gem" parent="Sprites/Right" index="0" instance=ExtResource( 3 )]
+position = Vector2( -100, -10 )
+scale = Vector2( 2.5, 2.5 )
+polygon = PoolVector2Array( 0, -30, 30, 0, 0, 30 )
+
+[node name="Fill" parent="Sprites/Right/Gem" index="0"]
+polygon = PoolVector2Array( 0, -20, 20, 0, 0, 20 )
+
+[node name="Knob" type="Polygon2D" parent="Sprites/Right" index="1"]
+modulate = Color( 1, 1, 0, 1 )
+position = Vector2( -75, 65 )
+polygon = PoolVector2Array( 7.5, 0, 6.49519, 3.75, 3.75, 6.49519, -3.27835e-07, 7.5, -3.75, 6.49519, -6.49519, 3.75, -7.5, -6.55671e-07, -6.49519, -3.75, -3.75, -6.49519, 8.94366e-08, -7.5, 3.75, -6.49519, 6.49519, -3.75 )
+script = ExtResource( 6 )
+radius = 7.5
+points = 12
+
+[node name="Control" type="Control" parent="Sprites/Right" index="2"]
+margin_left = -100.0
+margin_top = -100.0
+margin_bottom = 100.0
+rect_clip_content = true
+
+[node name="Label" type="Label" parent="Sprites/Right/Control" index="0"]
+margin_left = -75.0
+margin_top = 15.0
+margin_right = 75.0
+margin_bottom = 165.0
+custom_fonts/font = ExtResource( 2 )
+text = "0"
+align = 1
+valign = 1
 
 [editable path="Arrow"]
+[editable path="Sprites/Left/Gem"]
+[editable path="Sprites/Right/Gem"]

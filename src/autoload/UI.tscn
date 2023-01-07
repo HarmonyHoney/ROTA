@@ -135,7 +135,6 @@ size_flags_vertical = 4
 
 [node name="Clock" parent="Control/Down/Image" instance=ExtResource( 5 )]
 position = Vector2( 30, 30 )
-polygon = PoolVector2Array( 25, 0, 23.097, 9.56709, 17.6777, 17.6777, 9.56709, 23.097, -1.09278e-06, 25, -9.56709, 23.097, -17.6777, 17.6777, -23.097, 9.56709, -25, -2.18557e-06, -23.097, -9.56709, -17.6777, -17.6777, -9.56709, -23.097, 2.98122e-07, -25, 9.56709, -23.097, 17.6777, -17.6777, 23.097, -9.56709 )
 
 [node name="Caption" type="Label" parent="Control"]
 anchor_right = 1.0

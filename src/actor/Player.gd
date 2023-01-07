@@ -194,7 +194,8 @@ func _physics_process(delta):
 	
 	if is_input and !Cutscene.is_playing and !Wipe.is_wipe:
 		joy_last = joy
-		joy = Input.get_vector("left", "right", "up", "down").round()
+		joy = Input.get_vector("left", "right", "up", "down")
+		joy = Vector2(sign(joy.x), sign(joy.y))
 		
 		btnp_jump = Input.is_action_just_pressed("jump")
 		btnp_push = Input.is_action_just_pressed("grab")
@@ -325,25 +326,7 @@ func _physics_process(delta):
 		
 		# release box
 		if is_release:
-			is_hold = false
-			is_release = false
-			is_move = true
-			has_jumped = true
-			hold_clock = 0.0
-			
-			remove_collision_exception_with(box)
-			box.remove_collision_exception_with(self)
-			box.is_hold = false
-			box.pickup()
-			
-			Guide.set_box(null)
-			
-			release_anim()
-			
-			audio_grab.pitch_scale = rand_range(0.7, 1.3)
-			audio_grab.play()
-			
-			release_clock = release_time
+			box_release()
 	
 	# not holding
 	else:
@@ -664,12 +647,33 @@ func die():
 	
 	velocity = Vector2(-350 * dir_x, -800)
 	if is_hold:
-		release_anim()
-		Guide.set_box(null)
+		box_release()
 	anim.play("jump")
 	
 	audio_spike.play()
 	audio_fallout.play()
+
+func box_release():
+	is_hold = false
+	is_release = false
+	is_move = true
+	has_jumped = true
+	hold_clock = 0.0
+	spr_root.rotation = 0
+	
+	remove_collision_exception_with(box)
+	box.remove_collision_exception_with(self)
+	box.is_hold = false
+	box.pickup()
+	
+	Guide.set_box(null)
+	
+	release_anim()
+	
+	audio_grab.pitch_scale = rand_range(0.7, 1.3)
+	audio_grab.play()
+	
+	release_clock = release_time
 
 func release_anim():
 	# set animation keys

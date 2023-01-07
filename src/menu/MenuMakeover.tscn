@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/menu/MenuMakeover.gd" type="Script" id=2]
 [ext_resource path="res://src/menu/options/scroll/Hairstyle.tscn" type="PackedScene" id=3]
@@ -7,7 +7,6 @@
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=6]
 [ext_resource path="res://media/image/UI/reset.svg" type="Texture" id=7]
 [ext_resource path="res://src/menu/options/scroll/Color.gd" type="Script" id=8]
-[ext_resource path="res://media/image/UI/eye.svg" type="Texture" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -26,8 +25,9 @@ corner_radius_bottom_left = 50
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="Curve" id=5]
-_data = [ Vector2( 0, 0.418182 ), 0.0, 0.581818, 0, 1, Vector2( 1, 1 ), 0.581818, 0.0, 1, 0 ]
+[sub_resource type="Curve" id=7]
+min_value = 0.73
+_data = [ Vector2( 0, 0.73 ), 0.0, 0.27, 0, 1, Vector2( 1, 1 ), 0.27, 0.0, 1, 0 ]
 
 [node name="MenuMakeover" type="CanvasLayer"]
 pause_mode = 2
@@ -319,14 +319,6 @@ margin_right = 245.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 
-[node name="TextureRect" type="TextureRect" parent="Dialog/List/Eye/HBoxContainer/Circle3"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 9 )
-expand = true
-stretch_mode = 5
-
 [node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle3"]
 position = Vector2( 35, 35 )
 scale = Vector2( 2, 2 )
@@ -502,10 +494,12 @@ scale = Vector2( 1.333, 1.333 )
 [node name="LegL" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle/Fit"]
 position = Vector2( -5, -9.5 )
 rotation = 0.387463
-points = PoolVector2Array( 0, 0, 0, 26 )
+points = PoolVector2Array( 0, 0, -7.62939e-06, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="LegR" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle/Fit"]
 position = Vector2( 5, -9.5 )
@@ -514,12 +508,14 @@ points = PoolVector2Array( 0, 0, 0, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="Torso" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle/Fit"]
 position = Vector2( 0, -9.5 )
 points = PoolVector2Array( 0, -5, 0, 20 )
-width = 25.0
-width_curve = SubResource( 5 )
+width = 15.5
+width_curve = SubResource( 7 )
 default_color = Color( 1, 1, 1, 1 )
 
 [node name="Circle2" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
@@ -539,10 +535,12 @@ scale = Vector2( 1.444, 1.444 )
 [node name="LegL" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
 position = Vector2( -5, -9.5 )
 rotation = 0.387463
-points = PoolVector2Array( 0, 0, 0, 26 )
+points = PoolVector2Array( 0, 0, -7.62939e-06, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="LegR" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
 position = Vector2( 5, -9.5 )
@@ -551,12 +549,14 @@ points = PoolVector2Array( 0, 0, 0, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="Torso" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
 position = Vector2( 0, -9.5 )
 points = PoolVector2Array( 0, -5, 0, 20 )
-width = 25.0
-width_curve = SubResource( 5 )
+width = 15.5
+width_curve = SubResource( 7 )
 default_color = Color( 1, 1, 1, 1 )
 
 [node name="Circle3" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
@@ -576,10 +576,12 @@ scale = Vector2( 1.667, 1.667 )
 [node name="LegL" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
 position = Vector2( -5, -9.5 )
 rotation = 0.387463
-points = PoolVector2Array( 0, 0, 0, 26 )
+points = PoolVector2Array( 0, 0, -7.62939e-06, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="LegR" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
 position = Vector2( 5, -9.5 )
@@ -588,12 +590,14 @@ points = PoolVector2Array( 0, 0, 0, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="Torso" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
 position = Vector2( 0, -9.5 )
 points = PoolVector2Array( 0, -5, 0, 20 )
-width = 25.0
-width_curve = SubResource( 5 )
+width = 15.5
+width_curve = SubResource( 7 )
 default_color = Color( 1, 1, 1, 1 )
 
 [node name="Circle4" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
@@ -612,10 +616,12 @@ scale = Vector2( 1.444, 1.444 )
 [node name="LegL" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
 position = Vector2( -5, -9.5 )
 rotation = 0.387463
-points = PoolVector2Array( 0, 0, 0, 26 )
+points = PoolVector2Array( 0, 0, -7.62939e-06, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="LegR" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
 position = Vector2( 5, -9.5 )
@@ -624,12 +630,14 @@ points = PoolVector2Array( 0, 0, 0, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="Torso" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
 position = Vector2( 0, -9.5 )
 points = PoolVector2Array( 0, -5, 0, 20 )
-width = 25.0
-width_curve = SubResource( 5 )
+width = 15.5
+width_curve = SubResource( 7 )
 default_color = Color( 1, 1, 1, 1 )
 
 [node name="Circle5" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
@@ -649,10 +657,12 @@ scale = Vector2( 1.333, 1.333 )
 [node name="LegL" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
 position = Vector2( -5, -9.5 )
 rotation = 0.387463
-points = PoolVector2Array( 0, 0, 0, 26 )
+points = PoolVector2Array( 0, 0, -7.62939e-06, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="LegR" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
 position = Vector2( 5, -9.5 )
@@ -661,12 +671,14 @@ points = PoolVector2Array( 0, 0, 0, 26 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
+round_precision = 6
+antialiased = true
 
 [node name="Torso" type="Line2D" parent="Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
 position = Vector2( 0, -9.5 )
 points = PoolVector2Array( 0, -5, 0, 20 )
-width = 25.0
-width_curve = SubResource( 5 )
+width = 15.5
+width_curve = SubResource( 7 )
 default_color = Color( 1, 1, 1, 1 )
 
 [node name="Random" type="TextureRect" parent="Dialog/List"]

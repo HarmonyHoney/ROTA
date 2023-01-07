@@ -1,10 +1,10 @@
 tool
 extends Door
 
-onready var gem := $Sprites/Gem
-onready var label := $Sprites/Gem/Label
+onready var doors := [$Sprites/Left, $Sprites/Right]
+onready var gems := [$Sprites/Left/Gem, $Sprites/Right/Gem]
+onready var labels := [$Sprites/Left/Control/Label, $Sprites/Right/Control/Label]
 onready var door_mat : ShaderMaterial = $Sprites/Door.material
-onready var knobs = [$Sprites/Knob, $Sprites/Knob2]
 
 export var gem_count := 0 setget set_gem
 
@@ -21,18 +21,22 @@ func _physics_process(delta):
 	if open_close:
 		var s = open_easy.count(delta, open_close > 0)
 		door_mat.set_shader_param("line", lerp(0.0, 1.0, s))
-		gem.modulate.a = 1.0 - s
-		for i in knobs:
+		
+		for i in doors:
 			i.scale.x = lerp(1.0, 0.0, s)
 		if open_easy.clock == 0 or open_easy.is_complete:
 			open_close = 0
 
 func set_gem(arg := gem_count):
 	gem_count = max(arg, 0)
-	if label:
-		label.text = str(gem_count)
-	if gem:
-		gem.visible = gem_count > 0
+	var v = gem_count > 0
+	if labels:
+		for i in labels:
+			i.text = str(gem_count)
+			i.visible = v
+	if gems:
+		for i in gems:
+			i.visible = v
 
 # unlock cheat
 func cheat_code(cheat):
