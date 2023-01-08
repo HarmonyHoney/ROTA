@@ -15,7 +15,7 @@
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/menu/DemoLabel.gd" type="Script" id=17]
+[ext_resource path="res://src/actor/Fade.gd" type="Script" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -79,9 +79,7 @@ scene_path = "res://src/map/worlds/2/4.tscn"
 position = Vector2( -700, 2650 )
 scene_path = "res://src/map/worlds/2/5.tscn"
 
-[node name="Details" type="Node2D" parent="."]
-
-[node name="DemoLabel" type="Label" parent="Details"]
+[node name="DemoLabel" type="Label" parent="Actors"]
 margin_left = -2350.0
 margin_top = 2450.0
 margin_right = -1350.0
@@ -97,15 +95,18 @@ Available on Steam and itch.io
 - Harmony Honey <3"
 align = 1
 valign = 1
-script = ExtResource( 17 )
+script = ExtResource( 16 )
+is_demo = true
 
-[node name="Area2D" type="Area2D" parent="Details/DemoLabel"]
+[node name="Area2D" type="Area2D" parent="Actors/DemoLabel"]
 position = Vector2( 649.998, 250.004 )
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Details/DemoLabel/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actors/DemoLabel/Area2D"]
 shape = SubResource( 3 )
+
+[node name="Details" type="Node2D" parent="."]
 
 [node name="Rocks" type="Node2D" parent="Details"]
 modulate = Color( 0.858824, 0.847059, 0.835294, 1 )
@@ -576,5 +577,5 @@ palette = 0
 position = Vector2( -500, 1900 )
 z_index = -5
 
-[connection signal="area_entered" from="Details/DemoLabel/Area2D" to="Details/DemoLabel" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="Details/DemoLabel/Area2D" to="Details/DemoLabel" method="_on_Area2D_area_exited"]
+[connection signal="area_entered" from="Actors/DemoLabel/Area2D" to="Actors/DemoLabel" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Actors/DemoLabel/Area2D" to="Actors/DemoLabel" method="_on_Area2D_area_exited"]

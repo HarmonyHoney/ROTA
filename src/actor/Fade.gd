@@ -1,18 +1,17 @@
 extends CanvasItem
 
-var is_active := false
-
 var fade = EaseMover.new()
+export var is_demo := false
 
 func _ready():
-	visible = Shared.is_demo
+	visible = Shared.is_demo if is_demo else true
+	fade.show = false
 
 func _physics_process(delta):
-	fade.count(delta, is_active)
-	modulate.a = fade.smooth()
+	modulate.a = fade.count(delta)
 
 func _on_Area2D_area_entered(area):
-	is_active = true
+	fade.show = true
 
 func _on_Area2D_area_exited(area):
-	is_active = false
+	fade.show = false

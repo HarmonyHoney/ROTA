@@ -27,7 +27,7 @@ tile_data = PoolIntArray( 720890, -1073741824, 0 )
 position = Vector2( -200, 650 )
 rotation = 4.71239
 dir = 3
-scene_path = "res://src/map/worlds/1/0_start.tscn"
+scene_path = "res://src/map/worlds/0/1_start.tscn"
 
 [node name="DoorBig" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( -50, 1400 )

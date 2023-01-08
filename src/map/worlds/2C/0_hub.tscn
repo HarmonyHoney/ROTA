@@ -71,7 +71,7 @@ scene_path = "res://src/map/worlds/2C/6.tscn"
 position = Vector2( 2200, 1600 )
 rotation = 3.14159
 dir = 2
-scene_path = "res://src/menu/Ending.tscn"
+scene_path = "res://src/map/worlds/0/2_end.tscn"
 gem_count = 50
 
 [node name="Details" type="Node2D" parent="."]

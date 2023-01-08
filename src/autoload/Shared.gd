@@ -3,7 +3,8 @@ extends Node
 var splash_path := "res://src/menu/Splash.tscn"
 var title_path := "res://src/menu/MenuTitle.tscn"
 var worlds_path := "res://src/map/worlds/"
-var start_path := "res://src/map/worlds/1/0_start.tscn"
+var start_path := "res://src/map/worlds/0/1_start.tscn"
+var end_path := "res://src/map/worlds/0/2_end.tscn"
 
 onready var csfn := get_tree().current_scene.filename
 onready var last_scene := csfn
@@ -574,7 +575,7 @@ func try_achievement():
 	if gem_count > 49:
 		Steam.set_achievement("gem50")
 	
-	if csfn == "res://src/menu/Ending.tscn" and save_time < 3600:
+	if csfn == end_path and save_time < 3600:
 		Steam.set_achievement("speedrun")
 
 ### Demo ###
