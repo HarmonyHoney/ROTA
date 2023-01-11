@@ -2,7 +2,6 @@ tool
 extends Door
 
 onready var doors := [$Sprites/Left, $Sprites/Right]
-onready var gems := [$Sprites/Left/Gem, $Sprites/Right/Gem]
 onready var labels := [$Sprites/Left/Control/Label, $Sprites/Right/Control/Label]
 onready var door_mat : ShaderMaterial = $Sprites/Door.material
 
@@ -34,9 +33,8 @@ func set_gem(arg := gem_count):
 		for i in labels:
 			i.text = str(gem_count)
 			i.visible = v
-	if gems:
-		for i in gems:
-			i.visible = v
+	if door_mat:
+		door_mat.set_shader_param("gem_size", 0.75 if v else 0.0)
 
 # unlock cheat
 func cheat_code(cheat):

@@ -27,7 +27,6 @@ colors = PoolColorArray( 0.686275, 0, 1, 1, 1, 0, 0.913725, 1, 1, 1, 0, 1, 1, 0.
 modulate = Color( 0.898039, 0.615686, 0.341176, 1 )
 material = SubResource( 1 )
 position = Vector2( 0, 5 )
-scale = Vector2( 1, 0.994681 )
 texture = ExtResource( 7 )
 texture_offset = Vector2( 50, 50 )
 polygon = PoolVector2Array( 40, 50, -40, 50, -40, -30, -39.0211, -36.1803, -36.1803, -41.7557, -31.7557, -46.1803, -26.1803, -49.0211, -20, -50, 20, -50, 26.1803, -49.0211, 31.7557, -46.1803, 36.1803, -41.7557, 39.0211, -36.1803, 40, -30 )

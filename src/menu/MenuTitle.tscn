@@ -692,6 +692,7 @@ __meta__ = {
 }
 
 [node name="Demo" type="Label" parent="Map"]
+visible = false
 margin_left = 1500.0
 margin_top = 700.0
 margin_right = 2100.0

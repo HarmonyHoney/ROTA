@@ -33,7 +33,9 @@ func _physics_process(delta):
 	if open_close:
 		var s = open_easy.count(delta, open_close > 0)
 		door_mat.set_shader_param("line", lerp(0.9, 0.1, s))
-		open.scale.x = lerp(1.0, 0.0, s)
+		var o = 1.0 - s
+		open.scale.x = o
+		open.visible = o > 0.01
 		if open_easy.clock == 0.0 or open_easy.is_complete:
 			open_close = 0
 		
