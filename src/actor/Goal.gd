@@ -37,7 +37,9 @@ func _physics_process(delta):
 
 func cheat_code(cheat):
 	if "konami" in cheat:
-		pass#pickup(Shared.player)
+		is_collected = true
+		Shared.map_clock = 99
+		Audio.play("gem_collect")
 
 func shine(is_audio := true):
 	shine_easy.clock = shine_easy.time

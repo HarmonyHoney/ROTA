@@ -10,8 +10,10 @@ onready var anim : AnimationPlayer = $AnimationPlayer
 onready var sprites := $Sprites
 onready var spr_root := $Sprites/Root
 onready var spr_body := $Sprites/Root/Body
+onready var spr_eyes := $Sprites/Root/Body/Eyes
 var spr_easy := EaseMover.new()
 
+onready var spr_hands_parent := $Sprites/Hands
 onready var spr_hand_l := $Sprites/Hands/Left
 onready var spr_hand_r := $Sprites/Hands/Right
 onready var spr_hands := [spr_hand_l, spr_hand_r]
@@ -25,6 +27,7 @@ onready var audio_fallout := $Audio/FallOut
 onready var audio_spike := $Audio/Spike
 onready var audio_around := $Audio/Around
 
+export var dir := 0 setget set_dir
 export var is_input := true
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
@@ -40,7 +43,7 @@ var btn_push := false
 var btnp_push := false
 
 export var is_cam := true
-export var dir := 0 setget set_dir
+export var is_npc := false
 
 var is_move := true
 var is_walk := true
@@ -50,6 +53,7 @@ var velocity := Vector2.ZERO
 var dir_x := 1 setget set_dir_x
 signal scale_x
 var idle_dir := "idle"
+export var idle_anim := "idle"
 
 var walk_speed := 350.0
 var floor_accel := 12
@@ -105,18 +109,23 @@ var unpause_tick := 0
 var release_clock := 0.0
 var release_time := 0.2
 
-onready var colors := {"hair": [$Sprites/Root/Body/Hair], "skin": [$Sprites/Root/Body/Head, $Sprites/Hands],
+onready var colors := {"hair": [$Sprites/Root/Body/HairBack, $Sprites/Root/Body/HairFront,], "skin": [$Sprites/Root/Body/Head, $Sprites/Hands],
 "fit": [$Sprites/Root/Body/Fit], "eye": [$Sprites/Root/Body/Eyes]}
 export(Array, Color) var palette := []
 export var dye := {"hair": 0, "skin": 0, "fit": 0, "eye": 0} setget set_dye
 
-onready var hair_back := $Sprites/Root/Body/Hair/Back
-onready var hair_front := $Sprites/Root/Body/Hair/Front
+onready var hair_back := $Sprites/Root/Body/HairBack
+onready var hair_front := $Sprites/Root/Body/HairFront
 export (Array, String, FILE) var hair_backs := []
 export (Array, String, FILE) var hair_fronts := []
 
 export var hairstyle_back := 0 setget set_hair_back
 export var hairstyle_front := 0 setget set_hair_front
+
+var blink_ease := EaseMover.new(0.2)
+var blink_clock := 0.0
+var blink_time := 10.0
+var blink_range := Vector2(1, 20)
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -138,13 +147,17 @@ func _ready():
 	for i in 3:
 		l.bezier_track_set_key_value(2, i, -l.bezier_track_get_key_value(2, i))
 	anim.add_animation("idle_left", l)
+	
+	if is_npc:
+		z_index -= 1
+		spr_hands_parent.z_index = 0
 
 func wipe_start(arg):
 	spr_easy.show = arg
 
 func scene():
 	# go to last door
-	if is_instance_valid(Shared.door_in):
+	if is_instance_valid(Shared.door_in) and !is_npc:
 		var d = Shared.door_in
 		position = d.position
 		self.dir = d.dir
@@ -464,6 +477,22 @@ func _physics_process(delta):
 	squish_clock = min(squish_clock + delta, squish_time)
 	var s = smoothstep(0, 1, squish_clock / squish_time)
 	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, s)
+	
+	# blink anim
+	if blink_clock < blink_time:
+		blink_clock += delta
+	else:
+		var be = blink_ease.count(delta)
+		spr_eyes.scale.y = lerp(1.0, 0.1, be)
+		if be == 1.0:
+			blink_ease.show = false
+		elif be == 0.0:
+			blink_ease.show = true
+			blink_clock = 0.0
+			blink_time = rand_range(blink_range.x, blink_range.y)
+		
+	
+	
 
 func physics_frame():
 	# hold animation
@@ -506,7 +535,7 @@ func set_dir(arg := dir):
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
 	areas.scale.x = dir_x
-	idle_dir = "idle" if dir_x > 0 else "idle_left"
+	idle_dir = idle_anim if dir_x > 0 or idle_anim != "idle" else "idle_left"
 	anim.playback_speed = dir_x
 	emit_signal("scale_x", dir_x)
 

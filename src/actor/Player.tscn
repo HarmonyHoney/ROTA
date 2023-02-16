@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -164,6 +164,82 @@ tracks/6/enabled = true
 tracks/6/keys = {
 "points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "idle2"
+length = 1.2
+loop = true
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -35, -0.25, 0, 0.25, 0, -35, -0.25, 0, 0.25, 0, -35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 10, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 35, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 10, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 10, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
 }
 
 [sub_resource type="Animation" id=7]
@@ -400,13 +476,13 @@ height = 30.0
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 z_index = 50
 z_as_relative = false
-collision_layer = 3
+collision_layer = 2
 script = ExtResource( 2 )
-palette = [ Color( 0.14902, 0.14902, 0.14902, 1 ), Color( 0.505882, 0.505882, 0.6, 1 ), Color( 0.721569, 0.803922, 0.85098, 1 ), Color( 0.87, 0.87, 0.87, 1 ), Color( 0.623529, 1, 0.25098, 1 ), Color( 0, 1, 0, 1 ), Color( 0, 1, 0.498039, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 0.498039, 1, 1 ), Color( 0.160784, 0.160784, 1, 1 ), Color( 0.576471, 0.14902, 1, 1 ), Color( 1, 0, 1, 1 ), Color( 1, 0, 0.498039, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.501961, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.675, 0.35, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ) ]
+palette = [ Color( 0.14902, 0.14902, 0.14902, 1 ), Color( 0.505882, 0.505882, 0.6, 1 ), Color( 0.721569, 0.803922, 0.85098, 1 ), Color( 0.87, 0.87, 0.87, 1 ), Color( 0.729412, 1, 0.25098, 1 ), Color( 0, 1, 0, 1 ), Color( 0, 1, 0.498039, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 0.498039, 1, 1 ), Color( 0.160784, 0.160784, 1, 1 ), Color( 0.576471, 0.14902, 1, 1 ), Color( 1, 0, 1, 1 ), Color( 1, 0, 0.498039, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.501961, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.675, 0.35, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ) ]
 dye = {
-"eye": 11,
+"eye": 14,
 "fit": 4,
-"hair": 10,
+"hair": 11,
 "skin": 19
 }
 hair_backs = [ "", "res://src/actor/hair/back/Short.tscn", "res://src/actor/hair/back/Medium.tscn", "res://src/actor/hair/back/Long.tscn", "res://src/actor/hair/back/Braid.tscn", "res://src/actor/hair/back/Braids.tscn", "res://src/actor/hair/back/Afro.tscn" ]
@@ -439,6 +515,7 @@ autoplay = "RESET"
 playback_default_blend_time = 0.2
 anims/RESET = SubResource( 6 )
 anims/idle = SubResource( 5 )
+anims/idle2 = SubResource( 15 )
 anims/jump = SubResource( 7 )
 anims/release = SubResource( 9 )
 anims/walk = SubResource( 8 )
@@ -452,16 +529,12 @@ use_parent_material = true
 [node name="Body" type="Node2D" parent="Sprites/Root"]
 use_parent_material = true
 
-[node name="Hair" type="Node2D" parent="Sprites/Root/Body"]
-modulate = Color( 0.576471, 0.14902, 1, 1 )
+[node name="HairBack" type="Node2D" parent="Sprites/Root/Body"]
+modulate = Color( 1, 0, 1, 1 )
 position = Vector2( 0, -25 )
 
-[node name="Back" type="Node2D" parent="Sprites/Root/Body/Hair"]
-
-[node name="Front" type="Node2D" parent="Sprites/Root/Body/Hair"]
-
 [node name="Fit" type="Node2D" parent="Sprites/Root/Body"]
-modulate = Color( 0.623529, 1, 0.25098, 1 )
+modulate = Color( 0.729412, 1, 0.25098, 1 )
 
 [node name="LegL" type="Line2D" parent="Sprites/Root/Body/Fit"]
 position = Vector2( -5, -9.5 )
@@ -499,8 +572,8 @@ radius = 20.0
 points = 24
 
 [node name="Eyes" type="Node2D" parent="Sprites/Root/Body"]
-modulate = Color( 1, 0, 1, 1 )
-position = Vector2( 0, -28.5 )
+modulate = Color( 1, 0.501961, 0, 1 )
+position = Vector2( 0, -25 )
 
 [node name="Left" type="Polygon2D" parent="Sprites/Root/Body/Eyes"]
 position = Vector2( -10, 0 )
@@ -516,6 +589,24 @@ polygon = PoolVector2Array( 4, 3, 3.4641, 5, 2, 6.4641, -1.74846e-07, 7, -1.7484
 script = ExtResource( 1 )
 size = Vector2( 4, 7 )
 radius = Plane( 4, -1, -1, -1 )
+points = 4
+
+[node name="HairFront" type="Node2D" parent="Sprites/Root/Body"]
+modulate = Color( 1, 0, 1, 1 )
+position = Vector2( 0, -25 )
+
+[node name="Hat" type="Node2D" parent="Sprites/Root/Body"]
+visible = false
+z_index = 2
+
+[node name="Headband" type="Polygon2D" parent="Sprites/Root/Body/Hat"]
+position = Vector2( 0, -38 )
+z_index = 2
+polygon = PoolVector2Array( 20, 1, 19.5981, 2.5, 18.5, 3.59808, 17, 4, -17, 4, -18.5, 3.59808, -19.5981, 2.5, -20, 1, -20, -1, -19.5981, -2.5, -18.5, -3.59808, -17, -4, 17, -4, 18.5, -3.59808, 19.5981, -2.5, 20, -0.999999 )
+script = ExtResource( 1 )
+is_baked = false
+size = Vector2( 20, 4 )
+radius = Plane( 3, -1, -1, -1 )
 points = 4
 
 [node name="Hands" type="Node2D" parent="Sprites"]
