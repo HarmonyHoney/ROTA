@@ -208,8 +208,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( -35, -0.25, 0, 0.25, 0, -35, -0.25, 0, 0.25, 0, -35, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6, 1.2 )
+"points": PoolRealArray( -30, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 tracks/4/type = "bezier"
 tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
@@ -218,7 +218,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 10, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.6, 1.2 )
 }
 tracks/5/type = "bezier"
@@ -228,8 +228,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( 35, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6, 1.2 )
+"points": PoolRealArray( 30, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 tracks/6/type = "bezier"
 tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
@@ -238,7 +238,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 10, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 10, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.6, 1.2 )
 }
 

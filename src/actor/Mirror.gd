@@ -20,8 +20,8 @@ var dir_x := 1.0
 export var hide_distance := 50.0
 
 func _ready():
-	MenuMakeover.connect("closed", self, "closed")
 	get_tree().connect("idle_frame", self, "idle_frame")
+	MenuMakeover.connect("closed", self, "closed")
 	
 	arrow.dir = posmod(dir, 4)
 	rig.global_rotation = 0
@@ -49,16 +49,17 @@ func create_rig():
 	
 	from = []
 	to = []
-	var list = [p.sprites, p.spr_root, p.spr_body, p.spr_hand_l, p.spr_hand_r]
+	var list = [p.sprites, p.spr_root, p.spr_body, p.spr_hand_l, p.spr_hand_r, p.spr_eyes]
 	for i in list:
 		var path = p.sprites.get_path_to(i)
 		if s.has_node(path):
 			from.append(i)
 			to.append(s.get_node(path))
 	
-	for i in Shared.get_all_children(s.get_node("Root/Body/Hair")):
-		if i.has_method("scale_x"):
-			p.connect("scale_x", i, "scale_x")
+	for n in ["Back", "Front"]:
+		for i in Shared.get_all_children(s.get_node("Root/Body/Hair" + n)):
+			if i.has_method("scale_x"):
+				p.connect("scale_x", i, "scale_x")
 
 func _on_Arrow_open():
 	MenuMakeover.is_open = true

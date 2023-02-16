@@ -8,7 +8,6 @@ var scenes := []
 var items := []
 
 func _ready():
-	label_desc.text = "Hair" if order == "front" else ""
 	scenes = Shared.player.get("hair_" + order + "s")
 	count = scenes.size() - 1
 	
@@ -33,11 +32,13 @@ func _ready():
 	
 	# specific mohawk fix
 	for i in Shared.get_all_children(hbox):
-		if i.get("z_index") and i.z_index == -2:
+		if i.get("z_index") and i.z_index < 0:
 			i.z_index = 0
 
 func set_value():
-	Shared.player.set("hairstyle_" + order, cursor)
+	var s = "hairstyle_" + order
+	if Shared.player.get(s) != cursor:
+		Shared.player.set(s, cursor)
 	
 	for i in items:
 		i.visible = false

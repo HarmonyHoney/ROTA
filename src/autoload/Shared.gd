@@ -142,9 +142,6 @@ func _input(event):
 		if event.scancode == KEY_F11:
 			toggle_fullscreen()
 	
-#	if Input.is_action_just_pressed("ui_end"):
-#		burst_screenshot()
-	
 	# gamepad signal
 	if event.is_pressed():
 		var g = is_gamepad
@@ -156,6 +153,15 @@ func _input(event):
 		if g != is_gamepad:
 			emit_signal("gamepad_input", is_gamepad)
 			print("gamepad_input: ", is_gamepad)
+	
+#	if event.is_action_pressed("debug_screenshot"):
+#		burst_screenshot(15)
+#
+#	if event.is_action_pressed("debug_home"):
+#		wipe_scene("res://src/map/worlds/0/0_hub.tscn")
+#
+#	if event.is_action_pressed("debug_makeover"):
+#		MenuMakeover.is_open = !MenuMakeover.is_open
 
 func _physics_process(delta):
 	# recorded time
@@ -248,8 +254,8 @@ func set_window_size(arg : Vector2 = win_size):
 	win_size = arg
 	# specific fix for borderless fullscreen
 	var b = OS.window_borderless and win_size == OS.get_screen_size()
-	OS.window_size = win_size + Vector2(0, 1 if b else 0)
-	OS.window_position = Vector2.ZERO if b else (OS.get_screen_size() * 0.5) - (OS.window_size * 0.5)
+	OS.window_size = win_size + Vector2(2 if b else 0, 0)
+	OS.window_position = Vector2(-1, 0) if b else (OS.get_screen_size() * 0.5) - (OS.window_size * 0.5)
 
 func burst_screenshot(count := 30, viewport := get_tree().root):
 	var dir := Directory.new()
@@ -276,9 +282,10 @@ func burst_screenshot(count := 30, viewport := get_tree().root):
 		yield(get_tree(), "idle_frame")
 
 func get_all_children(n, a := []):
-	a.append(n)
-	for i in n.get_children():
-		a = get_all_children(i, a)
+	if is_instance_valid(n):
+		a.append(n)
+		for i in n.get_children():
+			a = get_all_children(i, a)
 	return a
 
 ### Gems

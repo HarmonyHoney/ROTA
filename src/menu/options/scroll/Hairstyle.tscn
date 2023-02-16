@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=1]
-[ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/menu/options/scroll/Hairstyle.gd" type="Script" id=3]
 
 [node name="Hairstyle" type="Control" groups=["hair"]]
@@ -10,29 +9,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 3 )
 is_loop = true
-
-[node name="Label" type="Label" parent="."]
-visible = false
-anchor_right = 0.5
-anchor_bottom = 1.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 2 )
-text = "Hair"
-valign = 1
-
-[node name="Label2" type="Label" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_vertical = 6
-custom_fonts/font = ExtResource( 2 )
-text = "< OFF >"
-align = 2
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0

@@ -1,11 +1,10 @@
 extends Scroll
 
-export (String, "hair", "skin", "fit", "eye") var part := "hair" setget set_part
+export (String, "hair", "skin", "fit", "eye") var part := "hair"
 
 onready var swatch := $HBoxContainer.get_children()
 
 func _ready():
-	set_part()
 	count = Shared.player.palette.size() - 1
 
 func set_value():
@@ -19,8 +18,5 @@ func set_value():
 	
 	if label_value: label_value.modulate = p[1]
 	
-	Shared.player.dye[part] = cursor
-
-func set_part(arg := part):
-	part = arg
-	if label_desc: label_desc.text = "" if part == "hair" else part.capitalize()
+	if Shared.player.dye[part] != cursor:
+		Shared.player.dye[part] = cursor
