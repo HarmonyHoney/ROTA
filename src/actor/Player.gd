@@ -220,7 +220,7 @@ func _physics_process(delta):
 				is_unpause = false
 		
 		if !is_unpause:
-			btn_jump = Input.is_action_pressed("jump") and release_clock == 0 and !UI.dialog_menu.is_open
+			btn_jump = Input.is_action_pressed("jump") and release_clock == 0
 			btn_push = Input.is_action_pressed("grab")
 	
 	# holding input

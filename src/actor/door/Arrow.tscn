@@ -1,16 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/actor/door/Arrow.gd" type="Script" id=1]
-[ext_resource path="res://media/image/UI/door_arrow.png" type="Texture" id=4]
+[ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=2]
+[ext_resource path="res://media/image/UI/key_up_square.png" type="Texture" id=3]
 [ext_resource path="res://src/shader/door_arrow.gdshader" type="Shader" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
 extents = Vector2( 40, 50 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 7 )
 shader_param/fill_y = 0.35
+shader_param/is_flip = true
+shader_param/is_descent = false
 
 [node name="Arrow" type="Node2D" groups=["door"]]
 z_index = 70
@@ -28,11 +31,16 @@ shape = SubResource( 1 )
 [node name="Image" type="Node2D" parent="."]
 position = Vector2( 0, -95 )
 
-[node name="Sprite" type="Sprite" parent="Image"]
-material = SubResource( 3 )
-position = Vector2( 7.62939e-06, 0 )
+[node name="Rect" type="Polygon2D" parent="Image"]
+material = SubResource( 4 )
 scale = Vector2( 0.35, 0.35 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
+texture_offset = Vector2( 100, 100 )
+polygon = PoolVector2Array( 100, 40, 97.0634, 58.541, 88.541, 75.2671, 75.2671, 88.541, 58.541, 97.0634, 40, 100, -40, 100, -58.541, 97.0634, -75.2671, 88.541, -88.541, 75.2671, -97.0634, 58.541, -100, 40, -100, -40, -97.0634, -58.541, -88.541, -75.2671, -75.2671, -88.541, -58.541, -97.0634, -40, -100, 40, -100, 58.541, -97.0634, 75.2671, -88.541, 88.541, -75.2671, 97.0634, -58.541, 100, -40 )
+script = ExtResource( 2 )
+size = Vector2( 100, 100 )
+radius = Plane( 60, -1, -1, -1 )
+points = 6
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

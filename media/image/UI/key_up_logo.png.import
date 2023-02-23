@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/door_arrow.png-7d0d1eb6752a8e941b154c9ba1d0be90.stex"
+path="res://.import/key_up_logo.png-c70d77cea2b84646a9eacf2acf014df6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://media/image/UI/door_arrow.png"
-dest_files=[ "res://.import/door_arrow.png-7d0d1eb6752a8e941b154c9ba1d0be90.stex" ]
+source_file="res://media/image/UI/key_up_logo.png"
+dest_files=[ "res://.import/key_up_logo.png-c70d77cea2b84646a9eacf2acf014df6.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

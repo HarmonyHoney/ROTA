@@ -6,7 +6,6 @@ onready var clock_label := $Control/Down/Label
 var up = EaseMover.new()
 var down = EaseMover.new()
 var keys = EaseMover.new()
-var caption = EaseMover.new()
 
 onready var clock := $Control/Clock
 onready var clock_file := $Control/Clock/File
@@ -16,12 +15,10 @@ onready var clock_best := $Control/Clock/Down/Best
 onready var clock_goal := $Control/Clock/Down/Goal
 onready var clock_ease := EaseMover.new()
 
-onready var caption_label := $Control/Caption
-onready var dialog_menu := $Control/Dialog
-
 signal dialog_accept
 signal dialog_bye
 signal dialog_closed
+
 
 func _ready():
 	Shared.connect("scene_changed", self, "scene_changed")
@@ -43,8 +40,6 @@ func _ready():
 	keys.from = keys.to + Vector2(0, 80)
 	keys.show = false
 	
-	caption.show = false
-	
 	scene_changed()
 	clock.modulate.a = Shared.clock_alpha
 
@@ -54,7 +49,6 @@ func _physics_process(delta):
 	down.move(delta, Shared.clock_rank > 0 and (down.show or p))
 	keys.move(delta)
 	
-	caption_label.modulate.a = caption.count(delta)
 	clock_down.modulate.a = clock_ease.count(delta)
 
 func scene_changed():

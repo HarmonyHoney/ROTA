@@ -5,7 +5,7 @@ class_name Arrow
 export var dir := 0
 
 onready var image := $Image
-onready var mat : ShaderMaterial = $Image/Sprite.material
+onready var mat : ShaderMaterial = $Image/Rect.material
 
 var player = null
 var is_active := false

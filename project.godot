@@ -188,6 +188,8 @@ Steam="*res://addons/steam_api/steam.gd"
 window/size/width=1280
 window/size/height=720
 window/size/borderless=true
+window/size/test_width=1920
+window/size/test_height=1080
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -360,4 +362,19 @@ debug_screenshot={
 2d_physics/layer_1="solid"
 2d_physics/layer_2="player"
 2d_physics/layer_3="box"
-2d_physic
+2d_physics/layer_4="spike"
+2d_physics/layer_5="spinner"
+2d_physics/layer_6="arrow"
+2d_physics/layer_7="portal"
+2d_physics/layer_8="exit"
+2d_physics/layer_11="door"
+2d_physics/layer_12="goal"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0, 0.741176, 1, 1 )
+environment/default_environment="res://default_env.tres"

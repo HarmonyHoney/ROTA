@@ -21,8 +21,7 @@ func count(delta, arg := show):
 	return smooth()
 
 func move(delta, arg := show):
-	count(delta, arg)
-	current = from.linear_interpolate(to, smooth())
+	current = from.linear_interpolate(to, count(delta, arg))
 	
 	if is_instance_valid(node):
 		node.rect_position = current
