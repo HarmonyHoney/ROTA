@@ -568,19 +568,25 @@ shape = SubResource( 7 )
 
 [node name="Chat" parent="Actors/NPC2" index="7"]
 dialog = "Haven't seen you before!"
-cursor = 24
+
+[node name="Triangle" parent="Actors/NPC2/Chat" index="0"]
+position = Vector2( 0, 0 )
+
+[node name="Rect" parent="Actors/NPC2/Chat" index="1"]
+polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+size = Vector2( 0, 0 )
 
 [node name="Back" parent="Actors/NPC2/Chat/Center" index="0"]
 margin_left = -269.0
 margin_right = 268.0
 text = "Haven't seen you before!"
-percent_visible = 1.19048
+percent_visible = 1.0
 
 [node name="Label" parent="Actors/NPC2/Chat/Center" index="1"]
 margin_left = -269.0
 margin_right = 268.0
 text = "Haven't seen you before!"
-percent_visible = 1.14286
+percent_visible = 1.0
 
 [node name="Details" type="Node2D" parent="."]
 

@@ -17,11 +17,17 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 2 )
 
-[node name="Player" instance=ExtResource( 1 )]
+[node name="NPC" instance=ExtResource( 1 )]
 is_input = false
 is_cam = false
 is_npc = true
 idle_anim = "idle2"
+
+[node name="Areas" parent="." index="2"]
+visible = false
+
+[node name="Headband" parent="Sprites/Root/Body/Hat" index="0"]
+polygon = PoolVector2Array( 20, 1, 19.5981, 2.5, 18.5, 3.59808, 17, 4, -17, 4, -18.5, 3.59808, -19.5981, 2.5, -20, 1, -20, -1, -19.5981, -2.5, -18.5, -3.59808, -17, -4, 17, -4, 18.5, -3.59808, 19.5981, -2.5, 20, -0.999999 )
 
 [node name="Arrow" parent="." index="6" instance=ExtResource( 4 )]
 
@@ -33,19 +39,20 @@ visible = false
 shape = SubResource( 4 )
 
 [node name="Image" parent="Arrow" index="1"]
-position = Vector2( 0, -110 )
+position = Vector2( 0, -120 )
 
 [node name="Chat" type="Node2D" parent="." index="7"]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0, -110 )
+position = Vector2( 0, -120 )
 z_index = 71
 z_as_relative = false
 script = ExtResource( 3 )
 dialog = "I do adore the flowers"
-cursor = 22
 is_show = false
+show_range = Vector2( -120, -150 )
 
 [node name="Triangle" type="Polygon2D" parent="Chat" index="0"]
+position = Vector2( 0, 37.5 )
 scale = Vector2( 1e-05, 1e-05 )
 polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
 
@@ -53,10 +60,10 @@ polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
 texture = ExtResource( 7 )
 texture_offset = Vector2( 0, 50 )
 texture_scale = Vector2( 0, 1 )
-polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+polygon = PoolVector2Array( 260, 0.0999985, 259.062, 8.42228, 256.296, 16.3273, 251.84, 23.4185, 245.919, 29.3405, 238.827, 33.7962, 230.922, 36.5623, 222.6, 37.5, -222.6, 37.5, -230.922, 36.5623, -238.827, 33.7962, -245.919, 29.3405, -251.84, 23.4185, -256.296, 16.3273, -259.062, 8.42228, -260, 0.0999952, -260, -0.100002, -259.062, -8.42228, -256.296, -16.3273, -251.841, -23.4185, -245.919, -29.3405, -238.827, -33.7962, -230.922, -36.5623, -222.6, -37.5, 222.6, -37.5, 230.922, -36.5623, 238.827, -33.7962, 245.919, -29.3405, 251.84, -23.4185, 256.296, -16.3273, 259.062, -8.42228, 260, -0.0999919 )
 script = ExtResource( 5 )
 is_baked = false
-size = Vector2( 0, 0 )
+size = Vector2( 260, 37.5 )
 radius = Plane( -2, -1, -1, -1 )
 
 [node name="Center" type="CenterContainer" parent="Chat" index="2"]
@@ -75,6 +82,7 @@ custom_fonts/font = SubResource( 3 )
 text = "I do adore the flowers"
 align = 1
 valign = 2
+percent_visible = 1.27778
 
 [node name="Label" type="Label" parent="Chat/Center" index="1"]
 margin_left = -240.0
@@ -86,6 +94,7 @@ custom_fonts/font = SubResource( 3 )
 text = "I do adore the flowers"
 align = 1
 valign = 2
+percent_visible = 1.22222
 
 [connection signal="activate" from="Arrow" to="Chat" method="_on_Arrow_activate"]
 [connection signal="open" from="Arrow" to="Chat" method="_on_Arrow_open"]

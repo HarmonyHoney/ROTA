@@ -8,6 +8,7 @@ onready var image := $Image
 onready var mat : ShaderMaterial = $Image/Rect.material
 
 var player = null
+var body = null
 var is_active := false
 var is_locked := false
 
@@ -43,6 +44,9 @@ func _physics_process(delta):
 	arrow_clock = clamp(arrow_clock + (delta if (is_active and !is_locked) else -delta), 0, arrow_time)
 	image.modulate.a = smoothstep(0, 1, arrow_clock / arrow_time)
 	
+	# activate
+	try_active()
+	
 	# open door
 	open_last = open_clock
 	var open = Input.is_action_pressed("up") and is_active and !is_locked and player != null and !player.is_hold and player.dir == dir and player.is_floor
@@ -55,11 +59,15 @@ func _physics_process(delta):
 		if open_clock == open_time and open_last != open_time:
 			emit_signal("open")
 
-func _on_Area2D_body_entered(body):
-	if body == player and player.dir == dir:
-		is_active = true
-		emit_signal("activate")
+func _on_Area2D_body_entered(_body):
+	body = _body
+	try_active()
 
-func _on_Area2D_body_exited(body):
-	is_active = false
-	emit_signal("activate")
+func _on_Area2D_body_exited(_body):
+	body = null
+	try_active()
+
+func try_active():
+	if (is_active and (body != player or (player.dir != dir))) or (!is_active and body == player and player.dir == dir):
+		is_active = !is_active
+		emit_signal("activate")
