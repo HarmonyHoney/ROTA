@@ -2,7 +2,7 @@ extends Camera2D
 
 signal turning(angle)
 
-var target_node
+var target_node setget set_target_node
 onready var target_pos := position
 var is_rotating := true
 var is_moving := true
@@ -70,6 +70,12 @@ func _process(delta):
 		# position
 		if is_moving:
 			global_position = global_position.linear_interpolate(target_pos + turn_offset.rotated(rotation), 0.08)
+
+func set_target_node(arg):
+	if is_instance_valid(target_node): target_node.disconnect("turn_cam", self, "turn")
+	target_node = arg
+	if is_instance_valid(target_node) and target_node.has_signal("turn_cam"): target_node.connect("turn_cam", self, "turn")
+	
 
 func turn(arg):
 	turn_from = rotation

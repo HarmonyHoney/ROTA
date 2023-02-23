@@ -28,6 +28,8 @@ onready var audio_spike := $Audio/Spike
 onready var audio_around := $Audio/Around
 
 export var dir := 0 setget set_dir
+signal turn
+signal turn_cam
 export var is_input := true
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
@@ -526,11 +528,12 @@ func set_dir(arg := dir):
 	
 	if Engine.editor_hint:
 		$Sprites.rotation = turn_to
-	elif Cam.target_node == self:
-		Cam.turn(turn_to)
 	
 	if areas:
 		areas.rotation = turn_to
+	
+	emit_signal("turn", dir)
+	emit_signal("turn_cam", turn_to)
 
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)

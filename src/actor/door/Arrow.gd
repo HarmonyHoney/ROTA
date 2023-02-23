@@ -71,3 +71,6 @@ func try_active():
 	if (is_active and (body != player or (player.dir != dir))) or (!is_active and body == player and player.dir == dir):
 		is_active = !is_active
 		emit_signal("activate")
+
+func turn(arg):
+	dir = posmod(arg, 4)

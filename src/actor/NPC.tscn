@@ -29,19 +29,19 @@ visible = false
 [node name="Headband" parent="Sprites/Root/Body/Hat" index="0"]
 polygon = PoolVector2Array( 20, 1, 19.5981, 2.5, 18.5, 3.59808, 17, 4, -17, 4, -18.5, 3.59808, -19.5981, 2.5, -20, 1, -20, -1, -19.5981, -2.5, -18.5, -3.59808, -17, -4, 17, -4, 18.5, -3.59808, 19.5981, -2.5, 20, -0.999999 )
 
-[node name="Arrow" parent="." index="6" instance=ExtResource( 4 )]
+[node name="Arrow" parent="Sprites" index="3" instance=ExtResource( 4 )]
 
-[node name="Area2D" parent="Arrow" index="0"]
+[node name="Area2D" parent="Sprites/Arrow" index="0"]
 visible = true
 
-[node name="CollisionShape2D" parent="Arrow/Area2D" index="0"]
+[node name="CollisionShape2D" parent="Sprites/Arrow/Area2D" index="0"]
 visible = false
 shape = SubResource( 4 )
 
-[node name="Image" parent="Arrow" index="1"]
+[node name="Image" parent="Sprites/Arrow" index="1"]
 position = Vector2( 0, -120 )
 
-[node name="Chat" type="Node2D" parent="." index="7"]
+[node name="Chat" type="Node2D" parent="Sprites" index="4"]
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -120 )
 z_index = 71
@@ -51,12 +51,12 @@ dialog = "I do adore the flowers"
 is_show = false
 show_range = Vector2( -120, -150 )
 
-[node name="Triangle" type="Polygon2D" parent="Chat" index="0"]
+[node name="Triangle" type="Polygon2D" parent="Sprites/Chat" index="0"]
 position = Vector2( 0, 37.5 )
 scale = Vector2( 1e-05, 1e-05 )
 polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
 
-[node name="Rect" type="Polygon2D" parent="Chat" index="1"]
+[node name="Rect" type="Polygon2D" parent="Sprites/Chat" index="1"]
 texture = ExtResource( 7 )
 texture_offset = Vector2( 0, 50 )
 texture_scale = Vector2( 0, 1 )
@@ -66,12 +66,12 @@ is_baked = false
 size = Vector2( 260, 37.5 )
 radius = Plane( -2, -1, -1, -1 )
 
-[node name="Center" type="CenterContainer" parent="Chat" index="2"]
+[node name="Center" type="CenterContainer" parent="Sprites/Chat" index="2"]
 margin_right = 40.0
 margin_bottom = 40.0
 use_top_left = true
 
-[node name="Back" type="Label" parent="Chat/Center" index="0"]
+[node name="Back" type="Label" parent="Sprites/Chat/Center" index="0"]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = -240.0
 margin_top = -21.0
@@ -84,7 +84,7 @@ align = 1
 valign = 2
 percent_visible = 1.27778
 
-[node name="Label" type="Label" parent="Chat/Center" index="1"]
+[node name="Label" type="Label" parent="Sprites/Chat/Center" index="1"]
 margin_left = -240.0
 margin_top = -21.0
 margin_right = 240.0
@@ -96,7 +96,8 @@ align = 1
 valign = 2
 percent_visible = 1.22222
 
-[connection signal="activate" from="Arrow" to="Chat" method="_on_Arrow_activate"]
-[connection signal="open" from="Arrow" to="Chat" method="_on_Arrow_open"]
+[connection signal="turn" from="." to="Sprites/Arrow" method="turn"]
+[connection signal="activate" from="Sprites/Arrow" to="Sprites/Chat" method="_on_Arrow_activate"]
+[connection signal="open" from="Sprites/Arrow" to="Sprites/Chat" method="_on_Arrow_open"]
 
-[editable path="Arrow"]
+[editable path="Sprites/Arrow"]

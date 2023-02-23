@@ -527,7 +527,8 @@ scene_path = "res://src/map/worlds/1/7.tscn"
 position = Vector2( 350, 350 )
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 5 )]
-position = Vector2( 600, 150 )
+position = Vector2( -150, 850 )
+dir = 3
 dye = {
 "eye": 10,
 "fit": 15,
@@ -537,6 +538,9 @@ dye = {
 hairstyle_back = 6
 hairstyle_front = 8
 
+[node name="Areas" parent="Actors/NPC2" index="2"]
+rotation = 4.71239
+
 [node name="AnimationPlayer" parent="Actors/NPC2" index="3"]
 anims/RESET = SubResource( 1 )
 anims/idle = SubResource( 2 )
@@ -544,6 +548,9 @@ anims/idle2 = SubResource( 3 )
 anims/jump = SubResource( 4 )
 anims/release = SubResource( 5 )
 anims/walk = SubResource( 6 )
+
+[node name="Sprites" parent="Actors/NPC2" index="4"]
+rotation = 4.71239
 
 [node name="HairBack" parent="Actors/NPC2/Sprites/Root/Body" index="0"]
 modulate = Color( 0, 1, 1, 1 )
@@ -563,30 +570,26 @@ modulate = Color( 0, 1, 1, 1 )
 [node name="Hands" parent="Actors/NPC2/Sprites" index="1"]
 modulate = Color( 1, 0.717647, 0.717647, 1 )
 
-[node name="CollisionShape2D" parent="Actors/NPC2/Arrow/Area2D" index="0"]
+[node name="Arrow" parent="Actors/NPC2/Sprites" index="3"]
+dir = 3
+
+[node name="CollisionShape2D" parent="Actors/NPC2/Sprites/Arrow/Area2D" index="0"]
 shape = SubResource( 7 )
 
-[node name="Chat" parent="Actors/NPC2" index="7"]
-dialog = "Haven't seen you before!"
+[node name="Chat" parent="Actors/NPC2/Sprites" index="4"]
+dialog = "Haven't seen you before (:"
 
-[node name="Triangle" parent="Actors/NPC2/Chat" index="0"]
-position = Vector2( 0, 0 )
+[node name="Back" parent="Actors/NPC2/Sprites/Chat/Center" index="0"]
+margin_left = -287.0
+margin_right = 286.0
+text = "Haven't seen you before (:"
+percent_visible = 0.0454545
 
-[node name="Rect" parent="Actors/NPC2/Chat" index="1"]
-polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
-size = Vector2( 0, 0 )
-
-[node name="Back" parent="Actors/NPC2/Chat/Center" index="0"]
-margin_left = -269.0
-margin_right = 268.0
-text = "Haven't seen you before!"
-percent_visible = 1.0
-
-[node name="Label" parent="Actors/NPC2/Chat/Center" index="1"]
-margin_left = -269.0
-margin_right = 268.0
-text = "Haven't seen you before!"
-percent_visible = 1.0
+[node name="Label" parent="Actors/NPC2/Sprites/Chat/Center" index="1"]
+margin_left = -287.0
+margin_right = 286.0
+text = "Haven't seen you before (:"
+percent_visible = 0.0
 
 [node name="Details" type="Node2D" parent="."]
 
@@ -984,4 +987,4 @@ position = Vector2( 2250, 1200 )
 palette = 5
 
 [editable path="Actors/NPC2"]
-[editable path="Actors/NPC2/Arrow"]
+[editable path="Actors/NPC2/Sprites/Arrow"]
