@@ -153,9 +153,11 @@ func _ready():
 	if is_npc:
 		z_index -= 1
 		spr_hands_parent.z_index = 0
+		spr_easy.clock = spr_easy.time
 
 func wipe_start(arg):
-	spr_easy.show = arg
+	if !is_npc:
+		spr_easy.show = arg
 
 func scene():
 	# go to last door
@@ -492,9 +494,6 @@ func _physics_process(delta):
 			blink_ease.show = true
 			blink_clock = 0.0
 			blink_time = rand_range(blink_range.x, blink_range.y)
-		
-	
-	
 
 func physics_frame():
 	# hold animation

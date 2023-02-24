@@ -77,56 +77,31 @@ gem_count = 15
 [node name="NPC" parent="Actors" instance=ExtResource( 19 )]
 position = Vector2( 3450, 2250 )
 dye = {
-"eye": 7,
-"fit": 12,
-"hair": 10,
+"eye": 15,
+"fit": 7,
+"hair": 11,
 "skin": 18
 }
 hairstyle_back = 0
 hairstyle_front = 7
 
-[node name="HairBack" parent="Actors/NPC/Sprites/Root/Body" index="0"]
-modulate = Color( 0.576471, 0.14902, 1, 1 )
-
 [node name="Fit" parent="Actors/NPC/Sprites/Root/Body" index="1"]
-modulate = Color( 1, 0, 0.498039, 1 )
+modulate = Color( 0, 1, 1, 1 )
 
 [node name="Head" parent="Actors/NPC/Sprites/Root/Body" index="2"]
 modulate = Color( 0.741176, 0.407843, 0.505882, 1 )
 
 [node name="Eyes" parent="Actors/NPC/Sprites/Root/Body" index="3"]
-modulate = Color( 0, 1, 1, 1 )
-
-[node name="HairFront" parent="Actors/NPC/Sprites/Root/Body" index="4"]
-modulate = Color( 0.576471, 0.14902, 1, 1 )
+modulate = Color( 1, 1, 0, 1 )
 
 [node name="Hands" parent="Actors/NPC/Sprites" index="1"]
 modulate = Color( 0.741176, 0.407843, 0.505882, 1 )
 
-[node name="CollisionShape2D" parent="Actors/NPC/Arrow/Area2D" index="0"]
+[node name="CollisionShape2D" parent="Actors/NPC/Sprites/Arrow/Area2D" index="0"]
 shape = SubResource( 1 )
 
-[node name="Chat" parent="Actors/NPC" index="7"]
-dialog = "Where am I?"
-
-[node name="Triangle" parent="Actors/NPC/Chat" index="0"]
-position = Vector2( 0, 0 )
-
-[node name="Rect" parent="Actors/NPC/Chat" index="1"]
-polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
-size = Vector2( 0, 0 )
-
-[node name="Back" parent="Actors/NPC/Chat/Center" index="0"]
-margin_left = -129.0
-margin_right = 128.0
-text = "Where am I?"
-percent_visible = 1.0
-
-[node name="Label" parent="Actors/NPC/Chat/Center" index="1"]
-margin_left = -129.0
-margin_right = 128.0
-text = "Where am I?"
-percent_visible = 1.0
+[node name="Chat" parent="Actors/NPC/Sprites" index="4"]
+lines = [ "Where am I?", "What happened last night man?...", "I'm looking for my keys.." ]
 
 [node name="Details" type="Node2D" parent="."]
 
@@ -327,4 +302,4 @@ z_index = -4
 palette = 5
 
 [editable path="Actors/NPC"]
-[editable path="Actors/NPC/Arrow"]
+[editable path="Actors/NPC/Sprites/Arrow"]

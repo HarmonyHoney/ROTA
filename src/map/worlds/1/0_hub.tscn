@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
@@ -13,6 +13,456 @@
 [ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=13]
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "idle"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -35, -0.25, 0, 0.25, 0, -25, -0.25, 0, 0.25, 0, -35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 35, -0.25, 0, 0.25, 0, 25, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "idle2"
+length = 1.2
+loop = true
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -30, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 30, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "jump"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -35, -0.25, 0, 0.25, 0, -35, -0.25, 0, 0.25, 0, -35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 35, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "release"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "walk"
+loop = true
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.2, 0, 0.2, 0, -15, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, -15, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.05, 0, 0.05, 0, -12, -0.05, 0, 0.05, 0, 0, -0.05, 0, 0.05, 0, 12, -0.05, 0, 0.05, 0, 0, -0.05, 0, 0.05, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -25, -0.1, 0, 0.1, 0, -30, -0.25, 0, 0.25, 0, -25, -0.1, 0, 0.1, 0, -25, -0.25, 0, 0.25, 0, -25, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.1, 0, 0.1, 0, -10, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0, -25, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 25, -0.1, 0, 0.1, 0, 25, -0.25, 0, 0.25, 0, 25, -0.1, 0, 0.1, 0, 30, -0.25, 0, 0.25, 0, 25, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 5, -0.1, 0, 0.1, 0, -25, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0, -10, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+
+[sub_resource type="RectangleShape2D" id=20]
+resource_local_to_scene = true
+extents = Vector2( 150, 50 )
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -464,6 +914,452 @@ tracks/6/keys = {
 resource_local_to_scene = true
 extents = Vector2( 150, 50 )
 
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "idle"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -35, -0.25, 0, 0.25, 0, -25, -0.25, 0, 0.25, 0, -35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 35, -0.25, 0, 0.25, 0, 25, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "idle2"
+length = 1.2
+loop = true
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -30, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 30, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "jump"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -35, -0.25, 0, 0.25, 0, -35, -0.25, 0, 0.25, 0, -35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 35, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "release"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "walk"
+loop = true
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.2, 0, 0.2, 0, -15, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0, -15, -0.2, 0, 0.2, 0, 0, -0.2, 0, 0.2, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.05, 0, 0.05, 0, -12, -0.05, 0, 0.05, 0, 0, -0.05, 0, 0.05, 0, 12, -0.05, 0, 0.05, 0, 0, -0.05, 0, 0.05, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -25, -0.1, 0, 0.1, 0, -30, -0.25, 0, 0.25, 0, -25, -0.1, 0, 0.1, 0, -25, -0.25, 0, 0.25, 0, -25, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 5, -0.1, 0, 0.1, 0, -10, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0, -25, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 25, -0.1, 0, 0.1, 0, 25, -0.25, 0, 0.25, 0, 25, -0.1, 0, 0.1, 0, 30, -0.25, 0, 0.25, 0, 25, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 5, -0.1, 0, 0.1, 0, -25, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0, -10, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
+}
+
 [node name="Map" type="Node2D"]
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 2 )]
@@ -526,17 +1422,64 @@ scene_path = "res://src/map/worlds/1/7.tscn"
 [node name="NPC" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 350, 350 )
 
-[node name="NPC2" parent="Actors" instance=ExtResource( 5 )]
-position = Vector2( -150, 850 )
+[node name="NPC4" parent="Actors" instance=ExtResource( 5 )]
+position = Vector2( -550, 1150 )
 dir = 3
 dye = {
-"eye": 10,
-"fit": 15,
-"hair": 7,
-"skin": 16
+"eye": 15,
+"fit": 10,
+"hair": 11,
+"skin": 17
 }
-hairstyle_back = 6
-hairstyle_front = 8
+hairstyle_back = 0
+hairstyle_front = 2
+
+[node name="Areas" parent="Actors/NPC4" index="2"]
+rotation = 4.71239
+
+[node name="AnimationPlayer" parent="Actors/NPC4" index="3"]
+anims/RESET = SubResource( 14 )
+anims/idle = SubResource( 15 )
+anims/idle2 = SubResource( 16 )
+anims/jump = SubResource( 17 )
+anims/release = SubResource( 18 )
+anims/walk = SubResource( 19 )
+
+[node name="Sprites" parent="Actors/NPC4" index="4"]
+rotation = 4.71239
+
+[node name="Fit" parent="Actors/NPC4/Sprites/Root/Body" index="1"]
+modulate = Color( 0.576471, 0.14902, 1, 1 )
+
+[node name="Head" parent="Actors/NPC4/Sprites/Root/Body" index="2"]
+modulate = Color( 1, 0.675, 0.35, 1 )
+
+[node name="Eyes" parent="Actors/NPC4/Sprites/Root/Body" index="3"]
+modulate = Color( 1, 1, 0, 1 )
+
+[node name="Hands" parent="Actors/NPC4/Sprites" index="1"]
+modulate = Color( 1, 0.675, 0.35, 1 )
+
+[node name="Arrow" parent="Actors/NPC4/Sprites" index="3"]
+dir = 3
+
+[node name="CollisionShape2D" parent="Actors/NPC4/Sprites/Arrow/Area2D" index="0"]
+shape = SubResource( 20 )
+
+[node name="Chat" parent="Actors/NPC4/Sprites" index="4"]
+lines = [ "Be careful!", "These things are pretty pointy..", "I come here to admire the view", "I like the seclusion" ]
+
+[node name="NPC2" parent="Actors" instance=ExtResource( 5 )]
+position = Vector2( 1350, 1360 )
+dir = 3
+dye = {
+"eye": 4,
+"fit": 15,
+"hair": 12,
+"skin": 19
+}
+hairstyle_back = 2
+hairstyle_front = 7
 
 [node name="Areas" parent="Actors/NPC2" index="2"]
 rotation = 4.71239
@@ -553,22 +1496,16 @@ anims/walk = SubResource( 6 )
 rotation = 4.71239
 
 [node name="HairBack" parent="Actors/NPC2/Sprites/Root/Body" index="0"]
-modulate = Color( 0, 1, 1, 1 )
+modulate = Color( 1, 0, 0.498039, 1 )
 
 [node name="Fit" parent="Actors/NPC2/Sprites/Root/Body" index="1"]
 modulate = Color( 1, 1, 0, 1 )
 
-[node name="Head" parent="Actors/NPC2/Sprites/Root/Body" index="2"]
-modulate = Color( 1, 0.717647, 0.717647, 1 )
-
 [node name="Eyes" parent="Actors/NPC2/Sprites/Root/Body" index="3"]
-modulate = Color( 0.576471, 0.14902, 1, 1 )
+modulate = Color( 0.729412, 1, 0.25098, 1 )
 
 [node name="HairFront" parent="Actors/NPC2/Sprites/Root/Body" index="4"]
-modulate = Color( 0, 1, 1, 1 )
-
-[node name="Hands" parent="Actors/NPC2/Sprites" index="1"]
-modulate = Color( 1, 0.717647, 0.717647, 1 )
+modulate = Color( 1, 0, 0.498039, 1 )
 
 [node name="Arrow" parent="Actors/NPC2/Sprites" index="3"]
 dir = 3
@@ -577,6 +1514,7 @@ dir = 3
 shape = SubResource( 7 )
 
 [node name="Chat" parent="Actors/NPC2/Sprites" index="4"]
+lines = [ "Bing bong", "Doodly doo", "WEEOO WEEEOO!" ]
 dialog = "Haven't seen you before (:"
 
 [node name="Back" parent="Actors/NPC2/Sprites/Chat/Center" index="0"]
@@ -586,6 +1524,72 @@ text = "Haven't seen you before (:"
 percent_visible = 0.0454545
 
 [node name="Label" parent="Actors/NPC2/Sprites/Chat/Center" index="1"]
+margin_left = -287.0
+margin_right = 286.0
+text = "Haven't seen you before (:"
+percent_visible = 0.0
+
+[node name="NPC3" parent="Actors" instance=ExtResource( 5 )]
+position = Vector2( 1500, 450 )
+dir = 2
+dye = {
+"eye": 10,
+"fit": 15,
+"hair": 7,
+"skin": 16
+}
+hairstyle_back = 6
+hairstyle_front = 8
+
+[node name="Areas" parent="Actors/NPC3" index="2"]
+rotation = 3.14159
+
+[node name="AnimationPlayer" parent="Actors/NPC3" index="3"]
+anims/RESET = SubResource( 8 )
+anims/idle = SubResource( 9 )
+anims/idle2 = SubResource( 10 )
+anims/jump = SubResource( 11 )
+anims/release = SubResource( 12 )
+anims/walk = SubResource( 13 )
+
+[node name="Sprites" parent="Actors/NPC3" index="4"]
+rotation = 3.14159
+
+[node name="HairBack" parent="Actors/NPC3/Sprites/Root/Body" index="0"]
+modulate = Color( 0, 1, 1, 1 )
+
+[node name="Fit" parent="Actors/NPC3/Sprites/Root/Body" index="1"]
+modulate = Color( 1, 1, 0, 1 )
+
+[node name="Head" parent="Actors/NPC3/Sprites/Root/Body" index="2"]
+modulate = Color( 1, 0.717647, 0.717647, 1 )
+
+[node name="Eyes" parent="Actors/NPC3/Sprites/Root/Body" index="3"]
+modulate = Color( 0.576471, 0.14902, 1, 1 )
+
+[node name="HairFront" parent="Actors/NPC3/Sprites/Root/Body" index="4"]
+modulate = Color( 0, 1, 1, 1 )
+
+[node name="Hands" parent="Actors/NPC3/Sprites" index="1"]
+modulate = Color( 1, 0.717647, 0.717647, 1 )
+
+[node name="Arrow" parent="Actors/NPC3/Sprites" index="3"]
+dir = 2
+
+[node name="CollisionShape2D" parent="Actors/NPC3/Sprites/Arrow/Area2D" index="0"]
+shape = SubResource( 7 )
+
+[node name="Chat" parent="Actors/NPC3/Sprites" index="4"]
+lines = [ "Bing bong", "Doodly doo", "WEEOO WEEEOO!" ]
+dialog = "Haven't seen you before (:"
+
+[node name="Back" parent="Actors/NPC3/Sprites/Chat/Center" index="0"]
+margin_left = -287.0
+margin_right = 286.0
+text = "Haven't seen you before (:"
+percent_visible = 0.0454545
+
+[node name="Label" parent="Actors/NPC3/Sprites/Chat/Center" index="1"]
 margin_left = -287.0
 margin_right = 286.0
 text = "Haven't seen you before (:"
@@ -908,8 +1912,8 @@ position = Vector2( 1850, 400 )
 palette = 2
 
 [node name="Flower4" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 1500, 400 )
-rotation = 3.14159
+position = Vector2( 1600, 400 )
+rotation = 3.92699
 palette = 3
 
 [node name="TreeTop" parent="Details" instance=ExtResource( 9 )]
@@ -986,5 +1990,9 @@ palette = 4
 position = Vector2( 2250, 1200 )
 palette = 5
 
+[editable path="Actors/NPC4"]
+[editable path="Actors/NPC4/Sprites/Arrow"]
 [editable path="Actors/NPC2"]
 [editable path="Actors/NPC2/Sprites/Arrow"]
+[editable path="Actors/NPC3"]
+[editable path="Actors/NPC3/Sprites/Arrow"]

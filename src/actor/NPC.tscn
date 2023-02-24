@@ -49,10 +49,8 @@ z_as_relative = false
 script = ExtResource( 3 )
 dialog = "I do adore the flowers"
 is_show = false
-show_range = Vector2( -120, -150 )
 
 [node name="Triangle" type="Polygon2D" parent="Sprites/Chat" index="0"]
-position = Vector2( 0, 37.5 )
 scale = Vector2( 1e-05, 1e-05 )
 polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
 
@@ -60,10 +58,10 @@ polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
 texture = ExtResource( 7 )
 texture_offset = Vector2( 0, 50 )
 texture_scale = Vector2( 0, 1 )
-polygon = PoolVector2Array( 260, 0.0999985, 259.062, 8.42228, 256.296, 16.3273, 251.84, 23.4185, 245.919, 29.3405, 238.827, 33.7962, 230.922, 36.5623, 222.6, 37.5, -222.6, 37.5, -230.922, 36.5623, -238.827, 33.7962, -245.919, 29.3405, -251.84, 23.4185, -256.296, 16.3273, -259.062, 8.42228, -260, 0.0999952, -260, -0.100002, -259.062, -8.42228, -256.296, -16.3273, -251.841, -23.4185, -245.919, -29.3405, -238.827, -33.7962, -230.922, -36.5623, -222.6, -37.5, 222.6, -37.5, 230.922, -36.5623, 238.827, -33.7962, 245.919, -29.3405, 251.84, -23.4185, 256.296, -16.3273, 259.062, -8.42228, 260, -0.0999919 )
+polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
 script = ExtResource( 5 )
 is_baked = false
-size = Vector2( 260, 37.5 )
+size = Vector2( 0, 0 )
 radius = Plane( -2, -1, -1, -1 )
 
 [node name="Center" type="CenterContainer" parent="Sprites/Chat" index="2"]
@@ -82,7 +80,6 @@ custom_fonts/font = SubResource( 3 )
 text = "I do adore the flowers"
 align = 1
 valign = 2
-percent_visible = 1.27778
 
 [node name="Label" type="Label" parent="Sprites/Chat/Center" index="1"]
 margin_left = -240.0
@@ -94,7 +91,6 @@ custom_fonts/font = SubResource( 3 )
 text = "I do adore the flowers"
 align = 1
 valign = 2
-percent_visible = 1.22222
 
 [connection signal="turn" from="." to="Sprites/Arrow" method="turn"]
 [connection signal="activate" from="Sprites/Arrow" to="Sprites/Chat" method="_on_Arrow_activate"]
