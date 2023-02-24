@@ -26,9 +26,6 @@ idle_anim = "idle2"
 [node name="Areas" parent="." index="2"]
 visible = false
 
-[node name="Headband" parent="Sprites/Root/Body/Hat" index="0"]
-polygon = PoolVector2Array( 20, 1, 19.5981, 2.5, 18.5, 3.59808, 17, 4, -17, 4, -18.5, 3.59808, -19.5981, 2.5, -20, 1, -20, -1, -19.5981, -2.5, -18.5, -3.59808, -17, -4, 17, -4, 18.5, -3.59808, 19.5981, -2.5, 20, -0.999999 )
-
 [node name="Arrow" parent="Sprites" index="3" instance=ExtResource( 4 )]
 
 [node name="Area2D" parent="Sprites/Arrow" index="0"]

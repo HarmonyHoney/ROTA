@@ -75,7 +75,7 @@ scene_path = "res://src/map/worlds/2A/0_hub.tscn"
 gem_count = 15
 
 [node name="NPC" parent="Actors" instance=ExtResource( 19 )]
-position = Vector2( 3450, 2250 )
+position = Vector2( 3425, 2250 )
 dye = {
 "eye": 15,
 "fit": 7,
@@ -101,7 +101,7 @@ modulate = Color( 0.741176, 0.407843, 0.505882, 1 )
 shape = SubResource( 1 )
 
 [node name="Chat" parent="Actors/NPC/Sprites" index="4"]
-lines = [ "Where am I?", "What happened last night man?...", "I'm looking for my keys.." ]
+lines = [ "Where am I?", "What happened last night?...", "I'm looking for my keys..", "do you have any snacks?" ]
 
 [node name="Details" type="Node2D" parent="."]
 

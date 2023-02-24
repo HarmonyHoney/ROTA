@@ -1425,6 +1425,7 @@ position = Vector2( 350, 350 )
 [node name="NPC4" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( -550, 1150 )
 dir = 3
+idle_anim = "ponder"
 dye = {
 "eye": 15,
 "fit": 10,
@@ -1532,13 +1533,14 @@ percent_visible = 0.0
 [node name="NPC3" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 1500, 450 )
 dir = 2
+idle_anim = "handstand"
 dye = {
 "eye": 10,
 "fit": 15,
 "hair": 7,
 "skin": 16
 }
-hairstyle_back = 6
+hairstyle_back = 0
 hairstyle_front = 8
 
 [node name="Areas" parent="Actors/NPC3" index="2"]
@@ -1580,7 +1582,7 @@ dir = 2
 shape = SubResource( 7 )
 
 [node name="Chat" parent="Actors/NPC3/Sprites" index="4"]
-lines = [ "Bing bong", "Doodly doo", "WEEOO WEEEOO!" ]
+lines = [ "Feet are overrated", "I'm a hands on learner", "Look at life upside down", "I'm going for the record!", "Change your perspective!", "Head rush!", "*phew* let me catch my breath!", "hello" ]
 dialog = "Haven't seen you before (:"
 
 [node name="Back" parent="Actors/NPC3/Sprites/Chat/Center" index="0"]
