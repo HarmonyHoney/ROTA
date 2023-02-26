@@ -3,7 +3,7 @@ extends Node
 func act():
 	Cutscene.is_playing = true
 	Cam.set_process(false)
-	Cam.position += Vector2(0, -400)
+	Cam.global_position += Vector2(0, -400)
 	
 	if is_instance_valid(Shared.player):
 		var p = Shared.player

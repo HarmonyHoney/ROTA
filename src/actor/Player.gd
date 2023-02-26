@@ -18,15 +18,6 @@ onready var spr_hand_l := $Sprites/Hands/Left
 onready var spr_hand_r := $Sprites/Hands/Right
 onready var spr_hands := [spr_hand_l, spr_hand_r]
 
-onready var audio_grab := $Audio/Grab
-onready var audio_push := $Audio/Push
-onready var audio_turn := $Audio/Turn
-onready var audio_jump := $Audio/Jump
-onready var audio_land := $Audio/Land
-onready var audio_fallout := $Audio/FallOut
-onready var audio_spike := $Audio/Spike
-onready var audio_around := $Audio/Around
-
 export var dir := 0 setget set_dir
 signal turn
 signal turn_cam
@@ -134,7 +125,6 @@ func _enter_tree():
 	if get_parent() == Shared:
 		Shared.player = self
 	MenuPause.connect("closed", self, "unpause")
-	UI.connect("dialog_closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")
 	Wipe.connect("start", self, "wipe_start")
 	get_tree().connect("physics_frame", self, "physics_frame")
@@ -154,6 +144,12 @@ func _ready():
 		z_index -= 1
 		spr_hands_parent.z_index = 0
 		spr_easy.clock = spr_easy.time
+		
+		for i in ["Arrow", "Chat"]:
+			var n = get_node_or_null(i)
+			if n:
+				remove_child(n)
+				sprites.add_child(n)
 
 func wipe_start(arg):
 	if !is_npc:
@@ -163,7 +159,7 @@ func scene():
 	# go to last door
 	if is_instance_valid(Shared.door_in) and !is_npc:
 		var d = Shared.door_in
-		position = d.position
+		global_position = d.global_position
 		self.dir = d.dir
 		sprites.rotation = turn_to
 		turn_clock = turn_time
@@ -248,9 +244,9 @@ func _physics_process(delta):
 				spr_hand_l.global_position = hand_positions[0].linear_interpolate(p1, s)
 				spr_hand_r.global_position = hand_positions[1].linear_interpolate(p2, s)
 				
-				move(goal_start.linear_interpolate(goal_grab, s) - position, 0)
+				move(goal_start.linear_interpolate(goal_grab, s) - global_position, 0)
 			1:
-				goal.position = goal_grab.linear_interpolate(position + rot(Vector2(0, -100)), s)
+				goal.global_position = goal_grab.linear_interpolate(global_position + rot(Vector2(0, -100)), s)
 			
 		# next step
 		if goal_easy.is_complete:
@@ -288,10 +284,10 @@ func _physics_process(delta):
 			if push_clock < push_time:
 				push_clock = min(push_clock + delta, push_time)
 				
-				var hold_pos = box.position + rot(Vector2(88 * -dir_x, 50 - collider_size.y))
+				var hold_pos = box.global_position + rot(Vector2(88 * -dir_x, 50 - collider_size.y))
 				var smooth = smoothstep(0, 1, push_clock / push_time)
 				var move_to = push_from.linear_interpolate(hold_pos, smooth)
-				var diff = move_to - position
+				var diff = move_to - global_position
 				
 				move(diff, 0)
 				
@@ -311,7 +307,7 @@ func _physics_process(delta):
 					is_release = true
 				
 				# check distance
-				elif position.distance_to(box.position) > 125:
+				elif global_position.distance_to(box.global_position) > 125:
 					is_release = true
 				
 				# release button
@@ -322,12 +318,12 @@ func _physics_process(delta):
 				elif box.can_push and joy_q.x != 0:
 					if dir_x == joy_q.x or !box.test_tile(dir - joy_q.x, 2):
 						if box.start_push(dir - joy_q.x, joy_q.x):
-							push_from = position
+							push_from = global_position
 							push_clock = 0
 							push_dir = joy_q.x
 							
-							audio_push.pitch_scale = rand_range(0.7, 1.3)
-							audio_push.play()
+							
+							Audio.play("player_push", 0.7, 1.3)
 							#print("push successful")
 						#else:
 						#	print("push failed")
@@ -336,8 +332,7 @@ func _physics_process(delta):
 				elif box.can_spin and joy_q.y != 0:
 					box.dir += joy_q.y * -dir_x
 					
-					audio_turn.pitch_scale = rand_range(0.9, 1.3)
-					audio_turn.play()
+					Audio.play("player_turn", 0.9, 1.3)
 				
 				joy_q = Vector2.ZERO
 		
@@ -386,8 +381,8 @@ func _physics_process(delta):
 					velocity.y = jump_speed
 					jump_clock = 0.0
 					
-					audio_jump.pitch_scale = rand_range(0.9, 1.1)
-					audio_jump.play()
+					
+					Audio.play("player_jump", 0.9, 1.1)
 					
 					squish_from = Vector2(0.7, 1.3)
 					squish_clock = 0.0
@@ -412,7 +407,7 @@ func _physics_process(delta):
 						var check_x = sprites.to_local(box.global_position).x > 0
 						self.dir_x = 1 if check_x else -1
 						
-						push_from = position
+						push_from = global_position
 						push_clock = 0
 						push_dir = dir_x
 						
@@ -424,8 +419,7 @@ func _physics_process(delta):
 						
 						anim.stop()
 						
-						audio_grab.pitch_scale = rand_range(0.7, 1.3)
-						audio_grab.play()
+						Audio.play("player_grab", 0.7, 1.3)
 				
 			# in the air
 			else:
@@ -467,8 +461,7 @@ func _physics_process(delta):
 	# air clock
 	if is_floor:
 		if air_clock > 0.4:
-			audio_land.pitch_scale = rand_range(0.7, 1.1)
-			audio_land.play()
+			Audio.play("player_land", 0.7, 1.1)
 
 			squish_from = Vector2(1.3, 0.7)
 			squish_clock = 0.0
@@ -625,7 +618,6 @@ func move(_vel := Vector2.ZERO, _dir := dir):
 	# Floor
 	is_floor = is_y and _vel.y > 0
 	if is_floor:
-		velocity.y = 0
 		has_jumped = false
 
 func walk_around(right := false):
@@ -633,8 +625,7 @@ func walk_around(right := false):
 	self.dir += 1 if right else 3
 	velocity.x = (walk_speed if right else -walk_speed) * 0.72
 	
-	audio_around.pitch_scale = rand_range(0.9, 1.3)
-	audio_around.play()
+	Audio.play("player_around", 0.9, 1.3)
 
 ### Area
 
@@ -647,8 +638,8 @@ func _on_BodyArea_area_entered(area):
 		goal = p
 		goal.is_collected = true
 		goal.z_index = z_index + 1
-		goal_grab = goal.position
-		goal_start = position
+		goal_grab = goal.global_position
+		goal_start = global_position
 		goal_step = 0
 		goal_easy.time = goal_times[0]
 		
@@ -681,8 +672,8 @@ func die():
 		box_release()
 	anim.play("jump")
 	
-	audio_spike.play()
-	audio_fallout.play()
+	Audio.play("player_spike")
+	Audio.play("player_fallout")
 
 func box_release():
 	is_hold = false
@@ -701,8 +692,7 @@ func box_release():
 	
 	release_anim()
 	
-	audio_grab.pitch_scale = rand_range(0.7, 1.3)
-	audio_grab.play()
+	Audio.play("player_grab", 0.7, 1.3)
 	
 	release_clock = release_time
 

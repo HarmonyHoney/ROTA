@@ -33,7 +33,7 @@ func _physics_process(delta):
 	
 	# follow target
 	if is_instance_valid(target):
-		position = position.linear_interpolate(target.position + target.rot(Vector2.UP * 20), 6.0 * delta)
+		global_position = global_position.linear_interpolate(target.global_position + target.rot(Vector2.UP * 20), 6.0 * delta)
 
 func cheat_code(cheat):
 	if "konami" in cheat:

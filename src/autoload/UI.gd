@@ -15,11 +15,6 @@ onready var clock_best := $Control/Clock/Down/Best
 onready var clock_goal := $Control/Clock/Down/Goal
 onready var clock_ease := EaseMover.new()
 
-signal dialog_accept
-signal dialog_bye
-signal dialog_closed
-
-
 func _ready():
 	Shared.connect("scene_changed", self, "scene_changed")
 	

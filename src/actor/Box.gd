@@ -70,11 +70,11 @@ func _ready():
 	turn_ease.clock = 99
 	
 	# snap to grid
-	position = (Vector2.ONE * tile / 2) + (position / tile).floor() * tile
+	global_position = (Vector2.ONE * tile / 2) + (global_position / tile).floor() * tile
 	
 	# vars for respawn
 	start_dir = dir
-	start_pos = position
+	start_pos = global_position
 	
 	# check floor
 	is_floor = test_tile(dir, 1)
@@ -185,25 +185,25 @@ func test_tile(check_dir := dir, distance := 1) -> bool:
 	shrink_shape(false)
 	
 	if !result:
-		var check_pos = position + vec
+		var check_pos = global_position + vec
 		check_pos = Vector2(stepify(check_pos.x, 50), stepify(check_pos.y, 50))
 		
 		for i in Shared.boxes:
 			if i != self:
-				if check_pos == i.position:
+				if check_pos == i.global_position:
 					result = true
 					break
 	
 	return result
 
 func move_tile(move_dir := dir, distance := 1):
-	var last_pos = position
-	position += rot(Vector2.DOWN * distance * tile, move_dir)
-	position = Vector2(stepify(position.x, 50), stepify(position.y, 50))
+	var last_pos = global_position
+	global_position += rot(Vector2.DOWN * distance * tile, move_dir)
+	global_position = Vector2(stepify(global_position.x, 50), stepify(global_position.y, 50))
 	#print(name, ": ", last_pos, " - ", position)
 	
 	# move sprite
-	sprite.position -= position - last_pos
+	sprite.position -= global_position - last_pos
 	move_from = sprite.position
 
 # start push at first box in line
@@ -246,7 +246,7 @@ func fall_out():
 		is_respawn = true
 		
 		set_dir(start_dir)
-		position = start_pos
+		global_position = start_pos
 		sprite.position = Vector2.ZERO
 		turn_ease.clock = 0.0
 		respawn_ease.clock = 0.0

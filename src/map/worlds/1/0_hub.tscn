@@ -1470,6 +1470,19 @@ shape = SubResource( 20 )
 [node name="Chat" parent="Actors/NPC4/Sprites" index="4"]
 lines = [ "Be careful!", "These things are pretty pointy..", "I come here to admire the view", "I like the seclusion" ]
 
+[node name="Triangle" parent="Actors/NPC4/Sprites/Chat" index="0"]
+position = Vector2( 0, 0 )
+
+[node name="Rect" parent="Actors/NPC4/Sprites/Chat" index="1"]
+polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+size = Vector2( 0, 0 )
+
+[node name="Back" parent="Actors/NPC4/Sprites/Chat/Center" index="0"]
+percent_visible = 1.0
+
+[node name="Label" parent="Actors/NPC4/Sprites/Chat/Center" index="1"]
+percent_visible = 1.0
+
 [node name="NPC2" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 1350, 1360 )
 dir = 3
@@ -1517,6 +1530,13 @@ shape = SubResource( 7 )
 [node name="Chat" parent="Actors/NPC2/Sprites" index="4"]
 lines = [ "Bing bong", "Doodly doo", "WEEOO WEEEOO!" ]
 dialog = "Haven't seen you before (:"
+
+[node name="Triangle" parent="Actors/NPC2/Sprites/Chat" index="0"]
+position = Vector2( 0, 0 )
+
+[node name="Rect" parent="Actors/NPC2/Sprites/Chat" index="1"]
+polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+size = Vector2( 0, 0 )
 
 [node name="Back" parent="Actors/NPC2/Sprites/Chat/Center" index="0"]
 margin_left = -287.0
@@ -1584,6 +1604,13 @@ shape = SubResource( 7 )
 [node name="Chat" parent="Actors/NPC3/Sprites" index="4"]
 lines = [ "Feet are overrated", "I'm a hands on learner", "Look at life upside down", "I'm going for the record!", "Change your perspective!", "Head rush!", "*phew* let me catch my breath!", "hello" ]
 dialog = "Haven't seen you before (:"
+
+[node name="Triangle" parent="Actors/NPC3/Sprites/Chat" index="0"]
+position = Vector2( 0, 0 )
+
+[node name="Rect" parent="Actors/NPC3/Sprites/Chat" index="1"]
+polygon = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
+size = Vector2( 0, 0 )
 
 [node name="Back" parent="Actors/NPC3/Sprites/Chat/Center" index="0"]
 margin_left = -287.0

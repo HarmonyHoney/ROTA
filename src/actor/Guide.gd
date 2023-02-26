@@ -35,5 +35,5 @@ func place():
 		
 		if is_instance_valid(box):
 			rotation = box.sprite.rotation
-			position = box.sprite.global_position
+			global_position = box.sprite.global_position
 			scale.x = box.sprite.scale.x

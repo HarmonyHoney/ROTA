@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -12,6 +12,13 @@
 [ext_resource path="res://media/audio/sfx/ziherette1.wav" type="AudioStream" id=10]
 [ext_resource path="res://media/audio/sfx/jump4.wav" type="AudioStream" id=11]
 [ext_resource path="res://media/audio/sfx/portal0.wav" type="AudioStream" id=12]
+[ext_resource path="res://media/audio/sfx/sfx4.wav" type="AudioStream" id=13]
+[ext_resource path="res://media/audio/sfx/fallout3.wav" type="AudioStream" id=14]
+[ext_resource path="res://media/audio/sfx/jump3.wav" type="AudioStream" id=15]
+[ext_resource path="res://media/audio/sfx/slap2.wav" type="AudioStream" id=16]
+[ext_resource path="res://media/audio/sfx/player_land.wav" type="AudioStream" id=17]
+[ext_resource path="res://media/audio/sfx/player_jump.wav" type="AudioStream" id=18]
+[ext_resource path="res://media/audio/sfx/btn3.wav" type="AudioStream" id=19]
 
 [node name="Audio" type="Node"]
 script = ExtResource( 1 )
@@ -76,4 +83,50 @@ bus = "SFX"
 [node name="Zoom" type="AudioStreamPlayer" parent="Cam"]
 pause_mode = 2
 stream = ExtResource( 11 )
+bus = "SFX"
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Grab" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 19 )
+bus = "SFX"
+
+[node name="Drop" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 13 )
+bus = "SFX"
+
+[node name="Push" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 8 )
+volume_db = -5.0
+bus = "SFX"
+
+[node name="Turn" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 4 )
+volume_db = -5.0
+bus = "SFX"
+
+[node name="Jump" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 18 )
+bus = "SFX"
+
+[node name="Land" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 17 )
+bus = "SFX"
+
+[node name="FallOut" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 14 )
+bus = "SFX"
+
+[node name="Spike" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 16 )
+bus = "SFX"
+
+[node name="Around" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 15 )
+volume_db = -7.0
+bus = "SFX"
+
+[node name="Peek" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 13 )
+volume_db = -7.0
 bus = "SFX"

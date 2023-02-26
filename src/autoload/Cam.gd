@@ -3,7 +3,7 @@ extends Camera2D
 signal turning(angle)
 
 var target_node setget set_target_node
-onready var target_pos := position
+onready var target_pos := global_position
 var is_rotating := true
 var is_moving := true
 
@@ -102,10 +102,10 @@ func reset_zoom():
 
 func scene_changed():
 	if is_instance_valid(target_node):
-		snap_to(target_node.position, target_node.turn_to)
+		snap_to(target_node.global_position, target_node.turn_to)
 
 func snap_to(pos, turn):
-	position = pos
+	global_position = pos
 	target_pos = pos
 	turn_from = turn
 	turn_to = turn

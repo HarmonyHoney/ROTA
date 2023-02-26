@@ -49,12 +49,12 @@ func random():
 		if i.is_in_group("color") or i.is_in_group("hair"):
 			i.cursor = l.pop_back() if i.is_in_group("color") else randi() % (i.count + 1)
 
-func outfit(l := pale, is_change := true):
+func outfit(l := pale):
 	for i in l.size():
 		items[i].cursor = l[i]
 
 func match_player():
-	outfit([player.hairstyle_front, player.hairstyle_back, player.dye["hair"], player.dye["eye"], player.dye["skin"], player.dye["fit"]], false)
+	outfit([player.hairstyle_front, player.hairstyle_back, player.dye["hair"], player.dye["eye"], player.dye["skin"], player.dye["fit"]])
 
 func preset():
 	var h = [[0,8], [1,9], [2,3], [2,7], [3,2], [3,4], [4,1], [5,1], [6,5]]
