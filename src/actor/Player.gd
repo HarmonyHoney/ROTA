@@ -115,10 +115,18 @@ export (Array, String, FILE) var hair_fronts := []
 export var hairstyle_back := 0 setget set_hair_back
 export var hairstyle_front := 0 setget set_hair_front
 
+onready var hat_node := $Sprites/Root/Body/Hat
+export (Array, String, FILE) var hats := []
+export var hat := 0 setget set_hat
+
 var blink_ease := EaseMover.new(0.2)
 var blink_clock := 0.0
 var blink_time := 10.0
 var blink_range := Vector2(1, 20)
+
+export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Haven't seen you before (:"] setget set_lines
+export (String, MULTILINE) var queue_write := "" setget set_queue_write
+onready var chat := get_node_or_null("Sprites/Chat")
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -132,6 +140,8 @@ func _enter_tree():
 func _ready():
 	set_hair_back()
 	set_hair_front()
+	set_dye()
+	set_hat()
 	if Engine.editor_hint: return
 	solve_jump()
 	
@@ -144,12 +154,8 @@ func _ready():
 		z_index -= 1
 		spr_hands_parent.z_index = 0
 		spr_easy.clock = spr_easy.time
-		
-		for i in ["Arrow", "Chat"]:
-			var n = get_node_or_null(i)
-			if n:
-				remove_child(n)
-				sprites.add_child(n)
+		set_lines()
+		set_queue_write()
 
 func wipe_start(arg):
 	if !is_npc:
@@ -548,7 +554,7 @@ func solve_jump():
 	jump_speed = -jump_gravity * jump_time
 	fall_gravity = jump_gravity * 2.0
 
-func set_dye(arg):
+func set_dye(arg := dye):
 	dye = arg
 	for i in dye.keys():
 		dye[i] = posmod(dye[i], palette.size())
@@ -582,6 +588,27 @@ func set_hair_front(arg := hairstyle_front):
 			hair_front.add_child(h)
 			for i in h.get_children():
 				connect("scale_x", i, "scale_x")
+
+func set_hat(arg := hat):
+	hat = posmod(arg, hats.size())
+	
+	if hat_node:
+		for i in hat_node.get_children():
+			i.queue_free()
+		
+		if hat > 0:
+			var h = load(hats[hat]).instance()
+			hat_node.add_child(h)
+			for i in h.get_children():
+				connect("scale_x", i, "scale_x")
+
+func set_queue_write(arg := queue_write):
+	queue_write = arg
+	if chat: chat.queue_write = queue_write
+
+func set_lines(arg := lines):
+	lines = arg
+	if chat: chat.lines = lines
 
 ### Movement
 

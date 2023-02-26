@@ -629,6 +629,7 @@ hair_backs = [ "", "res://src/actor/hair/back/Short.tscn", "res://src/actor/hair
 hair_fronts = [ "", "res://src/actor/hair/front/OneShort.tscn", "res://src/actor/hair/front/OneLong.tscn", "res://src/actor/hair/front/TwoShort.tscn", "res://src/actor/hair/front/TwoLong.tscn", "res://src/actor/hair/front/Bun.tscn", "res://src/actor/hair/front/Buns.tscn", "res://src/actor/hair/front/Mohawk.tscn", "res://src/actor/hair/front/FlatTop.tscn", "res://src/actor/hair/front/Bangs.tscn" ]
 hairstyle_back = 5
 hairstyle_front = 1
+hats = [ "", "res://src/actor/hat/Candle.tscn" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -738,18 +739,8 @@ modulate = Color( 1, 0, 1, 1 )
 position = Vector2( 0, -25 )
 
 [node name="Hat" type="Node2D" parent="Sprites/Root/Body"]
-visible = false
+position = Vector2( 0, -25 )
 z_index = 2
-
-[node name="Headband" type="Polygon2D" parent="Sprites/Root/Body/Hat"]
-position = Vector2( 0, -38 )
-z_index = 2
-polygon = PoolVector2Array( 20, 1, 19.5981, 2.5, 18.5, 3.59808, 17, 4, -17, 4, -18.5, 3.59808, -19.5981, 2.5, -20, 1, -20, -1, -19.5981, -2.5, -18.5, -3.59808, -17, -4, 17, -4, 18.5, -3.59808, 19.5981, -2.5, 20, -0.999999 )
-script = ExtResource( 1 )
-is_baked = false
-size = Vector2( 20, 4 )
-radius = Plane( 3, -1, -1, -1 )
-points = 4
 
 [node name="Hands" type="Node2D" parent="Sprites"]
 modulate = Color( 0.478431, 0.25098, 0.423529, 1 )

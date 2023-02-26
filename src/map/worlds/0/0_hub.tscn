@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/detail/BarrelCacti.tscn" type="PackedScene" id=2]
@@ -19,10 +19,6 @@
 [ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/actor/NPC.tscn" type="PackedScene" id=19]
-
-[sub_resource type="RectangleShape2D" id=1]
-resource_local_to_scene = true
-extents = Vector2( 150, 50 )
 
 [node name="Map" type="Node2D"]
 
@@ -84,23 +80,6 @@ dye = {
 }
 hairstyle_back = 0
 hairstyle_front = 7
-
-[node name="Fit" parent="Actors/NPC/Sprites/Root/Body" index="1"]
-modulate = Color( 0, 1, 1, 1 )
-
-[node name="Head" parent="Actors/NPC/Sprites/Root/Body" index="2"]
-modulate = Color( 0.741176, 0.407843, 0.505882, 1 )
-
-[node name="Eyes" parent="Actors/NPC/Sprites/Root/Body" index="3"]
-modulate = Color( 1, 1, 0, 1 )
-
-[node name="Hands" parent="Actors/NPC/Sprites" index="1"]
-modulate = Color( 0.741176, 0.407843, 0.505882, 1 )
-
-[node name="CollisionShape2D" parent="Actors/NPC/Sprites/Arrow/Area2D" index="0"]
-shape = SubResource( 1 )
-
-[node name="Chat" parent="Actors/NPC/Sprites" index="4"]
 lines = [ "Where am I?", "What happened last night?...", "I'm looking for my keys..", "do you have any snacks?" ]
 
 [node name="Details" type="Node2D" parent="."]
@@ -300,6 +279,3 @@ palette = 2
 position = Vector2( 3650, 2150 )
 z_index = -4
 palette = 5
-
-[editable path="Actors/NPC"]
-[editable path="Actors/NPC/Sprites/Arrow"]

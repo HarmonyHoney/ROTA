@@ -11,9 +11,10 @@ export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the f
 export (String, MULTILINE) var queue_write := "" setget set_queue_write
 var queue := []
 
-export (String, MULTILINE) var dialog := "Lovely Day!" setget set_dialog
+export (String, MULTILINE) var dialog := "I do adore the flowers" setget set_dialog
 
-export var is_show := true
+export var is_editor := false
+export var is_show := false
 export var panel_grow := Vector2(20, 17)
 export var show_range := Vector2(-120, -150)
 
@@ -28,13 +29,18 @@ var panel_easy := EaseMover.new(0.3)
 var key_up := false
 var key_hold := false
 
-func _ready():
-	pass
+var last := -1.0
+
 
 func _physics_process(delta):
+	if Engine.editor_hint and !is_editor: return
+	
 	var s = show_easy.count(delta, is_show)
-	modulate.a = s
-	position.y = lerp(show_range.x, show_range.y, s)
+	if s != last:
+		modulate.a = s
+		position.y = lerp(show_range.x, show_range.y, s)
+	last = s
+	
 	if rect and triangle:
 		if panel_easy.clock < panel_easy.time:
 			rect.size = panel_easy.move(delta, is_show)
@@ -70,7 +76,7 @@ func _physics_process(delta):
 		if !is_show:
 			if arrow: arrow.is_locked = false
 
-func set_queue_write(arg):
+func set_queue_write(arg := queue_write):
 	queue_write = arg
 	queue = queue_write.split_floats(",", false)
 
