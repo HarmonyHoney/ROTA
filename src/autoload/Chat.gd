@@ -1,26 +1,28 @@
 tool
 extends Node2D
 
-onready var label_back := $Center/Back
-onready var label := $Center/Label
-onready var rect := $Rect
-onready var triangle := $Triangle
+onready var bubble := $Bubble
+onready var label_back := $Bubble/Center/Back
+onready var label := $Bubble/Center/Label
+onready var rect := $Bubble/Rect
+onready var triangle := $Bubble/Triangle
 onready var arrow := $"../Arrow"
 
 export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Haven't seen you before (:"]
 export (String, MULTILINE) var queue_write := "" setget set_queue_write
-var queue := []
-
 export (String, MULTILINE) var dialog := "I do adore the flowers" setget set_dialog
 
 export var is_editor := false
 export var is_show := false
 export var panel_grow := Vector2(20, 17)
-export var show_range := Vector2(-120, -150)
+export var show_range := Vector2(0, -30)
 
+var line := -1
+var queue := []
 var cursor := 0
 var read_clock := 0.0
 var read_time := 2.0
+var last_s := -1.0
 
 var easy := EaseMover.new(0.05)
 var show_easy := EaseMover.new()
@@ -29,17 +31,19 @@ var panel_easy := EaseMover.new(0.3)
 var key_up := false
 var key_hold := false
 
-var last := -1.0
-
+func _ready():
+	arrow.connect("activate", self, "_on_Arrow_activate")
+	arrow.connect("open", self, "_on_Arrow_open")
 
 func _physics_process(delta):
 	if Engine.editor_hint and !is_editor: return
 	
 	var s = show_easy.count(delta, is_show)
-	if s != last:
+	if s != last_s:
 		modulate.a = s
-		position.y = lerp(show_range.x, show_range.y, s)
-	last = s
+		if bubble:
+			bubble.position.y = lerp(show_range.x, show_range.y, s)
+	last_s = s
 	
 	if rect and triangle:
 		if panel_easy.clock < panel_easy.time:
@@ -107,9 +111,11 @@ func _on_Arrow_open():
 		if queue.size() == 0:
 			queue = range(lines.size())
 			queue.shuffle()
+			queue.erase(line)
 		
 		if rect: rect.size = Vector2.ONE * 35
-		set_dialog(lines[int(queue.pop_front())])
+		line = int(queue.pop_front())
+		set_dialog(lines[line])
 
 func _on_Arrow_activate():
 	pass

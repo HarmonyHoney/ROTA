@@ -127,6 +127,7 @@ var blink_range := Vector2(1, 20)
 export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Haven't seen you before (:"] setget set_lines
 export (String, MULTILINE) var queue_write := "" setget set_queue_write
 onready var chat := get_node_or_null("Sprites/Chat")
+export var chat_offset := Vector2(0, -120) setget set_chat_offset
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -142,6 +143,7 @@ func _ready():
 	set_hair_front()
 	set_dye()
 	set_hat()
+	set_chat_offset()
 	if Engine.editor_hint: return
 	solve_jump()
 	
@@ -599,8 +601,8 @@ func set_hat(arg := hat):
 		if hat > 0:
 			var h = load(hats[hat]).instance()
 			hat_node.add_child(h)
-			for i in h.get_children():
-				connect("scale_x", i, "scale_x")
+#			for i in h.get_children():
+#				connect("scale_x", i, "scale_x")
 
 func set_queue_write(arg := queue_write):
 	queue_write = arg
@@ -609,6 +611,13 @@ func set_queue_write(arg := queue_write):
 func set_lines(arg := lines):
 	lines = arg
 	if chat: chat.lines = lines
+
+func set_chat_offset(arg := chat_offset):
+	chat_offset = arg
+	print(chat_offset)
+	if chat: chat.position = chat_offset
+	var a = get_node_or_null("Sprites/Arrow/Image")
+	if a: a.position = chat_offset
 
 ### Movement
 
