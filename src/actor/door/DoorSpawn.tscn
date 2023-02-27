@@ -1,23 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://src/actor/door/DoorBase.tscn" type="PackedScene" id=1]
-
-[sub_resource type="RectangleShape2D" id=1]
-resource_local_to_scene = true
-extents = Vector2( 40, 50 )
 
 [node name="Spawn" instance=ExtResource( 1 )]
 scene_path = "spawn"
 
 [node name="Arrow" parent="." index="0"]
-z_index = 0
-is_locked = true
-
-[node name="CollisionShape2D" parent="Arrow/Area2D" index="0"]
-shape = SubResource( 1 )
-
-[node name="Image" parent="Arrow" index="1"]
 modulate = Color( 0, 1, 0, 1 )
-position = Vector2( 0, 0 )
-
-[editable path="Arrow"]
+z_index = 0
+image_pos = Vector2( 0, 0 )

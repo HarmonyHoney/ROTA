@@ -3,9 +3,14 @@ extends Node2D
 class_name Arrow
 
 export var dir := 0
+export var col_size := Vector2(40, 50) setget set_col_size
+export var col_pos := Vector2(0, 0) setget set_col_pos
+export var image_pos := Vector2(0, -95) setget set_image_pos
 
 onready var image := $Image
 onready var mat : ShaderMaterial = $Image/Rect.material
+onready var area := $Area2D
+onready var col_shape := $Area2D/CollisionShape2D
 
 var player = null
 var body = null
@@ -26,9 +31,13 @@ signal activate
 signal open
 
 func _ready():
-	if Engine.editor_hint: return
-	player = Shared.player
+	set_col_size()
+	set_col_pos()
+	set_image_pos()
 	
+	if Engine.editor_hint: return
+	
+	player = Shared.player
 	image.modulate.a = 0.0
 	mat.set_shader_param("fill_y", 0.0)
 
@@ -58,6 +67,18 @@ func _physics_process(delta):
 		
 		if open_clock == open_time and open_last != open_time:
 			emit_signal("open")
+
+func set_col_size(arg := col_size):
+	col_size = arg
+	if col_shape: col_shape.shape.extents = col_size
+
+func set_col_pos(arg := col_pos):
+	col_pos = arg
+	if area: area.position = col_pos
+
+func set_image_pos(arg := image_pos):
+	image_pos = arg
+	if image: image.position = image_pos
 
 func _on_Area2D_body_entered(_body):
 	body = _body

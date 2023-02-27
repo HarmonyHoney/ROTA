@@ -21,7 +21,7 @@ onready var spr_hands := [spr_hand_l, spr_hand_r]
 export var dir := 0 setget set_dir
 signal turn
 signal turn_cam
-export var is_input := true
+export var is_input := false
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
 var joy_q := Vector2.ZERO
@@ -35,9 +35,6 @@ var jump_buffer := 0.3
 var btn_push := false
 var btnp_push := false
 
-export var is_cam := true
-export var is_npc := false
-
 var is_move := true
 var is_walk := true
 var is_floor := false
@@ -49,8 +46,8 @@ var idle_dir := "idle"
 export var idle_anim := "idle"
 
 var walk_speed := 350.0
-var floor_accel := 12
-var air_accel := 7
+var floor_accel := 12.0
+var air_accel := 7.0
 
 var is_jump := false
 var has_jumped := true
@@ -124,9 +121,11 @@ var blink_clock := 0.0
 var blink_time := 10.0
 var blink_range := Vector2(1, 20)
 
+export var is_npc := false
 export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Haven't seen you before (:"] setget set_lines
 export (String, MULTILINE) var queue_write := "" setget set_queue_write
 onready var chat := get_node_or_null("Sprites/Chat")
+onready var arrow := get_node_or_null("Sprites/Arrow")
 export var chat_offset := Vector2(0, -120) setget set_chat_offset
 
 func _enter_tree():
@@ -175,15 +174,15 @@ func scene():
 	velocity = Vector2.ZERO
 	joy_last = Vector2.ZERO
 	joy = Vector2.ZERO
+	is_floor = false
 	is_jump = true
 	is_dead = false
 	sprites.position = Vector2.ZERO
 	
 	# snap to floor
-	var test = rot(Vector2.DOWN * 150)
-	if test_move(transform, test):
-		move_and_collide(test)
-		is_floor = true
+	var v = Vector2.DOWN * 150
+	if test_move(transform, rot(v)):
+		move(v)
 		anim.play(idle_dir)
 	else:
 		anim.play("jump")
@@ -567,42 +566,27 @@ func set_dye(arg := dye):
 
 func set_hair_back(arg := hairstyle_back):
 	hairstyle_back = posmod(arg, hair_backs.size())
-	
-	if hair_back:
-		for i in hair_back.get_children():
-			i.queue_free()
-		
-		if hairstyle_back > 0:
-			var h = load(hair_backs[hairstyle_back]).instance()
-			hair_back.add_child(h)
-			for i in h.get_children():
-				connect("scale_x", i, "scale_x")
+	hairdo(hair_back, hair_backs, hairstyle_back)
 
 func set_hair_front(arg := hairstyle_front):
 	hairstyle_front = posmod(arg, hair_fronts.size())
-	
-	if hair_front:
-		for i in hair_front.get_children():
+	hairdo(hair_front, hair_fronts, hairstyle_front)
+
+func hairdo(node, array, style):
+	if node:
+		for i in node.get_children():
 			i.queue_free()
 		
-		if hairstyle_front > 0:
-			var h = load(hair_fronts[hairstyle_front]).instance()
-			hair_front.add_child(h)
+		if style > 0:
+			var h = load(array[style]).instance()
+			node.add_child(h)
 			for i in h.get_children():
-				connect("scale_x", i, "scale_x")
+				if i.has_method("scale_x"):
+					connect("scale_x", i, "scale_x")
 
 func set_hat(arg := hat):
 	hat = posmod(arg, hats.size())
-	
-	if hat_node:
-		for i in hat_node.get_children():
-			i.queue_free()
-		
-		if hat > 0:
-			var h = load(hats[hat]).instance()
-			hat_node.add_child(h)
-#			for i in h.get_children():
-#				connect("scale_x", i, "scale_x")
+	hairdo(hat_node, hats, hat)
 
 func set_queue_write(arg := queue_write):
 	queue_write = arg
@@ -614,10 +598,8 @@ func set_lines(arg := lines):
 
 func set_chat_offset(arg := chat_offset):
 	chat_offset = arg
-	print(chat_offset)
 	if chat: chat.position = chat_offset
-	var a = get_node_or_null("Sprites/Arrow/Image")
-	if a: a.position = chat_offset
+	if arrow: arrow.image_pos = chat_offset
 
 ### Movement
 

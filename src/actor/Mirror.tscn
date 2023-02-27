@@ -1,13 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/actor/Mirror.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/door/Arrow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/shader/sky_screen.gdshader" type="Shader" id=3]
 [ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=4]
-
-[sub_resource type="RectangleShape2D" id=1]
-resource_local_to_scene = true
-extents = Vector2( 75, 100 )
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 3 )
@@ -31,12 +27,8 @@ offset = Vector2( 70, 0 )
 hide_distance = 100.0
 
 [node name="Arrow" parent="." instance=ExtResource( 2 )]
-
-[node name="CollisionShape2D" parent="Arrow/Area2D" index="0"]
-shape = SubResource( 1 )
-
-[node name="Image" parent="Arrow" index="1"]
-position = Vector2( 0, -170 )
+col_size = Vector2( 75, 100 )
+image_pos = Vector2( 0, -170 )
 
 [node name="Back" type="Polygon2D" parent="."]
 material = SubResource( 5 )
@@ -111,5 +103,3 @@ script = ExtResource( 4 )
 size = Vector2( 1000, 1000 )
 
 [connection signal="open" from="Arrow" to="." method="_on_Arrow_open"]
-
-[editable path="Arrow"]

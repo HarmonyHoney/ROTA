@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/actor/door/DoorBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://media/font/profile/DoorLabel.tres" type="DynamicFont" id=2]
@@ -6,9 +6,6 @@
 [ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=5]
 [ext_resource path="res://src/shader/door_big.gdshader" type="Shader" id=7]
 [ext_resource path="res://media/image/box/round_rect100.png" type="Texture" id=8]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 100, 100 )
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
@@ -31,14 +28,9 @@ script = ExtResource( 4 )
 audio_range = Vector2( 0.7, 0.9 )
 gem_count = 0
 
-[node name="Area2D" parent="Arrow" index="0"]
-collision_layer = 0
-
-[node name="CollisionShape2D" parent="Arrow/Area2D" index="0"]
-shape = SubResource( 1 )
-
-[node name="Image" parent="Arrow" index="1"]
-position = Vector2( 0, -150 )
+[node name="Arrow" parent="." index="0"]
+col_size = Vector2( 100, 100 )
+image_pos = Vector2( 0, -150 )
 
 [node name="Sprites" type="Node2D" parent="." index="1"]
 
@@ -89,5 +81,3 @@ custom_fonts/font = ExtResource( 2 )
 text = "0"
 align = 1
 valign = 1
-
-[editable path="Arrow"]

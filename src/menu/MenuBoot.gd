@@ -8,6 +8,7 @@ func _ready():
 	Cam.target_node = null
 	Cam.snap_to(main_menu.pos, 0)
 	Shared.save_slot = -1
+	Shared.player.is_input = false
 	randomize()
 	MenuMakeover.preset()
 	
@@ -18,6 +19,7 @@ func _ready():
 func _exit_tree():
 	UI.keys.show = false
 	Cam.target_node = Shared.player
+	Shared.player.is_input = true
 
 func accept():
 	sub_menu(main_menu)

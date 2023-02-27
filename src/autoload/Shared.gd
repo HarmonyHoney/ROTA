@@ -1,5 +1,7 @@
 extends Node
 
+export var is_debug := false
+
 var splash_path := "res://src/menu/Splash.tscn"
 var title_path := "res://src/menu/MenuTitle.tscn"
 var worlds_path := "res://src/map/worlds/"
@@ -154,14 +156,15 @@ func _input(event):
 			emit_signal("gamepad_input", is_gamepad)
 			print("gamepad_input: ", is_gamepad)
 	
-#	if event.is_action_pressed("debug_screenshot"):
-#		burst_screenshot(15)
-#
-#	if event.is_action_pressed("debug_home"):
-#		wipe_scene("res://src/map/worlds/0/0_hub.tscn")
-#
-#	if event.is_action_pressed("debug_makeover"):
-#		MenuMakeover.is_open = !MenuMakeover.is_open
+	if is_debug:
+		if event.is_action_pressed("debug_screenshot"):
+			burst_screenshot(15)
+
+		if event.is_action_pressed("debug_warp"):
+			wipe_scene("res://src/map/worlds/0/0_hub.tscn")
+
+		if event.is_action_pressed("debug_makeover"):
+			MenuMakeover.is_open = !MenuMakeover.is_open
 
 func _physics_process(delta):
 	# recorded time
@@ -365,7 +368,7 @@ func list_all_files(path, is_ext := true):
 func list_folders_and_files(path, is_ext := true):
 	var dir = Directory.new()
 	if dir.open(path) != OK:
-		print("list_folder(): '", path, "' not found")
+		print("list_folders_and_files(): '", path, "' not found")
 		return
 	
 	dir.list_dir_begin(true)
@@ -545,10 +548,11 @@ func load_keys(path := "user://keys.tres"):
 	
 	if r is SaveDict:
 		for a in r.dict.keys():
-			InputMap.action_erase_events(a)
-			
-			for e in r.dict[a]:
-				InputMap.action_add_event(a, e)
+			if InputMap.has_action(a):
+				InputMap.action_erase_events(a)
+				
+				for e in r.dict[a]:
+					InputMap.action_add_event(a, e)
 
 ### Steam ###
 

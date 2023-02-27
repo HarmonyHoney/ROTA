@@ -6,6 +6,7 @@
 [node name="Shared" type="Node"]
 pause_mode = 2
 script = ExtResource( 1 )
+is_debug = true
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 pause_mode = 1

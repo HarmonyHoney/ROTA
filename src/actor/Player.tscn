@@ -618,7 +618,7 @@ z_index = 50
 z_as_relative = false
 collision_layer = 2
 script = ExtResource( 2 )
-palette = [ Color( 0.14902, 0.14902, 0.14902, 1 ), Color( 0.505882, 0.505882, 0.6, 1 ), Color( 0.721569, 0.803922, 0.85098, 1 ), Color( 0.87, 0.87, 0.87, 1 ), Color( 0.729412, 1, 0.25098, 1 ), Color( 0, 1, 0, 1 ), Color( 0, 1, 0.498039, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 0.498039, 1, 1 ), Color( 0.160784, 0.160784, 1, 1 ), Color( 0.576471, 0.14902, 1, 1 ), Color( 1, 0, 1, 1 ), Color( 1, 0, 0.498039, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.501961, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.675, 0.35, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ) ]
+palette = [ Color( 0, 0, 0, 1 ), Color( 0.505882, 0.505882, 0.6, 1 ), Color( 0.85098, 0.945098, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.729412, 1, 0.25098, 1 ), Color( 0, 1, 0, 1 ), Color( 0, 1, 0.498039, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 0.498039, 1, 1 ), Color( 0.160784, 0.160784, 1, 1 ), Color( 0.576471, 0.14902, 1, 1 ), Color( 1, 0, 1, 1 ), Color( 1, 0, 0.498039, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.501961, 0, 1 ), Color( 1, 1, 0, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.675, 0.35, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ) ]
 dye = {
 "eye": 14,
 "fit": 4,
@@ -626,10 +626,10 @@ dye = {
 "skin": 19
 }
 hair_backs = [ "", "res://src/actor/hair/back/Short.tscn", "res://src/actor/hair/back/Medium.tscn", "res://src/actor/hair/back/Long.tscn", "res://src/actor/hair/back/Braid.tscn", "res://src/actor/hair/back/Braids.tscn", "res://src/actor/hair/back/Afro.tscn" ]
-hair_fronts = [ "", "res://src/actor/hair/front/OneShort.tscn", "res://src/actor/hair/front/OneLong.tscn", "res://src/actor/hair/front/TwoShort.tscn", "res://src/actor/hair/front/TwoLong.tscn", "res://src/actor/hair/front/Bun.tscn", "res://src/actor/hair/front/Buns.tscn", "res://src/actor/hair/front/Mohawk.tscn", "res://src/actor/hair/front/FlatTop.tscn", "res://src/actor/hair/front/Bangs.tscn" ]
+hair_fronts = [ "", "res://src/actor/hair/front/OneShort.tscn", "res://src/actor/hair/front/OneLong.tscn", "res://src/actor/hair/front/TwoShort.tscn", "res://src/actor/hair/front/TwoLong.tscn", "res://src/actor/hair/front/Bun.tscn", "res://src/actor/hair/front/Buns.tscn", "res://src/actor/hair/front/Mohawk.tscn", "res://src/actor/hair/front/FlatTop.tscn", "res://src/actor/hair/front/Bangs.tscn", "res://src/actor/hair/front/FlowerPetals.tscn" ]
 hairstyle_back = 5
 hairstyle_front = 1
-hats = [ "", "res://src/actor/hat/Candle.tscn" ]
+hats = [ "", "res://src/actor/hat/Candle.tscn", "res://src/actor/hat/FlowerPetals.tscn" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -642,6 +642,7 @@ collision_mask = 2184
 shape = SubResource( 2 )
 
 [node name="Areas" type="Node2D" parent="."]
+visible = false
 
 [node name="HitArea" type="Area2D" parent="Areas"]
 position = Vector2( 55, 0 )
@@ -740,7 +741,6 @@ position = Vector2( 0, -25 )
 
 [node name="Hat" type="Node2D" parent="Sprites/Root/Body"]
 position = Vector2( 0, -25 )
-z_index = 2
 
 [node name="Hands" type="Node2D" parent="Sprites"]
 modulate = Color( 0.478431, 0.25098, 0.423529, 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/actor/NPC.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=12]
 
 [node name="Map" type="Node2D"]
@@ -72,6 +73,18 @@ position = Vector2( 1950, 850 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/worlds/3/7.tscn"
+
+[node name="NPC" parent="Actors" instance=ExtResource( 9 )]
+position = Vector2( 1350, 450 )
+dye = {
+"eye": 8,
+"fit": 19,
+"hair": 0,
+"skin": 4
+}
+hairstyle_back = 0
+hairstyle_front = 10
+hats = [ "", "res://src/actor/hat/Candle.tscn", "res://src/actor/hat/BarrelCacti.tscn" ]
 
 [node name="Details" type="Node2D" parent="."]
 
