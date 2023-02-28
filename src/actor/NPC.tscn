@@ -10,7 +10,7 @@ is_npc = true
 
 [node name="Arrow" parent="Sprites" index="3" instance=ExtResource( 4 )]
 col_size = Vector2( 150, 50 )
-col_pos = Vector2( 0, -35 )
+col_pos = Vector2( 0, -33 )
 image_pos = Vector2( 0, -120 )
 
 [node name="Chat" parent="Sprites" index="4" instance=ExtResource( 2 )]

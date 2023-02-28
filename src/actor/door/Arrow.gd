@@ -3,6 +3,7 @@ extends Node2D
 class_name Arrow
 
 export var dir := 0
+export var col_show := false setget set_col_show
 export var col_size := Vector2(40, 50) setget set_col_size
 export var col_pos := Vector2(0, 0) setget set_col_pos
 export var image_pos := Vector2(0, -95) setget set_image_pos
@@ -31,6 +32,7 @@ signal activate
 signal open
 
 func _ready():
+	set_col_show()
 	set_col_size()
 	set_col_pos()
 	set_image_pos()
@@ -67,6 +69,10 @@ func _physics_process(delta):
 		
 		if open_clock == open_time and open_last != open_time:
 			emit_signal("open")
+
+func set_col_show(arg := col_show):
+	col_show = arg
+	if col_shape: col_shape.visible = col_show
 
 func set_col_size(arg := col_size):
 	col_size = arg

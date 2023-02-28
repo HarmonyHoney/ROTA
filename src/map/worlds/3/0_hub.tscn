@@ -35,7 +35,7 @@ scene_path = "res://src/map/worlds/3B/0_hub.tscn"
 gem_count = 30
 
 [node name="Door1" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 450, 1350 )
+position = Vector2( 450, 1500 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/worlds/3/1.tscn"
@@ -84,8 +84,61 @@ dye = {
 }
 hairstyle_back = 0
 hairstyle_front = 10
-hats = [ "", "res://src/actor/hat/Candle.tscn", "res://src/actor/hat/BarrelCacti.tscn" ]
-lines = [ "Prickly tickly", "Cacti wacti", "It's pointy around here!" ]
+lines = [ "Prickly tickly", "Cacti wacti", "It's pointy around here!", "Cac-tar? Haven't heard of em" ]
+
+[node name="NPC2" parent="Actors" instance=ExtResource( 9 )]
+position = Vector2( 1300, 2250 )
+idle_anim = "ponder"
+dye = {
+"eye": 0,
+"fit": 0,
+"hair": 18,
+"skin": 16
+}
+hairstyle_back = 0
+hairstyle_front = 10
+lines = [ "Prickly tickly", "Cacti wacti", "It's pointy around here!", "Cac-tar? Haven't heard of em" ]
+
+[node name="NPC3" parent="Actors" instance=ExtResource( 9 )]
+position = Vector2( 450, 1250 )
+dir = 3
+idle_anim = "idle"
+dye = {
+"eye": 13,
+"fit": 10,
+"hair": 15,
+"skin": 17
+}
+hairstyle_back = 0
+hairstyle_front = 10
+lines = [ "Prickly tickly", "Cacti wacti", "It's pointy around here!", "Cac-tar? Haven't heard of em" ]
+
+[node name="NPC4" parent="Actors" instance=ExtResource( 9 )]
+position = Vector2( 1600, 1650 )
+idle_anim = "idle"
+dye = {
+"eye": 10,
+"fit": 3,
+"hair": 0,
+"skin": 6
+}
+hairstyle_back = 6
+hairstyle_front = 8
+lines = [ "24... 25... 26...", "I've been saving up my gems to open this door!", "I almost have enough...", "Have you seen these rotating blocks? Marvelous..", "Now, how can I reach that gem?...", "I found a smooth rock (:", "Turn this block, push that block over top... hmm", "Bask in the sunlight!" ]
+
+[node name="NPC5" parent="Actors" instance=ExtResource( 9 )]
+position = Vector2( 2250, 2450 )
+dir = 1
+idle_anim = "idle"
+dye = {
+"eye": 15,
+"fit": 18,
+"hair": 13,
+"skin": 4
+}
+hairstyle_back = 3
+hairstyle_front = 4
+lines = [ "Do you have any water?", "It gets a little toasty out here!", "I'm thirsty...", "Have you ever drank from a cactus?", "These spinny blocks are bending my brain 0=", "Look at all the cuute cacti!" ]
 
 [node name="Details" type="Node2D" parent="."]
 
@@ -203,6 +256,11 @@ position = Vector2( 10, 1410 )
 rotation = 2.35619
 scale = Vector2( -0.4, 0.4 )
 
+[node name="Saguaro18" parent="Details" instance=ExtResource( 7 )]
+position = Vector2( 500, 1350 )
+rotation = 4.97418
+scale = Vector2( -0.4, 0.4 )
+
 [node name="Saguaro5" parent="Details" instance=ExtResource( 7 )]
 position = Vector2( 300, 2200 )
 rotation = 4.66026
@@ -289,9 +347,9 @@ rotation = -1.57079
 palette = 5
 
 [node name="BarrelCacti5" parent="Details" instance=ExtResource( 4 )]
-position = Vector2( 450, 1200 )
-rotation = -1.57079
-palette = 2
+position = Vector2( 375, 1125 )
+rotation = -2.35619
+palette = 0
 
 [node name="BarrelCacti6" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 550, 1700 )

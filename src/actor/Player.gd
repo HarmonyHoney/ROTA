@@ -146,6 +146,7 @@ func _ready():
 	if Engine.editor_hint: return
 	solve_jump()
 	
+	if !anim.has_animation(idle_anim): idle_anim = "idle"
 	var l = anim.get_animation("idle").duplicate()
 	for i in 3:
 		l.bezier_track_set_key_value(2, i, -l.bezier_track_get_key_value(2, i))

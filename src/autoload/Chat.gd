@@ -114,7 +114,7 @@ func _on_Arrow_open():
 			queue.erase(line)
 		
 		if rect: rect.size = Vector2.ONE * 35
-		line = int(queue.pop_front())
+		line = posmod(int(queue.pop_front()), lines.size())
 		set_dialog(lines[line])
 
 func _on_Arrow_activate():
