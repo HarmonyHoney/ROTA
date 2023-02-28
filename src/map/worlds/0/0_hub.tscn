@@ -73,10 +73,10 @@ gem_count = 15
 [node name="NPC" parent="Actors" instance=ExtResource( 19 )]
 position = Vector2( 3425, 2250 )
 dye = {
-"eye": 15,
-"fit": 7,
-"hair": 11,
-"skin": 18
+"eye": 18,
+"fit": 15,
+"hair": 12,
+"skin": 5
 }
 hairstyle_back = 0
 hairstyle_front = 7

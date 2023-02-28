@@ -171,6 +171,8 @@ func scene():
 		sprites.rotation = turn_to
 		turn_clock = turn_time
 	
+	#print(name, " pos: ", global_position, " dir: ", dir)
+	
 	velocity = Vector2.ZERO
 	joy_last = Vector2.ZERO
 	joy = Vector2.ZERO

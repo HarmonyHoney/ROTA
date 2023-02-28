@@ -112,10 +112,10 @@ position = Vector2( -1950, 2025 )
 dir = 3
 idle_anim = "idle"
 dye = {
-"eye": 15,
-"fit": 18,
-"hair": 11,
-"skin": 16
+"eye": 18,
+"fit": 5,
+"hair": 0,
+"skin": 6
 }
 hairstyle_back = 0
 hairstyle_front = 0
@@ -128,10 +128,10 @@ chat_offset = Vector2( 0, -160 )
 position = Vector2( -1600, 1050 )
 idle_anim = "idle"
 dye = {
-"eye": 3,
-"fit": 15,
-"hair": 7,
-"skin": 18
+"eye": 0,
+"fit": 18,
+"hair": 15,
+"skin": 5
 }
 hairstyle_front = 3
 lines = [ "Have  you tried turning it off and on again?", "Breathe in, breathe out", "It's so cozy between these trees", "I'ts nice to catch a break and relax", "I feel calm.", "I found a big worm here yesterday!", "Let the trees breathe into you", "Nature takes care of you <3" ]
@@ -141,10 +141,10 @@ position = Vector2( -575, 2450 )
 dir = 2
 idle_anim = "ponder"
 dye = {
-"eye": 0,
-"fit": 7,
-"hair": 18,
-"skin": 17
+"eye": 3,
+"fit": 15,
+"hair": 5,
+"skin": 8
 }
 hairstyle_back = 3
 hairstyle_front = 9

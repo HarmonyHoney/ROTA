@@ -77,14 +77,15 @@ scene_path = "res://src/map/worlds/3/7.tscn"
 [node name="NPC" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 1350, 450 )
 dye = {
-"eye": 8,
-"fit": 19,
-"hair": 0,
-"skin": 4
+"eye": 14,
+"fit": 13,
+"hair": 11,
+"skin": 17
 }
 hairstyle_back = 0
 hairstyle_front = 10
 hats = [ "", "res://src/actor/hat/Candle.tscn", "res://src/actor/hat/BarrelCacti.tscn" ]
+lines = [ "Prickly tickly", "Cacti wacti", "It's pointy around here!" ]
 
 [node name="Details" type="Node2D" parent="."]
 

@@ -81,10 +81,10 @@ position = Vector2( -550, 1150 )
 dir = 3
 idle_anim = "ponder"
 dye = {
-"eye": 15,
-"fit": 10,
+"eye": 18,
+"fit": 13,
 "hair": 11,
-"skin": 17
+"skin": 8
 }
 hairstyle_back = 0
 hairstyle_front = 2
@@ -94,10 +94,10 @@ lines = [ "Be careful!", "These things are pretty pointy..", "I come here to adm
 position = Vector2( 1350, 1360 )
 dir = 3
 dye = {
-"eye": 4,
-"fit": 15,
-"hair": 12,
-"skin": 19
+"eye": 17,
+"fit": 18,
+"hair": 10,
+"skin": 4
 }
 hairstyle_back = 2
 hairstyle_front = 7
@@ -108,10 +108,10 @@ position = Vector2( 1500, 450 )
 dir = 2
 idle_anim = "handstand"
 dye = {
-"eye": 10,
+"eye": 13,
 "fit": 15,
-"hair": 7,
-"skin": 16
+"hair": 18,
+"skin": 6
 }
 hairstyle_back = 0
 hairstyle_front = 8
