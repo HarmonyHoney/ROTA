@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actor/scale_x.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, -0.5, 0, 1, Vector2( 1, 0.5 ), -0.5, 0.0, 1, 0 ]
+
+[node name="Hat" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2( 0, 13 )
+points = PoolVector2Array( 5, 0, 25, 0 )
+width_curve = SubResource( 1 )
+default_color = Color( 1, 0.686275, 0, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource( 1 )

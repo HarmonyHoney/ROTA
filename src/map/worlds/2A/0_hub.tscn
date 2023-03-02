@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/actor/NPC.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/detail/PineTree.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Snowman.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=12]
@@ -70,6 +71,33 @@ position = Vector2( 1450, 950 )
 rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/2A/7.tscn"
+
+[node name="NPC" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 200, 1350 )
+dir = 2
+dye = {
+"eye": 3,
+"fit": 10,
+"hair": 1,
+"skin": 0
+}
+hairstyle_back = 0
+hairstyle_front = 5
+hat = 3
+lines = [ "Aren't they marvelous?", "I rolled em up myself!", "Yeah, I'm pretty sick at rollin snow (;", "Balancing the last snowball is tricky!", " Now i feel tiny next to Snowbo", "I named them Snowbo!" ]
+
+[node name="NPC2" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 1150, 150 )
+dir = 2
+idle_anim = "ponder"
+dye = {
+"eye": 3,
+"fit": 12,
+"hair": 5,
+"skin": 0
+}
+hairstyle_front = 6
+hat = 3
 
 [node name="Details" type="Node2D" parent="."]
 
@@ -326,7 +354,7 @@ rotation = 5.49778
 palette = 0
 
 [node name="Flower11" parent="Details" instance=ExtResource( 12 )]
-position = Vector2( 1100, 100 )
+position = Vector2( 1000, 100 )
 rotation = 3.14159
 palette = 5
 

@@ -629,7 +629,7 @@ hair_backs = [ "", "res://src/actor/hair/back/Short.tscn", "res://src/actor/hair
 hair_fronts = [ "", "res://src/actor/hair/front/OneShort.tscn", "res://src/actor/hair/front/OneLong.tscn", "res://src/actor/hair/front/TwoShort.tscn", "res://src/actor/hair/front/TwoLong.tscn", "res://src/actor/hair/front/Bun.tscn", "res://src/actor/hair/front/Buns.tscn", "res://src/actor/hair/front/Mohawk.tscn", "res://src/actor/hair/front/FlatTop.tscn", "res://src/actor/hair/front/Bangs.tscn", "res://src/actor/hair/front/FlowerPetals.tscn" ]
 hairstyle_back = 5
 hairstyle_front = 1
-hats = [ "", "res://src/actor/hat/Candle.tscn", "res://src/actor/hat/FlowerPetals.tscn" ]
+hats = [ "", "res://src/actor/hat/Candle.tscn", "res://src/actor/hat/FlowerPetals.tscn", "res://src/actor/hat/Carrot.tscn" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

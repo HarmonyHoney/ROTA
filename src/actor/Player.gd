@@ -19,6 +19,8 @@ onready var spr_hand_r := $Sprites/Hands/Right
 onready var spr_hands := [spr_hand_l, spr_hand_r]
 
 export var dir := 0 setget set_dir
+onready var start_dir := dir
+onready var start_pos = global_position
 signal turn
 signal turn_cam
 export var is_input := false
@@ -164,13 +166,16 @@ func wipe_start(arg):
 		spr_easy.show = arg
 
 func scene():
+	# move npc
+	if is_npc:
+		global_position = start_pos
+		self.dir = start_dir
+		
 	# go to last door
-	if is_instance_valid(Shared.door_in) and !is_npc:
+	elif is_instance_valid(Shared.door_in):
 		var d = Shared.door_in
 		global_position = d.global_position
 		self.dir = d.dir
-		sprites.rotation = turn_to
-		turn_clock = turn_time
 	
 	#print(name, " pos: ", global_position, " dir: ", dir)
 	
@@ -181,6 +186,8 @@ func scene():
 	is_jump = true
 	is_dead = false
 	sprites.position = Vector2.ZERO
+	sprites.rotation = turn_to
+	turn_clock = turn_time
 	
 	# snap to floor
 	var v = Vector2.DOWN * 150
@@ -684,6 +691,10 @@ func _on_BodyArea_body_entered(body):
 
 func die():
 	if is_dead: return
+	if is_npc:
+		scene()
+		return
+	
 	is_dead = true
 	dead_clock = 0.0
 	Cutscene.is_playing = true
