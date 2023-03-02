@@ -16,6 +16,7 @@ export var is_editor := false
 export var is_show := false
 export var panel_grow := Vector2(20, 17)
 export var show_range := Vector2(0, -30)
+var panel_min := Vector2(35, 55)
 
 var line := -1
 var queue := []
@@ -101,6 +102,7 @@ func set_dialog(arg := dialog):
 		panel_easy.clock = 0.0
 		panel_easy.from = rect.size
 		panel_easy.to = (label.get_font("font").get_string_size(dialog) / 2.0) + panel_grow
+		panel_easy.to.x = max(panel_easy.to.x, panel_min.y)
 
 func _on_Arrow_open():
 	if !is_show:
@@ -113,7 +115,7 @@ func _on_Arrow_open():
 			queue.shuffle()
 			queue.erase(line)
 		
-		if rect: rect.size = Vector2.ONE * 35
+		if rect: rect.size = Vector2.ONE * panel_min.x
 		line = posmod(int(queue.pop_front()), lines.size())
 		set_dialog(lines[line])
 

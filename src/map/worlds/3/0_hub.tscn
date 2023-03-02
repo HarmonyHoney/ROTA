@@ -84,20 +84,21 @@ dye = {
 }
 hairstyle_back = 0
 hairstyle_front = 10
-lines = [ "Prickly tickly", "Cacti wacti", "It's pointy around here!", "Cac-tar? Haven't heard of em" ]
+lines = [ "You found my shortcut!", "I'm watching the door for new friends (:", "I can see it all from up here!", "Which way is up?..", "Spikes! Be careful..", "Have you seen the snow? I hear it's lovely (:" ]
+queue_write = "0"
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 1300, 2250 )
 idle_anim = "ponder"
 dye = {
 "eye": 0,
-"fit": 0,
-"hair": 18,
+"fit": 18,
+"hair": 11,
 "skin": 16
 }
-hairstyle_back = 0
+hairstyle_back = 3
 hairstyle_front = 10
-lines = [ "Prickly tickly", "Cacti wacti", "It's pointy around here!", "Cac-tar? Haven't heard of em" ]
+lines = [ "Me and my twin!", "This flower matches my hair (=", "What brings you out to the desert?", "Are you a gem collector too?", "Free hugs! Hope you like pricklies (;", "I love twirling the petals around!" ]
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 450, 1250 )
@@ -111,7 +112,8 @@ dye = {
 }
 hairstyle_back = 0
 hairstyle_front = 10
-lines = [ "Prickly tickly", "Cacti wacti", "It's pointy around here!", "Cac-tar? Haven't heard of em" ]
+lines = [ "Welcome to our home!", "Shake my hand! Don't mind the sting", "Watch your head...", "These blocks make my head spin!", "Ooo that cool desert breeze...", "Come to check out the rocks?", "Saguaro-k!" ]
+queue_write = "0"
 
 [node name="NPC4" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 1600, 1650 )
@@ -138,7 +140,7 @@ dye = {
 }
 hairstyle_back = 3
 hairstyle_front = 4
-lines = [ "Do you have any water?", "It gets a little toasty out here!", "I'm thirsty...", "Have you ever drank from a cactus?", "These spinny blocks are bending my brain 0=", "Look at all the cuute cacti!" ]
+lines = [ "Do you have any water?", "It gets a little toasty out here!", "I'm thirsty...", "Have you ever drank from a cactus?", "These spinny blocks are bending my brain 0=", "Look at all the cuute cacti!", "I adore that pink blossom" ]
 
 [node name="Details" type="Node2D" parent="."]
 
