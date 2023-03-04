@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -81,6 +81,18 @@ tracks/6/enabled = true
 tracks/6/keys = {
 "points": PoolRealArray( 5, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprites:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=17]
@@ -305,6 +317,22 @@ tracks/6/enabled = true
 tracks/6/keys = {
 "points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.6, 1.2 )
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "invisible"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -659,6 +687,7 @@ anims/RESET = SubResource( 6 )
 anims/handstand = SubResource( 17 )
 anims/idle = SubResource( 5 )
 anims/idle2 = SubResource( 15 )
+anims/invisible = SubResource( 18 )
 anims/jump = SubResource( 7 )
 anims/ponder = SubResource( 16 )
 anims/release = SubResource( 9 )

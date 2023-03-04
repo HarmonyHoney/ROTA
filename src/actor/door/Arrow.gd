@@ -101,3 +101,4 @@ func try_active():
 
 func turn(arg):
 	dir = posmod(arg, 4)
+	rotation_degrees = 90 * dir

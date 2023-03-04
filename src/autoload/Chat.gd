@@ -6,8 +6,9 @@ onready var label_back := $Bubble/Center/Back
 onready var label := $Bubble/Center/Label
 onready var rect := $Bubble/Rect
 onready var triangle := $Bubble/Triangle
-onready var arrow := $"../Arrow"
 onready var shadows := $Bubble/Shadow.get_children()
+export var arrow_path : NodePath
+onready var arrow := get_node_or_null(arrow_path)
 
 export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Haven't seen you before (:"]
 export (String, MULTILINE) var queue_write := "" setget set_queue_write
@@ -16,7 +17,7 @@ export (String, MULTILINE) var dialog := "I do adore the flowers" setget set_dia
 export var is_editor := false
 export var is_show := false setget set_is_show
 export var panel_grow := Vector2(20, 17)
-export var show_range := Vector2(0, -30)
+export var show_range := Vector2(-10, -45)
 var panel_min := Vector2(35, 55)
 
 var line := -1
@@ -34,8 +35,9 @@ var key_up := false
 var key_hold := false
 
 func _ready():
-	arrow.connect("activate", self, "_on_Arrow_activate")
-	arrow.connect("open", self, "_on_Arrow_open")
+	if arrow:
+		arrow.connect("activate", self, "_on_Arrow_activate")
+		arrow.connect("open", self, "_on_Arrow_open")
 
 func _physics_process(delta):
 	if Engine.editor_hint and !is_editor: return

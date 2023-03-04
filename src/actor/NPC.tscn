@@ -8,12 +8,13 @@
 idle_anim = "idle2"
 is_npc = true
 
-[node name="Arrow" parent="Sprites" index="3" instance=ExtResource( 4 )]
+[node name="Arrow" parent="." index="5" instance=ExtResource( 4 )]
 col_size = Vector2( 150, 50 )
 col_pos = Vector2( 0, -33 )
-image_pos = Vector2( 0, -120 )
+image_pos = Vector2( 0, -110 )
 
-[node name="Chat" parent="Sprites" index="4" instance=ExtResource( 2 )]
-position = Vector2( 0, -120 )
+[node name="Chat" parent="Arrow" index="2" instance=ExtResource( 2 )]
+position = Vector2( 0, -110 )
+arrow_path = NodePath("..")
 
-[connection signal="turn" from="." to="Sprites/Arrow" method="turn"]
+[connection signal="turn" from="." to="Arrow" method="turn"]

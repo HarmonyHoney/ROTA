@@ -84,7 +84,24 @@ dye = {
 hairstyle_back = 0
 hairstyle_front = 5
 hat = 3
-lines = [ "Aren't they marvelous?", "I rolled em up myself!", "Yeah, I'm pretty sick at rollin snow (;", "Balancing the last snowball is tricky!", " Now i feel tiny next to Snowbo", "I named them Snowbo!" ]
+lines = [ "Aren't they marvelous?", "I rolled em up myself!", "Yeah, I'm pretty sick at rollin snow (;", "Balancing the last snowball is tricky!", "Now i feel tiny next to Snowbo", "I named them Snowbo!" ]
+
+[node name="NPC3" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 650, 700 )
+dir = 1
+idle_anim = "invisible"
+dye = {
+"eye": 3,
+"fit": 10,
+"hair": 1,
+"skin": 0
+}
+hairstyle_back = 0
+hairstyle_front = 5
+hat = 3
+lines = [ "You found me! 0:", "I've been hiding in here all day!", "Tell my mom I'm fine!", "Psst.. can you bring me a soda?", "My friend rolled me up in here..", "Snow surrounds me in every direction..", "That's not yellow snow!.. I'ts something else", "*oof* Can you poke another air hole?", "Sure beats chores", "You gotta try this!", "I'm chillin!" ]
+queue_write = "0"
+chat_offset = Vector2( 0, -220 )
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 1150, 150 )

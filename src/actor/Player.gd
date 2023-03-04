@@ -126,18 +126,18 @@ var blink_range := Vector2(1, 20)
 export var is_npc := false
 export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Haven't seen you before (:"] setget set_lines
 export (String, MULTILINE) var queue_write := "" setget set_queue_write
-onready var chat := get_node_or_null("Sprites/Chat")
-onready var arrow := get_node_or_null("Sprites/Arrow")
-export var chat_offset := Vector2(0, -130) setget set_chat_offset
+export var chat_offset := Vector2(0, -110) setget set_chat_offset
+onready var arrow := get_node_or_null("Arrow")
+onready var chat := get_node_or_null("Arrow/Chat")
 
 func _enter_tree():
 	if Engine.editor_hint: return
 	if get_parent() == Shared:
 		Shared.player = self
+	get_tree().connect("physics_frame", self, "physics_frame")
 	MenuPause.connect("closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")
 	Wipe.connect("start", self, "wipe_start")
-	get_tree().connect("physics_frame", self, "physics_frame")
 
 func _ready():
 	set_hair_back()
@@ -153,6 +153,7 @@ func _ready():
 	for i in 3:
 		l.bezier_track_set_key_value(2, i, -l.bezier_track_get_key_value(2, i))
 	anim.add_animation("idle_left", l)
+	anim.play(idle_anim, 0.0)
 	
 	if is_npc:
 		z_index -= 1
@@ -160,6 +161,10 @@ func _ready():
 		spr_easy.clock = spr_easy.time
 		set_lines()
 		set_queue_write()
+		if hairstyle_back == 6 or hairstyle_front == 7:
+			self.chat_offset.y = -130
+		elif hairstyle_front == 10:
+			self.chat_offset.y = -115
 
 func wipe_start(arg):
 	if !is_npc:
