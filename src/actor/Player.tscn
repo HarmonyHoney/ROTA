@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -558,6 +558,81 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 )
 }
 
+[sub_resource type="Animation" id=19]
+resource_name = "snowball"
+length = 3.3
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -5, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, -5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2.7, 3.3 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 31, -0.25, 0, 0.25, 0, 31, -0.25, 0, 0.25, 0, 31, -0.25, 0, 0.25, 0, 31, -0.25, 0, 0.25, 0, 31, -0.25, 0, 0.25, 0, -32, -0.25, 0, 0.25, 0, 50, -0.25, 0, 0.25, 0, 31, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 2.3, 2.7, 3.3 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 7, -0.25, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 13, -0.25, 0, 0.25, 0, -21, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 2.3, 2.7, 3.3 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 39, -0.25, 0, 0.25, 0, 39, -0.25, 0, 0.25, 0, 39, -0.25, 0, 0.25, 0, 39, -0.25, 0, 0.25, 0, 39, -0.25, 0, 0.25, 0, 50, -0.25, 0, 0.25, 0, 29, -0.25, 0, 0.25, 0, 39, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 2.3, 2.7, 3.3 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 12, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0, -16, -0.25, 0, 0.25, 0, -6, -0.25, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 2.3, 2.7, 3.3 )
+}
+
 [sub_resource type="Animation" id=8]
 resource_name = "walk"
 loop = true
@@ -691,6 +766,7 @@ anims/invisible = SubResource( 18 )
 anims/jump = SubResource( 7 )
 anims/ponder = SubResource( 16 )
 anims/release = SubResource( 9 )
+anims/snowball = SubResource( 19 )
 anims/walk = SubResource( 8 )
 next/jump = "jump"
 

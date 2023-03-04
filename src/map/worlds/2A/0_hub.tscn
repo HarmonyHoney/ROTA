@@ -86,6 +86,33 @@ hairstyle_front = 5
 hat = 3
 lines = [ "Aren't they marvelous?", "I rolled em up myself!", "Yeah, I'm pretty sick at rollin snow (;", "Balancing the last snowball is tricky!", "Now i feel tiny next to Snowbo", "I named them Snowbo!" ]
 
+[node name="NPC4" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( 350, 750 )
+dir = 1
+idle_anim = "ponder"
+dye = {
+"eye": 0,
+"fit": 15,
+"hair": 6,
+"skin": 5
+}
+hairstyle_back = 3
+hairstyle_front = 8
+
+[node name="NPC5" parent="Actors" instance=ExtResource( 8 )]
+position = Vector2( -350, 400 )
+dir = 3
+idle_anim = "idle"
+dye = {
+"eye": 15,
+"fit": 18,
+"hair": 11,
+"skin": 6
+}
+hairstyle_back = 0
+hairstyle_front = 3
+lines = [ "*brrr* I forgot my coat!", "Find any pine cones?", "Wiggle the trees with me!", "We're playing hide and seek!", "Have you found my friend?", "I saw a gem through that door..", "My pappy told me to save my gems!" ]
+
 [node name="NPC3" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 650, 700 )
 dir = 1
@@ -99,22 +126,24 @@ dye = {
 hairstyle_back = 0
 hairstyle_front = 5
 hat = 3
-lines = [ "You found me! 0:", "I've been hiding in here all day!", "Tell my mom I'm fine!", "Psst.. can you bring me a soda?", "My friend rolled me up in here..", "Snow surrounds me in every direction..", "That's not yellow snow!.. I'ts something else", "*oof* Can you poke another air hole?", "Sure beats chores", "You gotta try this!", "I'm chillin!" ]
+lines = [ "You found me! 0:", "I've been hiding in here all day!", "Tell my mom I'm fine!", "Psst.. can you bring me a soda?", "My friend rolled me up in here..", "Snow surrounds me in every direction..", "That's not yellow snow!.. I'ts something else", "*oof* Can you poke another air hole?", "Sure beats chores", "You gotta try this!", "I'm chillin!", "It's me, Robbi!", "Snowballs can't hurt me now!" ]
 queue_write = "0"
 chat_offset = Vector2( 0, -220 )
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 1150, 150 )
 dir = 2
-idle_anim = "ponder"
+idle_anim = "snowball"
 dye = {
 "eye": 3,
-"fit": 12,
-"hair": 5,
+"fit": 11,
+"hair": 15,
 "skin": 0
 }
 hairstyle_front = 6
 hat = 3
+lines = [ "Wanna have a snowball fight? (:", "I'm gonna crush you!", "The snow is light and fluffy!", "It won't hurt thaat bad ;P", "I haven't seen Robbi since my astonishing victory (;", "Watch your back..", "" ]
+queue_write = "0"
 
 [node name="Details" type="Node2D" parent="."]
 

@@ -148,11 +148,24 @@ func _ready():
 	if Engine.editor_hint: return
 	solve_jump()
 	
-	if !anim.has_animation(idle_anim): idle_anim = "idle"
+	# create idle animiations facing left
 	var l = anim.get_animation("idle").duplicate()
 	for i in 3:
 		l.bezier_track_set_key_value(2, i, -l.bezier_track_get_key_value(2, i))
 	anim.add_animation("idle_left", l)
+	
+	if !anim.has_animation(idle_anim): idle_anim = "idle"
+	if idle_anim != "idle":
+		var a = anim.get_animation(idle_anim).duplicate()
+		for t in a.get_track_count():
+			var p = a.track_get_path(t)
+			if "position:x" in str(p) or "rotation_degrees" in str(p):
+				var c = a.track_get_key_count(t)
+				print(p, " ", c)
+				for k in c:
+					a.bezier_track_set_key_value(t, k, -a.bezier_track_get_key_value(t, k))
+		anim.add_animation(idle_anim + "_left", a)
+		
 	anim.play(idle_anim, 0.0)
 	
 	if is_npc:
@@ -552,7 +565,8 @@ func set_dir(arg := dir):
 func set_dir_x(arg := dir_x):
 	dir_x = sign(arg)
 	areas.scale.x = dir_x
-	idle_dir = idle_anim if dir_x > 0 or idle_anim != "idle" else "idle_left"
+	var l = idle_anim + "_left"
+	idle_dir = idle_anim if dir_x > 0 else l if anim.has_animation(l) else "idle"
 	anim.playback_speed = dir_x
 	emit_signal("scale_x", dir_x)
 
