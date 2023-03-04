@@ -7,3 +7,4 @@ func _ready():
 func set_value():
 	Shared.clock_alpha = float(cursor + 1) / list.size() 
 	UI.clock.modulate.a = Shared.clock_alpha
+	UI.scene_changed(true)

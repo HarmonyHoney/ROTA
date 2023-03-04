@@ -1,16 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://src/theme/shadow_text.tres" type="Theme" id=1]
 [ext_resource path="res://media/font/profile/UI_Keys.tres" type="DynamicFont" id=2]
 [ext_resource path="res://media/font/profile/UI_gem.tres" type="DynamicFont" id=3]
-[ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=4]
 [ext_resource path="res://src/actor/Clock.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/menu/options/Key.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/autoload/UI.gd" type="Script" id=10]
-
-[sub_resource type="DynamicFont" id=1]
-size = 50
-font_data = ExtResource( 4 )
 
 [node name="UI" type="CanvasLayer"]
 pause_mode = 2
@@ -173,7 +169,6 @@ action = "ui_cancel"
 is_connect = true
 
 [node name="Clock" type="VBoxContainer" parent="Control"]
-modulate = Color( 1, 1, 1, 0.5 )
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -183,16 +178,17 @@ margin_bottom = -20.0
 rect_min_size = Vector2( 300, 200 )
 
 [node name="File" type="Label" parent="Control/Clock"]
+modulate = Color( 1, 0.95, 0.95, 1 )
 margin_right = 600.0
 margin_bottom = 51.0
-custom_fonts/font = SubResource( 1 )
-text = "3:57"
+theme = ExtResource( 1 )
+text = "1:48:02"
 
 [node name="Map" type="Label" parent="Control/Clock"]
 margin_top = 55.0
 margin_right = 600.0
 margin_bottom = 106.0
-custom_fonts/font = SubResource( 1 )
+theme = ExtResource( 1 )
 text = "3:57"
 
 [node name="Spacer" type="Control" parent="Control/Clock"]
@@ -207,14 +203,16 @@ margin_right = 600.0
 margin_bottom = 680.0
 
 [node name="Best" type="Label" parent="Control/Clock/Down"]
+modulate = Color( 1, 1, 0, 1 )
 margin_right = 600.0
 margin_bottom = 51.0
-custom_fonts/font = SubResource( 1 )
-text = "Best 4:38"
+theme = ExtResource( 1 )
+text = "Best 17.49"
 
 [node name="Goal" type="Label" parent="Control/Clock/Down"]
+modulate = Color( 0.341176, 1, 0.341176, 1 )
 margin_top = 55.0
 margin_right = 600.0
 margin_bottom = 106.0
-custom_fonts/font = SubResource( 1 )
-text = "Goal 2:16"
+theme = ExtResource( 1 )
+text = "Goal 23.50"

@@ -152,7 +152,7 @@ func set_open(arg := is_open):
 	is_open = arg
 	
 	if is_open:
-		cursor = 0
+		self.cursor = 0
 		fill_items()
 		UI.menu_keys(text_accept, text_cancel)
 		open()

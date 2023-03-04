@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://media/image/UI/clock.png" type="Texture" id=1]
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://src/menu/options/scroll/Vsync.gd" type="Script" id=17]
 [ext_resource path="res://src/menu/options/scroll/Mouse.gd" type="Script" id=18]
 [ext_resource path="res://src/menu/options/scroll/Borderless.gd" type="Script" id=19]
+[ext_resource path="res://src/menu/options/scroll/SpeedDec.gd" type="Script" id=20]
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.75, 0.375, 0.38125, 1 )
@@ -538,7 +539,7 @@ script = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-list = PoolStringArray( "OFF", "MAP", "FILE", "BOTH" )
+list = PoolStringArray( "OFF", "MAP", "FILE", "BOTH", "TRADE" )
 
 [node name="Label" type="Label" parent="Control/Menu/List/Speedrun"]
 anchor_right = 0.5
@@ -589,6 +590,36 @@ margin_left = 25.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 2 )
 text = "< HALF >"
+align = 2
+valign = 1
+
+[node name="Decimals" type="Control" parent="Control/Menu/List" groups=["speed"]]
+margin_top = 1370.0
+margin_right = 640.0
+margin_bottom = 1440.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+count = 3
+
+[node name="Label" type="Label" parent="Control/Menu/List/Decimals"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "Decimals"
+valign = 1
+
+[node name="Label2" type="Label" parent="Control/Menu/List/Decimals"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "< 2 >"
 align = 2
 valign = 1
 

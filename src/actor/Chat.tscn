@@ -18,10 +18,28 @@ z_as_relative = false
 script = ExtResource( 2 )
 
 [node name="Bubble" type="Node2D" parent="."]
+position = Vector2( 0, -30 )
+
+[node name="Shadow" type="Node2D" parent="Bubble"]
+modulate = Color( 0, 0, 0, 0.501961 )
+position = Vector2( 7, 10 )
+
+[node name="Triangle" type="Polygon2D" parent="Bubble/Shadow"]
+position = Vector2( 0, 37.5 )
+polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
+
+[node name="Rect" type="Polygon2D" parent="Bubble/Shadow"]
+texture = ExtResource( 1 )
+texture_offset = Vector2( 0, 50 )
+texture_scale = Vector2( 0, 1 )
+polygon = PoolVector2Array( 260, 0.0999985, 259.062, 8.42228, 256.296, 16.3273, 251.84, 23.4185, 245.919, 29.3405, 238.827, 33.7962, 230.922, 36.5623, 222.6, 37.5, -222.6, 37.5, -230.922, 36.5623, -238.827, 33.7962, -245.919, 29.3405, -251.84, 23.4185, -256.296, 16.3273, -259.062, 8.42228, -260, 0.0999952, -260, -0.100002, -259.062, -8.42228, -256.296, -16.3273, -251.841, -23.4185, -245.919, -29.3405, -238.827, -33.7962, -230.922, -36.5623, -222.6, -37.5, 222.6, -37.5, 230.922, -36.5623, 238.827, -33.7962, 245.919, -29.3405, 251.84, -23.4185, 256.296, -16.3273, 259.062, -8.42228, 260, -0.0999919 )
+script = ExtResource( 4 )
+is_baked = false
+size = Vector2( 260, 37.5 )
+radius = Plane( -2, -1, -1, -1 )
 
 [node name="Triangle" type="Polygon2D" parent="Bubble"]
 position = Vector2( 0, 37.5 )
-scale = Vector2( 1e-05, 1e-05 )
 polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
 
 [node name="Rect" type="Polygon2D" parent="Bubble"]
@@ -50,6 +68,7 @@ custom_fonts/font = SubResource( 3 )
 text = "I do adore the flowers"
 align = 1
 valign = 2
+percent_visible = 1.27778
 
 [node name="Label" type="Label" parent="Bubble/Center"]
 margin_left = -240.0
@@ -61,3 +80,4 @@ custom_fonts/font = SubResource( 3 )
 text = "I do adore the flowers"
 align = 1
 valign = 2
+percent_visible = 1.22222

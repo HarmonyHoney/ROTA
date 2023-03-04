@@ -7,13 +7,14 @@ onready var label := $Bubble/Center/Label
 onready var rect := $Bubble/Rect
 onready var triangle := $Bubble/Triangle
 onready var arrow := $"../Arrow"
+onready var shadows := $Bubble/Shadow.get_children()
 
 export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Haven't seen you before (:"]
 export (String, MULTILINE) var queue_write := "" setget set_queue_write
 export (String, MULTILINE) var dialog := "I do adore the flowers" setget set_dialog
 
 export var is_editor := false
-export var is_show := false
+export var is_show := false setget set_is_show
 export var panel_grow := Vector2(20, 17)
 export var show_range := Vector2(0, -30)
 var panel_min := Vector2(35, 55)
@@ -49,8 +50,10 @@ func _physics_process(delta):
 	if rect and triangle:
 		if panel_easy.clock < panel_easy.time:
 			rect.size = panel_easy.move(delta, is_show)
+			shadows[1].size = rect.size
 		triangle.position.y = rect.size.y
 		triangle.scale = Vector2.ONE * s
+		shadows[0].transform = triangle.transform
 	
 	# input
 	key_up = Input.is_action_pressed("ui_up")
@@ -103,6 +106,10 @@ func set_dialog(arg := dialog):
 		panel_easy.from = rect.size
 		panel_easy.to = (label.get_font("font").get_string_size(dialog) / 2.0) + panel_grow
 		panel_easy.to.x = max(panel_easy.to.x, panel_min.y)
+
+func set_is_show(arg := is_show):
+	is_show = arg
+	set_dialog()
 
 func _on_Arrow_open():
 	if !is_show:

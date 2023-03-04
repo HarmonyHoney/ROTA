@@ -59,16 +59,7 @@ func _physics_process(delta):
 			is_clock = false
 
 func activate():
-	if not "hub" in scene_path and scene_path.begins_with(Shared.worlds_path):
-		UI.clock_ease.show = arrow.is_active and Shared.clock_show > 0
-		var m = scene_path.lstrip(Shared.worlds_path).rstrip(".tscn")
-		UI.clock_best.visible = Shared.goals.has(m)
-		if UI.clock_best.visible:
-			UI.clock_best.text = "Best: " + Shared.time_string(Shared.goals[m], true)
-		
-		UI.clock_goal.visible = Shared.speedruns.has(m)
-		if UI.clock_goal.visible:
-			UI.clock_goal.text = "Goal: " + Shared.time_string(Shared.speedruns[m], true)
+	Shared.speedrun_goal(scene_path, arrow.is_active)
 
 func on_enter():
 	Shared.collect_gem()

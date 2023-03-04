@@ -46,13 +46,15 @@ func _physics_process(delta):
 	
 	clock_down.modulate.a = clock_ease.count(delta)
 
-func scene_changed():
+func scene_changed(override := false):
 	up.clock = 0.0
-	var m = Shared.map_name != ""
+	var m = Shared.map_name != "" or override
+	var h = "hub" in Shared.map_name
 	var b = Shared.clock_show == Shared.SPEED.BOTH
-	clock_file.visible = m and (b or Shared.clock_show == Shared.SPEED.FILE)
-	clock_map.visible = not "hub" in Shared.map_name and m and (b or Shared.clock_show == Shared.SPEED.MAP)
-	clock_ease.show = false
+	var t = Shared.clock_show == Shared.SPEED.TRADE
+	clock_file.visible = m and ((t and h) or (b or Shared.clock_show == Shared.SPEED.FILE))
+	clock_map.visible = m and !h and (t or b or Shared.clock_show == Shared.SPEED.MAP)
+	clock_ease.show = m and !h and Shared.clock_show > 0
 
 func menu_keys(accept := "", cancel := ""):
 	var c = $Control/Keys/List.get_children()

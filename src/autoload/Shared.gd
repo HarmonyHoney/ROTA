@@ -20,9 +20,12 @@ signal scene_changed
 var gem_count := 0
 var goals := {}
 var clock_rank := 0
-enum SPEED {OFF, MAP, FILE, BOTH}
+enum SPEED {OFF, MAP, FILE, BOTH, TRADE}
 var clock_show := 0
-var clock_alpha := 0.5
+var clock_alpha := 1.0
+var clock_decimals := 2
+var clock_best_color := [Color.white, Color("ffff00")]
+
 var speedruns := {
 	"1/2": 11,
 	"1/3": 17.5,
@@ -173,8 +176,8 @@ func _physics_process(delta):
 		map_clock += delta
 	
 	# clock label
-	UI.clock_file.text = time_string(save_time, true)
-	UI.clock_map.text = time_string(map_clock, true)
+	UI.clock_file.text = time_string(save_time, clock_decimals)
+	UI.clock_map.text = time_string(map_clock, clock_decimals)
 	
 	# auto save
 	auto_save_clock += delta
@@ -182,11 +185,11 @@ func _physics_process(delta):
 		auto_save_clock = 0.0
 		save_data()
 
-func time_string(t := 0.0, is_decimal = false, is_min := false, is_hour := false):
+func time_string(t := 0.0, dec = 2, is_min := false, is_hour := false):
 	# time
 	var s_hour = str(int(t) / 3600) + ":" if is_hour or t > 3600 else ""
 	var s_min = str((int(t) / 60) % 60).pad_zeros(2 if s_hour else 0) + ":" if is_min or t > 60 else ""
-	var s_sec = str(fmod(t, 60)).pad_zeros(2).pad_decimals(2 if is_decimal else 0)
+	var s_sec = str(fmod(t, 60)).pad_zeros(2).pad_decimals(dec)
 	
 	return s_hour + s_min + s_sec
 
@@ -244,6 +247,8 @@ func change_scene():
 				print("door_in = ", i)
 				break
 		if is_instance_valid(door_in): break
+	
+	speedrun_goal(csfn, map_name != "" and not "hub" in map_name)
 	
 	emit_signal("scene_changed")
 
@@ -314,6 +319,20 @@ func collect_clocks(g := goals):
 		if g[i] != 0 and speedruns.has(i) and g[i] < speedruns[i]:
 			c += 1
 	return c
+
+func speedrun_goal(scene_path := csfn, _show := true):
+	if not "hub" in scene_path and scene_path.begins_with(worlds_path):
+		UI.clock_ease.show = _show and clock_show > 0
+		var m = scene_path.lstrip(worlds_path).rstrip(".tscn")
+		UI.clock_best.visible = goals.has(m)
+		if UI.clock_best.visible:
+			var g = goals[m]
+			UI.clock_best.text = "Best: " + time_string(g, 2)
+			UI.clock_best.modulate = clock_best_color[int(goals[m] > 0 and goals[m] < speedruns[m])]
+		
+		UI.clock_goal.visible = speedruns.has(m)
+		if UI.clock_goal.visible:
+			UI.clock_goal.text = "Goal: " + time_string(speedruns[m], 2)
 
 ### Volume
 
@@ -507,6 +526,7 @@ func save_options():
 	o["mouse"] = bool(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
 	o["clock_show"] = int(clock_show)
 	o["clock_alpha"] = float(clock_alpha)
+	o["clock_decimals"] = int(clock_decimals)
 	
 	file_save_json("user://options.json", o)
 	
@@ -534,6 +554,8 @@ func load_options():
 		clock_show = int(d["clock_show"])
 	if d.has("clock_alpha"):
 		clock_alpha = float(d["clock_alpha"])
+	if d.has("clock_decimals"):
+		clock_decimals = int(d["clock_decimals"])
 
 func save_keys(path := "user://keys.tres"):
 	var s_keys = SaveDict.new()

@@ -21,6 +21,7 @@ func open():
 
 func close():
 	Shared.save_options()
+	UI.scene_changed()
 
 func open_remap(is_gamepad := false):
 	MenuRemap.is_gamepad = is_gamepad

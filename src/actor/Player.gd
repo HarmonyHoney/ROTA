@@ -128,7 +128,7 @@ export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the f
 export (String, MULTILINE) var queue_write := "" setget set_queue_write
 onready var chat := get_node_or_null("Sprites/Chat")
 onready var arrow := get_node_or_null("Sprites/Arrow")
-export var chat_offset := Vector2(0, -120) setget set_chat_offset
+export var chat_offset := Vector2(0, -130) setget set_chat_offset
 
 func _enter_tree():
 	if Engine.editor_hint: return

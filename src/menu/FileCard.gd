@@ -28,7 +28,7 @@ func set_card():
 		clocks.visible = clock_label.text != "0"
 		
 		# time
-		time_label.text = Shared.time_string(d[slot]["time"], false, true)
+		time_label.text = Shared.time_string(d[slot]["time"], 0, true)
 	else:
 		is_new = true
 	
