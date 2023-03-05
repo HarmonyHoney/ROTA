@@ -363,10 +363,8 @@ debug_warp={
 2d_physics/layer_2="player"
 2d_physics/layer_3="box"
 2d_physics/layer_4="spike"
-2d_physics/layer_5="spinner"
-2d_physics/layer_6="arrow"
-2d_physics/layer_7="portal"
-2d_physics/layer_8="exit"
+2d_physics/layer_5="detail"
+2d_physics/layer_6="snowball"
 2d_physics/layer_11="door"
 2d_physics/layer_12="goal"
 

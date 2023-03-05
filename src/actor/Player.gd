@@ -130,6 +130,9 @@ export var chat_offset := Vector2(0, -110) setget set_chat_offset
 onready var arrow := get_node_or_null("Arrow")
 onready var chat := get_node_or_null("Arrow/Chat")
 
+export var snowball_scene : PackedScene
+var snowballs = []
+
 func _enter_tree():
 	if Engine.editor_hint: return
 	if get_parent() == Shared:
@@ -767,17 +770,21 @@ func release_anim():
 	
 	anim.play("release")
 
-export var snowball_scene : PackedScene
-
 func throw_snowball():
-	var s = snowball_scene.instance()
-	s.global_position = spr_hand_l.global_position
-	s.dir = dir
-	s.velocity = Vector2(500 * dir_x, -50)
-	var p = get_parent()
-	p.add_child(s)
-	s.owner = p
+	var s = null
+	for i in snowballs:
+		if i.is_out:
+			s = i
+			break
 	
+	if !is_instance_valid(s):
+		s = snowball_scene.instance()
+		var p = get_parent()
+		p.add_child(s)
+		s.owner = p
+		snowballs.append(s)
+	
+	s.throw(spr_hand_l.global_position, Vector2(500 * dir_x, -50), dir)
 	print(name, " throw snowball ", s)
 
 func enter_door():

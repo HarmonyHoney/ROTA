@@ -8,15 +8,14 @@
 [node name="Snowball" type="Area2D"]
 z_index = 10
 z_as_relative = false
-collision_layer = 7
-collision_mask = 0
+collision_layer = 32
+collision_mask = 7
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( 10, 0, 8.66025, 5, 5, 8.66025, -4.37114e-07, 10, -5, 8.66025, -8.66025, 5, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5 )
 script = ExtResource( 1 )
 is_baked = false

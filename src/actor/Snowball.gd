@@ -10,7 +10,7 @@ onready var polygon := $Polygon2D
 var is_hit := false
 var is_out := false
 var lifetime := 0.0
-var life_min := 0.3
+var life_min := 0.1
 
 var hit_easy := EaseMover.new()
 
@@ -42,11 +42,21 @@ func rot(vec : Vector2, _dir := dir) -> Vector2:
 	return vec
 
 func area_entered(area):
-	if lifetime > life_min:
-		#is_hit = true
-		print(name, " ", area)
+	if lifetime > life_min and !area.get_collision_layer_bit(4):
+		is_hit = true
+		#print(name, " ", area)
 
 func body_entered(body):
 	if lifetime > life_min:
 		is_hit = true
-		print(name, " ", body)
+		#print(name, " ", body)
+
+func throw(from := Vector2.ZERO, vel := Vector2(500, -50), _dir := dir):
+	global_position = from
+	velocity = vel
+	dir = _dir
+	is_out = false
+	is_hit = false
+	hit_easy.clock = 0
+	lifetime = 0
+	polygon.scale = Vector2.ONE
