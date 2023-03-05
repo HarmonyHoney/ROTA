@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://src/menu/DemoShow.gd" type="Script" id=22]
 [ext_resource path="res://media/image/UI/godot_logo.svg" type="Texture" id=23]
 [ext_resource path="res://src/actor/door/DoorSpawn.tscn" type="PackedScene" id=24]
+[ext_resource path="res://src/actor/Snowball.tscn" type="PackedScene" id=25]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
@@ -665,6 +666,18 @@ bg_palette = 1
 
 [node name="Spawn" parent="Map/Actors" instance=ExtResource( 24 )]
 position = Vector2( 1825, 0 )
+
+[node name="Snowball" parent="Map/Actors" instance=ExtResource( 25 )]
+position = Vector2( 1473, 296 )
+
+[node name="Snowball2" parent="Map/Actors" instance=ExtResource( 25 )]
+position = Vector2( 1525, 247 )
+
+[node name="Snowball3" parent="Map/Actors" instance=ExtResource( 25 )]
+position = Vector2( 1588, 147 )
+
+[node name="Snowball4" parent="Map/Actors" instance=ExtResource( 25 )]
+position = Vector2( 1588, 147 )
 
 [node name="AttractMode" type="Node2D" parent="Map"]
 position = Vector2( 1800, 650 )

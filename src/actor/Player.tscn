@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=3]
+[ext_resource path="res://src/actor/Snowball.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17, 17 )
@@ -632,6 +633,20 @@ tracks/6/keys = {
 "points": PoolRealArray( 12, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0, -16, -0.25, 0, 0.25, 0, -6, -0.25, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 2.3, 2.7, 3.3 )
 }
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 2.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "throw_snowball"
+} ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "walk"
@@ -733,6 +748,7 @@ hair_fronts = [ "", "res://src/actor/hair/front/OneShort.tscn", "res://src/actor
 hairstyle_back = 5
 hairstyle_front = 1
 hats = [ "", "res://src/actor/hat/Candle.tscn", "res://src/actor/hat/FlowerPetals.tscn", "res://src/actor/hat/Carrot.tscn" ]
+snowball_scene = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

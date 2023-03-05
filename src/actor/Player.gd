@@ -767,6 +767,19 @@ func release_anim():
 	
 	anim.play("release")
 
+export var snowball_scene : PackedScene
+
+func throw_snowball():
+	var s = snowball_scene.instance()
+	s.global_position = spr_hand_l.global_position
+	s.dir = dir
+	s.velocity = Vector2(500 * dir_x, -50)
+	var p = get_parent()
+	p.add_child(s)
+	s.owner = p
+	
+	print(name, " throw snowball ", s)
+
 func enter_door():
 	anim.play(idle_dir)
 	joy = Vector2.ZERO

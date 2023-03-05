@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=1]
+[ext_resource path="res://src/actor/Snowball.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="Snowball" type="Area2D"]
+z_index = 10
+z_as_relative = false
+collision_layer = 7
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 1, 0, 0, 1 )
+polygon = PoolVector2Array( 10, 0, 8.66025, 5, 5, 8.66025, -4.37114e-07, 10, -5, 8.66025, -8.66025, 5, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5 )
+script = ExtResource( 1 )
+is_baked = false
+radius = 10.0
+points = 12
+
+[connection signal="area_entered" from="." to="." method="area_entered"]
+[connection signal="body_entered" from="." to="." method="body_entered"]
