@@ -98,6 +98,7 @@ dye = {
 }
 hairstyle_back = 3
 hairstyle_front = 8
+lines = [ "Cozy up and feel the candle warmth!", "I'm a lover not a snowball fighter..", "Hmm this puzzle has me stumped..", "Love that pine tree scent! Mmm..", "These are my flower friends (=", "Take a moment to relax and reflect..", "Do I really need that gem?" ]
 
 [node name="NPC5" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( -350, 400 )

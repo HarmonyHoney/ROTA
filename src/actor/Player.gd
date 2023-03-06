@@ -210,7 +210,7 @@ func scene():
 	var v = Vector2.DOWN * 150
 	if test_move(transform, rot(v)):
 		move(v)
-		anim.play(idle_dir)
+		anim.play(idle_dir, 0.0)
 		anim.seek(rand_range(0, anim.current_animation_length), true)
 	else:
 		anim.play("jump")

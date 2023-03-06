@@ -101,7 +101,8 @@ dye = {
 }
 hairstyle_back = 2
 hairstyle_front = 7
-lines = [ "Bing bong", "Doodly doo", "WEEOO WEEEOO!" ]
+lines = [ "I've been through that big door!", "I lost a few gems, now I'm locked out..", "It's darker there (:", "Finding a white flower is good luck!" ]
+queue_write = "0"
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 1500, 450 )
