@@ -75,6 +75,7 @@ scene_path = "res://src/map/worlds/2A/7.tscn"
 [node name="NPC" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 200, 1350 )
 dir = 2
+palette = [ Color( 1, 1, 1, 1 ), Color( 0.682353, 0.678431, 0.8, 1 ), Color( 0.4368, 0.4368, 0.52, 1 ), Color( 0, 0, 0, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.866667, 0, 1 ), Color( 1, 0.686275, 0, 1 ), Color( 1, 0.509804, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0.796078, 1 ), Color( 1, 0, 1, 1 ), Color( 0.623529, 0.219608, 1, 1 ), Color( 0, 0.486275, 1, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 1, 0, 1 ), Color( 0.764706, 1, 0, 1 ), Color( 1, 1, 0, 1 ) ]
 dye = {
 "eye": 3,
 "fit": 10,
@@ -90,6 +91,7 @@ lines = [ "Aren't they marvelous?", "I rolled em up myself!", "Yeah, I'm pretty 
 position = Vector2( 350, 750 )
 dir = 1
 idle_anim = "ponder"
+palette = [ Color( 1, 1, 1, 1 ), Color( 0.682353, 0.678431, 0.8, 1 ), Color( 0.4368, 0.4368, 0.52, 1 ), Color( 0, 0, 0, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.866667, 0, 1 ), Color( 1, 0.686275, 0, 1 ), Color( 1, 0.509804, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0.796078, 1 ), Color( 1, 0, 1, 1 ), Color( 0.623529, 0.219608, 1, 1 ), Color( 0, 0.486275, 1, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 1, 0, 1 ), Color( 0.764706, 1, 0, 1 ), Color( 1, 1, 0, 1 ) ]
 dye = {
 "eye": 0,
 "fit": 15,
@@ -104,6 +106,7 @@ lines = [ "Cozy up and feel the candle warmth!", "I'm a lover not a snowball fig
 position = Vector2( -350, 400 )
 dir = 3
 idle_anim = "snowball"
+palette = [ Color( 1, 1, 1, 1 ), Color( 0.682353, 0.678431, 0.8, 1 ), Color( 0.4368, 0.4368, 0.52, 1 ), Color( 0, 0, 0, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.866667, 0, 1 ), Color( 1, 0.686275, 0, 1 ), Color( 1, 0.509804, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0.796078, 1 ), Color( 1, 0, 1, 1 ), Color( 0.623529, 0.219608, 1, 1 ), Color( 0, 0.486275, 1, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 1, 0, 1 ), Color( 0.764706, 1, 0, 1 ), Color( 1, 1, 0, 1 ) ]
 dye = {
 "eye": 15,
 "fit": 18,
@@ -118,6 +121,7 @@ lines = [ "*brrr* I forgot my coat!", "Find any pine cones?", "Wiggle the trees 
 position = Vector2( 650, 700 )
 dir = 1
 idle_anim = "invisible"
+palette = [ Color( 1, 1, 1, 1 ), Color( 0.682353, 0.678431, 0.8, 1 ), Color( 0.4368, 0.4368, 0.52, 1 ), Color( 0, 0, 0, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.866667, 0, 1 ), Color( 1, 0.686275, 0, 1 ), Color( 1, 0.509804, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0.796078, 1 ), Color( 1, 0, 1, 1 ), Color( 0.623529, 0.219608, 1, 1 ), Color( 0, 0.486275, 1, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 1, 0, 1 ), Color( 0.764706, 1, 0, 1 ), Color( 1, 1, 0, 1 ) ]
 dye = {
 "eye": 3,
 "fit": 10,
@@ -135,6 +139,7 @@ chat_offset = Vector2( 0, -220 )
 position = Vector2( 1150, 150 )
 dir = 2
 idle_anim = "snowball"
+palette = [ Color( 1, 1, 1, 1 ), Color( 0.682353, 0.678431, 0.8, 1 ), Color( 0.4368, 0.4368, 0.52, 1 ), Color( 0, 0, 0, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.866667, 0, 1 ), Color( 1, 0.686275, 0, 1 ), Color( 1, 0.509804, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0.796078, 1 ), Color( 1, 0, 1, 1 ), Color( 0.623529, 0.219608, 1, 1 ), Color( 0, 0.486275, 1, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 1, 0, 1 ), Color( 0.764706, 1, 0, 1 ), Color( 1, 1, 0, 1 ) ]
 dye = {
 "eye": 3,
 "fit": 11,

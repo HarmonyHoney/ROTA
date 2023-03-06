@@ -182,6 +182,7 @@ Music="*res://src/autoload/Music.tscn"
 Audio="*res://src/autoload/Audio.tscn"
 MenuMakeover="*res://src/menu/MenuMakeover.tscn"
 Steam="*res://addons/steam_api/steam.gd"
+Clouds="*res://src/autoload/Clouds.tscn"
 
 [display]
 

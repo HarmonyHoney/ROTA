@@ -35,7 +35,7 @@ points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 shader = ExtResource( 4 )
 shader_param/add_color = Color( 0, 0, 0, 1 )
 
-[node name="SolidTileMap" type="TileMap"]
+[node name="SolidTileMap" type="TileMap" groups=["solid_map"]]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 100, 100 )
 format = 1

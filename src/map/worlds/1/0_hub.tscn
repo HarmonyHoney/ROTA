@@ -75,11 +75,13 @@ scene_path = "res://src/map/worlds/1/7.tscn"
 
 [node name="NPC" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 350, 350 )
+palette = [ Color( 1, 1, 1, 1 ), Color( 0.682353, 0.678431, 0.8, 1 ), Color( 0.4368, 0.4368, 0.52, 1 ), Color( 0, 0, 0, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.866667, 0, 1 ), Color( 1, 0.686275, 0, 1 ), Color( 1, 0.509804, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0.796078, 1 ), Color( 1, 0, 1, 1 ), Color( 0.623529, 0.219608, 1, 1 ), Color( 0, 0.486275, 1, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 1, 0, 1 ), Color( 0.764706, 1, 0, 1 ), Color( 1, 1, 0, 1 ) ]
 
 [node name="NPC5" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( -550, 1150 )
 dir = 3
 idle_anim = "ponder"
+palette = [ Color( 1, 1, 1, 1 ), Color( 0.682353, 0.678431, 0.8, 1 ), Color( 0.4368, 0.4368, 0.52, 1 ), Color( 0, 0, 0, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.866667, 0, 1 ), Color( 1, 0.686275, 0, 1 ), Color( 1, 0.509804, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0.796078, 1 ), Color( 1, 0, 1, 1 ), Color( 0.623529, 0.219608, 1, 1 ), Color( 0, 0.486275, 1, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 1, 0, 1 ), Color( 0.764706, 1, 0, 1 ), Color( 1, 1, 0, 1 ) ]
 dye = {
 "eye": 18,
 "fit": 13,
@@ -93,6 +95,7 @@ lines = [ "Be careful!", "These things are pretty pointy..", "I come here to adm
 [node name="NPC2" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 1350, 1360 )
 dir = 3
+palette = [ Color( 1, 1, 1, 1 ), Color( 0.682353, 0.678431, 0.8, 1 ), Color( 0.4368, 0.4368, 0.52, 1 ), Color( 0, 0, 0, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.866667, 0, 1 ), Color( 1, 0.686275, 0, 1 ), Color( 1, 0.509804, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0.796078, 1 ), Color( 1, 0, 1, 1 ), Color( 0.623529, 0.219608, 1, 1 ), Color( 0, 0.486275, 1, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 1, 0, 1 ), Color( 0.764706, 1, 0, 1 ), Color( 1, 1, 0, 1 ) ]
 dye = {
 "eye": 17,
 "fit": 18,
@@ -108,6 +111,7 @@ queue_write = "0"
 position = Vector2( 1500, 450 )
 dir = 2
 idle_anim = "handstand"
+palette = [ Color( 1, 1, 1, 1 ), Color( 0.682353, 0.678431, 0.8, 1 ), Color( 0.4368, 0.4368, 0.52, 1 ), Color( 0, 0, 0, 1 ), Color( 0.478431, 0.25098, 0.423529, 1 ), Color( 0.741176, 0.407843, 0.505882, 1 ), Color( 1, 0.717647, 0.717647, 1 ), Color( 1, 0.866667, 0, 1 ), Color( 1, 0.686275, 0, 1 ), Color( 1, 0.509804, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0.796078, 1 ), Color( 1, 0, 1, 1 ), Color( 0.623529, 0.219608, 1, 1 ), Color( 0, 0.486275, 1, 1 ), Color( 0, 1, 1, 1 ), Color( 0, 1, 0, 1 ), Color( 0.764706, 1, 0, 1 ), Color( 1, 1, 0, 1 ) ]
 dye = {
 "eye": 13,
 "fit": 15,
