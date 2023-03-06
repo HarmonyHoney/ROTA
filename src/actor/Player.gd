@@ -159,8 +159,9 @@ func _ready():
 	
 	if !anim.has_animation(idle_anim): idle_anim = "idle"
 	anim_flip(idle_anim)
-		
-	anim.play(idle_anim, 0.0)
+#	randomize()
+#	anim.play(idle_anim, 0.0)
+#	anim.seek(2.0, true)
 	
 	if is_npc:
 		z_index -= 1
@@ -201,17 +202,19 @@ func scene():
 	sprites.rotation = turn_to
 	turn_clock = turn_time
 	
+	# face left or right
+	randomize()
+	self.dir_x = 1 if randf() > 0.5 else -1
+	
 	# snap to floor
 	var v = Vector2.DOWN * 150
 	if test_move(transform, rot(v)):
 		move(v)
 		anim.play(idle_dir)
+		anim.seek(rand_range(0, anim.current_animation_length), true)
 	else:
 		anim.play("jump")
 	
-	# face left or right
-	randomize()
-	self.dir_x = 1 if randf() > 0.5 else -1
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
