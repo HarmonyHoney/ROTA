@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/shader/sky.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/autoload/BG.gd" type="Script" id=2]
-[ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=3]
-[ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=4]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 1 )
@@ -13,7 +11,6 @@ shader_param/col2 = Color( 0, 0.917647, 1, 1 )
 [node name="BG" type="CanvasLayer"]
 layer = -5
 script = ExtResource( 2 )
-rot_speed = 1.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource( 2 )
@@ -22,100 +19,3 @@ margin_bottom = 720.0
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Center" type="Node2D" parent="."]
-visible = false
-position = Vector2( 640, 360 )
-
-[node name="Sun" type="Polygon2D" parent="Center"]
-position = Vector2( 350, 0 )
-color = Color( 1, 0.866667, 0, 1 )
-polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
-script = ExtResource( 3 )
-
-[node name="Polygon2D" type="Polygon2D" parent="Center/Sun"]
-color = Color( 1, 1, 0, 1 )
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="Polygon2D2" type="Polygon2D" parent="Center/Sun"]
-rotation = 0.785398
-color = Color( 1, 1, 0, 1 )
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="Polygon2D3" type="Polygon2D" parent="Center/Sun"]
-rotation = 1.5708
-color = Color( 1, 1, 0, 1 )
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="Polygon2D4" type="Polygon2D" parent="Center/Sun"]
-rotation = 2.35619
-color = Color( 1, 1, 0, 1 )
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="Polygon2D5" type="Polygon2D" parent="Center/Sun"]
-rotation = 3.14159
-color = Color( 1, 1, 0, 1 )
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="Polygon2D6" type="Polygon2D" parent="Center/Sun"]
-rotation = 3.92699
-color = Color( 1, 1, 0, 1 )
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="Polygon2D7" type="Polygon2D" parent="Center/Sun"]
-rotation = 4.71239
-color = Color( 1, 1, 0, 1 )
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="Polygon2D8" type="Polygon2D" parent="Center/Sun"]
-rotation = 5.49779
-color = Color( 1, 1, 0, 1 )
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
