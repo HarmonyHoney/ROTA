@@ -130,7 +130,7 @@ export var chat_offset := Vector2(0, -110) setget set_chat_offset
 onready var arrow := get_node_or_null("Arrow")
 onready var chat := get_node_or_null("Arrow/Chat")
 
-export var snowball_scene : PackedScene
+var snowball_scene : PackedScene = preload("res://src/actor/Snowball.tscn")
 var snowballs = []
 
 func _enter_tree():
@@ -158,16 +158,7 @@ func _ready():
 	anim.add_animation("idle_left", l)
 	
 	if !anim.has_animation(idle_anim): idle_anim = "idle"
-	if idle_anim != "idle":
-		var a = anim.get_animation(idle_anim).duplicate()
-		for t in a.get_track_count():
-			var p = a.track_get_path(t)
-			if "position:x" in str(p) or "rotation_degrees" in str(p):
-				var c = a.track_get_key_count(t)
-				print(p, " ", c)
-				for k in c:
-					a.bezier_track_set_key_value(t, k, -a.bezier_track_get_key_value(t, k))
-		anim.add_animation(idle_anim + "_left", a)
+	anim_flip(idle_anim)
 		
 	anim.play(idle_anim, 0.0)
 	
@@ -401,6 +392,7 @@ func _physics_process(delta):
 			if is_floor:
 				
 				# animation
+				anim.playback_speed = 1.0 if joy.x == 0 else dir_x
 				anim.play(idle_dir if joy.x == 0 else "walk")
 				
 				# hold cooldown
@@ -566,11 +558,10 @@ func set_dir(arg := dir):
 	emit_signal("turn_cam", turn_to)
 
 func set_dir_x(arg := dir_x):
-	dir_x = sign(arg)
+	dir_x = -1.0 if arg < 0 else 1.0
 	areas.scale.x = dir_x
 	var l = idle_anim + "_left"
-	idle_dir = idle_anim if dir_x > 0 else l if anim.has_animation(l) else "idle"
-	anim.playback_speed = dir_x
+	idle_dir = idle_anim if dir_x > 0 else (l if anim.has_animation(l) else "idle")
 	emit_signal("scale_x", dir_x)
 
 func set_jump_height(arg):
@@ -770,6 +761,22 @@ func release_anim():
 	
 	anim.play("release")
 
+func anim_flip(_name := ""):
+	if anim.has_animation(_name) and !anim.has_animation(_name + "_left"):
+		var a = anim.get_animation(_name).duplicate()
+		for t in a.get_track_count():
+			var p = str(a.track_get_path(t))
+			if "Left" in p: p = p.replace("Left", "Right")
+			elif "Right" in p: p = p.replace("Right", "Left")
+			a.track_set_path(t, p)
+			
+			if "position:x" in p or "rotation_degrees" in p:
+				var c = a.track_get_key_count(t)
+				print(name , " ", p, " ", c)
+				for k in c:
+					a.bezier_track_set_key_value(t, k, -a.bezier_track_get_key_value(t, k))
+		anim.add_animation(_name + "_left", a)
+
 func throw_snowball():
 	var s = null
 	for i in snowballs:
@@ -784,8 +791,8 @@ func throw_snowball():
 		s.owner = p
 		snowballs.append(s)
 	
-	s.throw(spr_hand_l.global_position, Vector2(500 * dir_x, -50), dir)
-	print(name, " throw snowball ", s)
+	s.throw((spr_hand_l if dir_x > 0 else spr_hand_r).global_position, s.throw_vel * Vector2(dir_x, 1), dir)
+	#print(name, " throw snowball ", s)
 
 func enter_door():
 	anim.play(idle_dir)

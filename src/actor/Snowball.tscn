@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Snowball.gd" type="Script" id=2]
+[ext_resource path="res://media/audio/sfx/piano_high.wav" type="AudioStream" id=3]
+[ext_resource path="res://media/audio/sfx/Randomize105.wav" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -9,8 +11,10 @@
 z_index = 10
 z_as_relative = false
 collision_layer = 32
-collision_mask = 7
+collision_mask = 71
 script = ExtResource( 2 )
+snow_gravity = Vector2( 0, 500 )
+throw_vel = Vector2( 500, -200 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -21,6 +25,18 @@ script = ExtResource( 1 )
 is_baked = false
 radius = 10.0
 points = 12
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource( 3 )
+attenuation = 4.0
+bus = "SFX"
+
+[node name="Throw" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource( 4 )
+attenuation = 4.0
+bus = "SFX"
 
 [connection signal="area_entered" from="." to="." method="area_entered"]
 [connection signal="body_entered" from="." to="." method="body_entered"]

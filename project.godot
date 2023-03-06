@@ -365,6 +365,7 @@ debug_warp={
 2d_physics/layer_4="spike"
 2d_physics/layer_5="detail"
 2d_physics/layer_6="snowball"
+2d_physics/layer_7="snowball_target"
 2d_physics/layer_11="door"
 2d_physics/layer_12="goal"
 

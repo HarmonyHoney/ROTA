@@ -102,7 +102,7 @@ hairstyle_front = 8
 [node name="NPC5" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( -350, 400 )
 dir = 3
-idle_anim = "idle"
+idle_anim = "snowball"
 dye = {
 "eye": 15,
 "fit": 18,
@@ -142,7 +142,7 @@ dye = {
 }
 hairstyle_front = 6
 hat = 3
-lines = [ "Wanna have a snowball fight? (:", "I'm gonna crush you!", "The snow is light and fluffy!", "It won't hurt thaat bad ;P", "I haven't seen Robbi since my astonishing victory (;", "Watch your back..", "" ]
+lines = [ "Wanna have a snowball fight? (:", "I'm gonna crush you!", "The snow is light and fluffy!", "It won't hurt thaat bad ;P", "I haven't seen Robbi since my astonishing victory (;", "Watch your back..", "Snowball Snowball Snooowbaaall", "Ooo yeah right in the face!" ]
 queue_write = "0"
 
 [node name="Details" type="Node2D" parent="."]
