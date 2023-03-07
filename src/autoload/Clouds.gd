@@ -41,10 +41,11 @@ func scene():
 	color_rect.rect_position = -color_rect.rect_size / 2.0
 	length = max(color_rect.rect_size.x, color_rect.rect_size.y) / 2.0
 	
-	sun.position = Vector2(length + 750, 0)
+	sun.position = Vector2(length + 650, 0)
 	moon.position = sun.position
 	sun.visible = BG.colors == 0 or BG.colors == 3
 	moon.visible = !sun.visible
+	moon.scale.x = -1 if randf() < 0.5 else 1.0
 	stars.rotation = rand_range(0.0, TAU)
 	
 	print("start: ", start, " end: ", end, " length: ", length, " global_position: ", global_position)

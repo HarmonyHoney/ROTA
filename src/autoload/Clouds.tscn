@@ -1,12 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=1]
 [ext_resource path="res://src/autoload/Clouds.gd" type="Script" id=2]
 [ext_resource path="res://src/actor/shape/TreeTop.gd" type="Script" id=3]
-[ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=4]
+[ext_resource path="res://src/shader/moon.gdshader" type="Shader" id=4]
+[ext_resource path="res://media/image/box/round_rect100.png" type="Texture" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, -0.527273, 0, 1, Vector2( 1, 0.472727 ), -0.527273, 0.0, 1, 0 ]
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 4 )
+shader_param/point = Vector2( 1.5, 0.5 )
+shader_param/radius = 0.5
+shader_param/outside_color = Color( 1, 1, 1, 1 )
+shader_param/inside_color = Color( 1, 1, 1, 0.2 )
+shader_param/time_scale = 0.005
 
 [node name="Clouds" type="Node2D"]
 z_index = -50
@@ -45,111 +57,106 @@ margin_bottom = 150.0
 [node name="Sun" type="Polygon2D" parent="Center/Stars"]
 position = Vector2( 350, 0 )
 color = Color( 1, 0.866667, 0, 1 )
-antialiased = true
 polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
 script = ExtResource( 1 )
 
-[node name="Polygon2D" type="Polygon2D" parent="Center/Stars/Sun"]
-color = Color( 1, 1, 0, 1 )
-antialiased = true
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
+[node name="Line2D" type="Line2D" parent="Center/Stars/Sun"]
+points = PoolVector2Array( 75, 0, 100, 0 )
+width = 30.0
+width_curve = SubResource( 2 )
+default_color = Color( 1, 1, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 5
 
-[node name="Polygon2D2" type="Polygon2D" parent="Center/Stars/Sun"]
-rotation = 0.785398
-color = Color( 1, 1, 0, 1 )
-antialiased = true
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
+[node name="Line2D2" type="Line2D" parent="Center/Stars/Sun"]
+rotation = 0.785397
+points = PoolVector2Array( 75, 0, 100, 0 )
+width = 30.0
+width_curve = SubResource( 2 )
+default_color = Color( 1, 1, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 5
 
-[node name="Polygon2D3" type="Polygon2D" parent="Center/Stars/Sun"]
-rotation = 1.5708
-color = Color( 1, 1, 0, 1 )
-antialiased = true
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
+[node name="Line2D3" type="Line2D" parent="Center/Stars/Sun"]
+rotation = 1.57079
+points = PoolVector2Array( 75, 0, 100, 0 )
+width = 30.0
+width_curve = SubResource( 2 )
+default_color = Color( 1, 1, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 5
 
-[node name="Polygon2D4" type="Polygon2D" parent="Center/Stars/Sun"]
+[node name="Line2D4" type="Line2D" parent="Center/Stars/Sun"]
 rotation = 2.35619
-color = Color( 1, 1, 0, 1 )
-antialiased = true
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
+points = PoolVector2Array( 75, 0, 100, 0 )
+width = 30.0
+width_curve = SubResource( 2 )
+default_color = Color( 1, 1, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 5
 
-[node name="Polygon2D5" type="Polygon2D" parent="Center/Stars/Sun"]
+[node name="Line2D5" type="Line2D" parent="Center/Stars/Sun"]
 rotation = 3.14159
-color = Color( 1, 1, 0, 1 )
-antialiased = true
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
+points = PoolVector2Array( 75, 0, 100, 0 )
+width = 30.0
+width_curve = SubResource( 2 )
+default_color = Color( 1, 1, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 5
 
-[node name="Polygon2D6" type="Polygon2D" parent="Center/Stars/Sun"]
+[node name="Line2D6" type="Line2D" parent="Center/Stars/Sun"]
 rotation = 3.92699
-color = Color( 1, 1, 0, 1 )
-antialiased = true
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
+points = PoolVector2Array( 75, 0, 100, 0 )
+width = 30.0
+width_curve = SubResource( 2 )
+default_color = Color( 1, 1, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 5
 
-[node name="Polygon2D7" type="Polygon2D" parent="Center/Stars/Sun"]
-rotation = 4.71239
-color = Color( 1, 1, 0, 1 )
-antialiased = true
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
+[node name="Line2D7" type="Line2D" parent="Center/Stars/Sun"]
+rotation = 4.71238
+points = PoolVector2Array( 75, 0, 100, 0 )
+width = 30.0
+width_curve = SubResource( 2 )
+default_color = Color( 1, 1, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 5
 
-[node name="Polygon2D8" type="Polygon2D" parent="Center/Stars/Sun"]
-rotation = 5.49779
-color = Color( 1, 1, 0, 1 )
-antialiased = true
-polygon = PoolVector2Array( 105, 0.0999999, 104.344, 2.55, 102.55, 4.34352, 100.1, 5, 59.9, 5, 57.45, 4.34352, 55.6565, 2.55, 55, 0.0999995, 55, -0.1, 55.6565, -2.55, 57.45, -4.34352, 59.9, -5, 100.1, -5, 102.55, -4.34352, 104.344, -2.55, 105, -0.099999 )
-script = ExtResource( 4 )
-is_baked = false
-size = Vector2( 25, 5 )
-rect_offset = Vector2( 80, 0 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
+[node name="Line2D8" type="Line2D" parent="Center/Stars/Sun"]
+rotation = 5.49778
+points = PoolVector2Array( 75, 0, 100, 0 )
+width = 30.0
+width_curve = SubResource( 2 )
+default_color = Color( 1, 1, 0, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 5
 
 [node name="Moon" type="Polygon2D" parent="Center/Stars"]
+modulate = Color( 0.937255, 0.94902, 1, 1 )
+material = SubResource( 4 )
 position = Vector2( 350, 0 )
 rotation = 1.57079
-scale = Vector2( 2, 2 )
-color = Color( 0.937255, 0.94902, 1, 1 )
-antialiased = true
-polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -4, 43, 13, 35, 23, 19, 27, 0, 23, -19, 12, -35, -4, -43, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
+texture = ExtResource( 5 )
+texture_offset = Vector2( 100, 100 )
+texture_scale = Vector2( 0.5, 0.5 )
+polygon = PoolVector2Array( 100, 0, 92.3879, 38.2683, 70.7107, 70.7107, 38.2683, 92.3879, -4.37114e-06, 100, -38.2683, 92.388, -70.7107, 70.7107, -92.3879, 38.2683, -100, -8.74228e-06, -92.3879, -38.2683, -70.7107, -70.7107, -38.2684, -92.3879, 1.19249e-06, -100, 38.2684, -92.3879, 70.7107, -70.7107, 92.388, -38.2683 )
+script = ExtResource( 1 )
+radius = 100.0
 
 [node name="Clouds" type="Node2D" parent="Center"]
