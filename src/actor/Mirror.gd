@@ -6,7 +6,7 @@ export var door_path : NodePath
 onready var door_node := get_node_or_null(door_path)
 onready var p = Shared.player
 onready var back_rect : Rect2 = $Back.get_rect()
-onready var rig := $Rig
+onready var rig := $Back/Center/Rig
 onready var rig_ease := EaseMover.new()
 onready var stage := $Stage
 
@@ -27,10 +27,6 @@ func _ready():
 	rig.global_rotation = 0
 	rig_ease.clock = rig_ease.time
 	create_rig()
-	
-	var sm = $Wall/ColorRect.material
-	for i in ["col1", "col2"]:
-		sm.set_shader_param(i, BG.mat.get_shader_param(i))
 
 func _physics_process(delta):
 	var s = rig_ease.count(delta)
@@ -44,6 +40,7 @@ func create_rig():
 		i.queue_free()
 	
 	var s = p.sprites.duplicate()
+	s.get_node("SpriteArea").queue_free()
 	s.modulate.a = 1
 	rig.add_child(s)
 	
@@ -83,7 +80,7 @@ func idle_frame():
 	
 	dist = to_local(p.global_position)
 	rig.position = dist + (offset * dir_x)
-	rig.visible =  back_rect.grow(hide_distance).has_point(rig.position)
+	rig.visible = back_rect.grow(hide_distance).has_point(rig.position)
 	
 	if abs(dist.x) > 200:
 		dir_x = -sign(dist.x)
