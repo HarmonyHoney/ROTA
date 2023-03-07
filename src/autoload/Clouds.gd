@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var hide := $Hide
-onready var circle := $Hide/Circle
+onready var cloud := $Hide/Cloud
 onready var color_rect := $Hide/ColorRect
 
 onready var center := $Center
@@ -60,16 +60,29 @@ func _physics_process(delta):
 	stars.rotate(deg2rad(star_speed * delta * -star_dir))
 
 func create_clouds():
-	for i in clouds.get_children():
-		i.queue_free()
+	var i = 0
+	var gc = clouds.get_children()
+	var gcs = gc.size()
 	
-	for x in 20:
-		for y in 3 + x:
-			var c = circle.duplicate()
-			clouds.add_child(c)
+	for x in (length / 50.0) + 5:
+		for y in max(3, x):
+			var c = null
+			if i < gcs:
+				c = gc[i]
+			else:
+				c = cloud.duplicate()
+				clouds.add_child(c)
 			c.owner = clouds
-			c.position = Vector2((x + 2) * 200, 0).rotated(rand_range(0.0, TAU))
+			c.position = Vector2(((x + 2) * 200) + rand_range(0.0, 100.0), 0).rotated(rand_range(0.0, TAU))
+			c.scale = Vector2.ONE * rand_range(0.25, 2.0)
+			c.rotation = randf() * TAU
+			c.visible = true
 			if c.position.length() > length + 500:
 				#c.color.a = lerp(c.color.a, 1.0, clamp((c.position.length() - (length + 700)) / 500.0, 0, 1))
 				c.color.a = 0.8
-		
+			i += 1
+	
+	if i < gcs:
+		for a in range(i, gcs):
+			gc[a].visible = false
+	
