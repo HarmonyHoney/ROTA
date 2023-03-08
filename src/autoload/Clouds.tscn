@@ -17,7 +17,7 @@ shader = ExtResource( 4 )
 shader_param/point = Vector2( 1.5, 0.5 )
 shader_param/radius = 0.5
 shader_param/outside_color = Color( 1, 1, 1, 1 )
-shader_param/inside_color = Color( 1, 1, 1, 0.2 )
+shader_param/inside_color = Color( 1, 1, 1, 0.1 )
 shader_param/time_scale = 0.005
 
 [node name="Clouds" type="Node2D"]
@@ -148,7 +148,7 @@ end_cap_mode = 2
 round_precision = 5
 
 [node name="Moon" type="Polygon2D" parent="Center/Stars"]
-modulate = Color( 0.937255, 0.94902, 1, 1 )
+modulate = Color( 1, 0.701961, 0, 1 )
 material = SubResource( 4 )
 position = Vector2( 350, 0 )
 rotation = 1.57079
