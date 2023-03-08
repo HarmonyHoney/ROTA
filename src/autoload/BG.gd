@@ -9,7 +9,7 @@ func _ready():
 	self.colors = 0
 
 func set_colors(arg := 0):
-	colors = clamp(arg, 0, (palette.size() / 2) - 1)
+	colors =  posmod(arg, palette.size() / 2)
 	#print("BG: ", colors, " pal: ", palette.size(), " / 2 = ", palette.size() / 2)
 	if mat:
 		mat.set_shader_param("col1", palette[colors * 2])

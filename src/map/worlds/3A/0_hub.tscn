@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/actor/NPC.tscn" type="PackedScene" id=15]
 
 [node name="Map" type="Node2D"]
 
@@ -61,6 +62,18 @@ scene_path = "res://src/map/worlds/3A/5.tscn"
 [node name="Door6" parent="Actors" instance=ExtResource( 10 )]
 position = Vector2( 2050, 250 )
 scene_path = "res://src/map/worlds/3A/6.tscn"
+
+[node name="NPC" parent="Actors" instance=ExtResource( 15 )]
+position = Vector2( 1650, 475 )
+dir = 3
+dye = {
+"eye": 2,
+"fit": 2,
+"hair": 1,
+"skin": 0
+}
+hairstyle_back = 3
+hairstyle_front = 4
 
 [node name="Details" type="Node2D" parent="."]
 
