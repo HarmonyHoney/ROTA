@@ -24,7 +24,7 @@
 [ext_resource path="res://src/menu/DemoShow.gd" type="Script" id=22]
 [ext_resource path="res://media/image/UI/godot_logo.svg" type="Texture" id=23]
 [ext_resource path="res://src/actor/door/DoorSpawn.tscn" type="PackedScene" id=24]
-[ext_resource path="res://src/actor/Snowball.tscn" type="PackedScene" id=25]
+[ext_resource path="res://src/theme/shadow_text.tres" type="Theme" id=25]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
@@ -131,7 +131,7 @@ margin_right = 249.0
 margin_bottom = 273.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 25 )
 text = "Play"
 align = 1
 valign = 1
@@ -147,6 +147,7 @@ margin_right = 316.0
 margin_bottom = 301.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
+theme = ExtResource( 25 )
 custom_fonts/font = ExtResource( 2 )
 text = "Makeover"
 align = 1
@@ -159,6 +160,7 @@ margin_right = 292.0
 margin_bottom = 329.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
+theme = ExtResource( 25 )
 custom_fonts/font = ExtResource( 2 )
 text = "Options"
 align = 1
@@ -174,6 +176,7 @@ margin_right = 286.0
 margin_bottom = 385.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
+theme = ExtResource( 25 )
 custom_fonts/font = ExtResource( 2 )
 text = "Credits"
 align = 1
@@ -189,6 +192,7 @@ margin_right = 336.0
 margin_bottom = 441.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
+theme = ExtResource( 25 )
 custom_fonts/font = ExtResource( 2 )
 text = "Store Page"
 align = 1
@@ -205,6 +209,7 @@ margin_right = 249.0
 margin_bottom = 497.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
+theme = ExtResource( 25 )
 custom_fonts/font = ExtResource( 2 )
 text = "Quit"
 align = 1
@@ -666,18 +671,6 @@ bg_palette = 1
 
 [node name="Spawn" parent="Map/Actors" instance=ExtResource( 24 )]
 position = Vector2( 1825, 0 )
-
-[node name="Snowball" parent="Map/Actors" instance=ExtResource( 25 )]
-position = Vector2( 1473, 296 )
-
-[node name="Snowball2" parent="Map/Actors" instance=ExtResource( 25 )]
-position = Vector2( 1525, 247 )
-
-[node name="Snowball3" parent="Map/Actors" instance=ExtResource( 25 )]
-position = Vector2( 1588, 147 )
-
-[node name="Snowball4" parent="Map/Actors" instance=ExtResource( 25 )]
-position = Vector2( 1588, 147 )
 
 [node name="AttractMode" type="Node2D" parent="Map"]
 position = Vector2( 1800, 650 )

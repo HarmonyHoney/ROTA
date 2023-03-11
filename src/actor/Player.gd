@@ -802,7 +802,7 @@ func enter_door():
 	joy = Vector2.ZERO
 
 func unpause():
-	print("unpause")
+	#print("unpause")
 	unpause_tick = 0
 	is_unpause = true
 	btn_jump = false

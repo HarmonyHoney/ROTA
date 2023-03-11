@@ -3,12 +3,14 @@ extends Node2D
 onready var hide := $Hide
 onready var cloud := $Hide/Cloud
 onready var color_rect := $Hide/ColorRect
+onready var particles := $Hide/Particles2D
 
 onready var center := $Center
 onready var clouds := $Center/Clouds
 onready var stars := $Center/Stars
 onready var sun := $Center/Stars/Sun
 onready var moon := $Center/Stars/Moon
+onready var snow := $Center/Snow
 
 export var cloud_speed := 1.0
 export var star_speed := 0.5
@@ -18,6 +20,9 @@ var star_dir := 1.0
 var length = 100.0
 var dir := 1.0
 var speed_mod := 1.0
+
+var clock := 0.0
+var step := 1.0
 
 func _enter_tree():
 	Shared.connect("scene_changed", self, "scene")
@@ -54,35 +59,82 @@ func scene():
 	star_dir = (-1.0 if randf() > 0.5 else 1.0) * rand_range(0.6, 1.0)
 	#speed_mod = rand_range(0.6, 1.0) * dir
 	create_clouds()
+	yield(get_tree(), "physics_frame")
+	solve_snow()
 
 func _physics_process(delta):
 	clouds.rotate(deg2rad(cloud_speed * delta * cloud_dir))
+	snow.rotation = clouds.rotation
 	stars.rotate(deg2rad(star_speed * delta * -star_dir))
+	
+	clock += delta
+	if clock > step:
+		clock -= step
+		solve_snow()
 
 func create_clouds():
-	var i = 0
+	var ci = -1
+	var pi = -1
 	var gc = clouds.get_children()
 	var gcs = gc.size()
+	var pc = snow.get_children()
+	var pcs = pc.size()
+	var is_snow = "2A/" in Shared.csfn or "3B" in Shared.csfn
 	
 	for x in (length / 50.0) + 5:
 		for y in max(3, x):
+			ci += 1
 			var c = null
-			if i < gcs:
-				c = gc[i]
+			if ci < gcs:
+				c = gc[ci]
 			else:
 				c = cloud.duplicate()
 				clouds.add_child(c)
-			c.owner = clouds
-			c.position = Vector2(((x + 2) * 200) + rand_range(0.0, 100.0), 0).rotated(rand_range(0.0, TAU))
+				c.owner = clouds
+			
+			var angle = rand_range(0.0, TAU)
+			c.position = Vector2(((x + 2) * 200) + rand_range(0.0, 100.0), 0).rotated(angle)
 			c.scale = Vector2.ONE * rand_range(0.25, 2.0)
 			c.rotation = randf() * TAU
 			c.visible = true
-			if c.position.length() > length + 500:
-				#c.color.a = lerp(c.color.a, 1.0, clamp((c.position.length() - (length + 700)) / 500.0, 0, 1))
+			c.color.a = 0.3
+			
+			var cpl = c.position.length()
+			if cpl > length + 500:
+				#c.color.a = lerp(c.color.a, 1.0, clamp((cpl - (length + 700)) / 500.0, 0, 1))
 				c.color.a = 0.8
-			i += 1
+				
+				if is_snow and cpl < length + 1000:
+					pi += 1
+					var p = null
+					if pi < pcs:
+						p = pc[pi]
+					else:
+						p = particles.duplicate()
+						snow.add_child(p)
+						p.owner = snow
+						p.process_material = p.process_material.duplicate()
+					
+					p.position = c.position
+					p.rotation = angle + (PI/2.0)
+					p.process_material.emission_sphere_radius = c.scale.x * 150.0
+					p.amount = c.scale.x * 200
+					p.visible = true
+					p.emitting = true
 	
-	if i < gcs:
-		for a in range(i, gcs):
+	if ci < gcs:
+		for a in range(max(ci, 0), gcs):
 			gc[a].visible = false
-	
+	if pi < pcs:
+		for a in range(max(pi, 0), pcs):
+			pc[a].visible = false
+			pc[a].emitting = false
+
+
+func solve_snow():
+	for i in snow.get_children():
+		var r = i.get_child(0)
+		var rp = r.get_collision_point()
+		var d = r.global_position.distance_to(rp)
+		#print(i.name, " ", d)
+		i.lifetime = (d / 50.0)
