@@ -1,14 +1,12 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=1]
 [ext_resource path="res://src/autoload/Clouds.gd" type="Script" id=2]
 [ext_resource path="res://src/actor/shape/TreeTop.gd" type="Script" id=3]
 [ext_resource path="res://src/shader/moon.gdshader" type="Shader" id=4]
 [ext_resource path="res://media/image/box/round_rect100.png" type="Texture" id=5]
-[ext_resource path="res://media/image/details/circle100.png" type="Texture" id=6]
-
-[sub_resource type="CanvasItemMaterial" id=1]
-blend_mode = 1
+[ext_resource path="res://media/image/details/raindrop2.svg" type="Texture" id=6]
+[ext_resource path="res://media/image/details/circle100.png" type="Texture" id=7]
 
 [sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0, 0.05, 0.95, 1 )
@@ -23,7 +21,7 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.930435, 1 ), 0.0, 0.0, 0, 
 [sub_resource type="CurveTexture" id=15]
 curve = SubResource( 14 )
 
-[sub_resource type="ParticlesMaterial" id=13]
+[sub_resource type="ParticlesMaterial" id=16]
 emission_shape = 1
 emission_sphere_radius = 150.0
 flag_disable_z = true
@@ -37,6 +35,25 @@ scale = 0.05
 scale_random = 0.02
 scale_curve = SubResource( 15 )
 color_ramp = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=17]
+emission_shape = 1
+emission_sphere_radius = 150.0
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 5.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 200.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.15
+scale_random = 0.02
+scale_curve = SubResource( 15 )
+color = Color( 0, 0.909804, 1, 0.74902 )
+color_ramp = SubResource( 11 )
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, -0.527273, 0, 1, Vector2( 1, 0.472727 ), -0.527273, 0.0, 1, 0 ]
@@ -53,6 +70,10 @@ shader_param/time_scale = 0.005
 z_index = -50
 z_as_relative = false
 script = ExtResource( 2 )
+snow_mat = SubResource( 16 )
+snow_tex = ExtResource( 7 )
+rain_mat = SubResource( 17 )
+rain_tex = ExtResource( 6 )
 
 [node name="Hide" type="Node2D" parent="."]
 
@@ -81,7 +102,7 @@ amount = 200
 lifetime = 9.0
 preprocess = 10.0
 visibility_rect = Rect2( -400, -100, 800, 3000 )
-process_material = SubResource( 13 )
+process_material = SubResource( 17 )
 texture = ExtResource( 6 )
 
 [node name="RayCast2D" type="RayCast2D" parent="Hide/Particles2D"]
@@ -199,6 +220,6 @@ radius = 100.0
 
 [node name="Clouds" type="Node2D" parent="Center"]
 
-[node name="Snow" type="Node2D" parent="Center"]
+[node name="Fall" type="Node2D" parent="Center"]
 z_index = 65
 z_as_relative = false
