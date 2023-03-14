@@ -11,6 +11,8 @@ shader_param/col2 = Color( 0, 0.917647, 1, 1 )
 [node name="BG" type="CanvasLayer"]
 layer = -5
 script = ExtResource( 2 )
+palettes = [ PoolColorArray( 0, 0.384314, 1, 1, 0, 0.917647, 1, 1, 0.686275, 0, 0.74902, 1, 0, 0.47451, 0.858824, 1, 1, 0.329412, 0, 1 ), PoolColorArray( 0, 0.917647, 1, 1, 0, 0.384314, 1, 1, 0.4, 0.4, 1, 1, 0, 0, 0.301961, 1 ), PoolColorArray( 1, 0, 1, 1, 0, 0.615686, 1, 1, 0.686275, 0, 0.74902, 1, 0, 0.47451, 0.858824, 1 ), PoolColorArray( 0, 0.384314, 1, 1, 0, 0.917647, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0.623529, 1, 1, 1, 0, 1, 0.780392, 0, 1, 1 ) ]
+daytime = 30.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource( 2 )
