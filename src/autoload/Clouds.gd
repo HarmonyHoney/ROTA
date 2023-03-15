@@ -54,9 +54,7 @@ func scene():
 	length = max(color_rect.rect_size.x, color_rect.rect_size.y) / 2.0
 	
 	sun.position = Vector2(length + 650, 0)
-	moon.position = sun.position
-	sun.visible = BG.colors == 0 or BG.colors == 3
-	moon.visible = !sun.visible
+	moon.position = -sun.position
 	moon.scale.x = -1 if randf() < 0.5 else 1.0
 	stars.rotation = rand_range(0.0, TAU)
 	
@@ -72,7 +70,12 @@ func scene():
 func _physics_process(delta):
 	clouds.rotate(deg2rad(cloud_speed * delta * cloud_dir))
 	precip.rotation = clouds.rotation
+	stars.rotation = BG.frac * TAU
 	stars.rotate(deg2rad(star_speed * delta * -star_dir))
+	
+	var sunf = ease(abs(BG.frac - 0.5) * 2.0, -7)
+	sun.modulate.a = sunf
+	moon.modulate.a = 1.0 - sunf
 	
 	clock += delta
 	if clock > step:

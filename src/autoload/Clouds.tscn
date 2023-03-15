@@ -207,7 +207,7 @@ end_cap_mode = 2
 round_precision = 5
 
 [node name="Moon" type="Polygon2D" parent="Center/Stars"]
-modulate = Color( 1, 0.701961, 0, 1 )
+self_modulate = Color( 1, 0.701961, 0, 1 )
 material = SubResource( 4 )
 position = Vector2( 350, 0 )
 rotation = 1.57079
