@@ -76,6 +76,7 @@ func _physics_process(delta):
 	var sunf = ease(abs(BG.frac - 0.5) * 2.0, -7)
 	sun.modulate.a = sunf
 	moon.modulate.a = 1.0 - sunf
+	$Center/Stars/Stars.modulate.a = 1.0 - sunf
 	
 	clock += delta
 	if clock > step:
