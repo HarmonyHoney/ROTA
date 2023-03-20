@@ -40,6 +40,7 @@ z_index = 100
 z_as_relative = false
 texture = ExtResource( 5 )
 script = ExtResource( 7 )
+is_night = true
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

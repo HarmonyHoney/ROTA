@@ -34,6 +34,7 @@ z_index = 100
 z_as_relative = false
 texture = ExtResource( 5 )
 script = ExtResource( 7 )
+is_night = true
 
 [node name="Spring" type="Node2D" parent="."]
 script = ExtResource( 3 )

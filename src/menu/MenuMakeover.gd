@@ -57,7 +57,7 @@ func match_player():
 	outfit([player.hairstyle_front, player.hairstyle_back, player.dye["hair"], player.dye["eye"], player.dye["skin"], player.dye["fit"]])
 
 func preset():
-	var h = [[0,8], [1,9], [2,3], [2,7], [3,2], [3,4], [4,1], [5,1], [6,5]]
+	var h = [[7,0], [1,9], [2,3], [2,7], [3,2], [3,4], [4,1], [5,1], [6,5]]
 	h.shuffle()
 	
 	var skin = 4 + (randi() % 5)

@@ -10,6 +10,7 @@ onready var clouds := $Center/Clouds
 onready var stars := $Center/Stars
 onready var sun := $Center/Stars/Sun
 onready var moon := $Center/Stars/Moon
+onready var night_sky := $Center/Stars/Stars
 onready var precip := $Center/Fall
 
 export var cloud_speed := 1.0
@@ -28,6 +29,8 @@ export var snow_mat : ParticlesMaterial
 export var snow_tex : Texture
 export var rain_mat : ParticlesMaterial
 export var rain_tex : Texture
+
+var sun_frac := 0.5
 
 func _enter_tree():
 	Shared.connect("scene_changed", self, "scene")
@@ -73,10 +76,10 @@ func _physics_process(delta):
 	stars.rotation = BG.frac * TAU
 	stars.rotate(deg2rad(star_speed * delta * -star_dir))
 	
-	var sunf = ease(abs(BG.frac - 0.5) * 2.0, -7)
-	sun.modulate.a = sunf
-	moon.modulate.a = 1.0 - sunf
-	$Center/Stars/Stars.modulate.a = 1.0 - sunf
+	sun_frac = ease(abs(BG.frac - 0.5) * 2.0, -7)
+	sun.modulate.a = sun_frac
+	moon.modulate.a = 1.0 - sun_frac
+	night_sky.modulate.a = 1.0 - sun_frac
 	
 	clock += delta
 	if clock > step:
