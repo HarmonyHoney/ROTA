@@ -32,6 +32,10 @@ export var rain_tex : Texture
 
 var sun_frac := 0.5
 
+var is_rain := false
+var rain_clock := 0.0
+export var rain_range := Vector2(30, 180)
+
 func _enter_tree():
 	Shared.connect("scene_changed", self, "scene")
 
@@ -85,6 +89,16 @@ func _physics_process(delta):
 	if clock > step:
 		clock -= step
 		solve_fall()
+	
+	
+	rain_clock -= delta
+	
+	if rain_clock < 0:
+		is_rain = !is_rain 
+		rain_clock = rand_range(rain_range.x, rain_range.y)
+		
+		for i in precip.get_children():
+			i.emitting = is_rain
 
 func create_clouds():
 	var ci = -1
@@ -94,7 +108,7 @@ func create_clouds():
 	var pc = precip.get_children()
 	var pcs = pc.size()
 	var is_snow = "2A/" in Shared.csfn or "3B" in Shared.csfn
-	var is_rain = (randf() > 0.8) and (Shared.map_name != "")
+	#var is_rain = (randf() > 0.8) and (Shared.map_name != "")
 	print("smn: ", Shared.map_name, " is_rain: ", is_rain, " is_snow: ", is_snow)
 	
 	
@@ -141,8 +155,8 @@ func create_clouds():
 					p.rotation = angle + (PI/2.0)
 					p.process_material.emission_sphere_radius = c.scale.x * 150.0
 					
-					p.visible = is_snow or is_rain
-					p.emitting = is_snow or is_rain
+					p.visible = is_rain #or is_snow
+					p.emitting = is_rain #or is_snow
 	
 	# clouds
 	if ci < gcs:

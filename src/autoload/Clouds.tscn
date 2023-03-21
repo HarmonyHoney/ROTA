@@ -98,6 +98,7 @@ snow_mat = SubResource( 16 )
 snow_tex = ExtResource( 7 )
 rain_mat = SubResource( 17 )
 rain_tex = ExtResource( 6 )
+rain_range = Vector2( 10, 30 )
 
 [node name="Hide" type="Node2D" parent="."]
 
@@ -124,7 +125,6 @@ margin_bottom = 150.0
 [node name="Particles2D" type="Particles2D" parent="Hide"]
 amount = 200
 lifetime = 9.0
-preprocess = 10.0
 visibility_rect = Rect2( -400, -100, 800, 3000 )
 process_material = SubResource( 17 )
 texture = ExtResource( 6 )
@@ -255,5 +255,4 @@ texture = ExtResource( 8 )
 [node name="Clouds" type="Node2D" parent="Center"]
 
 [node name="Fall" type="Node2D" parent="Center"]
-z_index = 65
 z_as_relative = false
