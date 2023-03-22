@@ -2,6 +2,7 @@ extends CanvasLayer
 
 onready var gem_label : Label = $Control/Top/Label
 onready var clock_label := $Control/Down/Label
+onready var color_rect := $Control/ColorRect
 
 var up = EaseMover.new()
 var down = EaseMover.new()
@@ -45,6 +46,7 @@ func _physics_process(delta):
 	keys.move(delta)
 	
 	clock_down.modulate.a = clock_ease.count(delta)
+	color_rect.self_modulate.a = 1.0 - Clouds.sun_frac
 
 func scene_changed(override := false):
 	up.clock = 0.0

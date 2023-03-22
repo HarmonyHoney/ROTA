@@ -12,18 +12,19 @@ onready var sun := $Center/Stars/Sun
 onready var moon := $Center/Stars/Moon
 onready var night_sky := $Center/Stars/Stars
 onready var precip := $Center/Fall
+onready var audio_rain := $AudioRain
+var precip_list = []
 
 export var cloud_speed := 1.0
 export var star_speed := 0.5
 var cloud_dir := 1.0
-var star_dir := 1.0
 
 var length = 100.0
 var dir := 1.0
 var speed_mod := 1.0
 
-var clock := 0.0
-var step := 1.0
+var solve_clock := 0.0
+var solve_step := 1.0
 
 export var snow_mat : ParticlesMaterial
 export var snow_tex : Texture
@@ -32,9 +33,12 @@ export var rain_tex : Texture
 
 var sun_frac := 0.5
 
-var is_rain := false
-var rain_clock := 0.0
-export var rain_range := Vector2(30, 180)
+export var is_rain := false setget set_is_rain
+var is_snow := false
+var rain_clock := 60.0
+export var rain_range := Vector2(60, 240)
+export var dry_range := Vector2(60, 720)
+
 
 func _enter_tree():
 	Shared.connect("scene_changed", self, "scene")
@@ -43,73 +47,70 @@ func _ready():
 	hide.visible = false
 	particles.emitting = false
 	particles.visible = false
+	
+	yield(Shared, "scene_changed")
+	randomize()
+	self.is_rain = randf() < 0.3
 
 func scene():
-	var start = Vector2.ONE * 900
-	var end = Vector2.ONE * -900
-
-	for i in get_tree().get_nodes_in_group("solid_map"):
-		for c in i.get_used_cells():
-			start.x = min(start.x, c.x)
-			start.y = min(start.y, c.y)
-			end.x = max(end.x, c.x)
-			end.y = max(end.y, c.y)
-	
-	global_position = (start.linear_interpolate(end, 0.5) + (Vector2.ONE * 0.5)) * 100.0
-	color_rect.rect_size = ((end - start) + Vector2.ONE) * 100.0
+	global_position = Shared.boundary_center
+	color_rect.rect_size = Shared.boundary_rect.size
 	color_rect.rect_position = -color_rect.rect_size / 2.0
 	length = max(color_rect.rect_size.x, color_rect.rect_size.y) / 2.0
 	
 	sun.position = Vector2(length + 650, 0)
 	moon.position = -sun.position
 	moon.scale.x = -1 if randf() < 0.5 else 1.0
-	stars.rotation = rand_range(0.0, TAU)
 	
-	print("start: ", start, " end: ", end, " length: ", length, " global_position: ", global_position)
-	
-	cloud_dir = (-1.0 if randf() > 0.5 else 1.0) * rand_range(0.6, 1.0)
-	star_dir = (-1.0 if randf() > 0.5 else 1.0) * rand_range(0.6, 1.0)
-	#speed_mod = rand_range(0.6, 1.0) * dir
+	is_snow = "2A/" in Shared.csfn or "3B/" in Shared.csfn
 	create_clouds()
-	yield(get_tree(), "physics_frame")
-	solve_fall()
+	solve_clock = 0.0
+	
+	if audio_rain:
+		audio_rain.playing = is_rain and !is_snow
 
 func _physics_process(delta):
 	clouds.rotate(deg2rad(cloud_speed * delta * cloud_dir))
 	precip.rotation = clouds.rotation
 	stars.rotation = BG.frac * TAU
-	stars.rotate(deg2rad(star_speed * delta * -star_dir))
 	
 	sun_frac = ease(abs(BG.frac - 0.5) * 2.0, -7)
 	sun.modulate.a = sun_frac
 	moon.modulate.a = 1.0 - sun_frac
 	night_sky.modulate.a = 1.0 - sun_frac
 	
-	clock += delta
-	if clock > step:
-		clock -= step
-		solve_fall()
-	
-	
 	rain_clock -= delta
-	
 	if rain_clock < 0:
-		is_rain = !is_rain 
-		rain_clock = rand_range(rain_range.x, rain_range.y)
-		
-		for i in precip.get_children():
-			i.emitting = is_rain
+		self.is_rain = !is_rain 
+	
+	if is_rain:
+		solve_clock -= delta
+		if solve_clock < 0:
+			solve_clock += solve_step
+			solve_fall()
+
+func set_is_rain(arg := is_rain):
+	is_rain = arg
+	var vec = rain_range if is_rain else dry_range
+	rain_clock = rand_range(vec.x, vec.y)
+	print("is_rain: ", is_rain, " audio: ", audio_rain, " precip_list: ", precip_list.size())
+	
+	for i in precip_list:
+		i.emitting = is_rain
+	solve_fall()
+
+	if audio_rain:
+		audio_rain.playing = is_rain and !is_snow
 
 func create_clouds():
+	cloud_dir = (-1.0 if randf() > 0.5 else 1.0) * rand_range(0.6, 1.0)
+	precip_list = []
 	var ci = -1
 	var pi = -1
 	var gc = clouds.get_children()
 	var gcs = gc.size()
 	var pc = precip.get_children()
 	var pcs = pc.size()
-	var is_snow = "2A/" in Shared.csfn or "3B" in Shared.csfn
-	#var is_rain = (randf() > 0.8) and (Shared.map_name != "")
-	print("smn: ", Shared.map_name, " is_rain: ", is_rain, " is_snow: ", is_snow)
 	
 	
 	for x in (length / 50.0) + 5:
@@ -144,19 +145,20 @@ func create_clouds():
 						p = particles.duplicate()
 						precip.add_child(p)
 						p.owner = precip
-						#p.process_material = p.process_material.duplicate()
 					
-					p.process_material = (snow_mat if is_snow else rain_mat).duplicate()
-					p.texture = snow_tex if is_snow else rain_tex
 					p.amount = c.scale.x * (200 if is_snow else 100)
-					p.lifetime = 9.0 if is_snow else 3.0
+					p.texture = snow_tex if is_snow else rain_tex
+					p.process_material = (snow_mat if is_snow else rain_mat).duplicate()
+					p.process_material.emission_sphere_radius = c.scale.x * 150.0
+					p.process_material.emission_box_extents = Vector3(c.scale.x * 175.0, 100, 0)
 					
 					p.position = c.position
 					p.rotation = angle + (PI/2.0)
-					p.process_material.emission_sphere_radius = c.scale.x * 150.0
 					
-					p.visible = is_rain #or is_snow
-					p.emitting = is_rain #or is_snow
+					p.visible = true
+					p.emitting = is_rain
+					
+					precip_list.append(p)
 	
 	# clouds
 	if ci < gcs:
@@ -168,11 +170,10 @@ func create_clouds():
 			pc[a].visible = false
 			pc[a].emitting = false
 
-
 func solve_fall():
-	for i in precip.get_children():
+	for i in precip_list:
 		var r = i.get_child(0)
 		var rp = r.get_collision_point()
 		var d = r.global_position.distance_to(rp)
-		#print(i.name, " ", d)
 		i.lifetime = (d / i.process_material.initial_velocity)
+		

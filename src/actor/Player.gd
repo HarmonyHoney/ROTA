@@ -487,7 +487,7 @@ func _physics_process(delta):
 			move(velocity * delta)
 	
 	# check boundary
-	if !Wipe.is_wipe and Boundary.is_outside(global_position):
+	if !Wipe.is_wipe and Shared.is_outside_boundary(global_position):
 		print(name, " outside boundary")
 		die()
 	

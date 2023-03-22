@@ -18,8 +18,7 @@ func _ready():
 	if Engine.editor_hint: return
 	
 	randomize()
-	if randf() > 0.5:
-		clock = time / 2.0
+	clock = randf() * time
 
 func _process(delta):
 	if Engine.editor_hint and !is_editor: return

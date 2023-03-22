@@ -10,6 +10,8 @@ var night_ease := EaseMover.new(4.0)
 
 onready var start_scale := scale
 
+func _ready():
+	night_ease.clock = night_ease.time * int(fposmod(BG.frac - 0.2, 1.0) < 0.5)
 
 func _physics_process(delta):
 	t += delta

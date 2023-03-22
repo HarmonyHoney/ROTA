@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/theme/shadow_text.tres" type="Theme" id=1]
 [ext_resource path="res://media/font/profile/UI_Keys.tres" type="DynamicFont" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/menu/options/Key.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/autoload/UI.gd" type="Script" id=10]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 2
 
 [node name="UI" type="CanvasLayer"]
 pause_mode = 2
@@ -22,10 +25,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
-visible = false
+modulate = Color( 1, 1, 1, 0.109804 )
+material = SubResource( 1 )
 margin_right = 1280.0
 margin_bottom = 720.0
-color = Color( 0, 0, 0, 0.4 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false

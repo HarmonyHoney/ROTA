@@ -128,7 +128,7 @@ func _physics_process(delta):
 		if sprite.position == Vector2.ZERO:
 			is_move = false
 			
-			if Boundary.is_outside(global_position):
+			if Shared.is_outside_boundary(global_position):
 				fall_out()
 			else:
 				audio_land.pitch_scale = rand_range(0.7, 1.3)
@@ -142,7 +142,7 @@ func _physics_process(delta):
 		
 		if !is_floor and !is_hold:
 			var move_count := 0
-			while !test_tile() and !Boundary.is_outside(global_position):
+			while !test_tile() and !Shared.is_outside_boundary(global_position):
 				move_tile()
 				move_count += 1
 			

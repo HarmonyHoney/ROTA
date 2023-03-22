@@ -172,7 +172,6 @@ UI="*res://src/autoload/UI.tscn"
 BG="*res://src/autoload/BG.tscn"
 Wipe="*res://src/autoload/Wipe.tscn"
 Guide="*res://src/actor/Guide.tscn"
-Boundary="*res://src/autoload/Boundary.tscn"
 CheatCode="*res://src/autoload/CheatCode.gd"
 Cutscene="*res://src/cutscene/Cutscene.tscn"
 MenuPause="*res://src/menu/MenuPause.tscn"
@@ -181,8 +180,8 @@ MenuRemap="*res://src/menu/options/MenuRemap.tscn"
 Music="*res://src/autoload/Music.tscn"
 Audio="*res://src/autoload/Audio.tscn"
 MenuMakeover="*res://src/menu/MenuMakeover.tscn"
-Steam="*res://addons/steam_api/steam.gd"
 Clouds="*res://src/autoload/Clouds.tscn"
+Steam="*res://addons/steam_api/steam.gd"
 
 [display]
 

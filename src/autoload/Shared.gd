@@ -112,6 +112,9 @@ Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
 
 var is_demo := false
 
+var boundary_rect := Rect2()
+var boundary_center := Vector2.ZERO
+
 func _ready():
 	Wipe.connect("complete", self, "wipe_complete")
 	#set_volume(0, 50)
@@ -233,7 +236,6 @@ func change_scene():
 		get_tree().change_scene(next_scene)
 		Cam.reset_zoom()
 	
-	BG.colors = 0
 	save_data()
 	try_achievement()
 	map_clock = 0.0
@@ -250,7 +252,27 @@ func change_scene():
 	
 	speedrun_goal(csfn, map_name != "" and not "hub" in map_name)
 	
+	set_boundary()
 	emit_signal("scene_changed")
+
+func set_boundary():
+	var start = Vector2.ONE * 900
+	var end = Vector2.ONE * -900
+
+	for i in get_tree().get_nodes_in_group("solid_map"):
+		for c in i.get_used_cells():
+			start.x = min(start.x, c.x)
+			start.y = min(start.y, c.y)
+			end.x = max(end.x, c.x)
+			end.y = max(end.y, c.y)
+	
+	boundary_center = (start.linear_interpolate(end, 0.5) + (Vector2.ONE * 0.5)) * 100.0
+	boundary_rect.size = ((end - start) + Vector2.ONE) * 100.0
+	boundary_rect.position = boundary_center - (boundary_rect.size / 2.0)
+	print("start: ", start, " end: ", end, " boundary_center: ", boundary_center)
+
+func is_outside_boundary(pos, margin := 10.0):
+	return boundary_rect != Rect2() and !boundary_rect.grow(margin * 100).has_point(pos)
 
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen

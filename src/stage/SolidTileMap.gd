@@ -15,13 +15,6 @@ func _ready():
 	
 	tile_set.tile_set_modulate(0, Color(0, 0, 0, 0))
 	make_tiles()
-	
-	if !Engine.editor_hint:
-		if get_used_rect() != Rect2(0, 0, 0, 0):
-			Boundary.add_shape(get_used_rect(), cell_size)
-		
-		if bg_palette > 0:
-			BG.colors = bg_palette
 
 func set_tileset(arg := detail):
 	detail = posmod(int(arg), 6)
