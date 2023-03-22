@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=1]
 [ext_resource path="res://src/autoload/Clouds.gd" type="Script" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://media/image/details/circle100.png" type="Texture" id=7]
 [ext_resource path="res://media/image/details/star.svg" type="Texture" id=8]
 [ext_resource path="res://media/audio/sfx/mixkit-light-rain-looping-1249.wav" type="AudioStream" id=9]
+[ext_resource path="res://media/image/details/circle.svg" type="Texture" id=10]
+[ext_resource path="res://src/shader/sky.gdshader" type="Shader" id=11]
+[ext_resource path="res://src/autoload/BG.gd" type="Script" id=12]
 
 [sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0, 0.05, 0.95, 1 )
@@ -54,10 +57,18 @@ scale_curve = SubResource( 15 )
 color = Color( 0, 0.909804, 1, 0.74902 )
 color_ramp = SubResource( 11 )
 
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 11 )
+shader_param/col1 = Color( 0, 0.878431, 1, 1 )
+shader_param/col2 = Color( 1, 0.639216, 0, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=21]
+blend_mode = 2
+
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=22]
 _data = [ Vector2( 0, 1 ), 0.0, -0.527273, 0, 1, Vector2( 1, 0.472727 ), -0.527273, 0.0, 1, 0 ]
 
 [sub_resource type="ShaderMaterial" id=4]
@@ -100,6 +111,33 @@ snow_tex = ExtResource( 7 )
 rain_mat = SubResource( 17 )
 rain_tex = ExtResource( 6 )
 is_rain = true
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -5
+script = ExtResource( 12 )
+palette = PoolColorArray( 1, 0.639216, 0, 1, 0, 0.878431, 1, 1, 0, 0.384314, 1, 1, 0.67451, 0, 1, 1, 0.686275, 0, 0.74902, 1, 0, 0, 0, 1 )
+clock = 190.0
+
+[node name="ColorRect" type="ColorRect" parent="BG"]
+material = SubResource( 2 )
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Front" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="ColorRect" type="ColorRect" parent="Front"]
+modulate = Color( 1, 1, 1, 0.109804 )
+material = SubResource( 21 )
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
 
 [node name="AudioRain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
@@ -152,7 +190,7 @@ script = ExtResource( 1 )
 [node name="Line2D" type="Line2D" parent="Center/Stars/Sun"]
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
-width_curve = SubResource( 2 )
+width_curve = SubResource( 22 )
 default_color = Color( 1, 1, 0, 1 )
 joint_mode = 2
 begin_cap_mode = 2
@@ -163,7 +201,7 @@ round_precision = 5
 rotation = 0.785397
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
-width_curve = SubResource( 2 )
+width_curve = SubResource( 22 )
 default_color = Color( 1, 1, 0, 1 )
 joint_mode = 2
 begin_cap_mode = 2
@@ -174,7 +212,7 @@ round_precision = 5
 rotation = 1.57079
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
-width_curve = SubResource( 2 )
+width_curve = SubResource( 22 )
 default_color = Color( 1, 1, 0, 1 )
 joint_mode = 2
 begin_cap_mode = 2
@@ -185,7 +223,7 @@ round_precision = 5
 rotation = 2.35619
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
-width_curve = SubResource( 2 )
+width_curve = SubResource( 22 )
 default_color = Color( 1, 1, 0, 1 )
 joint_mode = 2
 begin_cap_mode = 2
@@ -196,7 +234,7 @@ round_precision = 5
 rotation = 3.14159
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
-width_curve = SubResource( 2 )
+width_curve = SubResource( 22 )
 default_color = Color( 1, 1, 0, 1 )
 joint_mode = 2
 begin_cap_mode = 2
@@ -207,7 +245,7 @@ round_precision = 5
 rotation = 3.92699
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
-width_curve = SubResource( 2 )
+width_curve = SubResource( 22 )
 default_color = Color( 1, 1, 0, 1 )
 joint_mode = 2
 begin_cap_mode = 2
@@ -218,7 +256,7 @@ round_precision = 5
 rotation = 4.71238
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
-width_curve = SubResource( 2 )
+width_curve = SubResource( 22 )
 default_color = Color( 1, 1, 0, 1 )
 joint_mode = 2
 begin_cap_mode = 2
@@ -229,12 +267,20 @@ round_precision = 5
 rotation = 5.49778
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
-width_curve = SubResource( 2 )
+width_curve = SubResource( 22 )
 default_color = Color( 1, 1, 0, 1 )
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
+
+[node name="Light2D" type="Light2D" parent="Center/Stars/Sun"]
+texture = ExtResource( 10 )
+texture_scale = 20.0
+color = Color( 0.996078, 1, 0.909804, 1 )
+energy = 0.5
+shadow_enabled = true
+shadow_gradient_length = 50.0
 
 [node name="Moon" type="Polygon2D" parent="Center/Stars"]
 self_modulate = Color( 1, 0.701961, 0, 1 )
@@ -247,6 +293,14 @@ texture_scale = Vector2( 0.5, 0.5 )
 polygon = PoolVector2Array( 100, 0, 92.3879, 38.2683, 70.7107, 70.7107, 38.2683, 92.3879, -4.37114e-06, 100, -38.2683, 92.388, -70.7107, 70.7107, -92.3879, 38.2683, -100, -8.74228e-06, -92.3879, -38.2683, -70.7107, -70.7107, -38.2684, -92.3879, 1.19249e-06, -100, 38.2684, -92.3879, 70.7107, -70.7107, 92.388, -38.2683 )
 script = ExtResource( 1 )
 radius = 100.0
+
+[node name="Light2D" type="Light2D" parent="Center/Stars/Moon"]
+texture = ExtResource( 10 )
+texture_scale = 20.0
+color = Color( 0.996078, 1, 0.909804, 1 )
+energy = 0.5
+shadow_enabled = true
+shadow_gradient_length = 50.0
 
 [node name="Stars" type="Particles2D" parent="Center/Stars"]
 modulate = Color( 1, 1, 1, 0.5 )

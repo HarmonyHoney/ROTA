@@ -25,6 +25,7 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
+visible = false
 modulate = Color( 1, 1, 1, 0.109804 )
 material = SubResource( 1 )
 margin_right = 1280.0

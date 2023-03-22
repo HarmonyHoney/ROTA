@@ -9,19 +9,18 @@ onready var center := $Center
 onready var clouds := $Center/Clouds
 onready var stars := $Center/Stars
 onready var sun := $Center/Stars/Sun
+onready var sun_light := $Center/Stars/Sun/Light2D
 onready var moon := $Center/Stars/Moon
+onready var moon_light := $Center/Stars/Moon/Light2D
 onready var night_sky := $Center/Stars/Stars
 onready var precip := $Center/Fall
 onready var audio_rain := $AudioRain
-var precip_list = []
+onready var darkness := $Front/ColorRect
+onready var bg := $BG
 
 export var cloud_speed := 1.0
-export var star_speed := 0.5
 var cloud_dir := 1.0
-
 var length = 100.0
-var dir := 1.0
-var speed_mod := 1.0
 
 var solve_clock := 0.0
 var solve_step := 1.0
@@ -32,12 +31,14 @@ export var rain_mat : ParticlesMaterial
 export var rain_tex : Texture
 
 var sun_frac := 0.5
+var moon_frac := 0.5
 
 export var is_rain := false setget set_is_rain
 var is_snow := false
 var rain_clock := 60.0
 export var rain_range := Vector2(60, 240)
 export var dry_range := Vector2(60, 720)
+var precip_list = []
 
 
 func _enter_tree():
@@ -72,12 +73,20 @@ func scene():
 func _physics_process(delta):
 	clouds.rotate(deg2rad(cloud_speed * delta * cloud_dir))
 	precip.rotation = clouds.rotation
-	stars.rotation = BG.frac * TAU
+	stars.rotation = bg.frac * TAU
 	
-	sun_frac = ease(abs(BG.frac - 0.5) * 2.0, -7)
+	sun_frac = ease(abs(bg.frac - 0.5) * 2.0, -7)
+	moon_frac = 1.0 - sun_frac
+	
 	sun.modulate.a = sun_frac
-	moon.modulate.a = 1.0 - sun_frac
-	night_sky.modulate.a = 1.0 - sun_frac
+	sun_light.energy = sun_frac * 0.4
+	sun_light.enabled = sun_frac > 0
+	
+	moon.modulate.a = moon_frac
+	moon_light.energy = moon_frac * 0.5
+	moon_light.enabled = moon_frac > 0
+	night_sky.modulate.a = moon_frac
+	darkness.self_modulate.a = moon_frac
 	
 	rain_clock -= delta
 	if rain_clock < 0:

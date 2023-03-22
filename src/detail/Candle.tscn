@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=1]
+[ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=2]
 [ext_resource path="res://media/image/details/candle.png" type="Texture" id=3]
 [ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=4]
 [ext_resource path="res://media/image/box/round_rect400.png" type="Texture" id=5]
 [ext_resource path="res://src/shader/circle_fade.gdshader" type="Shader" id=6]
 [ext_resource path="res://src/detail/LightBase.gd" type="Script" id=7]
+[ext_resource path="res://media/image/details/flame.png" type="Texture" id=8]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 6 )
@@ -31,16 +33,33 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, -200 )
 
-[node name="Light" type="Sprite" parent="Sprites" groups=["light"]]
+[node name="Scale" type="Node2D" parent="Sprites"]
+position = Vector2( 0, -66.5 )
+script = ExtResource( 7 )
+is_night = true
+
+[node name="Flame" type="Sprite" parent="Sprites/Scale"]
+position = Vector2( 0, -9 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 8 )
+
+[node name="Light" type="Sprite" parent="Sprites/Scale" groups=["light"]]
 modulate = Color( 0.996078, 1, 0.909804, 0.109804 )
 material = SubResource( 3 )
-position = Vector2( 0, -66 )
+position = Vector2( 0, 0.5 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 100
 z_as_relative = false
 texture = ExtResource( 5 )
-script = ExtResource( 7 )
-is_night = true
+
+[node name="Wick" type="Polygon2D" parent="Sprites"]
+position = Vector2( 0, -65 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 3, 3.6, 2.15061, 5.65061, 0.0999998, 6.5, -0.1, 6.5, -2.15061, 5.65061, -3, 3.6, -3, -3.6, -2.15061, -5.65061, -0.0999999, -6.5, 0.0999999, -6.5, 2.15061, -5.65061, 3, -3.6 )
+script = ExtResource( 2 )
+size = Vector2( 3, 6.5 )
+radius = Plane( -2, -1, -1, -1 )
+points = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

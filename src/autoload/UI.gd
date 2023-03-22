@@ -46,7 +46,6 @@ func _physics_process(delta):
 	keys.move(delta)
 	
 	clock_down.modulate.a = clock_ease.count(delta)
-	color_rect.self_modulate.a = 1.0 - Clouds.sun_frac
 
 func scene_changed(override := false):
 	up.clock = 0.0

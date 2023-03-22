@@ -5,6 +5,7 @@
 [ext_resource path="res://media/audio/sfx/bell1.wav" type="AudioStream" id=3]
 
 [node name="Control" type="CanvasLayer"]
+layer = 5
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
