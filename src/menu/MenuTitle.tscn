@@ -84,6 +84,7 @@ is_audio_back = false
 sub_path = NodePath("Canvas/MenuTitle")
 
 [node name="Canvas" type="CanvasLayer" parent="."]
+layer = 4
 
 [node name="Back" type="ColorRect" parent="Canvas"]
 visible = false

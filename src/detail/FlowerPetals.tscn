@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/detail/PaletteSwap.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/shape/Petals.gd" type="Script" id=2]
 [ext_resource path="res://media/audio/sfx/guitar_pluck.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=4]
+[ext_resource path="res://src/detail/Visible.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 35.0
@@ -15,6 +16,13 @@ script = ExtResource( 1 )
 palette = 1
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )
 sprite_path = NodePath("Images")
+
+[node name="Visible" type="VisibilityNotifier2D" parent="."]
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+rect = Rect2( -25, -25, 50, 50 )
+script = ExtResource( 5 )
+node_path = NodePath("../Images")
 
 [node name="Spring" type="Node2D" parent="."]
 script = ExtResource( 4 )

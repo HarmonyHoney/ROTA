@@ -7,12 +7,14 @@ onready var particles := $Hide/Particles2D
 
 onready var center := $Center
 onready var clouds := $Center/Clouds
+
 onready var stars := $Center/Stars
-onready var sun := $Center/Stars/Sun
-onready var sun_light := $Center/Stars/Sun/Light2D
-onready var moon := $Center/Stars/Moon
-onready var moon_light := $Center/Stars/Moon/Light2D
 onready var night_sky := $Center/Stars/Stars
+onready var star_orbit := $Center/Stars/Orbit
+onready var sun := $Center/Stars/Orbit/Sun
+onready var moon := $Center/Stars/Orbit/Moon
+onready var star_light := $Center/Stars/Orbit/Light2D
+
 onready var precip := $Center/Fall
 onready var audio_rain := $AudioRain
 onready var darkness := $Front/ColorRect
@@ -59,8 +61,7 @@ func scene():
 	color_rect.rect_position = -color_rect.rect_size / 2.0
 	length = max(color_rect.rect_size.x, color_rect.rect_size.y) / 2.0
 	
-	sun.position = Vector2(length + 650, 0)
-	moon.position = -sun.position
+	star_orbit.position = Vector2(length + 650, 0)
 	moon.scale.x = -1 if randf() < 0.5 else 1.0
 	
 	is_snow = "2A/" in Shared.csfn or "3B/" in Shared.csfn
@@ -70,24 +71,20 @@ func scene():
 	if audio_rain:
 		audio_rain.playing = is_rain and !is_snow
 
-func _physics_process(delta):
+func _process(delta):
 	clouds.rotate(deg2rad(cloud_speed * delta * cloud_dir))
 	precip.rotation = clouds.rotation
 	stars.rotation = bg.frac * TAU
 	
-	sun_frac = ease(abs(bg.frac - 0.5) * 2.0, -7)
+	sun_frac = ease(abs(bg.frac - 0.5) * 2.0, -9)
 	moon_frac = 1.0 - sun_frac
 	
 	sun.modulate.a = sun_frac
-	sun_light.energy = sun_frac * 0.4
-	sun_light.enabled = sun_frac > 0
-	
 	moon.modulate.a = moon_frac
-	moon_light.energy = moon_frac * 0.5
-	moon_light.enabled = moon_frac > 0
 	night_sky.modulate.a = moon_frac
 	darkness.self_modulate.a = moon_frac
-	
+
+func _physics_process(delta):
 	rain_clock -= delta
 	if rain_clock < 0:
 		self.is_rain = !is_rain 

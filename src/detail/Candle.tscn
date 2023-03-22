@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/shader/circle_fade.gdshader" type="Shader" id=6]
 [ext_resource path="res://src/detail/LightBase.gd" type="Script" id=7]
 [ext_resource path="res://media/image/details/flame.png" type="Texture" id=8]
+[ext_resource path="res://src/detail/Visible.gd" type="Script" id=9]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 6 )
@@ -25,6 +26,13 @@ sprites_path = NodePath("Sprites")
 add_vel = 4.0
 weight = 4.0
 audio_path = NodePath("Audio/Hit")
+
+[node name="Visible" type="VisibilityNotifier2D" parent="."]
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+rect = Rect2( -100, -166.5, 200, 200 )
+script = ExtResource( 9 )
+node_path = NodePath("..")
 
 [node name="Sprites" type="Node2D" parent="."]
 

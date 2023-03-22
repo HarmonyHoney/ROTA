@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=3]
+[ext_resource path="res://src/detail/Visible.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17, 17 )
@@ -783,6 +784,13 @@ anims/release = SubResource( 9 )
 anims/snowball = SubResource( 19 )
 anims/walk = SubResource( 8 )
 next/jump = "jump"
+
+[node name="Visible" type="VisibilityNotifier2D" parent="."]
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+rect = Rect2( -100, -100, 200, 200 )
+script = ExtResource( 4 )
+node_path = NodePath("../Sprites")
 
 [node name="Sprites" type="Node2D" parent="."]
 

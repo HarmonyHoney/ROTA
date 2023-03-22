@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://media/image/details/TreeBark.svg" type="Texture" id=1]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=2]
 [ext_resource path="res://src/detail/PaletteSwap.gd" type="Script" id=3]
+[ext_resource path="res://src/detail/Visible.gd" type="Script" id=4]
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -17,27 +18,13 @@ palette = 1
 colors = PoolColorArray( 1, 1, 1, 1, 0.364706, 1, 0, 1, 0.494118, 0.890196, 0.337255, 1, 1, 0.776471, 0.913725, 1, 0.47451, 1, 1, 1, 1, 0.788235, 0, 1, 1, 0.980392, 0, 1 )
 sprite_path = NodePath("Sprites/TreeTop/Sprite")
 
-[node name="Sprites" type="Node2D" parent="."]
+[node name="Visible" type="VisibilityNotifier2D" parent="."]
+visible = false
+position = Vector2( 0, -100 )
 scale = Vector2( 0.5, 0.5 )
-
-[node name="TreeBark" type="Sprite" parent="Sprites"]
-modulate = Color( 1, 0.666667, 0, 1 )
-position = Vector2( 0, -200 )
-texture = ExtResource( 1 )
-
-[node name="TreeTop" parent="Sprites" instance=ExtResource( 5 )]
-position = Vector2( 0, -400 )
-z_index = 0
-z_as_relative = true
-script = null
-
-[node name="Spring" parent="Sprites/TreeTop" index="0"]
-add_vel = 0.025
-pitch_from = 0.4
-pitch_to = 0.7
-
-[node name="Sprite" parent="Sprites/TreeTop" index="1"]
-modulate = Color( 0.364706, 1, 0, 1 )
+rect = Rect2( -100, -200, 200, 440 )
+script = ExtResource( 4 )
+node_path = NodePath("../Sprites/TreeBark")
 
 [node name="Spring" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -56,6 +43,28 @@ collision_mask = 38
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spring/Area2D"]
 position = Vector2( 0, -50 )
 shape = SubResource( 1 )
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="TreeBark" type="Sprite" parent="Sprites"]
+modulate = Color( 1, 0.666667, 0, 1 )
+position = Vector2( 0, -200 )
+texture = ExtResource( 1 )
+
+[node name="TreeTop" parent="Sprites" instance=ExtResource( 5 )]
+position = Vector2( 0, -400 )
+z_index = 0
+z_as_relative = true
+script = null
+
+[node name="Spring" parent="Sprites/TreeTop" index="1"]
+add_vel = 0.025
+pitch_from = 0.4
+pitch_to = 0.7
+
+[node name="Sprite" parent="Sprites/TreeTop" index="2"]
+modulate = Color( 0.364706, 1, 0, 1 )
 
 [connection signal="area_entered" from="Spring/Area2D" to="Spring" method="_on_Area2D_area_entered"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=1]
 [ext_resource path="res://src/autoload/Clouds.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://media/image/details/circle.svg" type="Texture" id=10]
 [ext_resource path="res://src/shader/sky.gdshader" type="Shader" id=11]
 [ext_resource path="res://src/autoload/BG.gd" type="Script" id=12]
+[ext_resource path="res://src/detail/Visible.gd" type="Script" id=13]
 
 [sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0, 0.05, 0.95, 1 )
@@ -116,7 +117,7 @@ is_rain = true
 layer = -5
 script = ExtResource( 12 )
 palette = PoolColorArray( 1, 0.639216, 0, 1, 0, 0.878431, 1, 1, 0, 0.384314, 1, 1, 0.67451, 0, 1, 1, 0.686275, 0, 0.74902, 1, 0, 0, 0, 1 )
-clock = 190.0
+clock = 1.0
 
 [node name="ColorRect" type="ColorRect" parent="BG"]
 material = SubResource( 2 )
@@ -152,6 +153,12 @@ color = Color( 1, 1, 1, 0.301961 )
 polygon = PoolVector2Array( 156.458, -64.8071, 174.201, -54.2799, 188.104, -39.0379, 196.96, -20.4052, 200, 0, 196.96, 20.4052, 188.104, 39.0379, 174.201, 54.2799, 156.458, 64.8072, 161.56, 84.7968, 160.613, 105.405, 153.7, 124.843, 141.421, 141.421, 124.843, 153.7, 105.405, 160.613, 84.7968, 161.56, 64.8071, 156.458, 54.2799, 174.201, 39.0379, 188.104, 20.4052, 196.96, -8.74228e-06, 200, -20.4052, 196.96, -39.0379, 188.104, -54.2799, 174.201, -64.8072, 156.458, -84.7968, 161.56, -105.405, 160.613, -124.843, 153.7, -141.421, 141.421, -153.7, 124.843, -160.613, 105.405, -161.56, 84.7968, -156.458, 64.8071, -174.201, 54.2799, -188.104, 39.0379, -196.96, 20.4052, -200, -1.74846e-05, -196.96, -20.4052, -188.104, -39.038, -174.201, -54.2799, -156.458, -64.8072, -161.56, -84.7968, -160.613, -105.405, -153.7, -124.843, -141.421, -141.421, -124.843, -153.7, -105.405, -160.613, -84.7968, -161.56, -64.8071, -156.458, -54.2799, -174.201, -39.038, -188.104, -20.4052, -196.96, 2.38498e-06, -200, 20.4052, -196.96, 39.0379, -188.104, 54.2799, -174.201, 64.8071, -156.458, 84.7968, -161.56, 105.405, -160.613, 124.843, -153.7, 141.421, -141.421, 153.7, -124.843, 160.613, -105.405, 161.56, -84.7968 )
 script = ExtResource( 3 )
 
+[node name="Visible" type="VisibilityNotifier2D" parent="Hide/Cloud"]
+modulate = Color( 1, 0, 0, 1 )
+rect = Rect2( -200, -200, 400, 400 )
+script = ExtResource( 13 )
+node_path = NodePath("..")
+
 [node name="Point" type="Polygon2D" parent="Hide"]
 z_index = 100
 z_as_relative = false
@@ -181,13 +188,17 @@ cast_to = Vector2( 0, 2000 )
 
 [node name="Stars" type="Node2D" parent="Center"]
 
-[node name="Sun" type="Polygon2D" parent="Center/Stars"]
+[node name="Orbit" type="Node2D" parent="Center/Stars"]
+
+[node name="Sun" type="Polygon2D" parent="Center/Stars/Orbit"]
 position = Vector2( 350, 0 )
 color = Color( 1, 0.866667, 0, 1 )
 polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
 script = ExtResource( 1 )
 
-[node name="Line2D" type="Line2D" parent="Center/Stars/Sun"]
+[node name="Rays" type="Node2D" parent="Center/Stars/Orbit/Sun"]
+
+[node name="Line2D" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
 width_curve = SubResource( 22 )
@@ -197,7 +208,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D2" type="Line2D" parent="Center/Stars/Sun"]
+[node name="Line2D2" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
 rotation = 0.785397
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -208,7 +219,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D3" type="Line2D" parent="Center/Stars/Sun"]
+[node name="Line2D3" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
 rotation = 1.57079
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -219,7 +230,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D4" type="Line2D" parent="Center/Stars/Sun"]
+[node name="Line2D4" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
 rotation = 2.35619
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -230,7 +241,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D5" type="Line2D" parent="Center/Stars/Sun"]
+[node name="Line2D5" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
 rotation = 3.14159
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -241,8 +252,8 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D6" type="Line2D" parent="Center/Stars/Sun"]
-rotation = 3.92699
+[node name="Line2D6" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+rotation = -2.3562
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
 width_curve = SubResource( 22 )
@@ -252,8 +263,8 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D7" type="Line2D" parent="Center/Stars/Sun"]
-rotation = 4.71238
+[node name="Line2D7" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+rotation = -1.57081
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
 width_curve = SubResource( 22 )
@@ -263,8 +274,8 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D8" type="Line2D" parent="Center/Stars/Sun"]
-rotation = 5.49778
+[node name="Line2D8" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+rotation = -0.785405
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
 width_curve = SubResource( 22 )
@@ -274,15 +285,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Light2D" type="Light2D" parent="Center/Stars/Sun"]
-texture = ExtResource( 10 )
-texture_scale = 20.0
-color = Color( 0.996078, 1, 0.909804, 1 )
-energy = 0.5
-shadow_enabled = true
-shadow_gradient_length = 50.0
-
-[node name="Moon" type="Polygon2D" parent="Center/Stars"]
+[node name="Moon" type="Polygon2D" parent="Center/Stars/Orbit"]
 self_modulate = Color( 1, 0.701961, 0, 1 )
 material = SubResource( 4 )
 position = Vector2( 350, 0 )
@@ -294,11 +297,11 @@ polygon = PoolVector2Array( 100, 0, 92.3879, 38.2683, 70.7107, 70.7107, 38.2683,
 script = ExtResource( 1 )
 radius = 100.0
 
-[node name="Light2D" type="Light2D" parent="Center/Stars/Moon"]
+[node name="Light2D" type="Light2D" parent="Center/Stars/Orbit"]
 texture = ExtResource( 10 )
 texture_scale = 20.0
 color = Color( 0.996078, 1, 0.909804, 1 )
-energy = 0.5
+energy = 0.4
 shadow_enabled = true
 shadow_gradient_length = 50.0
 
