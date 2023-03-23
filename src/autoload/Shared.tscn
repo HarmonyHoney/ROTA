@@ -10,3 +10,11 @@ is_debug = true
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 pause_mode = 1
+
+[node name="Boundary" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.298039 )
+margin_left = -150.0
+margin_top = -150.0
+margin_right = 150.0
+margin_bottom = 150.0

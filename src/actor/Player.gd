@@ -18,6 +18,9 @@ onready var spr_hand_l := $Sprites/Hands/Left
 onready var spr_hand_r := $Sprites/Hands/Right
 onready var spr_hands := [spr_hand_l, spr_hand_r]
 
+onready var audio_walk := $Audio/Walk
+onready var audio_land := $Audio/Land
+
 export var dir := 0 setget set_dir
 onready var start_dir := dir
 onready var start_pos = global_position
@@ -494,7 +497,7 @@ func _physics_process(delta):
 	# air clock
 	if is_floor:
 		if air_clock > 0.4:
-			Audio.play("player_land", 0.7, 1.1)
+			Audio.play(audio_land, 0.7, 1.1)
 
 			squish_from = Vector2(1.3, 0.7)
 			squish_clock = 0.0
@@ -807,3 +810,7 @@ func unpause():
 	is_unpause = true
 	btn_jump = false
 	btn_push = false
+
+func footstep_sound():
+	if !audio_walk.playing and !audio_land.playing:
+		Audio.play(audio_walk, 1.5, 3.0)

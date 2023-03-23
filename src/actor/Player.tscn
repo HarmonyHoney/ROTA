@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=3]
 [ext_resource path="res://src/detail/Visible.gd" type="Script" id=4]
+[ext_resource path="res://media/audio/sfx/player_land.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17, 17 )
@@ -722,6 +723,26 @@ tracks/6/keys = {
 "points": PoolRealArray( 5, -0.1, 0, 0.1, 0, -25, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0, -10, -0.25, 0, 0.25, 0, 5, -0.1, 0, 0.1, 0 ),
 "times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 )
 }
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "footstep_sound"
+}, {
+"args": [  ],
+"method": "footstep_sound"
+}, {
+"args": [  ],
+"method": "footstep_sound"
+} ]
+}
 
 [sub_resource type="CapsuleShape2D" id=14]
 radius = 20.0
@@ -892,6 +913,18 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/SpriteArea"]
 position = Vector2( 0, -15 )
 shape = SubResource( 14 )
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Walk" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource( 5 )
+volume_db = -5.0
+bus = "SFX"
+
+[node name="Land" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource( 5 )
+volume_db = 2.0
+bus = "SFX"
 
 [connection signal="area_entered" from="BodyArea" to="." method="_on_BodyArea_area_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_BodyArea_body_entered"]

@@ -69,7 +69,7 @@ func closed():
 	create_rig()
 	
 	if is_instance_valid(Shared.door_in):
-		Shared.door_in.visible = true
+		Shared.door_in.modulate.a = 1.0
 		Shared.door_in.arrow.is_locked = false
 
 func idle_frame():

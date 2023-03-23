@@ -13,7 +13,7 @@ func act():
 		p.anim.play("jump")
 		
 	if is_instance_valid(Shared.door_in):
-		Shared.door_in.visible = false
+		Shared.door_in.modulate.a = 0.0
 		Shared.door_in.arrow.is_locked = true
 	
 	yield(get_tree().create_timer(1.2), "timeout")

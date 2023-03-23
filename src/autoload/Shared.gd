@@ -114,9 +114,12 @@ var is_demo := false
 
 var boundary_rect := Rect2()
 var boundary_center := Vector2.ZERO
+onready var boundary_node := $Boundary
 
 func _ready():
 	Wipe.connect("complete", self, "wipe_complete")
+	boundary_node.visible = false
+	
 	#set_volume(0, 50)
 	set_volume(1, 50)
 	set_volume(2, 50)
@@ -269,6 +272,9 @@ func set_boundary():
 	boundary_center = (start.linear_interpolate(end, 0.5) + (Vector2.ONE * 0.5)) * 100.0
 	boundary_rect.size = ((end - start) + Vector2.ONE) * 100.0
 	boundary_rect.position = boundary_center - (boundary_rect.size / 2.0)
+	boundary_node.rect_size = boundary_rect.size
+	boundary_node.rect_position = boundary_rect.position
+	
 	print(map_name, " start: ", start, " end: ", end, " boundary_center: ", boundary_center, " boundary_rect.size: ", boundary_rect.size, " get_area: ", boundary_rect.get_area())
 
 func is_outside_boundary(pos, margin := 10.0):

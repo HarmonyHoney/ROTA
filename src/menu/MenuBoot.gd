@@ -11,10 +11,6 @@ func _ready():
 	Shared.player.is_input = false
 	randomize()
 	MenuMakeover.preset()
-	
-	if !Music.playing:
-		randomize()
-		Music.play_song()
 
 func _exit_tree():
 	UI.keys.show = false

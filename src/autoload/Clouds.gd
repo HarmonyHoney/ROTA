@@ -4,7 +4,6 @@ onready var bg := $BG
 onready var canvas_mod := $CanvasModulate
 onready var hide := $Hide
 onready var cloud := $Hide/Cloud
-onready var color_rect := $Hide/ColorRect
 onready var particles := $Hide/Particles2D
 
 onready var center := $Sky/Center
@@ -62,9 +61,7 @@ func _ready():
 func scene():
 	center.global_position = Shared.boundary_center
 	precip.global_position = Shared.boundary_center
-	color_rect.rect_size = Shared.boundary_rect.size
-	color_rect.rect_position = -color_rect.rect_size / 2.0
-	length = max(color_rect.rect_size.x, color_rect.rect_size.y) / 2.0
+	length = max(Shared.boundary_rect.size.x, Shared.boundary_rect.size.y) / 2.0
 	
 	star_orbit.position = Vector2(length + 650, 0)
 	moon.scale.x = -1 if randf() < 0.5 else 1.0
