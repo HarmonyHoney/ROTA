@@ -1,24 +1,25 @@
 extends Node2D
 
+onready var bg := $BG
+onready var canvas_mod := $CanvasModulate
 onready var hide := $Hide
 onready var cloud := $Hide/Cloud
 onready var color_rect := $Hide/ColorRect
 onready var particles := $Hide/Particles2D
 
-onready var center := $Center
-onready var clouds := $Center/Clouds
-
-onready var stars := $Center/Stars
-onready var night_sky := $Center/Stars/Stars
-onready var star_orbit := $Center/Stars/Orbit
-onready var sun := $Center/Stars/Orbit/Sun
-onready var moon := $Center/Stars/Orbit/Moon
-onready var star_light := $Center/Stars/Orbit/Light2D
-
-onready var precip := $Center/Fall
+onready var center := $Sky/Center
+onready var clouds := $Sky/Center/Clouds
+onready var clouds_back := $Sky/Center/CloudsBack
+onready var precip := $Precip
 onready var audio_rain := $AudioRain
-onready var darkness := $Front/ColorRect
-onready var bg := $BG
+
+onready var stars := $Sky/Center/Stars
+onready var starfield := $Sky/Center/Starfield
+onready var star_orbit := $Sky/Center/Stars/Orbit
+onready var star_light := $Sky/Center/Stars/Orbit/Light2D
+onready var sun := $Sky/Center/Stars/Orbit/Sun
+onready var moon := $Sky/Center/Stars/Orbit/Moon
+
 
 export var cloud_speed := 1.0
 var cloud_dir := 1.0
@@ -42,9 +43,12 @@ export var rain_range := Vector2(60, 240)
 export var dry_range := Vector2(60, 720)
 var precip_list = []
 
+export var color_bright := Color.white
+export var color_dark := Color("bfbfbf")
 
 func _enter_tree():
 	Shared.connect("scene_changed", self, "scene")
+	get_tree().connect("idle_frame", self, "idle_frame")
 
 func _ready():
 	hide.visible = false
@@ -56,7 +60,8 @@ func _ready():
 	self.is_rain = randf() < 0.3
 
 func scene():
-	global_position = Shared.boundary_center
+	center.global_position = Shared.boundary_center
+	precip.global_position = Shared.boundary_center
 	color_rect.rect_size = Shared.boundary_rect.size
 	color_rect.rect_position = -color_rect.rect_size / 2.0
 	length = max(color_rect.rect_size.x, color_rect.rect_size.y) / 2.0
@@ -73,16 +78,26 @@ func scene():
 
 func _process(delta):
 	clouds.rotate(deg2rad(cloud_speed * delta * cloud_dir))
+	clouds_back.rotation = clouds.rotation
 	precip.rotation = clouds.rotation
 	stars.rotation = bg.frac * TAU
+	starfield.rotation = stars.rotation
 	
 	sun_frac = ease(abs(bg.frac - 0.5) * 2.0, -9)
 	moon_frac = 1.0 - sun_frac
 	
 	sun.modulate.a = sun_frac
 	moon.modulate.a = moon_frac
-	night_sky.modulate.a = moon_frac
-	darkness.self_modulate.a = moon_frac
+	starfield.modulate.a = moon_frac
+	starfield.visible = moon_frac > 0
+	canvas_mod.color = color_bright.linear_interpolate(color_dark, moon_frac)
+
+func idle_frame():
+	# parallax
+	var par = Cam.global_position - Shared.boundary_center
+	clouds_back.position = par * 0.3
+	#stars.position = Vector2.ZERO# par * 0.5
+	starfield.position = par * 0.5
 
 func _physics_process(delta):
 	rain_clock -= delta
@@ -111,65 +126,76 @@ func set_is_rain(arg := is_rain):
 func create_clouds():
 	cloud_dir = (-1.0 if randf() > 0.5 else 1.0) * rand_range(0.6, 1.0)
 	precip_list = []
-	var ci = -1
-	var pi = -1
+	var ci = 0
+	var bi = 0
+	var pi = 0
 	var gc = clouds.get_children()
-	var gcs = gc.size()
+	var bc = clouds_back.get_children()
 	var pc = precip.get_children()
+	var gcs = gc.size()
+	var bcs = bc.size()
 	var pcs = pc.size()
-	
 	
 	for x in (length / 50.0) + 5:
 		for y in max(3, x):
-			ci += 1
+			var dist = ((x + 2) * 200) + rand_range(0.0, 100.0)
+			var is_precip = dist < length + 1000
+			var is_front = (dist > length + 500)
+			if is_front and !is_precip: is_front = randf() > 0.5
+			
 			var c = null
-			if ci < gcs:
+			if is_front and ci < gcs:
 				c = gc[ci]
+				ci += 1
+			elif !is_front and bi < bcs:
+				c = bc[bi]
+				bi += 1
 			else:
 				c = cloud.duplicate()
-				clouds.add_child(c)
-				c.owner = clouds
+				(clouds if is_front else clouds_back).add_child(c)
+				c.owner = clouds if is_front else clouds_back
 			
 			var angle = rand_range(0.0, TAU)
-			c.position = Vector2(((x + 2) * 200) + rand_range(0.0, 100.0), 0).rotated(angle)
+			c.position = Vector2(dist, 0).rotated(angle)
 			c.scale = Vector2.ONE * rand_range(0.25, 2.0)
 			c.rotation = randf() * TAU
 			c.visible = true
-			c.color.a = 0.3
+			c.color.a = 0.8 if is_front else 0.3
 			
-			var cpl = c.position.length()
-			if cpl > length + 500:
-				#c.color.a = lerp(c.color.a, 1.0, clamp((cpl - (length + 700)) / 500.0, 0, 1))
-				c.color.a = 0.8
-				
-				if cpl < length + 1000:
+			#print( "x: ", x, " y: ", y, " dist: ", dist," is_front: ", is_front)
+			
+			
+			if is_front and is_precip:
+				var p = null
+				if pi < pcs:
+					p = pc[pi]
 					pi += 1
-					var p = null
-					if pi < pcs:
-						p = pc[pi]
-					else:
-						p = particles.duplicate()
-						precip.add_child(p)
-						p.owner = precip
-					
-					p.amount = c.scale.x * (200 if is_snow else 100)
-					p.texture = snow_tex if is_snow else rain_tex
-					p.process_material = (snow_mat if is_snow else rain_mat).duplicate()
-					p.process_material.emission_sphere_radius = c.scale.x * 150.0
-					p.process_material.emission_box_extents = Vector3(c.scale.x * 175.0, 100, 0)
-					
-					p.position = c.position
-					p.rotation = angle + (PI/2.0)
-					
-					p.visible = true
-					p.emitting = is_rain
-					
-					precip_list.append(p)
+				else:
+					p = particles.duplicate()
+					precip.add_child(p)
+					p.owner = precip
+				
+				p.amount = c.scale.x * (200 if is_snow else 100)
+				p.texture = snow_tex if is_snow else rain_tex
+				p.process_material = (snow_mat if is_snow else rain_mat).duplicate()
+				p.process_material.emission_sphere_radius = c.scale.x * 150.0
+				p.process_material.emission_box_extents = Vector3(c.scale.x * 175.0, 100, 0)
+				
+				p.position = c.position
+				p.rotation = angle + (PI/2.0)
+				
+				p.visible = true
+				p.emitting = is_rain
+				
+				precip_list.append(p)
 	
 	# clouds
 	if ci < gcs:
 		for a in range(max(ci, 0), gcs):
 			gc[a].visible = false
+	if ci < bcs:
+		for a in range(max(ci, 0), bcs):
+			bc[a].visible = false
 	# particles
 	if pi < pcs:
 		for a in range(max(pi, 0), pcs):

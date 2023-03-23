@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=1]
 [ext_resource path="res://src/autoload/Clouds.gd" type="Script" id=2]
@@ -16,7 +16,7 @@
 
 [sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0, 0.05, 0.95, 1 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.8, 1, 1, 1, 0.8, 1, 1, 1, 0 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.9, 1, 1, 1, 0.9, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=11]
 gradient = SubResource( 12 )
@@ -63,9 +63,6 @@ shader = ExtResource( 11 )
 shader_param/col1 = Color( 0, 0.878431, 1, 1 )
 shader_param/col2 = Color( 1, 0.639216, 0, 1 )
 
-[sub_resource type="CanvasItemMaterial" id=21]
-blend_mode = 2
-
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
@@ -92,7 +89,7 @@ curve = SubResource( 19 )
 
 [sub_resource type="ParticlesMaterial" id=20]
 emission_shape = 1
-emission_sphere_radius = 4000.0
+emission_sphere_radius = 3000.0
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
@@ -113,11 +110,14 @@ rain_mat = SubResource( 17 )
 rain_tex = ExtResource( 6 )
 is_rain = true
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.74902, 0.74902, 0.74902, 1 )
+
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -5
 script = ExtResource( 12 )
-palette = PoolColorArray( 1, 0.639216, 0, 1, 0, 0.878431, 1, 1, 0, 0.384314, 1, 1, 0.67451, 0, 1, 1, 0.686275, 0, 0.74902, 1, 0, 0, 0, 1 )
-clock = 1.0
+palette = PoolColorArray( 1, 0.639216, 0, 1, 0, 0.878431, 1, 1, 0, 0.384314, 1, 1, 0.67451, 0, 1, 1, 0.686275, 0, 0.74902, 1, 0.145098, 0, 0, 1 )
+clock = 100.0
 
 [node name="ColorRect" type="ColorRect" parent="BG"]
 material = SubResource( 2 )
@@ -125,19 +125,6 @@ margin_right = 1280.0
 margin_bottom = 720.0
 __meta__ = {
 "_edit_lock_": true
-}
-
-[node name="Front" type="CanvasLayer" parent="."]
-layer = 3
-
-[node name="ColorRect" type="ColorRect" parent="Front"]
-modulate = Color( 1, 1, 1, 0.109804 )
-material = SubResource( 21 )
-margin_right = 1280.0
-margin_bottom = 720.0
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
 }
 
 [node name="AudioRain" type="AudioStreamPlayer" parent="."]
@@ -184,21 +171,25 @@ texture = ExtResource( 6 )
 enabled = true
 cast_to = Vector2( 0, 2000 )
 
-[node name="Center" type="Node2D" parent="."]
+[node name="Sky" type="CanvasLayer" parent="."]
+layer = -4
+follow_viewport_enable = true
 
-[node name="Stars" type="Node2D" parent="Center"]
+[node name="Center" type="Node2D" parent="Sky"]
 
-[node name="Orbit" type="Node2D" parent="Center/Stars"]
+[node name="Stars" type="Node2D" parent="Sky/Center"]
 
-[node name="Sun" type="Polygon2D" parent="Center/Stars/Orbit"]
+[node name="Orbit" type="Node2D" parent="Sky/Center/Stars"]
+
+[node name="Sun" type="Polygon2D" parent="Sky/Center/Stars/Orbit"]
 position = Vector2( 350, 0 )
 color = Color( 1, 0.866667, 0, 1 )
 polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
 script = ExtResource( 1 )
 
-[node name="Rays" type="Node2D" parent="Center/Stars/Orbit/Sun"]
+[node name="Rays" type="Node2D" parent="Sky/Center/Stars/Orbit/Sun"]
 
-[node name="Line2D" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+[node name="Line2D" type="Line2D" parent="Sky/Center/Stars/Orbit/Sun/Rays"]
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
 width_curve = SubResource( 22 )
@@ -208,7 +199,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D2" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+[node name="Line2D2" type="Line2D" parent="Sky/Center/Stars/Orbit/Sun/Rays"]
 rotation = 0.785397
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -219,7 +210,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D3" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+[node name="Line2D3" type="Line2D" parent="Sky/Center/Stars/Orbit/Sun/Rays"]
 rotation = 1.57079
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -230,7 +221,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D4" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+[node name="Line2D4" type="Line2D" parent="Sky/Center/Stars/Orbit/Sun/Rays"]
 rotation = 2.35619
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -241,7 +232,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D5" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+[node name="Line2D5" type="Line2D" parent="Sky/Center/Stars/Orbit/Sun/Rays"]
 rotation = 3.14159
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -252,7 +243,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D6" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+[node name="Line2D6" type="Line2D" parent="Sky/Center/Stars/Orbit/Sun/Rays"]
 rotation = -2.3562
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -263,7 +254,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D7" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+[node name="Line2D7" type="Line2D" parent="Sky/Center/Stars/Orbit/Sun/Rays"]
 rotation = -1.57081
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -274,7 +265,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Line2D8" type="Line2D" parent="Center/Stars/Orbit/Sun/Rays"]
+[node name="Line2D8" type="Line2D" parent="Sky/Center/Stars/Orbit/Sun/Rays"]
 rotation = -0.785405
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
@@ -285,7 +276,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 5
 
-[node name="Moon" type="Polygon2D" parent="Center/Stars/Orbit"]
+[node name="Moon" type="Polygon2D" parent="Sky/Center/Stars/Orbit"]
 self_modulate = Color( 1, 0.701961, 0, 1 )
 material = SubResource( 4 )
 position = Vector2( 350, 0 )
@@ -297,7 +288,7 @@ polygon = PoolVector2Array( 100, 0, 92.3879, 38.2683, 70.7107, 70.7107, 38.2683,
 script = ExtResource( 1 )
 radius = 100.0
 
-[node name="Light2D" type="Light2D" parent="Center/Stars/Orbit"]
+[node name="Light2D" type="Light2D" parent="Sky/Center/Stars/Orbit"]
 texture = ExtResource( 10 )
 texture_scale = 20.0
 color = Color( 0.996078, 1, 0.909804, 1 )
@@ -305,17 +296,19 @@ energy = 0.4
 shadow_enabled = true
 shadow_gradient_length = 50.0
 
-[node name="Stars" type="Particles2D" parent="Center/Stars"]
+[node name="Starfield" type="Particles2D" parent="Sky/Center"]
 modulate = Color( 1, 1, 1, 0.5 )
 material = SubResource( 18 )
-amount = 2200
+amount = 1500
 lifetime = 30.0
 preprocess = 10.0
-visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+visibility_rect = Rect2( -3000, -3000, 6000, 6000 )
 process_material = SubResource( 20 )
 texture = ExtResource( 8 )
 
-[node name="Clouds" type="Node2D" parent="Center"]
+[node name="Clouds" type="Node2D" parent="Sky/Center"]
 
-[node name="Fall" type="Node2D" parent="Center"]
+[node name="CloudsBack" type="Node2D" parent="Sky/Center"]
+
+[node name="Precip" type="Node2D" parent="."]
 z_as_relative = false

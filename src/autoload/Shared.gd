@@ -269,7 +269,7 @@ func set_boundary():
 	boundary_center = (start.linear_interpolate(end, 0.5) + (Vector2.ONE * 0.5)) * 100.0
 	boundary_rect.size = ((end - start) + Vector2.ONE) * 100.0
 	boundary_rect.position = boundary_center - (boundary_rect.size / 2.0)
-	print("start: ", start, " end: ", end, " boundary_center: ", boundary_center)
+	print(map_name, " start: ", start, " end: ", end, " boundary_center: ", boundary_center, " boundary_rect.size: ", boundary_rect.size, " get_area: ", boundary_rect.get_area())
 
 func is_outside_boundary(pos, margin := 10.0):
 	return boundary_rect != Rect2() and !boundary_rect.grow(margin * 100).has_point(pos)

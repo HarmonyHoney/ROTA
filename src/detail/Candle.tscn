@@ -52,7 +52,7 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 8 )
 
 [node name="Light" type="Sprite" parent="Sprites/Scale" groups=["light"]]
-modulate = Color( 0.996078, 1, 0.909804, 0.109804 )
+modulate = Color( 1, 1, 0.909804, 0.25098 )
 material = SubResource( 3 )
 position = Vector2( 0, 0.5 )
 scale = Vector2( 0.5, 0.5 )

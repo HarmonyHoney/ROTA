@@ -3,7 +3,7 @@ extends PolyShape
 
 export var size := Vector2.ONE * 50 setget set_size
 export var rect_offset := Vector2.ZERO setget set_offset
-export var radius := Plane() setget set_radius
+export var radius := Plane(0, -1, -1, -1) setget set_radius
 export var points := 8 setget set_points
 
 func _draw():
@@ -18,7 +18,7 @@ func shape():
 	for i in 4:
 		var r = rad[0] if rad[i] == -1 else rad[i]
 		if r == -2: r = min(size.x, size.y)
-		r = clamp(r, 0, min(size.x, size.y) - 0.1)
+		r = clamp(r, 0, min(size.x, size.y) - 0.01)
 		
 		if points > 1 and r > 0:
 			var v = vec[i] * size - (vec[i] * r)

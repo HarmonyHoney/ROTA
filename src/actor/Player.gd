@@ -775,7 +775,7 @@ func anim_flip(_name := ""):
 			
 			if "position:x" in p or "rotation_degrees" in p:
 				var c = a.track_get_key_count(t)
-				print(name , " ", p, " ", c)
+				#print(name , " ", p, " ", c)
 				for k in c:
 					a.bezier_track_set_key_value(t, k, -a.bezier_track_get_key_value(t, k))
 		anim.add_animation(_name + "_left", a)

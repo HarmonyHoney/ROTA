@@ -12,7 +12,8 @@ var night_min := 0.3
 onready var start_scale := scale
 
 func _ready():
-	night_ease.clock = night_ease.time * int(Clouds.moon_frac > night_min)
+	if is_night:
+		night_ease.clock = night_ease.time * int(Clouds.moon_frac > night_min)
 
 func _physics_process(delta):
 	t += delta
