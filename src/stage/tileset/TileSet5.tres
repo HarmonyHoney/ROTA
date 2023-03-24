@@ -1,10 +1,25 @@
-[gd_resource type="TileSet" load_steps=6 format=2]
+[gd_resource type="TileSet" load_steps=11 format=2]
 
 [ext_resource path="res://media/image/tiles/tile6_3.png" type="Texture" id=1]
 [ext_resource path="res://media/image/tiles/tile6_1.png" type="Texture" id=2]
 [ext_resource path="res://media/image/tiles/tile6_0.png" type="Texture" id=3]
 [ext_resource path="res://media/image/tiles/tile6_2.png" type="Texture" id=4]
 [ext_resource path="res://media/image/tiles/tile6_4.png" type="Texture" id=5]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( 400, 400, 0, 400, 0, 0, 400, 0 )
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( 200, 400, 200, 400, 201, 377, 206, 351, 214, 327, 223, 306, 236, 285, 256, 261, 277, 242, 303, 225, 329, 213, 359, 204, 382, 201, 400, 200, 400, 400 )
+
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( 400, 400, 0, 400, 0, 200, 400, 200 )
+
+[sub_resource type="OccluderPolygon2D" id=4]
+polygon = PoolVector2Array( 0, 200, 0, 200, 26, 198, 47, 194, 64, 189, 83, 182, 110, 167, 133, 149, 156, 125, 177, 94, 187, 70, 195, 44, 199, 21, 200, 0, 400, 0, 400, 400, 0, 400 )
+
+[sub_resource type="OccluderPolygon2D" id=5]
+polygon = PoolVector2Array( 0, 200, 0, 200, 31, 197, 54, 192, 79, 183, 105, 170, 128, 153, 144, 138, 159, 121, 172, 101, 183, 80, 191, 59, 196, 39, 199, 20, 200, 0, 400, 0, 400, 200, 374, 202, 345, 208, 325, 215, 302, 226, 282, 239, 263, 255, 247, 272, 230, 295, 215, 325, 206, 353, 202, 371, 200, 400, 0, 400 )
 
 [resource]
 0/name = "tile6_0.png 0"
@@ -14,6 +29,7 @@
 0/region = Rect2( 0, 0, 400, 400 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
+0/occluder = SubResource( 1 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -28,6 +44,7 @@
 1/region = Rect2( 0, 0, 400, 400 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
+1/occluder = SubResource( 2 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -42,6 +59,7 @@
 2/region = Rect2( 0, 0, 400, 400 )
 2/tile_mode = 0
 2/occluder_offset = Vector2( 0, 0 )
+2/occluder = SubResource( 3 )
 2/navigation_offset = Vector2( 0, 0 )
 2/shape_offset = Vector2( 0, 0 )
 2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -56,6 +74,7 @@
 3/region = Rect2( 0, 0, 400, 400 )
 3/tile_mode = 0
 3/occluder_offset = Vector2( 0, 0 )
+3/occluder = SubResource( 4 )
 3/navigation_offset = Vector2( 0, 0 )
 3/shape_offset = Vector2( 0, 0 )
 3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -70,6 +89,7 @@
 4/region = Rect2( 0, 0, 400, 400 )
 4/tile_mode = 0
 4/occluder_offset = Vector2( 0, 0 )
+4/occluder = SubResource( 5 )
 4/navigation_offset = Vector2( 0, 0 )
 4/shape_offset = Vector2( 0, 0 )
 4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )

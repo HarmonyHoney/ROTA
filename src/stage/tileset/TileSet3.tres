@@ -1,10 +1,25 @@
-[gd_resource type="TileSet" load_steps=6 format=2]
+[gd_resource type="TileSet" load_steps=11 format=2]
 
 [ext_resource path="res://media/image/tiles/tile4_0.png" type="Texture" id=1]
 [ext_resource path="res://media/image/tiles/tile4_4.png" type="Texture" id=2]
 [ext_resource path="res://media/image/tiles/tile4_3.png" type="Texture" id=3]
 [ext_resource path="res://media/image/tiles/tile4_2.png" type="Texture" id=4]
 [ext_resource path="res://media/image/tiles/tile4_1.png" type="Texture" id=5]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( 400, 400, 0, 400, 0, 0, 400, 0 )
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( 200, 400, 200, 400, 200, 390, 188, 390, 181, 387, 174, 381, 171, 375, 170, 371, 170, 321, 171, 314, 176, 307, 181, 303, 188, 300, 200, 300, 200, 290, 204, 273, 194, 265, 186, 254, 182, 244, 180, 236, 180, 225, 182, 215, 188, 202, 196, 193, 204, 187, 212, 183, 224, 180, 234, 180, 244, 182, 254, 186, 266, 195, 271, 201, 272, 204, 278, 202, 289, 200, 300, 200, 300, 188, 306, 177, 314, 171, 320, 170, 370, 170, 379, 173, 386, 179, 389, 184, 390, 192, 390, 200, 400, 200, 400, 400 )
+
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( 0, 200, 0, 200, 13, 200, 19, 188, 27, 178, 41, 167, 53, 162, 63, 160, 74, 160, 86, 162, 98, 167, 105, 171, 114, 179, 121, 188, 127, 200, 159, 200, 187, 173, 196, 170, 204, 170, 212, 173, 218, 177, 240, 200, 273, 200, 279, 187, 288, 177, 299, 168, 312, 162, 324, 160, 336, 160, 352, 164, 362, 169, 369, 174, 379, 185, 384, 193, 387, 200, 400, 200, 400, 400, 0, 400 )
+
+[sub_resource type="OccluderPolygon2D" id=4]
+polygon = PoolVector2Array( 0, 200, 0, 200, 10, 200, 10, 188, 13, 180, 22, 172, 29, 170, 81, 170, 90, 173, 96, 179, 100, 188, 100, 200, 120, 200, 120, 190, 124, 173, 133, 156, 143, 144, 153, 135, 164, 128, 184, 121, 191, 120, 200, 120, 200, 100, 188, 100, 180, 97, 173, 90, 170, 83, 170, 28, 174, 19, 181, 13, 189, 10, 200, 10, 200, 0, 400, 0, 400, 400, 0, 400 )
+
+[sub_resource type="OccluderPolygon2D" id=5]
+polygon = PoolVector2Array( 0, 200, 0, 200, 10, 200, 10, 188, 13, 180, 21, 173, 30, 170, 79, 170, 90, 173, 97, 181, 100, 189, 100, 200, 120, 200, 120, 192, 124, 174, 127, 167, 134, 154, 144, 143, 154, 134, 171, 125, 191, 120, 200, 120, 200, 100, 188, 100, 178, 96, 173, 89, 170, 81, 170, 28, 174, 19, 183, 12, 189, 10, 200, 10, 200, 0, 400, 0, 400, 200, 390, 200, 390, 212, 386, 221, 379, 227, 371, 230, 319, 230, 311, 227, 304, 221, 300, 212, 300, 200, 280, 200, 280, 209, 275, 229, 268, 242, 258, 255, 247, 265, 233, 273, 218, 278, 209, 280, 200, 280, 200, 300, 211, 300, 221, 304, 227, 311, 230, 318, 230, 371, 227, 380, 220, 387, 211, 390, 200, 390, 200, 400, 0, 400 )
 
 [resource]
 0/name = "tile4_0.png 0"
@@ -14,6 +29,7 @@
 0/region = Rect2( 0, 0, 400, 400 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
+0/occluder = SubResource( 1 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -28,6 +44,7 @@
 1/region = Rect2( 0, 0, 400, 400 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
+1/occluder = SubResource( 2 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -42,6 +59,7 @@
 2/region = Rect2( 0, 0, 400, 400 )
 2/tile_mode = 0
 2/occluder_offset = Vector2( 0, 0 )
+2/occluder = SubResource( 3 )
 2/navigation_offset = Vector2( 0, 0 )
 2/shape_offset = Vector2( 0, 0 )
 2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -56,6 +74,7 @@
 3/region = Rect2( 0, 0, 400, 400 )
 3/tile_mode = 0
 3/occluder_offset = Vector2( 0, 0 )
+3/occluder = SubResource( 4 )
 3/navigation_offset = Vector2( 0, 0 )
 3/shape_offset = Vector2( 0, 0 )
 3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -70,6 +89,7 @@
 4/region = Rect2( 0, 0, 400, 400 )
 4/tile_mode = 0
 4/occluder_offset = Vector2( 0, 0 )
+4/occluder = SubResource( 5 )
 4/navigation_offset = Vector2( 0, 0 )
 4/shape_offset = Vector2( 0, 0 )
 4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
