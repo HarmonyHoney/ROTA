@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "CanvasItem",
 "class": "PolyShape",
 "language": "GDScript",
-"path": "res://src/actor/shape/PolyShape.gd"
+"path": "res://src/class/shape/PolyShape.gd"
 }, {
 "base": "Resource",
 "class": "SaveDict",

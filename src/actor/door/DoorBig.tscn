@@ -4,7 +4,7 @@
 [ext_resource path="res://media/font/profile/DoorLabel.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/detail/Visible.gd" type="Script" id=3]
 [ext_resource path="res://src/actor/door/DoorBig.gd" type="Script" id=4]
-[ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=5]
+[ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=5]
 [ext_resource path="res://src/shader/door_big.gdshader" type="Shader" id=7]
 [ext_resource path="res://media/image/box/round_rect100.png" type="Texture" id=8]
 

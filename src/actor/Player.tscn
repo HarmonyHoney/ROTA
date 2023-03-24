@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=1]
+[ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
-[ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=3]
+[ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=3]
 [ext_resource path="res://src/detail/Visible.gd" type="Script" id=4]
 [ext_resource path="res://media/audio/sfx/player_land.wav" type="AudioStream" id=5]
 

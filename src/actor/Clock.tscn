@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=1]
+[ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=1]
 
 [node name="Clock" type="Polygon2D"]
 self_modulate = Color( 1, 0.984314, 0, 1 )

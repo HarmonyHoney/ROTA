@@ -3,7 +3,7 @@
 [ext_resource path="res://src/actor/Mirror.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/door/Arrow.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/shader/sky_screen.gdshader" type="Shader" id=3]
-[ext_resource path="res://src/actor/shape/Rectangle.gd" type="Script" id=4]
+[ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=4]
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 3 )

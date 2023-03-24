@@ -4,7 +4,7 @@
 [ext_resource path="res://src/menu/options/scroll/Hairstyle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/actor/Hair.tscn" type="PackedScene" id=4]
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=5]
-[ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=6]
+[ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=6]
 [ext_resource path="res://media/image/UI/reset.svg" type="Texture" id=7]
 [ext_resource path="res://src/menu/options/scroll/Color.gd" type="Script" id=8]
 

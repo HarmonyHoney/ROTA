@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=1]
-[ext_resource path="res://src/actor/shape/Circle.gd" type="Script" id=2]
+[ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=2]
 [ext_resource path="res://src/menu/options/scroll/Color.gd" type="Script" id=3]
 
 [node name="Color" type="Control" groups=["color"]]
