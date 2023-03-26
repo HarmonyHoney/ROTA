@@ -2,14 +2,15 @@ tool
 extends Node2D
 class_name Arrow
 
-export var dir := 0
+export var dir := 0 setget set_dir
+export var is_turn := false
 export var col_show := false setget set_col_show
 export var col_size := Vector2(40, 50) setget set_col_size
 export var col_pos := Vector2(0, 0) setget set_col_pos
+export var image_show := false setget set_image_show
 export var image_pos := Vector2(0, -95) setget set_image_pos
 
 onready var image := $Image
-onready var mat : ShaderMaterial = $Image/Rect.material
 onready var area := $Area2D
 onready var col_shape := $Area2D/CollisionShape2D
 
@@ -18,12 +19,8 @@ var body = null
 var is_active := false
 var is_locked := false
 
-var arrow_clock := 0.0
-var arrow_time := 0.3
-
-var open_clock := 0.0
-var open_time := 0.5
-var open_last := 0.0
+var arrow_easy := EaseMover.new(0.3)
+var open_easy := EaseMover.new()
 
 var start_clock := 0.0
 var start_time := 0.5
@@ -38,10 +35,9 @@ func _ready():
 	set_image_pos()
 	
 	if Engine.editor_hint: return
+	self.image_show = false
 	
 	player = Shared.player
-	image.modulate.a = 0.0
-	mat.set_shader_param("fill_y", 0.0)
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
@@ -52,23 +48,22 @@ func _physics_process(delta):
 		return
 	
 	# image display
-	arrow_clock = clamp(arrow_clock + (delta if (is_active and !is_locked) else -delta), 0, arrow_time)
-	image.modulate.a = smoothstep(0, 1, arrow_clock / arrow_time)
+	arrow_easy.count(delta, is_active and !is_locked)
 	
 	# activate
 	try_active()
 	
 	# open door
-	open_last = open_clock
 	var open = Input.is_action_pressed("up") and is_active and !is_locked and player != null and !player.is_hold and player.dir == dir and player.is_floor
-	open_clock = clamp(open_clock + (delta if open else -delta), 0, open_time)
+	open_easy.count(delta, open)
 	
-	if open_clock > 0:
-		var os = smoothstep(0, 1, open_clock / open_time)
-		mat.set_shader_param("fill_y", os)
-		
-		if open_clock == open_time and open_last != open_time:
+	if open_easy.clock > 0:
+		if open_easy.is_complete and !open_easy.is_last:
 			emit_signal("open")
+
+func set_dir(arg := dir):
+	dir = posmod(arg, 4)
+	if is_turn: rotation_degrees = 90 * dir
 
 func set_col_show(arg := col_show):
 	col_show = arg
@@ -81,6 +76,10 @@ func set_col_size(arg := col_size):
 func set_col_pos(arg := col_pos):
 	col_pos = arg
 	if area: area.position = col_pos
+
+func set_image_show(arg := image_show):
+	image_show = arg
+	if image: image.visible = image_show
 
 func set_image_pos(arg := image_pos):
 	image_pos = arg
@@ -98,7 +97,6 @@ func try_active():
 	if (is_active and (body != player or (player.dir != dir))) or (!is_active and body == player and player.dir == dir):
 		is_active = !is_active
 		emit_signal("activate")
-
-func turn(arg):
-	dir = posmod(arg, 4)
-	rotation_degrees = 90 * dir
+		if is_active and Shared.arrow_track != self:
+			Shared.arrow_track = self
+			Shared.arrow.global_transform = image.global_transform

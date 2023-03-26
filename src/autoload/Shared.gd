@@ -116,6 +116,12 @@ var boundary_rect := Rect2()
 var boundary_center := Vector2.ZERO
 onready var boundary_node := $Boundary
 
+onready var arrow := $ArrowLayer/Arrow
+onready var arrow_mat : ShaderMaterial = $ArrowLayer/Arrow/Rect.material
+var arrow_track = null
+onready var chat := $ArrowLayer/Chat
+
+
 func _ready():
 	Wipe.connect("complete", self, "wipe_complete")
 	boundary_node.visible = false
@@ -190,6 +196,12 @@ func _physics_process(delta):
 	if auto_save_clock > auto_save_time:
 		auto_save_clock = 0.0
 		save_data()
+	
+	# arrows
+	if is_instance_valid(arrow_track):
+		arrow.modulate.a = arrow_track.arrow_easy.smooth()
+		arrow_mat.set_shader_param("fill_y", arrow_track.open_easy.smooth())
+	
 
 func time_string(t := 0.0, dec = 2, is_min := false, is_hour := false):
 	# time
@@ -227,6 +239,7 @@ func reset():
 func change_scene():
 	is_change = false
 	boxes.clear()
+	arrow.modulate.a = 0.0
 	
 	emit_signal("scene_before")
 	

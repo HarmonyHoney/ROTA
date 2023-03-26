@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://media/image/white_square_100x.png" type="Texture" id=1]
-[ext_resource path="res://src/autoload/Chat.gd" type="Script" id=2]
+[ext_resource path="res://src/actor/Chat.gd" type="Script" id=2]
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=4]
 
@@ -16,8 +16,11 @@ modulate = Color( 1, 1, 1, 0 )
 z_index = 71
 z_as_relative = false
 script = ExtResource( 2 )
+dialog = "aaa"
+is_editor = true
 
 [node name="Bubble" type="Node2D" parent="."]
+position = Vector2( 0, -10 )
 
 [node name="Shadow" type="Node2D" parent="Bubble"]
 modulate = Color( 0, 0, 0, 0.501961 )
@@ -32,10 +35,10 @@ polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
 texture = ExtResource( 1 )
 texture_offset = Vector2( 0, 50 )
 texture_scale = Vector2( 0, 1 )
-polygon = PoolVector2Array( 260, 0.0999985, 259.062, 8.42228, 256.296, 16.3273, 251.84, 23.4185, 245.919, 29.3405, 238.827, 33.7962, 230.922, 36.5623, 222.6, 37.5, -222.6, 37.5, -230.922, 36.5623, -238.827, 33.7962, -245.919, 29.3405, -251.84, 23.4185, -256.296, 16.3273, -259.062, 8.42228, -260, 0.0999952, -260, -0.100002, -259.062, -8.42228, -256.296, -16.3273, -251.841, -23.4185, -245.919, -29.3405, -238.827, -33.7962, -230.922, -36.5623, -222.6, -37.5, 222.6, -37.5, 230.922, -36.5623, 238.827, -33.7962, 245.919, -29.3405, 251.84, -23.4185, 256.296, -16.3273, 259.062, -8.42228, 260, -0.0999919 )
+polygon = PoolVector2Array( 59, 0, 58.0598, 8.34453, 55.2863, 16.2706, 50.8187, 23.3809, 44.8809, 29.3187, 37.7706, 33.7863, 29.8445, 36.5598, 21.5, 37.5, -21.5, 37.5, -29.8445, 36.5598, -37.7706, 33.7863, -44.8809, 29.3187, -50.8187, 23.3809, -55.2863, 16.2706, -58.0598, 8.34453, -59, -3.27835e-06, -58.0598, -8.34453, -55.2863, -16.2706, -50.8187, -23.3809, -44.8809, -29.3187, -37.7706, -33.7863, -29.8445, -36.5598, -21.5, -37.5, 21.5, -37.5, 29.8445, -36.5598, 37.7706, -33.7863, 44.8809, -29.3187, 50.8187, -23.3809, 55.2863, -16.2706, 58.0598, -8.34453 )
 script = ExtResource( 4 )
 is_baked = false
-size = Vector2( 260, 37.5 )
+size = Vector2( 59, 37.5 )
 radius = Plane( -2, -1, -1, -1 )
 
 [node name="Triangle" type="Polygon2D" parent="Bubble"]
@@ -47,10 +50,10 @@ polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
 texture = ExtResource( 1 )
 texture_offset = Vector2( 0, 50 )
 texture_scale = Vector2( 0, 1 )
-polygon = PoolVector2Array( 260, 0.0999985, 259.062, 8.42228, 256.296, 16.3273, 251.84, 23.4185, 245.919, 29.3405, 238.827, 33.7962, 230.922, 36.5623, 222.6, 37.5, -222.6, 37.5, -230.922, 36.5623, -238.827, 33.7962, -245.919, 29.3405, -251.84, 23.4185, -256.296, 16.3273, -259.062, 8.42228, -260, 0.0999952, -260, -0.100002, -259.062, -8.42228, -256.296, -16.3273, -251.841, -23.4185, -245.919, -29.3405, -238.827, -33.7962, -230.922, -36.5623, -222.6, -37.5, 222.6, -37.5, 230.922, -36.5623, 238.827, -33.7962, 245.919, -29.3405, 251.84, -23.4185, 256.296, -16.3273, 259.062, -8.42228, 260, -0.0999919 )
+polygon = PoolVector2Array( 59, 0, 58.0598, 8.34453, 55.2863, 16.2706, 50.8187, 23.3809, 44.8809, 29.3187, 37.7706, 33.7863, 29.8445, 36.5598, 21.5, 37.5, -21.5, 37.5, -29.8445, 36.5598, -37.7706, 33.7863, -44.8809, 29.3187, -50.8187, 23.3809, -55.2863, 16.2706, -58.0598, 8.34453, -59, -3.27835e-06, -58.0598, -8.34453, -55.2863, -16.2706, -50.8187, -23.3809, -44.8809, -29.3187, -37.7706, -33.7863, -29.8445, -36.5598, -21.5, -37.5, 21.5, -37.5, 29.8445, -36.5598, 37.7706, -33.7863, 44.8809, -29.3187, 50.8187, -23.3809, 55.2863, -16.2706, 58.0598, -8.34453 )
 script = ExtResource( 4 )
 is_baked = false
-size = Vector2( 260, 37.5 )
+size = Vector2( 59, 37.5 )
 radius = Plane( -2, -1, -1, -1 )
 
 [node name="Center" type="CenterContainer" parent="Bubble"]
@@ -60,25 +63,24 @@ use_top_left = true
 
 [node name="Back" type="Label" parent="Bubble/Center"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = -240.0
+margin_left = -39.0
 margin_top = -21.0
-margin_right = 240.0
+margin_right = 39.0
 margin_bottom = 20.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 3 )
-text = "I do adore the flowers"
+text = "aaa"
 align = 1
 valign = 2
-percent_visible = 0.0555556
+percent_visible = 1.33333
 
 [node name="Label" type="Label" parent="Bubble/Center"]
-margin_left = -240.0
+margin_left = -39.0
 margin_top = -21.0
-margin_right = 240.0
+margin_right = 39.0
 margin_bottom = 20.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 3 )
-text = "I do adore the flowers"
+text = "aaa"
 align = 1
 valign = 2
-percent_visible = 0.0

@@ -3,12 +3,14 @@ class_name EaseMover
 var show := true
 var clock := 0.0
 var time := 0.5
+var last := 0.0
 var from := Vector2.ZERO
 var to := Vector2.ZERO
 var current := Vector2.ZERO
 var node
 
-var is_complete setget , get_complete
+var is_complete setget , get_is_complete
+var is_last setget , get_is_last
 
 func _init(_time := time, _from := from, _to := to, _node := node):
 	time = _time
@@ -17,6 +19,7 @@ func _init(_time := time, _from := from, _to := to, _node := node):
 	node = _node
 
 func count(delta, arg := show):
+	last = clock
 	clock = clamp(clock + (delta if arg else -delta), 0, time)
 	return smooth()
 
@@ -34,5 +37,8 @@ func frac():
 func smooth():
 	return smoothstep(0, 1, clock / time)
 
-func get_complete():
+func get_is_complete():
 	return clock == time
+
+func get_is_last():
+	return clock == last

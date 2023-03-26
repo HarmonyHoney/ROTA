@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/autoload/Shared.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/shader/door_arrow.gdshader" type="Shader" id=3]
+[ext_resource path="res://media/image/UI/key_up_square.png" type="Texture" id=4]
+[ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=5]
+[ext_resource path="res://src/actor/Chat.tscn" type="PackedScene" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/fill_y = 0.35
+shader_param/is_flip = true
+shader_param/is_descent = false
 
 [node name="Shared" type="Node"]
 pause_mode = 2
@@ -18,3 +28,23 @@ margin_left = -150.0
 margin_top = -150.0
 margin_right = 150.0
 margin_bottom = 150.0
+
+[node name="ArrowLayer" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
+
+[node name="Arrow" type="Node2D" parent="ArrowLayer"]
+position = Vector2( -200, -200 )
+
+[node name="Rect" type="Polygon2D" parent="ArrowLayer/Arrow"]
+material = SubResource( 1 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 4 )
+texture_offset = Vector2( 100, 100 )
+polygon = PoolVector2Array( 100, 40, 97.0634, 58.541, 88.541, 75.2671, 75.2671, 88.541, 58.541, 97.0634, 40, 100, -40, 100, -58.541, 97.0634, -75.2671, 88.541, -88.541, 75.2671, -97.0634, 58.541, -100, 40, -100, -40, -97.0634, -58.541, -88.541, -75.2671, -75.2671, -88.541, -58.541, -97.0634, -40, -100, 40, -100, 58.541, -97.0634, 75.2671, -88.541, 88.541, -75.2671, 97.0634, -58.541, 100, -40 )
+script = ExtResource( 5 )
+size = Vector2( 100, 100 )
+radius = Plane( 60, -1, -1, -1 )
+points = 6
+
+[node name="Chat" parent="ArrowLayer" instance=ExtResource( 6 )]
+position = Vector2( -481, -210 )
