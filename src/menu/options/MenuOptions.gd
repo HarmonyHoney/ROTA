@@ -17,7 +17,7 @@ func row():
 	is_audio_joy = cursor > 3
 
 func open():
-	bg.visible = Shared.csfn != Shared.title_path
+	bg.visible = true#Shared.csfn != Shared.title_path
 
 func close():
 	Shared.save_options()

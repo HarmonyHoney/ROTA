@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
@@ -24,10 +24,27 @@
 [ext_resource path="res://src/menu/DemoShow.gd" type="Script" id=22]
 [ext_resource path="res://media/image/UI/godot_logo.svg" type="Texture" id=23]
 [ext_resource path="res://src/actor/door/DoorSpawn.tscn" type="PackedScene" id=24]
-[ext_resource path="res://src/theme/shadow_text.tres" type="Theme" id=25]
+[ext_resource path="res://src/shader/fade_x.gdshader" type="Shader" id=25]
+[ext_resource path="res://src/theme/title_text.tres" type="Theme" id=26]
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = ExtResource( 25 )
+shader_param/size = 0.856
+shader_param/width = 0.115
+shader_param/color = Color( 0, 0, 0, 1 )
+shader_param/scale = 1.0
+shader_param/is_half = false
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 0.33 )
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -35,12 +52,20 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.3, 0.3, 0.3, 1 )
+bg_color = Color( 1, 1, 1, 1 )
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 25 )
+shader_param/size = 0.5
+shader_param/width = 0.115
+shader_param/color = Color( 0, 0, 0, 1 )
+shader_param/scale = 0.598
+shader_param/is_half = true
 
 [sub_resource type="DynamicFont" id=6]
 size = 30
@@ -109,7 +134,15 @@ is_back_close = true
 sub_path = NodePath("../FileMenu")
 credits_path = NodePath("../Credits")
 
+[node name="BG" type="ColorRect" parent="Canvas/MenuTitle"]
+material = SubResource( 22 )
+margin_left = 24.0
+margin_right = 360.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 1 )
+
 [node name="Cursor" type="Panel" parent="Canvas/MenuTitle"]
+modulate = Color( 0.658824, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 0.1
 custom_styles/panel = SubResource( 1 )
@@ -132,7 +165,7 @@ margin_right = 249.0
 margin_bottom = 273.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-theme = ExtResource( 25 )
+theme = ExtResource( 26 )
 text = "Play"
 align = 1
 valign = 1
@@ -140,19 +173,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Makeover" type="Label" parent="Canvas/MenuTitle/List"]
+[node name="Back" type="Panel" parent="Canvas/MenuTitle/List/Play"]
 visible = false
-margin_left = 68.0
-margin_top = 250.0
-margin_right = 316.0
-margin_bottom = 301.0
-size_flags_horizontal = 4
-size_flags_vertical = 5
-theme = ExtResource( 25 )
-custom_fonts/font = ExtResource( 2 )
-text = "Makeover"
-align = 1
-valign = 1
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -3.0
+margin_right = 20.0
+margin_bottom = 3.0
+custom_styles/panel = SubResource( 8 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Options" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 91.0
@@ -161,8 +194,7 @@ margin_right = 292.0
 margin_bottom = 329.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-theme = ExtResource( 25 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 26 )
 text = "Options"
 align = 1
 valign = 1
@@ -177,8 +209,7 @@ margin_right = 286.0
 margin_bottom = 385.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-theme = ExtResource( 25 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 26 )
 text = "Credits"
 align = 1
 valign = 1
@@ -193,8 +224,7 @@ margin_right = 336.0
 margin_bottom = 441.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-theme = ExtResource( 25 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 26 )
 text = "Store Page"
 align = 1
 valign = 1
@@ -210,8 +240,7 @@ margin_right = 249.0
 margin_bottom = 497.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-theme = ExtResource( 25 )
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 26 )
 text = "Quit"
 align = 1
 valign = 1
@@ -238,6 +267,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="ListBack" type="VBoxContainer" parent="Canvas/FileMenu/Lists"]
+modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 4
@@ -288,6 +318,7 @@ __meta__ = {
 }
 
 [node name="Cursor" type="Panel" parent="Canvas/FileMenu/Lists"]
+modulate = Color( 0.658824, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 0.1
 custom_styles/panel = SubResource( 1 )
@@ -338,6 +369,7 @@ sub_path = NodePath("../FileDelete")
 demo_path = NodePath("../FileDemo")
 
 [node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileOpen"]
+modulate = Color( 0.658824, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 0.1
 custom_styles/panel = SubResource( 1 )
@@ -477,6 +509,7 @@ is_accept_close = true
 is_back_close = true
 
 [node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileDemo"]
+modulate = Color( 0.658824, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 0.1
 custom_styles/panel = SubResource( 1 )
@@ -537,11 +570,12 @@ is_back_close = true
 is_audio_cursor = false
 is_audio_accept = false
 
-[node name="Back" type="ColorRect" parent="Canvas/Credits"]
-visible = false
-modulate = Color( 0, 0, 0, 1 )
+[node name="BG" type="ColorRect" parent="Canvas/Credits"]
+material = SubResource( 21 )
+anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
 
 [node name="Patch" type="Label" parent="Canvas/Credits"]
 modulate = Color( 1, 1, 1, 0.25 )
