@@ -26,7 +26,7 @@
 shader = ExtResource( 21 )
 shader_param/size = 0.5
 shader_param/width = 0.1
-shader_param/color = Color( 0, 0, 0, 1 )
+shader_param/color = Color( 0, 0, 0, 0.7 )
 shader_param/scale = 1.0
 shader_param/is_half = false
 
@@ -222,9 +222,6 @@ size_flags_vertical = 6
 custom_fonts/font = ExtResource( 2 )
 text = "Keyboard Setup"
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Controller" type="Control" parent="Control/Menu/List"]
 margin_top = 370.0

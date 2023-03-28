@@ -17,7 +17,7 @@ func accept():
 			sub_menu(MenuMakeover)
 		"options":
 			sub_menu(MenuOptions)
-			Cam.target_pos = pos + Vector2(950, 0)
+			Cam.target_pos = pos + Vector2(0, -600)
 		"credits":
 			sub_menu(credits_menu)
 			Cam.target_pos = pos + Vector2(350, 0)

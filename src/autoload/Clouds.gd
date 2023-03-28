@@ -50,7 +50,7 @@ export var color_dark := Color("bfbfbf")
 
 func _enter_tree():
 	Shared.connect("scene_changed", self, "scene")
-	get_tree().connect("idle_frame", self, "idle_frame")
+	Cam.connect("moved", self, "cam_moved")
 
 func _ready():
 	hide.visible = false
@@ -99,7 +99,7 @@ func _process(delta):
 	clouds2.rotation = cloud_rotation
 	precip.rotation = cloud_rotation
 
-func idle_frame():
+func cam_moved():
 	# parallax
 	var par = Cam.global_position - Shared.boundary_center
 	clouds1.position = par * 0.3

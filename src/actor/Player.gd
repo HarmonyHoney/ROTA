@@ -141,6 +141,7 @@ func _enter_tree():
 	if get_parent() == Shared:
 		Shared.player = self
 	get_tree().connect("physics_frame", self, "physics_frame")
+	MenuPause.connect("opened", self, "pause")
 	MenuPause.connect("closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")
 	Wipe.connect("start", self, "wipe_start")
@@ -804,12 +805,22 @@ func enter_door():
 	anim.play(idle_dir)
 	joy = Vector2.ZERO
 
+func pause():
+	if Shared.player == self:
+		is_input = false
+		btn_jump = false
+		btnp_jump = false
+		btn_push = false
+		btnp_push = false
+		joy = Vector2.ZERO
+
 func unpause():
-	#print("unpause")
-	unpause_tick = 0
-	is_unpause = true
-	btn_jump = false
-	btn_push = false
+	if Shared.player == self:
+		is_input = true
+		is_unpause = true
+		unpause_tick = 0
+		btn_jump = false
+		btn_push = false
 
 func footstep_sound():
 	if !audio_walk.playing and !audio_land.playing:

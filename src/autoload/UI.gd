@@ -45,7 +45,7 @@ func _physics_process(delta):
 	down.move(delta, Shared.clock_rank > 0 and (down.show or p))
 	keys.move(delta)
 	
-	clock_down.modulate.a = clock_ease.count(delta)
+	clock_down.modulate.a = clock_ease.count(delta, clock_ease.show and !(MenuPause.is_paused and !MenuPause.is_open))
 
 func scene_changed(override := false):
 	up.clock = 0.0

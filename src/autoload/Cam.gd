@@ -31,7 +31,7 @@ var rot_offset := Vector2.ZERO
 var is_pan := false
 var pan_ease := EaseMover.new(1.0)
 signal pan_complete
-
+signal moved
 
 func _enter_tree():
 	Shared.connect("scene_changed", self, "scene_changed")
@@ -40,7 +40,7 @@ func _ready():
 	zoom = Vector2.ONE * zoom_min
 
 func _input(event):
-	if event.is_action_pressed("zoom") and !Wipe.is_wipe and !Cutscene.is_playing and !MenuMakeover.is_open and "world" in Shared.csfn:
+	if event.is_action_pressed("zoom") and !MenuPause.is_paused and !Wipe.is_wipe and !Cutscene.is_playing and !MenuMakeover.is_open and "world" in Shared.csfn:
 		start_zoom(zoom_step + 1)
 
 func _process(delta):
@@ -70,6 +70,8 @@ func _process(delta):
 		# position
 		if is_moving:
 			global_position = global_position.linear_interpolate(target_pos + turn_offset.rotated(rotation), 0.08)
+	
+	emit_signal("moved")
 
 func set_target_node(arg):
 	if is_instance_valid(target_node): target_node.disconnect("turn_cam", self, "turn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -19,12 +19,22 @@
 [ext_resource path="res://media/audio/sfx/player_land.wav" type="AudioStream" id=17]
 [ext_resource path="res://media/audio/sfx/player_jump.wav" type="AudioStream" id=18]
 [ext_resource path="res://media/audio/sfx/btn3.wav" type="AudioStream" id=19]
+[ext_resource path="res://media/audio/music/ost1.mp3" type="AudioStream" id=21]
+[ext_resource path="res://media/audio/music/ost3.mp3" type="AudioStream" id=22]
+[ext_resource path="res://media/audio/music/ost4.mp3" type="AudioStream" id=23]
+[ext_resource path="res://media/audio/music/ost2.mp3" type="AudioStream" id=24]
 
 [node name="Audio" type="Node"]
+pause_mode = 2
 script = ExtResource( 1 )
+ost = [ ExtResource( 21 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 23 ) ]
+
+[node name="Music" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="Music"]
+bus = "Music"
 
 [node name="Menu" type="Node" parent="."]
-pause_mode = 2
 
 [node name="Cursor" type="AudioStreamPlayer" parent="Menu"]
 stream = ExtResource( 3 )
@@ -56,6 +66,7 @@ stream = ExtResource( 12 )
 bus = "SFX"
 
 [node name="Gem" type="Node" parent="."]
+pause_mode = 1
 
 [node name="Collect" type="AudioStreamPlayer" parent="Gem"]
 stream = ExtResource( 5 )
@@ -86,6 +97,7 @@ stream = ExtResource( 11 )
 bus = "SFX"
 
 [node name="Player" type="Node" parent="."]
+pause_mode = 1
 
 [node name="Grab" type="AudioStreamPlayer" parent="Player"]
 stream = ExtResource( 19 )

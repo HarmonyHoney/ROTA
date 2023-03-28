@@ -1,12 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://media/font/profile/PauseHeader.tres" type="DynamicFont" id=1]
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/menu/DemoShow.gd" type="Script" id=3]
 [ext_resource path="res://src/menu/MenuPause.gd" type="Script" id=4]
+[ext_resource path="res://src/shader/fade_x.gdshader" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 5 )
+shader_param/size = 0.5
+shader_param/width = 0.1
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/scale = 1.0
+shader_param/is_half = false
 
 [sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.74902, 0.376471, 0.380392, 1 )
+bg_color = Color( 1, 1, 1, 1 )
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -17,8 +25,9 @@ corner_radius_bottom_left = 50
 pause_mode = 2
 layer = 5
 script = ExtResource( 4 )
-items_path = NodePath("Control/Menu/List/Items")
-cursor_path = NodePath("Control/Menu/List/Cursor")
+items_path = NodePath("Control/List/Items")
+cursor_path = NodePath("Control/List/Cursor")
+cursor_margin = Vector2( 20, 7 )
 fade_path = NodePath("Control")
 is_ui_keys = true
 is_process = true
@@ -28,76 +37,41 @@ is_audio_back = false
 [node name="Control" type="Control" parent="."]
 margin_right = 1280.0
 margin_bottom = 720.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BG" type="ColorRect" parent="Control"]
-modulate = Color( 1, 1, 1, 0.6 )
-margin_right = 1280.0
+modulate = Color( 0, 0, 0, 0.701961 )
+material = SubResource( 5 )
+margin_left = 443.0
+margin_right = 837.0
 margin_bottom = 720.0
 color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Menu" type="Panel" parent="Control"]
-self_modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.3
-anchor_top = 0.2
-anchor_right = 0.7
-anchor_bottom = 0.8
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="Control/Menu"]
-anchor_right = 1.0
-anchor_bottom = 0.4
-custom_fonts/font = ExtResource( 1 )
-text = "PAUSE"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="List" type="Control" parent="Control/Menu"]
-anchor_top = 0.35
+[node name="List" type="Control" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -0.199997
-margin_bottom = 35.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Cursor" type="Panel" parent="Control/Menu/List"]
-anchor_right = 0.75
-anchor_bottom = 0.25
-margin_left = 136.0
-margin_bottom = 5.8
+[node name="Cursor" type="Panel" parent="Control/List"]
+modulate = Color( 0.658824, 0, 0, 1 )
+margin_right = 100.0
+margin_bottom = 50.0
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
-"_edit_use_anchors_": false,
 "_editor_description_": ""
 }
 
-[node name="Items" type="VBoxContainer" parent="Control/Menu/List"]
+[node name="Items" type="VBoxContainer" parent="Control/List"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -64.0
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_constants/separation = 15
+alignment = 1
 
-[node name="Resume" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 162.0
-margin_right = 349.0
-margin_bottom = 51.0
+[node name="Resume" type="Label" parent="Control/List/Items"]
+margin_left = 546.0
+margin_top = 169.0
+margin_right = 733.0
+margin_bottom = 220.0
 size_flags_horizontal = 4
-size_flags_vertical = 7
+size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
 text = "Resume"
 align = 1
@@ -106,13 +80,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 185.0
-margin_top = 51.0
-margin_right = 326.0
-margin_bottom = 102.0
+[node name="Reset" type="Label" parent="Control/List/Items"]
+margin_left = 569.0
+margin_top = 235.0
+margin_right = 710.0
+margin_bottom = 286.0
 size_flags_horizontal = 4
-size_flags_vertical = 7
+size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
 text = "Reset"
 align = 1
@@ -121,13 +95,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hub" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 119.0
-margin_top = 102.0
-margin_right = 392.0
-margin_bottom = 153.0
+[node name="Hub" type="Label" parent="Control/List/Items"]
+margin_left = 503.0
+margin_top = 301.0
+margin_right = 776.0
+margin_bottom = 352.0
 size_flags_horizontal = 4
-size_flags_vertical = 7
+size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
 text = "Exit Stage"
 align = 1
@@ -136,13 +110,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 155.0
-margin_top = 153.0
-margin_right = 356.0
-margin_bottom = 204.0
+[node name="Options" type="Label" parent="Control/List/Items"]
+margin_left = 539.0
+margin_top = 367.0
+margin_right = 740.0
+margin_bottom = 418.0
 size_flags_horizontal = 4
-size_flags_vertical = 7
+size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
 text = "Options"
 align = 1
@@ -151,13 +125,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Store" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 112.0
-margin_top = 204.0
-margin_right = 400.0
-margin_bottom = 255.0
+[node name="Store" type="Label" parent="Control/List/Items"]
+margin_left = 496.0
+margin_top = 433.0
+margin_right = 784.0
+margin_bottom = 484.0
 size_flags_horizontal = 4
-size_flags_vertical = 7
+size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
 text = "Store Page"
 align = 1
@@ -167,13 +141,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Exit" type="Label" parent="Control/Menu/List/Items"]
-margin_left = 115.0
-margin_top = 255.0
-margin_right = 397.0
-margin_bottom = 306.0
+[node name="Exit" type="Label" parent="Control/List/Items"]
+margin_left = 499.0
+margin_top = 499.0
+margin_right = 781.0
+margin_bottom = 550.0
 size_flags_horizontal = 4
-size_flags_vertical = 7
+size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
 text = "Main Menu"
 align = 1

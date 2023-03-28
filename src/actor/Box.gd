@@ -131,8 +131,7 @@ func _physics_process(delta):
 			if Shared.is_outside_boundary(global_position):
 				fall_out()
 			else:
-				audio_land.pitch_scale = rand_range(0.7, 1.3)
-				audio_land.play()
+				Audio.play(audio_land, 0.7, 1.3)
 	
 	# start movement
 	elif !is_move:
@@ -149,8 +148,7 @@ func _physics_process(delta):
 			is_move = true
 			velocity = start_velocity
 			
-			audio_move.pitch_scale = rand_range(0.7, 1.3)
-			audio_move.play()
+			Audio.play(audio_move, 0.7, 1.3)
 
 func set_dir(arg := dir):
 	dir_last = dir

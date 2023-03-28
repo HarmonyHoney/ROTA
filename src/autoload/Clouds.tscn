@@ -149,7 +149,7 @@ z_index = -50
 z_as_relative = false
 script = ExtResource( 2 )
 cloud_bonus_rings = 2
-cloud_front_range = Vector2( 0, 300 )
+cloud_front_range = Vector2( 100, 400 )
 orbit_distance = 300.0
 snow_mat = SubResource( 16 )
 snow_tex = ExtResource( 7 )
@@ -161,7 +161,7 @@ is_rain = true
 layer = -5
 script = ExtResource( 12 )
 palette = PoolColorArray( 1, 0.639216, 0, 1, 0, 0.878431, 1, 1, 0, 0.384314, 1, 1, 0.67451, 0, 1, 1, 0.686275, 0, 0.74902, 1, 0.145098, 0, 0, 1 )
-clock = 30.0
+clock = 101.0
 
 [node name="ColorRect" type="ColorRect" parent="BG"]
 material = SubResource( 2 )

@@ -54,7 +54,7 @@ func _physics_process(delta):
 	try_active()
 	
 	# open door
-	var open = Input.is_action_pressed("up") and is_active and !is_locked and player != null and !player.is_hold and player.dir == dir and player.is_floor
+	var open = Input.is_action_pressed("up") and !MenuPause.is_paused and is_active and !is_locked and player != null and !player.is_hold and player.dir == dir and player.is_floor
 	open_easy.count(delta, open)
 	
 	if open_easy.clock > 0:

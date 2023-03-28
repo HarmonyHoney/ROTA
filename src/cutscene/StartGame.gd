@@ -4,6 +4,7 @@ func act():
 	Cutscene.is_playing = true
 	Cam.set_process(false)
 	Cam.global_position += Vector2(0, -400)
+	Cam.emit_signal("moved")
 	
 	if is_instance_valid(Shared.player):
 		var p = Shared.player

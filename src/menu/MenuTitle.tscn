@@ -30,8 +30,8 @@
 [sub_resource type="ShaderMaterial" id=22]
 shader = ExtResource( 25 )
 shader_param/size = 0.856
-shader_param/width = 0.115
-shader_param/color = Color( 0, 0, 0, 1 )
+shader_param/width = 0.15
+shader_param/color = Color( 0, 0, 0, 0.701961 )
 shader_param/scale = 1.0
 shader_param/is_half = false
 
@@ -51,6 +51,14 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 25 )
+shader_param/size = 0.5
+shader_param/width = 0.115
+shader_param/color = Color( 0, 0, 0, 0.701961 )
+shader_param/scale = 0.598
+shader_param/is_half = true
+
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 1, 1, 1 )
 border_color = Color( 1, 1, 1, 1 )
@@ -58,14 +66,6 @@ corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
-
-[sub_resource type="ShaderMaterial" id=21]
-shader = ExtResource( 25 )
-shader_param/size = 0.5
-shader_param/width = 0.115
-shader_param/color = Color( 0, 0, 0, 1 )
-shader_param/scale = 0.598
-shader_param/is_half = true
 
 [sub_resource type="DynamicFont" id=6]
 size = 30
@@ -126,7 +126,7 @@ margin_bottom = 720.0
 script = ExtResource( 15 )
 items_path = NodePath("List")
 cursor_path = NodePath("Cursor")
-cursor_margin = Vector2( 20, 3 )
+cursor_margin = Vector2( 20, 7 )
 fade_path = NodePath(".")
 is_input = true
 is_process = true
@@ -136,15 +136,29 @@ credits_path = NodePath("../Credits")
 
 [node name="BG" type="ColorRect" parent="Canvas/MenuTitle"]
 material = SubResource( 22 )
-margin_left = 24.0
-margin_right = 360.0
+margin_left = 27.0
+margin_right = 357.0
 margin_bottom = 720.0
 color = Color( 0, 0, 0, 1 )
 
+[node name="Back" type="Panel" parent="Canvas/MenuTitle"]
+visible = false
+modulate = Color( 0, 0, 0, 0.7 )
+anchor_right = 0.3
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 220.0
+margin_right = -50.0
+margin_bottom = -220.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="Cursor" type="Panel" parent="Canvas/MenuTitle"]
 modulate = Color( 0.658824, 0, 0, 1 )
-anchor_right = 1.0
-anchor_bottom = 0.1
+margin_right = 100.0
+margin_bottom = 50.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -155,14 +169,14 @@ anchor_right = 0.3
 anchor_bottom = 1.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-custom_constants/separation = 5
+custom_constants/separation = 15
 alignment = 1
 
 [node name="Play" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 135.0
-margin_top = 222.0
+margin_top = 235.0
 margin_right = 249.0
-margin_bottom = 273.0
+margin_bottom = 286.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 theme = ExtResource( 26 )
@@ -189,9 +203,9 @@ __meta__ = {
 
 [node name="Options" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 91.0
-margin_top = 278.0
+margin_top = 301.0
 margin_right = 292.0
-margin_bottom = 329.0
+margin_bottom = 352.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 theme = ExtResource( 26 )
@@ -204,9 +218,9 @@ __meta__ = {
 
 [node name="Credits" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 97.0
-margin_top = 334.0
+margin_top = 367.0
 margin_right = 286.0
-margin_bottom = 385.0
+margin_bottom = 418.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 theme = ExtResource( 26 )
@@ -218,6 +232,7 @@ __meta__ = {
 }
 
 [node name="Store" type="Label" parent="Canvas/MenuTitle/List"]
+visible = false
 margin_left = 48.0
 margin_top = 390.0
 margin_right = 336.0
@@ -235,9 +250,9 @@ __meta__ = {
 
 [node name="Exit" type="Label" parent="Canvas/MenuTitle/List"]
 margin_left = 134.0
-margin_top = 446.0
+margin_top = 433.0
 margin_right = 249.0
-margin_bottom = 497.0
+margin_bottom = 484.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 theme = ExtResource( 26 )
@@ -249,6 +264,7 @@ __meta__ = {
 }
 
 [node name="FileMenu" type="Control" parent="Canvas"]
+anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.93
 script = ExtResource( 14 )
@@ -261,8 +277,16 @@ is_process = true
 is_back_close = true
 sub_stay_open = true
 
+[node name="BG" type="ColorRect" parent="Canvas/FileMenu"]
+material = SubResource( 21 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 80.0
+margin_right = -80.0
+margin_bottom = 70.4
+color = Color( 0, 0, 0, 1 )
+
 [node name="Lists" type="Control" parent="Canvas/FileMenu"]
-anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -319,8 +343,8 @@ __meta__ = {
 
 [node name="Cursor" type="Panel" parent="Canvas/FileMenu/Lists"]
 modulate = Color( 0.658824, 0, 0, 1 )
-anchor_right = 1.0
-anchor_bottom = 0.1
+margin_right = 100.0
+margin_bottom = 50.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_editor_description_": ""
@@ -360,7 +384,7 @@ anchor_bottom = 1.0
 script = ExtResource( 17 )
 items_path = NodePath("List")
 cursor_path = NodePath("Cursor")
-cursor_margin = Vector2( 15, 0 )
+cursor_margin = Vector2( 20, 7 )
 fade_path = NodePath(".")
 is_input = true
 is_process = true
@@ -370,8 +394,8 @@ demo_path = NodePath("../FileDemo")
 
 [node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileOpen"]
 modulate = Color( 0.658824, 0, 0, 1 )
-anchor_right = 1.0
-anchor_bottom = 0.1
+margin_right = 100.0
+margin_bottom = 50.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -379,7 +403,6 @@ __meta__ = {
 }
 
 [node name="List" type="VBoxContainer" parent="Canvas/FileMenu/FileOpen"]
-anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -427,6 +450,7 @@ anchor_bottom = 1.0
 script = ExtResource( 16 )
 items_path = NodePath("List")
 cursor_path = NodePath("Cursor")
+cursor_margin = Vector2( 20, 7 )
 fade_path = NodePath(".")
 is_input = true
 is_process = true
@@ -434,27 +458,26 @@ is_back_close = true
 open_path = NodePath("../FileOpen")
 
 [node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileDelete"]
-anchor_right = 1.0
-anchor_bottom = 0.1
+modulate = Color( 0.658824, 0, 0, 1 )
+margin_right = 100.0
+margin_bottom = 50.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="Header" type="Label" parent="Canvas/FileMenu/FileDelete"]
-anchor_left = 0.5
-anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 0.5
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
-text = "Delete Save File?"
+text = "Delete
+Save File?"
 align = 1
 valign = 1
 
 [node name="List" type="VBoxContainer" parent="Canvas/FileMenu/FileDelete"]
-anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -502,6 +525,7 @@ __meta__ = {
 }
 items_path = NodePath("List")
 cursor_path = NodePath("Cursor")
+cursor_margin = Vector2( 20, 7 )
 fade_path = NodePath(".")
 is_input = true
 is_process = true
@@ -510,8 +534,8 @@ is_back_close = true
 
 [node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileDemo"]
 modulate = Color( 0.658824, 0, 0, 1 )
-anchor_right = 1.0
-anchor_bottom = 0.1
+margin_right = 100.0
+margin_bottom = 50.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -519,19 +543,17 @@ __meta__ = {
 }
 
 [node name="Header" type="Label" parent="Canvas/FileMenu/FileDemo"]
-anchor_left = 0.5
-anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 0.5
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
-text = "File outside of Demo!"
+text = "File outside
+of Demo!"
 align = 1
 valign = 1
 
 [node name="List" type="VBoxContainer" parent="Canvas/FileMenu/FileDemo"]
-anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -559,6 +581,7 @@ __meta__ = {
 }
 
 [node name="Credits" type="Control" parent="Canvas"]
+visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
 script = ExtResource( 20 )

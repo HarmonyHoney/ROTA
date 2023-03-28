@@ -38,6 +38,7 @@ position = Vector2( 75, 100 )
 
 [node name="Rig" type="Node2D" parent="Back/Center"]
 light_mask = 4
+z_index = 3
 
 [node name="Border" type="Line2D" parent="."]
 position = Vector2( -75, -100 )

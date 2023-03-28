@@ -26,9 +26,11 @@ export var is_process := false
 export var is_open := false setget set_open
 export var is_accept_close := false
 export var is_back_close := false
+signal opened
 signal closed
 var is_sub_menu := false
 var sub_ease := EaseMover.new()
+var sub_node
 
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
@@ -157,9 +159,10 @@ func set_open(arg := is_open):
 		UI.menu_keys(text_accept, text_cancel)
 		open()
 		row()
+		emit_signal("opened")
 	else:
-		emit_signal("closed")
 		close()
+		emit_signal("closed")
 	
 	if is_ui_keys:
 		UI.keys.show = is_open
@@ -201,17 +204,22 @@ func joy_y(arg := 1):
 		items[cursor].axis_y(arg)
 
 func sub_menu(arg : MenuBase):
+	sub_node = arg
 	is_sub_menu = true
 	is_open = sub_stay_open
 	
-	arg.is_open = true
-	if !arg.is_connected("closed", self, "sub_close"):
-		arg.connect("closed", self, "sub_close")
+	sub_node.is_open = true
+	if !sub_node.is_connected("closed", self, "sub_close"):
+		sub_node.connect("closed", self, "sub_close")
 
 func sub_close():
 	is_sub_menu = false
 	is_open = true
 	UI.menu_keys(text_accept, text_cancel)
+	
+	if sub_node and sub_node.is_connected("closed", self, "sub_close"):
+		sub_node.disconnect("closed", self, "sub_close")
+	sub_node = null
 	
 	reset_joy()
 	open()
