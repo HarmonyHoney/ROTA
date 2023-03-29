@@ -127,7 +127,7 @@ var blink_time := 10.0
 var blink_range := Vector2(1, 20)
 
 export var is_npc := false
-export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Haven't seen you before (:"] setget set_lines
+export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Hello (="] setget set_lines
 export (String, MULTILINE) var queue_write := "" setget set_queue_write
 export var chat_offset := Vector2(0, -110) setget set_chat_offset
 onready var arrow := get_node_or_null("Arrow")

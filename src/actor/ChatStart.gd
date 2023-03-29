@@ -3,7 +3,7 @@ extends Node2D
 export var arrow_path : NodePath
 onready var arrow := get_node_or_null(arrow_path)
 
-export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Haven't seen you before (:"]
+export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Hello (="]
 export (String, MULTILINE) var queue_write := "" setget set_queue_write
 
 var line := -1
