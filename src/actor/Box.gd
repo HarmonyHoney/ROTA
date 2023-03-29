@@ -254,7 +254,8 @@ func fall_out():
 		
 		sprite.scale = Vector2.ZERO
 		sprite.modulate.a = 0.5
-		audio_fallout.play()
+		if !Wipe.is_wipe:
+			audio_fallout.play()
 
 
 func pickup():

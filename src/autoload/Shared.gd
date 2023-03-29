@@ -89,6 +89,7 @@ var speedruns := {
 var boxes := []
 var doors := []
 
+onready var guide := $GuideLayer/Guide
 var player
 var door_in
 var goal

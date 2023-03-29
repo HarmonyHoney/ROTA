@@ -1,6 +1,17 @@
+tool
 extends Node2D
 
-onready var bg := $BG
+export var is_editor := false setget set_is_editor
+export var day_clock := 0.0
+export var day_time := 420.0 setget set_day_time
+export(Array, Color) var sky_pal = [Color("ffa300"), Color("00e0ff"), Color("0062ff"), Color("ac00ff"), Color("af00bf"), Color("250000")] setget set_sky_pal
+onready var sky_mat : ShaderMaterial = $BG/ColorRect.material
+
+var day_frac = 0.0
+var sky_step := 0
+var step_time := 1.0
+var step_frac := 0.0
+
 onready var canvas_mod := $CanvasModulate
 onready var hide := $Hide
 onready var particles := $Hide/Particles2D
@@ -20,14 +31,15 @@ onready var star_light := $Sky/Center/Stars/Orbit/Light2D
 onready var sun := $Sky/Center/Stars/Orbit/Sun
 onready var moon := $Sky/Center/Stars/Orbit/Moon
 
+export var orbit_distance := 650.0
 export var cloud_speed := 1.0
 var cloud_dir := 1.0
 var length = 100.0
 var cloud_rotation := 0.0
 var star_rotation := 0.0
 export var cloud_bonus_rings := 5
-export var cloud_front_range = Vector2(500, 1000)
-export var orbit_distance := 650.0
+export var cloud_front_edge = 0.0
+export var cloud_rain_range = Vector2(100, 400)
 
 export var snow_mat : ParticlesMaterial
 export var snow_tex : Texture
@@ -54,12 +66,18 @@ func _enter_tree():
 	Cam.connect("moved", self, "cam_moved")
 
 func _ready():
+	if Engine.editor_hint: return
+	
+	set_sky_pal()
+	
 	hide.visible = false
 	particles.emitting = false
 	particles.visible = false
 	
-	yield(Shared, "scene_changed")
 	randomize()
+	day_clock = randf() * day_time
+	
+	yield(Shared, "scene_changed")
 	self.is_rain = randf() < 0.3
 
 func scene():
@@ -79,8 +97,25 @@ func scene():
 		audio_rain.playing = is_rain and !is_snow
 
 func _process(delta):
+	if Engine.editor_hint and !is_editor: return
+	
+	day_clock = fposmod(day_clock + delta, day_time)
+	day_frac = day_clock / day_time
+	
+	step_frac = fposmod(day_clock, step_time) / step_time
+	sky_step = posmod((day_clock / step_time) + 2, sky_pal.size())
+	
+	var c1 = sky_pal[sky_step - 2].linear_interpolate(sky_pal[sky_step - 1], step_frac)
+	var c2 = sky_pal[sky_step - 1].linear_interpolate(sky_pal[sky_step], step_frac)
+	
+	if sky_mat:
+		sky_mat.set_shader_param("col1", c1)
+		sky_mat.set_shader_param("col2", c2)
+	
+	if Engine.editor_hint: return
+	
 	# visible
-	sun_frac = ease(abs(bg.frac - 0.5) * 2.0, -9)
+	sun_frac = ease(abs(day_frac - 0.5) * 2.0, -9)
 	moon_frac = 1.0 - sun_frac
 	
 	sun.modulate.a = sun_frac
@@ -90,9 +125,9 @@ func _process(delta):
 	canvas_mod.color = color_bright.linear_interpolate(color_dark, moon_frac)
 	
 	# rotation
-	star_rotation = bg.frac * TAU
-	stars.rotation = star_rotation
-	starfield.rotation = star_rotation
+	star_rotation = day_frac * TAU
+	for i in [stars, starfield]:
+		i.rotation = star_rotation
 	
 	cloud_rotation = fposmod(cloud_rotation + deg2rad(cloud_speed * delta * cloud_dir), TAU)
 	for i in [clouds, clouds1, clouds2, clouds_rain, precip]:
@@ -107,6 +142,8 @@ func cam_moved():
 	starfield.position = par * 0.9
 
 func _physics_process(delta):
+	if Engine.editor_hint: return
+	
 	rain_clock -= delta
 	if rain_clock < 0:
 		self.is_rain = !is_rain 
@@ -117,8 +154,26 @@ func _physics_process(delta):
 			solve_clock += solve_step
 			solve_fall()
 
+func set_is_editor(arg := is_editor):
+	is_editor = arg
+	if !is_editor:
+		day_clock = 0.0
+		if sky_mat:
+			sky_mat.set_shader_param("col1", sky_pal[0])
+			sky_mat.set_shader_param("col2", sky_pal[1])
+
+func set_sky_pal(arg := sky_pal):
+	sky_pal = arg
+	set_day_time()
+
+func set_day_time(arg := day_time):
+	day_time = abs(arg)
+	step_time = day_time / max(sky_pal.size(), 1.0)
+
 func set_is_rain(arg := is_rain):
 	is_rain = arg
+	if Engine.editor_hint: return
+	
 	var vec = rain_range if is_rain else dry_range
 	rain_clock = rand_range(vec.x, vec.y)
 	print("is_rain: ", is_rain, " audio: ", audio_rain, " precip_list: ", precip_list.size())
@@ -130,8 +185,8 @@ func set_is_rain(arg := is_rain):
 	if audio_rain:
 		audio_rain.playing = is_rain and !is_snow
 	
-	if clouds_rain:
-		clouds_rain.material.blend_mode = 2 if is_rain else 1
+#	if clouds_rain:
+#		clouds_rain.material.blend_mode = 2 if is_rain else 1
 
 func create_clouds():
 	cloud_dir = (-1.0 if randf() > 0.5 else 1.0) * rand_range(0.6, 1.0)
@@ -150,13 +205,14 @@ func create_clouds():
 			var scl = Vector2.ONE * rand_range(0.25, 2.0)
 			var dist = ((x + 2) * 200) + rand_range(0.0, 100.0)
 			var pos = Vector2(dist, 0).rotated(angle)
-			var edge = dist - (scl.x * 200.0)
+			var edge = dist - (scl.x * 200.0) - length
 			
 			var way_back := randf() > 0.5
-			var is_front = edge > length + cloud_front_range.x
-			var is_precip = edge < length + cloud_front_range.y
-			if is_front and !is_precip: is_front = randf() > 0.5
-			var layer = 3 if is_front and is_precip else 0 if is_front else 2 if way_back else 1
+			var is_front = edge > cloud_front_edge
+			var is_precip = edge > cloud_rain_range.x and edge < cloud_rain_range.y
+			if !is_precip and is_front: is_front = randf() > 0.5
+			
+			var layer = 3 if is_precip else 0 if is_front else 2 if way_back else 1
 			
 			var t = Transform2D(randf() * TAU, Vector2.ZERO)
 			t = t.scaled(scl)
@@ -169,7 +225,7 @@ func create_clouds():
 				2: wi += 1
 				3: ri += 1
 			
-			if is_front and is_precip:
+			if  is_precip:
 				var p = null
 				if pi < ps:
 					p = pc[pi]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/autoload/Shared.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,21 @@
 [ext_resource path="res://media/image/UI/key_up_square.png" type="Texture" id=4]
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=5]
 [ext_resource path="res://src/actor/Chat.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/shader/guide.gdshader" type="Shader" id=7]
+[ext_resource path="res://media/image/box/box_push.png" type="Texture" id=8]
+[ext_resource path="res://media/image/white_square_100x.png" type="Texture" id=9]
+[ext_resource path="res://src/actor/Guide.gd" type="Script" id=10]
+[ext_resource path="res://media/image/box/treads.png" type="Texture" id=11]
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = ExtResource( 7 )
+shader_param/height = 3.0
+shader_param/fade_height = 1.5
+shader_param/scale_x = 0.7
+shader_param/scale_y = 1.0
+shader_param/time_scale = 0.5
+shader_param/tread_mask = ExtResource( 11 )
+shader_param/box_mask = ExtResource( 8 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -29,7 +44,23 @@ margin_top = -150.0
 margin_right = 150.0
 margin_bottom = 150.0
 
+[node name="GuideLayer" type="CanvasLayer" parent="."]
+layer = 2
+follow_viewport_enable = true
+
+[node name="Guide" type="Node2D" parent="GuideLayer"]
+light_mask = 0
+script = ExtResource( 10 )
+
+[node name="Sprite" type="Sprite" parent="GuideLayer/Guide"]
+material = SubResource( 16 )
+texture = ExtResource( 9 )
+offset = Vector2( 0, 150 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 100, 300 )
+
 [node name="ArrowLayer" type="CanvasLayer" parent="."]
+layer = 3
 follow_viewport_enable = true
 
 [node name="Arrow" type="Node2D" parent="ArrowLayer"]

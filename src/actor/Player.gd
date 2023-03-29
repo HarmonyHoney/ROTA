@@ -448,7 +448,7 @@ func _physics_process(delta):
 						push_clock = 0
 						push_dir = dir_x
 						
-						Guide.set_box(box)
+						Shared.guide.set_box(box)
 						
 						# move box to first child
 						var p = box.get_parent()
@@ -740,7 +740,7 @@ func box_release():
 	box.is_hold = false
 	box.pickup()
 	
-	Guide.set_box(null)
+	Shared.guide.set_box(null)
 	
 	release_anim()
 	
