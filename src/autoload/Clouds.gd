@@ -62,6 +62,8 @@ export var color_bright := Color.white
 export var color_dark := Color("bfbfbf")
 
 func _enter_tree():
+	if Engine.editor_hint: return
+	
 	Shared.connect("scene_changed", self, "scene")
 	Cam.connect("moved", self, "cam_moved")
 
@@ -122,7 +124,11 @@ func _process(delta):
 	moon.modulate.a = moon_frac
 	starfield.modulate.a = moon_frac
 	starfield.visible = moon_frac > 0
-	canvas_mod.color = color_bright.linear_interpolate(color_dark, moon_frac)
+	
+	var mf = MenuMakeover.fade_ease
+	canvas_mod.color = color_bright.linear_interpolate(color_dark, max(moon_frac - mf.smooth(), 0.0))
+	if !mf.is_last:
+		star_light.energy = lerp(0.4, 0.0, mf.smooth())
 	
 	# rotation
 	star_rotation = day_frac * TAU
