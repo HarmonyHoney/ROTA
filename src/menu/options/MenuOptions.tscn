@@ -26,7 +26,7 @@
 shader = ExtResource( 21 )
 shader_param/size = 0.5
 shader_param/width = 0.1
-shader_param/color = Color( 0, 0, 0, 0.7 )
+shader_param/color = Color( 1, 1, 1, 1 )
 shader_param/scale = 1.0
 shader_param/is_half = false
 
@@ -59,11 +59,11 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="BG" type="ColorRect" parent="Control"]
+modulate = Color( 0, 0, 0, 0.8 )
 material = SubResource( 20 )
 margin_left = 200.0
 margin_right = 1080.0
 margin_bottom = 720.0
-color = Color( 0, 0, 0, 1 )
 
 [node name="Menu" type="Control" parent="Control"]
 margin_right = 1280.0
@@ -71,8 +71,8 @@ margin_bottom = 720.0
 
 [node name="Cursor" type="Panel" parent="Control/Menu"]
 modulate = Color( 0.658824, 0, 0, 1 )
-anchor_right = 1.0
-rect_min_size = Vector2( 0, 50 )
+margin_right = 100.0
+margin_bottom = 50.0
 custom_styles/panel = SubResource( 18 )
 __meta__ = {
 "_editor_description_": ""

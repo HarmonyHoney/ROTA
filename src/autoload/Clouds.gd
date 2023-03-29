@@ -129,6 +129,9 @@ func set_is_rain(arg := is_rain):
 
 	if audio_rain:
 		audio_rain.playing = is_rain and !is_snow
+	
+#	if clouds:
+#		clouds.material.blend_mode = 2 if is_rain else 1
 
 func create_clouds():
 	cloud_dir = (-1.0 if randf() > 0.5 else 1.0) * rand_range(0.6, 1.0)
@@ -143,13 +146,14 @@ func create_clouds():
 	for x in (length / 50.0) + cloud_bonus_rings:
 		for y in max(3, x):
 			var angle = rand_range(0.0, TAU)
+			var scl = Vector2.ONE * rand_range(0.25, 2.0)
 			var dist = ((x + 2) * 200) + rand_range(0.0, 100.0)
 			var pos = Vector2(dist, 0).rotated(angle)
-			var scl = Vector2.ONE * rand_range(0.25, 2.0)
+			var edge = dist - (scl.x * 200.0)
 			
 			var way_back := randf() > 0.5
-			var is_front = dist > length + cloud_front_range.x
-			var is_precip = dist < length + cloud_front_range.y
+			var is_front = edge > length + cloud_front_range.x
+			var is_precip = edge < length + cloud_front_range.y
 			if is_front and !is_precip: is_front = randf() > 0.5
 			var layer = 0 if is_front else 2 if way_back else 1
 			

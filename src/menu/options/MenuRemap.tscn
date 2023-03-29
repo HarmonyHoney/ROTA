@@ -63,12 +63,11 @@ __meta__ = {
 }
 
 [node name="BG" type="ColorRect" parent="Control"]
-modulate = Color( 0, 0, 0, 0.7 )
+modulate = Color( 0, 0, 0, 0.8 )
 material = SubResource( 23 )
 margin_left = 70.0
 margin_right = 1210.0
 margin_bottom = 720.0
-color = Color( 0, 0, 0, 1 )
 
 [node name="Menu" type="Control" parent="Control"]
 anchor_left = 0.25
@@ -79,16 +78,11 @@ __meta__ = {
 }
 
 [node name="Cursor" type="Panel" parent="Control/Menu"]
-modulate = Color( 0.74902, 0.376471, 0.380392, 1 )
-anchor_right = 1.0
-margin_left = 448.0
-margin_top = 115.0
-margin_right = -682.0
-margin_bottom = 195.0
-rect_min_size = Vector2( 0, 80 )
+modulate = Color( 0.658824, 0, 0, 1 )
+margin_right = 100.0
+margin_bottom = 50.0
 custom_styles/panel = SubResource( 18 )
 __meta__ = {
-"_edit_use_anchors_": false,
 "_editor_description_": ""
 }
 

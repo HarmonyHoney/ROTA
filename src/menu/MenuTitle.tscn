@@ -31,7 +31,7 @@
 shader = ExtResource( 25 )
 shader_param/size = 0.856
 shader_param/width = 0.15
-shader_param/color = Color( 0, 0, 0, 0.701961 )
+shader_param/color = Color( 1, 1, 1, 1 )
 shader_param/scale = 1.0
 shader_param/is_half = false
 
@@ -135,11 +135,11 @@ sub_path = NodePath("../FileMenu")
 credits_path = NodePath("../Credits")
 
 [node name="BG" type="ColorRect" parent="Canvas/MenuTitle"]
+modulate = Color( 0, 0, 0, 0.8 )
 material = SubResource( 22 )
 margin_left = 27.0
 margin_right = 357.0
 margin_bottom = 720.0
-color = Color( 0, 0, 0, 1 )
 
 [node name="Back" type="Panel" parent="Canvas/MenuTitle"]
 visible = false
