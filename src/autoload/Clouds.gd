@@ -9,6 +9,7 @@ onready var center := $Sky/Center
 onready var clouds := $Sky/Center/Clouds
 onready var clouds1 := $Sky/Center/Clouds1
 onready var clouds2 := $Sky/Center/Clouds2
+onready var clouds_rain := $Sky/Center/CloudsRain
 onready var precip := $Precip
 onready var audio_rain := $AudioRain
 
@@ -94,14 +95,13 @@ func _process(delta):
 	starfield.rotation = star_rotation
 	
 	cloud_rotation = fposmod(cloud_rotation + deg2rad(cloud_speed * delta * cloud_dir), TAU)
-	clouds.rotation = cloud_rotation
-	clouds1.rotation = cloud_rotation
-	clouds2.rotation = cloud_rotation
-	precip.rotation = cloud_rotation
+	for i in [clouds, clouds1, clouds2, clouds_rain, precip]:
+		i.rotation = cloud_rotation
 
 func cam_moved():
 	# parallax
 	var par = Cam.global_position - Shared.boundary_center
+	clouds.position = par * 0.15
 	clouds1.position = par * 0.3
 	clouds2.position = par * 0.6
 	starfield.position = par * 0.9
@@ -130,8 +130,8 @@ func set_is_rain(arg := is_rain):
 	if audio_rain:
 		audio_rain.playing = is_rain and !is_snow
 	
-#	if clouds:
-#		clouds.material.blend_mode = 2 if is_rain else 1
+	if clouds_rain:
+		clouds_rain.material.blend_mode = 2 if is_rain else 1
 
 func create_clouds():
 	cloud_dir = (-1.0 if randf() > 0.5 else 1.0) * rand_range(0.6, 1.0)
@@ -139,6 +139,7 @@ func create_clouds():
 	var ci = 0
 	var bi = 0
 	var wi = 0
+	var ri = 0
 	var pi = 0
 	var pc = precip.get_children()
 	var ps = pc.size()
@@ -155,17 +156,18 @@ func create_clouds():
 			var is_front = edge > length + cloud_front_range.x
 			var is_precip = edge < length + cloud_front_range.y
 			if is_front and !is_precip: is_front = randf() > 0.5
-			var layer = 0 if is_front else 2 if way_back else 1
+			var layer = 3 if is_front and is_precip else 0 if is_front else 2 if way_back else 1
 			
 			var t = Transform2D(randf() * TAU, Vector2.ZERO)
 			t = t.scaled(scl)
 			t.origin = pos
-			([clouds, clouds1, clouds2][layer]).multimesh.set_instance_transform_2d([ci, bi, wi][layer], t)
+			([clouds, clouds1, clouds2, clouds_rain][layer]).multimesh.set_instance_transform_2d([ci, bi, wi, ri][layer], t)
 			
 			match layer:
 				0: ci += 1
 				1: bi += 1
 				2: wi += 1
+				3: ri += 1
 			
 			if is_front and is_precip:
 				var p = null
@@ -192,8 +194,8 @@ func create_clouds():
 				precip_list.append(p)
 	
 	# clouds
-	for i in 3:
-		[clouds, clouds1, clouds2][i].multimesh.visible_instance_count = [ci, bi, wi][i]
+	for i in 4:
+		[clouds, clouds1, clouds2, clouds_rain][i].multimesh.visible_instance_count = [ci, bi, wi, ri][i]
 	
 	# particles
 	if pi < ps:
