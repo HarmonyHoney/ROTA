@@ -68,6 +68,8 @@ func _enter_tree():
 	Cam.connect("moved", self, "cam_moved")
 
 func _ready():
+	star_light.enabled = !Engine.editor_hint
+	
 	if Engine.editor_hint: return
 	
 	set_sky_pal()

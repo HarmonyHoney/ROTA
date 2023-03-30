@@ -306,9 +306,10 @@ end_cap_mode = 2
 round_precision = 5
 
 [node name="Light2D" type="Light2D" parent="Sky/Center/Stars/Orbit"]
+enabled = false
 texture = ExtResource( 10 )
 texture_scale = 20.0
-color = Color( 0.996078, 1, 0.909804, 1 )
+color = Color( 1, 1, 0.91, 1 )
 energy = 0.4
 shadow_enabled = true
 shadow_buffer_size = 4096
