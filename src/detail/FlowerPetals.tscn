@@ -9,13 +9,19 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 35.0
 
-[node name="FlowerPetals" type="Node2D"]
+[node name="FlowerPetals" type="Area2D"]
 z_index = -10
 z_as_relative = false
+collision_layer = 16
+collision_mask = 38
 script = ExtResource( 1 )
 palette = 1
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0, 0, 1, 1, 0.470588, 0.796078, 1, 0.47451, 1, 1, 1, 1, 0.980392, 0, 1, 1, 0.788235, 0, 1 )
 sprite_path = NodePath("Images")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
 
 [node name="Visible" type="VisibilityNotifier2D" parent="."]
 visible = false
@@ -41,18 +47,10 @@ rotation = 0.785397
 polygon = PoolVector2Array( 8.5, -8.5, 17, -8.5, 21.9962, -6.87664, 25.084, -2.62664, 25.084, 2.62664, 21.9962, 6.87664, 17, 8.5, 8.5, 8.5, 8.5, 17, 6.87664, 21.9962, 2.62664, 25.084, -2.62665, 25.084, -6.87665, 21.9962, -8.5, 17, -8.5, 8.5, -17, 8.5, -21.9962, 6.87664, -25.084, 2.62664, -25.084, -2.62665, -21.9962, -6.87665, -17, -8.5, -8.5, -8.5, -8.5, -17, -6.87664, -21.9962, -2.62665, -25.084, 2.62665, -25.084, 6.87664, -21.9962, 8.5, -17 )
 script = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-collision_layer = 16
-collision_mask = 38
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
-
 [node name="Audio" type="Node2D" parent="."]
 
 [node name="Hit" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 3 )
 bus = "SFX"
 
-[connection signal="area_entered" from="Area2D" to="Spring" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="." to="Spring" method="_on_Area2D_area_entered"]

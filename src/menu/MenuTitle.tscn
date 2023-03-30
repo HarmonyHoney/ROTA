@@ -137,23 +137,9 @@ credits_path = NodePath("../Credits")
 [node name="BG" type="ColorRect" parent="Canvas/MenuTitle"]
 modulate = Color( 0, 0, 0, 0.8 )
 material = SubResource( 22 )
-margin_left = 27.0
-margin_right = 357.0
-margin_bottom = 720.0
-
-[node name="Back" type="Panel" parent="Canvas/MenuTitle"]
-visible = false
-modulate = Color( 0, 0, 0, 0.7 )
-anchor_right = 0.3
-anchor_bottom = 1.0
 margin_left = 50.0
-margin_top = 220.0
-margin_right = -50.0
-margin_bottom = -220.0
-custom_styles/panel = SubResource( 1 )
-__meta__ = {
-"_editor_description_": ""
-}
+margin_right = 384.0
+margin_bottom = 720.0
 
 [node name="Cursor" type="Panel" parent="Canvas/MenuTitle"]
 modulate = Color( 0.658824, 0, 0, 1 )
@@ -167,15 +153,16 @@ __meta__ = {
 [node name="List" type="VBoxContainer" parent="Canvas/MenuTitle"]
 anchor_right = 0.3
 anchor_bottom = 1.0
+margin_left = 50.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_constants/separation = 15
 alignment = 1
 
 [node name="Play" type="Label" parent="Canvas/MenuTitle/List"]
-margin_left = 135.0
+margin_left = 110.0
 margin_top = 235.0
-margin_right = 249.0
+margin_right = 224.0
 margin_bottom = 286.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
@@ -202,9 +189,9 @@ __meta__ = {
 }
 
 [node name="Options" type="Label" parent="Canvas/MenuTitle/List"]
-margin_left = 91.0
+margin_left = 66.0
 margin_top = 301.0
-margin_right = 292.0
+margin_right = 267.0
 margin_bottom = 352.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
@@ -217,9 +204,9 @@ __meta__ = {
 }
 
 [node name="Credits" type="Label" parent="Canvas/MenuTitle/List"]
-margin_left = 97.0
+margin_left = 72.0
 margin_top = 367.0
-margin_right = 286.0
+margin_right = 261.0
 margin_bottom = 418.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
@@ -233,10 +220,10 @@ __meta__ = {
 
 [node name="Store" type="Label" parent="Canvas/MenuTitle/List"]
 visible = false
-margin_left = 48.0
-margin_top = 390.0
-margin_right = 336.0
-margin_bottom = 441.0
+margin_left = 23.0
+margin_top = 400.0
+margin_right = 311.0
+margin_bottom = 451.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 theme = ExtResource( 26 )
@@ -249,9 +236,9 @@ __meta__ = {
 }
 
 [node name="Exit" type="Label" parent="Canvas/MenuTitle/List"]
-margin_left = 134.0
+margin_left = 109.0
 margin_top = 433.0
-margin_right = 249.0
+margin_right = 224.0
 margin_bottom = 484.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
@@ -283,7 +270,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 80.0
 margin_right = -80.0
-margin_bottom = 70.4
+margin_bottom = 55.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Lists" type="Control" parent="Canvas/FileMenu"]
@@ -581,7 +568,6 @@ __meta__ = {
 }
 
 [node name="Credits" type="Control" parent="Canvas"]
-visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
 script = ExtResource( 20 )
@@ -601,7 +587,7 @@ anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Patch" type="Label" parent="Canvas/Credits"]
-modulate = Color( 1, 1, 1, 0.25 )
+modulate = Color( 1, 1, 1, 0.5 )
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0

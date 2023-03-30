@@ -3,7 +3,7 @@ class_name EaseMover
 var show := true
 var clock := 0.0
 var time := 0.5
-var last := 0.0
+var last := -1.0
 var from := Vector2.ZERO
 var to := Vector2.ZERO
 var current := Vector2.ZERO

@@ -52,6 +52,7 @@ export var is_audio_joy := false
 func _ready():
 	fill_items()
 	reset_cursor()
+	fade_delta()
 
 func _input(event):
 	if is_input:
@@ -96,9 +97,7 @@ func menu_input(event):
 		get_tree().set_input_as_handled()
 
 func menu_process(delta):
-	if fade_node:
-		fade_node.modulate.a = fade_ease.count(delta, is_open)
-		fade_node.visible = fade_ease.clock > 0
+	fade_delta(delta)
 	
 	sub_ease.count(delta, is_sub_menu)
 	
@@ -126,6 +125,14 @@ func menu_process(delta):
 			# scroll
 			if scroll_node:
 				scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
+
+func fade_delta(arg := 0.0):
+	if fade_node:
+		var s = fade_ease.count(arg, is_open)
+		fade_node.modulate.a = s
+		fade_node.visible = s > 0
+		if !fade_ease.is_last:
+			print(name, " ", fade_ease.clock, " s: ", s)
 
 func set_cursor(arg := 0):
 	select(false)
@@ -203,7 +210,9 @@ func joy_y(arg := 1):
 	if is_joy_y and items[cursor].has_method("axis_y"):
 		items[cursor].axis_y(arg)
 
-func sub_menu(arg : MenuBase):
+func sub_menu(arg):
+	if !is_instance_valid(arg): return
+	
 	sub_node = arg
 	is_sub_menu = true
 	is_open = sub_stay_open

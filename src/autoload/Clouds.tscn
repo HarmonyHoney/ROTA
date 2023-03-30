@@ -159,6 +159,7 @@ transform_2d_array = PoolVector2Array( 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
 z_index = -50
 z_as_relative = false
 script = ExtResource( 2 )
+day_clock = 200.0
 orbit_distance = 400.0
 cloud_bonus_rings = 2
 snow_mat = SubResource( 16 )
@@ -310,6 +311,7 @@ texture_scale = 20.0
 color = Color( 0.996078, 1, 0.909804, 1 )
 energy = 0.4
 shadow_enabled = true
+shadow_buffer_size = 4096
 shadow_gradient_length = 50.0
 __meta__ = {
 "_edit_lock_": true

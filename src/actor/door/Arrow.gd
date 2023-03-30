@@ -48,7 +48,7 @@ func _physics_process(delta):
 		return
 	
 	# image display
-	arrow_easy.count(delta, is_active and !is_locked)
+	arrow_easy.count(delta, is_active and !is_locked and !MenuPause.is_paused)
 	
 	# activate
 	try_active()

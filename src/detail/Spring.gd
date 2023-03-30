@@ -42,5 +42,7 @@ func hit(scale := 1.0):
 
 func _on_Area2D_area_entered(area):
 	if cooldown_clock == 0:
-		hit(1 if to_local(area.global_position).x < 0 else -1)
+		var gpx = to_local(area.global_position).x
+		if abs(gpx) < 1.0: gpx = 1.0 if randf() > 0.5 else -1.0
+		hit(-sign(gpx))
 		cooldown_clock = cooldown_time

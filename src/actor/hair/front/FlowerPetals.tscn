@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=1]
 
-[node name="Hat" type="Node2D"]
+[node name="Front" type="Node2D"]
 
 [node name="FlowerPetals" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -25 )
