@@ -34,11 +34,17 @@ var pan_ease := EaseMover.new(1.0)
 signal pan_complete
 signal moved
 
+onready var radial_canvas := $RadialBlur
+onready var radial_blur := $RadialBlur/ColorRect
+var is_blur := false
+var blur_scale = 1.0
+
 func _enter_tree():
 	Shared.connect("scene_changed", self, "scene_changed")
 
 func _ready():
 	zoom = Vector2.ONE * zoom_min
+	radial_canvas.visible = is_blur
 
 func _input(event):
 	if event.is_action_pressed("zoom") and !MenuPause.is_paused and !Wipe.is_wipe and !Cutscene.is_playing and !MenuMakeover.is_open and "world" in Shared.csfn:
@@ -56,8 +62,11 @@ func _process(delta):
 		if turn_ease.clock < turn_ease.time:
 			rotation = lerp_angle(turn_from, turn_to, turn_ease.count(delta))
 			emit_signal("turning", rotation)
-			var w = abs(wrapf(turn_ease.smooth() * 2.0, -1.0, 1.0))
-			$CanvasLayer/ColorRect.material.set_shader_param("blur", w * turn_sign)
+			if true and radial_blur:
+				var w = abs(wrapf(turn_ease.smooth() * 2.0, -1.0, 1.0))
+				var t = lerp_angle(turn_from, turn_to, 1.0) - turn_from
+				radial_blur.material.set_shader_param("blur_angle", t * blur_scale * delta * w)
+			
 	
 	if is_pan:
 		global_position = pan_ease.move(delta)
@@ -85,8 +94,10 @@ func set_target_node(arg):
 func turn(arg):
 	turn_from = rotation
 	turn_to = arg
-	turn_ease.clock = 0.0
-	turn_sign = 1.0 if turn_to > turn_from else -1.0
+	if turn_from != turn_to:
+		turn_ease.clock = 0.0
+		turn_sign = 1.0 if turn_from < lerp_angle(turn_from, turn_to, 1.0) else -1.0
+		
 
 func start_zoom(arg := 0, is_audio := true, _zmin = zoom_min, _zmax = zoom_max):
 	zoom_step = posmod(arg, zoom_steps + 1)
@@ -128,3 +139,14 @@ func pan(pos : Vector2):
 	pan_ease.from = global_position
 	pan_ease.to = target_pos
 	pan_ease.time = lerp(0.3, 1.0, clamp(pan_ease.from.distance_to(pan_ease.to) / 100.0, 0, 20) / 20)
+
+func blur(arg):
+	is_blur = arg > 0
+	if radial_canvas:
+		radial_canvas.visible = is_blur
+	
+	var a = posmod(arg, 8)
+	blur_scale = [0.0, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0, 70.0][a]
+	var bsteps = [1.0, 3.0, 4.0, 8.0, 8.0, 8.0, 12.0, 20.0][a]
+	if radial_blur:
+		radial_blur.material.set_shader_param("steps", bsteps)

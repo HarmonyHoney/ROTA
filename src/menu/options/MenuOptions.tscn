@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://media/image/UI/clock.png" type="Texture" id=1]
 [ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://src/menu/options/scroll/Borderless.gd" type="Script" id=19]
 [ext_resource path="res://src/menu/options/scroll/SpeedDec.gd" type="Script" id=20]
 [ext_resource path="res://src/shader/fade_x.gdshader" type="Shader" id=21]
+[ext_resource path="res://src/menu/options/scroll/RadialBlur.gd" type="Script" id=22]
 
 [sub_resource type="ShaderMaterial" id=20]
 shader = ExtResource( 21 )
@@ -502,19 +503,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer4" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+[node name="RadialBlur" type="Control" parent="Control/Menu/List"]
 margin_top = 1130.0
 margin_right = 640.0
-margin_bottom = 1160.0
+margin_bottom = 1200.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+list = PoolStringArray( "OFF", "0.5", "1.0", "2.0", "3.0", "5.0", "10.0", "TRIP" )
+
+[node name="Label" type="Label" parent="Control/Menu/List/RadialBlur"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "Radial Blur"
+valign = 1
+
+[node name="Label2" type="Label" parent="Control/Menu/List/RadialBlur"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "< OFF >"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer4" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 1200.0
+margin_right = 640.0
+margin_bottom = 1230.0
 rect_min_size = Vector2( 0, 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HeaderSpeed" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 1160.0
+margin_top = 1230.0
 margin_right = 640.0
-margin_bottom = 1230.0
+margin_bottom = 1300.0
 rect_min_size = Vector2( 0, 70 )
 
 [node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderSpeed"]
@@ -535,9 +569,9 @@ text = "Speedrun"
 valign = 1
 
 [node name="Speedrun" type="Control" parent="Control/Menu/List"]
-margin_top = 1230.0
+margin_top = 1300.0
 margin_right = 640.0
-margin_bottom = 1300.0
+margin_bottom = 1370.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 15 )
 __meta__ = {
@@ -568,9 +602,9 @@ __meta__ = {
 }
 
 [node name="Speedrun2" type="Control" parent="Control/Menu/List" groups=["speed"]]
-margin_top = 1300.0
+margin_top = 1370.0
 margin_right = 640.0
-margin_bottom = 1370.0
+margin_bottom = 1440.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 16 )
 __meta__ = {
@@ -598,9 +632,9 @@ align = 2
 valign = 1
 
 [node name="Decimals" type="Control" parent="Control/Menu/List" groups=["speed"]]
-margin_top = 1370.0
+margin_top = 1440.0
 margin_right = 640.0
-margin_bottom = 1440.0
+margin_bottom = 1510.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 20 )
 __meta__ = {

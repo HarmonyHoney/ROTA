@@ -110,6 +110,7 @@ var volume = [100, 100, 100]
 var win_size := Vector2(1280, 720)
 var win_sizes := [Vector2(640, 360), Vector2(960, 540), Vector2(1280, 720), Vector2(1600, 900),
 Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
+var radial_blur = 0 setget set_radial_blur
 
 var is_demo := false
 
@@ -383,6 +384,13 @@ func set_volume(bus = 0, vol = 0):
 	AudioServer.set_bus_volume_db(bus, linear2db(volume[bus] / 100.0))
 	#print("volume[", bus, "] ",AudioServer.get_bus_name(bus) ," : ", volume[bus])
 
+### Options
+
+func set_radial_blur(arg := radial_blur):
+	radial_blur = arg
+	Cam.blur(radial_blur)
+
+
 ### Exit Game
 
 func quit():
@@ -566,6 +574,7 @@ func save_options():
 	o["sounds"] = int(volume[1] / 10)
 	o["music"] = int(volume[2] / 10)
 	o["mouse"] = bool(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
+	o["radial_blur"] = int(radial_blur)
 	o["clock_show"] = int(clock_show)
 	o["clock_alpha"] = float(clock_alpha)
 	o["clock_decimals"] = int(clock_decimals)
@@ -592,6 +601,8 @@ func load_options():
 		set_volume(2, int(d["music"]) * 10)
 	if d.has("mouse"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if bool(d["mouse"]) else Input.MOUSE_MODE_HIDDEN
+	if d.has("radial_blur"):
+		self.radial_blur = int(d["radial_blur"])
 	if d.has("clock_show"):
 		clock_show = int(d["clock_show"])
 	if d.has("clock_alpha"):

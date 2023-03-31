@@ -131,8 +131,8 @@ func fade_delta(arg := 0.0):
 		var s = fade_ease.count(arg, is_open)
 		fade_node.modulate.a = s
 		fade_node.visible = s > 0
-		if !fade_ease.is_last:
-			print(name, " ", fade_ease.clock, " s: ", s)
+#		if !fade_ease.is_last:
+#			print(name, " ", fade_ease.clock, " s: ", s)
 
 func set_cursor(arg := 0):
 	select(false)
