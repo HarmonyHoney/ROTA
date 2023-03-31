@@ -519,6 +519,18 @@ palette = 5
 position = Vector2( 500, 800 )
 rotation = -3.14159
 
+[node name="Candle4" parent="Details" instance=ExtResource( 14 )]
+position = Vector2( 1010, 990 )
+rotation = -2.35619
+
+[node name="Candle6" parent="Details" instance=ExtResource( 14 )]
+position = Vector2( 500, 400 )
+rotation = -0.785397
+
+[node name="Candle5" parent="Details" instance=ExtResource( 14 )]
+position = Vector2( 1690, 1590 )
+rotation = 2.35619
+
 [node name="Candle3" parent="Details" instance=ExtResource( 14 )]
 position = Vector2( -500, 1250 )
 rotation = -1.57079

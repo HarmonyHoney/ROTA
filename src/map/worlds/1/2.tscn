@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=13]
 
 [node name="Node2D" type="Node2D"]
 
@@ -19,6 +20,7 @@
 tile_data = PoolIntArray( -65529, -1073741824, 0, -65528, -1073741824, 0, 7, 1610612736, 0, 8, -1610612736, 0, 65541, -1073741824, 0, 65542, -1073741824, 0, 65543, 1610612736, 0, 65544, -1610612736, 0, 131077, 0, 0, 131078, 0, 0, 196613, 0, 0, 196614, 0, 0, 262149, 0, 0, 262150, 0, 0, 327685, 0, 0, 327686, 0, 0, 393221, 0, 0, 393222, 0, 0, 458757, -1073741824, 0, 458758, -1073741824, 0, 458759, 0, 0, 458760, 0, 0, 524295, 0, 0, 524296, 0, 0, 589831, -1073741824, 0, 589832, -1073741824, 0 )
 
 [node name="SpikeMap" parent="." instance=ExtResource( 11 )]
+visible = false
 
 [node name="Actors" type="Node2D" parent="."]
 
@@ -124,3 +126,11 @@ palette = 2
 [node name="FlowerPetals6" parent="Details" instance=ExtResource( 12 )]
 position = Vector2( 480, 80 )
 rotation = -0.785397
+
+[node name="Candle" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 700, 300 )
+rotation = 1.57079
+
+[node name="Candle2" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 700, 600 )
+rotation = 1.57079

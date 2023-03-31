@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=14]
 
 [node name="Node2D" type="Node2D"]
 
@@ -101,7 +103,7 @@ rotation = -1.57079
 palette = 3
 
 [node name="Flower3" parent="Details" instance=ExtResource( 8 )]
-position = Vector2( 1200, 300 )
+position = Vector2( 1100, 300 )
 
 [node name="Flower4" parent="Details" instance=ExtResource( 8 )]
 position = Vector2( 1100, 550 )
@@ -174,3 +176,10 @@ palette = 4
 position = Vector2( 980, 20 )
 rotation = -0.785397
 palette = 2
+
+[node name="Candle" parent="Details" instance=ExtResource( 14 )]
+position = Vector2( 700, 0 )
+rotation = -3.14159
+
+[node name="Lamppost" parent="Details" instance=ExtResource( 13 )]
+position = Vector2( 1200, 300 )

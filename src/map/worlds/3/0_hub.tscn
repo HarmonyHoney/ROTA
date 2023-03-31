@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/actor/NPC.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=12]
 
 [node name="Map" type="Node2D"]
@@ -427,13 +429,13 @@ rotation = -3.14159
 palette = 5
 
 [node name="BarrelCacti15" parent="Details" instance=ExtResource( 4 )]
-position = Vector2( 1450, 1350 )
+position = Vector2( 3050, 1200 )
 rotation = -1.57079
 palette = 2
 
 [node name="BarrelCacti16" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1450, 1650 )
-palette = 5
+palette = 2
 
 [node name="BarrelCacti17" parent="Details" instance=ExtResource( 4 )]
 position = Vector2( 1750, 1650 )
@@ -458,3 +460,42 @@ palette = 4
 position = Vector2( 1850, 650 )
 rotation = -4.71238
 palette = 3
+
+[node name="Candle" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 1300, 700 )
+rotation = -1.57079
+
+[node name="Candle2" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 450, 700 )
+
+[node name="Candle3" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 810, 2310 )
+rotation = -0.785397
+
+[node name="Candle4" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 1550, 2000 )
+rotation = -3.14159
+
+[node name="Candle5" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 1000, 1800 )
+rotation = 1.57079
+
+[node name="Candle6" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 1500, 1350 )
+rotation = -1.5708
+
+[node name="Lamppost" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 1750, 700 )
+rotation = 3.14159
+
+[node name="Lamppost2" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 2200, 2000 )
+rotation = 3.92699
+
+[node name="Lamppost3" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( 300, 1900 )
+rotation = 4.71238
+
+[node name="Lamppost4" parent="Details" instance=ExtResource( 11 )]
+position = Vector2( -200, 1200 )
+rotation = 5.49778
