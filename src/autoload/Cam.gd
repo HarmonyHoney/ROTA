@@ -13,6 +13,7 @@ export var turn_offset := Vector2.ZERO
 var turn_ease := EaseMover.new()
 var turn_from := 0.0
 var turn_to := 0.0
+var turn_sign := 1.0
 
 var is_zoom := false
 
@@ -55,6 +56,8 @@ func _process(delta):
 		if turn_ease.clock < turn_ease.time:
 			rotation = lerp_angle(turn_from, turn_to, turn_ease.count(delta))
 			emit_signal("turning", rotation)
+			var w = abs(wrapf(turn_ease.smooth() * 2.0, -1.0, 1.0))
+			$CanvasLayer/ColorRect.material.set_shader_param("blur", w * turn_sign)
 	
 	if is_pan:
 		global_position = pan_ease.move(delta)
@@ -83,6 +86,7 @@ func turn(arg):
 	turn_from = rotation
 	turn_to = arg
 	turn_ease.clock = 0.0
+	turn_sign = 1.0 if turn_to > turn_from else -1.0
 
 func start_zoom(arg := 0, is_audio := true, _zmin = zoom_min, _zmax = zoom_max):
 	zoom_step = posmod(arg, zoom_steps + 1)
