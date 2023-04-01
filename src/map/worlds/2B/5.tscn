@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=2]
@@ -9,11 +9,13 @@
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Fence.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=16]
 
 [node name="Node2D" type="Node2D"]
 
@@ -232,3 +234,31 @@ rotation = 1.57079
 position = Vector2( 1400, 200 )
 rotation = 1.57079
 palette = 3
+
+[node name="Candle" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 0, 400 )
+rotation = -3.14159
+
+[node name="Candle5" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 700, 800 )
+rotation = -3.14159
+
+[node name="Candle2" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 790, -190 )
+rotation = -2.35619
+
+[node name="Candle3" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 600, -550 )
+rotation = -4.71239
+
+[node name="Candle4" parent="Details" instance=ExtResource( 10 )]
+position = Vector2( 1390, 290 )
+rotation = -3.92699
+
+[node name="Lamppost3" parent="Details" instance=ExtResource( 16 )]
+position = Vector2( 875, 525 )
+rotation = 0.785398
+
+[node name="Lamppost4" parent="Details" instance=ExtResource( 16 )]
+position = Vector2( 175, 125 )
+rotation = 0.785398

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actor/Goal.tscn" type="PackedScene" id=2]
@@ -8,12 +8,14 @@
 [ext_resource path="res://src/actor/Box.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Fence.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=16]
 
 [node name="Node2D" type="Node2D"]
 
@@ -158,3 +160,14 @@ palette = 5
 [node name="Bench" parent="Details" instance=ExtResource( 15 )]
 position = Vector2( 50, 200 )
 rotation = -1.57079
+
+[node name="Candle" parent="Details" instance=ExtResource( 9 )]
+position = Vector2( 1250, 100 )
+
+[node name="Lamppost" parent="Details" instance=ExtResource( 16 )]
+position = Vector2( 375, 125 )
+rotation = 0.785398
+
+[node name="Lamppost2" parent="Details" instance=ExtResource( 16 )]
+position = Vector2( 700, 800 )
+rotation = 3.14159
