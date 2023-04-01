@@ -159,7 +159,7 @@ transform_2d_array = PoolVector2Array( 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
 z_index = -50
 z_as_relative = false
 script = ExtResource( 2 )
-day_clock = 100.0
+day_clock = 121.0
 orbit_distance = 400.0
 cloud_bonus_rings = 2
 snow_mat = SubResource( 16 )
@@ -167,6 +167,7 @@ snow_tex = ExtResource( 7 )
 rain_mat = SubResource( 17 )
 rain_tex = ExtResource( 6 )
 is_rain = true
+color_dark = Color( 0.878431, 0.878431, 1, 1 )
 
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -5
@@ -309,11 +310,11 @@ round_precision = 5
 enabled = false
 texture = ExtResource( 10 )
 texture_scale = 20.0
-color = Color( 1, 1, 0.91, 1 )
-energy = 0.4
+color = Color( 1, 1, 0.435294, 1 )
+energy = 0.5
 shadow_enabled = true
 shadow_buffer_size = 4096
-shadow_gradient_length = 50.0
+shadow_gradient_length = 17.0
 __meta__ = {
 "_edit_lock_": true
 }
