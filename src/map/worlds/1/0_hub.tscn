@@ -77,6 +77,13 @@ scene_path = "res://src/map/worlds/1/7.tscn"
 
 [node name="NPC" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( 350, 350 )
+dye = {
+"eye": 15,
+"fit": 14,
+"hair": 11,
+"skin": 5
+}
+lines = [ "Lovely weather!", "I do adore the flowers", "Hello (=", "Are you a gem collector?", "I saw something shiny through that door..", "I flipped over this rock and found a gem! 0=" ]
 
 [node name="NPC5" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( -550, 1150 )
@@ -103,7 +110,7 @@ dye = {
 }
 hairstyle_back = 2
 hairstyle_front = 7
-lines = [ "I've been through that big door!", "I lost a few gems, now I'm locked out..", "It's darker there (:", "Finding a white flower is good luck!" ]
+lines = [ "I've been through that big door!", "I lost a few gems, now I'm locked out..", "I tried knocking.. no answer 0:", "Finding a white flower is good luck!" ]
 queue_write = "0"
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 5 )]
