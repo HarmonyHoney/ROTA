@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://src/actor/door/DoorSpawn.tscn" type="PackedScene" id=24]
 [ext_resource path="res://src/shader/fade_x.gdshader" type="Shader" id=25]
 [ext_resource path="res://src/theme/title_text.tres" type="Theme" id=26]
+[ext_resource path="res://media/image/UI/heart.svg" type="Texture" id=27]
 
 [sub_resource type="ShaderMaterial" id=22]
 shader = ExtResource( 25 )
@@ -55,7 +56,7 @@ corner_radius_bottom_left = 50
 shader = ExtResource( 25 )
 shader_param/size = 0.5
 shader_param/width = 0.115
-shader_param/color = Color( 0, 0, 0, 0.701961 )
+shader_param/color = Color( 0, 0, 0, 0.8 )
 shader_param/scale = 0.598
 shader_param/is_half = true
 
@@ -76,6 +77,13 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 65
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=23]
+size = 30
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
@@ -227,7 +235,7 @@ margin_bottom = 451.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 theme = ExtResource( 26 )
-text = "Store Page"
+text = "Store"
 align = 1
 valign = 1
 script = ExtResource( 22 )
@@ -584,7 +592,6 @@ material = SubResource( 21 )
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
 
 [node name="Patch" type="Label" parent="Canvas/Credits"]
 modulate = Color( 1, 1, 1, 0.5 )
@@ -600,20 +607,20 @@ align = 1
 valign = 2
 
 [node name="List" type="VBoxContainer" parent="Canvas/Credits"]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.55
+anchor_right = 0.95
+anchor_bottom = 0.95
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_constants/separation = 0
 alignment = 1
 
 [node name="Prefix" type="Label" parent="Canvas/Credits/List"]
-margin_top = 88.0
-margin_right = 640.0
-margin_bottom = 119.0
+margin_top = 42.0
+margin_right = 512.0
+margin_bottom = 73.0
 custom_fonts/font = SubResource( 6 )
-text = "       a game by"
+text = "   a game by"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -635,45 +642,45 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Canvas/Credits/List"]
-margin_top = 119.0
-margin_right = 640.0
-margin_bottom = 319.0
-rect_min_size = Vector2( 0, 200 )
+margin_top = 73.0
+margin_right = 512.0
+margin_bottom = 223.0
+rect_min_size = Vector2( 0, 150 )
 texture = ExtResource( 13 )
 expand = true
 stretch_mode = 6
 
 [node name="Suffix" type="Label" parent="Canvas/Credits/List"]
-margin_top = 319.0
-margin_right = 640.0
-margin_bottom = 350.0
+margin_top = 223.0
+margin_right = 512.0
+margin_bottom = 254.0
 custom_fonts/font = SubResource( 6 )
-text = "hhoney.net       "
+text = "hhoney.net   "
 align = 2
 valign = 1
 
 [node name="Spacer" type="Control" parent="Canvas/Credits/List"]
-margin_top = 350.0
-margin_right = 640.0
-margin_bottom = 370.0
+margin_top = 254.0
+margin_right = 512.0
+margin_bottom = 274.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="Prefix2" type="Label" parent="Canvas/Credits/List"]
-margin_top = 370.0
-margin_right = 640.0
-margin_bottom = 401.0
+margin_top = 274.0
+margin_right = 512.0
+margin_bottom = 305.0
 custom_fonts/font = SubResource( 6 )
-text = "       made with"
+text = "   made with"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect2" type="TextureRect" parent="Canvas/Credits/List"]
-margin_top = 401.0
-margin_right = 640.0
-margin_bottom = 601.0
-rect_min_size = Vector2( 0, 200 )
+margin_top = 305.0
+margin_right = 512.0
+margin_bottom = 455.0
+rect_min_size = Vector2( 0, 150 )
 texture = ExtResource( 23 )
 expand = true
 stretch_mode = 6
@@ -694,12 +701,110 @@ __meta__ = {
 }
 
 [node name="Suffix2" type="Label" parent="Canvas/Credits/List"]
-margin_top = 601.0
-margin_right = 640.0
-margin_bottom = 632.0
+margin_top = 455.0
+margin_right = 512.0
+margin_bottom = 486.0
 custom_fonts/font = SubResource( 6 )
-text = "godotengine.org       "
+text = "godotengine.org   "
 align = 2
+valign = 1
+
+[node name="Spacer2" type="Control" parent="Canvas/Credits/List"]
+margin_top = 486.0
+margin_right = 512.0
+margin_bottom = 516.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/Credits/List"]
+margin_top = 516.0
+margin_right = 512.0
+margin_bottom = 566.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Canvas/Credits/List/HBoxContainer"]
+margin_left = 95.0
+margin_right = 145.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 27 )
+expand = true
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="Canvas/Credits/List/HBoxContainer"]
+margin_left = 155.0
+margin_top = 9.0
+margin_right = 357.0
+margin_bottom = 40.0
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 23 )
+text = "Contributors"
+align = 1
+valign = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Canvas/Credits/List/HBoxContainer"]
+margin_left = 367.0
+margin_right = 417.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 27 )
+expand = true
+
+[node name="Spacer3" type="Control" parent="Canvas/Credits/List"]
+margin_top = 566.0
+margin_right = 512.0
+margin_bottom = 576.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Canvas/Credits/List"]
+margin_top = 576.0
+margin_right = 512.0
+margin_bottom = 642.0
+
+[node name="Label4" type="Label" parent="Canvas/Credits/List/HFlowContainer"]
+margin_left = 37.0
+margin_right = 205.0
+margin_bottom = 31.0
+size_flags_horizontal = 6
+custom_fonts/font = SubResource( 6 )
+text = "Guy Unger"
+align = 1
+valign = 1
+
+[node name="Label6" type="Label" parent="Canvas/Credits/List/HFlowContainer"]
+margin_left = 284.0
+margin_right = 474.0
+margin_bottom = 31.0
+size_flags_horizontal = 6
+custom_fonts/font = SubResource( 6 )
+text = "Sam Murray"
+align = 1
+valign = 1
+
+[node name="Label5" type="Label" parent="Canvas/Credits/List/HFlowContainer"]
+margin_left = 40.0
+margin_top = 35.0
+margin_right = 276.0
+margin_bottom = 66.0
+size_flags_horizontal = 6
+custom_fonts/font = SubResource( 6 )
+text = "Raffaele Picca"
+align = 1
+valign = 1
+
+[node name="Label7" type="Label" parent="Canvas/Credits/List/HFlowContainer"]
+margin_left = 361.0
+margin_top = 35.0
+margin_right = 470.0
+margin_bottom = 66.0
+size_flags_horizontal = 6
+custom_fonts/font = SubResource( 6 )
+text = "Kenney"
+align = 1
 valign = 1
 
 [node name="Map" type="Node2D" parent="."]
