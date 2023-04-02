@@ -9,6 +9,7 @@ export var point_count := 3 setget set_points
 export var vertices := 16 setget set_vertices
 export var gravity = 190.0
 export var is_scale_x := true
+export var is_scale_y := true
 
 var gons = []
 var last_pos := Vector2.ZERO
@@ -16,6 +17,10 @@ var hair_end = Vector2(-150, 150)
 
 func _ready():
 	u()
+	
+	if Engine.editor_hint: return
+	
+	if is_scale_y: is_scale_y = abs(sitting_angle) < 90.0
 
 func u():
 	for i in get_children():
@@ -67,3 +72,6 @@ func set_end(arg := end_scale):
 
 func scale_x(arg):
 	if is_scale_x: scale.x = arg
+
+func scale_y(arg):
+	if is_scale_y: scale.y = arg

@@ -47,6 +47,7 @@ var is_floor := false
 var velocity := Vector2.ZERO
 var dir_x := 1 setget set_dir_x
 signal scale_x
+signal scale_y
 var idle_dir := "idle"
 export var idle_anim := "idle"
 
@@ -177,6 +178,9 @@ func _ready():
 			self.chat_offset.y = -130
 		elif hairstyle_front == 10:
 			self.chat_offset.y = -115
+		
+		if idle_anim == "handstand":
+			emit_signal("scale_y", -1)
 
 func wipe_start(arg):
 	if !is_npc:
@@ -613,6 +617,8 @@ func hairdo(node, array, style):
 			for i in h.get_children():
 				if i.has_method("scale_x"):
 					connect("scale_x", i, "scale_x")
+				if i.has_method("scale_y"):
+					connect("scale_y", i, "scale_y")
 
 func set_hat(arg := hat):
 	hat = posmod(arg, hats.size())
