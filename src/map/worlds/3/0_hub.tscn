@@ -8,7 +8,7 @@
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/detail/Saguaro.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/actor/NPC.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=12]
@@ -78,6 +78,10 @@ scene_path = "res://src/map/worlds/3/7.tscn"
 
 [node name="NPC" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 1350, 450 )
+__meta__ = {
+"_editor_description_": ""
+}
+idle_anim = "idle2"
 dye = {
 "eye": 14,
 "fit": 13,
@@ -86,11 +90,15 @@ dye = {
 }
 hairstyle_back = 0
 hairstyle_front = 10
+is_npc = true
 lines = [ "You found my shortcut!", "I'm watching the door for new friends (:", "I can see it all from up here!", "Which way is up?..", "Spikes! Be careful..", "Have you seen the snow? I hear it's lovely (:" ]
 queue_write = "0"
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 1300, 2250 )
+__meta__ = {
+"_editor_description_": ""
+}
 idle_anim = "ponder"
 dye = {
 "eye": 0,
@@ -100,12 +108,15 @@ dye = {
 }
 hairstyle_back = 3
 hairstyle_front = 10
+is_npc = true
 lines = [ "Me and my twin!", "This flower matches my hair (=", "What brings you out to the desert?", "Are you a gem collector too?", "Free hugs! Hope you like pricklies (;", "I love twirling the petals around!" ]
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 450, 1250 )
+__meta__ = {
+"_editor_description_": ""
+}
 dir = 3
-idle_anim = "idle"
 dye = {
 "eye": 13,
 "fit": 10,
@@ -114,12 +125,15 @@ dye = {
 }
 hairstyle_back = 0
 hairstyle_front = 10
+is_npc = true
 lines = [ "Welcome to our home!", "Shake my hand! Don't mind the sting", "Watch your head...", "These blocks make my head spin!", "Ooo that cool desert breeze...", "Come to check out the rocks?", "Saguaro-k!" ]
 queue_write = "0"
 
 [node name="NPC4" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 1600, 1650 )
-idle_anim = "idle"
+__meta__ = {
+"_editor_description_": ""
+}
 dye = {
 "eye": 10,
 "fit": 3,
@@ -128,12 +142,15 @@ dye = {
 }
 hairstyle_back = 6
 hairstyle_front = 8
+is_npc = true
 lines = [ "24... 25... 26...", "I've been saving up my gems to open this door!", "I almost have enough...", "Have you seen these rotating blocks? Marvelous..", "Now, how can I reach that gem?...", "I found a smooth rock (:", "Turn this block, push that block over top... hmm", "Bask in the sunlight!" ]
 
 [node name="NPC5" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 2250, 2450 )
+__meta__ = {
+"_editor_description_": ""
+}
 dir = 1
-idle_anim = "idle"
 dye = {
 "eye": 15,
 "fit": 18,
@@ -142,6 +159,7 @@ dye = {
 }
 hairstyle_back = 3
 hairstyle_front = 4
+is_npc = true
 lines = [ "Do you have any water?", "It gets a little toasty out here!", "I'm thirsty...", "Have you ever drank from a cactus?", "These spinny blocks are bending my brain 0=", "Look at all the cuute cacti!", "I adore that pink blossom" ]
 
 [node name="Details" type="Node2D" parent="."]

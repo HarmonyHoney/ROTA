@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/detail/Fence.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=17]
 
 [node name="Map" type="Node2D"]
 __meta__ = {
@@ -65,6 +66,75 @@ position = Vector2( -350, 150 )
 rotation = 4.71239
 dir = 3
 scene_path = "res://src/map/worlds/2B/6.tscn"
+
+[node name="NPC" parent="Actors" instance=ExtResource( 17 )]
+position = Vector2( 906, 350 )
+__meta__ = {
+"_editor_description_": ""
+}
+idle_anim = "tree_behind"
+dye = {
+"eye": 0,
+"fit": 3,
+"hair": 14,
+"skin": 4
+}
+hairstyle_back = 1
+hairstyle_front = 4
+is_npc = true
+lines = [ "You didn't see me here...", "This is my tree!", "Climb your own!", "I'm a fly on the wall *bzz bzz*", "I'm on a secret mission (;", "I've said too much...", "Quit shaking it!" ]
+ready_z_index = -31
+
+[node name="NPC2" parent="Actors" instance=ExtResource( 17 )]
+position = Vector2( 1150, 1210 )
+__meta__ = {
+"_editor_description_": ""
+}
+dir = 1
+idle_anim = "bench"
+dye = {
+"eye": 0,
+"fit": 14,
+"hair": 12,
+"skin": 16
+}
+hairstyle_back = 0
+hairstyle_front = 7
+is_npc = true
+
+[node name="NPC3" parent="Actors" instance=ExtResource( 17 )]
+position = Vector2( -350, 450 )
+__meta__ = {
+"_editor_description_": ""
+}
+dir = 3
+idle_anim = "idle2"
+dye = {
+"eye": 14,
+"fit": 10,
+"hair": 18,
+"skin": 6
+}
+hairstyle_back = 3
+hairstyle_front = 6
+is_npc = true
+
+[node name="NPC4" parent="Actors" instance=ExtResource( 17 )]
+position = Vector2( 200, 950 )
+__meta__ = {
+"_editor_description_": ""
+}
+dir = 2
+idle_anim = "ponder"
+dye = {
+"eye": 15,
+"fit": 13,
+"hair": 0,
+"skin": 8
+}
+hairstyle_back = 3
+hairstyle_front = 2
+is_npc = true
 
 [node name="Details" type="Node2D" parent="."]
 

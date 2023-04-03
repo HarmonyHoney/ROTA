@@ -18,7 +18,7 @@
 [ext_resource path="res://src/detail/Fence.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=18]
-[ext_resource path="res://src/actor/NPC.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=19]
 
 [node name="Map" type="Node2D"]
 
@@ -72,6 +72,10 @@ gem_count = 15
 
 [node name="NPC" parent="Actors" instance=ExtResource( 19 )]
 position = Vector2( 3425, 2250 )
+__meta__ = {
+"_editor_description_": ""
+}
+idle_anim = "idle2"
 dye = {
 "eye": 18,
 "fit": 15,
@@ -80,6 +84,42 @@ dye = {
 }
 hairstyle_back = 0
 hairstyle_front = 7
+is_npc = true
+lines = [ "Where am I?", "What happened last night?...", "I'm looking for my keys..", "do you have any snacks?" ]
+
+[node name="NPC2" parent="Actors" instance=ExtResource( 19 )]
+position = Vector2( 3450, 1765 )
+__meta__ = {
+"_editor_description_": ""
+}
+dir = 3
+idle_anim = "bench"
+dye = {
+"eye": 18,
+"fit": 15,
+"hair": 12,
+"skin": 5
+}
+hairstyle_back = 2
+hairstyle_front = 7
+is_npc = true
+
+[node name="NPC3" parent="Actors" instance=ExtResource( 19 )]
+position = Vector2( 2700, 1750 )
+__meta__ = {
+"_editor_description_": ""
+}
+idle_anim = "snowball"
+dye = {
+"eye": 3,
+"fit": 10,
+"hair": 13,
+"skin": 0
+}
+hairstyle_back = 0
+hairstyle_front = 8
+hat = 3
+is_npc = true
 lines = [ "Where am I?", "What happened last night?...", "I'm looking for my keys..", "do you have any snacks?" ]
 
 [node name="Details" type="Node2D" parent="."]
@@ -164,7 +204,8 @@ position = Vector2( 2850, 2150 )
 rotation = 1.57079
 
 [node name="Flower" parent="Details/Snow" instance=ExtResource( 12 )]
-position = Vector2( 2700, 1800 )
+position = Vector2( 2610, 1810 )
+rotation = -0.785397
 palette = 4
 
 [node name="Flower3" parent="Details/Snow" instance=ExtResource( 12 )]
@@ -172,7 +213,7 @@ position = Vector2( 2700, 2300 )
 rotation = 3.14159
 
 [node name="Flower2" parent="Details/Snow" instance=ExtResource( 12 )]
-position = Vector2( 2795, 1805 )
+position = Vector2( 2790, 1810 )
 rotation = 0.785397
 palette = 2
 

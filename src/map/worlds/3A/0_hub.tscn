@@ -14,7 +14,7 @@
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=14]
-[ext_resource path="res://src/actor/NPC.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=15]
 
 [node name="Map" type="Node2D"]
 
@@ -65,7 +65,11 @@ scene_path = "res://src/map/worlds/3A/6.tscn"
 
 [node name="NPC" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 1650, 475 )
+__meta__ = {
+"_editor_description_": ""
+}
 dir = 3
+idle_anim = "idle2"
 dye = {
 "eye": 2,
 "fit": 2,
@@ -74,11 +78,16 @@ dye = {
 }
 hairstyle_back = 3
 hairstyle_front = 4
+is_npc = true
 lines = [ "You look vibrant!", "I lost my colors..", "Have you seen a mirror around here?", "I came here searching for gems (:", "Twist that block.. slide it over there.. hmm", "Have any dye?", "I love these colorful flowers (=" ]
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 600, 1350 )
+__meta__ = {
+"_editor_description_": ""
+}
 dir = 2
+idle_anim = "idle2"
 dye = {
 "eye": 18,
 "fit": 8,
@@ -88,11 +97,14 @@ dye = {
 hairstyle_back = 2
 hairstyle_front = 9
 hat = 1
+is_npc = true
 lines = [ "Lighten up!", "Too dark to handle? Bring a candle! (;", "I'm not afraid of the dark anymore!", "I'm Candle Candice! Sorry it doesn't rhyme...", "It's pine-scented! Have a sniff ^.^", "Have you seen Randall? Tell them hiii", "I'll trade you my candle for 50 gems... SIKE!", "Let the flames guide you... (:" ]
-chat_offset = Vector2( 0, -160 )
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 1950, 865 )
+__meta__ = {
+"_editor_description_": ""
+}
 dir = 1
 idle_anim = "handstand"
 dye = {
@@ -102,11 +114,15 @@ dye = {
 "skin": 11
 }
 hairstyle_back = 3
+is_npc = true
 lines = [ "I'm training for the handstand olympics (:", "My cousin has been training too..", "I'm staying upside down the longest!!", "Last year I sneezed at the last second..", "This year I'm taking home the gold ;P", "Hold it... hold it... I WILL WIN! (=" ]
 queue_write = "0"
 
 [node name="NPC4" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 2025, 1550 )
+__meta__ = {
+"_editor_description_": ""
+}
 dir = 2
 idle_anim = "ponder"
 dye = {
@@ -117,6 +133,7 @@ dye = {
 }
 hairstyle_back = 6
 hairstyle_front = 10
+is_npc = true
 lines = [ "These puzzles are twisting me up!", "I can see it all from here (=", "Gaze off with me!", "What does that cloud look like to you?", "Breathe in... Breath out.. *phew* (:", "That one looks like a turtle!! 0=", "I want to float around inside a cloud (=", "If I dive off will the clouds catch me?" ]
 
 [node name="Details" type="Node2D" parent="."]

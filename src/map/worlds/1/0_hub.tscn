@@ -4,7 +4,6 @@
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/actor/NPC.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=8]
@@ -15,6 +14,7 @@
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=16]
 
 [node name="Map" type="Node2D"]
 
@@ -75,33 +75,28 @@ rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/1/7.tscn"
 
-[node name="NPC" parent="Actors" instance=ExtResource( 5 )]
+[node name="NPC" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 350, 350 )
+__meta__ = {
+"_editor_description_": ""
+}
+idle_anim = "idle2"
 dye = {
 "eye": 15,
 "fit": 14,
 "hair": 11,
 "skin": 5
 }
+is_npc = true
 lines = [ "Lovely weather!", "I do adore the flowers", "Hello (=", "Are you a gem collector?", "I saw something shiny through that door..", "I flipped over this rock and found a gem! 0=" ]
 
-[node name="NPC5" parent="Actors" instance=ExtResource( 5 )]
-position = Vector2( -550, 1150 )
-dir = 3
-idle_anim = "ponder"
-dye = {
-"eye": 18,
-"fit": 13,
-"hair": 11,
-"skin": 8
-}
-hairstyle_back = 0
-hairstyle_front = 2
-lines = [ "Be careful!", "These things are pretty pointy..", "I come here to admire the view", "I like the seclusion" ]
-
-[node name="NPC2" parent="Actors" instance=ExtResource( 5 )]
+[node name="NPC2" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 1350, 1360 )
+__meta__ = {
+"_editor_description_": ""
+}
 dir = 3
+idle_anim = "idle2"
 dye = {
 "eye": 17,
 "fit": 18,
@@ -110,11 +105,15 @@ dye = {
 }
 hairstyle_back = 2
 hairstyle_front = 7
+is_npc = true
 lines = [ "I've been through that big door!", "I lost a few gems, now I'm locked out..", "I tried knocking.. no answer 0:", "Finding a white flower is good luck!" ]
 queue_write = "0"
 
-[node name="NPC3" parent="Actors" instance=ExtResource( 5 )]
+[node name="NPC3" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 1500, 450 )
+__meta__ = {
+"_editor_description_": ""
+}
 dir = 2
 idle_anim = "handstand"
 dye = {
@@ -125,7 +124,26 @@ dye = {
 }
 hairstyle_back = 0
 hairstyle_front = 8
+is_npc = true
 lines = [ "Feet are overrated", "I'm a hands on learner", "Look at life upside down", "I'm going for the record!", "Change your perspective!", "Head rush!", "*phew* let me catch my breath!", "hello" ]
+
+[node name="NPC5" parent="Actors" instance=ExtResource( 16 )]
+position = Vector2( -550, 1150 )
+__meta__ = {
+"_editor_description_": ""
+}
+dir = 3
+idle_anim = "ponder"
+dye = {
+"eye": 18,
+"fit": 13,
+"hair": 11,
+"skin": 8
+}
+hairstyle_back = 0
+hairstyle_front = 2
+is_npc = true
+lines = [ "Be careful!", "These things are pretty pointy..", "I come here to admire the view", "I like the seclusion" ]
 
 [node name="Details" type="Node2D" parent="."]
 

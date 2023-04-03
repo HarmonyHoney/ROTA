@@ -1,10 +1,12 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
 [ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=3]
 [ext_resource path="res://src/detail/Visible.gd" type="Script" id=4]
 [ext_resource path="res://media/audio/sfx/player_land.wav" type="AudioStream" id=5]
+[ext_resource path="res://src/actor/door/Arrow.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/actor/ChatStart.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17, 17 )
@@ -95,6 +97,80 @@ tracks/7/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "bench"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -6, -0.25, 0, 0.25, 0, 6, -0.25, 0, 0.25, 0, -6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -17, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -10, -0.25, 0, 0.25, 0, 10, -0.25, 0, 0.25, 0, -10, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1.01 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -30, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( -10, -0.25, 0, 0.25, 0, -13, -0.25, 0, 0.25, 0, -10, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.00999999, 0.5, 1 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 30, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( -13, -0.25, 0, 0.25, 0, -10, -0.25, 0, 0.25, 0, -13, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
 }
 
 [sub_resource type="Animation" id=17]
@@ -649,6 +725,80 @@ tracks/7/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=21]
+resource_name = "tree_behind"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprites/Root/Body:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprites/Root/Body:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -60, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprites/Root/Body:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 45, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0, 45, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.0100001, 0.5, 1.02 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Sprites/Hands/Left:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -20, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Sprites/Hands/Left:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( -50, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Sprites/Hands/Right:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 20, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Sprites/Hands/Right:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( -50, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
 [sub_resource type="Animation" id=8]
 resource_name = "walk"
 loop = true
@@ -791,6 +941,7 @@ shape = SubResource( 3 )
 autoplay = "RESET"
 playback_default_blend_time = 0.2
 anims/RESET = SubResource( 6 )
+anims/bench = SubResource( 20 )
 anims/handstand = SubResource( 17 )
 anims/idle = SubResource( 5 )
 anims/idle2 = SubResource( 15 )
@@ -799,6 +950,7 @@ anims/jump = SubResource( 7 )
 anims/ponder = SubResource( 16 )
 anims/release = SubResource( 9 )
 anims/snowball = SubResource( 19 )
+anims/tree_behind = SubResource( 21 )
 anims/walk = SubResource( 8 )
 next/jump = "jump"
 
@@ -808,6 +960,18 @@ modulate = Color( 1, 0, 0, 1 )
 rect = Rect2( -100, -100, 200, 200 )
 script = ExtResource( 4 )
 node_path = NodePath("../Sprites")
+
+[node name="Arrow" parent="." instance=ExtResource( 6 )]
+is_turn = true
+col_size = Vector2( 150, 50 )
+col_pos = Vector2( 0, -33 )
+image_pos = Vector2( 0, -110 )
+
+[node name="Chat" type="Node2D" parent="Arrow"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -110 )
+script = ExtResource( 7 )
+arrow_path = NodePath("..")
 
 [node name="Sprites" type="Node2D" parent="."]
 

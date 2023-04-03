@@ -133,6 +133,7 @@ export (String, MULTILINE) var queue_write := "" setget set_queue_write
 export var chat_offset := Vector2(0, -110) setget set_chat_offset
 onready var arrow := get_node_or_null("Arrow")
 onready var chat := get_node_or_null("Arrow/Chat")
+export var ready_z_index := 50
 
 var snowball_scene : PackedScene = preload("res://src/actor/Snowball.tscn")
 var snowballs = []
@@ -154,7 +155,9 @@ func _ready():
 	set_hat()
 	set_chat_offset()
 	if Engine.editor_hint: return
+	
 	solve_jump()
+	if arrow: connect("turn", arrow, "set_dir")
 	
 	# create idle animiations facing left
 	var l = anim.get_animation("idle").duplicate()
@@ -169,18 +172,29 @@ func _ready():
 #	anim.seek(2.0, true)
 	
 	if is_npc:
-		z_index -= 1
-		spr_hands_parent.z_index = 0
+		z_index = min(ready_z_index, 45)
 		spr_easy.clock = spr_easy.time
 		set_lines()
 		set_queue_write()
-		if hairstyle_back == 6 or hairstyle_front == 7:
-			self.chat_offset.y = -130
+		var coy = chat_offset.y
+		if hat == 1:
+			coy = min(coy, -160)
+		elif hairstyle_back in [6, 7] or hairstyle_front in [7]:
+			coy = min(coy, -130)
 		elif hairstyle_front == 10:
-			self.chat_offset.y = -115
+			coy = min(coy, -115)
+		
+		if idle_anim == "bench":
+			coy -= 17
+		elif idle_anim == "tree_behind":
+			coy = min(coy, -160)
+		
+		self.chat_offset.y = coy
 		
 		if idle_anim == "handstand":
 			emit_signal("scale_y", -1)
+	else:
+		if arrow: arrow.is_locked = true
 
 func wipe_start(arg):
 	if !is_npc:

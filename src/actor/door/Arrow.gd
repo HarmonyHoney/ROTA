@@ -17,7 +17,7 @@ onready var col_shape := $Area2D/CollisionShape2D
 var player = null
 var body = null
 var is_active := false
-var is_locked := false
+export var is_locked := false
 
 var arrow_easy := EaseMover.new(0.3)
 var open_easy := EaseMover.new()

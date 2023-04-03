@@ -4,6 +4,7 @@
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/detail/Tree.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=8]
@@ -14,7 +15,6 @@
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/actor/NPC.tscn" type="PackedScene" id=17]
 
 [node name="Map" type="Node2D"]
 __meta__ = {
@@ -68,10 +68,12 @@ scene_path = "res://src/map/worlds/2/4.tscn"
 position = Vector2( -700, 2650 )
 scene_path = "res://src/map/worlds/2/5.tscn"
 
-[node name="NPC" parent="Actors" instance=ExtResource( 17 )]
+[node name="NPC" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( -1950, 2025 )
+__meta__ = {
+"_editor_description_": ""
+}
 dir = 3
-idle_anim = "idle"
 dye = {
 "eye": 18,
 "fit": 5,
@@ -81,13 +83,16 @@ dye = {
 hairstyle_back = 0
 hairstyle_front = 0
 hat = 1
+is_npc = true
 lines = [ "It's always handy having a light", "Feel the delight of candle light!", "I'm not afraid of the dark! I swear..", "Candle candle candle candle..", "I've been trying to open that big door!", "They call me Candle Randall", "I get a lil spooked without my candy", "Need a light?" ]
 queue_write = "5"
 chat_offset = Vector2( 0, -160 )
 
-[node name="NPC2" parent="Actors" instance=ExtResource( 17 )]
+[node name="NPC2" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( -1600, 1050 )
-idle_anim = "idle"
+__meta__ = {
+"_editor_description_": ""
+}
 dye = {
 "eye": 0,
 "fit": 18,
@@ -95,10 +100,14 @@ dye = {
 "skin": 5
 }
 hairstyle_front = 3
+is_npc = true
 lines = [ "Have  you tried turning it off and on again?", "Breathe in, breathe out", "It's so cozy between these trees", "I'ts nice to catch a break and relax", "I feel calm.", "I found a big worm here yesterday!", "Let the trees breathe into you", "Nature takes care of you <3" ]
 
-[node name="NPC3" parent="Actors" instance=ExtResource( 17 )]
+[node name="NPC3" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( -575, 2450 )
+__meta__ = {
+"_editor_description_": ""
+}
 dir = 2
 idle_anim = "ponder"
 dye = {
@@ -109,6 +118,7 @@ dye = {
 }
 hairstyle_back = 3
 hairstyle_front = 9
+is_npc = true
 lines = [ "I feel a little dizzy..", "I'm taking a break to enjoy the night sky!", "These boxes have a mind of their own!", "I've been moving boxes all day!", "I've seen a few gems around here..", "I wonder whats beyond that big door" ]
 
 [node name="Details" type="Node2D" parent="."]
