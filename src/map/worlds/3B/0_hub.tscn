@@ -83,32 +83,39 @@ dir = 1
 idle_anim = "bench"
 dye = {
 "eye": 0,
-"fit": 3,
+"fit": 16,
 "hair": 12,
-"skin": 6
+"skin": 4
 }
 is_npc = true
+lines = [ "Can I braid your hair? (:", "Havin a cute sit on a cute bench (;", "Benchy benchy bench... ;P", "Hello (=", "This is my cozy little corner...", "Join me!", "I come here to feel the breeze [:", "Ooo look at that cloud...", "Ahh the sky makes me cry (':" ]
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 15 )]
-position = Vector2( 1000, 950 )
+position = Vector2( 1020, 950 )
 dir = 2
 dye = {
 "eye": 0,
-"fit": 3,
-"hair": 12,
-"skin": 6
+"fit": 14,
+"hair": 10,
+"skin": 16
 }
+hairstyle_back = 0
+hairstyle_front = 10
 is_npc = true
+lines = [ "I have mastered these twisty blocks (;", "You'll get it eventually!", "I believe in you <3", "Step back and change your perspective (:", "There's always another angle...", "Have you tried the old twisty-slidey?", "I've seen plenty of gems around here (:", "Good luck! ^.^" ]
 
 [node name="NPC4" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( -250, 450 )
 dir = 3
+idle_anim = "ponder"
 dye = {
-"eye": 0,
+"eye": 18,
 "fit": 3,
-"hair": 12,
+"hair": 14,
 "skin": 6
 }
+hairstyle_back = 0
+hairstyle_front = 8
 is_npc = true
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 15 )]
@@ -116,12 +123,15 @@ position = Vector2( 445, 1450 )
 dir = 2
 idle_anim = "tree_behind"
 dye = {
-"eye": 0,
+"eye": 3,
 "fit": 3,
 "hair": 12,
-"skin": 6
+"skin": 17
 }
+hairstyle_back = 3
+hairstyle_front = 10
 is_npc = true
+lines = [ "My hands are stuck to the pricklies!", "I climbed up here last night...", "Oh! That tickles 0=", "Want to play hide and seek?", "This is my cuddle cactus ;P", "I feel safe here...", "Grab a cactus and cuddle up! (;", "Hiiiiiii (:" ]
 ready_z_index = -21
 ready_dir_x = -1
 

@@ -39,12 +39,8 @@ func set_gem(arg := gem_count):
 # unlock cheat
 func cheat_code(cheat):
 	if "konami" in cheat and arrow.is_locked and arrow.is_active:
-		unlock()
-
-func unlock():
-	arrow.is_locked = false
-	arrow.visible = true
-	print(name, " unlocked")
+		arrow.is_locked = false
+		print(name, " unlocked")
 
 func activate():
 	UI.up.show = arrow.is_active and gem_count > 0
