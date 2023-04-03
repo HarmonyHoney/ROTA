@@ -101,6 +101,7 @@ dye = {
 hairstyle_back = 0
 hairstyle_front = 7
 is_npc = true
+lines = [ "Who needs gems?!", "This beautiful view is everything (=", "I can sit here forever!", "I love watching the sunset!", "I'm keeping the seat warm!", "No more puzzles! Only chilling ;P", "Beep boop...q" ]
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 17 )]
 position = Vector2( -350, 450 )
@@ -118,6 +119,7 @@ dye = {
 hairstyle_back = 3
 hairstyle_front = 6
 is_npc = true
+lines = [ "This puzzle has me stumped!", "I hope you reach that gem!", "Trees bring me life [:", "I saw something move in the trees earlier..", "Three blocks in one puzzle?", "This is overwhelming 0=", "Take a moment to relax.. think it out (:", "The answer will come to me..", "Would you like a hug?" ]
 
 [node name="NPC4" parent="Actors" instance=ExtResource( 17 )]
 position = Vector2( 200, 950 )
@@ -132,9 +134,10 @@ dye = {
 "hair": 0,
 "skin": 8
 }
-hairstyle_back = 3
+hairstyle_back = 2
 hairstyle_front = 2
 is_npc = true
+lines = [ "Have you seen my friend?", "We were playing hide and seek..", "I've been looking for hours! 0=", "Here's a nice place to catch my breath..", "Let me know if you see any movement (;", "I checked all the bushes.. no luck!", "Hmm.. I wonder where they could be..", "This is a great vantage point (;" ]
 
 [node name="Details" type="Node2D" parent="."]
 

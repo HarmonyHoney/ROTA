@@ -134,6 +134,7 @@ export var chat_offset := Vector2(0, -110) setget set_chat_offset
 onready var arrow := get_node_or_null("Arrow")
 onready var chat := get_node_or_null("Arrow/Chat")
 export var ready_z_index := 50
+export var ready_dir_x := 0
 
 var snowball_scene : PackedScene = preload("res://src/actor/Snowball.tscn")
 var snowballs = []
@@ -226,7 +227,7 @@ func scene():
 	
 	# face left or right
 	randomize()
-	self.dir_x = 1 if randf() > 0.5 else -1
+	self.dir_x = sign(ready_dir_x) if ready_dir_x != 0 else  1 if randf() > 0.5 else -1
 	
 	# snap to floor
 	var v = Vector2.DOWN * 150
@@ -738,6 +739,9 @@ func die():
 	is_dead = true
 	dead_clock = 0.0
 	Cutscene.is_playing = true
+	
+	for i in [MenuRemap, MenuOptions, MenuPause]:
+		if i.is_open: i.is_open = false
 	
 	velocity = Vector2(-350 * dir_x, -800)
 	if is_hold:

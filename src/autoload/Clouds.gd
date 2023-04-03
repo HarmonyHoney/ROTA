@@ -29,6 +29,8 @@ onready var starfield := $Sky/Center/Starfield
 onready var star_orbit := $Sky/Center/Stars/Orbit
 onready var star_light := $Sky/Center/Stars/Orbit/Light2D
 onready var sun := $Sky/Center/Stars/Orbit/Sun
+onready var sun_ball := $Sky/Center/Stars/Orbit/Sun/Ball
+onready var sun_rays := $Sky/Center/Stars/Orbit/Sun/Rays
 onready var moon := $Sky/Center/Stars/Orbit/Moon
 
 export var orbit_distance := 650.0
@@ -93,7 +95,7 @@ func scene():
 	star_orbit.position = Vector2(length + orbit_distance, 0)
 	moon.scale.x = -1 if randf() < 0.5 else 1.0
 	
-	is_snow = "2A/" in Shared.csfn or "3B/" in Shared.csfn
+	is_snow = "2A/" in Shared.csfn or "2C/" in Shared.csfn
 	create_clouds()
 	solve_clock = 0.0
 	
@@ -123,7 +125,12 @@ func _process(delta):
 	moon_frac = 1.0 - sun_frac
 	
 	sun.modulate.a = sun_frac
+	sun_ball.scale = Vector2.ONE * lerp(2.0, 1.0, sun_frac)
+	sun_rays.scale = Vector2.ONE * lerp(0.8, 1.0, sun_frac)
+	
 	moon.modulate.a = moon_frac
+	moon.scale = Vector2.ONE * lerp(0.5, 1.0, moon_frac)
+	
 	starfield.modulate.a = moon_frac
 	starfield.visible = moon_frac > 0
 	

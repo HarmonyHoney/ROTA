@@ -64,7 +64,7 @@ func _physics_process(delta):
 				if !Engine.editor_hint and (cursor - 1 == 0 or dialog[cursor - 1] == " "):
 					Audio.play("menu_cancel", 0.75, 1.5)
 		
-		elif (arrow and !arrow.is_active and !Engine.editor_hint) or (key_up and !key_hold):
+		elif (is_instance_valid(arrow) and !arrow.is_active and !Engine.editor_hint) or (key_up and !key_hold):
 			is_show = false
 		
 		elif read_clock < read_time:
