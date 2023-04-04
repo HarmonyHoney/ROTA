@@ -92,7 +92,7 @@ hairstyle_back = 0
 hairstyle_front = 10
 is_npc = true
 lines = [ "You found my shortcut!", "I'm watching the door for new friends (:", "I can see it all from up here!", "Which way is up?..", "Spikes! Be careful..", "Have you seen the snow? I hear it's lovely (:" ]
-queue_write = "0"
+greeting = 0
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 1300, 2250 )
@@ -126,8 +126,8 @@ dye = {
 hairstyle_back = 0
 hairstyle_front = 10
 is_npc = true
-lines = [ "Welcome to our home!", "Shake my hand! Don't mind the sting", "Watch your head...", "These blocks make my head spin!", "Ooo that cool desert breeze...", "Come to check out the rocks?", "Saguaro-k!" ]
-queue_write = "0"
+lines = [ "Welcome to Dry Land!", "Shake my hand! Don't mind the sting", "Watch your head...", "These blocks make my head spin!", "Ooo that cool desert breeze...", "Come to check out the rocks?", "Saguaro-k!" ]
+greeting = 0
 
 [node name="NPC4" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 1600, 1650 )
@@ -143,7 +143,8 @@ dye = {
 hairstyle_back = 6
 hairstyle_front = 8
 is_npc = true
-lines = [ "24... 25... 26...", "I've been saving up my gems to open this door!", "I almost have enough...", "Have you seen these rotating blocks? Marvelous..", "Now, how can I reach that gem?...", "I found a smooth rock (:", "Turn this block, push that block over top... hmm", "Bask in the sunlight!" ]
+lines = [ "24... 25... 26...", "I've been saving up my gems to open this door!", "I almost have enough...", "Have you seen these rotating blocks? Marvelous..", "Now, how can I reach that gem?...", "I found a smooth rock (:", "Turn this block, push that block over top... hmm", "Bask in the starlight!" ]
+greeting = 7
 
 [node name="NPC5" parent="Actors" instance=ExtResource( 9 )]
 position = Vector2( 2250, 2450 )

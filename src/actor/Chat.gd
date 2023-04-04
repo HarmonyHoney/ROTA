@@ -28,6 +28,13 @@ var arrow
 var key_up := false
 var key_hold := false
 
+func _ready():
+	Shared.connect("scene_before", self, "scene")
+
+func scene():
+	is_show = false
+	show_easy.clock = 0.0
+
 func _physics_process(delta):
 	if Engine.editor_hint and !is_editor: return
 	
@@ -73,7 +80,7 @@ func _physics_process(delta):
 				is_show = false
 		
 		if !is_show:
-			if arrow: arrow.is_locked = false
+			if is_instance_valid(arrow): arrow.is_locked = false
 
 func set_dialog(arg := dialog):
 	dialog = arg
@@ -95,7 +102,7 @@ func set_dialog(arg := dialog):
 
 func set_is_show(arg := is_show):
 	is_show = arg
-	if is_show:
+	if is_show and Engine.editor_hint:
 		set_dialog()
 
 func open(_dialog := dialog, _arrow := arrow, _gt := global_transform):
@@ -107,3 +114,5 @@ func open(_dialog := dialog, _arrow := arrow, _gt := global_transform):
 	if rect: rect.size = Vector2.ONE * panel_min.x
 	global_transform = _gt
 	self.dialog = _dialog
+	
+	Audio.play("menu_joy", 0.5, 0.8)

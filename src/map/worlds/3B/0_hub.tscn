@@ -88,7 +88,8 @@ dye = {
 "skin": 4
 }
 is_npc = true
-lines = [ "Can I braid your hair? (:", "Havin a cute sit on a cute bench (;", "Benchy benchy bench... ;P", "Hello (=", "This is my cozy little corner...", "Join me!", "I come here to feel the breeze [:", "Ooo look at that cloud...", "Ahh the sky makes me cry (':" ]
+lines = [ "Can I braid your hair? (:", "Havin a cute sit on a cute bench (;", "Benchy benchy bench... ;P", "Hiii ^.^", "This is my cozy little corner...", "Join me!", "I come here to feel the breeze [:", "Ooo look at that cloud...", "Ahh the sky makes me cry (':" ]
+greeting = 3
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 1020, 950 )
@@ -102,21 +103,24 @@ dye = {
 hairstyle_back = 0
 hairstyle_front = 10
 is_npc = true
-lines = [ "I have mastered these twisty blocks (;", "You'll get it eventually!", "I believe in you <3", "Step back and change your perspective (:", "There's always another angle...", "Have you tried the old twisty-slidey?", "I've seen plenty of gems around here (:", "Good luck! ^.^" ]
+lines = [ "I have mastered these twisty blocks (;", "You'll get it eventually!", "I believe in you <3", "Step back and change your perspective (:", "There's always another angle...", "Have you tried the old twisty-slidey?", "I've seen plenty of gems around here (:", "Good luck! ^.^", "Greetings puzzler! [-:" ]
+greeting = 8
 
 [node name="NPC4" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( -250, 450 )
 dir = 3
 idle_anim = "ponder"
 dye = {
-"eye": 18,
-"fit": 3,
+"eye": 5,
+"fit": 2,
 "hair": 14,
 "skin": 6
 }
 hairstyle_back = 0
 hairstyle_front = 8
 is_npc = true
+lines = [ "The desert is so peaceful..", "I love these hot days and cool nights (:", "Maybe I'll visit the snow next!", "I've travelled all over ROTA!", "What's your favorite destination? (;", "I'm afraid of heights! 0=", "This last puzzle is a long way down!", "I saw someone levitating blocks! I wonder how..", "How to bridge the gap? hmm..", "Hello friend! (=" ]
+greeting = 9
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 445, 1450 )
@@ -131,7 +135,8 @@ dye = {
 hairstyle_back = 3
 hairstyle_front = 10
 is_npc = true
-lines = [ "My hands are stuck to the pricklies!", "I climbed up here last night...", "Oh! That tickles 0=", "Want to play hide and seek?", "This is my cuddle cactus ;P", "I feel safe here...", "Grab a cactus and cuddle up! (;", "Hiiiiiii (:" ]
+lines = [ "My hands are stuck to the pricklies!", "I climbed up here last night...", "Oh! That tickles 0=", "Want to play hide and seek?", "This is my cuddle cactus ;P", "I feel safe here...", "Grab a cactus and cuddle up! (;", "Hey.. up here! (:" ]
+greeting = 7
 ready_z_index = -21
 ready_dir_x = -1
 

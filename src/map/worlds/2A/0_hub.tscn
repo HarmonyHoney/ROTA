@@ -72,7 +72,7 @@ rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/2A/7.tscn"
 
-[node name="Player" parent="Actors" instance=ExtResource( 8 )]
+[node name="NPC" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 200, 1350 )
 __meta__ = {
 "_editor_description_": ""
@@ -91,7 +91,7 @@ hat = 3
 is_npc = true
 lines = [ "Aren't they marvelous?", "I rolled em up myself!", "Yeah, I'm pretty sick at rollin snow (;", "Balancing the last snowball is tricky!", "Now i feel tiny next to Snowbo", "I named them Snowbo!" ]
 
-[node name="Player2" parent="Actors" instance=ExtResource( 8 )]
+[node name="NPC2" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 1150, 150 )
 __meta__ = {
 "_editor_description_": ""
@@ -108,9 +108,9 @@ hairstyle_front = 6
 hat = 3
 is_npc = true
 lines = [ "Wanna have a snowball fight? (:", "I'm gonna crush you!", "The snow is light and fluffy!", "It won't hurt thaat bad ;P", "I haven't seen Robbi since my astonishing victory (;", "Watch your back..", "Snowball Snowball Snooowbaaall", "Ooo yeah right in the face!" ]
-queue_write = "0"
+greeting = 0
 
-[node name="Player3" parent="Actors" instance=ExtResource( 8 )]
+[node name="NPC3" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 650, 700 )
 __meta__ = {
 "_editor_description_": ""
@@ -128,11 +128,11 @@ hairstyle_front = 5
 hat = 3
 is_npc = true
 lines = [ "You found me! 0:", "I've been hiding in here all day!", "Tell my mom I'm fine!", "Psst.. can you bring me a soda?", "My friend rolled me up in here..", "Snow surrounds me in every direction..", "That's not yellow snow!.. I'ts something else", "*oof* Can you poke another air hole?", "Sure beats chores", "You gotta try this!", "I'm chillin!", "It's me, Robbi!", "Snowballs can't hurt me now!" ]
-queue_write = "0"
+greeting = 0
 chat_offset = Vector2( 0, -220 )
 ready_z_index = -50
 
-[node name="Player4" parent="Actors" instance=ExtResource( 8 )]
+[node name="NPC4" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( 350, 750 )
 __meta__ = {
 "_editor_description_": ""
@@ -150,7 +150,7 @@ hairstyle_front = 8
 is_npc = true
 lines = [ "Cozy up and feel the candle warmth!", "I'm a lover not a snowball fighter..", "Hmm this puzzle has me stumped..", "Love that pine tree scent! Mmm..", "These are my flower friends (=", "Take a moment to relax and reflect..", "Do I really need that gem?" ]
 
-[node name="Player5" parent="Actors" instance=ExtResource( 8 )]
+[node name="NPC5" parent="Actors" instance=ExtResource( 8 )]
 position = Vector2( -350, 400 )
 __meta__ = {
 "_editor_description_": ""

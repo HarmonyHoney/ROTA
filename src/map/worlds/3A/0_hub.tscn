@@ -116,7 +116,7 @@ dye = {
 hairstyle_back = 3
 is_npc = true
 lines = [ "I'm training for the handstand olympics (:", "My cousin has been training too..", "I'm staying upside down the longest!!", "Last year I sneezed at the last second..", "This year I'm taking home the gold ;P", "Hold it... hold it... I WILL WIN! (=" ]
-queue_write = "0"
+greeting = 0
 
 [node name="NPC4" parent="Actors" instance=ExtResource( 15 )]
 position = Vector2( 2025, 1550 )

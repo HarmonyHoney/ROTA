@@ -128,13 +128,18 @@ var blink_time := 10.0
 var blink_range := Vector2(1, 20)
 
 export var is_npc := false
-export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Hello (="] setget set_lines
-export (String, MULTILINE) var queue_write := "" setget set_queue_write
+export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Hello (="]
+export var greeting := -1
+export var greeting_wait := Vector2(30, 45)
+var greeting_clock := 0.0
+export (String, MULTILINE) var queue_write := ""
 export var chat_offset := Vector2(0, -110) setget set_chat_offset
 onready var arrow := get_node_or_null("Arrow")
-onready var chat := get_node_or_null("Arrow/Chat")
 export var ready_z_index := 50
 export var ready_dir_x := 0
+
+var line := -1
+var queue := []
 
 var snowball_scene : PackedScene = preload("res://src/actor/Snowball.tscn")
 var snowballs = []
@@ -158,7 +163,9 @@ func _ready():
 	if Engine.editor_hint: return
 	
 	solve_jump()
-	if arrow: connect("turn", arrow, "set_dir")
+	if arrow:
+		connect("turn", arrow, "set_dir")
+		arrow.connect("open", self, "arrow_open")
 	
 	# create idle animiations facing left
 	var l = anim.get_animation("idle").duplicate()
@@ -175,8 +182,6 @@ func _ready():
 	if is_npc:
 		z_index = min(ready_z_index, 45)
 		spr_easy.clock = spr_easy.time
-		set_lines()
-		set_queue_write()
 		var coy = chat_offset.y
 		if hat == 1:
 			coy = min(coy, -160)
@@ -543,6 +548,10 @@ func _physics_process(delta):
 			blink_ease.show = true
 			blink_clock = 0.0
 			blink_time = rand_range(blink_range.x, blink_range.y)
+	
+	if is_npc:
+		if greeting_clock > 0:
+			greeting_clock = max(0, greeting_clock - delta)
 
 func physics_frame():
 	# hold animation
@@ -639,17 +648,8 @@ func set_hat(arg := hat):
 	hat = posmod(arg, hats.size())
 	hairdo(hat_node, hats, hat)
 
-func set_queue_write(arg := queue_write):
-	queue_write = arg
-	if chat: chat.queue_write = queue_write
-
-func set_lines(arg := lines):
-	lines = arg
-	if chat: chat.lines = lines
-
 func set_chat_offset(arg := chat_offset):
 	chat_offset = arg
-	if chat: chat.position = chat_offset
 	if arrow: arrow.image_pos = chat_offset
 
 ### Movement
@@ -849,3 +849,24 @@ func unpause():
 func footstep_sound():
 	if !audio_walk.playing and !audio_land.playing:
 		Audio.play(audio_walk, 1.5, 3.0)
+
+func arrow_open():
+	if greeting_clock == 0 and greeting > -1 and greeting < lines.size():
+		queue.erase(greeting)
+		queue.push_front(greeting)
+	
+	if queue.size() == 0:
+		queue = range(lines.size())
+		queue.shuffle()
+		queue.erase(line)
+		if greeting > -1: queue.erase(greeting)
+		if queue_write != "":
+			var qw = Array(PoolIntArray(Array(queue_write.split_floats(",", false))))
+			for i in qw.size():
+				var b = qw.pop_back()
+				queue.erase(b)
+				queue.push_front(b)
+	
+	line = posmod(int(queue.pop_front()), lines.size())
+	Shared.chat.open(lines[line], arrow, Transform2D(dir * PI * 0.5, global_position + rot(chat_offset)))
+	greeting_clock = rand_range(greeting_wait.x, greeting_wait.y)
