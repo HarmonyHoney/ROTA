@@ -521,11 +521,11 @@ position = Vector2( 950, 900 )
 palette = 2
 
 [node name="FlowerPetals11" parent="Details" instance=ExtResource( 4 )]
-position = Vector2( 1235, 150 )
+position = Vector2( 1235, 160 )
 palette = 2
 
 [node name="FlowerPetals12" parent="Details" instance=ExtResource( 4 )]
-position = Vector2( 1465, 150 )
+position = Vector2( 1465, 160 )
 palette = 5
 
 [node name="FlowerPetals5" parent="Details" instance=ExtResource( 4 )]

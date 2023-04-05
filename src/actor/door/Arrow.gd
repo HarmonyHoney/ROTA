@@ -11,8 +11,7 @@ export var image_show := false setget set_image_show
 export var image_pos := Vector2(0, -95) setget set_image_pos
 
 onready var image := $Image
-onready var area := $Area2D
-onready var col_shape := $Area2D/CollisionShape2D
+onready var col_shape := $CollisionShape2D
 
 var player = null
 var body = null
@@ -75,7 +74,7 @@ func set_col_size(arg := col_size):
 
 func set_col_pos(arg := col_pos):
 	col_pos = arg
-	if area: area.position = col_pos
+	if col_shape: col_shape.position = col_pos
 
 func set_image_show(arg := image_show):
 	image_show = arg
@@ -85,16 +84,18 @@ func set_image_pos(arg := image_pos):
 	image_pos = arg
 	if image: image.position = image_pos
 
-func _on_Area2D_body_entered(_body):
+func _on_body_entered(_body):
 	body = _body
 	try_active()
+	print(get_parent().name, " entered ", body, " is_active ", is_active)
 
-func _on_Area2D_body_exited(_body):
+func _on_body_exited(_body):
+	print(get_parent().name, " exited ", _body)
 	body = null
 	try_active()
 
 func try_active():
-	if (is_active and (body != player or (player.dir != dir))) or (!is_active and body == player and player.dir == dir):
+	if (is_active and (body != player or player.dir != dir)) or (!is_active and body == player and player.dir == dir):
 		is_active = !is_active
 		emit_signal("activate")
 		if is_active and Shared.arrow_track != self:

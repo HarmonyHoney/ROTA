@@ -50,6 +50,7 @@ signal scale_x
 signal scale_y
 var idle_dir := "idle"
 export var idle_anim := "idle"
+export var is_idle_flip := false
 
 var walk_speed := 350.0
 var floor_accel := 12.0
@@ -200,7 +201,10 @@ func _ready():
 		if idle_anim == "handstand":
 			emit_signal("scale_y", -1)
 	else:
-		if arrow: arrow.is_locked = true
+		if arrow:
+			arrow.is_locked = true
+			arrow.monitoring = false
+			arrow.monitorable = false
 
 func wipe_start(arg):
 	if !is_npc:
@@ -596,7 +600,7 @@ func set_dir_x(arg := dir_x):
 	dir_x = -1.0 if arg < 0 else 1.0
 	areas.scale.x = dir_x
 	var l = idle_anim + "_left"
-	idle_dir = idle_anim if dir_x > 0 else (l if anim.has_animation(l) else "idle")
+	idle_dir = idle_anim if (dir_x < 0 if is_idle_flip else dir_x > 0) else (l if anim.has_animation(l) else "idle")
 	emit_signal("scale_x", dir_x)
 
 func set_jump_height(arg):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/detail/PineTree.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/detail/Flower.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/detail/RockSquare.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/detail/Snowman.tscn" type="PackedScene" id=14]
 
@@ -73,6 +74,89 @@ rotation = 3.14159
 dir = 2
 scene_path = "res://src/map/worlds/0/2_end.tscn"
 gem_count = 50
+
+[node name="NPC" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 2450, 800 )
+dir = 3
+idle_anim = "invisible"
+dye = {
+"eye": 3,
+"fit": 5,
+"hair": 14,
+"skin": 0
+}
+hairstyle_back = 2
+hat = 3
+is_npc = true
+lines = [ "Here I am!", "What gave me away? ;P", "Did you see me wiggle? d;", "It's quite cozy in here...", "It does get a little stinky... o:", "I've been hiding since morning!", "I'm supposed to be in class...", "I packed my own lunch! (-;", "Want a carrot?", "Find your own snowman!!.. Or we can share (;", "Hop in! The snow is fine ^.^" ]
+greeting = 0
+chat_offset = Vector2( 0, -220 )
+ready_z_index = -50
+
+[node name="NPC2" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 2750, 840 )
+dir = 1
+idle_anim = "bench"
+dye = {
+"eye": 3,
+"fit": 5,
+"hair": 14,
+"skin": 0
+}
+hairstyle_back = 2
+hat = 3
+is_npc = true
+lines = [ "Hey! Come chill.. (:", "I hope I don't melt in the sun! ;P", "There's snow place I'd rather be! ^.^", "Look at this! Take it all in..", "What did we do to deserve such beauty? (:", "Join me for the sunrise! <3", "It's a lovely day to be outside! <3", "Remember to breathe...", "Starlight be praised!", "This is where I belong..." ]
+greeting = 0
+
+[node name="NPC3" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 1850, 1750 )
+dir = 2
+idle_anim = "snowball"
+dye = {
+"eye": 3,
+"fit": 4,
+"hair": 11,
+"skin": 0
+}
+hairstyle_back = 2
+hairstyle_front = 2
+hat = 3
+is_npc = true
+lines = [ "Hey babe! (;", "Watch how far I can throw!! (=", "I'm throwing this one into orbit! ;P", "Look at her goooo!", "I'll knock that star out of the sky!!", "Check this out (;", "Take this!", "Witness the power of concentrated snow! 0=", "Oh they are going down!", "I'm the best snowballer around!! (:<" ]
+greeting = 0
+
+[node name="NPC4" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 2290, 1950 )
+idle_anim = "ponder"
+is_idle_flip = true
+dye = {
+"eye": 16,
+"fit": 12,
+"hair": 3,
+"skin": 0
+}
+hairstyle_back = 3
+hairstyle_front = 7
+hat = 3
+is_npc = true
+lines = [ "What's good!? ^.^", "You've come a long way!", "Few puzzlers make it out this far..", "What brings you so deep into the frost?", "I came here searching for more gems!", "It's nice to breathe some fresh air (:", "I've been stumped on this puzzle all day..", "Swap the two and slide one over.. hmm...", "These puzzles perplex me..", "A-ha! That might work.." ]
+greeting = 0
+
+[node name="NPC5" parent="Actors" instance=ExtResource( 12 )]
+position = Vector2( 3000, 1550 )
+dir = 2
+idle_anim = "handstand"
+dye = {
+"eye": 0,
+"fit": 17,
+"hair": 10,
+"skin": 5
+}
+hairstyle_back = 3
+is_npc = true
+lines = [ "Hey friend! (-:", "I'm giving my brain a break!", "All the blood is rushing to my head! 0=", "More blood flow = more brain power!!", "Wiggle your fingers and your toes! ;P", "I feel wild from all these puzzles!", "I had to get up and move my body!", "I gotta stay moving! (;", "Feel the balance!", "Let it happen... <3" ]
+greeting = 0
 
 [node name="Details" type="Node2D" parent="."]
 
