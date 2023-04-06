@@ -22,7 +22,7 @@ var goals := {}
 var clock_rank := 0
 enum SPEED {OFF, MAP, FILE, BOTH, TRADE}
 var clock_show := 0
-var clock_alpha := 1.0
+var clock_alpha := 1.0 setget set_clock_alpha
 var clock_decimals := 2
 var clock_best_color := [Color.white, Color("ffff00")]
 
@@ -111,6 +111,9 @@ var win_size := Vector2(1280, 720)
 var win_sizes := [Vector2(640, 360), Vector2(960, 540), Vector2(1280, 720), Vector2(1600, 900),
 Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
 var radial_blur = 0 setget set_radial_blur
+var light_enabled := 1 setget set_light_enabled
+var shadow_enabled := 1 setget set_shadow_enabled
+var shadow_buffer := 2 setget set_shadow_buffer
 
 var is_demo := false
 
@@ -122,7 +125,6 @@ onready var arrow := $ArrowLayer/Arrow
 onready var arrow_mat : ShaderMaterial = $ArrowLayer/Arrow/Rect.material
 var arrow_track = null
 onready var chat := $ArrowLayer/Chat
-
 
 func _ready():
 	Wipe.connect("complete", self, "wipe_complete")
@@ -155,6 +157,12 @@ func _ready():
 	var fe = f.file_exists("res://src/map/worlds/2A/0_hub.tscn")
 	f.close()
 	is_demo = !fe
+	
+	yield(get_tree(), "idle_frame")
+	set_radial_blur()
+	set_light_enabled()
+	set_shadow_enabled()
+	set_shadow_buffer()
 
 func _input(event):
 	if event is InputEventKey and event.pressed and !event.is_echo():
@@ -390,6 +398,25 @@ func set_radial_blur(arg := radial_blur):
 	radial_blur = arg
 	Cam.blur(radial_blur)
 
+func set_light_enabled(arg := light_enabled):
+	light_enabled = arg
+	if is_instance_valid(Clouds.star_light):
+		Clouds.star_light.enabled = bool(light_enabled)
+
+func set_shadow_enabled(arg := shadow_enabled):
+	shadow_enabled = arg
+	if is_instance_valid(Clouds.star_light):
+		Clouds.star_light.shadow_enabled = bool(shadow_enabled)
+
+func set_shadow_buffer(arg := shadow_buffer):
+	shadow_buffer = arg
+	if is_instance_valid(Clouds.star_light):
+		Clouds.star_light.shadow_buffer_size = [1024, 2048, 4096, 8192, 16384][shadow_buffer % 5]
+
+func set_clock_alpha(arg := clock_alpha):
+	clock_alpha = clamp(arg, 0, 1)
+	if is_instance_valid(UI.clock):
+		UI.clock.modulate.a = clock_alpha
 
 ### Exit Game
 
@@ -573,8 +600,14 @@ func save_options():
 	
 	o["sounds"] = int(volume[1] / 10)
 	o["music"] = int(volume[2] / 10)
+	
 	o["mouse"] = bool(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
 	o["radial_blur"] = int(radial_blur)
+	
+	o["light_enabled"] = int(light_enabled)
+	o["shadow_enabled"] = int(shadow_enabled)
+	o["shadow_buffer"] = int(shadow_buffer)
+	
 	o["clock_show"] = int(clock_show)
 	o["clock_alpha"] = float(clock_alpha)
 	o["clock_decimals"] = int(clock_decimals)
@@ -599,10 +632,19 @@ func load_options():
 		set_volume(1, int(d["sounds"]) * 10)
 	if d.has("music"):
 		set_volume(2, int(d["music"]) * 10)
+	
 	if d.has("mouse"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if bool(d["mouse"]) else Input.MOUSE_MODE_HIDDEN
 	if d.has("radial_blur"):
 		self.radial_blur = int(d["radial_blur"])
+	
+	if d.has("light_enabled"):
+		self.light_enabled = int(d["light_enabled"])
+	if d.has("shadow_enabled"):
+		self.shadow_enabled = int(d["shadow_enabled"])
+	if d.has("shadow_buffer"):
+		self.shadow_buffer = int(d["shadow_buffer"])
+	
 	if d.has("clock_show"):
 		clock_show = int(d["clock_show"])
 	if d.has("clock_alpha"):

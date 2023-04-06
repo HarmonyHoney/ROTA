@@ -9,6 +9,8 @@ export var is_loop := false
 export var count := 0
 export var list : PoolStringArray = ["OFF", "ON"]
 var is_select := false
+export var is_refill := false
+export var is_ui_scene := false
 
 func _ready():
 	set_label()
@@ -27,6 +29,10 @@ func set_cursor(arg := cursor):
 	cursor = posmod(arg, max(count + 1, list.size())) if is_loop else clamp(arg, 0, max(count, list.size() - 1))
 	set_label()
 	set_value()
+	if is_refill:
+		MenuOptions.fill_items()
+	if is_ui_scene:
+		UI.scene_changed(true)
 
 func select(arg := is_select):
 	is_select = arg

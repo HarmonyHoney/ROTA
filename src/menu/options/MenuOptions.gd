@@ -10,6 +10,10 @@ func fill_items():
 				i._ready()
 			if i.is_in_group("speed"):
 				i.visible = Shared.clock_show > 0
+			if i.is_in_group("light"):
+				i.visible = Shared.light_enabled > 0
+			if i.is_in_group("shadow") and i.visible:
+				i.visible = Shared.shadow_enabled > 0
 	
 	.fill_items()
 

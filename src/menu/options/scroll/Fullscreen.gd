@@ -7,4 +7,3 @@ func _ready():
 func set_value():
 	if cursor != int(OS.window_fullscreen):
 		Shared.toggle_fullscreen()
-		MenuOptions.fill_items()

@@ -6,6 +6,7 @@ var target_node setget set_target_node
 onready var target_pos := global_position
 var is_rotating := true
 var is_moving := true
+export var move_speed := 4.8
 
 var screen_size := Vector2(1280, 720)
 export var turn_offset := Vector2.ZERO
@@ -81,7 +82,7 @@ func _process(delta):
 		
 		# position
 		if is_moving:
-			global_position = global_position.linear_interpolate(target_pos + turn_offset.rotated(rotation), 0.08)
+			global_position = global_position.linear_interpolate(target_pos + turn_offset.rotated(rotation), move_speed * delta)
 	
 	emit_signal("moved")
 
