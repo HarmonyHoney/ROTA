@@ -57,6 +57,8 @@ func create_rig():
 		for i in Shared.get_all_children(s.get_node("Root/Body/Hair" + n)):
 			if i.has_method("scale_x"):
 				p.connect("scale_x", i, "scale_x")
+			if i.has_method("turn_angle"):
+				p.connect("turn_angle", i, "turn_angle")
 
 func _on_Arrow_open():
 	MenuMakeover.is_open = true

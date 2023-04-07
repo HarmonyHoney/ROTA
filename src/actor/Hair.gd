@@ -9,7 +9,9 @@ export var point_count := 3 setget set_points
 export var vertices := 16 setget set_vertices
 export var gravity = 190.0
 export var is_scale_x := true
-export var is_scale_y := true
+export var is_stiff := false
+export var dir_x := 1
+export var offset_angle := 0.0
 
 var gons = []
 var last_pos := Vector2.ZERO
@@ -20,7 +22,7 @@ func _ready():
 	
 	if Engine.editor_hint: return
 	
-	if is_scale_y: is_scale_y = abs(sitting_angle) < 90.0
+	if !is_stiff: is_stiff = abs(sitting_angle) > 90.0
 
 func u():
 	for i in get_children():
@@ -38,12 +40,13 @@ func u():
 		add_child(g)
 		gons.append(g)
 
-func _physics_process(delta):
-	# move end
-	hair_end -= hair_end - to_local(last_pos)
+func _process(delta):
+	# angle
+	var a = deg2rad((sitting_angle * dir_x)) + offset_angle
+	if is_stiff: a += global_rotation - offset_angle
 	
-	# gravity
-	hair_end += Vector2.DOWN.rotated(deg2rad(sitting_angle)) * gravity * delta
+	# movement + gravity
+	hair_end = to_local(last_pos + (Vector2.DOWN.rotated(a) * gravity * delta))
 	
 	# keep length
 	if hair_end.length() > length:
@@ -71,7 +74,7 @@ func set_end(arg := end_scale):
 	u()
 
 func scale_x(arg):
-	if is_scale_x: scale.x = arg
+	if is_scale_x: dir_x = arg
 
-func scale_y(arg):
-	if is_scale_y: scale.y = arg
+func turn_angle(arg):
+	offset_angle = arg

@@ -25,6 +25,7 @@ export var dir := 0 setget set_dir
 onready var start_dir := dir
 onready var start_pos = global_position
 signal turn
+signal turn_angle
 signal turn_cam
 export var is_input := false
 var joy := Vector2.ZERO
@@ -197,9 +198,6 @@ func _ready():
 			coy = min(coy, -160)
 		
 		self.chat_offset.y = coy
-		
-		if idle_anim == "handstand":
-			emit_signal("scale_y", -1)
 	else:
 		if arrow:
 			arrow.is_locked = true
@@ -232,6 +230,7 @@ func scene():
 	is_dead = false
 	sprites.position = Vector2.ZERO
 	sprites.rotation = turn_to
+	emit_signal("turn_angle", turn_to)
 	turn_clock = turn_time
 	
 	# face left or right
@@ -409,7 +408,9 @@ func _physics_process(delta):
 		# turning
 		if turn_clock < turn_time:
 			turn_clock = min(turn_clock + delta, turn_time)
-			sprites.rotation = lerp_angle(turn_from, turn_to, smoothstep(0, 1, turn_clock / turn_time))
+			var r = lerp_angle(turn_from, turn_to, smoothstep(0, 1, turn_clock / turn_time))
+			sprites.rotation = r
+			emit_signal("turn_angle", r)
 		
 		# in control
 		else:
@@ -645,8 +646,10 @@ func hairdo(node, array, style):
 			for i in h.get_children():
 				if i.has_method("scale_x"):
 					connect("scale_x", i, "scale_x")
-				if i.has_method("scale_y"):
-					connect("scale_y", i, "scale_y")
+					i.scale_x(dir_x)
+				if i.has_method("turn_angle"):
+					connect("turn_angle", i, "turn_angle")
+					i.turn_angle(sprites.rotation)
 
 func set_hat(arg := hat):
 	hat = posmod(arg, hats.size())

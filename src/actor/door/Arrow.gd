@@ -57,7 +57,7 @@ func _physics_process(delta):
 	open_easy.count(delta, open)
 	
 	if open_easy.clock > 0:
-		if open_easy.is_complete and !open_easy.is_last:
+		if open_easy.is_complete and !open_easy.is_last and Shared.arrow_track == self:
 			emit_signal("open")
 
 func set_dir(arg := dir):

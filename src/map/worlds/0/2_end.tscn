@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/actor/Fade.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/door/DoorBig.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://src/detail/TreeTop.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=15]
 
 [sub_resource type="DynamicFont" id=3]
 size = 100
@@ -67,6 +68,22 @@ text = "the end"
 align = 1
 valign = 1
 
+[node name="NPC" parent="Actors" instance=ExtResource( 15 )]
+position = Vector2( 150, 290 )
+dir = 3
+idle_anim = "bench"
+dye = {
+"eye": 0,
+"fit": 0,
+"hair": 1,
+"skin": 3
+}
+hairstyle_back = 2
+hairstyle_front = 10
+is_npc = true
+lines = [ "Hello child (:", "You are a curious one!", "You opened the door!", "This is the end of the road..", "That door has been shut for ages..", "Enjoy our	 peaceful little sanctuary (:" ]
+greeting = 0
+
 [node name="Details" type="Node2D" parent="."]
 
 [node name="Rocks" type="Node2D" parent="Details"]
@@ -85,7 +102,7 @@ position = Vector2( 350, 300 )
 scale = Vector2( 0.261665, 0.261665 )
 
 [node name="Bench" parent="Details" instance=ExtResource( 4 )]
-position = Vector2( 142, 300 )
+position = Vector2( 150, 300 )
 rotation = -1.57079
 
 [node name="Candle" parent="Details" instance=ExtResource( 7 )]
