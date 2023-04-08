@@ -206,13 +206,10 @@ func set_is_rain(arg := is_rain):
 func create_clouds():
 	cloud_dir = (-1.0 if randf() > 0.5 else 1.0) * rand_range(0.6, 1.0)
 	precip_list = []
-	var ci = 0
-	var bi = 0
-	var wi = 0
-	var ri = 0
 	var pi = 0
 	var pc = precip.get_children()
 	var ps = pc.size()
+	var layers = [[], [], [], []]
 	
 	for x in (length / 50.0) + cloud_bonus_rings:
 		for y in max(3, x):
@@ -232,15 +229,9 @@ func create_clouds():
 			var t = Transform2D(randf() * TAU, Vector2.ZERO)
 			t = t.scaled(scl)
 			t.origin = pos
-			([clouds, clouds1, clouds2, clouds_rain][layer]).multimesh.set_instance_transform_2d([ci, bi, wi, ri][layer], t)
+			layers[layer].append(t)
 			
-			match layer:
-				0: ci += 1
-				1: bi += 1
-				2: wi += 1
-				3: ri += 1
-			
-			if  is_precip:
+			if is_precip:
 				var p = null
 				if pi < ps:
 					p = pc[pi]
@@ -266,7 +257,12 @@ func create_clouds():
 	
 	# clouds
 	for i in 4:
-		[clouds, clouds1, clouds2, clouds_rain][i].multimesh.visible_instance_count = [ci, bi, wi, ri][i]
+		var mesh = [clouds, clouds1, clouds2, clouds_rain][i].multimesh
+		var c = layers[i].size()
+		mesh.instance_count = c
+		
+		for x in c:
+			mesh.set_instance_transform_2d(x, layers[i][x])
 	
 	# particles
 	if pi < ps:

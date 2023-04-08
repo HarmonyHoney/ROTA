@@ -15,7 +15,7 @@ export var offset_angle := 0.0
 
 var gons = []
 var last_pos := Vector2.ZERO
-var hair_end = Vector2(-150, 150)
+var hair_end := Vector2.ZERO
 
 func _ready():
 	u()
