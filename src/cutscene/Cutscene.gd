@@ -14,6 +14,9 @@ var is_clock := false
 onready var start_game := $StartGame
 var is_start_game := false
 
+onready var door_unlock := $DoorUnlock
+var is_door_unlock := false
+
 func _enter_tree():
 	Shared.connect("scene_changed", self, "scene_changed")
 

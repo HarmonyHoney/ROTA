@@ -19,8 +19,9 @@ shader_param/line = 0.0
 shader_param/gem_size = 0.0
 shader_param/gem_line = 0.667
 shader_param/gem_offset = Vector2( 0, -0.1 )
-shader_param/gem_col = Color( 1, 0.86, 0, 1 )
-shader_param/gem_fill = Color( 1, 1, 0, 1 )
+shader_param/gem_col = Color( 0.686275, 0, 1, 1 )
+shader_param/gem_fill = Color( 1, 0, 0.913725, 1 )
+shader_param/knob_col = Color( 1, 1, 0, 1 )
 shader_param/knob_offset = Vector2( 0.25, 0.65 )
 shader_param/knob_size = 0.075
 
@@ -28,6 +29,7 @@ shader_param/knob_size = 0.075
 script = ExtResource( 4 )
 audio_range = Vector2( 0.7, 0.9 )
 gem_count = 0
+is_fade = false
 
 [node name="Visible" type="VisibilityNotifier2D" parent="." index="0"]
 visible = false
@@ -51,40 +53,18 @@ script = ExtResource( 5 )
 size = Vector2( 100, 100 )
 radius = Plane( 0, 0, 50, 50 )
 
-[node name="Left" type="Node2D" parent="Sprites" index="1"]
-position = Vector2( -100, 0 )
-
-[node name="Control" type="Control" parent="Sprites/Left" index="0"]
+[node name="Control" type="Control" parent="Sprites" index="1"]
+margin_left = -100.0
 margin_top = -100.0
 margin_right = 100.0
 margin_bottom = 100.0
 rect_clip_content = true
 
-[node name="Label" type="Label" parent="Sprites/Left/Control" index="0"]
+[node name="Label" type="Label" parent="Sprites/Control" index="0"]
 visible = false
 margin_left = 25.0
 margin_top = 15.0
 margin_right = 175.0
-margin_bottom = 165.0
-custom_fonts/font = ExtResource( 2 )
-text = "0"
-align = 1
-valign = 1
-
-[node name="Right" type="Node2D" parent="Sprites" index="2"]
-position = Vector2( 100, 0 )
-
-[node name="Control" type="Control" parent="Sprites/Right" index="0"]
-margin_left = -100.0
-margin_top = -100.0
-margin_bottom = 100.0
-rect_clip_content = true
-
-[node name="Label" type="Label" parent="Sprites/Right/Control" index="0"]
-visible = false
-margin_left = -75.0
-margin_top = 15.0
-margin_right = 75.0
 margin_bottom = 165.0
 custom_fonts/font = ExtResource( 2 )
 text = "0"

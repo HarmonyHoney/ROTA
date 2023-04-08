@@ -2,16 +2,16 @@ tool
 extends Node2D
 class_name Door
 
+onready var arrow := $Arrow
+
 export var dir := 0 setget set_dir
 export(String, FILE) var scene_path := ""
 export var audio_range := Vector2(0.85, 1.15)
+export var colors : PoolColorArray = ["af00ff", "ff00e9", "fffb00", "ffdd00"]
 
 var open_easy := EaseMover.new()
-var is_open := false
-var is_close := false
 var open_close := 0
-
-onready var arrow := $Arrow
+var is_cutscene := false
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -26,6 +26,7 @@ func _ready():
 	# set is_locked if scene not found
 	var f = File.new()
 	arrow.is_locked = !f.file_exists(scene_path)
+	f.close()
 	arrow.connect("open", self, "enter_door")
 	arrow.dir = dir
 
@@ -39,7 +40,9 @@ func set_dir(arg):
 	rotation_degrees = dir * 90
 
 func enter_door():
-	if scene_path != "" and Shared.wipe_scene(scene_path, Shared.csfn, 0.5):
+	if is_cutscene:
+		Cutscene.door_unlock.act(self)
+	elif scene_path != "" and Shared.wipe_scene(scene_path, Shared.csfn, 0.5):
 		Shared.player.enter_door()
 		arrow.is_locked = true
 		open_close = 1

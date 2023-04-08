@@ -20,6 +20,8 @@ signal scene_changed
 var gem_count := 0
 var goals := {}
 var clock_rank := 0
+var doors_unlocked := []
+
 enum SPEED {OFF, MAP, FILE, BOTH, TRADE}
 var clock_show := 0
 var clock_alpha := 1.0 setget set_clock_alpha
@@ -525,9 +527,10 @@ func save_data():
 	s["goals"] = goals.duplicate()
 	s["dye"] = Shared.player.dye.duplicate()
 	s["hair"] = [Shared.player.hairstyle_back, Shared.player.hairstyle_front]
+	s["doors_unlocked"] = Shared.doors_unlocked.duplicate()
 	
 	for i in s.keys():
-		if not i in "time, csfn, last_scene, goals, dye, hair":
+		if not i in "time, csfn, last_scene, goals, dye, hair, doors_unlocked":
 			s.erase(i)
 	
 	file_save_json("user://save_data.json", save_dict)
@@ -573,6 +576,9 @@ func load_slot(arg := 0):
 		
 		if s.has("time"):
 			save_time = s["time"]
+		
+		if s.has("doors_unlocked"):
+			doors_unlocked = s["doors_unlocked"]
 		
 	else:
 		Cutscene.is_start_game = true

@@ -9,7 +9,6 @@ onready var gem := $Sprites/Open/Gem
 onready var gem_fill := $Sprites/Open/Gem/Fill
 var is_gem := false
 var gem_easy := EaseMover.new()
-export var colors : PoolColorArray = ["af00ff", "ff00e9", "fffb00", "ffdd00"]
 
 onready var clock := $Sprites/Open/Clock
 var is_clock := false

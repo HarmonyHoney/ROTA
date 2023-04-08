@@ -21,9 +21,6 @@ export var is_locked := false
 var arrow_easy := EaseMover.new(0.3)
 var open_easy := EaseMover.new()
 
-var start_clock := 0.0
-var start_time := 0.5
-
 signal activate
 signal open
 
@@ -41,20 +38,16 @@ func _ready():
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
-	# starting delay
-	if Cutscene.is_playing or start_clock < start_time:
-		start_clock += delta
-		return
-	
-	# image display
-	arrow_easy.count(delta, is_active and !is_locked and !MenuPause.is_paused)
-	
 	# activate
 	try_active()
+
+	# image display
+	var is_alpha = is_active and !is_locked and !MenuPause.is_paused and !Cutscene.is_playing and !Wipe.is_wipe
+	arrow_easy.count(delta, is_alpha)
 	
 	# open door
-	var open = Input.is_action_pressed("up") and !MenuPause.is_paused and is_active and !is_locked and player != null and !player.is_hold and player.dir == dir and player.is_floor
-	open_easy.count(delta, open)
+	var is_open =  Input.is_action_pressed("up") and is_alpha and player != null and !player.is_hold and player.dir == dir and player.is_floor
+	open_easy.count(delta, is_open)
 	
 	if open_easy.clock > 0:
 		if open_easy.is_complete and !open_easy.is_last and Shared.arrow_track == self:
