@@ -41,7 +41,6 @@ node_path = NodePath("..")
 [node name="Arrow" parent="." index="1"]
 col_size = Vector2( 100, 100 )
 image_pos = Vector2( 0, -150 )
-is_locked = true
 
 [node name="Sprites" type="Node2D" parent="." index="2"]
 

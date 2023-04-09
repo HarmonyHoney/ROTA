@@ -23,9 +23,7 @@ func _ready():
 	door_name = Shared.map_name + ":" + name
 	
 	is_cutscene = gem_count > 0 and !Shared.doors_unlocked.has(door_name)
-	if door_mat:
-		for i in 2:
-			door_mat.set_shader_param(["gem_col", "gem_fill"][i] , colors[(0 if is_cutscene else 2) + i])
+	gem_color(!is_cutscene)
 	
 	label.modulate.a = 0.0
 
@@ -77,3 +75,8 @@ func activate():
 func on_enter():
 	if !Shared.doors_unlocked.has(door_name):
 		Shared.doors_unlocked.append(door_name)
+
+func gem_color(is_gold := false):
+	if door_mat:
+		for i in 2:
+			door_mat.set_shader_param(["gem_col", "gem_fill"][i] , colors[(2 if is_gold else 0) + i])

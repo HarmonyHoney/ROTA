@@ -23,6 +23,8 @@ func _exit_tree():
 	Shared.doors.erase(self)
 
 func _ready():
+	if Engine.editor_hint: return
+	
 	# set is_locked if scene not found
 	var f = File.new()
 	arrow.is_locked = !f.file_exists(scene_path)

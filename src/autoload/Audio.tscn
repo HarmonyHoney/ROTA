@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -19,10 +19,12 @@
 [ext_resource path="res://media/audio/sfx/player_land.wav" type="AudioStream" id=17]
 [ext_resource path="res://media/audio/sfx/player_jump.wav" type="AudioStream" id=18]
 [ext_resource path="res://media/audio/sfx/btn3.wav" type="AudioStream" id=19]
+[ext_resource path="res://media/audio/sfx/piano_high.wav" type="AudioStream" id=20]
 [ext_resource path="res://media/audio/music/ost1.mp3" type="AudioStream" id=21]
 [ext_resource path="res://media/audio/music/ost3.mp3" type="AudioStream" id=22]
 [ext_resource path="res://media/audio/music/ost4.mp3" type="AudioStream" id=23]
 [ext_resource path="res://media/audio/music/ost2.mp3" type="AudioStream" id=24]
+[ext_resource path="res://media/audio/sfx/guitar_pluck.wav" type="AudioStream" id=25]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -74,6 +76,14 @@ bus = "SFX"
 
 [node name="Show" type="AudioStreamPlayer" parent="Gem"]
 stream = ExtResource( 6 )
+bus = "SFX"
+
+[node name="Piano" type="AudioStreamPlayer" parent="Gem"]
+stream = ExtResource( 20 )
+bus = "SFX"
+
+[node name="Socket" type="AudioStreamPlayer" parent="Gem"]
+stream = ExtResource( 25 )
 bus = "SFX"
 
 [node name="Clock" type="Node" parent="."]

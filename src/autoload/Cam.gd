@@ -87,7 +87,7 @@ func _process(delta):
 	emit_signal("moved")
 
 func set_target_node(arg):
-	if is_instance_valid(target_node): target_node.disconnect("turn_cam", self, "turn")
+	if is_instance_valid(target_node) and target_node.has_signal("turn_cam"): target_node.disconnect("turn_cam", self, "turn")
 	target_node = arg
 	if is_instance_valid(target_node) and target_node.has_signal("turn_cam"): target_node.connect("turn_cam", self, "turn")
 	
