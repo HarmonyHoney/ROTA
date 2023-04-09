@@ -1,6 +1,7 @@
 extends Node
 
-var is_playing := false
+var is_playing := false setget set_is_playing
+signal playing
 
 onready var goal_show := $GoalShow
 var is_show_goal := false
@@ -38,3 +39,7 @@ func scene_changed():
 	elif is_start_game:
 		is_start_game = false
 		start_game.act()
+
+func set_is_playing(arg := is_playing):
+	is_playing = arg
+	emit_signal("playing", is_playing)

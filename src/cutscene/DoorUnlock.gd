@@ -6,7 +6,9 @@ onready var gems := []
 
 export var radius := 150.0
 export var turn_speed := 3.0
+export var turn_sign := 1.0
 
+var player
 var door
 var gem_count = 0
 
@@ -43,13 +45,21 @@ func _ready():
 func _physics_process(delta):
 	clock += delta
 	
+	if player.joy.x != 0:
+		var dist = door.to_local(player.global_position)
+		if abs(dist.x) > 150 or clock > 3.0:
+			player.joy.x = 0
+			player.dir_x *= -1
+			clock = 0.0
+		return
+	
 	gem_last = gem_step
 	gem_step = floor(clock / gem_offset)
 	
-	var shrink = clamp(clock - gem_shrink.x, 0.0, gem_shrink.y) / gem_shrink.y
-	
 	if gem_step != gem_last and gem_step < gem_count:
-		Audio.play("gem_piano", 0.5 + (gem_step * 0.1))
+		Audio.play("gem_piano", lerp(0.5, 1.5, float(gem_step) / float(gem_count - 1)))
+	
+	var shrink = clamp(clock - gem_shrink.x, 0.0, gem_shrink.y) / gem_shrink.y
 	
 	for i in gems.size():
 		var f = clock - (gem_offset * i)
@@ -57,7 +67,7 @@ func _physics_process(delta):
 		var under = abs(min(f, 0.0))
 		
 		var a = (TAU * (float(i) / float(gem_count))) + ((clock + under) * turn_speed)
-		var pos = Vector2(radius * (1.0 - shrink) * -sign(turn_speed), 0).rotated(a)
+		var pos = Vector2(0, radius * (1.0 - shrink)).rotated(a * turn_sign)
 		gems[i].position = gems_node.to_local(Shared.player.global_position).linear_interpolate(pos, frac)
 		gems[i].scale = Vector2.ONE * ease(frac - shrink, 0.5)
 	
@@ -97,10 +107,12 @@ func _physics_process(delta):
 func act(d):
 	if !is_instance_valid(d): return
 	door = d
+	player = Shared.player
 	
 	Cutscene.is_playing = true
 	
 	gems_node.global_position = door.global_position + Shared.rot(Vector2(0, -300), door.dir)
+	gems_node.global_rotation = door.global_rotation
 	gem.position = gems_node.position
 	socket_pos = door.global_position + Shared.rot(Vector2(0, -10), door.dir)
 	
@@ -123,12 +135,17 @@ func act(d):
 	step = 0
 	time = (gem_count * gem_offset) + gem_time
 	gem_shrink.x = time
-	if randf() > 0.5: turn_speed = -turn_speed
+	turn_sign = 1.0 if randf() > 0.5 else -1.0
+	gem_last = 0
+	#if randf() > 0.5: turn_speed = -turn_speed
+	
+	var dist = door.to_local(player.global_position)
+	player.joy = Vector2(sign(dist.x), 0)
 	
 	set_physics_process(true)
 	yield(self, "done")
 	
-	Cam.target_node = Shared.player
+	Cam.target_node = player
 	Cutscene.is_playing = false
 
 

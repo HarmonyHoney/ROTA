@@ -155,6 +155,7 @@ func _enter_tree():
 	MenuPause.connect("closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")
 	Wipe.connect("start", self, "wipe_start")
+	Cutscene.connect("playing", self, "cutscene_playing")
 
 func _ready():
 	set_hair_back()
@@ -834,16 +835,12 @@ func throw_snowball():
 
 func enter_door():
 	anim.play(idle_dir)
-	joy = Vector2.ZERO
+	clear_input()
 
 func pause():
 	if Shared.player == self:
 		is_input = false
-		btn_jump = false
-		btnp_jump = false
-		btn_push = false
-		btnp_push = false
-		joy = Vector2.ZERO
+		clear_input()
 
 func unpause():
 	if Shared.player == self:
@@ -852,6 +849,17 @@ func unpause():
 		unpause_tick = 0
 		btn_jump = false
 		btn_push = false
+
+func clear_input():
+	btn_jump = false
+	btnp_jump = false
+	btn_push = false
+	btnp_push = false
+	joy = Vector2.ZERO
+
+func cutscene_playing(arg := false):
+	if arg and Shared.player == self:
+		clear_input()
 
 func footstep_sound():
 	if !audio_walk.playing and !audio_land.playing:
@@ -877,3 +885,4 @@ func arrow_open():
 	line = posmod(int(queue.pop_front()), lines.size())
 	Shared.chat.open(lines[line], arrow, Transform2D(dir * PI * 0.5, global_position + rot(chat_offset)))
 	greeting_clock = rand_range(greeting_wait.x, greeting_wait.y)
+

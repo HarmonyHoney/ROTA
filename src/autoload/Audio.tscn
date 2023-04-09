@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://media/audio/music/ost4.mp3" type="AudioStream" id=23]
 [ext_resource path="res://media/audio/music/ost2.mp3" type="AudioStream" id=24]
 [ext_resource path="res://media/audio/sfx/guitar_pluck.wav" type="AudioStream" id=25]
+[ext_resource path="res://media/audio/sfx/hit0.wav" type="AudioStream" id=26]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -84,6 +85,10 @@ bus = "SFX"
 
 [node name="Socket" type="AudioStreamPlayer" parent="Gem"]
 stream = ExtResource( 25 )
+bus = "SFX"
+
+[node name="Place" type="AudioStreamPlayer" parent="Gem"]
+stream = ExtResource( 26 )
 bus = "SFX"
 
 [node name="Clock" type="Node" parent="."]
