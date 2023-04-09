@@ -349,6 +349,17 @@ func get_all_children(n, a := []):
 			a = get_all_children(i, a)
 	return a
 
+func rot(vec : Vector2, _dir : int) -> Vector2:
+	_dir = posmod(_dir, 4)
+	match _dir:
+		1:
+			return Vector2(-vec.y, vec.x)
+		2:
+			return Vector2(-vec.x, -vec.y)
+		3:
+			return Vector2(vec.y, -vec.x)
+	return vec
+
 ### Gems
 
 func collect_gem():

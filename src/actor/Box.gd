@@ -169,8 +169,16 @@ func set_can_spin(arg := can_spin):
 	if box_sprite:
 		box_sprite.texture = tex_both if can_spin else tex_push
 
-func rot(arg : Vector2, _dir := dir, backwards := false):
-	return arg.rotated(deg2rad((-_dir if backwards else _dir) * 90))
+func rot(vec : Vector2, _dir := dir) -> Vector2:
+	_dir = posmod(_dir, 4)
+	match _dir:
+		1:
+			return Vector2(-vec.y, vec.x)
+		2:
+			return Vector2(-vec.x, -vec.y)
+		3:
+			return Vector2(vec.y, -vec.x)
+	return vec
 
 func shrink_shape(shrink := true):
 	collision_shape.shape.extents = Vector2(49, 49) if shrink else Vector2(50, 50)

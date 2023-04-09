@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/cutscene/Cutscene.gd" type="Script" id=1]
 [ext_resource path="res://src/cutscene/GemCollect.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/cutscene/Clock.gd" type="Script" id=4]
 [ext_resource path="res://src/cutscene/DoorUnlock.gd" type="Script" id=5]
 [ext_resource path="res://src/cutscene/StartGame.gd" type="Script" id=6]
+[ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=7]
 
 [node name="Cutscene" type="Node"]
 script = ExtResource( 1 )
@@ -24,3 +25,8 @@ script = ExtResource( 4 )
 
 [node name="DoorUnlock" type="Node" parent="."]
 script = ExtResource( 5 )
+turn_speed = 3.0
+
+[node name="Gem" parent="DoorUnlock" instance=ExtResource( 7 )]
+
+[node name="Gems" type="Node2D" parent="DoorUnlock"]
