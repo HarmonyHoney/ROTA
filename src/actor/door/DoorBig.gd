@@ -9,7 +9,6 @@ export var gem_count := 0 setget set_gem
 export var is_fade := false setget set_is_fade
 var fade_easy := EaseMover.new()
 var label_easy := EaseMover.new()
-var door_name = ""
 
 func _ready():
 	set_gem()
@@ -20,9 +19,7 @@ func _ready():
 	if !arrow.is_locked:
 		arrow.is_locked = Shared.gem_count < gem_count
 	
-	door_name = Shared.map_name + ":" + name
-	
-	is_cutscene = gem_count > 0 and !Shared.doors_unlocked.has(door_name)
+	is_cutscene = gem_count > 0 and !Shared.maps_visited.has(map_path)
 	gem_color(!is_cutscene)
 	
 	label.modulate.a = 0.0
@@ -71,10 +68,6 @@ func cheat_code(cheat):
 
 func activate():
 	UI.up.show = arrow.is_active and is_cutscene
-
-func on_enter():
-	if !Shared.doors_unlocked.has(door_name):
-		Shared.doors_unlocked.append(door_name)
 
 func gem_color(is_gold := false):
 	if door_mat:

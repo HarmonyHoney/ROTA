@@ -21,6 +21,7 @@ var gem_count := 0
 var goals := {}
 var clock_rank := 0
 var doors_unlocked := []
+var maps_visited := []
 
 enum SPEED {OFF, MAP, FILE, BOTH, TRADE}
 var clock_show := 0
@@ -264,6 +265,9 @@ func change_scene():
 		get_tree().change_scene(next_scene)
 		Cam.reset_zoom()
 	
+	if map_name != "" and !maps_visited.has(map_name):
+		maps_visited.append(map_name)
+	
 	save_data()
 	try_achievement()
 	map_clock = 0.0
@@ -341,6 +345,8 @@ func burst_screenshot(count := 30, viewport := get_tree().root):
 	for i in images.size():
 		images[i].save_png("user://snap/" + s + "snap" + str(i) + ".png")
 		yield(get_tree(), "idle_frame")
+
+### Useful funcs
 
 func get_all_children(n, a := []):
 	if is_instance_valid(n):
@@ -536,12 +542,12 @@ func save_data():
 		s["csfn"] = csfn
 		s["last_scene"] = last_scene
 	s["goals"] = goals.duplicate()
-	s["dye"] = Shared.player.dye.duplicate()
-	s["hair"] = [Shared.player.hairstyle_back, Shared.player.hairstyle_front]
-	s["doors_unlocked"] = Shared.doors_unlocked.duplicate()
+	s["dye"] = player.dye.duplicate()
+	s["hair"] = [player.hairstyle_back, player.hairstyle_front]
+	s["maps_visited"] = maps_visited
 	
 	for i in s.keys():
-		if not i in "time, csfn, last_scene, goals, dye, hair, doors_unlocked":
+		if not i in "time, csfn, last_scene, goals, dye, hair, maps_visited":
 			s.erase(i)
 	
 	file_save_json("user://save_data.json", save_dict)
@@ -588,8 +594,8 @@ func load_slot(arg := 0):
 		if s.has("time"):
 			save_time = s["time"]
 		
-		if s.has("doors_unlocked"):
-			doors_unlocked = s["doors_unlocked"]
+		if s.has("maps_visited"):
+			maps_visited = s["maps_visited"]
 		
 	else:
 		Cutscene.is_start_game = true
@@ -601,14 +607,14 @@ func load_slot(arg := 0):
 		goals = {}
 		save_time = 0.0
 	
-	return Shared.wipe_scene(Shared.next_scene, Shared.last_scene)
+	return wipe_scene(next_scene, last_scene)
 
 func load_slot_style(arg := 0):
 	var s = save_dict[clamp(arg, 0, 2)]
 	if s.has("dye") and s.has("hair"):
-		Shared.player.dye = s["dye"].duplicate()
-		Shared.player.hairstyle_back = s["hair"][0]
-		Shared.player.hairstyle_front = s["hair"][1]
+		player.dye = s["dye"].duplicate()
+		player.hairstyle_back = s["hair"][0]
+		player.hairstyle_front = s["hair"][1]
 	else:
 		MenuMakeover.preset()
 

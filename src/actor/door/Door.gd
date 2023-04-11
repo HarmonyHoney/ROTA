@@ -12,6 +12,7 @@ export var colors : PoolColorArray = ["af00ff", "ff00e9", "fffb00", "ffdd00"]
 var open_easy := EaseMover.new()
 var open_close := 0
 var is_cutscene := false
+var map_path := ""
 
 func _enter_tree():
 	if Engine.editor_hint: return
@@ -31,6 +32,8 @@ func _ready():
 	f.close()
 	arrow.connect("open", self, "enter_door")
 	arrow.dir = dir
+	
+	map_path = scene_path.lstrip(Shared.worlds_path).rstrip(".tscn") if scene_path.begins_with(Shared.worlds_path) else ""
 
 func scene_changed():
 	if Shared.door_in == self:

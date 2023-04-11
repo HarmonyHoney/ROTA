@@ -269,10 +269,13 @@ func _physics_process(delta):
 	# input
 	release_clock = max(release_clock - delta, 0)
 	
-	if is_input and !Cutscene.is_playing and !Wipe.is_wipe:
+	if is_input and !MenuPause.is_paused and !Cutscene.is_playing and !Wipe.is_wipe:
 		joy_last = joy
-		joy = Input.get_vector("left", "right", "up", "down")
-		joy = Vector2(sign(joy.x), sign(joy.y))
+#		joy = Input.get_vector("left", "right", "up", "down")
+#		joy = Vector2(sign(joy.x), sign(joy.y))
+		joy.x = round(Input.get_axis("left", "right"))
+		joy.y = round(Input.get_axis("up", "down"))
+		
 		
 		btnp_jump = Input.is_action_just_pressed("jump")
 		btnp_push = Input.is_action_just_pressed("grab")
@@ -839,16 +842,13 @@ func enter_door():
 
 func pause():
 	if Shared.player == self:
-		is_input = false
 		clear_input()
 
 func unpause():
 	if Shared.player == self:
-		is_input = true
+		clear_input()
 		is_unpause = true
 		unpause_tick = 0
-		btn_jump = false
-		btn_push = false
 
 func clear_input():
 	btn_jump = false

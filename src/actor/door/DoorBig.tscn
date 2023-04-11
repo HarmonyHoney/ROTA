@@ -34,7 +34,7 @@ is_fade = false
 [node name="Visible" type="VisibilityNotifier2D" parent="." index="0"]
 visible = false
 modulate = Color( 1, 0, 0, 1 )
-rect = Rect2( -100, -190, 200, 290 )
+rect = Rect2( -100, -100, 200, 200 )
 script = ExtResource( 3 )
 node_path = NodePath("..")
 
