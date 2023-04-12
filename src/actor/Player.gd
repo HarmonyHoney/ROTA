@@ -271,8 +271,6 @@ func _physics_process(delta):
 	
 	if is_input and !MenuPause.is_paused and !Cutscene.is_playing and !Wipe.is_wipe:
 		joy_last = joy
-#		joy = Input.get_vector("left", "right", "up", "down")
-#		joy = Vector2(sign(joy.x), sign(joy.y))
 		joy.x = round(Input.get_axis("left", "right"))
 		joy.y = round(Input.get_axis("up", "down"))
 		
