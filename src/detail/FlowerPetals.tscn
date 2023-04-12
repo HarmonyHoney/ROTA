@@ -39,7 +39,7 @@ audio_path = NodePath("../Audio/Hit")
 pitch_from = 0.85
 pitch_to = 1.15
 
-[node name="Images" type="Node2D" parent="."]
+[node name="Images" type="Node2D" parent="." groups=["mirror"]]
 modulate = Color( 1, 0, 0, 1 )
 
 [node name="Petals" type="Polygon2D" parent="Images"]

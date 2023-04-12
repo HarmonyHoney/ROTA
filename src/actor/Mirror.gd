@@ -39,7 +39,7 @@ func create_rig():
 	for i in rig.get_children():
 		i.queue_free()
 	
-	var s = p.sprites.duplicate()
+	var s = p.sprites.duplicate(DUPLICATE_USE_INSTANCING)
 	s.get_node("SpriteArea").queue_free()
 	s.modulate.a = 1
 	rig.add_child(s)
@@ -47,6 +47,12 @@ func create_rig():
 	from = []
 	to = []
 	var list = [p.sprites, p.spr_root, p.spr_body, p.spr_hand_l, p.spr_hand_r, p.spr_eyes]
+	
+	for i in Shared.get_all_children(p.hair_front):
+		if i.is_in_group("mirror"):
+			print("mirror: ", i)
+			list.append(i)
+	
 	for i in list:
 		var path = p.sprites.get_path_to(i)
 		if s.has_node(path):
@@ -55,10 +61,10 @@ func create_rig():
 	
 	for n in ["Back", "Front"]:
 		for i in Shared.get_all_children(s.get_node("Root/Body/Hair" + n)):
-			if i.has_method("scale_x"):
-				p.connect("scale_x", i, "scale_x")
-			if i.has_method("turn_angle"):
-				p.connect("turn_angle", i, "turn_angle")
+			for c in ["scale_x", "turn_angle"]:
+				if i.has_method(c) and !p.is_connected(c, i, c):
+					p.connect(c, i, c)
+
 
 func _on_Arrow_open():
 	MenuMakeover.is_open = true

@@ -263,10 +263,12 @@ func change_scene():
 		get_tree().reload_current_scene()
 	else:
 		csfn = next_scene
-		map_name = csfn.lstrip(worlds_path).rstrip(".tscn") if csfn.begins_with(worlds_path) else ""
+		map_name = csfn.right(worlds_path.length()).replace(".tscn", "") if csfn.begins_with(worlds_path) else ""
+		#map_name = csfn.rstrip(".tscn")
 		get_tree().change_scene(next_scene)
 		Cam.reset_zoom()
 	
+	print("map_name: ", map_name, " csfn: ", csfn)
 	if map_name != "" and !maps_visited.has(map_name):
 		maps_visited.append(map_name)
 	
@@ -550,7 +552,9 @@ func save_data():
 	s["goals"] = goals.duplicate()
 	s["dye"] = player.dye.duplicate()
 	s["hair"] = [player.hairstyle_back, player.hairstyle_front]
-	s["maps_visited"] = maps_visited
+	
+	maps_visited.sort()
+	s["maps_visited"] = maps_visited.duplicate()
 	
 	for i in s.keys():
 		if not i in "time, csfn, last_scene, goals, dye, hair, maps_visited":
@@ -600,8 +604,7 @@ func load_slot(arg := 0):
 		if s.has("time"):
 			save_time = s["time"]
 		
-		if s.has("maps_visited"):
-			maps_visited = s["maps_visited"]
+		maps_visited = s["maps_visited"].duplicate() if s.has("maps_visited") else []
 		
 	else:
 		Cutscene.is_start_game = true
@@ -612,6 +615,7 @@ func load_slot(arg := 0):
 		UI.gem_label.text = str(gem_count)
 		goals = {}
 		save_time = 0.0
+		maps_visited = []
 	
 	return wipe_scene(next_scene, last_scene)
 

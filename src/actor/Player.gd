@@ -646,12 +646,12 @@ func hairdo(node, array, style):
 			var h = load(array[style]).instance()
 			node.add_child(h)
 			for i in h.get_children():
-				if i.has_method("scale_x"):
-					connect("scale_x", i, "scale_x")
-					i.scale_x(dir_x)
-				if i.has_method("turn_angle"):
-					connect("turn_angle", i, "turn_angle")
-					i.turn_angle(sprites.rotation)
+				for c in ["scale_x", "turn_angle"]:
+					if i.has_method(c) and !is_connected(c, i, c):
+						connect(c, i, c)
+						match c:
+							"scale_x": i.scale_x(dir_x)
+							"turn_angle": i.turn_angle(sprites.rotation)
 
 func set_hat(arg := hat):
 	hat = posmod(arg, hats.size())
