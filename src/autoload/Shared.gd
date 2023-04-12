@@ -117,6 +117,7 @@ var radial_blur = 0 setget set_radial_blur
 var light_enabled := 1 setget set_light_enabled
 var shadow_enabled := 1 setget set_shadow_enabled
 var shadow_buffer := 2 setget set_shadow_buffer
+var is_weather := true setget set_is_weather
 
 var is_demo := false
 
@@ -166,6 +167,7 @@ func _ready():
 	set_light_enabled()
 	set_shadow_enabled()
 	set_shadow_buffer()
+	set_is_weather()
 
 func _input(event):
 	if event is InputEventKey and event.pressed and !event.is_echo():
@@ -432,6 +434,10 @@ func set_shadow_buffer(arg := shadow_buffer):
 	if is_instance_valid(Clouds.star_light):
 		Clouds.star_light.shadow_buffer_size = [1024, 2048, 4096, 8192, 16384][shadow_buffer % 5]
 
+func set_is_weather(arg := is_weather):
+	is_weather = bool(arg)
+	Clouds.set_is_weather(is_weather)
+
 func set_clock_alpha(arg := clock_alpha):
 	clock_alpha = clamp(arg, 0, 1)
 	if is_instance_valid(UI.clock):
@@ -624,12 +630,13 @@ func save_options():
 	o["sounds"] = int(volume[1] / 10)
 	o["music"] = int(volume[2] / 10)
 	
-	o["mouse"] = bool(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
+	o["mouse"] = int(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
 	o["radial_blur"] = int(radial_blur)
 	
 	o["light_enabled"] = int(light_enabled)
 	o["shadow_enabled"] = int(shadow_enabled)
 	o["shadow_buffer"] = int(shadow_buffer)
+	o["is_weather"] = int(is_weather)
 	
 	o["clock_show"] = int(clock_show)
 	o["clock_alpha"] = float(clock_alpha)
@@ -657,7 +664,7 @@ func load_options():
 		set_volume(2, int(d["music"]) * 10)
 	
 	if d.has("mouse"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if bool(d["mouse"]) else Input.MOUSE_MODE_HIDDEN
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if int(d["mouse"]) else Input.MOUSE_MODE_HIDDEN
 	if d.has("radial_blur"):
 		self.radial_blur = int(d["radial_blur"])
 	
@@ -667,6 +674,8 @@ func load_options():
 		self.shadow_enabled = int(d["shadow_enabled"])
 	if d.has("shadow_buffer"):
 		self.shadow_buffer = int(d["shadow_buffer"])
+	if d.has("is_weather"):
+		self.is_weather = int(d["is_weather"])
 	
 	if d.has("clock_show"):
 		clock_show = int(d["clock_show"])

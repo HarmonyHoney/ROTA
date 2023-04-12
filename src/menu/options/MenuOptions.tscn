@@ -636,19 +636,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer4" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+[node name="Weather" type="Control" parent="Control/Menu/List" groups=["light", "shadow"]]
 margin_top = 1410.0
 margin_right = 640.0
-margin_bottom = 1440.0
+margin_bottom = 1480.0
+rect_min_size = Vector2( 0, 70 )
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+var_name = "is_weather"
+
+[node name="Label" type="Label" parent="Control/Menu/List/Weather"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "Weather"
+valign = 1
+
+[node name="Label2" type="Label" parent="Control/Menu/List/Weather"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 2 )
+text = "< OFF >"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer4" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+margin_top = 1480.0
+margin_right = 640.0
+margin_bottom = 1510.0
 rect_min_size = Vector2( 0, 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HeaderSpeed" type="Control" parent="Control/Menu/List" groups=["no_item"]]
-margin_top = 1440.0
+margin_top = 1510.0
 margin_right = 640.0
-margin_bottom = 1510.0
+margin_bottom = 1580.0
 rect_min_size = Vector2( 0, 70 )
 
 [node name="Tex" type="TextureRect" parent="Control/Menu/List/HeaderSpeed"]
@@ -669,9 +702,9 @@ text = "Speedrun"
 valign = 1
 
 [node name="Speedrun" type="Control" parent="Control/Menu/List"]
-margin_top = 1510.0
+margin_top = 1580.0
 margin_right = 640.0
-margin_bottom = 1580.0
+margin_bottom = 1650.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 24 )
 __meta__ = {
@@ -706,9 +739,9 @@ __meta__ = {
 }
 
 [node name="Speedrun2" type="Control" parent="Control/Menu/List" groups=["speed"]]
-margin_top = 1580.0
+margin_top = 1650.0
 margin_right = 640.0
-margin_bottom = 1650.0
+margin_bottom = 1720.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 24 )
 __meta__ = {
@@ -740,9 +773,9 @@ align = 2
 valign = 1
 
 [node name="Decimals" type="Control" parent="Control/Menu/List" groups=["speed"]]
-margin_top = 1650.0
+margin_top = 1720.0
 margin_right = 640.0
-margin_bottom = 1720.0
+margin_bottom = 1790.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 24 )
 __meta__ = {
