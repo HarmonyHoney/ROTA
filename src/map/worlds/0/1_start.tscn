@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/detail/Bench.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/actor/Mirror.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/detail/RockCircle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/actor/Player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/actor/ChatTree.gd" type="Script" id=12]
 
 [node name="Node2D" type="Node2D"]
 
@@ -33,7 +34,7 @@ rotation = 3.14159
 dir = 2
 door_path = NodePath("../Door")
 
-[node name="NPC3" parent="Actors" instance=ExtResource( 11 )]
+[node name="NPC" parent="Actors" instance=ExtResource( 11 )]
 position = Vector2( 150, 290 )
 __meta__ = {
 "_editor_description_": ""
@@ -41,16 +42,23 @@ __meta__ = {
 dir = 3
 idle_anim = "bench"
 dye = {
-"eye": 3,
-"fit": 10,
-"hair": 13,
-"skin": 0
+"eye": 11,
+"fit": 2,
+"hair": 0,
+"skin": 3
 }
 hairstyle_back = 0
-hairstyle_front = 8
-hat = 3
+hairstyle_front = 3
 is_npc = true
-lines = [ "Wake up sleepyhead!", "Welcome to ROTA... (:", "You've been out for a while!" ]
+lines = [ "Wake up sleepyhead!", "Welcome to ROTA... (:", "You've been out for a while!", "How do you look? Turn around!", "Gaze into the mirror..." ]
+greeting = 0
+
+[node name="Chat" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "\"1/0_hub\" in maps_visited"
+is_lines = 3
+lines = [ "How was it out there? (:" ]
+is_greeting = true
 greeting = 0
 
 [node name="Details" type="Node2D" parent="."]

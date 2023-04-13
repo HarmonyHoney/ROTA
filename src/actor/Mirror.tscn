@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/actor/Mirror.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/door/Arrow.tscn" type="PackedScene" id=2]
@@ -9,11 +9,6 @@
 shader = ExtResource( 3 )
 shader_param/col1 = Color( 0, 0.380392, 1, 1 )
 shader_param/col2 = Color( 0, 0.921569, 1, 1 )
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 3 )
-shader_param/col1 = Color( 0, 0.38, 1, 1 )
-shader_param/col2 = Color( 0, 0.92, 1, 1 )
 
 [node name="Mirror" type="Node2D"]
 z_index = -5
@@ -51,12 +46,12 @@ end_cap_mode = 2
 
 [node name="Stage" type="Polygon2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-material = SubResource( 6 )
-position = Vector2( -2, -1 )
-z_index = 40
+light_mask = 0
+material = SubResource( 5 )
+z_index = 45
 z_as_relative = false
-polygon = PoolVector2Array( 1000, 1000, -1000, 1000, -1000, -1000, 1000, -1000 )
+polygon = PoolVector2Array( 75, 100, -75, 100, -75, -100, 75, -100 )
 script = ExtResource( 4 )
-size = Vector2( 1000, 1000 )
+size = Vector2( 75, 100 )
 
 [connection signal="open" from="Arrow" to="." method="_on_Arrow_open"]

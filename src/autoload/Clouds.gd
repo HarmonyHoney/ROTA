@@ -4,6 +4,7 @@ extends Node2D
 export var is_editor := false setget set_is_editor
 export var day_clock := 0.0
 export var day_time := 420.0 setget set_day_time
+export var day_scale := 1.0
 export(Array, Color) var sky_pal = [Color("ffa300"), Color("00e0ff"), Color("0062ff"), Color("ac00ff"), Color("af00bf"), Color("250000")] setget set_sky_pal
 onready var sky_mat : ShaderMaterial = $BG/ColorRect.material
 
@@ -105,18 +106,15 @@ func scene():
 func _process(delta):
 	if Engine.editor_hint and !is_editor: return
 	
-	day_clock = fposmod(day_clock + delta, day_time)
+	day_clock = fposmod(day_clock + (delta * day_scale), day_time)
 	day_frac = day_clock / day_time
 	
 	step_frac = fposmod(day_clock, step_time) / step_time
 	sky_step = posmod((day_clock / step_time) + 2, sky_pal.size())
 	
-	var c1 = sky_pal[sky_step - 2].linear_interpolate(sky_pal[sky_step - 1], step_frac)
-	var c2 = sky_pal[sky_step - 1].linear_interpolate(sky_pal[sky_step], step_frac)
-	
 	if sky_mat:
-		sky_mat.set_shader_param("col1", c1)
-		sky_mat.set_shader_param("col2", c2)
+		for i in 2:
+			sky_mat.set_shader_param("col" + str(i + 1), sky_pal[sky_step - 2 - i].linear_interpolate(sky_pal[sky_step - 1 - i], step_frac))
 	
 	if Engine.editor_hint: return
 	

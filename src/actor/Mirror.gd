@@ -9,6 +9,8 @@ onready var back_rect : Rect2 = $Back.get_rect()
 onready var rig := $Back/Center/Rig
 onready var rig_ease := EaseMover.new()
 onready var stage := $Stage
+onready var sky_mat : ShaderMaterial = $Back.material
+onready var sky_pal : Array = Clouds.sky_pal.duplicate()
 
 var from := []
 var to := []
@@ -32,6 +34,8 @@ func _physics_process(delta):
 	var s = rig_ease.count(delta)
 	rig.modulate.a = s
 	stage.modulate.a = 1.0 - s
+	stage.scale = Vector2.ONE * lerp(7.0, 1.0, s)
+	
 	for i in lights:
 		i.self_modulate.a = s
 
@@ -65,7 +69,6 @@ func create_rig():
 				if i.has_method(c) and !p.is_connected(c, i, c):
 					p.connect(c, i, c)
 
-
 func _on_Arrow_open():
 	MenuMakeover.is_open = true
 	arrow.is_locked = true
@@ -92,4 +95,13 @@ func idle_frame():
 	
 	if abs(dist.x) > 200:
 		dir_x = -sign(dist.x)
+	
+	var sps = sky_pal.size()
+	var sky_step = posmod(Clouds.sky_step + (sps / 2.0) , sps)
+	var sf = Clouds.step_frac
+	
+	for i in 2:
+		sky_mat.set_shader_param("col" + str(i + 1), sky_pal[sky_step - 2 - i].linear_interpolate(sky_pal[sky_step - 1 - i], sf))
+	
+	
 	
