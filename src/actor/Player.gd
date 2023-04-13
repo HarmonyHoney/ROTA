@@ -864,21 +864,21 @@ func footstep_sound():
 		Audio.play(audio_walk, 1.5, 3.0)
 
 func arrow_open():
-	if greeting_clock == 0 and greeting > -1 and greeting < lines.size():
-		queue.erase(greeting)
-		queue.push_front(greeting)
-	
 	if queue.size() == 0:
 		queue = range(lines.size())
 		queue.shuffle()
 		queue.erase(line)
-		if greeting > -1: queue.erase(greeting)
+		greeting_clock = 0
 		if queue_write != "":
-			var qw = Array(PoolIntArray(Array(queue_write.split_floats(",", false))))
+			var qw = Array(queue_write.split_floats(",", false))
 			for i in qw.size():
-				var b = qw.pop_back()
+				var b = int(qw.pop_back())
 				queue.erase(b)
 				queue.push_front(b)
+	
+	if greeting_clock == 0 and line != greeting and greeting > -1 and greeting < lines.size():
+		queue.erase(greeting)
+		queue.push_front(greeting)
 	
 	line = posmod(int(queue.pop_front()), lines.size())
 	Shared.chat.open(lines[line], arrow, Transform2D(dir * PI * 0.5, global_position + rot(chat_offset)))

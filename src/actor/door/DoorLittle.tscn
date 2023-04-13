@@ -20,7 +20,6 @@ shader_param/is_flip = false
 
 [node name="Door" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-colors = PoolColorArray( 0.686275, 0, 1, 1, 1, 0, 0.913725, 1, 1, 1, 0, 1, 1, 0.866667, 0, 1 )
 
 [node name="Visible" type="VisibilityNotifier2D" parent="." index="0"]
 visible = false

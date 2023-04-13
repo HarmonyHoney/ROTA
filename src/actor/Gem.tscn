@@ -5,5 +5,5 @@ color = Color( 1, 1, 0, 1 )
 polygon = PoolVector2Array( -30, 0, 0, -30, 30, 0, 0, 30 )
 
 [node name="Fill" type="Polygon2D" parent="."]
-color = Color( 1, 0.866667, 0, 1 )
+color = Color( 1, 0.8, 0, 1 )
 polygon = PoolVector2Array( -20, 0, 0, -20, 20, 0, 0, 20 )

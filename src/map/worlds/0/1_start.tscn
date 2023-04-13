@@ -50,16 +50,75 @@ dye = {
 hairstyle_back = 0
 hairstyle_front = 3
 is_npc = true
-lines = [ "Wake up sleepyhead!", "Welcome to ROTA... (:", "You've been out for a while!", "How do you look? Turn around!", "Gaze into the mirror..." ]
+lines = [ "Wake up sleepyhead!", "You've been out for a while!", "Welcome to ROTA... (:", "How do you look? Turn around!", "Gaze into the mirror...", "Can you feel the breeze?", "Let your eyes drift into the sky...", "I see all in the clouds..." ]
 greeting = 0
+queue_write = "1,2"
 
 [node name="Chat" type="Node" parent="Actors/NPC"]
 script = ExtResource( 12 )
 expression_string = "\"1/0_hub\" in maps_visited"
+erase = "0,1,2"
 is_lines = 3
-lines = [ "How was it out there? (:" ]
+lines = [ "How was it out there? (:", "So many worlds to explore!" ]
 is_greeting = true
 greeting = 0
+is_queue = true
+queue_write = "1"
+
+[node name="Chat2" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "gem_count > 0 and gem_count < 5"
+erase = "0"
+is_lines = 3
+lines = [ "You've got a shine about you!", "Have you found a gem? (;" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1"
+
+[node name="Chat3" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "gem_count > 4 and !(\"2/0_hub\" in maps_visited)"
+erase = "0"
+is_lines = 3
+lines = [ "You are glowing! ^.^", "You've become quite the collector! (;", "That's enough gems to fit a socket!" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2"
+
+[node name="Chat4" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "\"2/0_hub\" in maps_visited and !(\"3/0_hub\" in maps_visited)"
+erase = "0"
+is_lines = 3
+lines = [ "How was your walk into town? (:", "Send my best to Candle Randall <3" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1"
+
+[node name="Chat5" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "\"3/0_hub\" in maps_visited and !(\"2A/0_hub\" in maps_visited)"
+erase = "0"
+is_lines = 3
+lines = [ "You've got a tan! (;", "Tell me all about the desert! ^.^", "I bet the cacti are lovely..." ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2"
+
+[node name="Chat6" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "\"2A/0_hub\" in maps_visited"
+erase = "0"
+is_lines = 3
+lines = [ "I smell the pine trees on you!", "How was the snow?", "I hope you wore a jacket!", "Watch out for snowballs.. ;P" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2,3"
 
 [node name="Details" type="Node2D" parent="."]
 

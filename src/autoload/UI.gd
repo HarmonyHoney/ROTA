@@ -41,8 +41,8 @@ func _ready():
 
 func _physics_process(delta):
 	var p = MenuPause.is_open
-	up.move(delta, up.show or p)
-	down.move(delta, Shared.clock_rank > 0 and (down.show or p))
+	up.move(delta, up.show or (p and Shared.gem_count > 0))
+	down.move(delta, down.show or (p and Shared.clock_rank > 0))
 	keys.move(delta)
 	
 	clock_down.modulate.a = clock_ease.count(delta, clock_ease.show and !(MenuPause.is_paused and !MenuPause.is_open))

@@ -7,7 +7,7 @@ onready var arrow := $Arrow
 export var dir := 0 setget set_dir
 export(String, FILE) var scene_path := ""
 export var audio_range := Vector2(0.85, 1.15)
-export var colors : PoolColorArray = ["af00ff", "ff00e9", "fffb00", "ffdd00"]
+export var colors : PoolColorArray = ["af00ff", "ff00e9", "fffb00", "ffcc00"]
 
 var open_easy := EaseMover.new()
 var open_close := 0
