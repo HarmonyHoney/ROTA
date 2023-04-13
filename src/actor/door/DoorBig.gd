@@ -16,10 +16,9 @@ func _ready():
 	
 	arrow.connect("activate", self, "activate")
 	CheatCode.connect("activate", self, "cheat_code")
-	if !arrow.is_locked:
-		arrow.is_locked = Shared.gem_count < gem_count
+	if !arrow.is_locked: arrow.is_locked = Shared.gem_count < gem_count
 	
-	is_cutscene = gem_count > 0 and !Shared.maps_visited.has(map_path)
+	is_cutscene = gem_count > 0 and (arrow.is_locked or !Shared.maps_visited.has(map_path))
 	gem_color(!is_cutscene)
 	
 	label.modulate.a = 0.0
@@ -64,6 +63,7 @@ func set_is_fade(arg := is_fade):
 func cheat_code(cheat):
 	if "konami" in cheat and arrow.is_locked and arrow.is_active:
 		arrow.is_locked = false
+		Audio.play("gem_show", 0.5)
 		print(name, " unlocked")
 
 func activate():

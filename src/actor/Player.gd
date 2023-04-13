@@ -130,7 +130,7 @@ var blink_time := 10.0
 var blink_range := Vector2(1, 20)
 
 export var is_npc := false
-export (Array, String, MULTILINE) var lines := ["Lovely day!", "I do adore the flowers", "Hello (="]
+export (Array, String, MULTILINE) var lines := ["Hello (=", "Lovely weather!", "I do adore the flowers"]
 export var greeting := -1
 export var greeting_wait := Vector2(30, 45)
 var greeting_clock := 0.0

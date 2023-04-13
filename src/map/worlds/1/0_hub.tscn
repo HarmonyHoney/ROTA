@@ -89,7 +89,8 @@ dye = {
 "skin": 5
 }
 is_npc = true
-lines = [ "Lovely weather!", "I do adore the flowers", "Hello (=", "Are you a gem collector?", "I saw something shiny through that door..", "I flipped over this rock and found a gem! 0=" ]
+lines = [ "Hello (=", "Lovely weather!", "I do adore the flowers", "Are you a gem collector?", "I saw something shiny through that door..", "I flipped over this rock and found a gem! 0=" ]
+greeting = 0
 
 [node name="Chat" type="Node" parent="Actors/NPC"]
 script = ExtResource( 5 )
@@ -116,27 +117,8 @@ dye = {
 hairstyle_back = 2
 hairstyle_front = 7
 is_npc = true
-lines = [ "I've been through that big door!", "I lost a few gems, now I'm locked out..", "I tried knocking.. no answer 0:", "Finding a white flower is good luck!" ]
+lines = [ "Hey buddy!", "I've been through that big door!", "I lost a few gems, now I'm locked out..", "I tried knocking.. no answer 0:", "Finding a white flower is good luck!", "My friend is on the other side!" ]
 greeting = 0
-
-[node name="NPC4" parent="Actors" instance=ExtResource( 16 )]
-position = Vector2( 1850, 1450 )
-__meta__ = {
-"_editor_description_": ""
-}
-dir = 2
-idle_anim = "tree_behind"
-dye = {
-"eye": 17,
-"fit": 18,
-"hair": 10,
-"skin": 4
-}
-hairstyle_back = 2
-hairstyle_front = 7
-is_npc = true
-greeting = 0
-ready_z_index = -31
 
 [node name="NPC6" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 443, 850 )
@@ -146,14 +128,15 @@ __meta__ = {
 dir = 2
 idle_anim = "tree_behind"
 dye = {
-"eye": 17,
-"fit": 18,
-"hair": 10,
-"skin": 4
+"eye": 3,
+"fit": 3,
+"hair": 13,
+"skin": 6
 }
 hairstyle_back = 3
 hairstyle_front = 8
 is_npc = true
+lines = [ "Hey, up here! (=", "Climb with me! (;", "There's plenty of trees!", "Haha you look so tiny down there..", "I'm not afraid of heights!", "Don't worry I'm not stuck! ^.^", "I'll come down soon...", "Grab a branch! (:", "The weather's great up here ;P", "I found a gem in the leaves!" ]
 greeting = 0
 ready_z_index = -31
 
@@ -173,7 +156,8 @@ dye = {
 hairstyle_back = 0
 hairstyle_front = 8
 is_npc = true
-lines = [ "Feet are overrated", "I'm a hands on learner", "Look at life upside down", "I'm going for the record!", "Change your perspective!", "Head rush!", "*phew* let me catch my breath!", "hello" ]
+lines = [ "Yo!q", "Feet are overrated", "I'm a hands on learner", "Look at life upside down", "I'm going for the record!", "Change your perspective!", "Head rush!", "*phew* let me catch my breath!" ]
+greeting = 0
 
 [node name="NPC5" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( -550, 1150 )
