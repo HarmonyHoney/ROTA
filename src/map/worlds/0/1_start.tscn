@@ -111,7 +111,7 @@ queue_write = "1,2"
 
 [node name="Chat6" type="Node" parent="Actors/NPC"]
 script = ExtResource( 12 )
-expression_string = "\"2A/0_hub\" in maps_visited"
+expression_string = "\"2A/0_hub\" in maps_visited and !(\"3A/0_hub\" in maps_visited)"
 erase = "0"
 is_lines = 3
 lines = [ "I smell the pine trees on you!", "How was the snow?", "I hope you wore a jacket!", "Watch out for snowballs.. ;P" ]
@@ -119,6 +119,83 @@ is_greeting = true
 greeting = 0
 is_queue = true
 queue_write = "1,2,3"
+
+[node name="Chat7" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "\"3A/0_hub\" in maps_visited and !(\"2B/0_hub\" in maps_visited)"
+erase = "0"
+is_lines = 3
+lines = [ "You restored the link between grasslands!", "Thank you for uniting the people <3", "The worlds are coming closer together..." ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2"
+
+[node name="Chat8" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "\"2B/0_hub\" in maps_visited and !(\"3B/0_hub\" in maps_visited)"
+erase = "0"
+is_lines = 3
+lines = [ "The townsfolk are happily reunited! <3", "Are you responsible for this? (-;", "A flame rekindled..." ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2"
+
+[node name="Chat9" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "\"3B/0_hub\" in maps_visited and !(\"2C/0_hub\" in maps_visited)"
+erase = "0"
+is_lines = 3
+lines = [ "I see visions of a tribe at peace! (:", "A link between worlds is restored...", "Harmony fills the desert! <3" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2"
+
+[node name="Chat10" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "gem_count < 45 and \"2C/0_hub\" in maps_visited and !(\"0/2_end\" in maps_visited)"
+erase = "0"
+is_lines = 3
+lines = [ "You came all the way back here to see me? (;", "I hope the frost has been treating you well..", "You've brought a lot of warmth to a cold place! <3" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2"
+
+[node name="Chat11" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = " gem_count > 44 and !(\"0/2_end\" in maps_visited)"
+erase = "0"
+is_lines = 3
+lines = [ "There's no stopping you! ^.^", "Look at how far you've come (;", "Quite the collection you have...", "My friend is excited to meet you!" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2,3"
+
+[node name="Chat12" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "gem_count > 49 and !(\"0/2_end\" in maps_visited)"
+erase = "0"
+is_lines = 3
+lines = [ "What are you doing here!?!", "Look at all these gems! 0=", "A frosted door waits for you...", "You will be in good company (;" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2,3"
+
+[node name="Chat13" type="Node" parent="Actors/NPC"]
+script = ExtResource( 12 )
+expression_string = "\"0/2_end\" in maps_visited"
+erase = "0"
+is_lines = 3
+lines = [ "I see you've met my friend!", "The worlds of ROTA are reunited! (:", "You have my eternal thanks.. <3", "Where are you off to next puzzler?", "For every gem, there is a clock.. (;" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2,3,4"
 
 [node name="Details" type="Node2D" parent="."]
 
