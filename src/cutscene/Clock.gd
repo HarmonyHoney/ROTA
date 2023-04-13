@@ -1,15 +1,27 @@
 extends Node
 
 func act():
-	Cutscene.is_playing = true
-	Shared.player.spr_easy.show = false
+	var p = Shared.player
 	var d = Shared.door_in
+	for i in [p, d]:
+		if !is_instance_valid(i): return
+	
+	Cutscene.is_playing = true
+	Cam.target_node = d
+	
 	d.gem.visible = true
 	d.clock.visible = true
 	d.clock.scale = Vector2.ZERO
 	
 	if Wipe.is_wipe:
 		yield(Wipe, "complete")
+	
+	if abs(d.to_local(p.global_position).x) < 50.0:
+		p.joy.x = [-1, 1][randi() % 2]
+		yield(get_tree().create_timer(0.27), "timeout")
+		p.joy.x = 0.0
+		p.dir_x *= -1
+		yield(get_tree().create_timer(0.2), "timeout")
 	
 	d.is_clock = true
 	Audio.play("clock_collect", 0.9, 1.1)
@@ -19,6 +31,7 @@ func act():
 	UI.clock_label.text = str(Shared.clock_rank)
 	yield(get_tree().create_timer(0.5), "timeout")
 	
-	Shared.player.spr_easy.show = true
 	UI.down.show = false
+	
+	Cam.target_node = Shared.player
 	Cutscene.is_playing = false

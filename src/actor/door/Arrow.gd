@@ -80,10 +80,10 @@ func set_image_pos(arg := image_pos):
 func _on_body_entered(_body):
 	body = _body
 	try_active()
-	print(get_parent().name, " entered ", body, " is_active ", is_active)
+	#print(get_parent().name, " entered ", body, " is_active ", is_active)
 
 func _on_body_exited(_body):
-	print(get_parent().name, " exited ", _body)
+	#print(get_parent().name, " exited ", _body)
 	body = null
 	try_active()
 

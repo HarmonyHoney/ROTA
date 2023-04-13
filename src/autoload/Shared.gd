@@ -264,11 +264,10 @@ func change_scene():
 	else:
 		csfn = next_scene
 		map_name = csfn.right(worlds_path.length()).replace(".tscn", "") if csfn.begins_with(worlds_path) else ""
-		#map_name = csfn.rstrip(".tscn")
 		get_tree().change_scene(next_scene)
 		Cam.reset_zoom()
 	
-	print("map_name: ", map_name, " csfn: ", csfn)
+	#print("map_name: ", map_name, " csfn: ", csfn)
 	if map_name != "" and !maps_visited.has(map_name):
 		maps_visited.append(map_name)
 	
@@ -383,6 +382,7 @@ func collect_gem():
 		
 		Cutscene.is_collect = gem_count > o[0]
 		Cutscene.is_clock = clock_rank > o[1]
+		#print("is_collect: ", Cutscene.is_collect, " is_clock: ", Cutscene.is_clock)
 		goal.fade_easy.clock = goal.fade_easy.time
 		
 		save_data()
@@ -611,9 +611,11 @@ func load_slot(arg := 0):
 		
 		next_scene = start_path
 		last_scene = start_path
+		goals = {}
 		gem_count = 0
 		UI.gem_label.text = str(gem_count)
-		goals = {}
+		clock_rank = 0
+		UI.clock_label.text = str(clock_rank)
 		save_time = 0.0
 		maps_visited = []
 	
