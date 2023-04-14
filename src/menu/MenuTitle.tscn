@@ -820,7 +820,7 @@ bg_palette = 1
 [node name="Actors" type="Node2D" parent="Map"]
 
 [node name="Spawn" parent="Map/Actors" instance=ExtResource( 24 )]
-position = Vector2( 1825, 0 )
+position = Vector2( 1825, 300 )
 
 [node name="AttractMode" type="Node2D" parent="Map"]
 position = Vector2( 1800, 650 )

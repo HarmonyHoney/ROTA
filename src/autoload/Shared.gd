@@ -373,19 +373,20 @@ func rot(vec : Vector2, _dir : int) -> Vector2:
 
 func collect_gem():
 	if is_instance_valid(goal) and goal.is_collected:
+		goal.fade_easy.clock = goal.fade_easy.time
+		goal.turn_x = Shared.player.dir_x
+		
 		if !goals.has(map_name) or map_clock < goals[map_name]:
 			goals[map_name] = map_clock
-		
-		var o = [gem_count, clock_rank]
-		gem_count = goals.size()
-		clock_rank = collect_clocks()
-		
-		Cutscene.is_collect = gem_count > o[0]
-		Cutscene.is_clock = clock_rank > o[1]
-		#print("is_collect: ", Cutscene.is_collect, " is_clock: ", Cutscene.is_clock)
-		goal.fade_easy.clock = goal.fade_easy.time
-		
-		save_data()
+			var o = [gem_count, clock_rank]
+			gem_count = goals.size()
+			clock_rank = collect_clocks()
+			save_data()
+			
+			Cutscene.is_collect = gem_count > o[0]
+			Cutscene.is_clock = clock_rank > o[1]
+			Cutscene.is_faster = !Cutscene.is_collect and !Cutscene.is_clock
+			#print("is_collect: ", Cutscene.is_collect, " is_clock: ", Cutscene.is_clock)
 
 func collect_clocks(g := goals):
 	var c = 0

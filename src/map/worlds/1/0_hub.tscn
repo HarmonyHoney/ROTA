@@ -89,17 +89,41 @@ dye = {
 "skin": 5
 }
 is_npc = true
-lines = [ "Hello (=", "Lovely weather!", "I do adore the flowers", "Are you a gem collector?", "I saw something shiny through that door..", "I flipped over this rock and found a gem! 0=" ]
+lines = [ "Hello (=", "Lovely weather!", "I do adore the flowers", "I saw something shiny through that door..", "I flipped over this rock and found a gem! 0=", "I'm on the hunt for sparklies.." ]
 greeting = 0
 
 [node name="Chat" type="Node" parent="Actors/NPC"]
 script = ExtResource( 5 )
-expression_string = "\"2A/0_hub\" in maps_visited"
-erase = "0,1,2"
+expression_string = "gem_count == 0"
+erase = "0"
 is_lines = 3
-lines = [ "You have been to the snow! (-=" ]
+lines = [ "Hello new friend! (:", "Are you a gem collector too?" ]
 is_greeting = true
 greeting = 0
+is_queue = true
+queue_write = "1"
+
+[node name="Chat2" type="Node" parent="Actors/NPC"]
+script = ExtResource( 5 )
+expression_string = "gem_count > 0 and gem_count < 3"
+erase = "0"
+is_lines = 3
+lines = [ "You are shining!", "Is that a gem? 0;" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1"
+
+[node name="Chat3" type="Node" parent="Actors/NPC"]
+script = ExtResource( 5 )
+expression_string = "gem_count > 2"
+erase = "0"
+is_lines = 3
+lines = [ "Look at you glow! ^.^", "Can I see your gem collection?" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1"
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 1350, 1360 )

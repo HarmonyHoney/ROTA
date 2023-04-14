@@ -48,7 +48,7 @@ func enter_door():
 	if is_cutscene:
 		Cutscene.door_unlock.act(self)
 	elif scene_path != "" and Shared.wipe_scene(scene_path, Shared.csfn, 0.5):
-		Shared.player.enter_door()
+		Shared.player.enter_door(self)
 		arrow.is_locked = true
 		open_close = 1
 		open_easy.clock = 0.0

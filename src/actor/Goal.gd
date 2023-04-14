@@ -4,6 +4,8 @@ onready var sprites = $Sprites
 onready var area = $Area2D
 var shine_easy := EaseMover.new()
 var fade_easy := EaseMover.new()
+var turn_x := 1.0
+var turn_easy := EaseMover.new(0.3)
 
 var target = null
 var is_collected := false
@@ -29,11 +31,18 @@ func _physics_process(delta):
 		sprites.scale = Vector2.ONE * lerp(1.0, 2.0, shine_easy.count(delta, false))
 	
 	if fade_easy.clock > 0:
-		modulate.a = fade_easy.count(delta, false)
+		var s = fade_easy.count(delta, false)
+		sprites.scale = Vector2.ONE * lerp(0.0, 1.0, s)
+		sprites.rotation = lerp(TAU * 0.3 * turn_x, 0.0, s)
 	
 	# follow target
 	if is_instance_valid(target):
-		global_position = global_position.linear_interpolate(target.global_position + target.rot(Vector2.UP * 20), 6.0 * delta)
+		var p = target.global_position
+		if target == Shared.player:
+			var s = turn_easy.count(delta, target.dir_x < 0, false)
+			p += Vector2(lerp(-1.0, 1.0, ease(s, -0.7)) * 50, -30).rotated(target.sprites.rotation)
+		
+		global_position = global_position.linear_interpolate(p, 6.0 * delta)
 
 func cheat_code(cheat):
 	if "konami" in cheat:

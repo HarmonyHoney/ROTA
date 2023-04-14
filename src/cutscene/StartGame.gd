@@ -12,13 +12,19 @@ func act():
 	Cam.target_pos = Cam.global_position
 	Cam.emit_signal("moved")
 	
-	p.move_and_collide(Vector2(0, -850))
+	d.modulate.a = 0.0
+	d.arrow.is_locked = true
+	
+	p.move_and_collide(Vector2(0, -600))
+	p.door_exit = null
 	p.is_floor = false
 	p.has_jumped = true
 	p.anim.play("jump")
-
-	d.modulate.a = 0.0
-	d.arrow.is_locked = true
+	p.spr_easy.show = false
+	
+	if Wipe.is_wipe:
+		yield(Wipe, "complete")
+	p.spr_easy.show = true
 	
 	yield(get_tree().create_timer(1.2), "timeout")
 	Cam.target_node = p

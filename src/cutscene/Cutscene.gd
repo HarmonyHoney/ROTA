@@ -11,6 +11,7 @@ var is_collect := false
 
 onready var clock := $Clock
 var is_clock := false
+var is_faster := false
 
 onready var start_game := $StartGame
 var is_start_game := false
@@ -35,6 +36,11 @@ func scene_changed():
 	elif is_clock:
 		is_clock = false
 		clock.act()
+	
+	elif is_faster:
+		is_faster = false
+		if Wipe.is_wipe: yield(Wipe, "complete")
+		Audio.play("clock_collect", 1.33)
 		
 	elif is_start_game:
 		is_start_game = false

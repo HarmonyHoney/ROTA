@@ -18,10 +18,10 @@ func _init(_time := time, _from := from, _to := to, _node := node):
 	to = _to
 	node = _node
 
-func count(delta, arg := show):
+func count(delta, arg := show, is_smooth := true):
 	last = clock
 	clock = clamp(clock + (delta if arg else -delta), 0, time)
-	return smooth()
+	return smooth() if is_smooth else (clock / time)
 
 func move(delta, arg := show):
 	current = from.linear_interpolate(to, count(delta, arg))

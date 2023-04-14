@@ -12,6 +12,7 @@ onready var spr_root := $Sprites/Root
 onready var spr_body := $Sprites/Root/Body
 onready var spr_eyes := $Sprites/Root/Body/Eyes
 var spr_easy := EaseMover.new()
+var door_exit
 
 onready var spr_hands_parent := $Sprites/Hands
 onready var spr_hand_l := $Sprites/Hands/Left
@@ -207,19 +208,22 @@ func _ready():
 
 func wipe_start(arg):
 	if !is_npc:
+		door_exit = null
 		spr_easy.show = arg
+		if arg: spr_easy.clock = 0.0
 
 func scene():
+	door_exit = Shared.door_in if is_instance_valid(Shared.door_in) else null
+	
 	# move npc
 	if is_npc:
 		global_position = start_pos
 		self.dir = start_dir
 		
 	# go to last door
-	elif is_instance_valid(Shared.door_in):
-		var d = Shared.door_in
-		global_position = d.global_position
-		self.dir = d.dir
+	elif door_exit:
+		global_position = door_exit.global_position
+		self.dir = door_exit.dir
 	
 	#print(name, " pos: ", global_position, " dir: ", dir)
 	
@@ -228,6 +232,7 @@ func scene():
 	joy = Vector2.ZERO
 	is_floor = false
 	is_jump = true
+	has_jumped = true
 	is_dead = false
 	sprites.position = Vector2.ZERO
 	sprites.rotation = turn_to
@@ -251,8 +256,6 @@ func scene():
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
-	sprites.modulate.a = spr_easy.count(delta)
-	
 	if is_dead:
 		sprites.position += rot(velocity) * delta
 		sprites.rotate(deg2rad(-dir_x * 240) * delta)
@@ -266,6 +269,17 @@ func _physics_process(delta):
 		
 		return
 	
+	if !spr_easy.is_complete or !spr_easy.show:
+		var sec = spr_easy.count(delta)
+		var dp = to_local(door_exit.global_position) if is_instance_valid(door_exit) else rot(Vector2(0, -25))
+		sprites.position = dp.linear_interpolate(Vector2.ZERO, sec)
+		for i in [spr_hands_parent, spr_root]:
+			i.rotation = lerp(TAU * 0.15 * -dir_x, 0.0, sec)
+			i.scale = Vector2.ONE * lerp(0.0, 1.0, sec)
+	
+		if sec < 1.0:
+			return
+	
 	# input
 	release_clock = max(release_clock - delta, 0)
 	
@@ -273,7 +287,6 @@ func _physics_process(delta):
 		joy_last = joy
 		joy.x = round(Input.get_axis("left", "right"))
 		joy.y = round(Input.get_axis("up", "down"))
-		
 		
 		btnp_jump = Input.is_action_just_pressed("jump")
 		btnp_push = Input.is_action_just_pressed("grab")
@@ -332,6 +345,7 @@ func _physics_process(delta):
 				
 				goal.z_index = 0
 				goal.target = self
+				goal.turn_easy.clock = goal.turn_easy.time * 0.5
 	
 	# holding box
 	elif is_hold:
@@ -530,10 +544,10 @@ func _physics_process(delta):
 	if is_floor:
 		if air_clock > 0.4:
 			Audio.play(audio_land, 0.7, 1.1)
-
+			
 			squish_from = Vector2(1.3, 0.7)
 			squish_clock = 0.0
-
+		
 		air_clock = 0.0
 	else:
 		air_clock += delta
@@ -834,9 +848,13 @@ func throw_snowball():
 	s.throw((spr_hand_l if dir_x > 0 else spr_hand_r).global_position, s.throw_vel * Vector2(dir_x, 1), dir)
 	#print(name, " throw snowball ", s)
 
-func enter_door():
-	anim.play(idle_dir)
+func enter_door(arg):
+	door_exit = arg
+	anim.stop()
 	clear_input()
+	
+	if is_instance_valid(goal):
+		goal.target = door_exit
 
 func pause():
 	if Shared.player == self:
