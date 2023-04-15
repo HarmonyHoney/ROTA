@@ -13,10 +13,13 @@
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 8 )
-shader_param/col1 = Color( 1, 1, 1, 1 )
+shader_param/col1 = Color( 0.898039, 0.615686, 0.341176, 1 )
 shader_param/col2 = Color( 0, 0, 0, 1 )
+shader_param/col3 = Color( 0.301961, 0.301961, 0.301961, 1 )
 shader_param/line = 0.9
 shader_param/is_flip = false
+shader_param/ring = 0.2
+shader_param/ring_offset = -1.0
 
 [node name="Door" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -31,7 +34,6 @@ node_path = NodePath("..")
 [node name="Sprites" type="Node2D" parent="." index="2"]
 
 [node name="Door" type="Polygon2D" parent="Sprites" index="0"]
-modulate = Color( 0.898039, 0.615686, 0.341176, 1 )
 material = SubResource( 1 )
 position = Vector2( 0, 5 )
 texture = ExtResource( 7 )

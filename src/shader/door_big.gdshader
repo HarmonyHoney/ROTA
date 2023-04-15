@@ -2,9 +2,13 @@ shader_type canvas_item;
 
 uniform vec4 col_fill : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform vec4 col_back : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 col_back2 : hint_color = vec4(1.0, 0.0, 0.0, 1.0);
 uniform vec4 col_line : hint_color = vec4(0.5, 0.5, 0.5, 1.0);
 uniform float line_width : hint_range(0.0, 1.0) = 0.035;
 uniform float line : hint_range(0.0, 1.0) = 0.5;
+
+uniform float ring : hint_range(0.0, 1.0) = 0.5;
+uniform float ring_offset : hint_range(-3.0, 3.0) = 0.0;
 
 uniform float gem_size : hint_range(0.0, 1.0) = 0.75;
 uniform float gem_line : hint_range(0.0, 1.0) = 0.667;
@@ -26,7 +30,7 @@ void fragment(){
 	bool is_knob = distance(vec2(new_x, UV.y), knob_offset) < knob_size;
 	
 	if (x < line){
-		COLOR = col_back;
+		COLOR = mix(col_back, col_back2, floor(mod((length(UV) + (TIME * ring_offset)) / ring, 2.0)) );
 	}
 	else if (sum < gem_size){
 		COLOR = mix(gem_fill, gem_col, float(sum > gem_size * gem_line));

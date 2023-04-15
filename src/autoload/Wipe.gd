@@ -8,6 +8,7 @@ signal complete
 
 var is_wipe := false
 var is_in := false
+var is_intro := false
 
 var radius := 0.71
 var easy = EaseMover.new()
@@ -24,6 +25,8 @@ func _process(delta):
 	elif is_wipe:
 		mat.set_shader_param("radius", easy.count(delta, !is_in) * radius)
 		
+		is_intro = is_in and easy.frac() > 0.33
+		
 		if (easy.clock == 0 and is_in) or (easy.clock == easy.time and !is_in):
 			is_wipe = false
 			sprite.visible = false
@@ -31,6 +34,7 @@ func _process(delta):
 
 func start(arg := false, _delay := 0.0):
 	is_in = arg
+	is_intro = is_in
 	delay = max(0.001, _delay)
 	is_wipe = true
 	sprite.visible = true

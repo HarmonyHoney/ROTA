@@ -27,15 +27,20 @@ func _ready():
 		gem.visible = false
 	elif Shared.goals.has(m):
 		gem_color(2)
+	
+	door_mat.set_shader_param("line", 1.0)
 
 func _physics_process(delta):
 	if open_close:
-		var s = open_easy.count(delta, open_close > 0)
+		var w = Wipe.is_intro and open_close < 0
+		var s = open_easy.count(delta, open_close > 0 or w)
+			
 		door_mat.set_shader_param("line", lerp(0.9, 0.1, s))
 		var o = 1.0 - s
 		open.scale.x = o
 		open.visible = o > 0.01
-		if open_easy.clock == 0.0 or open_easy.is_complete:
+		
+		if (open_easy.clock == 0.0 or open_easy.is_complete) and !w:
 			open_close = 0
 		
 	elif is_gem:
@@ -62,6 +67,7 @@ func activate():
 
 func on_enter():
 	Shared.collect_gem()
+	door_mat.set_shader_param("ring_offset", -door_mat.get_shader_param("ring_offset"))
 
 func gem_color(arg := 0):
 	gem.color = colors[arg]

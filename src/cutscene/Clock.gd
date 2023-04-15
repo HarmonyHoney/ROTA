@@ -15,6 +15,8 @@ func act():
 	
 	if Wipe.is_wipe:
 		yield(Wipe, "complete")
+	if !p.spr_easy.is_complete:
+		yield(p, "show_up")
 	
 	if abs(d.to_local(p.global_position).x) < 50.0:
 		p.joy.x = [-1, 1][randi() % 2]

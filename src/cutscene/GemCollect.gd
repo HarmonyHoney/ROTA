@@ -12,8 +12,11 @@ func act():
 	d.clock.visible = false
 	d.gem.visible = true
 	d.gem_color()
+	
 	if Wipe.is_wipe:
 		yield(Wipe, "complete")
+	if !p.spr_easy.is_complete:
+		yield(p, "show_up")
 	
 	p.joy.x = [-1, 1][randi() % 2]
 	yield(get_tree().create_timer(0.27), "timeout")

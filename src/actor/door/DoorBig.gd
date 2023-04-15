@@ -9,6 +9,7 @@ export var gem_count := 0 setget set_gem
 export var is_fade := false setget set_is_fade
 var fade_easy := EaseMover.new()
 var label_easy := EaseMover.new()
+var ring_clock := 0.0
 
 func _ready():
 	set_gem()
@@ -22,15 +23,18 @@ func _ready():
 	gem_color(!is_cutscene)
 	
 	label.modulate.a = 0.0
+		
+	door_mat.set_shader_param("line", 0.0)
 
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
 	if open_close:
-		var s = open_easy.count(delta, open_close > 0)
+		var w = Wipe.is_intro and open_close < 0
+		var s = open_easy.count(delta, open_close > 0 or w)
 		door_mat.set_shader_param("line", lerp(0.0, 1.0, s))
 		
-		if open_easy.clock == 0 or open_easy.is_complete:
+		if (open_easy.clock == 0 or open_easy.is_complete) and !w:
 			open_close = 0
 	
 	if is_instance_valid(arrow):
@@ -69,7 +73,11 @@ func cheat_code(cheat):
 func activate():
 	UI.up.show = arrow.is_active and is_cutscene
 
+func on_enter():
+	door_mat.set_shader_param("ring_offset", -door_mat.get_shader_param("ring_offset"))
+
 func gem_color(is_gold := false):
 	if door_mat:
 		for i in 2:
 			door_mat.set_shader_param(["gem_col", "gem_fill"][i] , colors[(2 if is_gold else 0) + i])
+		

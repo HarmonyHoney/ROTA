@@ -199,7 +199,7 @@ func _input(event):
 func _physics_process(delta):
 	# recorded time
 	save_time += delta
-	if !get_tree().paused and !Wipe.is_wipe and !Cutscene.is_playing:
+	if !get_tree().paused and !Wipe.is_wipe and !Cutscene.is_playing and player.spr_easy.is_complete:
 		map_clock += delta
 	
 	# clock label

@@ -11,7 +11,9 @@ onready var sprites := $Sprites
 onready var spr_root := $Sprites/Root
 onready var spr_body := $Sprites/Root/Body
 onready var spr_eyes := $Sprites/Root/Body/Eyes
+
 var spr_easy := EaseMover.new()
+signal show_up
 var door_exit
 
 onready var spr_hands_parent := $Sprites/Hands
@@ -230,9 +232,12 @@ func scene():
 	velocity = Vector2.ZERO
 	joy_last = Vector2.ZERO
 	joy = Vector2.ZERO
+	
 	is_floor = false
 	is_jump = true
 	has_jumped = true
+	air_clock = 0.0
+	
 	is_dead = false
 	sprites.position = Vector2.ZERO
 	sprites.rotation = turn_to
@@ -270,15 +275,17 @@ func _physics_process(delta):
 		return
 	
 	if !spr_easy.is_complete or !spr_easy.show:
-		var sec = spr_easy.count(delta)
+		var sec = spr_easy.count(delta, spr_easy.show and !Wipe.is_intro)
 		var dp = to_local(door_exit.global_position) if is_instance_valid(door_exit) else rot(Vector2(0, -25))
 		sprites.position = dp.linear_interpolate(Vector2.ZERO, sec)
 		for i in [spr_hands_parent, spr_root]:
 			i.rotation = lerp(TAU * 0.15 * -dir_x, 0.0, sec)
 			i.scale = Vector2.ONE * lerp(0.0, 1.0, sec)
-	
+		
 		if sec < 1.0:
 			return
+		else:
+			emit_signal("show_up")
 	
 	# input
 	release_clock = max(release_clock - delta, 0)

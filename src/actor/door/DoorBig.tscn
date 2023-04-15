@@ -13,9 +13,12 @@ resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/col_fill = Color( 0.898039, 0.615686, 0.341176, 1 )
 shader_param/col_back = Color( 0, 0, 0, 1 )
+shader_param/col_back2 = Color( 0.301961, 0.301961, 0.301961, 1 )
 shader_param/col_line = Color( 0.713726, 0.345098, 0.156863, 1 )
 shader_param/line_width = 0.035
 shader_param/line = 0.0
+shader_param/ring = 0.3
+shader_param/ring_offset = -1.5
 shader_param/gem_size = 0.0
 shader_param/gem_line = 0.667
 shader_param/gem_offset = Vector2( 0, -0.1 )
@@ -46,6 +49,7 @@ image_pos = Vector2( 0, -150 )
 
 [node name="Door" type="Polygon2D" parent="Sprites" index="0"]
 material = SubResource( 2 )
+position = Vector2( 1, 0 )
 texture = ExtResource( 8 )
 polygon = PoolVector2Array( 100, 100, -100, 100, -100, -50, -98.7464, -61.126, -95.0484, -71.6942, -89.0916, -81.1745, -81.1745, -89.0916, -71.6942, -95.0484, -61.126, -98.7464, -50, -100, 50, -100, 61.1261, -98.7464, 71.6942, -95.0484, 81.1745, -89.0916, 89.0916, -81.1745, 95.0484, -71.6942, 98.7464, -61.126, 100, -50 )
 script = ExtResource( 5 )

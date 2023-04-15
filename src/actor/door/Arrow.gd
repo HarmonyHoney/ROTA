@@ -42,7 +42,7 @@ func _physics_process(delta):
 	try_active()
 
 	# image display
-	var is_alpha = is_active and !is_locked and !MenuPause.is_paused and !Cutscene.is_playing and !Wipe.is_wipe
+	var is_alpha = is_active and !is_locked and !MenuPause.is_paused and !Cutscene.is_playing and !Wipe.is_wipe and Shared.player.spr_easy.is_complete
 	arrow_easy.count(delta, is_alpha)
 	
 	# open door

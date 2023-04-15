@@ -20,11 +20,9 @@ func act():
 	p.is_floor = false
 	p.has_jumped = true
 	p.anim.play("jump")
-	p.spr_easy.show = false
 	
 	if Wipe.is_wipe:
 		yield(Wipe, "complete")
-	p.spr_easy.show = true
 	
 	yield(get_tree().create_timer(1.2), "timeout")
 	Cam.target_node = p

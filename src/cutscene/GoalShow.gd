@@ -7,10 +7,12 @@ func act():
 		if !is_instance_valid(i): return
 	
 	Cutscene.is_playing = true
-	
 	Cam.target_node = null
+	
 	if Wipe.is_wipe:
 		yield(Wipe, "complete")
+	if !p.spr_easy.is_complete:
+		yield(p, "show_up")
 	
 	Cam.pan(g.global_position)
 	yield(Cam, "pan_complete")
