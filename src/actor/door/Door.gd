@@ -59,3 +59,17 @@ func enter_door():
 
 func on_enter():
 	pass
+
+func on_close():
+	Audio.play("door_close", audio_range.x, audio_range.y)
+
+func open_count(delta):
+	var w = Wipe.is_intro and open_close < 0
+	var s = open_easy.count(delta, open_close > 0 or w)
+	
+	if (open_easy.clock == 0.0 or open_easy.is_complete) and !w:
+		open_close = 0
+		if open_easy.clock == 0.0:
+			on_close()
+	
+	return s

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -26,6 +26,8 @@
 [ext_resource path="res://media/audio/music/ost2.mp3" type="AudioStream" id=24]
 [ext_resource path="res://media/audio/sfx/guitar_pluck.wav" type="AudioStream" id=25]
 [ext_resource path="res://media/audio/sfx/hit0.wav" type="AudioStream" id=26]
+[ext_resource path="res://media/audio/sfx/door_squeak.wav" type="AudioStream" id=27]
+[ext_resource path="res://media/audio/sfx/door_close.wav" type="AudioStream" id=28]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -102,6 +104,14 @@ bus = "SFX"
 [node name="Open" type="AudioStreamPlayer" parent="Door"]
 stream = ExtResource( 9 )
 volume_db = 12.0
+bus = "SFX"
+
+[node name="Close" type="AudioStreamPlayer" parent="Door"]
+stream = ExtResource( 28 )
+bus = "SFX"
+
+[node name="Squeak" type="AudioStreamPlayer" parent="Door"]
+stream = ExtResource( 27 )
 bus = "SFX"
 
 [node name="Cam" type="Node" parent="."]

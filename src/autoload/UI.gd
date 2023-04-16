@@ -93,7 +93,7 @@ func menu_keys(accept := "", cancel := ""):
 func gem_text(arg := 0, is_animate := true, _easy := gem_easy, _labels := gem_labels, _labels_node := gem_labels_node):
 	_easy.clock = 0.0 if is_animate else (_easy.time * 0.99)
 	_easy.from.x = _labels_node.rect_min_size.x
-	_easy.to.x = str(arg).length() * 62
+	_easy.to.x = str(arg).length() * 62 if arg > 0 else 0.0
 	
 	yield(get_tree(), "idle_frame")
 	

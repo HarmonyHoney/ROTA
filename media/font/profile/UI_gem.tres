@@ -7,4 +7,5 @@ size = 88
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
+extra_spacing_bottom = -7
 font_data = ExtResource( 1 )

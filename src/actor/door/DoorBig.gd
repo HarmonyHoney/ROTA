@@ -30,12 +30,8 @@ func _physics_process(delta):
 	if Engine.editor_hint: return
 	
 	if open_close:
-		var w = Wipe.is_intro and open_close < 0
-		var s = open_easy.count(delta, open_close > 0 or w)
+		var s = open_count(delta)
 		door_mat.set_shader_param("line", lerp(0.0, 1.0, s))
-		
-		if (open_easy.clock == 0 or open_easy.is_complete) and !w:
-			open_close = 0
 	
 	if is_instance_valid(arrow):
 		var l = label_easy.count(delta, arrow.is_active and is_cutscene)
