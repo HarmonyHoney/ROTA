@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/detail/Rocks.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=2]
@@ -12,6 +12,15 @@
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=12]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+export var is_act := true
+
+func _ready():
+	if !Shared.is_demo and is_act: get_parent().queue_free()
+"
 
 [node name="Map" type="Node2D"]
 
@@ -162,6 +171,29 @@ hairstyle_back = 3
 hairstyle_front = 4
 is_npc = true
 lines = [ "Do you have any water?", "It gets a little toasty out here!", "I'm thirsty...", "Have you ever drank from a cactus?", "These spinny blocks are bending my brain 0=", "Look at all the cuute cacti!", "I adore that pink blossom" ]
+
+[node name="NPC6" parent="Actors" instance=ExtResource( 9 )]
+position = Vector2( 250, 1850 )
+__meta__ = {
+"_editor_description_": ""
+}
+dir = 3
+idle_anim = "ponder"
+dye = {
+"eye": 11,
+"fit": 2,
+"hair": 0,
+"skin": 3
+}
+hairstyle_back = 0
+hairstyle_front = 3
+is_npc = true
+lines = [ "Psst! Hey...", "Over here kid...", "Notice how all these doors are locked?", "You want em open? You gotta do me a favor...", "You unlock the full game, I unlock these doors!", "Capiche? (;", "Scram kid!", "Act natural...", "I've heard enough outta you!", "The demo's over kid!", "Nothing to see here...", "Hmm... did you find any clocks? (;", "Go on, get the full game!", "So many puzzles ahead! <3" ]
+greeting = 0
+queue_write = "1,2,3,4,5"
+
+[node name="Node" type="Node" parent="Actors/NPC6"]
+script = SubResource( 1 )
 
 [node name="Details" type="Node2D" parent="."]
 

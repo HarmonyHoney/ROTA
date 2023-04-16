@@ -152,8 +152,20 @@ dye = {
 hairstyle_back = 2
 hairstyle_front = 7
 is_npc = true
-lines = [ "Hey buddy!", "I've been through that big door!", "I lost a few gems, now I'm locked out..", "I tried knocking.. no answer 0:", "Finding a white flower is good luck!", "My friend is on the other side!" ]
+lines = [ "Hey buddy!", "This door won't budge!!", "I'm locked out...", "I tried knocking... no answer! 0:", "What's that big purple gem anyway?", "I hope somebody opens it!", "My friend is on the other side!", "White flowers bring good luck <3" ]
 greeting = 0
+queue_write = "1,2"
+
+[node name="Chat" type="Node" parent="Actors/NPC2"]
+script = ExtResource( 5 )
+expression_string = "\"3A/0_hub\" in maps_visited"
+erase = "0,1,2,3,4,5"
+is_lines = 3
+lines = [ "Hey buddy! (;", "Did you unlock this door?", "Thank you for reconnecting us! <3", "Ah, together again...", "Where did you find so many gems!? 0:", "Tell me of your travels! (=" ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2"
 
 [node name="NPC6" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 443, 850 )
@@ -191,7 +203,7 @@ dye = {
 hairstyle_back = 0
 hairstyle_front = 8
 is_npc = true
-lines = [ "Yo!q", "Feet are overrated", "I'm a hands on learner", "Look at life upside down", "I'm going for the record!", "Change your perspective!", "Head rush!", "*phew* let me catch my breath!" ]
+lines = [ "Yo!", "Feet are overrated", "I'm a hands on learner", "Look at life upside down", "I'm going for the record!", "Change your perspective!", "Head rush!", "*phew* let me catch my breath!" ]
 greeting = 0
 
 [node name="NPC5" parent="Actors" instance=ExtResource( 16 )]
@@ -210,7 +222,9 @@ dye = {
 hairstyle_back = 0
 hairstyle_front = 2
 is_npc = true
-lines = [ "Be careful!", "These things are pretty pointy..", "I come here to admire the view", "I like the seclusion" ]
+lines = [ "Hmm... Oh, hello! (:", "I've been gazing off...", "Look at this view! 0:", "Seclusion comforts me...", "Don't mind me...", "These things are pretty pointy...", "Watch your step! (;", "Have you ever wished upon a star?", "That cloud looks like a seahorse!!", "What do you see? (:" ]
+greeting = 0
+queue_write = "1"
 
 [node name="Details" type="Node2D" parent="."]
 

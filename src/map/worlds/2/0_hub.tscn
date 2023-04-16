@@ -84,8 +84,8 @@ hairstyle_back = 0
 hairstyle_front = 0
 hat = 1
 is_npc = true
-lines = [ "It's always handy having a light", "Feel the delight of candle light!", "I'm not afraid of the dark! I swear..", "Candle candle candle candle..", "I've been trying to open that big door!", "They call me Candle Randall", "I get a lil spooked without my candy", "Need a light?" ]
-greeting = 5
+lines = [ "They call me Candle Randall!", "It's always handy having a light", "Feel the delight of candle light!", "I'm not afraid of the dark! I swear...", "Candle candle candle candle...", "I've been trying to open that big door!", "I get a lil spooked without my candy", "Need a light?" ]
+greeting = 0
 chat_offset = Vector2( 0, -160 )
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 5 )]
@@ -101,7 +101,8 @@ dye = {
 }
 hairstyle_front = 3
 is_npc = true
-lines = [ "Have  you tried turning it off and on again?", "Breathe in, breathe out", "It's so cozy between these trees", "I'ts nice to catch a break and relax", "I feel calm.", "I found a big worm here yesterday!", "Let the trees breathe into you", "Nature takes care of you <3" ]
+lines = [ "Hey cutie! ;P", "Have  you tried turning it off and on again?", "Breathe in, breathe out", "It's so cozy between these trees", "I'ts nice to catch a break and relax", "I feel calm.", "I found a big worm here yesterday!", "Let the trees breathe into you", "Nature takes care of you <3" ]
+greeting = 0
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 5 )]
 position = Vector2( -575, 2450 )
@@ -119,7 +120,8 @@ dye = {
 hairstyle_back = 3
 hairstyle_front = 9
 is_npc = true
-lines = [ "I feel a little dizzy..", "I'm taking a break to enjoy the night sky!", "These boxes have a mind of their own!", "I've been moving boxes all day!", "I've seen a few gems around here..", "I wonder whats beyond that big door" ]
+lines = [ "Hi there! ^.^", "I feel a little dizzy..", "I'm taking a break to enjoy the night sky!", "These boxes have a mind of their own!", "I've been moving boxes all day!", "I've seen a few gems around here..", "I wonder whats beyond that big door" ]
+greeting = 0
 
 [node name="Details" type="Node2D" parent="."]
 

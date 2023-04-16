@@ -71,21 +71,22 @@ scene_path = "res://src/map/worlds/2A/0_hub.tscn"
 gem_count = 15
 
 [node name="NPC" parent="Actors" instance=ExtResource( 19 )]
-position = Vector2( 3425, 2250 )
+position = Vector2( 3440, 2250 )
 __meta__ = {
 "_editor_description_": ""
 }
 idle_anim = "idle2"
 dye = {
-"eye": 18,
-"fit": 15,
-"hair": 12,
-"skin": 5
+"eye": 0,
+"fit": 13,
+"hair": 5,
+"skin": 6
 }
-hairstyle_back = 0
-hairstyle_front = 7
+hairstyle_back = 3
+hairstyle_front = 2
 is_npc = true
-lines = [ "Where am I?", "What happened last night?...", "I'm looking for my keys..", "do you have any snacks?" ]
+lines = [ "Hello! Who are you?", "Where am I?", "What happened last night?...", "I'm looking for my keys..", "Do you have any snacks?", "Who am we?", "You look familiar...", "This might take a while!", "What is \"who\" ?", "Hmm...", "Hhhhmmmmm....." ]
+greeting = 0
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 19 )]
 position = Vector2( 3450, 1765 )
@@ -103,6 +104,9 @@ dye = {
 hairstyle_back = 2
 hairstyle_front = 7
 is_npc = true
+lines = [ "Good to see you!", "Another lovely day...", "Call me Melody!", "I've seen plenty folks pass through here...", "Welcome to The Crossroads (:", "The starlight shines bright!", "Praise the stars!", "The world keeps on turning...", "Mhmm... beautiful! <3" ]
+greeting = 0
+queue_write = "1"
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 19 )]
 position = Vector2( 2700, 1750 )
@@ -120,7 +124,8 @@ hairstyle_back = 0
 hairstyle_front = 8
 hat = 3
 is_npc = true
-lines = [ "Where am I?", "What happened last night?...", "I'm looking for my keys..", "do you have any snacks?" ]
+lines = [ "Hey dude ^.^", "Look out!", "Think fast! (;", "Wahoo!", "Yippee!!", "Target practice ;P", "Check THIS out... (;", "Coming in hot!!!", "Coming in cold?...", "Throw one with me!", "Whatcha up tooo?", "Have you seen Robbi?" ]
+greeting = 0
 
 [node name="Details" type="Node2D" parent="."]
 
