@@ -71,14 +71,20 @@ func _physics_process(delta):
 		gems[i].position = gems_node.to_local(Shared.player.global_position).linear_interpolate(pos, frac)
 		gems[i].scale = Vector2.ONE * ease(frac - shrink, 0.5)
 	
-	gem.scale = Vector2.ONE * lerp(0.0, 2.5, shrink)
+	gem.scale = Vector2.ONE * lerp(0.0, 2.5, smoothstep(0.0, 1.0, shrink))
 	
-	if step == 2:
-		gem.global_position = gems_node.global_position.linear_interpolate(socket_pos, socket_ease.count(delta))
-	elif step == 3:
-		click_ease.count(delta)
-		var w = ease(abs(wrapf(click_ease.frac() * 2.0, -1.0, 1.0)), -5)
-		gem.scale = Vector2.ONE * lerp(2.5, 2.2, w)
+	var speedy = 30
+	match step:
+		0:
+			Clouds.day_scale = lerp(1.0, speedy, ease(clamp(clock / (gem_offset * gem_count), 0.0, 1.0), 3.0))
+		1:
+			Clouds.day_scale = lerp(speedy, 1.0, smoothstep(0.0, 1.0, (clock - gem_shrink.x) / 1.0))
+		2:
+			var se = socket_ease.count(delta)
+			gem.global_position = gems_node.global_position.linear_interpolate(socket_pos, se)
+		3:
+			var w = ease(abs(wrapf(click_ease.count(delta, click_ease.show, false) * 2.0, -1.0, 1.0)), -5.0)
+			gem.scale = Vector2.ONE * lerp(2.5, 2.2, w)
 	
 	if clock > time:
 		step += 1
@@ -140,7 +146,7 @@ func act(d):
 	#if randf() > 0.5: turn_speed = -turn_speed
 	
 	var dist = door.to_local(player.global_position)
-	player.joy = Vector2(sign(dist.x), 0)
+	player.joy = Vector2(sign(dist.x) if dist.x else player.dir_x, 0)
 	
 	set_physics_process(true)
 	yield(self, "done")

@@ -23,7 +23,8 @@ func set_card():
 	if d.has(slot) and d[slot].has("goals") and d[slot].has("time"):
 		is_new = false
 		
-		gem_label.text = str(d[slot]["goals"].size())
+		var gt = d[slot]["goals"].size()
+		gem_label.text = str(gt) if gt > 0 else ""
 		clock_label.text = str(Shared.collect_clocks(d[slot]["goals"]))
 		clocks.visible = clock_label.text != "0"
 		

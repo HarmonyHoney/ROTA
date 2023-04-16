@@ -29,9 +29,8 @@ func act():
 	UI.up.show = true
 	yield(get_tree().create_timer(1.0), "timeout")
 	
-	UI.gem_label.text = str(Shared.gem_count)
-	yield(get_tree().create_timer(0.5), "timeout")
-	
+	UI.gem_text(Shared.gem_count)
+	yield(get_tree().create_timer(0.8), "timeout")
 	UI.up.show = false
 	
 	Cam.target_node = p

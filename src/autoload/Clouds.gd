@@ -29,6 +29,7 @@ onready var stars := $Sky/Center/Stars
 onready var starfield := $Sky/Center/Starfield
 onready var star_orbit := $Sky/Center/Stars/Orbit
 onready var star_light := $Sky/Center/Stars/Orbit/Light2D
+onready var star_energy : float = star_light.energy
 onready var sun := $Sky/Center/Stars/Orbit/Sun
 onready var sun_ball := $Sky/Center/Stars/Orbit/Sun/Ball
 onready var sun_rays := $Sky/Center/Stars/Orbit/Sun/Rays
@@ -135,14 +136,14 @@ func _process(delta):
 	var mf = MenuMakeover.fade_ease
 	canvas_mod.color = color_bright.linear_interpolate(color_dark, max(moon_frac - mf.smooth(), 0.0))
 	if !mf.is_last:
-		star_light.energy = lerp(0.4, 0.0, mf.smooth())
+		star_light.energy = lerp(star_energy, 0.0, mf.smooth())
 	
 	# rotation
 	star_rotation = day_frac * TAU
 	for i in [stars, starfield]:
 		i.rotation = star_rotation
 	
-	cloud_rotation = fposmod(cloud_rotation + deg2rad(cloud_speed * delta * cloud_dir), TAU)
+	cloud_rotation = fposmod(cloud_rotation + deg2rad(cloud_speed * delta * cloud_dir * day_scale), TAU)
 	for i in [clouds, clouds1, clouds2, clouds_rain, precip]:
 		i.rotation = cloud_rotation
 

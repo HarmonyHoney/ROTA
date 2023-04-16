@@ -30,10 +30,9 @@ func act():
 	UI.down.show = true
 	yield(get_tree().create_timer(1.0), "timeout")
 	
-	UI.clock_label.text = str(Shared.clock_rank)
-	yield(get_tree().create_timer(0.5), "timeout")
-	
+	UI.rank_text(Shared.clock_rank)
+	yield(get_tree().create_timer(0.8), "timeout")
 	UI.down.show = false
 	
-	Cam.target_node = Shared.player
+	Cam.target_node = p
 	Cutscene.is_playing = false

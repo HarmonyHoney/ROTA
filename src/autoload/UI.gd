@@ -1,8 +1,18 @@
 extends CanvasLayer
 
-onready var gem_label : Label = $Control/Top/Label
-onready var clock_label := $Control/Down/Label
+onready var gem_label : Label = $Control/Top/Labels/Control/Center/Label
+onready var clock_label : Label = $Control/Down/Labels/Control/Center/Label
 onready var color_rect := $Control/ColorRect
+
+var gem_easy = EaseMover.new()
+onready var gem_centers = $Control/Top/Labels/Control.get_children()
+onready var gem_labels = [$Control/Top/Labels/Control/Center/Label, $Control/Top/Labels/Control/Center2/Label]
+onready var gem_labels_node := $Control/Top/Labels
+
+var rank_easy = EaseMover.new()
+onready var rank_centers  = $Control/Down/Labels/Control.get_children()
+onready var rank_labels = [$Control/Down/Labels/Control/Center/Label, $Control/Down/Labels/Control/Center2/Label]
+onready var rank_labels_node := $Control/Down/Labels
 
 var up = EaseMover.new()
 var down = EaseMover.new()
@@ -45,6 +55,12 @@ func _physics_process(delta):
 	down.move(delta, down.show or (p and Shared.clock_rank > 0))
 	keys.move(delta)
 	
+	if !gem_easy.is_complete:
+		gem_count(delta, gem_easy, gem_centers, gem_labels_node)
+	
+	if !rank_easy.is_complete:
+		gem_count(delta, rank_easy, rank_centers, rank_labels_node, 1.0)
+	
 	clock_down.modulate.a = clock_ease.count(delta, clock_ease.show and !(MenuPause.is_paused and !MenuPause.is_open))
 
 func scene_changed(override := false):
@@ -73,3 +89,29 @@ func menu_keys(accept := "", cancel := ""):
 	c[3].text = cancel
 	c[4].visible = is_c # key
 	
+
+func gem_text(arg := 0, is_animate := true, _easy := gem_easy, _labels := gem_labels, _labels_node := gem_labels_node):
+	_easy.clock = 0.0 if is_animate else (_easy.time * 0.99)
+	_easy.from.x = _labels_node.rect_min_size.x
+	_easy.to.x = str(arg).length() * 62
+	
+	yield(get_tree(), "idle_frame")
+	
+	for i in 2:
+		var a = arg - i
+		var s = str(a) if a > 0 else ""
+		_labels[1 - i].text = s
+
+func rank_text(arg := 0, is_animate := true):
+	gem_text(arg, is_animate, rank_easy, rank_labels, rank_labels_node)
+
+func gem_count(delta, _easy, _centers, _labels_node, _scale = -1):
+	var s = _easy.count(delta)
+	_labels_node.rect_min_size = _easy.from_lerp_to(s)
+	
+	var vec = [Vector2.ZERO, Vector2(0, 120 * _scale)]
+	var scl = [Vector2.ONE, Vector2.ONE * 0.33]
+	for i in 2:
+		var gc = _centers[i]
+		gc.rect_scale = scl[i].linear_interpolate(scl[1 - i], s)
+		gc.rect_position = vec[i].linear_interpolate(vec[1 - i], s)

@@ -116,7 +116,7 @@ queue_write = "1"
 
 [node name="Chat3" type="Node" parent="Actors/NPC"]
 script = ExtResource( 5 )
-expression_string = "gem_count > 2"
+expression_string = "gem_count > 2 and gem_count < 5"
 erase = "0"
 is_lines = 3
 lines = [ "Look at you glow! ^.^", "Can I see your gem collection?" ]
@@ -124,6 +124,17 @@ is_greeting = true
 greeting = 0
 is_queue = true
 queue_write = "1"
+
+[node name="Chat4" type="Node" parent="Actors/NPC"]
+script = ExtResource( 5 )
+expression_string = "gem_count > 4"
+erase = "0"
+is_lines = 3
+lines = [ "Hey puzzler! ^.^", "Your collection keeps growing! ;P", "You have many worlds to explore..." ]
+is_greeting = true
+greeting = 0
+is_queue = true
+queue_write = "1,2"
 
 [node name="NPC2" parent="Actors" instance=ExtResource( 16 )]
 position = Vector2( 1350, 1360 )

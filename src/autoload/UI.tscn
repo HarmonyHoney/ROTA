@@ -43,27 +43,61 @@ custom_constants/separation = 10
 alignment = 1
 
 [node name="Image" type="Control" parent="Control/Top"]
-margin_left = 543.0
+margin_left = 533.0
 margin_top = 42.0
-margin_right = 603.0
+margin_right = 613.0
 margin_bottom = 102.0
-rect_min_size = Vector2( 60, 60 )
+rect_min_size = Vector2( 80, 60 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Gem" type="Control" parent="Control/Top/Image"]
-margin_left = 30.0
+margin_left = 40.0
 margin_top = 30.0
-margin_right = 30.0
+margin_right = 40.0
 margin_bottom = 30.0
 
 [node name="Gem" parent="Control/Top/Image/Gem" instance=ExtResource( 6 )]
+scale = Vector2( 1.33, 1.33 )
 
-[node name="Label" type="Label" parent="Control/Top"]
-margin_left = 613.0
-margin_top = 27.0
-margin_right = 737.0
-margin_bottom = 116.0
+[node name="Labels" type="CenterContainer" parent="Control/Top"]
+margin_left = 623.0
+margin_right = 747.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 124, 0 )
+size_flags_horizontal = 4
+
+[node name="Control" type="Control" parent="Control/Top/Labels"]
+margin_left = 62.0
+margin_top = 72.0
+margin_right = 62.0
+margin_bottom = 72.0
+
+[node name="Center" type="CenterContainer" parent="Control/Top/Labels/Control"]
+use_top_left = true
+
+[node name="Label" type="Label" parent="Control/Top/Labels/Control/Center"]
+margin_left = -62.0
+margin_top = -45.0
+margin_right = 62.0
+margin_bottom = 44.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 3 )
+text = "17"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Center2" type="CenterContainer" parent="Control/Top/Labels/Control"]
+use_top_left = true
+
+[node name="Label" type="Label" parent="Control/Top/Labels/Control/Center2"]
+margin_left = -62.0
+margin_top = -45.0
+margin_right = 62.0
+margin_bottom = 44.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 3 )
 text = "17"
@@ -80,14 +114,47 @@ anchor_bottom = 1.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="Control/Down"]
-margin_left = 543.0
-margin_top = 27.0
-margin_right = 667.0
-margin_bottom = 116.0
+[node name="Labels" type="CenterContainer" parent="Control/Down"]
+margin_left = 533.0
+margin_right = 657.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 124, 0 )
+size_flags_horizontal = 4
+
+[node name="Control" type="Control" parent="Control/Down/Labels"]
+margin_left = 62.0
+margin_top = 72.0
+margin_right = 62.0
+margin_bottom = 72.0
+
+[node name="Center" type="CenterContainer" parent="Control/Down/Labels/Control"]
+use_top_left = true
+
+[node name="Label" type="Label" parent="Control/Down/Labels/Control/Center"]
+margin_left = -62.0
+margin_top = -45.0
+margin_right = 62.0
+margin_bottom = 44.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 3 )
-text = "28"
+text = "17"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Center2" type="CenterContainer" parent="Control/Down/Labels/Control"]
+use_top_left = true
+
+[node name="Label" type="Label" parent="Control/Down/Labels/Control/Center2"]
+margin_left = -62.0
+margin_top = -45.0
+margin_right = 62.0
+margin_bottom = 44.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 3 )
+text = "17"
 align = 1
 valign = 1
 __meta__ = {
@@ -95,16 +162,17 @@ __meta__ = {
 }
 
 [node name="Image" type="Control" parent="Control/Down"]
-margin_left = 677.0
+margin_left = 667.0
 margin_top = 42.0
-margin_right = 737.0
+margin_right = 747.0
 margin_bottom = 102.0
-rect_min_size = Vector2( 60, 60 )
+rect_min_size = Vector2( 80, 60 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Clock" parent="Control/Down/Image" instance=ExtResource( 5 )]
-position = Vector2( 30, 30 )
+position = Vector2( 40, 30 )
+scale = Vector2( 1.33, 1.33 )
 
 [node name="Keys" type="Control" parent="Control"]
 margin_left = 1280.0

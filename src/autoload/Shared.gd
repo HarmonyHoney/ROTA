@@ -597,10 +597,10 @@ func load_slot(arg := 0):
 		
 		# gems
 		gem_count = goals.size()
-		UI.gem_label.text = str(gem_count)
+		UI.gem_text(gem_count, false)
 		
 		clock_rank = collect_clocks()
-		UI.clock_label.text = str(clock_rank)
+		UI.rank_text(clock_rank, false)
 		
 		if s.has("time"):
 			save_time = s["time"]
@@ -614,9 +614,9 @@ func load_slot(arg := 0):
 		last_scene = start_path
 		goals = {}
 		gem_count = 0
-		UI.gem_label.text = str(gem_count)
+		UI.gem_text(gem_count, false)
 		clock_rank = 0
-		UI.clock_label.text = str(clock_rank)
+		UI.rank_text(clock_rank, false)
 		save_time = 0.0
 		maps_visited = []
 	

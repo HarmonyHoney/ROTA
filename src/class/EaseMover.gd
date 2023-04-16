@@ -31,6 +31,9 @@ func move(delta, arg := show):
 	
 	return current
 
+func from_lerp_to(arg := (clock / time)):
+	return from.linear_interpolate(to, arg)
+
 func frac():
 	return clock / time
 
