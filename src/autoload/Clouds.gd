@@ -4,7 +4,7 @@ extends Node2D
 export var is_editor := false setget set_is_editor
 export var day_clock := 0.0
 export var day_time := 420.0 setget set_day_time
-export var day_scale := 1.0
+export var day_scale := 1.0 setget set_day_scale
 export(Array, Color) var sky_pal = [Color("ffa300"), Color("00e0ff"), Color("0062ff"), Color("ac00ff"), Color("af00bf"), Color("250000")] setget set_sky_pal
 onready var sky_mat : ShaderMaterial = $BG/ColorRect.material
 
@@ -31,9 +31,8 @@ onready var star_orbit := $Sky/Center/Stars/Orbit
 onready var star_light := $Sky/Center/Stars/Orbit/Light2D
 onready var star_energy : float = star_light.energy
 onready var sun := $Sky/Center/Stars/Orbit/Sun
-onready var sun_ball := $Sky/Center/Stars/Orbit/Sun/Ball
-onready var sun_rays := $Sky/Center/Stars/Orbit/Sun/Rays
 onready var moon := $Sky/Center/Stars/Orbit/Moon
+onready var moon_mat : ShaderMaterial = moon.material
 
 export var orbit_distance := 650.0
 export var cloud_speed := 1.0
@@ -113,9 +112,10 @@ func _process(delta):
 	step_frac = fposmod(day_clock, step_time) / step_time
 	sky_step = posmod((day_clock / step_time) + 2, sky_pal.size())
 	
-	if sky_mat:
+	if sky_mat and moon_mat:
 		for i in 2:
-			sky_mat.set_shader_param("col" + str(i + 1), sky_pal[sky_step - 2 - i].linear_interpolate(sky_pal[sky_step - 1 - i], step_frac))
+			for m in [sky_mat, moon_mat]:
+				m.set_shader_param("col" + str(i + 1), sky_pal[sky_step - 2 - i].linear_interpolate(sky_pal[sky_step - 1 - i], step_frac))
 	
 	if Engine.editor_hint: return
 	
@@ -123,12 +123,9 @@ func _process(delta):
 	sun_frac = ease(abs(day_frac - 0.5) * 2.0, -9)
 	moon_frac = 1.0 - sun_frac
 	
-	sun.modulate.a = sun_frac
-	sun_ball.scale = Vector2.ONE * lerp(2.0, 1.0, sun_frac)
-	sun_rays.scale = Vector2.ONE * lerp(0.8, 1.0, sun_frac)
-	
-	moon.modulate.a = moon_frac
 	moon.scale = Vector2.ONE * lerp(0.5, 1.0, moon_frac)
+	sun.scale = Vector2.ONE * lerp(0.8, 1.0, sun_frac)
+	moon_mat.set_shader_param("sun_frac", sun_frac)
 	
 	starfield.modulate.a = moon_frac
 	starfield.visible = moon_frac > 0
@@ -158,12 +155,12 @@ func cam_moved():
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
-	rain_clock -= delta
+	rain_clock -= delta * day_scale
 	if rain_clock < 0:
 		self.is_rain = !is_rain 
 	
 	if is_rain:
-		solve_clock -= delta
+		solve_clock -= delta * day_scale
 		if solve_clock < 0:
 			solve_clock += solve_step
 			solve_fall()
@@ -183,6 +180,11 @@ func set_sky_pal(arg := sky_pal):
 func set_day_time(arg := day_time):
 	day_time = abs(arg)
 	step_time = day_time / max(sky_pal.size(), 1.0)
+
+func set_day_scale(arg := day_scale):
+	day_scale = arg
+	for i in precip_list:
+		i.speed_scale = max(1.0, day_scale)
 
 func set_is_rain(arg := is_rain):
 	is_rain = arg

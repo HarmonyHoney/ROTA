@@ -14,7 +14,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0.3, -0.3, 0, 0.3, 0, 0.515, -0.3, 0, 0.3, 0, 0.3, -0.3, 0, 0.3, 0 ),
+"points": PoolRealArray( 0.2, -0.3, 0, 0.3, 0, 0.345, -0.3, 0, 0.3, 0, 0.2, -0.3, 0, 0.3, 0 ),
 "times": PoolRealArray( 0, 0.5, 1 )
 }
 tracks/1/type = "bezier"
@@ -24,19 +24,19 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.515, -0.3, 0, 0.3, 0, 0.3, -0.3, 0, 0.3, 0, 0.515, -0.3, 0, 0.3, 0 ),
-"times": PoolRealArray( 0, 0.5, 1 )
+"points": PoolRealArray( 0.345, -0.3, 0, 0.3, 0, 0.2, -0.3, 0, 0.3, 0, 0.345, -0.3, 0, 0.3, 0 ),
+"times": PoolRealArray( 0.00999999, 0.5, 1.01 )
 }
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 5 )
-shader_param/offset_y = 0.3
-shader_param/add_color = Color( 0, 0, 0, 0 )
+shader_param/offset_y = 0.2
+shader_param/add_color = Color( 0.7, 0.7, 0.7, 1 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 5 )
-shader_param/offset_y = 0.515
-shader_param/add_color = Color( 0, 0, 0, 0 )
+shader_param/offset_y = 0.345
+shader_param/add_color = Color( 0.7, 0.7, 0.7, 1 )
 
 [node name="Spike" type="Node2D" groups=["spike"]]
 script = ExtResource( 4 )
@@ -49,22 +49,6 @@ anims/Idle = SubResource( 1 )
 [node name="Sprites" type="Node2D" parent="."]
 position = Vector2( -50, -50 )
 scale = Vector2( 0.25, 0.25 )
-
-[node name="LeftFloor" type="Sprite" parent="Sprites"]
-use_parent_material = true
-position = Vector2( 0, 400 )
-texture = ExtResource( 2 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 200, 200, 200 )
-
-[node name="RightFloor" type="Sprite" parent="Sprites"]
-use_parent_material = true
-position = Vector2( 200, 400 )
-texture = ExtResource( 2 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 200, 200, 200 )
 
 [node name="Left" type="Sprite" parent="Sprites"]
 material = SubResource( 2 )

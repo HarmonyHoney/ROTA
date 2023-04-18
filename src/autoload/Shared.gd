@@ -195,6 +195,10 @@ func _input(event):
 
 		if event.is_action_pressed("debug_makeover"):
 			MenuMakeover.is_open = !MenuMakeover.is_open
+		
+		if event.is_action_pressed("debug_add_gem"):
+			gem_count += 1
+			UI.gem_text(gem_count)
 
 func _physics_process(delta):
 	# recorded time
@@ -376,16 +380,21 @@ func collect_gem():
 		goal.fade_easy.clock = goal.fade_easy.time
 		goal.turn_x = Shared.player.dir_x
 		
-		if !goals.has(map_name) or map_clock < goals[map_name]:
+		var is_collect = !goals.has(map_name)
+		var is_faster = !is_collect and map_clock < goals[map_name]
+		
+		if is_collect or is_faster:
 			goals[map_name] = map_clock
-			var o = [gem_count, clock_rank]
 			gem_count = goals.size()
+			
+			var last_clock = clock_rank
 			clock_rank = collect_clocks()
+			var is_clock = clock_rank > last_clock
 			save_data()
 			
-			Cutscene.is_collect = gem_count > o[0]
-			Cutscene.is_clock = clock_rank > o[1]
-			Cutscene.is_faster = !Cutscene.is_collect and !Cutscene.is_clock
+			Cutscene.is_collect = is_collect
+			Cutscene.is_clock = is_clock
+			Cutscene.is_faster = !is_collect and !is_clock
 			#print("is_collect: ", Cutscene.is_collect, " is_clock: ", Cutscene.is_clock)
 
 func collect_clocks(g := goals):
