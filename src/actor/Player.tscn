@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/actor/Player.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/detail/Visible.gd" type="Script" id=4]
 [ext_resource path="res://media/audio/sfx/player_land.wav" type="AudioStream" id=5]
 [ext_resource path="res://src/actor/door/Arrow.tscn" type="PackedScene" id=6]
+[ext_resource path="res://smoothing2d.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17, 17 )
@@ -967,6 +968,8 @@ anims/walk = SubResource( 8 )
 next/jump = "jump"
 
 [node name="Sprites" type="Node2D" parent="."]
+script = ExtResource( 7 )
+target = NodePath("..")
 
 [node name="Root" type="Node2D" parent="Sprites"]
 use_parent_material = true
