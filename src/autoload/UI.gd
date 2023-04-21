@@ -49,7 +49,7 @@ func _ready():
 	scene_changed()
 	clock.modulate.a = Shared.clock_alpha
 
-func _physics_process(delta):
+func _process(delta):
 	var p = MenuPause.is_open
 	up.move(delta, up.show or (p and Shared.gem_count > 0))
 	down.move(delta, down.show or (p and Shared.clock_rank > 0))

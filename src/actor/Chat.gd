@@ -35,7 +35,7 @@ func scene():
 	is_show = false
 	show_easy.clock = 0.0
 
-func _physics_process(delta):
+func _process(delta):
 	if Engine.editor_hint and !is_editor: return
 	
 	var s = show_easy.count(delta, is_show)

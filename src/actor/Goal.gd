@@ -26,7 +26,7 @@ func _ready():
 		var c = 0.0
 		sprites.modulate = Color(c,c,c, 0.2)
 
-func _physics_process(delta):
+func _process(delta):
 	if shine_easy.clock > 0:
 		sprites.scale = Vector2.ONE * lerp(1.0, 2.0, shine_easy.count(delta, false))
 	

@@ -16,7 +16,7 @@ func _ready():
 	get_tree().connect("idle_frame", self, "place")
 	Shared.connect("scene_changed", self, "set_box")
 
-func _physics_process(delta):
+func _process(delta):
 	_delta = delta
 
 func set_box(b = null):

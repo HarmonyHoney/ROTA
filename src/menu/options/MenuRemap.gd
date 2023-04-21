@@ -48,7 +48,7 @@ func _input(event):
 	else:
 		menu_input(event)
 
-func _physics_process(delta):
+func _process(delta):
 	if is_prompt:
 		prompt_clock -= delta
 		prompt_timer_label.text = str(ceil(max(0, prompt_clock)))
@@ -56,8 +56,7 @@ func _physics_process(delta):
 		if prompt_clock < 0:
 			is_prompt = false
 	
-	prompt_ease.count(delta, is_prompt)
-	prompt_ease.node.modulate.a = lerp(0, 1, prompt_ease.clock / prompt_ease.time)
+	prompt_ease.node.modulate.a = prompt_ease.count(delta, is_prompt)
 	prompt_ease.node.visible = prompt_ease.clock > 0
 	
 	#if !is_open: return
@@ -66,9 +65,8 @@ func _physics_process(delta):
 	header.rect_global_position.y = clamp(header_track.rect_global_position.y, 30, 1280)
 	
 	# header back
-	header_ease.show  = header.rect_global_position.y == 30
-	header_ease.count(delta)
-	header_back.modulate.a = lerp(0, 1.0, header_ease.frac())
+	header_ease.show = header.rect_global_position.y == 30
+	header_back.modulate.a = header_ease.count(delta)
 
 func accept():
 	if items[cursor].is_in_group("reset"):

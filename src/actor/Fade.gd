@@ -7,7 +7,7 @@ func _ready():
 	visible = Shared.is_demo if is_demo else true
 	fade.show = false
 
-func _physics_process(delta):
+func _process(delta):
 	modulate.a = fade.count(delta)
 
 func _on_Area2D_area_entered(area):

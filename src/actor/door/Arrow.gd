@@ -31,8 +31,8 @@ func _ready():
 	set_image_pos()
 	
 	if Engine.editor_hint: return
-	self.image_show = false
 	
+	self.image_show = false
 	player = Shared.player
 
 func _physics_process(delta):
@@ -42,16 +42,18 @@ func _physics_process(delta):
 	try_active()
 
 	# image display
-	var is_alpha = is_active and !is_locked and !MenuPause.is_paused and !Cutscene.is_playing and !Wipe.is_wipe and Shared.player.spr_easy.is_complete
-	arrow_easy.count(delta, is_alpha)
+	arrow_easy.show = is_active and !is_locked and !MenuPause.is_paused and !Cutscene.is_playing and !Wipe.is_wipe and Shared.player.spr_easy.is_complete
 	
 	# open door
-	var is_open =  Input.is_action_pressed("up") and is_alpha and player != null and !player.is_hold and player.dir == dir and player.is_floor
-	open_easy.count(delta, is_open)
+	open_easy.show = Input.is_action_pressed("up") and arrow_easy.show and player != null and !player.is_hold and player.dir == dir and player.is_floor
+
+func _process(delta):
+	if Engine.editor_hint: return
+	arrow_easy.count(delta)
+	open_easy.count(delta)
 	
-	if open_easy.clock > 0:
-		if open_easy.is_complete and !open_easy.is_last and Shared.arrow_track == self:
-			emit_signal("open")
+	if open_easy.is_complete and !open_easy.is_last and Shared.arrow_track == self:
+		emit_signal("open")
 
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)

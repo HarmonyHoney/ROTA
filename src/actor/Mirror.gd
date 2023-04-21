@@ -30,7 +30,7 @@ func _ready():
 	rig_ease.clock = rig_ease.time
 	create_rig()
 
-func _physics_process(delta):
+func _process(delta):
 	var s = rig_ease.count(delta)
 	rig.modulate.a = s
 	stage.modulate.a = 1.0 - s

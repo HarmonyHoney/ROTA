@@ -30,7 +30,9 @@ func _ready():
 	
 	door_mat.set_shader_param("line", 1.0)
 
-func _physics_process(delta):
+func _process(delta):
+	if Engine.editor_hint: return
+	
 	if open_close:
 		var s = open_count(delta)
 		door_mat.set_shader_param("line", lerp(0.9, 0.1, s))

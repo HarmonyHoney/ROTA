@@ -15,7 +15,7 @@ func _ready():
 	if is_night:
 		night_ease.clock = night_ease.time * int(Clouds.moon_frac > night_min)
 
-func _physics_process(delta):
+func _process(delta):
 	t += delta
 	
 	var s = 1.0 + (sin(t * time_scale) * sin_scale)

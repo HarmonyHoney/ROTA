@@ -26,7 +26,7 @@ func _ready():
 		
 	door_mat.set_shader_param("line", 0.0)
 
-func _physics_process(delta):
+func _process(delta):
 	if Engine.editor_hint: return
 	
 	if open_close:

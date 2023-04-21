@@ -10,6 +10,7 @@ var current := Vector2.ZERO
 var node
 
 var is_complete setget , get_is_complete
+var is_less setget , get_is_less
 var is_last setget , get_is_last
 
 func _init(_time := time, _from := from, _to := to, _node := node):
@@ -23,8 +24,8 @@ func count(delta, arg := show, is_smooth := true):
 	clock = clamp(clock + (delta if arg else -delta), 0, time)
 	return smooth() if is_smooth else (clock / time)
 
-func move(delta, arg := show):
-	current = from.linear_interpolate(to, count(delta, arg))
+func move(delta, arg := show, is_smooth := true):
+	current = from.linear_interpolate(to, count(delta, arg, is_smooth))
 	
 	if is_instance_valid(node):
 		node.rect_position = current
@@ -42,6 +43,9 @@ func smooth():
 
 func get_is_complete():
 	return clock == time
+
+func get_is_less():
+	return clock < time
 
 func get_is_last():
 	return clock == last

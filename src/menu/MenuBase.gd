@@ -9,9 +9,11 @@ export var cursor_path : NodePath
 onready var cursor_node = get_node_or_null(cursor_path)
 var cursor := 0 setget set_cursor
 export var cursor_margin := Vector2(30, 0)
+var cursor_speed := 9.0
 
 export var scroll_path : NodePath
 onready var scroll_node = get_node_or_null(scroll_path)
+var scroll_speed := 4.8
 
 export var fade_path : NodePath
 onready var fade_node = get_node_or_null(fade_path)
@@ -58,7 +60,7 @@ func _input(event):
 	if is_input:
 		menu_input(event)
 
-func _physics_process(delta):
+func _process(delta):
 	if is_process:
 		menu_process(delta)
 
@@ -119,12 +121,12 @@ func menu_process(delta):
 		
 		# move cursor
 		if items_node and cursor_node:
-			cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(items[cursor].rect_global_position - cursor_margin, 0.15)
-			cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size + (cursor_margin * 2.0), 0.15)
+			cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(items[cursor].rect_global_position - cursor_margin, cursor_speed * delta)
+			cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size + (cursor_margin * 2.0), cursor_speed * delta)
 			
 			# scroll
 			if scroll_node:
-				scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), 0.08)
+				scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), scroll_speed * delta)
 
 func fade_delta(arg := 0.0):
 	if fade_node:

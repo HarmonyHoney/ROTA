@@ -84,8 +84,6 @@ func _physics_process(delta):
 	if Engine.editor_hint: return
 	
 	if is_respawn:
-		sprite.scale = Vector2.ONE * respawn_ease.count(delta)
-		
 		if respawn_ease.is_complete and area_respawn.get_overlapping_bodies().size() == 0:
 			is_respawn = false
 			
@@ -94,44 +92,9 @@ func _physics_process(delta):
 			
 			audio_respawn.play()
 			sprite.modulate.a = 1.0
-		return
 	
-	elif is_push:
-		var s = push_ease.count(delta)
-		# lerp sprite and update collision_sprite
-		sprite.position = move_from.linear_interpolate(Vector2.ZERO, s)
-		collision_sprite.position = sprite.position
-		sprite.rotation = lerp_angle(turn_to + deg2rad(12 * -push_x), turn_to, abs(0.5 - s) * 2.0)
-		
-		if push_ease.is_complete:
-			is_push = false
-	
-	# turn clock
-	elif is_turn:
-		var s = turn_ease.count(delta)
-		sprite.rotation = lerp_angle(turn_from, turn_to, s)
-		sprite.scale = Vector2.ONE * lerp(0.8, 1.0, s)
-		
-		if turn_ease.is_complete:
-			is_turn = false
-	
-	# pickup clock
-	elif pickup_ease.clock < pickup_ease.time:
-		sprite.scale = Vector2.ONE * lerp(1.1, 1.0, pickup_ease.count(delta))
-	
-	# movement
-	elif is_move:
-		velocity += gravity * delta
-		sprite.position = sprite.position.move_toward(Vector2.ZERO, velocity * delta)
-		collision_sprite.position = sprite.position
-		
-		if sprite.position == Vector2.ZERO:
-			is_move = false
-			
-			if Shared.is_outside_boundary(global_position):
-				fall_out()
-			else:
-				Audio.play(audio_land, 0.7, 1.3)
+	elif is_push or is_turn or is_move or pickup_ease.is_less:
+		pass
 	
 	# start movement
 	elif !is_move:
@@ -149,6 +112,46 @@ func _physics_process(delta):
 			velocity = start_velocity
 			
 			Audio.play(audio_move, 0.7, 1.3)
+
+func _process(delta):
+	if is_respawn:
+		sprite.scale = Vector2.ONE * respawn_ease.count(delta)
+	
+	elif is_push:
+		var s = push_ease.count(delta)
+		# lerp sprite and update collision_sprite
+		sprite.position = move_from.linear_interpolate(Vector2.ZERO, s)
+		collision_sprite.position = sprite.position
+		sprite.rotation = lerp_angle(turn_to + deg2rad(12 * -push_x), turn_to, abs(0.5 - s) * 2.0)
+		if push_ease.is_complete:
+			is_push = false
+	
+	# turn clock
+	elif is_turn:
+		var s = turn_ease.count(delta)
+		sprite.rotation = lerp_angle(turn_from, turn_to, s)
+		sprite.scale = Vector2.ONE * lerp(0.8, 1.0, s)
+		
+		if turn_ease.is_complete:
+			is_turn = false
+	
+	# pickup clock
+	elif pickup_ease.is_less:
+		sprite.scale = Vector2.ONE * lerp(1.1, 1.0, pickup_ease.count(delta))
+	
+	# movement
+	elif is_move:
+		velocity += gravity * delta
+		sprite.position = sprite.position.move_toward(Vector2.ZERO, velocity * delta)
+		collision_sprite.position = sprite.position
+		
+		if sprite.position == Vector2.ZERO:
+			is_move = false
+			
+			if Shared.is_outside_boundary(global_position):
+				fall_out()
+			else:
+				Audio.play(audio_land, 0.7, 1.3)
 
 func set_dir(arg := dir):
 	dir_last = dir

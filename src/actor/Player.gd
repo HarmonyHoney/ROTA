@@ -15,6 +15,10 @@ onready var spr_eyes := $Sprites/Root/Body/Eyes
 var spr_easy := EaseMover.new()
 signal show_up
 var door_exit
+var _delta := 0.0166667
+var difference := Vector2.ZERO
+var last_pos := Vector2.ZERO
+var target_pos := Vector2.ZERO
 
 onready var spr_hands_parent := $Sprites/Hands
 onready var spr_hand_l := $Sprites/Hands/Left
@@ -75,16 +79,14 @@ var is_dead := false
 var dead_clock := 0.0
 var dead_time := 0.7
 
-var turn_clock := 0.0
-var turn_time := 0.2
+var turn_ease := EaseMover.new(0.2)
 var turn_from := 0.0
 var turn_to := 0.0
 
 var is_hold := false
 var is_release := false
 var box
-var push_clock := 0.0
-var push_time := 0.2
+var push_ease := EaseMover.new(0.2)
 var push_from := Vector2.ZERO
 var push_dir := 1
 
@@ -101,8 +103,7 @@ var goal_start := Vector2.ZERO
 var goal_grab := Vector2.ZERO
 
 var squish_from := Vector2.ONE
-var squish_clock := 0.0
-var squish_time := 0.5
+var squish_ease := EaseMover.new(0.5)
 
 var is_unpause := false
 var unpause_tick := 0
@@ -154,6 +155,7 @@ func _enter_tree():
 	if get_parent() == Shared:
 		Shared.player = self
 	get_tree().connect("physics_frame", self, "physics_frame")
+	get_tree().connect("idle_frame", self, "idle_frame")
 	MenuPause.connect("opened", self, "pause")
 	MenuPause.connect("closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")
@@ -242,7 +244,7 @@ func scene():
 	sprites.position = Vector2.ZERO
 	sprites.rotation = turn_to
 	emit_signal("turn_angle", turn_to)
-	turn_clock = turn_time
+	turn_ease.clock = turn_ease.time
 	
 	# face left or right
 	randomize()
@@ -261,31 +263,8 @@ func scene():
 func _physics_process(delta):
 	if Engine.editor_hint: return
 	
-	if is_dead:
-		sprites.position += rot(velocity) * delta
-		sprites.rotate(deg2rad(-dir_x * 240) * delta)
-		velocity.y += fall_gravity * delta
-		
-		if dead_clock < dead_time:
-			dead_clock += delta
-			if dead_clock > dead_time:
-				Cutscene.is_playing = false
-				Shared.reset()
-		
+	if is_dead or (spr_easy.is_less or !spr_easy.show):
 		return
-	
-	if !spr_easy.is_complete or !spr_easy.show:
-		var sec = spr_easy.count(delta, spr_easy.show and !Wipe.is_intro)
-		var dp = to_local(door_exit.global_position) if is_instance_valid(door_exit) else rot(Vector2(0, -25))
-		sprites.position = dp.linear_interpolate(Vector2.ZERO, sec)
-		for i in [spr_hands_parent, spr_root]:
-			i.rotation = lerp(TAU * 0.15 * -dir_x, 0.0, sec)
-			i.scale = Vector2.ONE * lerp(0.0, 1.0, sec)
-		
-		if sec < 1.0:
-			return
-		else:
-			emit_signal("show_up")
 	
 	# input
 	release_clock = max(release_clock - delta, 0)
@@ -315,23 +294,8 @@ func _physics_process(delta):
 	
 	# pickup goal
 	if is_goal and is_instance_valid(goal):
-		var s = goal_easy.count(delta)
-		
-		var offset = Vector2(20, 20) * goal.sprites.scale
-		var p1 = goal.to_global(offset * Vector2(-1, 1))
-		var p2 = goal.to_global(offset)
-		
-		spr_hand_l.global_position = p1
-		spr_hand_r.global_position = p2
-		
-		match goal_step:
-			0:
-				spr_hand_l.global_position = hand_positions[0].linear_interpolate(p1, s)
-				spr_hand_r.global_position = hand_positions[1].linear_interpolate(p2, s)
-				
-				move(goal_start.linear_interpolate(goal_grab, s) - global_position, 0)
-			1:
-				goal.global_position = goal_grab.linear_interpolate(global_position + rot(Vector2(0, -100)), s)
+		if goal_step == 0:
+			move(goal_start.linear_interpolate(goal_grab, goal_easy.smooth()) - global_position, 0)
 			
 		# next step
 		if goal_easy.is_complete:
@@ -367,18 +331,14 @@ func _physics_process(delta):
 				hold_y = 1
 			
 			# during push
-			if push_clock < push_time:
-				push_clock = min(push_clock + delta, push_time)
+			if push_ease.is_less:
+				var smooth = push_ease.count(delta)
 				
 				var hold_pos = box.global_position + rot(Vector2(88 * -dir_x, 50 - collider_size.y))
-				var smooth = smoothstep(0, 1, push_clock / push_time)
 				var move_to = push_from.linear_interpolate(hold_pos, smooth)
 				var diff = move_to - global_position
 				
 				move(diff, 0)
-				
-				# wobble body
-				spr_root.rotation = lerp_angle(deg2rad(12 * -push_dir), 0, abs(0.5 - smooth) * 2.0)
 			
 			# during box turn
 			elif box.is_turn:
@@ -405,7 +365,7 @@ func _physics_process(delta):
 					if dir_x == joy_q.x or !box.test_tile(dir - joy_q.x, 2):
 						if box.start_push(dir - joy_q.x, joy_q.x):
 							push_from = global_position
-							push_clock = 0
+							push_ease.clock = 0
 							push_dir = joy_q.x
 							
 							
@@ -428,15 +388,9 @@ func _physics_process(delta):
 	
 	# not holding
 	else:
-		# turning
-		if turn_clock < turn_time:
-			turn_clock = min(turn_clock + delta, turn_time)
-			var r = lerp_angle(turn_from, turn_to, smoothstep(0, 1, turn_clock / turn_time))
-			sprites.rotation = r
-			emit_signal("turn_angle", r)
 		
-		# in control
-		else:
+		# done turning and in control
+		if turn_ease.is_complete:
 			# dir_x
 			if joy.x != 0:
 				self.dir_x = joy.x
@@ -474,7 +428,7 @@ func _physics_process(delta):
 					Audio.play("player_jump", 0.9, 1.1)
 					
 					squish_from = Vector2(0.7, 1.3)
-					squish_clock = 0.0
+					squish_ease.clock = 0.0
 				
 				# start hold
 				elif btn_push and hold_clock == hold_cooldown:
@@ -497,7 +451,7 @@ func _physics_process(delta):
 						self.dir_x = 1 if check_x else -1
 						
 						push_from = global_position
-						push_clock = 0
+						push_ease.clock = 0
 						push_dir = dir_x
 						
 						Shared.guide.set_box(box)
@@ -553,16 +507,94 @@ func _physics_process(delta):
 			Audio.play(audio_land, 0.7, 1.1)
 			
 			squish_from = Vector2(1.3, 0.7)
-			squish_clock = 0.0
+			squish_ease.clock = 0.0
 		
 		air_clock = 0.0
 	else:
 		air_clock += delta
 	
+	if is_npc:
+		if greeting_clock > 0:
+			greeting_clock = max(0, greeting_clock - delta)
+
+func physics_frame():
+	last_pos = target_pos
+	target_pos = global_position
+	difference = last_pos - target_pos
+
+func _process(delta):
+	if Engine.editor_hint: return
+	_delta = delta
+	
+	if is_dead:
+		sprites.position += rot(velocity) * delta
+		sprites.rotate(deg2rad(240) * -dir_x * delta)
+		velocity.y += fall_gravity * delta
+		
+		if dead_clock < dead_time:
+			dead_clock += delta
+			if dead_clock > dead_time:
+				Cutscene.is_playing = false
+				Shared.reset()
+		
+		return
+	
+	if spr_easy.is_less or !spr_easy.show:
+		var sec = spr_easy.count(delta, spr_easy.show and !Wipe.is_intro)
+		var dp = to_local(door_exit.global_position) if is_instance_valid(door_exit) else rot(Vector2(0, -25))
+		sprites.position = dp.linear_interpolate(Vector2.ZERO, sec)
+		for i in [spr_hands_parent, spr_root]:
+			i.rotation = lerp(TAU * 0.15 * -dir_x, 0.0, sec)
+			i.scale = Vector2.ONE * lerp(0.0, 1.0, sec)
+		
+		if sec < 1.0:
+			return
+		else:
+			emit_signal("show_up")
+	
+	# interpolate
+	sprites.position = difference.linear_interpolate(Vector2.ZERO, Engine.get_physics_interpolation_fraction()) if Shared.is_interpolate else Vector2.ZERO
+	
+	if is_goal and is_instance_valid(goal):
+		var s = goal_easy.count(delta)
+		
+		var offset = Vector2(20, 20) * goal.sprites.scale
+		var p1 = goal.to_global(offset * Vector2(-1, 1))
+		var p2 = goal.to_global(offset)
+		
+		spr_hand_l.global_position = p1
+		spr_hand_r.global_position = p2
+		
+		match goal_step:
+			0:
+				spr_hand_l.global_position = hand_positions[0].linear_interpolate(p1, s)
+				spr_hand_r.global_position = hand_positions[1].linear_interpolate(p2, s)
+			1:
+				goal.global_position = goal_grab.linear_interpolate(global_position + rot(Vector2(0, -100)), s)
+	
+	
+	# hold animation
+	if is_hold:
+		# during push
+		if push_ease.is_less:
+			# wobble body
+			var s = abs(0.5 - push_ease.smooth()) * 2.0
+			spr_root.rotation = lerp_angle(deg2rad(12 * -push_dir), 0, s)
+		
+		# body
+		var s = 6.0 * delta
+		spr_body.rotation = lerp_angle(spr_body.rotation, 0, s)
+		spr_body.position.y = lerp(spr_body.position.y, 0, s)
+		
+	else:
+		if turn_ease.is_less:
+			var s = turn_ease.count(delta)
+			var r = lerp_angle(turn_from, turn_to, s)
+			sprites.rotation = r
+			emit_signal("turn_angle", r)
+	
 	# squash squish and stretch
-	squish_clock = min(squish_clock + delta, squish_time)
-	var s = smoothstep(0, 1, squish_clock / squish_time)
-	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, s)
+	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, squish_ease.count(delta))
 	
 	# blink anim
 	if blink_clock < blink_time:
@@ -576,17 +608,12 @@ func _physics_process(delta):
 			blink_ease.show = true
 			blink_clock = 0.0
 			blink_time = rand_range(blink_range.x, blink_range.y)
-	
-	if is_npc:
-		if greeting_clock > 0:
-			greeting_clock = max(0, greeting_clock - delta)
 
-func physics_frame():
-	# hold animation
+func idle_frame():
 	if is_hold:
 		# hands
 		var box_angle = turn_to
-		var smooth = 0.2
+		var smooth = 12.0 * _delta
 		if box.is_turn or box.is_push:
 			box_angle += box.sprite.rotation - (box.turn_from if box.is_turn else box.turn_to)
 			smooth = 1.0
@@ -597,10 +624,6 @@ func physics_frame():
 			var offset = Vector2(0, 20  * (-1 if sign(dir_x + 1) == i else 1))
 			var goto = box_edge + offset.rotated(box_angle)
 			spr_hands[i].global_position = spr_hands[i].global_position.linear_interpolate(goto, smooth)
-		
-		# body
-		spr_body.rotation = lerp_angle(spr_body.rotation, 0, 0.1)
-		spr_body.position.y = lerp(spr_body.position.y, 0, 0.1)
 
 ### Set Get
 
@@ -608,7 +631,7 @@ func set_dir(arg := dir):
 	dir = posmod(arg, 4)
 	turn_to = deg2rad(dir * 90)
 	
-	turn_clock = 0
+	turn_ease.clock = 0
 	turn_from = sprites.rotation if sprites else 0
 	
 	if Engine.editor_hint:

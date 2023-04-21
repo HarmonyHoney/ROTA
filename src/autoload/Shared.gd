@@ -1,6 +1,9 @@
 extends Node
 
 export var is_debug := false
+export var time_scale := 1.0 setget set_time_scale
+export var iterations := 60 setget set_iterations
+export var target_fps := 0.0 setget set_target_fps
 
 var splash_path := "res://src/menu/Splash.tscn"
 var title_path := "res://src/menu/MenuTitle.tscn"
@@ -118,6 +121,7 @@ var light_enabled := 1 setget set_light_enabled
 var shadow_enabled := 1 setget set_shadow_enabled
 var shadow_buffer := 2 setget set_shadow_buffer
 var is_weather := true setget set_is_weather
+var is_interpolate := true setget set_is_interpolate
 
 var is_demo := false
 
@@ -168,6 +172,7 @@ func _ready():
 	set_shadow_enabled()
 	set_shadow_buffer()
 	set_is_weather()
+	set_is_interpolate()
 
 func _input(event):
 	if event is InputEventKey and event.pressed and !event.is_echo():
@@ -201,6 +206,13 @@ func _input(event):
 			UI.gem_text(gem_count)
 
 func _physics_process(delta):
+	# auto save
+	auto_save_clock += delta
+	if auto_save_clock > auto_save_time:
+		auto_save_clock = 0.0
+		save_data()
+
+func _process(delta):
 	# recorded time
 	save_time += delta
 	if !get_tree().paused and !Wipe.is_wipe and !Cutscene.is_playing and player.spr_easy.is_complete:
@@ -210,17 +222,10 @@ func _physics_process(delta):
 	UI.clock_file.text = time_string(save_time, clock_decimals)
 	UI.clock_map.text = time_string(map_clock, clock_decimals)
 	
-	# auto save
-	auto_save_clock += delta
-	if auto_save_clock > auto_save_time:
-		auto_save_clock = 0.0
-		save_data()
-	
 	# arrows
 	if is_instance_valid(arrow_track):
 		arrow.modulate.a = arrow_track.arrow_easy.smooth()
 		arrow_mat.set_shader_param("fill_y", arrow_track.open_easy.smooth())
-	
 
 func time_string(t := 0.0, dec = 2, is_min := false, is_hour := false):
 	# time
@@ -418,14 +423,12 @@ func speedrun_goal(scene_path := csfn, _show := true):
 		if UI.clock_goal.visible:
 			UI.clock_goal.text = "Goal: " + time_string(speedruns[m], 2)
 
-### Volume
+### Options
 
 func set_volume(bus = 0, vol = 0):
 	volume[bus] = clamp(vol, 0, 100)
 	AudioServer.set_bus_volume_db(bus, linear2db(volume[bus] / 100.0))
 	#print("volume[", bus, "] ",AudioServer.get_bus_name(bus) ," : ", volume[bus])
-
-### Options
 
 func set_radial_blur(arg := radial_blur):
 	radial_blur = arg
@@ -450,10 +453,25 @@ func set_is_weather(arg := is_weather):
 	is_weather = bool(arg)
 	Clouds.set_is_weather(is_weather)
 
+func set_is_interpolate(arg := is_interpolate):
+	is_interpolate = bool(arg)
+
 func set_clock_alpha(arg := clock_alpha):
 	clock_alpha = clamp(arg, 0, 1)
 	if is_instance_valid(UI.clock):
 		UI.clock.modulate.a = clock_alpha
+
+func set_time_scale(arg := time_scale):
+	time_scale = arg
+	Engine.time_scale = time_scale
+
+func set_iterations(arg := iterations):
+	iterations = max(1, arg)
+	Engine.iterations_per_second = iterations
+
+func set_target_fps(arg := target_fps):
+	target_fps = abs(arg)
+	Engine.target_fps = target_fps
 
 ### Exit Game
 
@@ -648,6 +666,7 @@ func save_options():
 	
 	o["mouse"] = int(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
 	o["radial_blur"] = int(radial_blur)
+	o["is_interpolate"] = int(is_interpolate)
 	
 	o["light_enabled"] = int(light_enabled)
 	o["shadow_enabled"] = int(shadow_enabled)
@@ -683,6 +702,8 @@ func load_options():
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if int(d["mouse"]) else Input.MOUSE_MODE_HIDDEN
 	if d.has("radial_blur"):
 		self.radial_blur = int(d["radial_blur"])
+	if d.has("is_interpolate"):
+		self.is_interpolate = int(d["is_interpolate"])
 	
 	if d.has("light_enabled"):
 		self.light_enabled = int(d["light_enabled"])

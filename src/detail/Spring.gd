@@ -19,10 +19,9 @@ onready var audio_hit := get_node_or_null(audio_path)
 export var pitch_from := 0.7
 export var pitch_to := 1.3
 
-
-func _physics_process(delta):
+func _process(delta):
 	velocity = lerp(velocity, (target - angle) * 0.5, delta * weight)
-	angle += velocity
+	angle += velocity * 60.0 * delta
 	
 	if sprites:
 		if is_scale:
@@ -33,8 +32,8 @@ func _physics_process(delta):
 	# cooldown
 	cooldown_clock = max(cooldown_clock - delta, 0)
 
-func hit(scale := 1.0):
-	velocity += add_vel * scale
+func hit(_scale := 1.0):
+	velocity += add_vel * _scale
 	
 	if is_audio and audio_hit:
 		audio_hit.pitch_scale = rand_range(pitch_from, pitch_to)
