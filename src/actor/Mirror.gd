@@ -28,6 +28,9 @@ func _ready():
 	arrow.dir = posmod(dir, 4)
 	rig.global_rotation = 0
 	rig_ease.clock = rig_ease.time
+	
+	yield(get_tree().create_timer(3.0), "timeout")
+	
 	create_rig()
 
 func _process(delta):
@@ -38,6 +41,26 @@ func _process(delta):
 	
 	for i in lights:
 		i.self_modulate.a = s
+	
+	# sky palette
+	var sps = sky_pal.size()
+	var sky_step = posmod(Clouds.sky_step + (sps / 2.0) , sps)
+	var sf = Clouds.step_frac
+	
+	for i in 2:
+		sky_mat.set_shader_param("col" + str(i + 1), sky_pal[sky_step - 2 - i].linear_interpolate(sky_pal[sky_step - 1 - i], sf))
+	
+	# animate
+	for i in from.size():
+		if is_instance_valid(to[i]) and is_instance_valid(from[i]):
+			to[i].transform = from[i].transform
+	
+	dist = to_local(p.global_position)
+	rig.position = dist + (offset * dir_x)
+	rig.visible = back_rect.grow(hide_distance).has_point(rig.position)
+	
+	if abs(dist.x) > 200:
+		dir_x = -sign(dist.x)
 
 func create_rig():
 	for i in rig.get_children():
@@ -82,26 +105,4 @@ func closed():
 	if is_instance_valid(Shared.door_in):
 		Shared.door_in.modulate.a = 1.0
 		Shared.door_in.arrow.is_locked = false
-
-func idle_frame():
-	# animate
-	for i in from.size():
-		if is_instance_valid(to[i]) and is_instance_valid(from[i]):
-			to[i].transform = from[i].transform
-	
-	dist = to_local(p.global_position)
-	rig.position = dist + (offset * dir_x)
-	rig.visible = back_rect.grow(hide_distance).has_point(rig.position)
-	
-	if abs(dist.x) > 200:
-		dir_x = -sign(dist.x)
-	
-	var sps = sky_pal.size()
-	var sky_step = posmod(Clouds.sky_step + (sps / 2.0) , sps)
-	var sf = Clouds.step_frac
-	
-	for i in 2:
-		sky_mat.set_shader_param("col" + str(i + 1), sky_pal[sky_step - 2 - i].linear_interpolate(sky_pal[sky_step - 1 - i], sf))
-	
-	
 	

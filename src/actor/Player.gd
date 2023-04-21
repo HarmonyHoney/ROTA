@@ -15,7 +15,6 @@ onready var spr_eyes := $Sprites/Root/Body/Eyes
 var spr_easy := EaseMover.new()
 signal show_up
 var door_exit
-var _delta := 0.0166667
 var difference := Vector2.ZERO
 var last_pos := Vector2.ZERO
 var target_pos := Vector2.ZERO
@@ -155,7 +154,6 @@ func _enter_tree():
 	if get_parent() == Shared:
 		Shared.player = self
 	get_tree().connect("physics_frame", self, "physics_frame")
-	get_tree().connect("idle_frame", self, "idle_frame")
 	MenuPause.connect("opened", self, "pause")
 	MenuPause.connect("closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")
@@ -524,7 +522,6 @@ func physics_frame():
 
 func _process(delta):
 	if Engine.editor_hint: return
-	_delta = delta
 	
 	if is_dead:
 		sprites.position += rot(velocity) * delta
@@ -571,7 +568,8 @@ func _process(delta):
 				spr_hand_r.global_position = hand_positions[1].linear_interpolate(p2, s)
 			1:
 				goal.global_position = goal_grab.linear_interpolate(global_position + rot(Vector2(0, -100)), s)
-	
+		
+		return
 	
 	# hold animation
 	if is_hold:
@@ -585,6 +583,20 @@ func _process(delta):
 		var s = 6.0 * delta
 		spr_body.rotation = lerp_angle(spr_body.rotation, 0, s)
 		spr_body.position.y = lerp(spr_body.position.y, 0, s)
+		
+		# hands
+		var box_angle = turn_to
+		var smooth = 12.0 * delta
+		if box.is_turn or box.is_push:
+			box_angle += box.sprite.rotation - (box.turn_from if box.is_turn else box.turn_to)
+			smooth = 1.0
+		
+		var box_edge = box.sprite.global_position - Vector2(50 * dir_x, 0).rotated(box_angle)
+		# move hands
+		for i in 2:
+			var offset = Vector2(0, 20  * (-1 if sign(dir_x + 1) == i else 1))
+			var goto = box_edge + offset.rotated(box_angle)
+			spr_hands[i].global_position = spr_hands[i].global_position.linear_interpolate(goto, smooth)
 		
 	else:
 		if turn_ease.is_less:
@@ -608,22 +620,6 @@ func _process(delta):
 			blink_ease.show = true
 			blink_clock = 0.0
 			blink_time = rand_range(blink_range.x, blink_range.y)
-
-func idle_frame():
-	if is_hold:
-		# hands
-		var box_angle = turn_to
-		var smooth = 12.0 * _delta
-		if box.is_turn or box.is_push:
-			box_angle += box.sprite.rotation - (box.turn_from if box.is_turn else box.turn_to)
-			smooth = 1.0
-		
-		var box_edge = box.sprite.global_position - Vector2(50 * dir_x, 0).rotated(box_angle)
-		# move hands
-		for i in 2:
-			var offset = Vector2(0, 20  * (-1 if sign(dir_x + 1) == i else 1))
-			var goto = box_edge + offset.rotated(box_angle)
-			spr_hands[i].global_position = spr_hands[i].global_position.linear_interpolate(goto, smooth)
 
 ### Set Get
 
