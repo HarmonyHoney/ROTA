@@ -22,7 +22,6 @@ var dir_x := 1.0
 export var hide_distance := 50.0
 
 func _ready():
-	get_tree().connect("idle_frame", self, "idle_frame")
 	MenuMakeover.connect("closed", self, "closed")
 	
 	arrow.dir = posmod(dir, 4)
