@@ -3,5 +3,5 @@
 
 # custom
 .import/
-[Ee]xport/
-[Bb]uild/
+[Ee]xport/*/
+[Ee]xport/_mac*
