@@ -602,7 +602,7 @@ margin_bottom = -15.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 21 )
-text = "Patch 5"
+text = "Patch 6"
 align = 1
 valign = 2
 
@@ -786,9 +786,9 @@ align = 1
 valign = 1
 
 [node name="Label5" type="Label" parent="Canvas/Credits/List/HFlowContainer"]
-margin_left = 40.0
+margin_left = 31.0
 margin_top = 35.0
-margin_right = 276.0
+margin_right = 267.0
 margin_bottom = 66.0
 size_flags_horizontal = 6
 custom_fonts/font = SubResource( 6 )
@@ -797,13 +797,13 @@ align = 1
 valign = 1
 
 [node name="Label7" type="Label" parent="Canvas/Credits/List/HFlowContainer"]
-margin_left = 361.0
+margin_left = 334.0
 margin_top = 35.0
-margin_right = 470.0
+margin_right = 480.0
 margin_bottom = 66.0
 size_flags_horizontal = 6
 custom_fonts/font = SubResource( 6 )
-text = "Kenney"
+text = "neropatti"
 align = 1
 valign = 1
 
