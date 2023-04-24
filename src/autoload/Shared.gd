@@ -436,6 +436,7 @@ func set_radial_blur(arg := radial_blur):
 
 func set_light_enabled(arg := light_enabled):
 	light_enabled = arg
+	#print("light_enabled: ", light_enabled)
 	if is_instance_valid(Clouds.star_light):
 		Clouds.star_light.enabled = bool(light_enabled)
 
@@ -471,6 +472,7 @@ func set_iterations(arg := iterations):
 
 func set_target_fps(arg := target_fps):
 	target_fps = abs(arg)
+	#print("target_fps: ", target_fps)
 	Engine.target_fps = target_fps
 
 ### Exit Game

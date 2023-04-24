@@ -511,7 +511,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 var_name = "is_interpolate"
-is_int = false
 
 [node name="Label" type="Label" parent="Control/Menu/List/Interpolate"]
 anchor_right = 0.5
@@ -546,6 +545,7 @@ __meta__ = {
 }
 list = PoolStringArray( "OFF", "30", "60", "90", "120", "144", "240" )
 var_name = "target_fps"
+is_int = true
 
 [node name="Label" type="Label" parent="Control/Menu/List/TargetFPS"]
 anchor_right = 0.5
@@ -571,9 +571,9 @@ __meta__ = {
 
 [node name="Iterations" type="Control" parent="Control/Menu/List"]
 visible = false
-margin_top = 1200.0
+margin_top = 1270.0
 margin_right = 640.0
-margin_bottom = 1270.0
+margin_bottom = 1340.0
 rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 24 )
 __meta__ = {
@@ -581,6 +581,7 @@ __meta__ = {
 }
 list = PoolStringArray( "60", "90", "120", "144" )
 var_name = "iterations"
+is_int = true
 
 [node name="Label" type="Label" parent="Control/Menu/List/Iterations"]
 anchor_right = 0.5
