@@ -48,6 +48,7 @@ layer = 2
 follow_viewport_enable = true
 
 [node name="Guide" type="Node2D" parent="GuideLayer"]
+process_priority = 100
 light_mask = 0
 script = ExtResource( 10 )
 

@@ -13,11 +13,11 @@ var _delta := 1.0 / 60.0
 func _ready():
 	visible = false
 	
-	get_tree().connect("idle_frame", self, "place")
 	Shared.connect("scene_changed", self, "set_box")
 
 func _process(delta):
 	_delta = delta
+	place()
 
 func set_box(b = null):
 	is_deploy = is_instance_valid(b)

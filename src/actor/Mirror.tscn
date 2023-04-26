@@ -11,6 +11,7 @@ shader_param/col1 = Color( 0, 0.380392, 1, 1 )
 shader_param/col2 = Color( 0, 0.921569, 1, 1 )
 
 [node name="Mirror" type="Node2D"]
+process_priority = 10
 z_index = -5
 script = ExtResource( 1 )
 offset = Vector2( 70, 0 )

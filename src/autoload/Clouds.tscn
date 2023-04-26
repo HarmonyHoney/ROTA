@@ -293,7 +293,6 @@ round_precision = 5
 
 [node name="Line2D8" type="Line2D" parent="Sky/Center/Stars/Orbit/Sun"]
 rotation = -0.785405
-scale = Vector2( 1, 1 )
 points = PoolVector2Array( 75, 0, 100, 0 )
 width = 30.0
 width_curve = SubResource( 22 )

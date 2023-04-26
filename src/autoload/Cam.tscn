@@ -11,6 +11,7 @@ shader_param/steps = 8.0
 shader_param/aspect = 0.5625
 
 [node name="Cam" type="Camera2D" groups=["game_camera"]]
+process_priority = 50
 rotating = true
 current = true
 script = ExtResource( 1 )

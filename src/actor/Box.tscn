@@ -20,6 +20,7 @@ extents = Vector2( 30, 30 )
 extents = Vector2( 49.9, 49.9 )
 
 [node name="Box" type="KinematicBody2D" groups=["box"]]
+process_priority = -5
 position = Vector2( 50, 50 )
 z_index = 30
 z_as_relative = false

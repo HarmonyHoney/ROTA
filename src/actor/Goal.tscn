@@ -7,6 +7,7 @@
 extents = Vector2( 35, 35 )
 
 [node name="Goal" type="Node2D" groups=["goal"]]
+process_priority = -1
 z_index = 90
 z_as_relative = false
 script = ExtResource( 1 )
