@@ -2,6 +2,8 @@ extends MenuBase
 
 onready var palette : PoolColorArray = Shared.player.palette
 var player
+onready var hair_fronts : int = Shared.player.hair_fronts.size()
+onready var hair_backs : int = Shared.player.hair_backs.size()
 
 var pale = [3,2,2,1,0,16]
 
@@ -57,12 +59,13 @@ func match_player():
 	outfit([player.hairstyle_front, player.hairstyle_back, player.dye["hair"], player.dye["eye"], player.dye["skin"], player.dye["fit"]])
 
 func preset():
-	var h = [[7,0], [1,9], [2,3], [2,7], [3,2], [3,4], [4,1], [5,1], [6,5]]
-	h.shuffle()
+	randomize()
+	var front = (randi() % (hair_fronts - 1)) + 1
+	var back = randi() % hair_backs
 	
 	var skin = 4 + (randi() % 5)
 	var c = range(palette.size())
 	c.erase(skin)
 	c.shuffle()
 	
-	outfit([h[0][0], h[0][1], c[0], c[1], skin, c[2]])
+	outfit([front, back, c[0], c[1], skin, c[2]])
