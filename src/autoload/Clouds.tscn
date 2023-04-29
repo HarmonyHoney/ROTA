@@ -142,6 +142,7 @@ shader_param/col1 = Color( 0, 0.384314, 1, 1 )
 shader_param/col2 = Color( 0.67451, 0, 1, 1 )
 shader_param/sun_frac = 0.0
 shader_param/time_scale = 0.003
+shader_param/time_add = 0.5
 
 [sub_resource type="CanvasItemMaterial" id=36]
 blend_mode = 1
@@ -153,14 +154,13 @@ mesh = SubResource( 34 )
 z_index = -50
 z_as_relative = false
 script = ExtResource( 2 )
-day_clock = 50.318
+day_clock = 225.0
 orbit_distance = 400.0
 cloud_bonus_rings = 2
 snow_mat = SubResource( 16 )
 snow_tex = ExtResource( 7 )
 rain_mat = SubResource( 17 )
 rain_tex = ExtResource( 6 )
-is_rain = true
 color_dark = Color( 0.92, 0.92, 1, 1 )
 
 [node name="BG" type="CanvasLayer" parent="."]

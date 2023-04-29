@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://src/shader/fade_x.gdshader" type="Shader" id=25]
 [ext_resource path="res://src/theme/title_text.tres" type="Theme" id=26]
 [ext_resource path="res://media/image/UI/heart.svg" type="Texture" id=27]
+[ext_resource path="res://src/shader/inset_shadow.gdshader" type="Shader" id=28]
 
 [sub_resource type="ShaderMaterial" id=22]
 shader = ExtResource( 25 )
@@ -88,6 +89,16 @@ outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=25]
+shader = ExtResource( 28 )
+shader_param/fill_color = Color( 0.25098, 0.25098, 0.25098, 1 )
+shader_param/shadow_color = Color( 0.1, 0.1, 0.1, 1 )
+shader_param/shadow_dist = 0.022
+shader_param/shadow_angle = 0.123
+shader_param/shadow_offset = 0.25
+shader_param/uv_scale = Vector2( 1, 3.25 )
+shader_param/samples = 6.0
 
 [sub_resource type="DynamicFont" id=4]
 size = 185
@@ -827,7 +838,8 @@ position = Vector2( 1800, 650 )
 script = ExtResource( 3 )
 
 [node name="Title" type="Sprite" parent="Map"]
-modulate = Color( 0.25098, 0.25098, 0.25098, 1 )
+process_priority = 1
+material = SubResource( 25 )
 position = Vector2( 1800, 650 )
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 19 )

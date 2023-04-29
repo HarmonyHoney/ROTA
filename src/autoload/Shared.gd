@@ -23,7 +23,6 @@ signal scene_changed
 var gem_count := 0
 var goals := {}
 var clock_rank := 0
-var doors_unlocked := []
 var maps_visited := []
 
 enum SPEED {OFF, MAP, FILE, BOTH, TRADE}
@@ -192,18 +191,24 @@ func _input(event):
 			print("gamepad_input: ", is_gamepad)
 	
 	if is_debug:
-		if event.is_action_pressed("debug_screenshot"):
-			burst_screenshot(15)
-
-		if event.is_action_pressed("debug_warp"):
-			wipe_scene("res://src/map/worlds/0/0_hub.tscn")
-
-		if event.is_action_pressed("debug_makeover"):
-			MenuMakeover.is_open = !MenuMakeover.is_open
 		
-		if event.is_action_pressed("debug_add_gem"):
-			gem_count += 1
-			UI.gem_text(gem_count)
+		for i in ["screenshot", "warp", "makeover", "add_gem", "reset"]:
+			var p = event.is_action_pressed("debug_" + i)
+			if !p: continue
+			
+			match i:
+				"screenshot":
+					burst_screenshot(15)
+				"warp":
+					wipe_scene("res://src/map/worlds/0/0_hub.tscn")
+				"makeover":
+					MenuMakeover.is_open = !MenuMakeover.is_open
+				"add_gem":
+					gem_count += 1
+					UI.gem_text(gem_count)
+				"reset":
+					reset()
+		
 
 func _physics_process(delta):
 	# auto save

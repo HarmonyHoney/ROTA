@@ -83,6 +83,7 @@ func _ready():
 	
 	randomize()
 	day_clock = randf() * day_time
+	moon_mat.set_shader_param("time_add", lerp(0.1, 0.9, randf()))
 	
 	yield(Shared, "scene_changed")
 	self.is_rain = randf() < 0.3
