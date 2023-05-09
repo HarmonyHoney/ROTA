@@ -64,6 +64,12 @@ rotation = 1.5708
 dir = 1
 scene_path = "res://src/map/worlds/1/5.tscn"
 
+[node name="Door8" parent="Actors" instance=ExtResource( 7 )]
+position = Vector2( 2250, 1300 )
+rotation = 1.5708
+dir = 1
+scene_path = "res://src/map/worlds/arcade/Arcade.tscn"
+
 [node name="Door6" parent="Actors" instance=ExtResource( 7 )]
 position = Vector2( 850, 850 )
 rotation = 3.14159

@@ -6,9 +6,8 @@ export var detail := 0 setget set_tileset
 
 var sets = [preload("res://src/stage/tileset/TileSet0.tres"),preload("res://src/stage/tileset/TileSet1.tres"),
 preload("res://src/stage/tileset/TileSet2.tres"),preload("res://src/stage/tileset/TileSet3.tres"),
-preload("res://src/stage/tileset/TileSet4.tres"),preload("res://src/stage/tileset/TileSet5.tres")]
-
-export var bg_palette := 0
+preload("res://src/stage/tileset/TileSet4.tres"),preload("res://src/stage/tileset/TileSet5.tres"),
+preload("res://src/stage/tileset/TileSet6.tres")]
 
 func _ready():
 	set_tileset()
@@ -17,7 +16,7 @@ func _ready():
 	make_tiles()
 
 func set_tileset(arg := detail):
-	detail = posmod(int(arg), 6)
+	detail = posmod(int(arg), sets.size())
 	if auto and detail < sets.size():
 		if sets[detail] is TileSet:
 			auto.tile_set = sets[detail]

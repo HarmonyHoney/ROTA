@@ -98,11 +98,12 @@ func scene():
 	moon.scale.x = -1 if randf() < 0.5 else 1.0
 	
 	is_snow = "2A/" in Shared.csfn or "2C/" in Shared.csfn
+	
 	create_clouds()
 	solve_clock = 0.0
 	
 	if audio_rain:
-		audio_rain.playing = is_rain and !is_snow
+		audio_rain.playing = is_rain and !is_snow and !Shared.is_arcade
 
 func _process(delta):
 	if Engine.editor_hint and !is_editor: return
@@ -112,6 +113,8 @@ func _process(delta):
 	
 	step_frac = fposmod(day_clock, step_time) / step_time
 	sky_step = posmod((day_clock / step_time) + 2, sky_pal.size())
+	
+	if Shared.is_arcade: return
 	
 	if sky_mat and moon_mat:
 		for i in 2:
@@ -154,7 +157,7 @@ func cam_moved():
 	starfield.position = par * 0.9
 
 func _physics_process(delta):
-	if Engine.editor_hint: return
+	if Engine.editor_hint or Shared.is_arcade: return
 	
 	rain_clock -= delta * day_scale
 	if rain_clock < 0:
@@ -217,7 +220,7 @@ func create_clouds():
 	var ps = pc.size()
 	var layers = [[], [], [], []]
 	
-	for x in (length / 50.0) + cloud_bonus_rings:
+	for x in 0 if Shared.is_arcade else( (length / 50.0) + cloud_bonus_rings):
 		for y in max(3, x):
 			var angle = rand_range(0.0, TAU)
 			var scl = Vector2.ONE * rand_range(0.25, 2.0)
