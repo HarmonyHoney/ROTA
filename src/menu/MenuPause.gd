@@ -14,7 +14,7 @@ func _input(event):
 			self.is_open = false
 		else:
 			menu_input(event)
-	elif event.is_action_pressed("ui_pause") and !is_sub_menu and "world" in Shared.csfn and !Cutscene.is_playing and !MenuMakeover.is_open:
+	elif event.is_action_pressed("ui_pause") and !is_sub_menu and (Shared.map_name != "" or Shared.is_arcade) and !Cutscene.is_playing and !MenuMakeover.is_open:
 		self.is_open = true
 
 func accept():

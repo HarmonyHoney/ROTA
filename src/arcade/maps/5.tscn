@@ -2,9 +2,9 @@
 
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
-[ext_resource path="res://src/map/worlds/arcade/Candy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/map/worlds/arcade/ArcadePlayer.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/arcade/Candy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/arcade/ArcadePlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
 
 [sub_resource type="OccluderPolygon2D" id=5]
 polygon = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
@@ -44,34 +44,34 @@ polygon = PoolVector2Array( 600, 600, -600, 600, -600, -600, 600, -600 )
 script = ExtResource( 1 )
 size = Vector2( 600, 600 )
 
-[node name="SolidTileMap" parent="." instance=ExtResource( 6 )]
+[node name="SolidTileMap" parent="." instance=ExtResource( 5 )]
 tile_set = SubResource( 2 )
 tile_data = PoolIntArray( -327686, 0, 0, -393211, 0, 0, -262149, 0, 0, -262148, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -196613, 0, 0, -196612, 0, 0, -262141, 0, 0, -262140, 0, 0, -131075, 0, 0, -131074, 0, 0, -65539, 0, 0, -65538, 0, 0, -1, 0, 0, -65536, 0, 0, 65535, 0, 0, 0, 0, 0, 65537, 0, 0, 65538, 0, 0, 131073, 0, 0, 131074, 0, 0, 262139, 0, 0, 262140, 0, 0, 262143, 0, 0, 196608, 0, 0, 196611, 0, 0, 196612, 0, 0, 327675, 0, 0, 327676, 0, 0, 262147, 0, 0, 262148, 0, 0, 393210, 0, 0, 327685, 0, 0 )
 detail = 6
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
+[node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 250 )
 
-[node name="Candy" parent="." instance=ExtResource( 4 )]
+[node name="Candy" parent="." instance=ExtResource( 3 )]
 position = Vector2( -400, -550 )
 
-[node name="Candy2" parent="." instance=ExtResource( 4 )]
+[node name="Candy2" parent="." instance=ExtResource( 3 )]
 position = Vector2( -200, -350 )
 
-[node name="Candy3" parent="." instance=ExtResource( 4 )]
+[node name="Candy3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -150 )
 
-[node name="Candy4" parent="." instance=ExtResource( 4 )]
+[node name="Candy4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 200, 50 )
 
-[node name="Candy5" parent="." instance=ExtResource( 4 )]
+[node name="Candy5" parent="." instance=ExtResource( 3 )]
 position = Vector2( 400, 250 )
 
-[node name="Candy6" parent="." instance=ExtResource( 4 )]
+[node name="Candy6" parent="." instance=ExtResource( 3 )]
 position = Vector2( 550, 450 )
 
-[node name="Candy7" parent="." instance=ExtResource( 4 )]
+[node name="Candy7" parent="." instance=ExtResource( 3 )]
 position = Vector2( -400, 250 )
 
-[node name="Candy8" parent="." instance=ExtResource( 4 )]
+[node name="Candy8" parent="." instance=ExtResource( 3 )]
 position = Vector2( 400, -550 )

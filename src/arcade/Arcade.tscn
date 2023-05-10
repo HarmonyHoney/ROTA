@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/map/worlds/arcade/Arcade.gd" type="Script" id=1]
-[ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=2]
-[ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
+[ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=2]
+[ext_resource path="res://src/arcade/Arcade.gd" type="Script" id=3]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/map/worlds/arcade/ArcadeGame.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=7]
+[ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/arcade/ArcadeGame.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/shader/inside_round_rect.gdshader" type="Shader" id=8]
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -16,14 +16,14 @@ shader_param/inside_color = Color( 0, 0, 0, 0 )
 shader_param/outside_color = Color( 0, 0.631373, 0.94902, 1 )
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 
 [node name="Map" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="SolidTileMap" parent="Map" instance=ExtResource( 5 )]
+[node name="SolidTileMap" parent="Map" instance=ExtResource( 7 )]
 tile_data = PoolIntArray( -851982, -1073741824, 0, -851981, -1073741824, 0, -851980, -1073741824, 0, -851979, -1073741824, 0, -851978, -1073741824, 0, -786446, -1073741824, 0, -786442, -1073741824, 0, -720910, -1073741824, 0, -720906, -1073741824, 0, -655374, -1073741824, 0, -655370, -1073741824, 0, -589838, -1073741824, 0, -589837, -1073741824, 0, -589836, -1073741824, 0, -589835, -1073741824, 0, -589834, -1073741824, 0 )
 detail = 4
 
@@ -31,7 +31,7 @@ detail = 4
 
 [node name="Actors" type="Node2D" parent="Map"]
 
-[node name="Door" parent="Map/Actors" instance=ExtResource( 3 )]
+[node name="Door" parent="Map/Actors" instance=ExtResource( 5 )]
 position = Vector2( -1150, -1050 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -43,7 +43,7 @@ position = Vector2( 640, 360 )
 [node name="Back" type="Polygon2D" parent="CanvasLayer/Cabinet"]
 color = Color( 0, 0.631373, 0.94902, 1 )
 polygon = PoolVector2Array( 350, 360, -350, 360, -350, -360, 350, -360 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 is_baked = false
 size = Vector2( 350, 360 )
 
@@ -94,7 +94,7 @@ position = Vector2( -200, 23 )
 position = Vector2( 0, -50 )
 color = Color( 0.5, 0, 0, 1 )
 polygon = PoolVector2Array( 15, 50, 14.6239, 53.3378, 13.5145, 56.5083, 11.7275, 59.3523, 9.35235, 61.7275, 6.50826, 63.5145, 3.33781, 64.6239, -6.55671e-07, 65, -3.33781, 64.6239, -6.50826, 63.5145, -9.35235, 61.7275, -11.7275, 59.3523, -13.5145, 56.5083, -14.6239, 53.3378, -15, 50, -15, -50, -14.6239, -53.3378, -13.5145, -56.5083, -11.7275, -59.3523, -9.35234, -61.7275, -6.50826, -63.5145, -3.33782, -64.6239, 1.78873e-07, -65, 3.33782, -64.6239, 6.50826, -63.5145, 9.35235, -61.7275, 11.7275, -59.3523, 13.5145, -56.5083, 14.6239, -53.3378, 15, -50 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 is_baked = false
 size = Vector2( 15, 65 )
 radius = Plane( -2, -1, -1, -1 )
@@ -103,7 +103,7 @@ radius = Plane( -2, -1, -1, -1 )
 position = Vector2( 0, -70 )
 color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
-script = ExtResource( 7 )
+script = ExtResource( 2 )
 
 [node name="Button" type="Node2D" parent="CanvasLayer/Cabinet/Controls"]
 position = Vector2( 50, 0 )
@@ -112,12 +112,12 @@ scale = Vector2( 1, 0.75 )
 [node name="Polygon2D2" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button"]
 color = Color( 0.5, 0, 0, 1 )
 polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
-script = ExtResource( 7 )
+script = ExtResource( 2 )
 
 [node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button"]
 color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( 40, 0, 36.9552, 15.3073, 28.2843, 28.2843, 15.3073, 36.9552, -1.74846e-06, 40, -15.3073, 36.9552, -28.2843, 28.2843, -36.9552, 15.3073, -40, -3.49691e-06, -36.9552, -15.3073, -28.2843, -28.2843, -15.3073, -36.9552, 4.76995e-07, -40, 15.3073, -36.9552, 28.2843, -28.2843, 36.9552, -15.3073 )
-script = ExtResource( 7 )
+script = ExtResource( 2 )
 is_baked = false
 radius = 40.0
 
@@ -133,7 +133,7 @@ rect_clip_content = true
 position = Vector2( 40, 40 )
 color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( 40, 60, -40, 60, -40, -3.49691e-06, -38.9971, -8.90084, -36.0388, -17.3554, -31.2733, -24.9396, -24.9396, -31.2733, -17.3554, -36.0387, -8.90084, -38.9971, 4.76995e-07, -40, 8.90084, -38.9971, 17.3554, -36.0387, 24.9396, -31.2733, 31.2733, -24.9396, 36.0388, -17.3554, 38.9971, -8.90083, 40, 6.99382e-06 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 is_baked = false
 size = Vector2( 40, 50 )
 rect_offset = Vector2( 0, 10 )
@@ -146,12 +146,12 @@ scale = Vector2( 1, 0.75 )
 [node name="Polygon2D2" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button2"]
 color = Color( 0.5, 0, 0, 1 )
 polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
-script = ExtResource( 7 )
+script = ExtResource( 2 )
 
 [node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button2"]
 color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( 40, 0, 36.9552, 15.3073, 28.2843, 28.2843, 15.3073, 36.9552, -1.74846e-06, 40, -15.3073, 36.9552, -28.2843, 28.2843, -36.9552, 15.3073, -40, -3.49691e-06, -36.9552, -15.3073, -28.2843, -28.2843, -15.3073, -36.9552, 4.76995e-07, -40, 15.3073, -36.9552, 28.2843, -28.2843, 36.9552, -15.3073 )
-script = ExtResource( 7 )
+script = ExtResource( 2 )
 is_baked = false
 radius = 40.0
 
@@ -167,7 +167,7 @@ rect_clip_content = true
 position = Vector2( 40, 40 )
 color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( 40, 60, -40, 60, -40, -3.49691e-06, -38.9971, -8.90084, -36.0388, -17.3554, -31.2733, -24.9396, -24.9396, -31.2733, -17.3554, -36.0387, -8.90084, -38.9971, 4.76995e-07, -40, 8.90084, -38.9971, 17.3554, -36.0387, 24.9396, -31.2733, 31.2733, -24.9396, 36.0388, -17.3554, 38.9971, -8.90083, 40, 6.99382e-06 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 is_baked = false
 size = Vector2( 40, 50 )
 rect_offset = Vector2( 0, 10 )

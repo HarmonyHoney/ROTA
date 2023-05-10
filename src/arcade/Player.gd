@@ -25,7 +25,7 @@ var dir_x := 1.0
 
 func _ready():
 	spr_list = []
-	for i in 3:
+	for i in 8:
 		var s = image.duplicate()
 		add_child(s)
 		spr_list.append(s)
@@ -82,10 +82,16 @@ func _physics_process(delta):
 	# mirrors
 	
 	var sg = image.global_position
-	var add = Vector2(room_size.x * -sign(sg.x), room_size.y * -sign(sg.y)) * 2.0
+	var add = Vector2(room_size.x, room_size.y) * 2.0
 	
-	for i in 3:
+	var vec = []
+	for x in [-1, 0, 1]:
+		for y in [-1, 0, 1]:
+			if !(x == 0 and y == 0):
+				vec.append(Vector2(x, y))
+	
+	for i in spr_list.size():
 		spr_list[i].scale = image.scale
 		spr_list[i].rotation = image.rotation
-		spr_list[i].global_position = sg + (add * [Vector2.RIGHT, Vector2.DOWN, Vector2.ONE][i])
+		spr_list[i].global_position = sg + (add * vec[i])
 	
