@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
+[ext_resource path="res://src/map/worlds/arcade/Candy.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 30, 30 )
+
+[node name="Candy" type="KinematicBody2D"]
+position = Vector2( 250, -150 )
+collision_layer = 2
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Head" type="Polygon2D" parent="Sprites"]
+polygon = PoolVector2Array( 30, 20, 29.7493, 22.2252, 29.0097, 24.3388, 27.8183, 26.2349, 26.2349, 27.8183, 24.3388, 29.0097, 22.2252, 29.7493, 20, 30, -20, 30, -22.2252, 29.7493, -24.3388, 29.0097, -26.2349, 27.8183, -27.8183, 26.2349, -29.0097, 24.3388, -29.7493, 22.2252, -30, 20, -30, -2.62268e-06, -29.2478, -6.67563, -27.0291, -13.0165, -23.4549, -18.7047, -18.7047, -23.4549, -13.0165, -27.0291, -6.67563, -29.2478, 3.57746e-07, -30, 6.67563, -29.2478, 13.0165, -27.0291, 18.7047, -23.4549, 23.4549, -18.7047, 27.0291, -13.0165, 29.2478, -6.67563, 30, 5.24537e-06 )
+script = ExtResource( 1 )
+is_baked = false
+size = Vector2( 30, 30 )
+radius = Plane( 10, 10, -2, -2 )
+
+[node name="EyeL" type="Polygon2D" parent="Sprites/Head"]
+position = Vector2( -15, 0 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
+script = ExtResource( 1 )
+is_baked = false
+size = Vector2( 7, 12 )
+radius = Plane( -2, -1, -1, -1 )
+points = 4
+
+[node name="EyeR" type="Polygon2D" parent="Sprites/Head"]
+position = Vector2( 15, 0 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
+script = ExtResource( 1 )
+is_baked = false
+size = Vector2( 7, 12 )
+radius = Plane( -2, -1, -1, -1 )
+points = 4

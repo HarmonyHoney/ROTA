@@ -1,22 +1,19 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/map/worlds/arcade/Arcade.gd" type="Script" id=1]
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=2]
 [ext_resource path="res://src/actor/door/DoorLittle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/stage/SpikeMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/map/worlds/arcade/Candy.gd" type="Script" id=6]
+[ext_resource path="res://src/map/worlds/arcade/ArcadeGame.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=7]
-[ext_resource path="res://src/map/worlds/arcade/Player.gd" type="Script" id=8]
+[ext_resource path="res://src/shader/inside_round_rect.gdshader" type="Shader" id=8]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 20, 34 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 20, 34 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 30, 30 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 8 )
+shader_param/radius = 0.15
+shader_param/inside_color = Color( 0, 0, 0, 0 )
+shader_param/outside_color = Color( 0, 0.631373, 0.94902, 1 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,191 +36,139 @@ position = Vector2( -1150, -1050 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
-scale = Vector2( 0.5, 0.5 )
-transform = Transform2D( 0.5, 0, 0, 0.5, 0, 0 )
 
-[node name="Control" type="Control" parent="CanvasLayer"]
-margin_left = 347.0
-margin_top = 60.0
-margin_right = 387.0
-margin_bottom = 100.0
+[node name="Cabinet" type="Node2D" parent="CanvasLayer"]
+position = Vector2( 640, 360 )
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+[node name="Back" type="Polygon2D" parent="CanvasLayer/Cabinet"]
+color = Color( 0, 0.631373, 0.94902, 1 )
+polygon = PoolVector2Array( 350, 360, -350, 360, -350, -360, 350, -360 )
+script = ExtResource( 2 )
+is_baked = false
+size = Vector2( 350, 360 )
+
+[node name="Screen" type="Node2D" parent="CanvasLayer/Cabinet"]
+position = Vector2( 0, -59 )
+scale = Vector2( 0.9, 0.9 )
+
+[node name="Control" type="Control" parent="CanvasLayer/Cabinet/Screen"]
+margin_left = -300.0
+margin_top = -300.0
+margin_right = -260.0
+margin_bottom = -260.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Cabinet/Screen/Control"]
 margin_right = 1200.0
 margin_bottom = 1200.0
 rect_clip_content = true
 color = Color( 0, 0, 0, 1 )
 
-[node name="Node2D" type="Node2D" parent="CanvasLayer/Control"]
-position = Vector2( -347, -60 )
-
-[node name="SolidTileMap" parent="CanvasLayer/Control/Node2D" instance=ExtResource( 5 )]
-tile_data = PoolIntArray( -851982, -1073741824, 0, -851981, -1073741824, 0, -851980, -1073741824, 0, -851979, -1073741824, 0, -851978, -1073741824, 0, -786446, -1073741824, 0, -786442, -1073741824, 0, -720910, -1073741824, 0, -720906, -1073741824, 0, -655374, -1073741824, 0, -655370, -1073741824, 0, -589838, -1073741824, 0, -589837, -1073741824, 0, -589836, -1073741824, 0, -589835, -1073741824, 0, -589834, -1073741824, 0, 4, -1073741824, 0, 5, -1073741824, 0, 6, -1073741824, 0, 7, -1073741824, 0, 65541, -1073741824, 0, 65542, -1073741824, 0, 327680, -1073741824, 0, 327681, -1073741824, 0, 327682, -1073741824, 0, 327683, -1073741824, 0, 327684, -1073741824, 0, 327688, -1073741824, 0, 327689, -1073741824, 0, 327690, -1073741824, 0, 327691, -1073741824, 0, 393216, -1073741824, 0, 393217, -1073741824, 0, 393218, -1073741824, 0, 393219, -1073741824, 0, 393220, -1073741824, 0, 393224, -1073741824, 0, 393225, -1073741824, 0, 393226, -1073741824, 0, 393227, -1073741824, 0, 589832, -1073741824, 0, 589833, -1073741824, 0, 655364, -1073741824, 0, 655365, -1073741824, 0, 655366, -1073741824, 0, 655367, -1073741824, 0, 655368, -1073741824, 0, 655369, -1073741824, 0, 720900, -1073741824, 0, 720901, -1073741824, 0, 720902, -1073741824, 0, 720903, -1073741824, 0, 720904, -1073741824, 0 )
-detail = 6
-
-[node name="Player" type="KinematicBody2D" parent="CanvasLayer/Control/Node2D"]
-position = Vector2( 250, 450 )
-collision_layer = 0
-script = ExtResource( 8 )
-move_speed = 300.0
-move_damp = 0.08
-jump_speed = 800.0
-gravity = 1500.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Control/Node2D/Player"]
-scale = Vector2( 0.999999, 0.999999 )
-shape = SubResource( 3 )
-
-[node name="Area2D" type="Area2D" parent="CanvasLayer/Control/Node2D/Player"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Control/Node2D/Player/Area2D"]
-shape = SubResource( 5 )
-
-[node name="Sprites" type="Node2D" parent="CanvasLayer/Control/Node2D/Player"]
-position = Vector2( 6.10352e-05, 6.10352e-05 )
-scale = Vector2( 0.7, 0.7 )
-
-[node name="Head" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Player/Sprites"]
-position = Vector2( -6.10352e-05, -20.0001 )
-polygon = PoolVector2Array( 30, 0, 27.7164, 11.4805, 21.2132, 21.2132, 11.4805, 27.7164, -1.31134e-06, 30, -11.4805, 27.7164, -21.2132, 21.2132, -27.7164, 11.4805, -30, -2.62268e-06, -27.7164, -11.4805, -21.2132, -21.2132, -11.4805, -27.7164, 3.57746e-07, -30, 11.4805, -27.7164, 21.2132, -21.2132, 27.7164, -11.4805 )
-script = ExtResource( 7 )
-is_baked = false
-radius = 30.0
-
-[node name="EyeL" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Player/Sprites/Head"]
-position = Vector2( -15, 0 )
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 7, 12 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="EyeR" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Player/Sprites/Head"]
-position = Vector2( 15, 0 )
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 7, 12 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="Legs" type="Node2D" parent="CanvasLayer/Control/Node2D/Player/Sprites"]
-position = Vector2( -6.10352e-05, 4.99994 )
-
-[node name="Left" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Player/Sprites/Legs"]
-rotation = 0.523598
-polygon = PoolVector2Array( 10, 40, 8.66025, 45, 5, 48.6603, -4.37114e-07, 50, -5, 48.6603, -8.66025, 45, -10, 40, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5, 10, 1.74846e-06 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 10, 30 )
-rect_offset = Vector2( 0, 20 )
-radius = Plane( -2, -2, -2, -2 )
-points = 4
-
-[node name="Middle" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Player/Sprites/Legs"]
-visible = false
-position = Vector2( 0, 18 )
-polygon = PoolVector2Array( 10, 10, -10, 10, -10, -10, 10, -10 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 10, 10 )
-points = 4
-
-[node name="Right" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Player/Sprites/Legs"]
-rotation = -0.523598
-polygon = PoolVector2Array( 10, 40, 8.66025, 45, 5, 48.6603, -4.37114e-07, 50, -5, 48.6603, -8.66025, 45, -10, 40, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5, 10, 1.74846e-06 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 10, 30 )
-rect_offset = Vector2( 0, 20 )
-radius = Plane( -2, -2, -2, -2 )
-points = 4
-
-[node name="Candy" type="KinematicBody2D" parent="CanvasLayer/Control/Node2D"]
-position = Vector2( 871, 450 )
-collision_layer = 2
-script = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Control/Node2D/Candy"]
-shape = SubResource( 4 )
-
-[node name="Sprites" type="Node2D" parent="CanvasLayer/Control/Node2D/Candy"]
-
-[node name="Head" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Candy/Sprites"]
-polygon = PoolVector2Array( 30, 20, 29.7493, 22.2252, 29.0097, 24.3388, 27.8183, 26.2349, 26.2349, 27.8183, 24.3388, 29.0097, 22.2252, 29.7493, 20, 30, -20, 30, -22.2252, 29.7493, -24.3388, 29.0097, -26.2349, 27.8183, -27.8183, 26.2349, -29.0097, 24.3388, -29.7493, 22.2252, -30, 20, -30, -2.62268e-06, -29.2478, -6.67563, -27.0291, -13.0165, -23.4549, -18.7047, -18.7047, -23.4549, -13.0165, -27.0291, -6.67563, -29.2478, 3.57746e-07, -30, 6.67563, -29.2478, 13.0165, -27.0291, 18.7047, -23.4549, 23.4549, -18.7047, 27.0291, -13.0165, 29.2478, -6.67563, 30, 5.24537e-06 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 30, 30 )
-radius = Plane( 10, 10, -2, -2 )
-
-[node name="EyeL" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Candy/Sprites/Head"]
-position = Vector2( -15, 0 )
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 7, 12 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="EyeR" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Candy/Sprites/Head"]
-position = Vector2( 15, 0 )
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 7, 12 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="Candy2" type="KinematicBody2D" parent="CanvasLayer/Control/Node2D"]
-position = Vector2( 646, 946 )
-collision_layer = 2
-script = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Control/Node2D/Candy2"]
-shape = SubResource( 4 )
-
-[node name="Sprites" type="Node2D" parent="CanvasLayer/Control/Node2D/Candy2"]
-
-[node name="Head" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Candy2/Sprites"]
-polygon = PoolVector2Array( 30, 20, 29.7493, 22.2252, 29.0097, 24.3388, 27.8183, 26.2349, 26.2349, 27.8183, 24.3388, 29.0097, 22.2252, 29.7493, 20, 30, -20, 30, -22.2252, 29.7493, -24.3388, 29.0097, -26.2349, 27.8183, -27.8183, 26.2349, -29.0097, 24.3388, -29.7493, 22.2252, -30, 20, -30, -2.62268e-06, -29.2478, -6.67563, -27.0291, -13.0165, -23.4549, -18.7047, -18.7047, -23.4549, -13.0165, -27.0291, -6.67563, -29.2478, 3.57746e-07, -30, 6.67563, -29.2478, 13.0165, -27.0291, 18.7047, -23.4549, 23.4549, -18.7047, 27.0291, -13.0165, 29.2478, -6.67563, 30, 5.24537e-06 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 30, 30 )
-radius = Plane( 10, 10, -2, -2 )
-
-[node name="EyeL" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Candy2/Sprites/Head"]
-position = Vector2( -15, 0 )
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 7, 12 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="EyeR" type="Polygon2D" parent="CanvasLayer/Control/Node2D/Candy2/Sprites/Head"]
-position = Vector2( 15, 0 )
-color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
-script = ExtResource( 2 )
-is_baked = false
-size = Vector2( 7, 12 )
-radius = Plane( -2, -1, -1, -1 )
-points = 4
-
-[node name="ViewportContainer" type="ViewportContainer" parent="CanvasLayer/Control"]
+[node name="ViewportContainer" type="ViewportContainer" parent="CanvasLayer/Cabinet/Screen/Control"]
 margin_right = 1200.0
 margin_bottom = 1200.0
 
-[node name="Viewport" type="Viewport" parent="CanvasLayer/Control/ViewportContainer"]
+[node name="Viewport" type="Viewport" parent="CanvasLayer/Cabinet/Screen/Control/ViewportContainer"]
 size = Vector2( 1200, 1200 )
+own_world = true
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
+
+[node name="Game" parent="CanvasLayer/Cabinet/Screen/Control/ViewportContainer/Viewport" instance=ExtResource( 6 )]
+
+[node name="Border" type="ColorRect" parent="CanvasLayer/Cabinet/Screen/Control"]
+material = SubResource( 2 )
+margin_right = 1200.0
+margin_bottom = 1200.0
+rect_pivot_offset = Vector2( 2455.56, 1437.78 )
+rect_clip_content = true
+
+[node name="Controls" type="Node2D" parent="CanvasLayer/Cabinet"]
+position = Vector2( 0, 315 )
+
+[node name="Joystick" type="Node2D" parent="CanvasLayer/Cabinet/Controls"]
+position = Vector2( -200, 23 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Joystick"]
+position = Vector2( 0, -50 )
+color = Color( 0.5, 0, 0, 1 )
+polygon = PoolVector2Array( 15, 50, 14.6239, 53.3378, 13.5145, 56.5083, 11.7275, 59.3523, 9.35235, 61.7275, 6.50826, 63.5145, 3.33781, 64.6239, -6.55671e-07, 65, -3.33781, 64.6239, -6.50826, 63.5145, -9.35235, 61.7275, -11.7275, 59.3523, -13.5145, 56.5083, -14.6239, 53.3378, -15, 50, -15, -50, -14.6239, -53.3378, -13.5145, -56.5083, -11.7275, -59.3523, -9.35234, -61.7275, -6.50826, -63.5145, -3.33782, -64.6239, 1.78873e-07, -65, 3.33782, -64.6239, 6.50826, -63.5145, 9.35235, -61.7275, 11.7275, -59.3523, 13.5145, -56.5083, 14.6239, -53.3378, 15, -50 )
+script = ExtResource( 2 )
+is_baked = false
+size = Vector2( 15, 65 )
+radius = Plane( -2, -1, -1, -1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Joystick"]
+position = Vector2( 0, -70 )
+color = Color( 1, 0, 0, 1 )
+polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
+script = ExtResource( 7 )
+
+[node name="Button" type="Node2D" parent="CanvasLayer/Cabinet/Controls"]
+position = Vector2( 50, 0 )
+scale = Vector2( 1, 0.75 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button"]
+color = Color( 0.5, 0, 0, 1 )
+polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
+script = ExtResource( 7 )
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button"]
+color = Color( 1, 0, 0, 1 )
+polygon = PoolVector2Array( 40, 0, 36.9552, 15.3073, 28.2843, 28.2843, 15.3073, 36.9552, -1.74846e-06, 40, -15.3073, 36.9552, -28.2843, 28.2843, -36.9552, 15.3073, -40, -3.49691e-06, -36.9552, -15.3073, -28.2843, -28.2843, -15.3073, -36.9552, 4.76995e-07, -40, 15.3073, -36.9552, 28.2843, -28.2843, 36.9552, -15.3073 )
+script = ExtResource( 7 )
+is_baked = false
+radius = 40.0
+
+[node name="Control" type="Control" parent="CanvasLayer/Cabinet/Controls/Button"]
+margin_left = -40.0
+margin_top = -60.0
+margin_right = 40.0
+rect_clip_content = true
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer/Cabinet/Controls/Button/Control"]
+
+[node name="Polygon2D3" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button/Control/Node2D"]
+position = Vector2( 40, 40 )
+color = Color( 1, 0, 0, 1 )
+polygon = PoolVector2Array( 40, 60, -40, 60, -40, -3.49691e-06, -38.9971, -8.90084, -36.0388, -17.3554, -31.2733, -24.9396, -24.9396, -31.2733, -17.3554, -36.0387, -8.90084, -38.9971, 4.76995e-07, -40, 8.90084, -38.9971, 17.3554, -36.0387, 24.9396, -31.2733, 31.2733, -24.9396, 36.0388, -17.3554, 38.9971, -8.90083, 40, 6.99382e-06 )
+script = ExtResource( 2 )
+is_baked = false
+size = Vector2( 40, 50 )
+rect_offset = Vector2( 0, 10 )
+radius = Plane( 0, 0, -2, -2 )
+
+[node name="Button2" type="Node2D" parent="CanvasLayer/Cabinet/Controls"]
+position = Vector2( 200, 0 )
+scale = Vector2( 1, 0.75 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button2"]
+color = Color( 0.5, 0, 0, 1 )
+polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
+script = ExtResource( 7 )
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button2"]
+color = Color( 1, 0, 0, 1 )
+polygon = PoolVector2Array( 40, 0, 36.9552, 15.3073, 28.2843, 28.2843, 15.3073, 36.9552, -1.74846e-06, 40, -15.3073, 36.9552, -28.2843, 28.2843, -36.9552, 15.3073, -40, -3.49691e-06, -36.9552, -15.3073, -28.2843, -28.2843, -15.3073, -36.9552, 4.76995e-07, -40, 15.3073, -36.9552, 28.2843, -28.2843, 36.9552, -15.3073 )
+script = ExtResource( 7 )
+is_baked = false
+radius = 40.0
+
+[node name="Control" type="Control" parent="CanvasLayer/Cabinet/Controls/Button2"]
+margin_left = -40.0
+margin_top = -60.0
+margin_right = 40.0
+rect_clip_content = true
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer/Cabinet/Controls/Button2/Control"]
+
+[node name="Polygon2D3" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button2/Control/Node2D"]
+position = Vector2( 40, 40 )
+color = Color( 1, 0, 0, 1 )
+polygon = PoolVector2Array( 40, 60, -40, 60, -40, -3.49691e-06, -38.9971, -8.90084, -36.0388, -17.3554, -31.2733, -24.9396, -24.9396, -31.2733, -17.3554, -36.0387, -8.90084, -38.9971, 4.76995e-07, -40, 8.90084, -38.9971, 17.3554, -36.0387, 24.9396, -31.2733, 31.2733, -24.9396, 36.0388, -17.3554, 38.9971, -8.90083, 40, 6.99382e-06 )
+script = ExtResource( 2 )
+is_baked = false
+size = Vector2( 40, 50 )
+rect_offset = Vector2( 0, 10 )
+radius = Plane( 0, 0, -2, -2 )
