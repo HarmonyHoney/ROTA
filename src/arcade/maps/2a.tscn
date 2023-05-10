@@ -46,11 +46,20 @@ size = Vector2( 600, 600 )
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 5 )]
 tile_set = SubResource( 2 )
-tile_data = PoolIntArray( -196609, 0, 0, -262144, 0, 0, -131073, 0, 0, -196608, 0, 0, -65537, 0, 0, -131072, 0, 0, -1, 0, 0, -65536, 0, 0, 65535, 0, 0, 0, 0, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0 )
+tile_data = PoolIntArray( -196612, 0, 0, -196611, 0, 0, -196610, 0, 0, -131076, 0, 0, -131075, 0, 0, -131074, 0, 0, -196606, 0, 0, -196605, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -131070, 0, 0, -131069, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 196603, 0, 0, 196604, 0, 0, 131076, 0, 0, 262139, 0, 0, 262140, 0, 0, 196612, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0 )
 detail = 6
 
-[node name="Player" parent="." groups=["start"] instance=ExtResource( 4 )]
-position = Vector2( -350, 50 )
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( -400, 150 )
 
-[node name="Candy" parent="." groups=["candy"] instance=ExtResource( 3 )]
-position = Vector2( 250, 50 )
+[node name="Candy" parent="." instance=ExtResource( 3 )]
+position = Vector2( -300, -450 )
+
+[node name="Candy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 250, 350 )
+
+[node name="Candy3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 350, 50 )
+
+[node name="Candy4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 300, -350 )

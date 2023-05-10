@@ -39,7 +39,6 @@ points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 [node name="Map" type="Node2D"]
 
 [node name="Back" type="Polygon2D" parent="." groups=["back"]]
-visible = false
 color = Color( 1, 0, 0, 0.407843 )
 polygon = PoolVector2Array( 600, 600, -600, 600, -600, -600, 600, -600 )
 script = ExtResource( 1 )

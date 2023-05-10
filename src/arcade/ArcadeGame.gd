@@ -15,9 +15,8 @@ var candies := []
 
 func _ready():
 	map_ease.clock = map_ease.time
-	for i in Shared.get_all_children(map_node):
-		if i.is_in_group("solid_map"):
-			wrap_tiles(i)
+	
+	scene()
 
 func _physics_process(delta):
 	if map_ease.is_less:
