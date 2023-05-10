@@ -32,6 +32,9 @@ func _ready():
 		add_child(s)
 		spr_list.append(s)
 
+func _exit_tree():
+	arcade.candies.erase(self)
+
 func _physics_process(delta):
 	if !is_dead:
 		move_and_slide(Vector2(speed * dir_x, 0.0))

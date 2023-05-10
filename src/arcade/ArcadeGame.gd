@@ -44,6 +44,10 @@ func win():
 	map_ease.clock = 0.0
 	map += 1
 
+func lose():
+	map_ease.clock = 0.0
+	map = max(0, map - 1)
+
 func scene():
 	cam.zoom = Vector2.ONE * 1.1
 	for i in map_node.get_children():

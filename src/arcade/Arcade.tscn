@@ -48,7 +48,7 @@ is_baked = false
 size = Vector2( 350, 360 )
 
 [node name="Screen" type="Node2D" parent="CanvasLayer/Cabinet"]
-position = Vector2( 0, -59 )
+position = Vector2( 0, -70 )
 scale = Vector2( 0.9, 0.9 )
 
 [node name="Control" type="Control" parent="CanvasLayer/Cabinet/Screen"]
@@ -85,7 +85,7 @@ rect_pivot_offset = Vector2( 2455.56, 1437.78 )
 rect_clip_content = true
 
 [node name="Controls" type="Node2D" parent="CanvasLayer/Cabinet"]
-position = Vector2( 0, 315 )
+position = Vector2( 0, 310 )
 
 [node name="Joystick" type="Node2D" parent="CanvasLayer/Cabinet/Controls"]
 position = Vector2( -200, 23 )
