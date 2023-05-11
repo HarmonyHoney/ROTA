@@ -11,13 +11,10 @@ extents = Vector2( 20, 34 )
 extents = Vector2( 20, 34 )
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( -350, -150 )
 collision_layer = 0
 script = ExtResource( 3 )
-move_speed = 350.0
-move_damp = 0.08
-jump_speed = 800.0
-gravity = 1500.0
+jump_speed = 630.0
+hit_speed = 800.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.999999, 0.999999 )
@@ -32,16 +29,23 @@ shape = SubResource( 6 )
 
 [node name="Sprites" type="Node2D" parent="."]
 position = Vector2( 6.10352e-05, 6.10352e-05 )
+
+[node name="Root" type="Node2D" parent="Sprites"]
+position = Vector2( -6.10352e-05, 34.9999 )
+
+[node name="Body" type="Node2D" parent="Sprites/Root"]
+position = Vector2( 0, -35 )
 scale = Vector2( 0.7, 0.7 )
 
-[node name="Head" type="Polygon2D" parent="Sprites"]
+[node name="Head" type="Polygon2D" parent="Sprites/Root/Body"]
 position = Vector2( -6.10352e-05, -20.0001 )
+scale = Vector2( 1, 1 )
 polygon = PoolVector2Array( 30, 0, 27.7164, 11.4805, 21.2132, 21.2132, 11.4805, 27.7164, -1.31134e-06, 30, -11.4805, 27.7164, -21.2132, 21.2132, -27.7164, 11.4805, -30, -2.62268e-06, -27.7164, -11.4805, -21.2132, -21.2132, -11.4805, -27.7164, 3.57746e-07, -30, 11.4805, -27.7164, 21.2132, -21.2132, 27.7164, -11.4805 )
 script = ExtResource( 2 )
 is_baked = false
 radius = 30.0
 
-[node name="EyeL" type="Polygon2D" parent="Sprites/Head"]
+[node name="EyeL" type="Polygon2D" parent="Sprites/Root/Body/Head"]
 position = Vector2( -15, 0 )
 color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
@@ -51,7 +55,7 @@ size = Vector2( 7, 12 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="EyeR" type="Polygon2D" parent="Sprites/Head"]
+[node name="EyeR" type="Polygon2D" parent="Sprites/Root/Body/Head"]
 position = Vector2( 15, 0 )
 color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
@@ -61,10 +65,11 @@ size = Vector2( 7, 12 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="Legs" type="Node2D" parent="Sprites"]
-position = Vector2( -6.10352e-05, 4.99994 )
+[node name="Legs" type="Node2D" parent="Sprites/Root/Body"]
+position = Vector2( -6.10352e-05, 4.99993 )
+scale = Vector2( 1, 1 )
 
-[node name="Left" type="Polygon2D" parent="Sprites/Legs"]
+[node name="Left" type="Polygon2D" parent="Sprites/Root/Body/Legs"]
 rotation = 0.523598
 polygon = PoolVector2Array( 10, 40, 8.66025, 45, 5, 48.6603, -4.37114e-07, 50, -5, 48.6603, -8.66025, 45, -10, 40, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5, 10, 1.74846e-06 )
 script = ExtResource( 1 )
@@ -74,7 +79,7 @@ rect_offset = Vector2( 0, 20 )
 radius = Plane( -2, -2, -2, -2 )
 points = 4
 
-[node name="Middle" type="Polygon2D" parent="Sprites/Legs"]
+[node name="Middle" type="Polygon2D" parent="Sprites/Root/Body/Legs"]
 visible = false
 position = Vector2( 0, 18 )
 polygon = PoolVector2Array( 10, 10, -10, 10, -10, -10, 10, -10 )
@@ -83,7 +88,7 @@ is_baked = false
 size = Vector2( 10, 10 )
 points = 4
 
-[node name="Right" type="Polygon2D" parent="Sprites/Legs"]
+[node name="Right" type="Polygon2D" parent="Sprites/Root/Body/Legs"]
 rotation = -0.523598
 polygon = PoolVector2Array( 10, 40, 8.66025, 45, 5, 48.6603, -4.37114e-07, 50, -5, 48.6603, -8.66025, 45, -10, 40, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5, 10, 1.74846e-06 )
 script = ExtResource( 1 )

@@ -2,26 +2,36 @@ extends KinematicBody2D
 
 onready var area := $Area2D
 onready var image := $Sprites
+onready var image_root := $Sprites/Root
 var spr_list := []
 
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
 var btnp_jump := false
 var btn_jump := false
+var jump_ease := EaseMover.new(0.15)
+var is_jump := false
 
-export var move_speed := 100.0
+export var move_speed := 350.0
 export var move_accel := 0.3
-export var move_damp := 0.2
-export var jump_speed := 100.0
-
-export var room_size := Vector2(600, 600)
-
-export var gravity := 100.0
+export var move_damp := 0.08
+export var jump_speed := 620.0
+export var hit_speed := 900.0
+var room_size := Vector2(600, 600)
+export var gravity := 1500.0
+export var term_vel := 4000.0
+export var squish_jump := Vector2(0.5, 1.5)
+export var squish_land := Vector2(1.4, 0.6)
+export var land_time := 0.25
+export var land_vel := 250.0
+var squish_ease := EaseMover.new(0.3)
 
 var vel := Vector2.ZERO
+var vel_last := Vector2.ZERO
 var is_floor := false
 var walk_clock = 0.0
 var dir_x := 1.0
+var air_clock := 0.0
 
 var is_input = true
 var is_dead := false
@@ -34,11 +44,16 @@ func _ready():
 	
 	spr_list = []
 	for i in 8:
-		var s = image.duplicate()
+		var s = image_root.duplicate()
 		add_child(s)
 		spr_list.append(s)
+	
+	
+	image_root.scale = Vector2.ZERO
+	squish_ease.to = Vector2.ONE
 
 func _physics_process(delta):
+	# input
 	joy_last = joy
 	if is_input:
 		joy.x = round(Input.get_axis("left", "right"))
@@ -46,7 +61,19 @@ func _physics_process(delta):
 		
 		btnp_jump = Input.is_action_just_pressed("jump")
 		btn_jump = Input.is_action_pressed("jump")
-		is_floor = test_move(transform, Vector2(0, 3))
+	
+	# is floor & air clock
+	is_floor = test_move(transform, Vector2(0, 3))
+	
+	if is_floor and air_clock > 0.0:
+		var s = min(vel_last.y, land_vel) / land_vel
+		
+		squish_ease.from = Vector2.ONE.linear_interpolate(squish_land, ease(s, 2.2))
+		squish_ease.clock = 0.0
+	
+	air_clock = 0.0 if is_floor else air_clock + delta
+	
+	# walking
 	
 	if joy.x == 0:
 		vel.x = lerp(vel.x, 0.0, delta * 21.0)
@@ -55,19 +82,38 @@ func _physics_process(delta):
 		vel.x = clamp(vel.x + (move_speed * move_accel * joy.x), -move_speed, move_speed)
 		dir_x = joy.x
 	
-	vel.y += gravity * delta
+	# jumping and gravity
 	
-	if btn_jump and is_floor:
+	vel.y = clamp(vel.y + (gravity * delta), -term_vel, term_vel)
+	
+	if btn_jump and is_floor and !is_jump:
+		is_jump = true
+		Audio.play("arcade_jump", 0.9, 1.3)
+		jump_ease.clock = 0.0
+		squish_ease.from = squish_jump
+		squish_ease.clock = 0.0
+	
+	if is_jump:
 		vel.y = -jump_speed
+		var s = jump_ease.count(delta)
+		
+		jump_ease.time = .16
+		is_jump = jump_ease.is_less and btn_jump
 	
-	for i in area.get_overlapping_bodies():
-		if is_floor:
-			die()
-			break
-		else:
-			i.die()
-			vel.y = -jump_speed# * (1.0 if btn_jump else 0.7)
+	if !is_dead:
+		for i in area.get_overlapping_bodies():
+			if is_floor or (position.y > i.position.y - 25 and vel.y < 0.0):
+				die()
+				break
+			else:
+				i.die()
+				vel.y = -hit_speed
+				Audio.play("arcade_bell", 0.5, 1.3)
+				Audio.play("arcade_hit", 0.8, 1.2)
+				squish_ease.from = squish_land
+				squish_ease.clock = 0.0
 	
+	vel_last = vel
 	vel = move_and_slide(vel)
 	
 	
@@ -84,7 +130,9 @@ func _physics_process(delta):
 	
 	if is_dead:
 		var s = dead_ease.count(delta, true, false)
-		image.scale = Vector2.ONE * lerp(1.0, 0.0, ease(s, 2.0))
+		image.scale = Vector2.ONE * lerp(1.5, 0.0, ease(s, 2.0))
+		image.rotation_degrees = lerp(dir_x * 9.0, dir_x * 360.0, ease(s, 2.0))
+		
 	else:
 		if is_floor:
 			if joy.x == 0:
@@ -98,24 +146,25 @@ func _physics_process(delta):
 			image.position.y = lerp(image.position.y, 0, 10 * delta)
 	
 	
+	# squish ease
+	image_root.scale = squish_ease.move(delta)
+	
+	
+	
 	# mirrors
-	
-	var sg = image.global_position
-	var add = Vector2(room_size.x, room_size.y) * 2.0
-	
 	var vec = []
 	for x in [-1, 0, 1]:
 		for y in [-1, 0, 1]:
 			if !(x == 0 and y == 0):
 				vec.append(Vector2(x, y))
 	
-	for i in spr_list.size():
-		spr_list[i].scale = image.scale
-		spr_list[i].rotation = image.rotation
-		spr_list[i].global_position = sg + (add * vec[i])
+	var sg = image_root.global_position
+	var add = Vector2(room_size.x, room_size.y) * 2.0
 	
-
-
+	for i in spr_list.size():
+		spr_list[i].scale = image_root.global_scale
+		spr_list[i].rotation = image_root.global_rotation
+		spr_list[i].global_position = sg + (add * vec[i])
 
 func die():
 	is_dead = true
@@ -124,4 +173,6 @@ func die():
 	vel.x = move_speed * -dir_x
 	joy.x = -dir_x
 	arcade.lose()
+	#Audio.play(audio_die, 0.8, 1.2)
+	Audio.play("arcade_owie", 0.7, 1.1)
 	

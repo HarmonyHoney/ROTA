@@ -1,5 +1,7 @@
 extends Node
 
+export var is_refresh := false setget set_refresh
+
 var dict = {}
 
 onready var music_player := $Music/Music
@@ -12,8 +14,7 @@ var wait_clock := 0.0
 var wait_time := 10.0
 
 func _ready():
-	for i in Shared.get_all_children(self):
-		dict[str(get_path_to(i)).to_lower().replace("/", "_")] = i
+	set_refresh()
 	#print(dict)
 	
 	music_player.connect("finished", self, "music_finished")
@@ -46,3 +47,8 @@ func music_play():
 	last_song = music_que.pop_front()
 	music_player.stream = ost[last_song]
 	music_player.play()
+
+func set_refresh(arg := false):
+	print("Audio.dict refresh")
+	for i in Shared.get_all_children(self):
+		dict[str(get_path_to(i)).to_lower().replace("/", "_")] = i

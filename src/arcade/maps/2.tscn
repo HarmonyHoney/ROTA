@@ -3,7 +3,7 @@
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
 [ext_resource path="res://src/arcade/Candy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/arcade/ArcadePlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/arcade/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
 
 [sub_resource type="OccluderPolygon2D" id=5]
@@ -46,14 +46,14 @@ size = Vector2( 600, 600 )
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 5 )]
 tile_set = SubResource( 2 )
-tile_data = PoolIntArray( -327683, 0, 0, -327682, 0, 0, -327681, 0, 0, -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 393213, 0, 0, 393214, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0 )
+tile_data = PoolIntArray( -196611, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 0, 0, -262143, 0, 0, -262142, 0, 0, -131075, 0, 0, -131074, 0, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 262138, 0, 0, 262139, 0, 0, 262140, 0, 0, 262141, 0, 0, 262142, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0 )
 detail = 6
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 250, -150 )
+position = Vector2( 250, 50 )
 
 [node name="Candy" parent="." instance=ExtResource( 3 )]
-position = Vector2( -350, -150 )
+position = Vector2( -350, 50 )
 
 [node name="Candy2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 50, 450 )
+position = Vector2( 50, -550 )

@@ -7,9 +7,9 @@
 extents = Vector2( 30, 30 )
 
 [node name="Candy" type="KinematicBody2D"]
-position = Vector2( 250, -150 )
 collision_layer = 2
 script = ExtResource( 2 )
+speed = 130.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -28,6 +28,10 @@
 [ext_resource path="res://media/audio/sfx/hit0.wav" type="AudioStream" id=26]
 [ext_resource path="res://media/audio/sfx/door_squeak.wav" type="AudioStream" id=27]
 [ext_resource path="res://media/audio/sfx/door_close.wav" type="AudioStream" id=28]
+[ext_resource path="res://media/audio/sfx/key.wav" type="AudioStream" id=29]
+[ext_resource path="res://media/audio/sfx/fallout2.wav" type="AudioStream" id=30]
+[ext_resource path="res://media/audio/sfx/jump1.wav" type="AudioStream" id=31]
+[ext_resource path="res://media/audio/sfx/zap0.wav" type="AudioStream" id=32]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -166,4 +170,34 @@ bus = "SFX"
 [node name="Peek" type="AudioStreamPlayer" parent="Player"]
 stream = ExtResource( 13 )
 volume_db = -7.0
+bus = "SFX"
+
+[node name="Arcade" type="Node" parent="."]
+
+[node name="Win" type="AudioStreamPlayer" parent="Arcade"]
+stream = ExtResource( 29 )
+bus = "SFX"
+
+[node name="Lose" type="AudioStreamPlayer" parent="Arcade"]
+stream = ExtResource( 30 )
+bus = "SFX"
+
+[node name="Jump" type="AudioStreamPlayer" parent="Arcade"]
+stream = ExtResource( 31 )
+bus = "SFX"
+
+[node name="Hit" type="AudioStreamPlayer" parent="Arcade"]
+stream = ExtResource( 13 )
+bus = "SFX"
+
+[node name="Bell" type="AudioStreamPlayer" parent="Arcade"]
+stream = ExtResource( 32 )
+bus = "SFX"
+
+[node name="Die" type="AudioStreamPlayer" parent="Arcade"]
+stream = ExtResource( 30 )
+bus = "SFX"
+
+[node name="Owie" type="AudioStreamPlayer" parent="Arcade"]
+stream = ExtResource( 16 )
 bus = "SFX"

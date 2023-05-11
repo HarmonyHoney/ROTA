@@ -12,6 +12,7 @@ var spr_list := []
 var walk_clock := 0.0
 var is_dead := false
 var dead_ease := EaseMover.new()
+var is_floor := false
 
 var arcade
 
@@ -27,7 +28,7 @@ func _ready():
 	
 	
 	spr_list = []
-	for i in 3:
+	for i in 8:
 		var s = image.duplicate()
 		add_child(s)
 		spr_list.append(s)
@@ -36,8 +37,12 @@ func _exit_tree():
 	arcade.candies.erase(self)
 
 func _physics_process(delta):
+	is_floor = test_move(transform, Vector2(0, 2.0))
+	
 	if !is_dead:
 		move_and_slide(Vector2(speed * dir_x, 0.0))
+		if !is_floor:
+			move_and_collide(Vector2(0, 5.0))
 	
 	var tf = Transform2D(0.0, position + Vector2(dir_x * 20, 0.0))
 	
@@ -52,20 +57,30 @@ func _physics_process(delta):
 	else:
 		walk_clock += delta
 		
-		image.rotation_degrees = sin(walk_clock * 8.0) * 8.0
+		image.rotation_degrees = sin(walk_clock * 8.0) * 10.0
 		image.position.y = -abs(cos(walk_clock * 8.0) * 10.0)
 	
 	# wrap
 	position.x = wrapf(position.x, -room_size.x, room_size.x)
 	position.y = wrapf(position.y, -room_size.y, room_size.y)
+
+	
+	# mirrors
+	var vec = []
+	for x in [-1, 0, 1]:
+		for y in [-1, 0, 1]:
+			if !(x == 0 and y == 0):
+				vec.append(Vector2(x, y))
 	
 	var sg = image.global_position
-	var add = Vector2(room_size.x * -sign(sg.x), room_size.y * -sign(sg.y)) * 2.0
+	var add = Vector2(room_size.x, room_size.y) * 2.0
 	
-	for i in 3:
-		spr_list[i].rotation = image.rotation
+	for i in spr_list.size():
 		spr_list[i].scale = image.scale
-		spr_list[i].global_position = sg + (add * [Vector2.RIGHT, Vector2.DOWN, Vector2.ONE][i])
+		spr_list[i].rotation = image.rotation
+		spr_list[i].global_position = sg + (add * vec[i])
+	
+	
 
 func die():
 	is_dead = true
