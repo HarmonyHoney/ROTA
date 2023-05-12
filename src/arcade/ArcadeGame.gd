@@ -2,12 +2,16 @@ extends Node2D
 
 onready var cam := $Camera2D
 onready var map_node := $Map
+onready var center_node := $UI/Control/Center
+onready var label_node := $UI/Control/Center/Label
+onready var wipe_mat : ShaderMaterial = $UI/Control/Wipe.material
+
 
 export var tile_size := 12.0
 
 export(String, DIR) var folder := ""
 onready var maps : Array = Shared.list_all_files(folder)
-export var map := 0
+export var map := 0 setget set_map
 var map_ease := EaseMover.new(1.0)
 
 var candies := []
@@ -15,33 +19,45 @@ var candies := []
 export var room_size := 600.0
 
 export var wrap_cam = 0
-export var cam_speed := Vector2(100, 100)
+export var cam_speed := 100.0
+var wrap_angle = 0.0
 
 
 func _ready():
-	map_ease.clock = map_ease.time
+	map_ease.clock = 0.01
 	
 	scene()
 
 func _physics_process(delta):
-	if map_ease.is_less:
-		var s = map_ease.count(delta, true, false)
-		
-		cam.zoom = Vector2.ONE * lerp(1.1, 3.0, ease(s, 1.8))
-		cam.position = map_ease.from_lerp_to(ease(s, 1.8))
+	var s = map_ease.count(delta)
+	var f = map_ease.frac()
+	
+	if !map_ease.is_last:
+		cam.zoom = Vector2.ONE * lerp(1.1, 3.0, s)
+		cam.position = map_ease.from_lerp_to(s)
+		center_node.rect_scale = Vector2.ONE * lerp(0.0, 2.5, s)
+		wipe_mat.set_shader_param("radius", lerp(0.71, 0.0, ease(1.0 - f, 0.17)))
 		
 		if map_ease.is_complete:
+			yield(get_tree(), "physics_frame")
 			scene()
 	
 	
 	if wrap_cam > 0:
-		cam.position.y = wrapf(cam.position.y + (cam_speed.y * delta), -room_size, room_size)
-		
-		if wrap_cam > 1:
-			cam.position.x = wrapf(cam.position.x + (cam_speed.x * delta), -room_size, room_size)
+		cam.position += Vector2.RIGHT.rotated(wrap_angle) * cam_speed * delta
+		cam.position = Vector2(wrapf(cam.position.x, -room_size, room_size), wrapf(cam.position.y, -room_size, room_size))
 		
 		map_ease.from = cam.position
+
+func set_map(arg := map):
+	map = max(0, arg)
+	#print("map: ", map)
 	
+	var loop = floor(map / maps.size())
+	
+	label_node.text = (str(loop + 1) + "-" if loop > 0 else "") + str(map % maps.size())
+	
+
 
 func wrap_tiles(_map):
 	var tiles = _map.get_used_cells()
@@ -56,20 +72,26 @@ func wrap_tiles(_map):
 func win():
 	if candies.size() > 0: return
 	
-	map_ease.clock = 0.0
-	map += 1
+	map_ease.show = true
+	self.map += 1
+	
 	Audio.play("arcade_win", 0.7, 1.1)
-	print("map: ", map)
 
 func lose():
-	map_ease.clock = 0.0
-	map = max(0, map - 1)
+	map_ease.show = true
+	self.map -= 1
+	
 	Audio.play("arcade_lose", 0.7, 1.1)
-	print("map: ", map)
 
 func scene():
 	wrap_cam = floor(map / maps.size())
-	cam_speed *= Vector2(1.0 if randf() < 0.5 else -1.0, 1.0 if randf() < 0.5 else -1.0)
+	
+	randomize()
+	wrap_angle = lerp(0.0, TAU, (randi() % 3) / 4.0) + (0.0 if wrap_cam < 2 else deg2rad(15.0))
+	#print(rad2deg(wrap_angle))
+	
+	map_ease.from = Vector2.ZERO
+	map_ease.show = false
 	
 	cam.position = Vector2.ZERO
 	cam.zoom = Vector2.ONE * 1.1
