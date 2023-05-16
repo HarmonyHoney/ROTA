@@ -60,6 +60,7 @@ export var dry_range := Vector2(60, 720)
 var precip_list = []
 var solve_clock := 0.0
 var solve_step := 1.0
+var rain_ease := EaseMover.new(7.0)
 
 export var color_bright := Color.white
 export var color_dark := Color("bfbfbf")
@@ -147,6 +148,13 @@ func _process(delta):
 	cloud_rotation = fposmod(cloud_rotation + deg2rad(cloud_speed * delta * cloud_dir * day_scale), TAU)
 	for i in [clouds, clouds1, clouds2, clouds_rain, precip]:
 		i.rotation = cloud_rotation
+	
+	# rain
+	var s = rain_ease.count(delta, is_rain and !is_snow and Shared.is_weather)
+	if !rain_ease.is_last:
+		audio_rain.volume_db = lerp(-20, 4.0, s)
+		if rain_ease.clock == 0.0:
+			audio_rain.stop()
 
 func cam_moved():
 	# parallax
@@ -196,18 +204,14 @@ func set_is_rain(arg := is_rain):
 	
 	var vec = rain_range if is_rain else dry_range
 	rain_clock = rand_range(vec.x, vec.y)
-	print("is_rain: ", is_rain, " audio: ", audio_rain, " precip_list: ", precip_list.size())
+	if is_rain and audio_rain: audio_rain.play(audio_rain.get_playback_position())
+	#print("is_rain: ", is_rain, " audio: ", audio_rain, " precip_list: ", precip_list.size())
 	
 	for i in precip_list:
 		i.emitting = is_rain
 	solve_fall()
-	
-	set_is_weather(false)
 
 func set_is_weather(_visible := true):
-	if audio_rain:
-		audio_rain.playing = (is_rain and !is_snow) and Shared.is_weather
-	
 	if _visible:
 		for i in precip_list:
 			i.visible = Shared.is_weather
