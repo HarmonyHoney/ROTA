@@ -18,7 +18,7 @@ func fill_items():
 	.fill_items()
 
 func row():
-	is_audio_joy = cursor > 3
+	is_audio_joy = cursor > 4
 
 func open():
 	bg.visible = true#Shared.csfn != Shared.title_path

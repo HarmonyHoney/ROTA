@@ -201,16 +201,16 @@ func set_is_rain(arg := is_rain):
 	for i in precip_list:
 		i.emitting = is_rain
 	solve_fall()
-
-	if audio_rain:
-		audio_rain.playing = is_rain and !is_snow
 	
-#	if clouds_rain:
-#		clouds_rain.material.blend_mode = 2 if is_rain else 1
+	set_is_weather(false)
 
-func set_is_weather(arg):
-	for i in precip_list:
-		i.visible = Shared.is_weather
+func set_is_weather(_visible := true):
+	if audio_rain:
+		audio_rain.playing = (is_rain and !is_snow) and Shared.is_weather
+	
+	if _visible:
+		for i in precip_list:
+			i.visible = Shared.is_weather
 
 func create_clouds():
 	cloud_dir = (-1.0 if randf() > 0.5 else 1.0) * rand_range(0.6, 1.0)

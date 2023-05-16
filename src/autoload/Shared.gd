@@ -112,7 +112,7 @@ var default_keys := {}
 var is_gamepad := false
 signal gamepad_input(arg)
 
-var volume = [100, 100, 100]
+var volume = [100, 100, 100, 100]
 var win_size := Vector2(1280, 720)
 var win_sizes := [Vector2(640, 360), Vector2(960, 540), Vector2(1280, 720), Vector2(1600, 900),
 Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
@@ -138,9 +138,8 @@ func _ready():
 	Wipe.connect("complete", self, "wipe_complete")
 	boundary_node.visible = false
 	
-	#set_volume(0, 50)
-	set_volume(1, 50)
-	set_volume(2, 50)
+	for i in [1, 2, 3]:
+		set_volume(i, 50)
 	
 	# get default key binds
 	for i in InputMap.get_actions():
@@ -459,7 +458,7 @@ func set_shadow_buffer(arg := shadow_buffer):
 
 func set_is_weather(arg := is_weather):
 	is_weather = bool(arg)
-	Clouds.set_is_weather(is_weather)
+	Clouds.set_is_weather()
 
 func set_is_interpolate(arg := is_interpolate):
 	is_interpolate = bool(arg)
@@ -672,6 +671,7 @@ func save_options():
 	
 	o["sounds"] = int(volume[1] / 10)
 	o["music"] = int(volume[2] / 10)
+	o["weather"] = int(volume[3] / 10)
 	
 	o["mouse"] = int(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
 	o["radial_blur"] = int(radial_blur)
@@ -706,6 +706,8 @@ func load_options():
 		set_volume(1, int(d["sounds"]) * 10)
 	if d.has("music"):
 		set_volume(2, int(d["music"]) * 10)
+	if d.has("weather"):
+		set_volume(3, int(d["weather"]) * 10)
 	
 	if d.has("mouse"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if int(d["mouse"]) else Input.MOUSE_MODE_HIDDEN

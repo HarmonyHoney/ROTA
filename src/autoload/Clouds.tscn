@@ -341,7 +341,7 @@ z_as_relative = false
 [node name="AudioRain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = 4.0
-bus = "SFX"
+bus = "Weather"
 
 [node name="Hide" type="Node2D" parent="."]
 

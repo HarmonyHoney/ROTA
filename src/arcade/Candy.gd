@@ -16,6 +16,8 @@ var is_floor := false
 
 var arcade
 
+var image_rot := 0.0
+
 func _ready():
 	for i in get_tree().get_nodes_in_group("arcade"):
 		arcade = i
@@ -52,12 +54,14 @@ func _physics_process(delta):
 	
 	# animation
 	if is_dead:
-		var s = dead_ease.count(delta)
-		image.scale = Vector2.ONE * lerp(1.0, 0.0, s)
+		var e = ease(dead_ease.count(delta, true, false), 0.5)
+		image.scale = Vector2.ONE * lerp(1.0, 0.0, e)
+		image.rotation_degrees = image_rot + lerp(0.0, 240.0 * dir_x, e)
 	else:
 		walk_clock += delta
 		
-		image.rotation_degrees = sin(walk_clock * 8.0) * 10.0
+		image_rot = sin(walk_clock * 8.0) * 10.0
+		image.rotation_degrees = image_rot
 		image.position.y = -abs(cos(walk_clock * 8.0) * 10.0)
 	
 	# wrap
@@ -87,6 +91,7 @@ func die():
 	collision_layer = 0
 	arcade.candies.erase(self)
 	arcade.win()
+	dir_x = -1.0 if randf() < 0.5 else 1.0
 
 
 
