@@ -21,7 +21,7 @@ export var room_size := 600.0
 export var wrap_cam = 0
 export var cam_speed := 100.0
 var wrap_angle = 0.0
-
+var delta_scale := 1.0
 
 func _ready():
 	map_ease.clock = 0.01
@@ -52,10 +52,10 @@ func _physics_process(delta):
 func set_map(arg := map):
 	map = max(0, arg)
 	#print("map: ", map)
+	if maps and label_node:
+		var loop = floor(map / maps.size())
 	
-	var loop = floor(map / maps.size())
-	
-	label_node.text = (str(loop + 1) + "-" if loop > 0 else "") + str(map % maps.size())
+		label_node.text = (str(loop + 1) + "-" if loop > 0 else "") + str(map % maps.size())
 	
 
 
@@ -85,9 +85,14 @@ func lose():
 
 func scene():
 	wrap_cam = floor(map / maps.size())
+	var c = clamp(wrap_cam - 1, 1.0, 5.0)
+	cam_speed = c * 100
+	delta_scale = 1.0 + (clamp(wrap_cam - 1, 0.0, 5.0) * 0.2)
+	
+	print("wrap_cam: ", wrap_cam, " cam_speed: ", cam_speed, " delta_scale : ", delta_scale)
 	
 	randomize()
-	wrap_angle = lerp(0.0, TAU, (randi() % 3) / 4.0) + (0.0 if wrap_cam < 2 else deg2rad(15.0))
+	wrap_angle = lerp(0.0, TAU, (randi() % 3) / 4.0) + (0.0 if wrap_cam < 2 else deg2rad(45.0))
 	#print(rad2deg(wrap_angle))
 	
 	map_ease.from = Vector2.ZERO

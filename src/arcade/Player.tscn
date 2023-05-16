@@ -39,7 +39,6 @@ scale = Vector2( 0.7, 0.7 )
 
 [node name="Head" type="Polygon2D" parent="Sprites/Root/Body"]
 position = Vector2( -6.10352e-05, -20.0001 )
-scale = Vector2( 1, 1 )
 polygon = PoolVector2Array( 30, 0, 27.7164, 11.4805, 21.2132, 21.2132, 11.4805, 27.7164, -1.31134e-06, 30, -11.4805, 27.7164, -21.2132, 21.2132, -27.7164, 11.4805, -30, -2.62268e-06, -27.7164, -11.4805, -21.2132, -21.2132, -11.4805, -27.7164, 3.57746e-07, -30, 11.4805, -27.7164, 21.2132, -21.2132, 27.7164, -11.4805 )
 script = ExtResource( 2 )
 is_baked = false
@@ -67,7 +66,6 @@ points = 4
 
 [node name="Legs" type="Node2D" parent="Sprites/Root/Body"]
 position = Vector2( -6.10352e-05, 4.99993 )
-scale = Vector2( 1, 1 )
 
 [node name="Left" type="Polygon2D" parent="Sprites/Root/Body/Legs"]
 rotation = 0.523598

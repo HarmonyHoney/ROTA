@@ -17,11 +17,13 @@ var is_floor := false
 var arcade
 
 var image_rot := 0.0
+var delta_scale := 1.0
 
 func _ready():
 	for i in get_tree().get_nodes_in_group("arcade"):
 		arcade = i
 	arcade.candies.append(self)
+	delta_scale = arcade.delta_scale
 	
 	move_and_collide(Vector2(0, 500))
 
@@ -39,10 +41,12 @@ func _exit_tree():
 	arcade.candies.erase(self)
 
 func _physics_process(delta):
+	delta *= delta_scale
+	#print(delta_scale)
 	is_floor = test_move(transform, Vector2(0, 2.0))
 	
 	if !is_dead:
-		move_and_slide(Vector2(speed * dir_x, 0.0))
+		move_and_collide(Vector2(speed * dir_x, 0.0) * delta)
 		if !is_floor:
 			move_and_collide(Vector2(0, 5.0))
 	
