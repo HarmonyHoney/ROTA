@@ -23,20 +23,20 @@ func _process(delta):
 		delay -= delta
 		if delay < 0.0 and !is_in: Audio.play("menu_wipe", 0.9, 1.1)
 	elif is_wipe:
-		mat.set_shader_param("radius", easy.count(delta, !is_in) * radius)
+		var s = easy.count(delta, !is_in)
+		mat.set_shader_param("radius", s * radius)
+		sprite.visible = easy.clock > 0.0
 		
 		is_intro = is_in and easy.frac() > 0.33
 		
-		if (easy.clock == 0 and is_in) or (easy.clock == easy.time and !is_in):
+		if (easy.clock == 0 and is_in) or (easy.is_complete and !is_in):
 			is_wipe = false
-			sprite.visible = false
 			emit_signal("complete", is_in)
 
 func start(arg := false, _delay := 0.0):
 	is_in = arg
 	is_intro = is_in
-	delay = max(0.001, _delay)
 	is_wipe = true
-	sprite.visible = true
+	delay = max(0.001, _delay)
 	easy.clock = easy.time if is_in else 0
 	emit_signal("start", is_in)
