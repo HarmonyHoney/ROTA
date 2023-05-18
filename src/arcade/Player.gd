@@ -37,8 +37,12 @@ var is_input = true
 var is_dead := false
 var arcade
 var dead_ease := EaseMover.new()
+var unpause_tick := 0.0
+var is_unpause := false
 
 func _ready():
+	MenuPause.connect("opened", self, "pause")
+	
 	for i in get_tree().get_nodes_in_group("arcade"):
 		arcade = i
 	
@@ -55,12 +59,15 @@ func _ready():
 func _physics_process(delta):
 	# input
 	joy_last = joy
-	if is_input:
+	if is_input and !MenuPause.is_open:
 		joy.x = round(Input.get_axis("left", "right"))
 		joy.y = round(Input.get_axis("up", "down"))
 		
-		btnp_jump = Input.is_action_just_pressed("jump")
-		btn_jump = Input.is_action_pressed("jump")
+		var j = Input.is_action_pressed("jump")
+		if !j: is_unpause = false
+		if !is_unpause:
+			btnp_jump = Input.is_action_just_pressed("jump")
+			btn_jump = j
 	
 	# is floor & air clock
 	is_floor = test_move(transform, Vector2(0, 3))
@@ -175,4 +182,9 @@ func die():
 	arcade.lose()
 	#Audio.play(audio_die, 0.8, 1.2)
 	Audio.play("arcade_owie", 0.7, 1.1)
-	
+
+func pause(arg := false):
+	joy = Vector2.ZERO
+	btn_jump = false
+	btnp_jump = false
+	is_unpause = !arg

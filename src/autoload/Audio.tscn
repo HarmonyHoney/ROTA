@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://media/audio/sfx/fallout2.wav" type="AudioStream" id=30]
 [ext_resource path="res://media/audio/sfx/jump1.wav" type="AudioStream" id=31]
 [ext_resource path="res://media/audio/sfx/zap0.wav" type="AudioStream" id=32]
+[ext_resource path="res://media/audio/music/arcade2.mp3" type="AudioStream" id=33]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -41,6 +42,12 @@ ost = [ ExtResource( 21 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 23
 [node name="Music" type="Node" parent="."]
 
 [node name="Music" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 21 )
+bus = "Music"
+
+[node name="Arcade" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource( 33 )
+volume_db = 4.0
 bus = "Music"
 
 [node name="Menu" type="Node" parent="."]

@@ -29,7 +29,6 @@ export var is_open := false setget set_open
 export var is_accept_close := false
 export var is_back_close := false
 signal opened
-signal closed
 var is_sub_menu := false
 var sub_ease := EaseMover.new()
 var sub_node
@@ -168,10 +167,9 @@ func set_open(arg := is_open):
 		UI.menu_keys(text_accept, text_cancel)
 		open()
 		row()
-		emit_signal("opened")
 	else:
 		close()
-		emit_signal("closed")
+	emit_signal("opened", is_open)
 	
 	if is_ui_keys:
 		UI.keys.show = is_open
@@ -220,16 +218,18 @@ func sub_menu(arg):
 	is_open = sub_stay_open
 	
 	sub_node.is_open = true
-	if !sub_node.is_connected("closed", self, "sub_close"):
-		sub_node.connect("closed", self, "sub_close")
+	if !sub_node.is_connected("opened", self, "sub_close"):
+		sub_node.connect("opened", self, "sub_close")
 
-func sub_close():
+func sub_close(arg := false):
+	if arg: return
+	
 	is_sub_menu = false
 	is_open = true
 	UI.menu_keys(text_accept, text_cancel)
 	
-	if sub_node and sub_node.is_connected("closed", self, "sub_close"):
-		sub_node.disconnect("closed", self, "sub_close")
+	if sub_node and sub_node.is_connected("opened", self, "sub_close"):
+		sub_node.disconnect("opened", self, "sub_close")
 	sub_node = null
 	
 	reset_joy()

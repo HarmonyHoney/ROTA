@@ -12,6 +12,7 @@ var music_que = []
 export var wait_range := Vector2(10, 90)
 var wait_clock := 0.0
 var wait_time := 10.0
+var music_ease := EaseMover.new(1.0)
 
 func _ready():
 	set_refresh()
@@ -34,9 +35,26 @@ func _physics_process(delta):
 		wait_clock -= delta
 		if wait_clock <= 0:
 			music_play()
+	
+	var s = music_ease.count(delta, Shared.is_arcade)
+	if !music_ease.is_last:
+		var m = dict["music_music"]
+		var a = dict["music_arcade"]
+		m.volume_db = lerp(0.0, -30.0, s)
+		a.volume_db = lerp(-30.0, 0.0, s)
+		
+		if music_ease.clock == 0.0:
+			if !m.playing: m.play(m.get_playback_position())
+			a.stop()
+		if music_ease.is_complete:
+			a.play()
+			m.stop()
+	
 
 func music_finished():
-	wait_clock = rand_range(wait_range.x, wait_range.y)
+	if !Shared.is_arcade:
+		wait_clock = rand_range(wait_range.x, wait_range.y)
+		print("music_finished, wait_clock: ", wait_clock)
 
 func music_play():
 	if music_que.empty():

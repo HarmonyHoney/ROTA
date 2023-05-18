@@ -155,7 +155,6 @@ func _enter_tree():
 		Shared.player = self
 	get_tree().connect("physics_frame", self, "physics_frame")
 	MenuPause.connect("opened", self, "pause")
-	MenuPause.connect("closed", self, "unpause")
 	Shared.connect("scene_changed", self, "scene")
 	Wipe.connect("start", self, "wipe_start")
 	Cutscene.connect("playing", self, "cutscene_playing")
@@ -882,15 +881,12 @@ func enter_door(arg):
 	if is_instance_valid(goal):
 		goal.target = door_exit
 
-func pause():
+func pause(arg := false):
 	if Shared.player == self:
 		clear_input()
-
-func unpause():
-	if Shared.player == self:
-		clear_input()
-		is_unpause = true
-		unpause_tick = 0
+		if !arg:
+			is_unpause = true
+			unpause_tick = 0
 
 func clear_input():
 	btn_jump = false

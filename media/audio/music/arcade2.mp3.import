@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/arcade2.mp3-b7a708f610143e79ed68b5eeea715060.mp3str"
+
+[deps]
+
+source_file="res://media/audio/music/arcade2.mp3"
+dest_files=[ "res://.import/arcade2.mp3-b7a708f610143e79ed68b5eeea715060.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

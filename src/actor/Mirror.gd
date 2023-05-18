@@ -22,7 +22,7 @@ var dir_x := 1.0
 export var hide_distance := 50.0
 
 func _ready():
-	MenuMakeover.connect("closed", self, "closed")
+	MenuMakeover.connect("opened", self, "closed")
 	
 	arrow.dir = posmod(dir, 4)
 	rig.global_rotation = 0
@@ -96,7 +96,9 @@ func _on_Arrow_open():
 	arrow.is_locked = true
 	rig_ease.show = false
 
-func closed():
+func closed(arg := false):
+	if arg: return
+	
 	arrow.is_locked = false
 	rig_ease.show = true
 	create_rig()
