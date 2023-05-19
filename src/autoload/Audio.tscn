@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://media/audio/sfx/jump1.wav" type="AudioStream" id=31]
 [ext_resource path="res://media/audio/sfx/zap0.wav" type="AudioStream" id=32]
 [ext_resource path="res://media/audio/music/arcade2.mp3" type="AudioStream" id=33]
+[ext_resource path="res://media/audio/sfx/oneup1.wav" type="AudioStream" id=34]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -207,4 +208,8 @@ bus = "SFX"
 
 [node name="Owie" type="AudioStreamPlayer" parent="Arcade"]
 stream = ExtResource( 16 )
+bus = "SFX"
+
+[node name="Boot" type="AudioStreamPlayer" parent="Arcade"]
+stream = ExtResource( 34 )
 bus = "SFX"

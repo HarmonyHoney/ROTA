@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var dir_x := 1.0
+var dir_x := 0.0
 
 export var speed := 100.0
 
@@ -25,17 +25,11 @@ func _ready():
 	arcade.candies.append(self)
 	delta_scale = arcade.delta_scale
 	
-	move_and_collide(Vector2(0, 500))
-
-	if randf() > 0.5:
-		dir_x = -dir_x
+	if dir_x == 0.0:
+		dir_x = -1.0 if randf() < 0.5 else 1.0
 	
-	
-	spr_list = []
-	for i in 8:
-		var s = image.duplicate()
-		add_child(s)
-		spr_list.append(s)
+	if test_move(transform, Vector2(0, 100)):
+		move_and_collide(Vector2(0, 100))
 
 func _exit_tree():
 	arcade.candies.erase(self)
@@ -48,7 +42,7 @@ func _physics_process(delta):
 	if !is_dead:
 		move_and_collide(Vector2(speed * dir_x, 0.0) * delta)
 		if !is_floor:
-			move_and_collide(Vector2(0, 5.0))
+			move_and_collide(Vector2(0, 10.0))
 	
 	var tf = Transform2D(0.0, position + Vector2(dir_x * 20, 0.0))
 	
@@ -71,24 +65,6 @@ func _physics_process(delta):
 	# wrap
 	position.x = wrapf(position.x, -room_size.x, room_size.x)
 	position.y = wrapf(position.y, -room_size.y, room_size.y)
-
-	
-	# mirrors
-	var vec = []
-	for x in [-1, 0, 1]:
-		for y in [-1, 0, 1]:
-			if !(x == 0 and y == 0):
-				vec.append(Vector2(x, y))
-	
-	var sg = image.global_position
-	var add = Vector2(room_size.x, room_size.y) * 2.0
-	
-	for i in spr_list.size():
-		spr_list[i].scale = image.scale
-		spr_list[i].rotation = image.rotation
-		spr_list[i].global_position = sg + (add * vec[i])
-	
-	
 
 func die():
 	is_dead = true

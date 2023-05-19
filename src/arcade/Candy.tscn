@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/arcade/Candy.gd" type="Script" id=2]
+[ext_resource path="res://src/arcade/Wrapper.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 30, 30 )
 
-[node name="Candy" type="KinematicBody2D"]
+[node name="Candy" type="KinematicBody2D" groups=["candy"]]
 collision_layer = 2
 script = ExtResource( 2 )
 speed = 130.0
@@ -42,3 +43,7 @@ is_baked = false
 size = Vector2( 7, 12 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
+
+[node name="Wrapper" type="Node2D" parent="."]
+script = ExtResource( 3 )
+image_path = NodePath("../Sprites")

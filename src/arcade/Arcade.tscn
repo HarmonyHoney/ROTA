@@ -89,11 +89,11 @@ rect_clip_content = true
 position = Vector2( 0, 310 )
 
 [node name="Joystick" type="Node2D" parent="CanvasLayer/Cabinet/Controls"]
-position = Vector2( -200, 23 )
+position = Vector2( -180, 23 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Joystick"]
 position = Vector2( 0, -50 )
-color = Color( 0.5, 0, 0, 1 )
+color = Color( 0.392157, 0, 0.196078, 1 )
 polygon = PoolVector2Array( 15, 50, 14.6239, 53.3378, 13.5145, 56.5083, 11.7275, 59.3523, 9.35235, 61.7275, 6.50826, 63.5145, 3.33781, 64.6239, -6.55671e-07, 65, -3.33781, 64.6239, -6.50826, 63.5145, -9.35235, 61.7275, -11.7275, 59.3523, -13.5145, 56.5083, -14.6239, 53.3378, -15, 50, -15, -50, -14.6239, -53.3378, -13.5145, -56.5083, -11.7275, -59.3523, -9.35234, -61.7275, -6.50826, -63.5145, -3.33782, -64.6239, 1.78873e-07, -65, 3.33782, -64.6239, 6.50826, -63.5145, 9.35235, -61.7275, 11.7275, -59.3523, 13.5145, -56.5083, 14.6239, -53.3378, 15, -50 )
 script = ExtResource( 1 )
 is_baked = false
@@ -107,11 +107,11 @@ polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 4
 script = ExtResource( 2 )
 
 [node name="Button" type="Node2D" parent="CanvasLayer/Cabinet/Controls"]
-position = Vector2( 50, 0 )
+position = Vector2( 30, 0 )
 scale = Vector2( 1, 0.75 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button"]
-color = Color( 0.5, 0, 0, 1 )
+color = Color( 0.392157, 0, 0.196078, 1 )
 polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
 script = ExtResource( 2 )
 
@@ -141,11 +141,11 @@ rect_offset = Vector2( 0, 10 )
 radius = Plane( 0, 0, -2, -2 )
 
 [node name="Button2" type="Node2D" parent="CanvasLayer/Cabinet/Controls"]
-position = Vector2( 200, 0 )
+position = Vector2( 180, 0 )
 scale = Vector2( 1, 0.75 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="CanvasLayer/Cabinet/Controls/Button2"]
-color = Color( 0.5, 0, 0, 1 )
+color = Color( 0.392157, 0, 0.196078, 1 )
 polygon = PoolVector2Array( 50, 0, 46.194, 19.1342, 35.3553, 35.3553, 19.1342, 46.194, -2.18557e-06, 50, -19.1342, 46.194, -35.3553, 35.3553, -46.194, 19.1342, -50, -4.37114e-06, -46.194, -19.1342, -35.3553, -35.3553, -19.1342, -46.194, 5.96244e-07, -50, 19.1342, -46.194, 35.3553, -35.3553, 46.194, -19.1342 )
 script = ExtResource( 2 )
 

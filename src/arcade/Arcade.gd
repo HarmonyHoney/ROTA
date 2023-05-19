@@ -22,7 +22,7 @@ func _exit_tree():
 	Cam.target_node = player
 
 func _physics_process(delta):
-	var m = MenuPause.is_open
+	var m = MenuPause.is_paused
 	
 	joy.x = 0.0 if m else round(Input.get_axis("left", "right"))
 	var a = Input.is_action_pressed("jump")

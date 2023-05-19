@@ -13,8 +13,10 @@ var is_complete setget , get_is_complete
 var is_less setget , get_is_less
 var is_last setget , get_is_last
 
-func _init(_time := time, _from := from, _to := to, _node := node):
+func _init(_time := time, _clock := clock, _from := from, _to := to, _node := node):
 	time = _time
+	clock = _time if _clock < 0.0 else _clock
+	
 	from = _from
 	to = _to
 	node = _node

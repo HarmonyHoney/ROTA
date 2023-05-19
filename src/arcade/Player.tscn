@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=2]
 [ext_resource path="res://src/arcade/Player.gd" type="Script" id=3]
+[ext_resource path="res://src/arcade/Wrapper.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 20, 34 )
@@ -95,3 +96,7 @@ size = Vector2( 10, 30 )
 rect_offset = Vector2( 0, 20 )
 radius = Plane( -2, -2, -2, -2 )
 points = 4
+
+[node name="Wrapper" type="Node2D" parent="."]
+script = ExtResource( 4 )
+image_path = NodePath("../Sprites/Root")

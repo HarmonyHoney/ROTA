@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
+[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
+[ext_resource path="res://src/arcade/Candy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/arcade/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://src/arcade/Wrapper.gd" type="Script" id=7]
+
+[sub_resource type="OccluderPolygon2D" id=5]
+polygon = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
+
+[sub_resource type="TileSet" id=2]
+0/name = "rect-100.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 0, 0, 0, 0 )
+0/region = Rect2( 0, 0, 100, 100 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/occluder = SubResource( 5 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="DynamicFont" id=6]
+size = 230
+extra_spacing_bottom = -20
+font_data = ExtResource( 6 )
+
+[node name="Map" type="Node2D"]
+
+[node name="Back" type="Polygon2D" parent="." groups=["back"]]
+color = Color( 1, 0, 0, 0.407843 )
+polygon = PoolVector2Array( 600, 600, -600, 600, -600, -600, 600, -600 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+size = Vector2( 600, 600 )
+
+[node name="SolidTileMap" parent="." instance=ExtResource( 5 )]
+tile_set = SubResource( 2 )
+tile_data = PoolIntArray( -327686, -1610612736, 0, -327685, -1610612736, 0, -327684, -1610612736, 0, -327683, -1610612736, 0, -327682, -1610612736, 0, -393215, -1610612736, 0, -393214, -1610612736, 0, -393213, -1610612736, 0, -393212, -1610612736, 0, -393211, -1610612736, 0, -262150, -1610612736, 0, -262149, -1610612736, 0, -262148, -1610612736, 0, -262147, -1610612736, 0, -262146, -1610612736, 0, -327679, -1610612736, 0, -327678, -1610612736, 0, -327677, -1610612736, 0, -327676, -1610612736, 0, -327675, -1610612736, 0, 196602, -1610612736, 0, 196603, -1610612736, 0, 131076, -1610612736, 0, 131077, -1610612736, 0, 262138, -1610612736, 0, 262139, -1610612736, 0, 262143, -1610612736, 0, 196608, -1610612736, 0, 196612, -1610612736, 0, 196613, -1610612736, 0, 327679, -1610612736, 0, 262144, -1610612736, 0 )
+detail = 6
+
+[node name="Wrapper" type="Node2D" parent="."]
+script = ExtResource( 7 )
+image_path = NodePath("../Title")
+
+[node name="Title" type="Node2D" parent="."]
+position = Vector2( -600, -400 )
+
+[node name="Label" type="Label" parent="Title"]
+margin_right = 1200.0
+margin_bottom = 600.0
+custom_fonts/font = SubResource( 6 )
+text = "WRAP
+IT UP"
+align = 1
+valign = 1
+
+[node name="Player" parent="." groups=["start"] instance=ExtResource( 4 )]
+position = Vector2( 0, 250 )
+
+[node name="Candy" parent="." instance=ExtResource( 3 )]
+position = Vector2( -450, 150 )
+
+[node name="Candy3" parent="." instance=ExtResource( 3 )]
+position = Vector2( -350, 450 )
+
+[node name="Candy4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 200, 450 )

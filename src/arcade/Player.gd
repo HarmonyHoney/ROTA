@@ -3,11 +3,9 @@ extends KinematicBody2D
 onready var area := $Area2D
 onready var image := $Sprites
 onready var image_root := $Sprites/Root
-var spr_list := []
 
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
-var btnp_jump := false
 var btn_jump := false
 var jump_ease := EaseMover.new(0.15)
 var is_jump := false
@@ -46,12 +44,8 @@ func _ready():
 	for i in get_tree().get_nodes_in_group("arcade"):
 		arcade = i
 	
-	spr_list = []
-	for i in 8:
-		var s = image_root.duplicate()
-		add_child(s)
-		spr_list.append(s)
-	
+	if arcade.map == 0:
+		is_input = false
 	
 	image_root.scale = Vector2.ZERO
 	squish_ease.to = Vector2.ONE
@@ -59,14 +53,13 @@ func _ready():
 func _physics_process(delta):
 	# input
 	joy_last = joy
-	if is_input and !MenuPause.is_open:
+	if is_input and !MenuPause.is_paused:
 		joy.x = round(Input.get_axis("left", "right"))
 		joy.y = round(Input.get_axis("up", "down"))
 		
-		var j = Input.is_action_pressed("jump")
+		var j = Input.is_action_pressed("jump") or Input.is_action_pressed("grab")
 		if !j: is_unpause = false
 		if !is_unpause:
-			btnp_jump = Input.is_action_just_pressed("jump")
 			btn_jump = j
 	
 	# is floor & air clock
@@ -155,23 +148,6 @@ func _physics_process(delta):
 	
 	# squish ease
 	image_root.scale = squish_ease.move(delta)
-	
-	
-	
-	# mirrors
-	var vec = []
-	for x in [-1, 0, 1]:
-		for y in [-1, 0, 1]:
-			if !(x == 0 and y == 0):
-				vec.append(Vector2(x, y))
-	
-	var sg = image_root.global_position
-	var add = Vector2(room_size.x, room_size.y) * 2.0
-	
-	for i in spr_list.size():
-		spr_list[i].scale = image_root.global_scale
-		spr_list[i].rotation = image_root.global_rotation
-		spr_list[i].global_position = sg + (add * vec[i])
 
 func die():
 	is_dead = true
@@ -186,5 +162,4 @@ func die():
 func pause(arg := false):
 	joy = Vector2.ZERO
 	btn_jump = false
-	btnp_jump = false
 	is_unpause = !arg

@@ -12,13 +12,12 @@ var music_que = []
 export var wait_range := Vector2(10, 90)
 var wait_clock := 0.0
 var wait_time := 10.0
-var music_ease := EaseMover.new(1.0)
+var music_ease := EaseMover.new(1.0, -1)
 
 func _ready():
-	set_refresh()
-	#print(dict)
-	
 	music_player.connect("finished", self, "music_finished")
+	set_refresh()
+	
 	randomize()
 	wait_clock = 4.0
 
@@ -36,20 +35,15 @@ func _physics_process(delta):
 		if wait_clock <= 0:
 			music_play()
 	
-	var s = music_ease.count(delta, Shared.is_arcade)
+	var s = music_ease.count(delta, !Shared.is_arcade)
 	if !music_ease.is_last:
 		var m = dict["music_music"]
-		var a = dict["music_arcade"]
-		m.volume_db = lerp(0.0, -30.0, s)
-		a.volume_db = lerp(-30.0, 0.0, s)
+		m.volume_db = lerp(-30.0, 0.0, s)
 		
 		if music_ease.clock == 0.0:
-			if !m.playing: m.play(m.get_playback_position())
-			a.stop()
-		if music_ease.is_complete:
-			a.play()
 			m.stop()
-	
+		elif music_ease.last == 0.0 and !m.playing:
+			m.play(m.get_playback_position())
 
 func music_finished():
 	if !Shared.is_arcade:
@@ -67,6 +61,10 @@ func music_play():
 	music_player.play()
 
 func set_refresh(arg := false):
-	print("Audio.dict refresh")
+	is_refresh = arg
+	dict = {}
 	for i in Shared.get_all_children(self):
-		dict[str(get_path_to(i)).to_lower().replace("/", "_")] = i
+		if i is AudioStreamPlayer or i is AudioStreamPlayer2D:
+			dict[str(get_path_to(i)).to_lower().replace("/", "_")] = i
+	
+	print("Audio.dict refresh: ", dict.keys())
