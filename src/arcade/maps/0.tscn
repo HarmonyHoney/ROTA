@@ -40,7 +40,8 @@ points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 230
-extra_spacing_bottom = -20
+extra_spacing_top = 5
+extra_spacing_bottom = -15
 font_data = ExtResource( 6 )
 
 [node name="Map" type="Node2D"]

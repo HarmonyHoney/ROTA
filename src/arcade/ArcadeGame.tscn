@@ -18,8 +18,8 @@ shader_param/radius = 0.126
 shader_param/width = 0.0
 
 [sub_resource type="DynamicFont" id=1]
-size = 200
-outline_size = 20
+size = 170
+outline_size = 17
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
@@ -64,9 +64,9 @@ margin_bottom = 600.0
 use_top_left = true
 
 [node name="Label" type="Label" parent="UI/Control/Center"]
-margin_left = -140.0
+margin_left = -119.0
 margin_top = -100.0
-margin_right = 140.0
+margin_right = 119.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 200, 200 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )

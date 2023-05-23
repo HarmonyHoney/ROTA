@@ -37,6 +37,8 @@ func _ready():
 	Audio.play("arcade_boot")
 	yield(get_tree().create_timer(1.0), "timeout")
 	music.play()
+	
+	shuffle_maps()
 
 func _exit_tree():
 	if music:
@@ -127,7 +129,9 @@ func scene():
 	for i in map_node.get_children():
 		i.queue_free()
 	
-	var m = load(maps[map % maps.size()]).instance()
+	var goto = map % maps.size()
+	if goto == 0: shuffle_maps()
+	var m = load(maps[goto]).instance()
 	map_node.add_child(m)
 	
 	for i in m.get_children():
@@ -148,3 +152,18 @@ func scene():
 
 func pause(arg := false):
 	is_unpause = !arg
+
+func shuffle_maps():
+	var num = []
+	for i in 10:
+		num.append([])
+	
+	var m = Shared.list_all_files(folder)
+	for i in m:
+		num[int(i)].append(i)
+	
+	maps = []
+	for i in num:
+		i.shuffle()
+		for y in i:
+			maps.append(y)
