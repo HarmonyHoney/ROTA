@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://src/arcade/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/arcade/Candy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=4]
-[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=5]
+[ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
+[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
+[ext_resource path="res://src/arcade/Candy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/arcade/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=5]
 
 [sub_resource type="OccluderPolygon2D" id=5]
 polygon = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
@@ -14,7 +14,7 @@ points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 
 [sub_resource type="TileSet" id=2]
 0/name = "rect-100.png 0"
-0/texture = ExtResource( 5 )
+0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 0, 0, 0, 0 )
 0/region = Rect2( 0, 0, 100, 100 )
@@ -41,25 +41,28 @@ points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 [node name="Back" type="Polygon2D" parent="." groups=["back"]]
 color = Color( 1, 0, 0, 0.407843 )
 polygon = PoolVector2Array( 600, 600, -600, 600, -600, -600, 600, -600 )
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 size = Vector2( 600, 600 )
 
-[node name="SolidTileMap" parent="." instance=ExtResource( 3 )]
+[node name="SolidTileMap" parent="." instance=ExtResource( 5 )]
 tile_set = SubResource( 2 )
-tile_data = PoolIntArray( -196611, 0, 0, -196610, 0, 0, -262143, 0, 0, -262142, 0, 0, -131075, 0, 0, -131074, 0, 0, -196607, 0, 0, -196606, 0, 0, 196603, 0, 0, 196604, 0, 0, 196607, 0, 0, 131072, 0, 0, 131075, 0, 0, 131076, 0, 0, 262139, 0, 0, 262140, 0, 0, 262143, 0, 0, 196608, 0, 0, 196611, 0, 0, 196612, 0, 0 )
+tile_data = PoolIntArray( -393216, 0, 0, -393215, 0, 0, -131074, 0, 0, -131073, 0, 0, -6, 0, 0, -65531, 0, 0, 65530, 0, 0, 0, 0, 0, 1, 0, 0, 5, 0, 0, 262142, 0, 0, 262143, 0, 0 )
 detail = 6
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 200, -450 )
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( -550, -150 )
 
-[node name="Candy" parent="." instance=ExtResource( 2 )]
-position = Vector2( -400, 150 )
+[node name="Candy" parent="." instance=ExtResource( 3 )]
+position = Vector2( -100, 250 )
 
-[node name="Candy2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 150 )
+[node name="Candy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( -100, -350 )
 
-[node name="Candy3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 400, 150 )
+[node name="Candy3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 100, -50 )
+
+[node name="Candy4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 100, 450 )

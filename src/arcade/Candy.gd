@@ -25,6 +25,8 @@ func _ready():
 	arcade.candies.append(self)
 	delta_scale = arcade.delta_scale
 	
+	randomize()
+	speed *=  1.0 + rand_range(-0.1, 0.1)
 	if dir_x == 0.0:
 		dir_x = -1.0 if randf() < 0.5 else 1.0
 	

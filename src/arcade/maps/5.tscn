@@ -42,6 +42,9 @@ points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 color = Color( 1, 0, 0, 0.407843 )
 polygon = PoolVector2Array( 600, 600, -600, 600, -600, -600, 600, -600 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 size = Vector2( 600, 600 )
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 5 )]

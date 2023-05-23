@@ -162,6 +162,7 @@ func shuffle_maps():
 	for i in m:
 		num[int(i)].append(i)
 	
+	randomize()
 	maps = []
 	for i in num:
 		i.shuffle()
