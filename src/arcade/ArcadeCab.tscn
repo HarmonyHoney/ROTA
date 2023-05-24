@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/actor/door/DoorBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://media/image/details/arcade_cabinet.png" type="Texture" id=2]
+
+[node name="ArcadeCab" instance=ExtResource( 1 )]
+scene_path = "res://src/arcade/Arcade.tscn"
+
+[node name="Arrow" parent="." index="0"]
+col_size = Vector2( 100, 75 )
+col_pos = Vector2( 0, -25 )
+image_pos = Vector2( 0, -160 )
+
+[node name="Image" type="Node2D" parent="." index="1"]
+
+[node name="Sprite" type="Sprite" parent="Image" index="0"]
+position = Vector2( 4, -30 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
