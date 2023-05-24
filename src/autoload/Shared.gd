@@ -753,7 +753,7 @@ func load_keys(path := "user://keys.tres"):
 
 ### Steam ###
 
-func try_achievement():
+func try_achievement(arg := ""):
 	if !Steam.is_init(): return
 	
 	var map := ""
@@ -785,6 +785,9 @@ func try_achievement():
 	
 	if csfn == end_path and save_time < 3600:
 		Steam.set_achievement("speedrun")
+	
+	if arg != "":
+		Steam.set_achievement(arg)
 
 ### Demo ###
 

@@ -115,6 +115,9 @@ func scene():
 	cam_speed = c * 100
 	delta_scale = 1.0 + (clamp(wrap_cam - 1, 0.0, 5.0) * 0.2)
 	
+	if wrap_cam > 0:
+		Shared.try_achievement("wrap_it_up")
+	
 	#print("wrap_cam: ", wrap_cam, " cam_speed: ", cam_speed, " delta_scale : ", delta_scale)
 	
 	randomize()
