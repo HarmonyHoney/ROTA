@@ -18,8 +18,10 @@ func shape():
 	var rad = [radius.x, radius.y, radius.z, radius.d]
 	
 	for i in 4:
+		var lil = min(size.x, size.y)
 		var r = rad[0] if rad[i] == -1 else rad[i]
-		r = clamp(INF if r == -2 else r, 0, min(size.x, size.y))
+		r = INF if r == -2 else r * lil if (r > 0 and r <= 1.0) else r
+		r = clamp(r, 0, lil)
 		
 		if points > 1 and r > 0:
 			var v = vec[i] * size - (vec[i] * r)

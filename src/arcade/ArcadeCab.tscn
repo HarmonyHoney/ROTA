@@ -1,19 +1,49 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/actor/door/DoorBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://media/image/details/arcade_cabinet.png" type="Texture" id=2]
+[ext_resource path="res://media/image/details/arcade_back.png" type="Texture" id=2]
+[ext_resource path="res://src/arcade/Screen.gd" type="Script" id=3]
+[ext_resource path="res://media/image/details/arcade_front.png" type="Texture" id=4]
+[ext_resource path="res://src/arcade/AttractAudio.gd" type="Script" id=5]
+[ext_resource path="res://media/audio/sfx/sfx4.wav" type="AudioStream" id=6]
+[ext_resource path="res://media/audio/sfx/zap0.wav" type="AudioStream" id=7]
+[ext_resource path="res://media/audio/sfx/jump1.wav" type="AudioStream" id=8]
+[ext_resource path="res://media/audio/sfx/fallout2.wav" type="AudioStream" id=9]
+[ext_resource path="res://media/audio/sfx/key.wav" type="AudioStream" id=10]
+[ext_resource path="res://media/audio/sfx/oneup1.wav" type="AudioStream" id=11]
 
 [node name="ArcadeCab" instance=ExtResource( 1 )]
 scene_path = "res://src/arcade/Arcade.tscn"
 
 [node name="Arrow" parent="." index="0"]
-col_size = Vector2( 100, 75 )
+col_show = true
+col_size = Vector2( 120, 75 )
 col_pos = Vector2( 0, -25 )
 image_pos = Vector2( 0, -160 )
 
 [node name="Image" type="Node2D" parent="." index="1"]
 
-[node name="Sprite" type="Sprite" parent="Image" index="0"]
+[node name="Back" type="Sprite" parent="Image" index="0"]
 position = Vector2( 4, -30 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
+
+[node name="Screen" type="Polygon2D" parent="Image" index="1"]
+position = Vector2( 6.5, -57.5 )
+polygon = PoolVector2Array( 15.25, 7.625, 15.0588, 9.32172, 14.4949, 10.9334, 13.5865, 12.3791, 12.3791, 13.5865, 10.9334, 14.4949, 9.32172, 15.0588, 7.625, 15.25, -7.625, 15.25, -9.32172, 15.0588, -10.9334, 14.4949, -12.3791, 13.5865, -13.5865, 12.3791, -14.4949, 10.9334, -15.0588, 9.32172, -15.25, 7.625, -15.25, -7.625, -15.0588, -9.32172, -14.4949, -10.9334, -13.5865, -12.3791, -12.3791, -13.5865, -10.9334, -14.4949, -9.32172, -15.0588, -7.625, -15.25, 7.625, -15.25, 9.32172, -15.0588, 10.9334, -14.4949, 12.3791, -13.5865, 13.5865, -12.3791, 14.4949, -10.9334, 15.0588, -9.32172, 15.25, -7.625 )
+script = ExtResource( 3 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.372549, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0.156863, 0.466667, 1, 1, 0.796078, 0.235294, 1, 1, 1, 0, 0.843137, 1, 1, 0.686275, 0.686275, 1, 0.662745, 1, 0.662745, 1, 1, 0.992157, 0.596078, 1, 0.768627, 0.768627, 1, 1, 1, 0.568627, 1, 1 )
+wait_range = Vector2( 0.1, 0.4 )
+
+[node name="Front" type="Sprite" parent="Image" index="2"]
+position = Vector2( 4, -30 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="2"]
+volume_db = -2.0
+max_distance = 1000.0
+attenuation = 3.0
+script = ExtResource( 5 )
+list = [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 11 ) ]
+wait = Vector2( 0.1, 0.4 )
