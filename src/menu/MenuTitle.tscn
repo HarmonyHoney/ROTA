@@ -125,21 +125,21 @@ is_input = true
 is_open = true
 is_audio_cursor = false
 is_audio_back = false
-sub_path = NodePath("Canvas/MenuTitle")
+sub_path = NodePath("Canvas/CenterContainer/Control/MenuTitle")
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 layer = 4
 
-[node name="Back" type="ColorRect" parent="Canvas"]
-visible = false
+[node name="CenterContainer" type="CenterContainer" parent="Canvas"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.47, 0.47, 0.47, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="MenuTitle" type="Control" parent="Canvas"]
+[node name="Control" type="Control" parent="Canvas/CenterContainer"]
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 1280, 720 )
+
+[node name="MenuTitle" type="Control" parent="Canvas/CenterContainer/Control"]
 margin_right = 1280.0
 margin_bottom = 720.0
 script = ExtResource( 15 )
@@ -153,14 +153,14 @@ is_back_close = true
 sub_path = NodePath("../FileMenu")
 credits_path = NodePath("../Credits")
 
-[node name="BG" type="ColorRect" parent="Canvas/MenuTitle"]
+[node name="BG" type="ColorRect" parent="Canvas/CenterContainer/Control/MenuTitle"]
 modulate = Color( 0, 0, 0, 0.8 )
 material = SubResource( 22 )
 margin_left = 50.0
 margin_right = 384.0
 margin_bottom = 720.0
 
-[node name="Cursor" type="Panel" parent="Canvas/MenuTitle"]
+[node name="Cursor" type="Panel" parent="Canvas/CenterContainer/Control/MenuTitle"]
 modulate = Color( 0.658824, 0, 0, 1 )
 margin_right = 100.0
 margin_bottom = 50.0
@@ -169,7 +169,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="List" type="VBoxContainer" parent="Canvas/MenuTitle"]
+[node name="List" type="VBoxContainer" parent="Canvas/CenterContainer/Control/MenuTitle"]
 anchor_right = 0.3
 anchor_bottom = 1.0
 margin_left = 50.0
@@ -178,7 +178,7 @@ size_flags_vertical = 4
 custom_constants/separation = 15
 alignment = 1
 
-[node name="Play" type="Label" parent="Canvas/MenuTitle/List"]
+[node name="Play" type="Label" parent="Canvas/CenterContainer/Control/MenuTitle/List"]
 margin_left = 110.0
 margin_top = 235.0
 margin_right = 224.0
@@ -193,7 +193,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Back" type="Panel" parent="Canvas/MenuTitle/List/Play"]
+[node name="Back" type="Panel" parent="Canvas/CenterContainer/Control/MenuTitle/List/Play"]
 visible = false
 show_behind_parent = true
 anchor_right = 1.0
@@ -207,7 +207,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Options" type="Label" parent="Canvas/MenuTitle/List"]
+[node name="Options" type="Label" parent="Canvas/CenterContainer/Control/MenuTitle/List"]
 margin_left = 66.0
 margin_top = 301.0
 margin_right = 267.0
@@ -222,7 +222,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Credits" type="Label" parent="Canvas/MenuTitle/List"]
+[node name="Credits" type="Label" parent="Canvas/CenterContainer/Control/MenuTitle/List"]
 margin_left = 72.0
 margin_top = 367.0
 margin_right = 261.0
@@ -237,7 +237,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Store" type="Label" parent="Canvas/MenuTitle/List"]
+[node name="Store" type="Label" parent="Canvas/CenterContainer/Control/MenuTitle/List"]
 visible = false
 margin_left = 23.0
 margin_top = 400.0
@@ -254,7 +254,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Exit" type="Label" parent="Canvas/MenuTitle/List"]
+[node name="Exit" type="Label" parent="Canvas/CenterContainer/Control/MenuTitle/List"]
 margin_left = 109.0
 margin_top = 433.0
 margin_right = 224.0
@@ -269,7 +269,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FileMenu" type="Control" parent="Canvas"]
+[node name="FileMenu" type="Control" parent="Canvas/CenterContainer/Control"]
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.93
@@ -283,7 +283,7 @@ is_process = true
 is_back_close = true
 sub_stay_open = true
 
-[node name="BG" type="ColorRect" parent="Canvas/FileMenu"]
+[node name="BG" type="ColorRect" parent="Canvas/CenterContainer/Control/FileMenu"]
 material = SubResource( 21 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -292,11 +292,11 @@ margin_right = -80.0
 margin_bottom = 55.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Lists" type="Control" parent="Canvas/FileMenu"]
+[node name="Lists" type="Control" parent="Canvas/CenterContainer/Control/FileMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="ListBack" type="VBoxContainer" parent="Canvas/FileMenu/Lists"]
+[node name="ListBack" type="VBoxContainer" parent="Canvas/CenterContainer/Control/FileMenu/Lists"]
 modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -305,7 +305,7 @@ size_flags_vertical = 4
 custom_constants/separation = 20
 alignment = 1
 
-[node name="File1" type="Panel" parent="Canvas/FileMenu/Lists/ListBack"]
+[node name="File1" type="Panel" parent="Canvas/CenterContainer/Control/FileMenu/Lists/ListBack"]
 margin_left = 145.0
 margin_top = 52.0
 margin_right = 495.0
@@ -319,7 +319,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="File2" type="Panel" parent="Canvas/FileMenu/Lists/ListBack"]
+[node name="File2" type="Panel" parent="Canvas/CenterContainer/Control/FileMenu/Lists/ListBack"]
 margin_left = 145.0
 margin_top = 247.0
 margin_right = 495.0
@@ -333,7 +333,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="File3" type="Panel" parent="Canvas/FileMenu/Lists/ListBack"]
+[node name="File3" type="Panel" parent="Canvas/CenterContainer/Control/FileMenu/Lists/ListBack"]
 margin_left = 145.0
 margin_top = 442.0
 margin_right = 495.0
@@ -347,7 +347,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Cursor" type="Panel" parent="Canvas/FileMenu/Lists"]
+[node name="Cursor" type="Panel" parent="Canvas/CenterContainer/Control/FileMenu/Lists"]
 modulate = Color( 0.658824, 0, 0, 1 )
 margin_right = 100.0
 margin_bottom = 50.0
@@ -356,7 +356,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="List" type="VBoxContainer" parent="Canvas/FileMenu/Lists"]
+[node name="List" type="VBoxContainer" parent="Canvas/CenterContainer/Control/FileMenu/Lists"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 4
@@ -364,27 +364,27 @@ size_flags_vertical = 4
 custom_constants/separation = 20
 alignment = 1
 
-[node name="FileCard" parent="Canvas/FileMenu/Lists/List" instance=ExtResource( 5 )]
+[node name="FileCard" parent="Canvas/CenterContainer/Control/FileMenu/Lists/List" instance=ExtResource( 5 )]
 margin_left = 145.0
 margin_top = 52.0
 margin_right = 495.0
 margin_bottom = 227.0
 
-[node name="FileCard2" parent="Canvas/FileMenu/Lists/List" instance=ExtResource( 5 )]
+[node name="FileCard2" parent="Canvas/CenterContainer/Control/FileMenu/Lists/List" instance=ExtResource( 5 )]
 margin_left = 145.0
 margin_top = 247.0
 margin_right = 495.0
 margin_bottom = 422.0
 slot = 1
 
-[node name="FileCard3" parent="Canvas/FileMenu/Lists/List" instance=ExtResource( 5 )]
+[node name="FileCard3" parent="Canvas/CenterContainer/Control/FileMenu/Lists/List" instance=ExtResource( 5 )]
 margin_left = 145.0
 margin_top = 442.0
 margin_right = 495.0
 margin_bottom = 617.0
 slot = 2
 
-[node name="FileOpen" type="Control" parent="Canvas/FileMenu"]
+[node name="FileOpen" type="Control" parent="Canvas/CenterContainer/Control/FileMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 17 )
@@ -398,7 +398,7 @@ is_back_close = true
 sub_path = NodePath("../FileDelete")
 demo_path = NodePath("../FileDemo")
 
-[node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileOpen"]
+[node name="Cursor" type="Panel" parent="Canvas/CenterContainer/Control/FileMenu/FileOpen"]
 modulate = Color( 0.658824, 0, 0, 1 )
 margin_right = 100.0
 margin_bottom = 50.0
@@ -408,7 +408,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="List" type="VBoxContainer" parent="Canvas/FileMenu/FileOpen"]
+[node name="List" type="VBoxContainer" parent="Canvas/CenterContainer/Control/FileMenu/FileOpen"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -420,7 +420,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Continue" type="Label" parent="Canvas/FileMenu/FileOpen/List"]
+[node name="Continue" type="Label" parent="Canvas/CenterContainer/Control/FileMenu/FileOpen/List"]
 margin_left = 204.0
 margin_top = 106.0
 margin_right = 435.0
@@ -435,7 +435,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Delete" type="Label" parent="Canvas/FileMenu/FileOpen/List"]
+[node name="Delete" type="Label" parent="Canvas/CenterContainer/Control/FileMenu/FileOpen/List"]
 margin_left = 239.0
 margin_top = 177.0
 margin_right = 400.0
@@ -450,7 +450,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FileDelete" type="Control" parent="Canvas/FileMenu"]
+[node name="FileDelete" type="Control" parent="Canvas/CenterContainer/Control/FileMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 16 )
@@ -463,7 +463,7 @@ is_process = true
 is_back_close = true
 open_path = NodePath("../FileOpen")
 
-[node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileDelete"]
+[node name="Cursor" type="Panel" parent="Canvas/CenterContainer/Control/FileMenu/FileDelete"]
 modulate = Color( 0.658824, 0, 0, 1 )
 margin_right = 100.0
 margin_bottom = 50.0
@@ -472,7 +472,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Header" type="Label" parent="Canvas/FileMenu/FileDelete"]
+[node name="Header" type="Label" parent="Canvas/CenterContainer/Control/FileMenu/FileDelete"]
 anchor_right = 1.0
 anchor_bottom = 0.5
 size_flags_horizontal = 4
@@ -483,7 +483,7 @@ Save File?"
 align = 1
 valign = 1
 
-[node name="List" type="VBoxContainer" parent="Canvas/FileMenu/FileDelete"]
+[node name="List" type="VBoxContainer" parent="Canvas/CenterContainer/Control/FileMenu/FileDelete"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -492,7 +492,7 @@ size_flags_vertical = 4
 custom_constants/separation = 20
 alignment = 1
 
-[node name="Yes" type="Label" parent="Canvas/FileMenu/FileDelete/List"]
+[node name="Yes" type="Label" parent="Canvas/CenterContainer/Control/FileMenu/FileDelete/List"]
 margin_left = 275.0
 margin_top = 106.0
 margin_right = 364.0
@@ -507,7 +507,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="No" type="Label" parent="Canvas/FileMenu/FileDelete/List"]
+[node name="No" type="Label" parent="Canvas/CenterContainer/Control/FileMenu/FileDelete/List"]
 margin_left = 284.0
 margin_top = 177.0
 margin_right = 355.0
@@ -522,7 +522,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FileDemo" type="Control" parent="Canvas/FileMenu"]
+[node name="FileDemo" type="Control" parent="Canvas/CenterContainer/Control/FileMenu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 20 )
@@ -538,7 +538,7 @@ is_process = true
 is_accept_close = true
 is_back_close = true
 
-[node name="Cursor" type="Panel" parent="Canvas/FileMenu/FileDemo"]
+[node name="Cursor" type="Panel" parent="Canvas/CenterContainer/Control/FileMenu/FileDemo"]
 modulate = Color( 0.658824, 0, 0, 1 )
 margin_right = 100.0
 margin_bottom = 50.0
@@ -548,7 +548,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Header" type="Label" parent="Canvas/FileMenu/FileDemo"]
+[node name="Header" type="Label" parent="Canvas/CenterContainer/Control/FileMenu/FileDemo"]
 anchor_right = 1.0
 anchor_bottom = 0.5
 size_flags_horizontal = 4
@@ -559,7 +559,7 @@ of Demo!"
 align = 1
 valign = 1
 
-[node name="List" type="VBoxContainer" parent="Canvas/FileMenu/FileDemo"]
+[node name="List" type="VBoxContainer" parent="Canvas/CenterContainer/Control/FileMenu/FileDemo"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -571,7 +571,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Ok" type="Label" parent="Canvas/FileMenu/FileDemo/List"]
+[node name="Ok" type="Label" parent="Canvas/CenterContainer/Control/FileMenu/FileDemo/List"]
 margin_left = 259.0
 margin_top = 141.0
 margin_right = 380.0
@@ -586,7 +586,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Credits" type="Control" parent="Canvas"]
+[node name="Credits" type="Control" parent="Canvas/CenterContainer/Control"]
 margin_right = 1280.0
 margin_bottom = 720.0
 script = ExtResource( 20 )
@@ -598,13 +598,13 @@ is_back_close = true
 is_audio_cursor = false
 is_audio_accept = false
 
-[node name="BG" type="ColorRect" parent="Canvas/Credits"]
+[node name="BG" type="ColorRect" parent="Canvas/CenterContainer/Control/Credits"]
 material = SubResource( 21 )
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Patch" type="Label" parent="Canvas/Credits"]
+[node name="Patch" type="Label" parent="Canvas/CenterContainer/Control/Credits"]
 modulate = Color( 1, 1, 1, 0.5 )
 anchor_left = 0.5
 anchor_right = 1.0
@@ -617,7 +617,7 @@ text = "Patch 6"
 align = 1
 valign = 2
 
-[node name="List" type="VBoxContainer" parent="Canvas/Credits"]
+[node name="List" type="VBoxContainer" parent="Canvas/CenterContainer/Control/Credits"]
 anchor_left = 0.55
 anchor_right = 0.95
 anchor_bottom = 0.95
@@ -626,7 +626,7 @@ size_flags_vertical = 4
 custom_constants/separation = 0
 alignment = 1
 
-[node name="Prefix" type="Label" parent="Canvas/Credits/List"]
+[node name="Prefix" type="Label" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 42.0
 margin_right = 512.0
 margin_bottom = 73.0
@@ -637,7 +637,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Canvas/Credits/List"]
+[node name="Label" type="Label" parent="Canvas/CenterContainer/Control/Credits/List"]
 visible = false
 margin_left = 48.0
 margin_top = 125.0
@@ -652,7 +652,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Canvas/Credits/List"]
+[node name="TextureRect" type="TextureRect" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 73.0
 margin_right = 512.0
 margin_bottom = 223.0
@@ -661,7 +661,7 @@ texture = ExtResource( 13 )
 expand = true
 stretch_mode = 6
 
-[node name="Suffix" type="Label" parent="Canvas/Credits/List"]
+[node name="Suffix" type="Label" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 223.0
 margin_right = 512.0
 margin_bottom = 254.0
@@ -670,13 +670,13 @@ text = "hhoney.net   "
 align = 2
 valign = 1
 
-[node name="Spacer" type="Control" parent="Canvas/Credits/List"]
+[node name="Spacer" type="Control" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 254.0
 margin_right = 512.0
 margin_bottom = 274.0
 rect_min_size = Vector2( 0, 20 )
 
-[node name="Prefix2" type="Label" parent="Canvas/Credits/List"]
+[node name="Prefix2" type="Label" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 274.0
 margin_right = 512.0
 margin_bottom = 305.0
@@ -687,7 +687,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect2" type="TextureRect" parent="Canvas/Credits/List"]
+[node name="TextureRect2" type="TextureRect" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 305.0
 margin_right = 512.0
 margin_bottom = 455.0
@@ -696,7 +696,7 @@ texture = ExtResource( 23 )
 expand = true
 stretch_mode = 6
 
-[node name="Label2" type="Label" parent="Canvas/Credits/List"]
+[node name="Label2" type="Label" parent="Canvas/CenterContainer/Control/Credits/List"]
 visible = false
 margin_left = 90.0
 margin_top = 595.0
@@ -711,7 +711,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Suffix2" type="Label" parent="Canvas/Credits/List"]
+[node name="Suffix2" type="Label" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 455.0
 margin_right = 512.0
 margin_bottom = 486.0
@@ -720,20 +720,20 @@ text = "godotengine.org   "
 align = 2
 valign = 1
 
-[node name="Spacer2" type="Control" parent="Canvas/Credits/List"]
+[node name="Spacer2" type="Control" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 486.0
 margin_right = 512.0
 margin_bottom = 516.0
 rect_min_size = Vector2( 0, 30 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/Credits/List"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 516.0
 margin_right = 512.0
 margin_bottom = 566.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Canvas/Credits/List/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Canvas/CenterContainer/Control/Credits/List/HBoxContainer"]
 margin_left = 95.0
 margin_right = 145.0
 margin_bottom = 50.0
@@ -744,7 +744,7 @@ texture = ExtResource( 27 )
 expand = true
 stretch_mode = 5
 
-[node name="Label3" type="Label" parent="Canvas/Credits/List/HBoxContainer"]
+[node name="Label3" type="Label" parent="Canvas/CenterContainer/Control/Credits/List/HBoxContainer"]
 margin_left = 155.0
 margin_top = 9.0
 margin_right = 357.0
@@ -755,7 +755,7 @@ text = "Contributors"
 align = 1
 valign = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Canvas/Credits/List/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Canvas/CenterContainer/Control/Credits/List/HBoxContainer"]
 margin_left = 367.0
 margin_right = 417.0
 margin_bottom = 50.0
@@ -765,18 +765,18 @@ size_flags_vertical = 4
 texture = ExtResource( 27 )
 expand = true
 
-[node name="Spacer3" type="Control" parent="Canvas/Credits/List"]
+[node name="Spacer3" type="Control" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 566.0
 margin_right = 512.0
 margin_bottom = 576.0
 rect_min_size = Vector2( 0, 10 )
 
-[node name="HFlowContainer" type="HFlowContainer" parent="Canvas/Credits/List"]
+[node name="HFlowContainer" type="HFlowContainer" parent="Canvas/CenterContainer/Control/Credits/List"]
 margin_top = 576.0
 margin_right = 512.0
 margin_bottom = 642.0
 
-[node name="Label4" type="Label" parent="Canvas/Credits/List/HFlowContainer"]
+[node name="Label4" type="Label" parent="Canvas/CenterContainer/Control/Credits/List/HFlowContainer"]
 margin_left = 37.0
 margin_right = 205.0
 margin_bottom = 31.0
@@ -786,7 +786,7 @@ text = "Guy Unger"
 align = 1
 valign = 1
 
-[node name="Label6" type="Label" parent="Canvas/Credits/List/HFlowContainer"]
+[node name="Label6" type="Label" parent="Canvas/CenterContainer/Control/Credits/List/HFlowContainer"]
 margin_left = 284.0
 margin_right = 474.0
 margin_bottom = 31.0
@@ -796,7 +796,7 @@ text = "Sam Murray"
 align = 1
 valign = 1
 
-[node name="Label5" type="Label" parent="Canvas/Credits/List/HFlowContainer"]
+[node name="Label5" type="Label" parent="Canvas/CenterContainer/Control/Credits/List/HFlowContainer"]
 margin_left = 31.0
 margin_top = 35.0
 margin_right = 267.0
@@ -807,7 +807,7 @@ text = "Raffaele Picca"
 align = 1
 valign = 1
 
-[node name="Label7" type="Label" parent="Canvas/Credits/List/HFlowContainer"]
+[node name="Label7" type="Label" parent="Canvas/CenterContainer/Control/Credits/List/HFlowContainer"]
 margin_left = 334.0
 margin_top = 35.0
 margin_right = 480.0
@@ -818,6 +818,15 @@ text = "neropatti"
 align = 1
 valign = 1
 
+[node name="Back" type="ColorRect" parent="Canvas/CenterContainer/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.47, 0.47, 0.47, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Map" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -826,7 +835,6 @@ __meta__ = {
 [node name="SolidTileMap" parent="Map" instance=ExtResource( 6 )]
 tile_data = PoolIntArray( 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 393231, 0, 0, 393232, 0, 0, 393233, 0, 0, 393234, 0, 0, 393235, 0, 0, 393236, 0, 0, 458767, 0, 0, 458768, 0, 0, 458769, 0, 0, 458770, 0, 0, 458771, 0, 0, 458772, 0, 0 )
 detail = 4
-bg_palette = 1
 
 [node name="Actors" type="Node2D" parent="Map"]
 

@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var sprite : Sprite = $Sprite
+onready var sprite : CanvasItem = $TextureRect
 onready var mat : ShaderMaterial = sprite.material
 
 signal start

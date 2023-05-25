@@ -1,29 +1,29 @@
 extends CanvasLayer
 
-onready var gem_label : Label = $Control/Top/Labels/Control/Center/Label
-onready var clock_label : Label = $Control/Down/Labels/Control/Center/Label
-onready var color_rect := $Control/ColorRect
+onready var gem_label : Label = $Center/Control/Top/Labels/Control/Center/Label
+onready var clock_label : Label = $Center/Control/Down/Labels/Control/Center/Label
+onready var color_rect := $Center/Control/ColorRect
 
 var gem_easy = EaseMover.new()
-onready var gem_centers = $Control/Top/Labels/Control.get_children()
-onready var gem_labels = [$Control/Top/Labels/Control/Center/Label, $Control/Top/Labels/Control/Center2/Label]
-onready var gem_labels_node := $Control/Top/Labels
+onready var gem_centers = $Center/Control/Top/Labels/Control.get_children()
+onready var gem_labels = [$Center/Control/Top/Labels/Control/Center/Label, $Center/Control/Top/Labels/Control/Center2/Label]
+onready var gem_labels_node := $Center/Control/Top/Labels
 
 var rank_easy = EaseMover.new()
-onready var rank_centers  = $Control/Down/Labels/Control.get_children()
-onready var rank_labels = [$Control/Down/Labels/Control/Center/Label, $Control/Down/Labels/Control/Center2/Label]
-onready var rank_labels_node := $Control/Down/Labels
+onready var rank_centers  = $Center/Control/Down/Labels/Control.get_children()
+onready var rank_labels = [$Center/Control/Down/Labels/Control/Center/Label, $Center/Control/Down/Labels/Control/Center2/Label]
+onready var rank_labels_node := $Center/Control/Down/Labels
 
 var up = EaseMover.new()
 var down = EaseMover.new()
 var keys = EaseMover.new()
 
-onready var clock := $Control/Clock
-onready var clock_file := $Control/Clock/File
-onready var clock_map := $Control/Clock/Map
-onready var clock_down := $Control/Clock/Down
-onready var clock_best := $Control/Clock/Down/Best
-onready var clock_goal := $Control/Clock/Down/Goal
+onready var clock := $Center/Control/Clock
+onready var clock_file := $Center/Control/Clock/File
+onready var clock_map := $Center/Control/Clock/Map
+onready var clock_down := $Center/Control/Clock/Down
+onready var clock_best := $Center/Control/Clock/Down/Best
+onready var clock_goal := $Center/Control/Clock/Down/Goal
 onready var clock_ease := EaseMover.new()
 
 func _ready():
@@ -31,17 +31,17 @@ func _ready():
 	
 	gem_label.text = str(Shared.gem_count)
 	
-	up.node = $Control/Top
+	up.node = $Center/Control/Top
 	up.to = up.node.rect_position
 	up.from = up.to - Vector2(0, 120)
 	up.show = false
 	
-	down.node = $Control/Down
+	down.node = $Center/Control/Down
 	down.to = down.node.rect_position
 	down.from = down.to + Vector2(0, 120)
 	down.show = false
 	
-	keys.node = $Control/Keys
+	keys.node = $Center/Control/Keys
 	keys.to = keys.node.rect_position
 	keys.from = keys.to + Vector2(0, 80)
 	keys.show = false
@@ -74,7 +74,7 @@ func scene_changed(override := false):
 	clock_ease.show = m and !h and Shared.clock_show > 0
 
 func menu_keys(accept := "", cancel := ""):
-	var c = $Control/Keys/List.get_children()
+	var c = $Center/Control/Keys/List.get_children()
 	
 	# accept
 	var is_a = accept != ""

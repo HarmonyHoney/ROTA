@@ -1,11 +1,11 @@
 extends MenuBase
 
-onready var control := $Control
+onready var control := $Center/Control
 
 onready var prompt_ease := EaseMover.new()
 var is_prompt := false
-onready var prompt_key := $Control/Prompt/VBoxContainer/Key
-onready var prompt_timer_label := $Control/Prompt/VBoxContainer/Timer
+onready var prompt_key := $Center/Control/Prompt/VBoxContainer/Key
+onready var prompt_timer_label := $Center/Control/Prompt/VBoxContainer/Timer
 var prompt_clock := 0.0
 var prompt_time := 5.0
 var is_button := false
@@ -14,18 +14,18 @@ onready var key = preload("res://src/menu/options/Key.tscn")
 
 export var is_gamepad := false
 
-onready var header := $Control/Header
-onready var header_back := $Control/Header/Back
+onready var header := $Center/Control/Header
+onready var header_back := $Center/Control/Header/Back
 onready var header_ease := EaseMover.new(0.2)
-onready var header_track := $Control/Menu/List/Spacer
-onready var title_label := $Control/Menu/List/Title
+onready var header_track := $Center/Control/Menu/List/Spacer
+onready var title_label := $Center/Control/Menu/List/Title
 
 var defaults := {}
 
 func _ready():
 	# get default binds
 	defaults = Shared.default_keys.duplicate()
-	prompt_ease.node = $Control/Prompt
+	prompt_ease.node = $Center/Control/Prompt
 
 func _input(event):
 	if !is_open: return

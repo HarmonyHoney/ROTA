@@ -52,11 +52,16 @@ is_joy_x = true
 is_act = true
 is_audio_joy = true
 
-[node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="Control" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="BG" type="ColorRect" parent="Control"]
+[node name="BG" type="Control" parent="Control"]
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 1280, 720 )
+
+[node name="ColorRect" type="ColorRect" parent="Control/BG"]
 modulate = Color( 0, 0, 0, 0.8 )
 material = SubResource( 20 )
 margin_left = 200.0
@@ -66,6 +71,7 @@ margin_bottom = 720.0
 [node name="Menu" type="Control" parent="Control"]
 margin_right = 1280.0
 margin_bottom = 720.0
+rect_min_size = Vector2( 1280, 720 )
 
 [node name="Cursor" type="Panel" parent="Control/Menu"]
 modulate = Color( 0.658824, 0, 0, 1 )

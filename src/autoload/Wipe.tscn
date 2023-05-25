@@ -4,7 +4,7 @@
 [ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=3]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 shader_param/inside = Color( 1, 1, 1, 1 )
 shader_param/line = Color( 0, 0, 0, 1 )
@@ -12,7 +12,7 @@ shader_param/outside = Color( 0, 0, 0, 0 )
 shader_param/scale = 2.0
 shader_param/offset = Vector2( 0.2, -0.2 )
 shader_param/start_offset = Vector2( 0.5, 0.5 )
-shader_param/radius = 0.0
+shader_param/radius = 0.356
 shader_param/width = 0.0
 
 [node name="Wipe" type="CanvasLayer"]
@@ -20,9 +20,9 @@ pause_mode = 2
 layer = 15
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 1 )
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 2 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 1280, 720 )
+stretch_mode = 2

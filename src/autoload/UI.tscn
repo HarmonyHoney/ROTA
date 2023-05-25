@@ -16,15 +16,20 @@ pause_mode = 2
 layer = 10
 script = ExtResource( 10 )
 
-[node name="Control" type="Control" parent="."]
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="Center"]
 margin_right = 1280.0
 margin_bottom = 720.0
+rect_min_size = Vector2( 1280, 720 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="ColorRect" type="ColorRect" parent="Center/Control"]
 visible = false
 modulate = Color( 1, 1, 1, 0.109804 )
 material = SubResource( 1 )
@@ -35,14 +40,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Top" type="HBoxContainer" parent="Control"]
+[node name="Top" type="HBoxContainer" parent="Center/Control"]
 anchor_right = 1.0
 anchor_bottom = 0.2
 rect_min_size = Vector2( 1280, 144 )
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Image" type="CenterContainer" parent="Control/Top"]
+[node name="Image" type="CenterContainer" parent="Center/Control/Top"]
 margin_left = 533.0
 margin_top = 42.0
 margin_right = 613.0
@@ -51,32 +56,32 @@ rect_min_size = Vector2( 80, 60 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Control" type="Control" parent="Control/Top/Image"]
+[node name="Control" type="Control" parent="Center/Control/Top/Image"]
 margin_left = 40.0
 margin_top = 30.0
 margin_right = 40.0
 margin_bottom = 30.0
 
-[node name="Gem" parent="Control/Top/Image/Control" instance=ExtResource( 6 )]
+[node name="Gem" parent="Center/Control/Top/Image/Control" instance=ExtResource( 6 )]
 scale = Vector2( 1.5, 1.5 )
 
-[node name="Labels" type="CenterContainer" parent="Control/Top"]
+[node name="Labels" type="CenterContainer" parent="Center/Control/Top"]
 margin_left = 623.0
 margin_right = 747.0
 margin_bottom = 144.0
 rect_min_size = Vector2( 124, 0 )
 size_flags_horizontal = 4
 
-[node name="Control" type="Control" parent="Control/Top/Labels"]
+[node name="Control" type="Control" parent="Center/Control/Top/Labels"]
 margin_left = 62.0
 margin_top = 72.0
 margin_right = 62.0
 margin_bottom = 72.0
 
-[node name="Center" type="CenterContainer" parent="Control/Top/Labels/Control"]
+[node name="Center" type="CenterContainer" parent="Center/Control/Top/Labels/Control"]
 use_top_left = true
 
-[node name="Label" type="Label" parent="Control/Top/Labels/Control/Center"]
+[node name="Label" type="Label" parent="Center/Control/Top/Labels/Control/Center"]
 margin_left = -62.0
 margin_top = -41.0
 margin_right = 62.0
@@ -90,10 +95,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Center2" type="CenterContainer" parent="Control/Top/Labels/Control"]
+[node name="Center2" type="CenterContainer" parent="Center/Control/Top/Labels/Control"]
 use_top_left = true
 
-[node name="Label" type="Label" parent="Control/Top/Labels/Control/Center2"]
+[node name="Label" type="Label" parent="Center/Control/Top/Labels/Control/Center2"]
 margin_left = -62.0
 margin_top = -41.0
 margin_right = 62.0
@@ -107,30 +112,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Down" type="HBoxContainer" parent="Control"]
+[node name="Down" type="HBoxContainer" parent="Center/Control"]
 anchor_top = 0.8
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Labels" type="CenterContainer" parent="Control/Down"]
+[node name="Labels" type="CenterContainer" parent="Center/Control/Down"]
 margin_left = 533.0
 margin_right = 657.0
 margin_bottom = 144.0
 rect_min_size = Vector2( 124, 0 )
 size_flags_horizontal = 4
 
-[node name="Control" type="Control" parent="Control/Down/Labels"]
+[node name="Control" type="Control" parent="Center/Control/Down/Labels"]
 margin_left = 62.0
 margin_top = 72.0
 margin_right = 62.0
 margin_bottom = 72.0
 
-[node name="Center" type="CenterContainer" parent="Control/Down/Labels/Control"]
+[node name="Center" type="CenterContainer" parent="Center/Control/Down/Labels/Control"]
 use_top_left = true
 
-[node name="Label" type="Label" parent="Control/Down/Labels/Control/Center"]
+[node name="Label" type="Label" parent="Center/Control/Down/Labels/Control/Center"]
 margin_left = -62.0
 margin_top = -41.0
 margin_right = 62.0
@@ -144,10 +149,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Center2" type="CenterContainer" parent="Control/Down/Labels/Control"]
+[node name="Center2" type="CenterContainer" parent="Center/Control/Down/Labels/Control"]
 use_top_left = true
 
-[node name="Label" type="Label" parent="Control/Down/Labels/Control/Center2"]
+[node name="Label" type="Label" parent="Center/Control/Down/Labels/Control/Center2"]
 margin_left = -62.0
 margin_top = -41.0
 margin_right = 62.0
@@ -161,7 +166,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Image" type="CenterContainer" parent="Control/Down"]
+[node name="Image" type="CenterContainer" parent="Center/Control/Down"]
 margin_left = 667.0
 margin_top = 42.0
 margin_right = 747.0
@@ -170,30 +175,30 @@ rect_min_size = Vector2( 80, 60 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Control" type="Control" parent="Control/Down/Image"]
+[node name="Control" type="Control" parent="Center/Control/Down/Image"]
 margin_left = 40.0
 margin_top = 30.0
 margin_right = 40.0
 margin_bottom = 30.0
 
-[node name="Clock" parent="Control/Down/Image/Control" instance=ExtResource( 5 )]
+[node name="Clock" parent="Center/Control/Down/Image/Control" instance=ExtResource( 5 )]
 scale = Vector2( 1.5, 1.5 )
 
-[node name="Keys" type="Control" parent="Control"]
+[node name="Keys" type="Control" parent="Center/Control"]
 margin_left = 1280.0
 margin_top = 720.0
 margin_right = 1320.0
 margin_bottom = 760.0
 rect_scale = Vector2( 0.9, 0.9 )
 
-[node name="List" type="HBoxContainer" parent="Control/Keys"]
+[node name="List" type="HBoxContainer" parent="Center/Control/Keys"]
 margin_left = -500.0
 margin_top = -85.0
 margin_right = -18.0
 custom_constants/separation = 10
 alignment = 2
 
-[node name="Label" type="Label" parent="Control/Keys/List"]
+[node name="Label" type="Label" parent="Center/Control/Keys/List"]
 margin_left = 57.0
 margin_top = 27.0
 margin_right = 165.0
@@ -206,7 +211,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" parent="Control/Keys/List" instance=ExtResource( 9 )]
+[node name="Key" parent="Center/Control/Keys/List" instance=ExtResource( 9 )]
 margin_left = 175.0
 margin_top = 17.0
 margin_right = 275.0
@@ -216,13 +221,13 @@ text = "ENTER"
 action = "ui_accept"
 is_connect = true
 
-[node name="Spacer" type="Control" parent="Control/Keys/List"]
+[node name="Spacer" type="Control" parent="Center/Control/Keys/List"]
 margin_left = 285.0
 margin_right = 290.0
 margin_bottom = 85.0
 rect_min_size = Vector2( 5, 0 )
 
-[node name="Label2" type="Label" parent="Control/Keys/List"]
+[node name="Label2" type="Label" parent="Center/Control/Keys/List"]
 margin_left = 300.0
 margin_top = 27.0
 margin_right = 372.0
@@ -235,7 +240,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key2" parent="Control/Keys/List" instance=ExtResource( 9 )]
+[node name="Key2" parent="Center/Control/Keys/List" instance=ExtResource( 9 )]
 margin_left = 382.0
 margin_top = 17.0
 margin_right = 482.0
@@ -245,7 +250,7 @@ text = "ESCAPE"
 action = "ui_cancel"
 is_connect = true
 
-[node name="Clock" type="VBoxContainer" parent="Control"]
+[node name="Clock" type="VBoxContainer" parent="Center/Control"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -254,39 +259,39 @@ margin_right = -20.0
 margin_bottom = -20.0
 rect_min_size = Vector2( 300, 200 )
 
-[node name="File" type="Label" parent="Control/Clock"]
+[node name="File" type="Label" parent="Center/Control/Clock"]
 modulate = Color( 1, 0.95, 0.95, 1 )
 margin_right = 600.0
 margin_bottom = 51.0
 theme = ExtResource( 1 )
 text = "1:48:02"
 
-[node name="Map" type="Label" parent="Control/Clock"]
+[node name="Map" type="Label" parent="Center/Control/Clock"]
 margin_top = 55.0
 margin_right = 600.0
 margin_bottom = 106.0
 theme = ExtResource( 1 )
 text = "3:57"
 
-[node name="Spacer" type="Control" parent="Control/Clock"]
+[node name="Spacer" type="Control" parent="Center/Control/Clock"]
 margin_top = 110.0
 margin_right = 600.0
 margin_bottom = 570.0
 size_flags_vertical = 3
 
-[node name="Down" type="VBoxContainer" parent="Control/Clock"]
+[node name="Down" type="VBoxContainer" parent="Center/Control/Clock"]
 margin_top = 574.0
 margin_right = 600.0
 margin_bottom = 680.0
 
-[node name="Best" type="Label" parent="Control/Clock/Down"]
+[node name="Best" type="Label" parent="Center/Control/Clock/Down"]
 modulate = Color( 1, 1, 0, 1 )
 margin_right = 600.0
 margin_bottom = 51.0
 theme = ExtResource( 1 )
 text = "Best 17.49"
 
-[node name="Goal" type="Label" parent="Control/Clock/Down"]
+[node name="Goal" type="Label" parent="Center/Control/Clock/Down"]
 modulate = Color( 0.341176, 1, 0.341176, 1 )
 margin_top = 55.0
 margin_right = 600.0

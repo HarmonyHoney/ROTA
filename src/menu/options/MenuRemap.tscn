@@ -47,29 +47,31 @@ corner_radius_bottom_left = 50
 pause_mode = 2
 layer = 7
 script = ExtResource( 5 )
-items_path = NodePath("Control/Menu/List")
-cursor_path = NodePath("Control/Menu/Cursor")
+items_path = NodePath("Center/Control/Menu/List")
+cursor_path = NodePath("Center/Control/Menu/Cursor")
 cursor_margin = Vector2( 25, 0 )
-scroll_path = NodePath("Control/Menu")
-fade_path = NodePath("Control")
+scroll_path = NodePath("Center/Control/Menu")
+fade_path = NodePath("Center/Control")
 is_process = true
 is_back_close = true
 
-[node name="Control" type="Control" parent="."]
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="Center"]
 margin_right = 1280.0
 margin_bottom = 720.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+rect_min_size = Vector2( 1280, 720 )
 
-[node name="BG" type="ColorRect" parent="Control"]
+[node name="BG" type="ColorRect" parent="Center/Control"]
 modulate = Color( 0, 0, 0, 0.8 )
 material = SubResource( 23 )
 margin_left = 70.0
 margin_right = 1210.0
 margin_bottom = 720.0
 
-[node name="Menu" type="Control" parent="Control"]
+[node name="Menu" type="Control" parent="Center/Control"]
 anchor_left = 0.25
 anchor_right = 0.75
 margin_bottom = 720.0
@@ -77,7 +79,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cursor" type="Panel" parent="Control/Menu"]
+[node name="Cursor" type="Panel" parent="Center/Control/Menu"]
 modulate = Color( 0.658824, 0, 0, 1 )
 margin_right = 100.0
 margin_bottom = 50.0
@@ -86,7 +88,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="List" type="VBoxContainer" parent="Control/Menu"]
+[node name="List" type="VBoxContainer" parent="Center/Control/Menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 115.0
@@ -94,7 +96,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="Control/Menu/List" groups=["no_item"]]
+[node name="Title" type="Label" parent="Center/Control/Menu/List" groups=["no_item"]]
 margin_right = 640.0
 margin_bottom = 51.0
 custom_fonts/font = ExtResource( 4 )
@@ -105,13 +107,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+[node name="Spacer" type="Control" parent="Center/Control/Menu/List" groups=["no_item"]]
 margin_top = 55.0
 margin_right = 640.0
 margin_bottom = 175.0
 rect_min_size = Vector2( 0, 120 )
 
-[node name="Game" type="Label" parent="Control/Menu/List" groups=["no_item"]]
+[node name="Game" type="Label" parent="Center/Control/Menu/List" groups=["no_item"]]
 modulate = Color( 0.7, 0.7, 0.7, 1 )
 margin_top = 179.0
 margin_right = 640.0
@@ -123,7 +125,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Row5" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row5" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 224.0
 margin_right = 640.0
@@ -131,7 +133,7 @@ margin_bottom = 304.0
 action = "jump"
 text = "Jump"
 
-[node name="Row6" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row6" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 308.0
 margin_right = 640.0
@@ -139,7 +141,7 @@ margin_bottom = 388.0
 action = "grab"
 text = "Grab"
 
-[node name="Row7" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row7" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 392.0
 margin_right = 640.0
@@ -147,7 +149,7 @@ margin_bottom = 472.0
 action = "zoom"
 text = "Zoom"
 
-[node name="Row" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 476.0
 margin_right = 640.0
@@ -155,7 +157,7 @@ margin_bottom = 556.0
 action = "left"
 text = "Left"
 
-[node name="Row2" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row2" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 560.0
 margin_right = 640.0
@@ -163,7 +165,7 @@ margin_bottom = 640.0
 action = "right"
 text = "Right"
 
-[node name="Row3" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row3" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 644.0
 margin_right = 640.0
@@ -171,7 +173,7 @@ margin_bottom = 724.0
 action = "up"
 text = "Up"
 
-[node name="Row4" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row4" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 728.0
 margin_right = 640.0
@@ -179,20 +181,20 @@ margin_bottom = 808.0
 action = "down"
 text = "Down"
 
-[node name="Spacer2" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+[node name="Spacer2" type="Control" parent="Center/Control/Menu/List" groups=["no_item"]]
 margin_top = 812.0
 margin_right = 640.0
 margin_bottom = 852.0
 rect_min_size = Vector2( 0, 40 )
 
-[node name="Menu" type="Control" parent="Control/Menu/List" groups=["no_item"]]
+[node name="Menu" type="Control" parent="Center/Control/Menu/List" groups=["no_item"]]
 modulate = Color( 0.7, 0.7, 0.7, 1 )
 margin_top = 856.0
 margin_right = 640.0
 margin_bottom = 906.0
 rect_min_size = Vector2( 0, 50 )
 
-[node name="Menu" type="Label" parent="Control/Menu/List/Menu"]
+[node name="Menu" type="Label" parent="Center/Control/Menu/List/Menu"]
 margin_top = 4.0
 margin_right = 640.0
 margin_bottom = 52.0
@@ -203,7 +205,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Menu2" type="Label" parent="Control/Menu/List/Menu"]
+[node name="Menu2" type="Label" parent="Center/Control/Menu/List/Menu"]
 margin_top = 4.0
 margin_right = 640.0
 margin_bottom = 52.0
@@ -215,7 +217,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Row13" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row13" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 910.0
 margin_right = 640.0
@@ -223,7 +225,7 @@ margin_bottom = 990.0
 action = "ui_accept"
 text = "Accept"
 
-[node name="Row14" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row14" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 994.0
 margin_right = 640.0
@@ -231,7 +233,7 @@ margin_bottom = 1074.0
 action = "ui_cancel"
 text = "Cancel"
 
-[node name="Row15" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row15" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 1078.0
 margin_right = 640.0
@@ -239,7 +241,7 @@ margin_bottom = 1158.0
 action = "ui_pause"
 text = "Pause"
 
-[node name="Row9" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row9" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 1162.0
 margin_right = 640.0
@@ -247,7 +249,7 @@ margin_bottom = 1242.0
 action = "ui_left"
 text = "Left"
 
-[node name="Row10" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row10" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 1246.0
 margin_right = 640.0
@@ -255,7 +257,7 @@ margin_bottom = 1326.0
 action = "ui_right"
 text = "Right"
 
-[node name="Row11" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row11" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 1330.0
 margin_right = 640.0
@@ -263,7 +265,7 @@ margin_bottom = 1410.0
 action = "ui_up"
 text = "Up"
 
-[node name="Row12" parent="Control/Menu/List" instance=ExtResource( 6 )]
+[node name="Row12" parent="Center/Control/Menu/List" instance=ExtResource( 6 )]
 anchor_right = 0.0
 margin_top = 1414.0
 margin_right = 640.0
@@ -271,7 +273,7 @@ margin_bottom = 1494.0
 action = "ui_down"
 text = "Down"
 
-[node name="Reset" type="Label" parent="Control/Menu/List" groups=["reset"]]
+[node name="Reset" type="Label" parent="Center/Control/Menu/List" groups=["reset"]]
 margin_top = 1498.0
 margin_right = 640.0
 margin_bottom = 1578.0
@@ -284,7 +286,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Header" type="Control" parent="Control"]
+[node name="Header" type="Control" parent="Center/Control"]
 anchor_left = 0.2
 anchor_right = 0.8
 margin_left = -60.0
@@ -296,7 +298,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Back" type="Panel" parent="Control/Header"]
+[node name="Back" type="Panel" parent="Center/Control/Header"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 22 )
@@ -304,7 +306,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Header"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Center/Control/Header"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 15
@@ -313,7 +315,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/Header/HBoxContainer"]
+[node name="Label" type="Label" parent="Center/Control/Header/HBoxContainer"]
 margin_left = 72.0
 margin_top = 19.0
 margin_right = 183.0
@@ -327,7 +329,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" parent="Control/Header/HBoxContainer" instance=ExtResource( 1 )]
+[node name="Key" parent="Center/Control/Header/HBoxContainer" instance=ExtResource( 1 )]
 margin_left = 198.0
 margin_top = 15.0
 margin_right = 248.0
@@ -336,7 +338,7 @@ size_flags_vertical = 4
 action = "ui_accept"
 is_connect = true
 
-[node name="Label2" type="Label" parent="Control/Header/HBoxContainer"]
+[node name="Label2" type="Label" parent="Center/Control/Header/HBoxContainer"]
 margin_left = 263.0
 margin_top = 19.0
 margin_right = 566.0
@@ -350,7 +352,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key2" parent="Control/Header/HBoxContainer" instance=ExtResource( 1 )]
+[node name="Key2" parent="Center/Control/Header/HBoxContainer" instance=ExtResource( 1 )]
 margin_left = 581.0
 margin_top = 15.0
 margin_right = 631.0
@@ -359,7 +361,7 @@ size_flags_vertical = 4
 action = "ui_end"
 is_connect = true
 
-[node name="Label3" type="Label" parent="Control/Header/HBoxContainer"]
+[node name="Label3" type="Label" parent="Center/Control/Header/HBoxContainer"]
 margin_left = 646.0
 margin_top = 19.0
 margin_right = 815.0
@@ -373,7 +375,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Prompt" type="Panel" parent="Control"]
+[node name="Prompt" type="Panel" parent="Center/Control"]
 visible = false
 self_modulate = Color( 0, 0, 0, 0.7 )
 anchor_left = 0.3
@@ -387,7 +389,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Prompt"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Center/Control/Prompt"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
@@ -395,7 +397,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Prompt" type="Label" parent="Control/Prompt/VBoxContainer"]
+[node name="Prompt" type="Label" parent="Center/Control/Prompt/VBoxContainer"]
 margin_right = 552.0
 margin_bottom = 109.0
 rect_pivot_offset = Vector2( -390.432, 251.663 )
@@ -409,7 +411,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="Label" parent="Control/Prompt/VBoxContainer"]
+[node name="Key" type="Label" parent="Center/Control/Prompt/VBoxContainer"]
 margin_top = 109.0
 margin_right = 552.0
 margin_bottom = 218.0
@@ -424,7 +426,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Label" parent="Control/Prompt/VBoxContainer"]
+[node name="Timer" type="Label" parent="Center/Control/Prompt/VBoxContainer"]
 margin_top = 218.0
 margin_right = 552.0
 margin_bottom = 328.0

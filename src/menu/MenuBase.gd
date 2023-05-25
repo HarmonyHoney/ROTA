@@ -14,6 +14,7 @@ var cursor_speed := 9.0
 export var scroll_path : NodePath
 onready var scroll_node = get_node_or_null(scroll_path)
 var scroll_speed := 4.8
+var scroll_y := 0.0
 
 export var fade_path : NodePath
 onready var fade_node = get_node_or_null(fade_path)
@@ -54,6 +55,8 @@ func _ready():
 	fill_items()
 	reset_cursor()
 	fade_delta()
+	
+	get_tree().connect("screen_resized", self, "resize")
 
 func _input(event):
 	if is_input:
@@ -123,9 +126,15 @@ func menu_process(delta):
 			cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(items[cursor].rect_global_position - cursor_margin, cursor_speed * delta)
 			cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size + (cursor_margin * 2.0), cursor_speed * delta)
 			
-			# scroll
-			if scroll_node:
-				scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), scroll_speed * delta)
+			scroll(scroll_speed * delta)
+
+func resize():
+	yield(get_tree(), "idle_frame")
+	scroll()
+
+func scroll(delta := 1.0):
+	if scroll_node:
+		scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), delta)
 
 func fade_delta(arg := 0.0):
 	if fade_node:
@@ -154,9 +163,7 @@ func reset_cursor():
 		cursor_node.rect_global_position = items[0].rect_global_position - cursor_margin
 		cursor_node.rect_size = items[0].rect_size + (cursor_margin * 2.0)
 		
-		# scroll
-		if scroll_node:
-			scroll_node.rect_position.y = (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0)
+		scroll()
 
 func set_open(arg := is_open):
 	is_open = arg

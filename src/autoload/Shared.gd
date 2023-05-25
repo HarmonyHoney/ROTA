@@ -114,8 +114,9 @@ signal gamepad_input(arg)
 
 var volume = [100, 100, 100, 100]
 var win_size := Vector2(1280, 720)
-var win_sizes := [Vector2(640, 360), Vector2(960, 540), Vector2(1280, 720), Vector2(1600, 900),
-Vector2(1920, 1080), Vector2(2560, 1440), Vector2(3840, 2160)]
+var win_sizes := [Vector2(640, 360), Vector2(960, 540), Vector2(1280, 720), Vector2(1680, 720),
+Vector2(1600, 900), Vector2(2100, 900), Vector2(1920, 1080), Vector2(2560, 1080), Vector2(2560, 1440), Vector2(3440, 1440),
+Vector2(3840, 2160), Vector2(5160, 2160)]
 var radial_blur = 0 setget set_radial_blur
 var light_enabled := 1 setget set_light_enabled
 var shadow_enabled := 1 setget set_shadow_enabled

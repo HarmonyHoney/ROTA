@@ -7,7 +7,7 @@ onready var hair_backs : int = Shared.player.hair_backs.size()
 
 var pale = [3,2,2,1,0,16]
 
-onready var arrows := $Dialog/Arrows.get_children()
+onready var arrows := $Center/Control/Dialog/Arrows.get_children()
 export var arrow_margin := Vector2.ZERO
 
 func row():

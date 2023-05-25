@@ -34,9 +34,12 @@ func _ready():
 
 func _process(delta):
 	var s = rig_ease.count(delta)
+	var x_scale := get_viewport_rect().size.x / 1280
+	var c_dist := abs(to_local(Cam.global_position).x / 75.0)
+	
 	rig.modulate.a = s
 	stage.modulate.a = 1.0 - s
-	stage.scale = Vector2.ONE * lerp(7.0, 1.0, s)
+	stage.scale = Vector2.ONE * lerp((3.42 * x_scale) + c_dist, 1.0, s)
 	
 	for i in lights:
 		i.self_modulate.a = s

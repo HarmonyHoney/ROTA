@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
 [ext_resource path="res://src/menu/MenuMakeover.gd" type="Script" id=2]
@@ -8,13 +8,6 @@
 [ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=6]
 [ext_resource path="res://media/image/UI/reset.svg" type="Texture" id=7]
 [ext_resource path="res://src/menu/options/scroll/Color.gd" type="Script" id=8]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
@@ -29,9 +22,9 @@ bg_color = Color( 1, 1, 1, 1 )
 [node name="MenuMakeover" type="CanvasLayer"]
 pause_mode = 2
 script = ExtResource( 2 )
-items_path = NodePath("Dialog/List")
-cursor_path = NodePath("Dialog/Cursor")
-fade_path = NodePath("Dialog")
+items_path = NodePath("Center/Control/Dialog/List")
+cursor_path = NodePath("Center/Control/Dialog/Cursor")
+fade_path = NodePath("Center/Control/Dialog")
 is_ui_keys = true
 is_input = true
 is_process = true
@@ -40,29 +33,23 @@ is_joy_x = true
 is_audio_joy = true
 arrow_margin = Vector2( -10, 0 )
 
-[node name="Dialog" type="Control" parent="."]
+[node name="Center" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="Center"]
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 1280, 720 )
+
+[node name="Dialog" type="Control" parent="Center/Control"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 120.0
 margin_top = 35.0
 margin_right = -100.0
-rect_pivot_offset = Vector2( -618, -18 )
 
-[node name="Panel" type="Panel" parent="Dialog"]
-visible = false
-modulate = Color( 0.7, 1, 1, 0.8 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -30.0
-margin_top = -30.0
-margin_right = 30.0
-margin_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_min_size = Vector2( 250, 200 )
-custom_styles/panel = SubResource( 1 )
-
-[node name="Cursor" type="Panel" parent="Dialog"]
+[node name="Cursor" type="Panel" parent="Center/Control/Dialog"]
 modulate = Color( 1, 1, 1, 0.25 )
 margin_left = 33.0
 margin_top = 18.0
@@ -73,7 +60,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Column" type="Panel" parent="Dialog"]
+[node name="Column" type="Panel" parent="Center/Control/Dialog"]
 modulate = Color( 1, 1, 1, 0.25 )
 anchor_left = 0.5
 anchor_right = 0.5
@@ -87,9 +74,9 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Arrows" type="Control" parent="Dialog"]
+[node name="Arrows" type="Control" parent="Center/Control/Dialog"]
 
-[node name="Left" type="Label" parent="Dialog/Arrows"]
+[node name="Left" type="Label" parent="Center/Control/Dialog/Arrows"]
 margin_right = 26.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 30, 70 )
@@ -99,7 +86,7 @@ text = "<"
 align = 2
 valign = 1
 
-[node name="Right" type="Label" parent="Dialog/Arrows"]
+[node name="Right" type="Label" parent="Center/Control/Dialog/Arrows"]
 margin_left = 76.0
 margin_right = 106.0
 margin_bottom = 70.0
@@ -112,7 +99,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="List" type="VBoxContainer" parent="Dialog"]
+[node name="List" type="VBoxContainer" parent="Center/Control/Dialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -122,7 +109,7 @@ size_flags_vertical = 4
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Front" parent="Dialog/List" instance=ExtResource( 3 )]
+[node name="Front" parent="Center/Control/Dialog/List" instance=ExtResource( 3 )]
 margin_top = 67.0
 margin_right = 420.0
 margin_bottom = 137.0
@@ -131,12 +118,12 @@ __meta__ = {
 }
 order = "front"
 
-[node name="Back" parent="Dialog/List" instance=ExtResource( 3 )]
+[node name="Back" parent="Center/Control/Dialog/List" instance=ExtResource( 3 )]
 margin_top = 147.0
 margin_right = 420.0
 margin_bottom = 217.0
 
-[node name="Hair" type="Control" parent="Dialog/List" groups=["color"]]
+[node name="Hair" type="Control" parent="Center/Control/Dialog/List" groups=["color"]]
 margin_top = 227.0
 margin_right = 420.0
 margin_bottom = 297.0
@@ -145,12 +132,12 @@ script = ExtResource( 8 )
 is_loop = true
 count = 18
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Hair"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Center/Control/Dialog/List/Hair"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
 
-[node name="Circle" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
+[node name="Circle" type="Control" parent="Center/Control/Dialog/List/Hair/HBoxContainer"]
 modulate = Color( 0, 1, 0, 1 )
 margin_left = 27.0
 margin_right = 97.0
@@ -160,14 +147,14 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle" instance=ExtResource( 4 )]
+[node name="Hair" parent="Center/Control/Dialog/List/Hair/HBoxContainer/Circle" instance=ExtResource( 4 )]
 position = Vector2( 45, 32 )
 scale = Vector2( 1.5, 1.5 )
 width = 20.0
 length = 15.0
 sitting_angle = 60.0
 
-[node name="Circle2" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
+[node name="Circle2" type="Control" parent="Center/Control/Dialog/List/Hair/HBoxContainer"]
 modulate = Color( 1, 0, 0, 1 )
 margin_left = 101.0
 margin_right = 171.0
@@ -177,14 +164,14 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle2" instance=ExtResource( 4 )]
+[node name="Hair" parent="Center/Control/Dialog/List/Hair/HBoxContainer/Circle2" instance=ExtResource( 4 )]
 position = Vector2( 45, 32 )
 scale = Vector2( 1.75, 1.75 )
 width = 20.0
 length = 15.0
 sitting_angle = 60.0
 
-[node name="Circle3" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
+[node name="Circle3" type="Control" parent="Center/Control/Dialog/List/Hair/HBoxContainer"]
 modulate = Color( 0, 0, 1, 1 )
 margin_left = 175.0
 margin_right = 245.0
@@ -194,14 +181,14 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle3" instance=ExtResource( 4 )]
+[node name="Hair" parent="Center/Control/Dialog/List/Hair/HBoxContainer/Circle3" instance=ExtResource( 4 )]
 position = Vector2( 45, 32 )
 scale = Vector2( 2, 2 )
 width = 20.0
 length = 15.0
 sitting_angle = 60.0
 
-[node name="Circle4" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
+[node name="Circle4" type="Control" parent="Center/Control/Dialog/List/Hair/HBoxContainer"]
 margin_left = 249.0
 margin_right = 319.0
 margin_bottom = 70.0
@@ -210,14 +197,14 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle4" instance=ExtResource( 4 )]
+[node name="Hair" parent="Center/Control/Dialog/List/Hair/HBoxContainer/Circle4" instance=ExtResource( 4 )]
 position = Vector2( 45, 32 )
 scale = Vector2( 1.75, 1.75 )
 width = 20.0
 length = 15.0
 sitting_angle = 60.0
 
-[node name="Circle5" type="Control" parent="Dialog/List/Hair/HBoxContainer"]
+[node name="Circle5" type="Control" parent="Center/Control/Dialog/List/Hair/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 margin_left = 323.0
 margin_right = 393.0
@@ -227,14 +214,14 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Hair" parent="Dialog/List/Hair/HBoxContainer/Circle5" instance=ExtResource( 4 )]
+[node name="Hair" parent="Center/Control/Dialog/List/Hair/HBoxContainer/Circle5" instance=ExtResource( 4 )]
 position = Vector2( 45, 32 )
 scale = Vector2( 1.5, 1.5 )
 width = 20.0
 length = 15.0
 sitting_angle = 60.0
 
-[node name="Eye" type="Control" parent="Dialog/List" groups=["color"]]
+[node name="Eye" type="Control" parent="Center/Control/Dialog/List" groups=["color"]]
 margin_top = 307.0
 margin_right = 420.0
 margin_bottom = 377.0
@@ -244,12 +231,12 @@ is_loop = true
 count = 18
 part = "eye"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Eye"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Center/Control/Dialog/List/Eye"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
 
-[node name="Circle" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
+[node name="Circle" type="Control" parent="Center/Control/Dialog/List/Eye/HBoxContainer"]
 modulate = Color( 0, 1, 0, 1 )
 margin_left = 27.0
 margin_right = 97.0
@@ -259,11 +246,11 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle"]
+[node name="Eyes" type="Node2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle"]
 position = Vector2( 35, 35 )
 scale = Vector2( 1.5, 1.5 )
 
-[node name="Left" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle/Eyes"]
+[node name="Left" type="Line2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle/Eyes"]
 position = Vector2( -9, 0 )
 points = PoolVector2Array( 0, -3, 0, 3 )
 width = 8.0
@@ -271,7 +258,7 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Right" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle/Eyes"]
+[node name="Right" type="Line2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle/Eyes"]
 position = Vector2( 9, 0 )
 points = PoolVector2Array( 0, -3, 0, 3 )
 width = 8.0
@@ -279,7 +266,7 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Circle2" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
+[node name="Circle2" type="Control" parent="Center/Control/Dialog/List/Eye/HBoxContainer"]
 modulate = Color( 1, 0, 0, 1 )
 margin_left = 101.0
 margin_right = 171.0
@@ -289,11 +276,11 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle2"]
+[node name="Eyes" type="Node2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle2"]
 position = Vector2( 35, 35 )
 scale = Vector2( 1.75, 1.75 )
 
-[node name="Left" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle2/Eyes"]
+[node name="Left" type="Line2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle2/Eyes"]
 position = Vector2( -9, 0 )
 points = PoolVector2Array( 0, -3, 0, 3 )
 width = 8.0
@@ -301,7 +288,7 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Right" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle2/Eyes"]
+[node name="Right" type="Line2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle2/Eyes"]
 position = Vector2( 9, 0 )
 points = PoolVector2Array( 0, -3, 0, 3 )
 width = 8.0
@@ -309,18 +296,18 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Circle3" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
+[node name="Circle3" type="Control" parent="Center/Control/Dialog/List/Eye/HBoxContainer"]
 modulate = Color( 0, 0, 1, 1 )
 margin_left = 175.0
 margin_right = 245.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 
-[node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle3"]
+[node name="Eyes" type="Node2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle3"]
 position = Vector2( 35, 35 )
 scale = Vector2( 2, 2 )
 
-[node name="Left" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle3/Eyes"]
+[node name="Left" type="Line2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle3/Eyes"]
 position = Vector2( -9, 0 )
 points = PoolVector2Array( 0, -3, 0, 3 )
 width = 8.0
@@ -328,7 +315,7 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Right" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle3/Eyes"]
+[node name="Right" type="Line2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle3/Eyes"]
 position = Vector2( 9, 0 )
 points = PoolVector2Array( 0, -3, 0, 3 )
 width = 8.0
@@ -336,7 +323,7 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Circle4" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
+[node name="Circle4" type="Control" parent="Center/Control/Dialog/List/Eye/HBoxContainer"]
 margin_left = 249.0
 margin_right = 319.0
 margin_bottom = 70.0
@@ -345,11 +332,11 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle4"]
+[node name="Eyes" type="Node2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle4"]
 position = Vector2( 35, 35 )
 scale = Vector2( 1.75, 1.75 )
 
-[node name="Left" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle4/Eyes"]
+[node name="Left" type="Line2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle4/Eyes"]
 position = Vector2( -9, 0 )
 points = PoolVector2Array( 0, -3, 0, 3 )
 width = 8.0
@@ -357,7 +344,7 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Right" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle4/Eyes"]
+[node name="Right" type="Line2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle4/Eyes"]
 position = Vector2( 9, 0 )
 points = PoolVector2Array( 0, -3, 0, 3 )
 width = 8.0
@@ -365,7 +352,7 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Circle5" type="Control" parent="Dialog/List/Eye/HBoxContainer"]
+[node name="Circle5" type="Control" parent="Center/Control/Dialog/List/Eye/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 margin_left = 323.0
 margin_right = 393.0
@@ -375,11 +362,11 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Eyes" type="Node2D" parent="Dialog/List/Eye/HBoxContainer/Circle5"]
+[node name="Eyes" type="Node2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle5"]
 position = Vector2( 35, 35 )
 scale = Vector2( 1.5, 1.5 )
 
-[node name="Left" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle5/Eyes"]
+[node name="Left" type="Line2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle5/Eyes"]
 position = Vector2( -9, 0 )
 points = PoolVector2Array( 0, -3, 0, 3 )
 width = 8.0
@@ -387,7 +374,7 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Right" type="Line2D" parent="Dialog/List/Eye/HBoxContainer/Circle5/Eyes"]
+[node name="Right" type="Line2D" parent="Center/Control/Dialog/List/Eye/HBoxContainer/Circle5/Eyes"]
 position = Vector2( 9, 0 )
 points = PoolVector2Array( 0, -3, 0, 3 )
 width = 8.0
@@ -395,7 +382,7 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Skin" type="Control" parent="Dialog/List" groups=["color"]]
+[node name="Skin" type="Control" parent="Center/Control/Dialog/List" groups=["color"]]
 margin_top = 387.0
 margin_right = 420.0
 margin_bottom = 457.0
@@ -405,12 +392,12 @@ is_loop = true
 count = 18
 part = "skin"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Skin"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Center/Control/Dialog/List/Skin"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
 
-[node name="Circle" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
+[node name="Circle" type="Control" parent="Center/Control/Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 0, 1, 0, 1 )
 margin_left = 27.0
 margin_right = 97.0
@@ -420,7 +407,7 @@ script = ExtResource( 6 )
 radius = 25.0
 circle_offset = Vector2( 35, 35 )
 
-[node name="Circle2" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
+[node name="Circle2" type="Control" parent="Center/Control/Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 1, 0, 0, 1 )
 margin_left = 101.0
 margin_right = 171.0
@@ -430,7 +417,7 @@ script = ExtResource( 6 )
 radius = 30.0
 circle_offset = Vector2( 35, 35 )
 
-[node name="Circle3" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
+[node name="Circle3" type="Control" parent="Center/Control/Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 0, 0, 1, 1 )
 margin_left = 175.0
 margin_right = 245.0
@@ -440,7 +427,7 @@ script = ExtResource( 6 )
 radius = 30.0
 circle_offset = Vector2( 35, 35 )
 
-[node name="Circle4" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
+[node name="Circle4" type="Control" parent="Center/Control/Dialog/List/Skin/HBoxContainer"]
 margin_left = 249.0
 margin_right = 319.0
 margin_bottom = 70.0
@@ -449,7 +436,7 @@ script = ExtResource( 6 )
 radius = 30.0
 circle_offset = Vector2( 35, 35 )
 
-[node name="Circle5" type="Control" parent="Dialog/List/Skin/HBoxContainer"]
+[node name="Circle5" type="Control" parent="Center/Control/Dialog/List/Skin/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 margin_left = 323.0
 margin_right = 393.0
@@ -459,7 +446,7 @@ script = ExtResource( 6 )
 radius = 25.0
 circle_offset = Vector2( 35, 35 )
 
-[node name="Fit" type="Control" parent="Dialog/List" groups=["color"]]
+[node name="Fit" type="Control" parent="Center/Control/Dialog/List" groups=["color"]]
 margin_top = 467.0
 margin_right = 420.0
 margin_bottom = 537.0
@@ -469,12 +456,12 @@ is_loop = true
 count = 18
 part = "fit"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Dialog/List/Fit"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Center/Control/Dialog/List/Fit"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
 
-[node name="Circle" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
+[node name="Circle" type="Control" parent="Center/Control/Dialog/List/Fit/HBoxContainer"]
 modulate = Color( 0, 1, 0, 1 )
 margin_left = 27.0
 margin_right = 97.0
@@ -484,11 +471,11 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle"]
+[node name="Fit" type="Node2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle"]
 position = Vector2( 35, 35 )
 scale = Vector2( 1.333, 1.333 )
 
-[node name="LegL" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle/Fit"]
+[node name="LegL" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle/Fit"]
 position = Vector2( -3, -14 )
 rotation = 0.387463
 polygon = PoolVector2Array( 5, 31, 4.33013, 33.5, 2.5, 35.3301, -2.18557e-07, 36, -2.5, 35.3301, -4.33013, 33.5, -5, 31, -5, 5, -4.33013, 2.5, -2.5, 0.669873, 5.96244e-08, 0, 2.5, 0.669873, 4.33013, 2.5, 5, 5 )
@@ -498,7 +485,7 @@ rect_offset = Vector2( 0, 18 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="LegR" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle/Fit"]
+[node name="LegR" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle/Fit"]
 position = Vector2( 3, -14 )
 rotation = -0.387463
 polygon = PoolVector2Array( 5, 31, 4.33013, 33.5, 2.5, 35.3301, -2.18557e-07, 36, -2.5, 35.3301, -4.33013, 33.5, -5, 31, -5, 5, -4.33013, 2.5, -2.5, 0.669873, 5.96244e-08, 0, 2.5, 0.669873, 4.33013, 2.5, 5, 5 )
@@ -508,11 +495,11 @@ rect_offset = Vector2( 0, 18 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="Torso" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle/Fit"]
+[node name="Torso" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle/Fit"]
 position = Vector2( 0, -14.5 )
 polygon = PoolVector2Array( 7.6, 25, -7.6, 25, -5.55, 0, 5.55, 0 )
 
-[node name="Circle2" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
+[node name="Circle2" type="Control" parent="Center/Control/Dialog/List/Fit/HBoxContainer"]
 modulate = Color( 1, 0, 0, 1 )
 margin_left = 101.0
 margin_right = 171.0
@@ -522,11 +509,11 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle2"]
+[node name="Fit" type="Node2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle2"]
 position = Vector2( 35, 35 )
 scale = Vector2( 1.444, 1.444 )
 
-[node name="LegL" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
+[node name="LegL" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
 position = Vector2( -3, -14 )
 rotation = 0.387463
 polygon = PoolVector2Array( 5, 31, 4.33013, 33.5, 2.5, 35.3301, -2.18557e-07, 36, -2.5, 35.3301, -4.33013, 33.5, -5, 31, -5, 5, -4.33013, 2.5, -2.5, 0.669873, 5.96244e-08, 0, 2.5, 0.669873, 4.33013, 2.5, 5, 5 )
@@ -536,7 +523,7 @@ rect_offset = Vector2( 0, 18 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="LegR" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
+[node name="LegR" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
 position = Vector2( 3, -14 )
 rotation = -0.387463
 polygon = PoolVector2Array( 5, 31, 4.33013, 33.5, 2.5, 35.3301, -2.18557e-07, 36, -2.5, 35.3301, -4.33013, 33.5, -5, 31, -5, 5, -4.33013, 2.5, -2.5, 0.669873, 5.96244e-08, 0, 2.5, 0.669873, 4.33013, 2.5, 5, 5 )
@@ -546,11 +533,11 @@ rect_offset = Vector2( 0, 18 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="Torso" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
+[node name="Torso" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle2/Fit"]
 position = Vector2( 0, -14.5 )
 polygon = PoolVector2Array( 7.6, 25, -7.6, 25, -5.55, 0, 5.55, 0 )
 
-[node name="Circle3" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
+[node name="Circle3" type="Control" parent="Center/Control/Dialog/List/Fit/HBoxContainer"]
 modulate = Color( 0, 0, 1, 1 )
 margin_left = 175.0
 margin_right = 245.0
@@ -560,11 +547,11 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle3"]
+[node name="Fit" type="Node2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle3"]
 position = Vector2( 35, 35 )
 scale = Vector2( 1.667, 1.667 )
 
-[node name="LegL" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
+[node name="LegL" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
 position = Vector2( -3, -14 )
 rotation = 0.387463
 polygon = PoolVector2Array( 5, 31, 4.33013, 33.5, 2.5, 35.3301, -2.18557e-07, 36, -2.5, 35.3301, -4.33013, 33.5, -5, 31, -5, 5, -4.33013, 2.5, -2.5, 0.669873, 5.96244e-08, 0, 2.5, 0.669873, 4.33013, 2.5, 5, 5 )
@@ -574,7 +561,7 @@ rect_offset = Vector2( 0, 18 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="LegR" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
+[node name="LegR" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
 position = Vector2( 3, -14 )
 rotation = -0.387463
 polygon = PoolVector2Array( 5, 31, 4.33013, 33.5, 2.5, 35.3301, -2.18557e-07, 36, -2.5, 35.3301, -4.33013, 33.5, -5, 31, -5, 5, -4.33013, 2.5, -2.5, 0.669873, 5.96244e-08, 0, 2.5, 0.669873, 4.33013, 2.5, 5, 5 )
@@ -584,11 +571,11 @@ rect_offset = Vector2( 0, 18 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="Torso" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
+[node name="Torso" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle3/Fit"]
 position = Vector2( 0, -14.5 )
 polygon = PoolVector2Array( 7.6, 25, -7.6, 25, -5.55, 0, 5.55, 0 )
 
-[node name="Circle4" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
+[node name="Circle4" type="Control" parent="Center/Control/Dialog/List/Fit/HBoxContainer"]
 margin_left = 249.0
 margin_right = 319.0
 margin_bottom = 70.0
@@ -597,11 +584,11 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle4"]
+[node name="Fit" type="Node2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle4"]
 position = Vector2( 35, 35 )
 scale = Vector2( 1.444, 1.444 )
 
-[node name="LegL" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
+[node name="LegL" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
 position = Vector2( -3, -14 )
 rotation = 0.387463
 polygon = PoolVector2Array( 5, 31, 4.33013, 33.5, 2.5, 35.3301, -2.18557e-07, 36, -2.5, 35.3301, -4.33013, 33.5, -5, 31, -5, 5, -4.33013, 2.5, -2.5, 0.669873, 5.96244e-08, 0, 2.5, 0.669873, 4.33013, 2.5, 5, 5 )
@@ -611,7 +598,7 @@ rect_offset = Vector2( 0, 18 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="LegR" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
+[node name="LegR" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
 position = Vector2( 3, -14 )
 rotation = -0.387463
 polygon = PoolVector2Array( 5, 31, 4.33013, 33.5, 2.5, 35.3301, -2.18557e-07, 36, -2.5, 35.3301, -4.33013, 33.5, -5, 31, -5, 5, -4.33013, 2.5, -2.5, 0.669873, 5.96244e-08, 0, 2.5, 0.669873, 4.33013, 2.5, 5, 5 )
@@ -621,11 +608,11 @@ rect_offset = Vector2( 0, 18 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="Torso" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
+[node name="Torso" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle4/Fit"]
 position = Vector2( 0, -14.5 )
 polygon = PoolVector2Array( 7.6, 25, -7.6, 25, -5.55, 0, 5.55, 0 )
 
-[node name="Circle5" type="Control" parent="Dialog/List/Fit/HBoxContainer"]
+[node name="Circle5" type="Control" parent="Center/Control/Dialog/List/Fit/HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
 margin_left = 323.0
 margin_right = 393.0
@@ -635,11 +622,11 @@ script = ExtResource( 6 )
 radius = 0.0
 points = 8
 
-[node name="Fit" type="Node2D" parent="Dialog/List/Fit/HBoxContainer/Circle5"]
+[node name="Fit" type="Node2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle5"]
 position = Vector2( 35, 35 )
 scale = Vector2( 1.333, 1.333 )
 
-[node name="LegL" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
+[node name="LegL" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
 position = Vector2( -3, -14 )
 rotation = 0.387463
 polygon = PoolVector2Array( 5, 31, 4.33013, 33.5, 2.5, 35.3301, -2.18557e-07, 36, -2.5, 35.3301, -4.33013, 33.5, -5, 31, -5, 5, -4.33013, 2.5, -2.5, 0.669873, 5.96244e-08, 0, 2.5, 0.669873, 4.33013, 2.5, 5, 5 )
@@ -649,7 +636,7 @@ rect_offset = Vector2( 0, 18 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="LegR" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
+[node name="LegR" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
 position = Vector2( 3, -14 )
 rotation = -0.387463
 polygon = PoolVector2Array( 5, 31, 4.33013, 33.5, 2.5, 35.3301, -2.18557e-07, 36, -2.5, 35.3301, -4.33013, 33.5, -5, 31, -5, 5, -4.33013, 2.5, -2.5, 0.669873, 5.96244e-08, 0, 2.5, 0.669873, 4.33013, 2.5, 5, 5 )
@@ -659,11 +646,11 @@ rect_offset = Vector2( 0, 18 )
 radius = Plane( -2, -1, -1, -1 )
 points = 4
 
-[node name="Torso" type="Polygon2D" parent="Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
+[node name="Torso" type="Polygon2D" parent="Center/Control/Dialog/List/Fit/HBoxContainer/Circle5/Fit"]
 position = Vector2( 0, -14.5 )
 polygon = PoolVector2Array( 7.6, 25, -7.6, 25, -5.55, 0, 5.55, 0 )
 
-[node name="Random" type="TextureRect" parent="Dialog/List"]
+[node name="Random" type="TextureRect" parent="Center/Control/Dialog/List"]
 margin_left = 175.0
 margin_top = 547.0
 margin_right = 245.0

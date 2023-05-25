@@ -1,7 +1,5 @@
 extends MenuBase
 
-onready var bg := $Control/BG
-
 func fill_items():
 	if is_instance_valid(items_node):
 		for i in items_node.get_children():
@@ -19,9 +17,6 @@ func fill_items():
 
 func row():
 	is_audio_joy = cursor > 4
-
-func open():
-	bg.visible = true#Shared.csfn != Shared.title_path
 
 func close():
 	Shared.save_options()
