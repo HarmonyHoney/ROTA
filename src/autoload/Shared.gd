@@ -754,9 +754,7 @@ func load_keys(path := "user://keys.tres"):
 
 ### Steam ###
 
-func try_achievement(arg := ""):
-	if !Steam.is_init(): return
-	
+func try_achievement():
 	var map := ""
 	
 	match csfn:
@@ -779,15 +777,23 @@ func try_achievement(arg := ""):
 			map = "snow2"
 	
 	if map != "":
-		Steam.set_achievement(map)
+		achieve(map)
 	
-	if gem_count > 49:
-		Steam.set_achievement("gem50")
+	if gem_count > 0:
+		achieve("gem1")
+		if gem_count > 49:
+			achieve("gem50")
+	
+	if clock_rank > 0:
+		achieve("clock1")
+		if clock_rank > 49:
+			achieve("clock50")
 	
 	if csfn == end_path and save_time < 3600:
-		Steam.set_achievement("speedrun")
-	
-	if arg != "":
+		achieve("speedrun")
+
+func achieve(arg := ""):
+	if arg != "" and Steam.is_init():
 		Steam.set_achievement(arg)
 
 ### Demo ###
