@@ -1,0 +1,30 @@
+id: net.hhoney.rota
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+base: org.godotengine.godot.BaseApp
+base-version: '3.6'
+sdk: org.freedesktop.Sdk
+command: godot-runner
+finish-args:
+- --share=ipc
+- --socket=x11
+- --socket=pulseaudio
+- --device=all
+modules:
+- name: rota
+  buildsystem: simple
+  sources:
+
+  - type: dir
+    path: ../
+
+  - type: file
+    url: https://github.com/HarmonyHoney/ROTA/releases/download/flathub3/ROTA.pck
+    sha256: fc7849b61e32c6ff6d8a8c4b31225c396ca845ee220436f75f665d60698c59a6
+
+  build-commands:
+  - install -Dm644 ROTA.pck ${FLATPAK_DEST}/bin/godot-runner.pck
+  - install -Dm644 linux/${FLATPAK_ID}.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+  - install -Dm644 linux/${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
+  - install -Dm644 media/image/icon/icon256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+
