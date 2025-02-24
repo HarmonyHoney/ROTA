@@ -1,0 +1,24 @@
+name: Flatpak
+on:
+  push:
+    branches:
+    - master4
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  flatpak:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-47
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v4
+    - uses: flathub-infra/flatpak-github-actions/flatpak-builder@master
+      with:
+        bundle: rota.flatpak
+        manifest-path: linux/net.hhoney.rota.yml
+        cache-key: "flatpak-builder-${{ github.sha }}"
