@@ -3,7 +3,7 @@
   <name>ROTA</name>
   <summary>Gravity bends beneath your feet</summary>
   <branding>
-    <color type="primary" scheme_preference="light">#ff99ff</color>
+    <color type="primary" scheme_preference="light">#ffc3d6</color>
     <color type="primary" scheme_preference="dark">#850087</color>
   </branding>
   <developer_name translatable="no">HHoney Software</developer_name>
@@ -61,6 +61,11 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="2025.02.23" date="2025-02-23">
+      <description>
+        <p>Refreshed app icon and brand colors</p>
+      </description>
+    </release>
     <release version="2024.12.10" date="2024-12-10">
       <description>
         <p>Touch screen revisions</p>
