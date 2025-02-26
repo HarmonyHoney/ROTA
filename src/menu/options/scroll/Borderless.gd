@@ -1,10 +1,10 @@
 extends Scroll
 
 func _ready():
-	cursor = int(OS.window_borderless)
+	cursor = int(get_window().borderless)
 	set_label()
 
 func set_value():
-	OS.window_borderless = bool(cursor)
+	get_window().borderless = bool(cursor)
 	Shared.set_window_size()
 

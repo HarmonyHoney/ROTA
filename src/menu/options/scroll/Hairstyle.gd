@@ -1,8 +1,8 @@
 extends Scroll
 
-export(String, "back", "front") var order = "back"
-onready var hbox := $HBoxContainer
-onready var circle := $HBoxContainer/Circle
+@export var order = "back" # (String, "back", "front")
+@onready var hbox := $HBoxContainer
+@onready var circle := $HBoxContainer/Circle
 
 var scenes := []
 var items := []
@@ -17,7 +17,7 @@ func _ready():
 		var c = circle.duplicate()
 		hbox.add_child(c)
 		
-		var s = load(scenes[i]).instance()
+		var s = load(scenes[i]).instantiate()
 		
 		if order == "back":
 			s.show_behind_parent = true

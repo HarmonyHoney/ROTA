@@ -4,11 +4,11 @@ render_mode blend_mix;
 uniform vec2 point = vec2(0, 0.5);
 uniform float radius : hint_range(0.0, 1.0) = 0.5;
 
-uniform vec4 outside_color : hint_color = vec4(1.0);
-uniform vec4 inside_color : hint_color = vec4(0.0);
-uniform vec4 sun_color : hint_color = vec4(1.0, 1.0, 0.0, 1.0);
-uniform vec4 col1 : hint_color = vec4(1.0);
-uniform vec4 col2 : hint_color = vec4(0.0);
+uniform vec4 outside_color : source_color = vec4(1.0);
+uniform vec4 inside_color : source_color = vec4(0.0);
+uniform vec4 sun_color : source_color = vec4(1.0, 1.0, 0.0, 1.0);
+uniform vec4 col1 : source_color = vec4(1.0);
+uniform vec4 col2 : source_color = vec4(0.0);
 
 uniform float sun_frac : hint_range(0.0, 1.0) = 0.0;
 uniform float time_scale : hint_range(0.0, 0.05) = 1.0;

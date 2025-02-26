@@ -11,7 +11,7 @@ z_as_relative = false
 script = ExtResource( 3 )
 palette = 1
 
-[node name="Visible" type="VisibilityNotifier2D" parent="."]
+[node name="Visible" type="VisibleOnScreenNotifier2D" parent="."]
 visible = false
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0, 31 )
@@ -22,7 +22,7 @@ node_path = NodePath("../Circle")
 [node name="Circle" type="Polygon2D" parent="."]
 modulate = Color( 0.364706, 1, 0, 1 )
 position = Vector2( 0, 28.5 )
-polygon = PoolVector2Array( 35, 0, 32.3358, 13.3939, 24.7487, 24.7487, 13.3939, 32.3358, -1.5299e-06, 35, -13.3939, 32.3358, -24.7487, 24.7487, -32.3358, 13.3939, -35, -3.0598e-06, -32.3358, -13.3939, -24.7487, -24.7487, -13.3939, -32.3358, 4.17371e-07, -35, 13.3939, -32.3358, 24.7487, -24.7487, 32.3358, -13.3939 )
+polygon = PackedVector2Array( 35, 0, 32.3358, 13.3939, 24.7487, 24.7487, 13.3939, 32.3358, -1.5299e-06, 35, -13.3939, 32.3358, -24.7487, 24.7487, -32.3358, 13.3939, -35, -3.0598e-06, -32.3358, -13.3939, -24.7487, -24.7487, -13.3939, -32.3358, 4.17371e-07, -35, 13.3939, -32.3358, 24.7487, -24.7487, 32.3358, -13.3939 )
 script = ExtResource( 4 )
 radius = 35.0
 

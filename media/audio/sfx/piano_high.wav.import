@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/piano_high.wav-bbea07a132410bc2cd96646d6668bfdf.sample"
+type="AudioStreamWAV"
+uid="uid://dh4effjgr6neq"
+path="res://.godot/imported/piano_high.wav-bbea07a132410bc2cd96646d6668bfdf.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/piano_high.wav"
-dest_files=[ "res://.import/piano_high.wav-bbea07a132410bc2cd96646d6668bfdf.sample" ]
+dest_files=["res://.godot/imported/piano_high.wav-bbea07a132410bc2cd96646d6668bfdf.sample"]
 
 [params]
 

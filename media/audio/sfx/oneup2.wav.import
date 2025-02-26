@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/oneup2.wav-c308d6a42a0e153651c27f9d1c48c875.sample"
+type="AudioStreamWAV"
+uid="uid://b757giegq38jv"
+path="res://.godot/imported/oneup2.wav-c308d6a42a0e153651c27f9d1c48c875.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/oneup2.wav"
-dest_files=[ "res://.import/oneup2.wav-c308d6a42a0e153651c27f9d1c48c875.sample" ]
+dest_files=["res://.godot/imported/oneup2.wav-c308d6a42a0e153651c27f9d1c48c875.sample"]
 
 [params]
 

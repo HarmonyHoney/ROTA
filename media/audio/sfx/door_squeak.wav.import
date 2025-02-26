@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/door_squeak.wav-8da03e1c16fa5b0067012fed526c6e07.sample"
+type="AudioStreamWAV"
+uid="uid://b8nerml6tcm8i"
+path="res://.godot/imported/door_squeak.wav-8da03e1c16fa5b0067012fed526c6e07.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/door_squeak.wav"
-dest_files=[ "res://.import/door_squeak.wav-8da03e1c16fa5b0067012fed526c6e07.sample" ]
+dest_files=["res://.godot/imported/door_squeak.wav-8da03e1c16fa5b0067012fed526c6e07.sample"]
 
 [params]
 

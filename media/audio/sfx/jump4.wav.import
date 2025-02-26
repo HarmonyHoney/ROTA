@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/jump4.wav-bde10855a9ca7e5db79d1f0057bceb1b.sample"
+type="AudioStreamWAV"
+uid="uid://cbjp14cpjvmku"
+path="res://.godot/imported/jump4.wav-bde10855a9ca7e5db79d1f0057bceb1b.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/jump4.wav"
-dest_files=[ "res://.import/jump4.wav-bde10855a9ca7e5db79d1f0057bceb1b.sample" ]
+dest_files=["res://.godot/imported/jump4.wav-bde10855a9ca7e5db79d1f0057bceb1b.sample"]
 
 [params]
 

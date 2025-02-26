@@ -1,17 +1,17 @@
 #tool
 extends Control
 
-export var text := "" setget set_text
-export var action := "" setget set_action
-export var is_gamepad := false setget set_gamepad
-export var is_connect := false setget set_connect
-export var is_shrink := false setget set_shrink
+@export var text := "": set = set_text
+@export var action := "": set = set_action
+@export var is_gamepad := false: set = set_gamepad
+@export var is_connect := false: set = set_connect
+@export var is_shrink := false: set = set_shrink
 
-onready var offset := $Offset
-onready var sprite := $Offset/Sprite
-onready var center := $Offset/Center
-onready var label := $Offset/Center/Label
-onready var font : Font = label.get("custom_fonts/font")
+@onready var offset := $Offset
+@onready var sprite := $Offset/Sprite2D
+@onready var center := $Offset/Center
+@onready var label := $Offset/Center/Label
+@onready var font : Font = label.get("theme_override_fonts/font")
 
 var tex_key = preload("res://media/image/box/round_rect200.png")
 var tex_key_2 = preload("res://media/image/UI/key_2.png")
@@ -49,7 +49,7 @@ var rotate = {"DOWN": 180,
 "JOY 14": 270,
 "JOY 15": 90,}
 
-var short = {KEY_CONTROL : "Ctrl",
+var short = {KEY_CTRL : "Ctrl",
 KEY_DELETE: "Del",
 KEY_BRACELEFT: "[",
 KEY_BRACERIGHT: "]",
@@ -83,8 +83,8 @@ func parse_event(event : InputEvent):
 		var sgn = "+" if event.axis_value > 0 else "-"
 		s = "AXIS " + str(event.axis) + sgn
 	elif event is InputEvent:
-		if event is InputEventKey and short.has(event.scancode):
-			s = short[event.scancode]
+		if event is InputEventKey and short.has(event.keycode):
+			s = short[event.keycode]
 		else:
 			s = str(event.as_text().to_upper())
 	
@@ -94,7 +94,7 @@ func set_text(arg := text):
 	text = arg
 	if !label or text == "": return
 	
-	offset.rect_scale = Vector2.ONE
+	offset.scale = Vector2.ONE
 	
 	# sprite
 	if tex.has(text):
@@ -103,9 +103,9 @@ func set_text(arg := text):
 		sprite.texture = tex[text]
 		sprite.rotation_degrees = rotate[text] if rotate.has(text) else 0
 		
-		rect_min_size.x = 50
-		rect_size = rect_min_size
-		offset.rect_position.x = 25
+		custom_minimum_size.x = 50
+		size = custom_minimum_size
+		offset.position.x = 25
 	
 	# text over key
 	else:
@@ -120,12 +120,12 @@ func set_text(arg := text):
 		sprite.texture = tex_key if check else tex_key_2
 		sprite.rotation_degrees = 0
 		
-		rect_min_size.x = 50 if check else 100
-		rect_size = rect_min_size
-		offset.rect_position.x = 25 if check else 50
+		custom_minimum_size.x = 50 if check else 100
+		size = custom_minimum_size
+		offset.position.x = 25 if check else 50
 		
 		if is_shrink and !check:
-			offset.rect_scale = Vector2.ONE * 0.5
+			offset.scale = Vector2.ONE * 0.5
 	
 	set_shrink()
 
@@ -133,7 +133,7 @@ func set_action(arg := action):
 	action = arg
 	
 	if action != "" and InputMap.has_action(action):
-		var l = InputMap.get_action_list(action)
+		var l = InputMap.action_get_events(action)
 		
 		# gamepad or keyboard
 		var e = null
@@ -151,9 +151,9 @@ func set_connect(arg := is_connect):
 	is_connect = arg
 	
 	if is_connect:
-		Shared.connect("gamepad_input", self, "set_gamepad")
+		Shared.connect("gamepad_input", Callable(self, "set_gamepad"))
 	else:
-		Shared.disconnect("gamepad_input", self, "set_gamepad")
+		Shared.disconnect("gamepad_input", Callable(self, "set_gamepad"))
 	
 	self.is_gamepad = Shared.is_gamepad
 

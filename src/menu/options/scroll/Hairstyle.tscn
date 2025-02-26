@@ -4,9 +4,9 @@
 [ext_resource path="res://src/menu/options/scroll/Hairstyle.gd" type="Script" id=3]
 
 [node name="Hairstyle" type="Control" groups=["hair"]]
-margin_right = 560.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 0, 70 )
+offset_right = 560.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2( 0, 70 )
 script = ExtResource( 3 )
 is_loop = true
 
@@ -17,10 +17,10 @@ alignment = 1
 
 [node name="Circle" type="Control" parent="HBoxContainer"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 245.0
-margin_right = 315.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 70, 70 )
+offset_left = 245.0
+offset_right = 315.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2( 70, 70 )
 script = ExtResource( 1 )
 radius = 20.0
 circle_offset = Vector2( 35, 35 )

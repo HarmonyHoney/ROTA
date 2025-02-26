@@ -1,21 +1,21 @@
 extends Node
 
-export var is_refresh := false setget set_refresh
+@export var is_refresh := false: set = set_refresh
 
 var dict = {}
 
-onready var music_player := $Music/Music
-export (Array, AudioStream) var ost = []
+@onready var music_player := $Music/Music
+@export var ost = [] # (Array, AudioStream)
 var last_song := -1
 var music_que = []
 
-export var wait_range := Vector2(10, 90)
+@export var wait_range := Vector2(10, 90)
 var wait_clock := 0.0
 var wait_time := 10.0
 var music_ease := EaseMover.new(1.0, -1)
 
 func _ready():
-	music_player.connect("finished", self, "music_finished")
+	music_player.connect("finished", Callable(self, "music_finished"))
 	set_refresh()
 	
 	randomize()
@@ -26,7 +26,7 @@ func play(arg = "menu_cursor", from := 1.0, to := -1.0, pos := 0.0):
 		arg = dict[arg]
 	
 	if is_instance_valid(arg) and (arg is AudioStreamPlayer or arg is AudioStreamPlayer2D):
-		arg.pitch_scale = from if to < 0 else rand_range(from, to)
+		arg.pitch_scale = from if to < 0 else randf_range(from, to)
 		arg.play(pos)
 
 func _physics_process(delta):
@@ -47,11 +47,11 @@ func _physics_process(delta):
 
 func music_finished():
 	if !Shared.is_arcade:
-		wait_clock = rand_range(wait_range.x, wait_range.y)
+		wait_clock = randf_range(wait_range.x, wait_range.y)
 		print("music_finished, wait_clock: ", wait_clock)
 
 func music_play():
-	if music_que.empty():
+	if music_que.is_empty():
 		music_que = range(ost.size())
 		music_que.erase(last_song)
 		music_que.shuffle()

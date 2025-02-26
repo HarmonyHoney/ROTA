@@ -1,17 +1,17 @@
-tool
+@tool
 extends PolyShape
 
-export var leaves := 8 setget set_leaves
-export var dist := 130.0 setget set_dist
-export var radius := 70.0 setget set_radius
-export var points := 8 setget set_points
-export var draw_offset := Vector2.ZERO setget set_offset
-export var is_draw_debug := false setget set_debug
+@export var leaves := 8: set = set_leaves
+@export var dist := 130.0: set = set_dist
+@export var radius := 70.0: set = set_radius
+@export var points := 8: set = set_points
+@export var draw_offset := Vector2.ZERO: set = set_offset
+@export var is_draw_debug := false: set = set_debug
 var _draw_me := Vector2.ZERO
 var _draw_circle := Vector2.ZERO
 
 func _draw():
-	if !is_poly and gon.size() > 2: draw_colored_polygon(gon, Color.white, PoolVector2Array(), null, null, true)
+	if !is_poly and gon.size() > 2: draw_colored_polygon(gon, Color.WHITE, PackedVector2Array(), null, null, true)
 	if is_draw_debug:
 		var c = Color(0,0,0, 0.5)
 		draw_line(Vector2.ZERO, Vector2(dist * 2, 0), c, 5.0)

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/zap0.wav-e75867dbe80c10b3f08891554acaa74e.sample"
+type="AudioStreamWAV"
+uid="uid://cymwjcdrd0vrp"
+path="res://.godot/imported/zap0.wav-e75867dbe80c10b3f08891554acaa74e.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/zap0.wav"
-dest_files=[ "res://.import/zap0.wav-e75867dbe80c10b3f08891554acaa74e.sample" ]
+dest_files=["res://.godot/imported/zap0.wav-e75867dbe80c10b3f08891554acaa74e.sample"]
 
 [params]
 

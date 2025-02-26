@@ -22,10 +22,10 @@ func act():
 	p.anim.play("jump")
 	
 	if Wipe.is_wipe:
-		yield(Wipe, "complete")
+		await Wipe.complete
 	
-	yield(get_tree().create_timer(1.2), "timeout")
+	await get_tree().create_timer(1.2).timeout
 	Cam.target_node = p
-	yield(get_tree().create_timer(0.2), "timeout")
+	await get_tree().create_timer(0.2).timeout
 	
 	Cutscene.is_playing = false

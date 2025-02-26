@@ -1,18 +1,18 @@
 extends Control
 class_name Scroll
 
-onready var label_desc := get_node_or_null("Label")
-onready var label_value := get_node_or_null("Label2")
+@onready var label_desc := get_node_or_null("Label")
+@onready var label_value := get_node_or_null("Label2")
 
-var cursor := 0 setget set_cursor
-export var is_loop := false
-export var count := 0
-export var list : PoolStringArray = ["OFF", "ON"]
+var cursor := 0: set = set_cursor
+@export var is_loop := false
+@export var count := 0
+@export var list : PackedStringArray = ["OFF", "ON"]
 var is_select := false
-export var is_refill := false
-export var is_ui_scene := false
+@export var is_refill := false
+@export var is_ui_scene := false
 
-export var step := 1
+@export var step := 1
 
 func _ready():
 	set_label()

@@ -2,33 +2,33 @@ extends Node
 class_name MenuBase
 
 var items = []
-export var items_path : NodePath
-onready var items_node = get_node_or_null(items_path)
+@export var items_path : NodePath
+@onready var items_node = get_node_or_null(items_path)
 
-export var cursor_path : NodePath
-onready var cursor_node = get_node_or_null(cursor_path)
-var cursor := 0 setget set_cursor
-export var cursor_margin := Vector2(30, 0)
+@export var cursor_path : NodePath
+@onready var cursor_node = get_node_or_null(cursor_path)
+var cursor := 0: set = set_cursor
+@export var cursor_margin := Vector2(30, 0)
 var cursor_speed := 9.0
 
-export var scroll_path : NodePath
-onready var scroll_node = get_node_or_null(scroll_path)
+@export var scroll_path : NodePath
+@onready var scroll_node = get_node_or_null(scroll_path)
 var scroll_speed := 4.8
 var scroll_y := 0.0
 
-export var fade_path : NodePath
-onready var fade_node = get_node_or_null(fade_path)
-onready var fade_ease := EaseMover.new()
+@export var fade_path : NodePath
+@onready var fade_node = get_node_or_null(fade_path)
+@onready var fade_ease := EaseMover.new()
 
-export var text_accept := "Act"
-export var text_cancel := "Back"
-export var is_ui_keys := false
+@export var text_accept := "Act"
+@export var text_cancel := "Back"
+@export var is_ui_keys := false
 
-export var is_input := false
-export var is_process := false
-export var is_open := false setget set_open
-export var is_accept_close := false
-export var is_back_close := false
+@export var is_input := false
+@export var is_process := false
+@export var is_open := false: set = set_open
+@export var is_accept_close := false
+@export var is_back_close := false
 signal opened
 var is_sub_menu := false
 var sub_ease := EaseMover.new()
@@ -41,22 +41,22 @@ var joy_clock := 0.0
 var joy_wait := 0.3
 var joy_repeat := 0.2
 
-export var is_joy_x := false
-export var is_joy_y := false
-export var is_act := false
-export var sub_stay_open := false
+@export var is_joy_x := false
+@export var is_joy_y := false
+@export var is_act := false
+@export var sub_stay_open := false
 
-export var is_audio_cursor := true
-export var is_audio_accept := true
-export var is_audio_back := true
-export var is_audio_joy := false
+@export var is_audio_cursor := true
+@export var is_audio_accept := true
+@export var is_audio_back := true
+@export var is_audio_joy := false
 
 func _ready():
 	fill_items()
 	reset_cursor()
 	fade_delta()
 	
-	get_tree().connect("screen_resized", self, "resize")
+	get_tree().connect("screen_resized", Callable(self, "resize"))
 
 func _input(event):
 	if is_input:
@@ -98,7 +98,7 @@ func menu_input(event):
 		joy_x(joy.x)
 	
 	if is_open != last_open:
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 func menu_process(delta):
 	fade_delta(delta)
@@ -123,18 +123,18 @@ func menu_process(delta):
 		
 		# move cursor
 		if items_node and cursor_node:
-			cursor_node.rect_global_position = cursor_node.rect_global_position.linear_interpolate(items[cursor].rect_global_position - cursor_margin, cursor_speed * delta)
-			cursor_node.rect_size = cursor_node.rect_size.linear_interpolate(items[cursor].rect_size + (cursor_margin * 2.0), cursor_speed * delta)
+			cursor_node.global_position = cursor_node.global_position.lerp(items[cursor].global_position - cursor_margin, cursor_speed * delta)
+			cursor_node.size = cursor_node.size.lerp(items[cursor].size + (cursor_margin * 2.0), cursor_speed * delta)
 			
 			scroll(scroll_speed * delta)
 
 func resize():
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	scroll()
 
 func scroll(delta := 1.0):
 	if scroll_node:
-		scroll_node.rect_position.y = lerp(scroll_node.rect_position.y, (720 / 2.0) - (cursor_node.rect_position.y + cursor_node.rect_size.y / 2.0), delta)
+		scroll_node.position.y = lerp(scroll_node.position.y, (720 / 2.0) - (cursor_node.position.y + cursor_node.size.y / 2.0), delta)
 
 func fade_delta(arg := 0.0):
 	if fade_node:
@@ -160,8 +160,8 @@ func reset_cursor():
 	self.cursor = 0
 	row()
 	if items_node and cursor_node:
-		cursor_node.rect_global_position = items[0].rect_global_position - cursor_margin
-		cursor_node.rect_size = items[0].rect_size + (cursor_margin * 2.0)
+		cursor_node.global_position = items[0].global_position - cursor_margin
+		cursor_node.size = items[0].size + (cursor_margin * 2.0)
 		
 		scroll()
 
@@ -225,8 +225,8 @@ func sub_menu(arg):
 	is_open = sub_stay_open
 	
 	sub_node.is_open = true
-	if !sub_node.is_connected("opened", self, "sub_close"):
-		sub_node.connect("opened", self, "sub_close")
+	if !sub_node.is_connected("opened", Callable(self, "sub_close")):
+		sub_node.connect("opened", Callable(self, "sub_close"))
 
 func sub_close(arg := false):
 	if arg: return
@@ -235,8 +235,8 @@ func sub_close(arg := false):
 	is_open = true
 	UI.menu_keys(text_accept, text_cancel)
 	
-	if sub_node and sub_node.is_connected("opened", self, "sub_close"):
-		sub_node.disconnect("opened", self, "sub_close")
+	if sub_node and sub_node.is_connected("opened", Callable(self, "sub_close")):
+		sub_node.disconnect("opened", Callable(self, "sub_close"))
 	sub_node = null
 	
 	reset_joy()

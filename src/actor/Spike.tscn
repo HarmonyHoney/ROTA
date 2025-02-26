@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://media/image/spike/spike.png" type="Texture" id=2]
+[ext_resource path="res://media/image/spike/spike.png" type="Texture2D" id=2]
 [ext_resource path="res://src/actor/Spike.gd" type="Script" id=4]
 [ext_resource path="res://src/shader/offset_y.gdshader" type="Shader" id=5]
 
@@ -14,8 +14,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0.2, -0.3, 0, 0.3, 0, 0.345, -0.3, 0, 0.3, 0, 0.2, -0.3, 0, 0.3, 0 ),
-"times": PoolRealArray( 0, 0.5, 1 )
+"points": PackedFloat32Array( 0.2, -0.3, 0, 0.3, 0, 0.345, -0.3, 0, 0.3, 0, 0.2, -0.3, 0, 0.3, 0 ),
+"times": PackedFloat32Array( 0, 0.5, 1 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("Sprites/Right:material:shader_param/offset_y")
@@ -24,8 +24,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.345, -0.3, 0, 0.3, 0, 0.2, -0.3, 0, 0.3, 0, 0.345, -0.3, 0, 0.3, 0 ),
-"times": PoolRealArray( 0.00999999, 0.5, 1.01 )
+"points": PackedFloat32Array( 0.345, -0.3, 0, 0.3, 0, 0.2, -0.3, 0, 0.3, 0, 0.345, -0.3, 0, 0.3, 0 ),
+"times": PackedFloat32Array( 0.00999999, 0.5, 1.01 )
 }
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -50,12 +50,12 @@ anims/Idle = SubResource( 1 )
 position = Vector2( -50, -50 )
 scale = Vector2( 0.25, 0.25 )
 
-[node name="Left" type="Sprite" parent="Sprites"]
+[node name="Left" type="Sprite2D" parent="Sprites"]
 material = SubResource( 2 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Right" type="Sprite" parent="Sprites"]
+[node name="Right" type="Sprite2D" parent="Sprites"]
 material = SubResource( 3 )
 position = Vector2( 200, 0 )
 texture = ExtResource( 2 )

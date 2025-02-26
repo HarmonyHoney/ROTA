@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/actor/door/DoorBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://media/font/profile/DoorLabel.tres" type="DynamicFont" id=2]
+[ext_resource path="res://media/font/profile/DoorLabel.tres" type="FontFile" id=2]
 [ext_resource path="res://src/detail/Visible.gd" type="Script" id=3]
 [ext_resource path="res://src/actor/door/DoorBig.gd" type="Script" id=4]
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=5]
 [ext_resource path="res://src/shader/door_big.gdshader" type="Shader" id=7]
-[ext_resource path="res://media/image/box/round_rect100.png" type="Texture" id=8]
+[ext_resource path="res://media/image/box/round_rect100.png" type="Texture2D" id=8]
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
@@ -34,7 +34,7 @@ audio_range = Vector2( 0.7, 0.9 )
 gem_count = 0
 is_fade = false
 
-[node name="Visible" type="VisibilityNotifier2D" parent="." index="0"]
+[node name="Visible" type="VisibleOnScreenNotifier2D" parent="." index="0"]
 visible = false
 modulate = Color( 1, 0, 0, 1 )
 rect = Rect2( -100, -100, 200, 200 )
@@ -51,25 +51,25 @@ image_pos = Vector2( 0, -150 )
 material = SubResource( 2 )
 position = Vector2( 1, 0 )
 texture = ExtResource( 8 )
-polygon = PoolVector2Array( 100, 100, -100, 100, -100, -50, -98.7464, -61.126, -95.0484, -71.6942, -89.0916, -81.1745, -81.1745, -89.0916, -71.6942, -95.0484, -61.126, -98.7464, -50, -100, 50, -100, 61.1261, -98.7464, 71.6942, -95.0484, 81.1745, -89.0916, 89.0916, -81.1745, 95.0484, -71.6942, 98.7464, -61.126, 100, -50 )
+polygon = PackedVector2Array( 100, 100, -100, 100, -100, -50, -98.7464, -61.126, -95.0484, -71.6942, -89.0916, -81.1745, -81.1745, -89.0916, -71.6942, -95.0484, -61.126, -98.7464, -50, -100, 50, -100, 61.1261, -98.7464, 71.6942, -95.0484, 81.1745, -89.0916, 89.0916, -81.1745, 95.0484, -71.6942, 98.7464, -61.126, 100, -50 )
 script = ExtResource( 5 )
 size = Vector2( 100, 100 )
 radius = Plane( 0, 0, 50, 50 )
 
 [node name="Control" type="Control" parent="Sprites" index="1"]
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 100.0
-margin_bottom = 100.0
-rect_clip_content = true
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+clip_contents = true
 
 [node name="Label" type="Label" parent="Sprites/Control" index="0"]
 visible = false
-margin_left = 25.0
-margin_top = 15.0
-margin_right = 175.0
-margin_bottom = 165.0
-custom_fonts/font = ExtResource( 2 )
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 175.0
+offset_bottom = 165.0
+theme_override_fonts/font = ExtResource( 2 )
 text = "0"
 align = 1
 valign = 1

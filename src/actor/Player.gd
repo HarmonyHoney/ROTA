@@ -1,16 +1,16 @@
-tool
-extends KinematicBody2D
+@tool
+extends CharacterBody2D
 class_name Player
 
-onready var areas : Node2D = $Areas
-onready var hit_area : Area2D = $Areas/HitArea
-onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
+@onready var areas : Node2D = $Areas
+@onready var hit_area : Area2D = $Areas/HitArea
+@onready var collider_size : Vector2 = $CollisionShape2D.shape.extents
 
-onready var anim : AnimationPlayer = $AnimationPlayer
-onready var sprites := $Sprites
-onready var spr_root := $Sprites/Root
-onready var spr_body := $Sprites/Root/Body
-onready var spr_eyes := $Sprites/Root/Body/Eyes
+@onready var anim : AnimationPlayer = $AnimationPlayer
+@onready var sprites := $Sprites
+@onready var spr_root := $Sprites/Root
+@onready var spr_body := $Sprites/Root/Body
+@onready var spr_eyes := $Sprites/Root/Body/Eyes
 
 var spr_easy := EaseMover.new()
 signal show_up
@@ -19,21 +19,21 @@ var difference := Vector2.ZERO
 var last_pos := Vector2.ZERO
 var target_pos := Vector2.ZERO
 
-onready var spr_hands_parent := $Sprites/Hands
-onready var spr_hand_l := $Sprites/Hands/Left
-onready var spr_hand_r := $Sprites/Hands/Right
-onready var spr_hands := [spr_hand_l, spr_hand_r]
+@onready var spr_hands_parent := $Sprites/Hands
+@onready var spr_hand_l := $Sprites/Hands/Left
+@onready var spr_hand_r := $Sprites/Hands/Right
+@onready var spr_hands := [spr_hand_l, spr_hand_r]
 
-onready var audio_walk := $Audio/Walk
-onready var audio_land := $Audio/Land
+@onready var audio_walk := $Audio/Walk
+@onready var audio_land := $Audio/Land
 
-export var dir := 0 setget set_dir
-onready var start_dir := dir
-onready var start_pos = global_position
+@export var dir := 0: set = set_dir
+@onready var start_dir := dir
+@onready var start_pos = global_position
 signal turn
 signal turn_angle
 signal turn_cam
-export var is_input := false
+@export var is_input := false
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
 var joy_q := Vector2.ZERO
@@ -51,13 +51,13 @@ var is_move := true
 var is_walk := true
 var is_floor := false
 
-var velocity := Vector2.ZERO
-var dir_x := 1 setget set_dir_x
+var the_velocity := Vector2.ZERO
+var dir_x := 1: set = set_dir_x
 signal scale_x
 signal scale_y
 var idle_dir := "idle"
-export var idle_anim := "idle"
-export var is_idle_flip := false
+@export var idle_anim := "idle"
+@export var is_idle_flip := false
 
 var walk_speed := 350.0
 var floor_accel := 12.0
@@ -65,8 +65,8 @@ var air_accel := 7.0
 
 var is_jump := false
 var has_jumped := true
-var jump_height := 240.0 setget set_jump_height
-var jump_time := 0.6 setget set_jump_time
+var jump_height := 240.0: set = set_jump_height
+var jump_time := 0.6: set = set_jump_time
 var jump_minimum := 0.12
 var jump_speed := 0.0
 var jump_gravity := 0.0
@@ -110,38 +110,38 @@ var unpause_tick := 0
 var release_clock := 0.0
 var release_time := 0.2
 
-onready var colors := {"hair": [$Sprites/Root/Body/HairBack, $Sprites/Root/Body/HairFront,], "skin": [$Sprites/Root/Body/Head, $Sprites/Hands],
+@onready var colors := {"hair": [$Sprites/Root/Body/HairBack, $Sprites/Root/Body/HairFront,], "skin": [$Sprites/Root/Body/Head, $Sprites/Hands],
 "fit": [$Sprites/Root/Body/Fit], "eye": [$Sprites/Root/Body/Eyes]}
-export(Array, Color) var palette := []
-export var dye := {"hair": 0, "skin": 0, "fit": 0, "eye": 0} setget set_dye
+@export var palette := [] # (Array, Color)
+@export var dye := {"hair": 0, "skin": 0, "fit": 0, "eye": 0}: set = set_dye
 
-onready var hair_back := $Sprites/Root/Body/HairBack
-onready var hair_front := $Sprites/Root/Body/HairFront
-export (Array, String, FILE) var hair_backs := []
-export (Array, String, FILE) var hair_fronts := []
+@onready var hair_back := $Sprites/Root/Body/HairBack
+@onready var hair_front := $Sprites/Root/Body/HairFront
+@export var hair_backs := [] # (Array, String, FILE)
+@export var hair_fronts := [] # (Array, String, FILE)
 
-export var hairstyle_back := 0 setget set_hair_back
-export var hairstyle_front := 0 setget set_hair_front
+@export var hairstyle_back := 0: set = set_hair_back
+@export var hairstyle_front := 0: set = set_hair_front
 
-onready var hat_node := $Sprites/Root/Body/Hat
-export (Array, String, FILE) var hats := []
-export var hat := 0 setget set_hat
+@onready var hat_node := $Sprites/Root/Body/Hat
+@export var hats := [] # (Array, String, FILE)
+@export var hat := 0: set = set_hat
 
 var blink_ease := EaseMover.new(0.2)
 var blink_clock := 0.0
 var blink_time := 10.0
 var blink_range := Vector2(1, 20)
 
-export var is_npc := false
-export (Array, String, MULTILINE) var lines := ["Hello (=", "Lovely weather!", "I do adore the flowers"]
-export var greeting := -1
-export var greeting_wait := Vector2(30, 45)
+@export var is_npc := false
+@export var lines := ["Hello (=", "Lovely weather!", "I do adore the flowers"] # (Array, String, MULTILINE)
+@export var greeting := -1
+@export var greeting_wait := Vector2(30, 45)
 var greeting_clock := 0.0
-export (String, MULTILINE) var queue_write := ""
-export var chat_offset := Vector2(0, -110) setget set_chat_offset
-onready var arrow := get_node_or_null("Arrow")
-export var ready_z_index := 50
-export var ready_dir_x := 0
+@export var queue_write := "" # (String, MULTILINE)
+@export var chat_offset := Vector2(0, -110): set = set_chat_offset
+@onready var arrow := get_node_or_null("Arrow")
+@export var ready_z_index := 50
+@export var ready_dir_x := 0
 
 var line := -1
 var queue := []
@@ -150,14 +150,14 @@ var snowball_scene : PackedScene = preload("res://src/actor/Snowball.tscn")
 var snowballs = []
 
 func _enter_tree():
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	if get_parent() == Shared:
 		Shared.player = self
-	get_tree().connect("physics_frame", self, "physics_frame")
-	MenuPause.connect("opened", self, "pause")
-	Shared.connect("scene_changed", self, "scene")
-	Wipe.connect("start", self, "wipe_start")
-	Cutscene.connect("playing", self, "cutscene_playing")
+	get_tree().connect("physics_frame", Callable(self, "physics_frame"))
+	MenuPause.connect("opened", Callable(self, "pause"))
+	Shared.connect("scene_changed", Callable(self, "scene"))
+	Wipe.connect("start", Callable(self, "wipe_start"))
+	Cutscene.connect("playing", Callable(self, "cutscene_playing"))
 
 func _ready():
 	set_hair_back()
@@ -165,12 +165,12 @@ func _ready():
 	set_dye()
 	set_hat()
 	set_chat_offset()
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	
 	solve_jump()
 	if arrow:
-		connect("turn", arrow, "set_dir")
-		arrow.connect("open", self, "arrow_open")
+		connect("turn", Callable(arrow, "set_dir"))
+		arrow.connect("open", Callable(self, "arrow_open"))
 	
 	# create idle animiations facing left
 	var l = anim.get_animation("idle").duplicate()
@@ -228,7 +228,7 @@ func scene():
 	
 	#print(name, " pos: ", global_position, " dir: ", dir)
 	
-	velocity = Vector2.ZERO
+	the_velocity = Vector2.ZERO
 	joy_last = Vector2.ZERO
 	joy = Vector2.ZERO
 	
@@ -252,13 +252,13 @@ func scene():
 	if test_move(transform, rot(v)):
 		move(v)
 		anim.play(idle_dir, 0.0)
-		anim.seek(rand_range(0, anim.current_animation_length), true)
+		anim.seek(randf_range(0, anim.current_animation_length), true)
 	else:
 		anim.play("jump")
 	
 
 func _physics_process(delta):
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	
 	if is_dead or (spr_easy.is_less or !spr_easy.show):
 		return
@@ -292,7 +292,7 @@ func _physics_process(delta):
 	# pickup goal
 	if is_goal and is_instance_valid(goal):
 		if goal_step == 0:
-			move(goal_start.linear_interpolate(goal_grab, goal_easy.smooth()) - global_position, 0)
+			move(goal_start.lerp(goal_grab, goal_easy.smooth()) - global_position, 0)
 			
 		# next step
 		if goal_easy.is_complete:
@@ -332,7 +332,7 @@ func _physics_process(delta):
 				var smooth = push_ease.count(delta)
 				
 				var hold_pos = box.global_position + rot(Vector2(88 * -dir_x, 50 - collider_size.y))
-				var move_to = push_from.linear_interpolate(hold_pos, smooth)
+				var move_to = push_from.lerp(hold_pos, smooth)
 				var diff = move_to - global_position
 				
 				move(diff, 0)
@@ -396,7 +396,7 @@ func _physics_process(delta):
 			if is_walk:
 				var target = joy.x * walk_speed 
 				var weight = floor_accel if is_floor else air_accel
-				velocity.x = lerp(velocity.x, target, weight * delta)
+				the_velocity.x = lerp(the_velocity.x, target, weight * delta)
 			
 			# on the floor
 			if is_floor:
@@ -418,7 +418,7 @@ func _physics_process(delta):
 					
 					is_jump = true
 					has_jumped = true
-					velocity.y = jump_speed
+					the_velocity.y = jump_speed
 					jump_clock = 0.0
 					
 					
@@ -436,7 +436,7 @@ func _physics_process(delta):
 						is_hold = true
 						is_release = false
 						is_move = false
-						velocity = Vector2.ZERO
+						the_velocity = Vector2.ZERO
 						
 						add_collision_exception_with(box)
 						box.add_collision_exception_with(self)
@@ -469,7 +469,7 @@ func _physics_process(delta):
 					jump_clock += delta
 					if btn_jump:
 						# keep jump gravity if bonk head on ceiling
-						if velocity.y >= -1.0 and jump_clock > (jump_time / 2.0):
+						if the_velocity.y >= -1.0 and jump_clock > (jump_time / 2.0):
 							is_jump = false
 							#print("jump start: ", jump_start, " / jump end: ", position.y + velocity.y, " / distance: ", position.y - jump_start)
 					# short jump
@@ -520,11 +520,11 @@ func physics_frame():
 	difference = last_pos - target_pos
 
 func _process(delta):
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	
 	if is_dead:
 		sprites.position += rot(velocity) * delta
-		sprites.rotate(deg2rad(240) * -dir_x * delta)
+		sprites.rotate(deg_to_rad(240) * -dir_x * delta)
 		velocity.y += fall_gravity * delta
 		
 		if dead_clock < dead_time:
@@ -538,7 +538,7 @@ func _process(delta):
 	if spr_easy.is_less or !spr_easy.show:
 		var sec = spr_easy.count(delta, spr_easy.show and !Wipe.is_intro)
 		var dp = to_local(door_exit.global_position) if is_instance_valid(door_exit) else rot(Vector2(0, -25))
-		sprites.position = dp.linear_interpolate(Vector2.ZERO, sec)
+		sprites.position = dp.lerp(Vector2.ZERO, sec)
 		for i in [spr_hands_parent, spr_root]:
 			i.rotation = lerp(TAU * 0.15 * -dir_x, 0.0, sec)
 			i.scale = Vector2.ONE * lerp(0.0, 1.0, sec)
@@ -549,7 +549,7 @@ func _process(delta):
 			emit_signal("show_up")
 	
 	# interpolate
-	sprites.position = difference.linear_interpolate(Vector2.ZERO, Engine.get_physics_interpolation_fraction()) if Shared.is_interpolate else Vector2.ZERO
+	sprites.position = difference.lerp(Vector2.ZERO, Engine.get_physics_interpolation_fraction()) if Shared.is_interpolate else Vector2.ZERO
 	
 	if is_goal and is_instance_valid(goal):
 		var s = goal_easy.count(delta)
@@ -563,10 +563,10 @@ func _process(delta):
 		
 		match goal_step:
 			0:
-				spr_hand_l.global_position = hand_positions[0].linear_interpolate(p1, s)
-				spr_hand_r.global_position = hand_positions[1].linear_interpolate(p2, s)
+				spr_hand_l.global_position = hand_positions[0].lerp(p1, s)
+				spr_hand_r.global_position = hand_positions[1].lerp(p2, s)
 			1:
-				goal.global_position = goal_grab.linear_interpolate(global_position + rot(Vector2(0, -100)), s)
+				goal.global_position = goal_grab.lerp(global_position + rot(Vector2(0, -100)), s)
 		
 		return
 	
@@ -576,7 +576,7 @@ func _process(delta):
 		if push_ease.is_less:
 			# wobble body
 			var s = abs(0.5 - push_ease.smooth()) * 2.0
-			spr_root.rotation = lerp_angle(deg2rad(12 * -push_dir), 0, s)
+			spr_root.rotation = lerp_angle(deg_to_rad(12 * -push_dir), 0, s)
 		
 		# body
 		var s = 6.0 * delta
@@ -595,7 +595,7 @@ func _process(delta):
 		for i in 2:
 			var offset = Vector2(0, 20  * (-1 if sign(dir_x + 1) == i else 1))
 			var goto = box_edge + offset.rotated(box_angle)
-			spr_hands[i].global_position = spr_hands[i].global_position.linear_interpolate(goto, smooth)
+			spr_hands[i].global_position = spr_hands[i].global_position.lerp(goto, smooth)
 		
 	else:
 		if turn_ease.is_less:
@@ -605,7 +605,7 @@ func _process(delta):
 			emit_signal("turn_angle", r)
 	
 	# squash squish and stretch
-	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, squish_ease.count(delta))
+	sprites.scale = squish_from.lerp(Vector2.ONE, squish_ease.count(delta))
 	
 	# blink anim
 	if blink_clock < blink_time:
@@ -618,18 +618,18 @@ func _process(delta):
 		elif be == 0.0:
 			blink_ease.show = true
 			blink_clock = 0.0
-			blink_time = rand_range(blink_range.x, blink_range.y)
+			blink_time = randf_range(blink_range.x, blink_range.y)
 
 ### Set Get
 
 func set_dir(arg := dir):
 	dir = posmod(arg, 4)
-	turn_to = deg2rad(dir * 90)
+	turn_to = deg_to_rad(dir * 90)
 	
 	turn_ease.clock = 0
 	turn_from = sprites.rotation if sprites else 0
 	
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		$Sprites.rotation = turn_to
 	
 	if areas:
@@ -682,12 +682,12 @@ func hairdo(node, array, style):
 			i.queue_free()
 		
 		if style > 0:
-			var h = load(array[style]).instance()
+			var h = load(array[style]).instantiate()
 			node.add_child(h)
 			for i in h.get_children():
 				for c in ["scale_x", "turn_angle"]:
-					if i.has_method(c) and !is_connected(c, i, c):
-						connect(c, i, c)
+					if i.has_method(c) and !is_connected(c, Callable(i, c)):
+						connect(c, Callable(i, c))
 						match c:
 							"scale_x": i.scale_x(dir_x)
 							"turn_angle": i.turn_angle(sprites.rotation)
@@ -864,7 +864,7 @@ func throw_snowball():
 			break
 	
 	if !is_instance_valid(s):
-		s = snowball_scene.instance()
+		s = snowball_scene.instantiate()
 		var p = get_parent()
 		p.add_child(s)
 		s.owner = p
@@ -922,5 +922,4 @@ func arrow_open():
 	
 	line = posmod(int(queue.pop_front()), lines.size())
 	Shared.chat.open(lines[line], arrow, Transform2D(dir * PI * 0.5, global_position + rot(chat_offset)))
-	greeting_clock = rand_range(greeting_wait.x, greeting_wait.y)
-
+	greeting_clock = randf_range(greeting_wait.x, greeting_wait.y)

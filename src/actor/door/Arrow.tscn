@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/actor/door/Arrow.gd" type="Script" id=1]
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=2]
-[ext_resource path="res://media/image/UI/key_up_square.png" type="Texture" id=3]
+[ext_resource path="res://media/image/UI/key_up_square.png" type="Texture2D" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
@@ -25,7 +25,7 @@ position = Vector2( 0, -95 )
 scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 3 )
 texture_offset = Vector2( 100, 100 )
-polygon = PoolVector2Array( 100, 40, 91.9615, 70, 70, 91.9615, 40, 100, -40, 100, -70, 91.9615, -91.9615, 70, -100, 40, -100, -40, -91.9615, -70, -70, -91.9615, -40, -100, 40, -100, 70, -91.9615, 91.9615, -70, 100, -40 )
+polygon = PackedVector2Array( 100, 40, 91.9615, 70, 70, 91.9615, 40, 100, -40, 100, -70, 91.9615, -91.9615, 70, -100, 40, -100, -40, -91.9615, -70, -70, -91.9615, -40, -100, 40, -100, 70, -91.9615, 91.9615, -70, 100, -40 )
 script = ExtResource( 2 )
 size = Vector2( 100, 100 )
 radius = Plane( 60, -1, -1, -1 )

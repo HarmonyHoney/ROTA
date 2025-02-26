@@ -36,7 +36,7 @@
 [ext_resource path="res://media/audio/sfx/oneup1.wav" type="AudioStream" id=34]
 
 [node name="Audio" type="Node"]
-pause_mode = 2
+process_mode = 3
 script = ExtResource( 1 )
 ost = [ ExtResource( 21 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 23 ) ]
 
@@ -83,7 +83,7 @@ stream = ExtResource( 12 )
 bus = "SFX"
 
 [node name="Gem" type="Node" parent="."]
-pause_mode = 1
+process_mode = 1
 
 [node name="Collect" type="AudioStreamPlayer" parent="Gem"]
 stream = ExtResource( 5 )
@@ -129,12 +129,12 @@ bus = "SFX"
 [node name="Cam" type="Node" parent="."]
 
 [node name="Zoom" type="AudioStreamPlayer" parent="Cam"]
-pause_mode = 2
+process_mode = 3
 stream = ExtResource( 11 )
 bus = "SFX"
 
 [node name="Player" type="Node" parent="."]
-pause_mode = 1
+process_mode = 1
 
 [node name="Grab" type="AudioStreamPlayer" parent="Player"]
 stream = ExtResource( 19 )

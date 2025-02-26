@@ -1,26 +1,26 @@
 extends Node
 
-var is_playing := false setget set_is_playing
+var is_playing := false: set = set_is_playing
 signal playing
 
-onready var goal_show := $GoalShow
+@onready var goal_show := $GoalShow
 var is_show_goal := false
 
-onready var gem_collect := $GemCollect
+@onready var gem_collect := $GemCollect
 var is_collect := false
 
-onready var clock := $Clock
+@onready var clock := $Clock
 var is_clock := false
 var is_faster := false
 
-onready var start_game := $StartGame
+@onready var start_game := $StartGame
 var is_start_game := false
 
-onready var door_unlock := $DoorUnlock
+@onready var door_unlock := $DoorUnlock
 var is_door_unlock := false
 
 func _enter_tree():
-	Shared.connect("scene_changed", self, "scene_changed")
+	Shared.connect("scene_changed", Callable(self, "scene_changed"))
 
 func scene_changed():
 	if is_playing: return
@@ -39,7 +39,7 @@ func scene_changed():
 	
 	elif is_faster:
 		is_faster = false
-		if Wipe.is_wipe: yield(Wipe, "complete")
+		if Wipe.is_wipe: await Wipe.complete
 		Audio.play("clock_collect", 1.33)
 		
 	elif is_start_game:

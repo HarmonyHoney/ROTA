@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform sampler2D tread_mask;
-uniform vec4 tread_color : hint_color;
+uniform vec4 tread_color : source_color;
 uniform float time_scale : hint_range(0.0, 2.0) = 1.0;
 
 void fragment(){

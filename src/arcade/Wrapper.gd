@@ -1,7 +1,7 @@
 extends Node2D
 
-export var image_path : NodePath = ""
-onready var image_node := get_node_or_null(image_path)
+@export var image_path : NodePath = ""
+@onready var image_node := get_node_or_null(image_path)
 var spr_list := []
 var room_size := Vector2(600, 600)
 var vec = []

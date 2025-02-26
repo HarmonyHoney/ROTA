@@ -1,2 +1,2 @@
-tool
+@tool
 extends PaletteSwap

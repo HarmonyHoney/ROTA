@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/fallout3.wav-717cc99b265ececece4823bcbabc76c9.sample"
+type="AudioStreamWAV"
+uid="uid://803y8y3q51km"
+path="res://.godot/imported/fallout3.wav-717cc99b265ececece4823bcbabc76c9.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/fallout3.wav"
-dest_files=[ "res://.import/fallout3.wav-717cc99b265ececece4823bcbabc76c9.sample" ]
+dest_files=["res://.godot/imported/fallout3.wav-717cc99b265ececece4823bcbabc76c9.sample"]
 
 [params]
 

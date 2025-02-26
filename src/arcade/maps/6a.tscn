@@ -1,16 +1,16 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=1]
-[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
+[ext_resource path="res://media/image/box/box-100.png" type="Texture2D" id=2]
 [ext_resource path="res://src/stage/SolidTileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/arcade/Candy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/arcade/Player.tscn" type="PackedScene" id=5]
 
 [sub_resource type="OccluderPolygon2D" id=5]
-polygon = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
+polygon = PackedVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
+points = PackedVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 
 [sub_resource type="TileSet" id=2]
 0/name = "rect-100.png 0"
@@ -40,7 +40,7 @@ points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 
 [node name="Back" type="Polygon2D" parent="." groups=["back"]]
 color = Color( 1, 0, 0, 0.407843 )
-polygon = PoolVector2Array( 600, 600, -600, 600, -600, -600, 600, -600 )
+polygon = PackedVector2Array( 600, 600, -600, 600, -600, -600, 600, -600 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -49,7 +49,7 @@ size = Vector2( 600, 600 )
 
 [node name="SolidTileMap" parent="." instance=ExtResource( 3 )]
 tile_set = SubResource( 2 )
-tile_data = PoolIntArray( -196614, 0, 0, -196613, 0, 0, -196612, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -65537, 0, 0, -131072, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0 )
+tile_data = PackedInt32Array( -196614, 0, 0, -196613, 0, 0, -196612, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -65537, 0, 0, -131072, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0 )
 detail = 6
 
 [node name="Player" parent="." instance=ExtResource( 5 )]

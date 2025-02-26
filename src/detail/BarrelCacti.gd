@@ -1,9 +1,9 @@
-tool
+@tool
 extends Node2D
 
-onready var petals := $FlowerPetals
+@onready var petals := $FlowerPetals
 
-export var palette := 0 setget set_palette
+@export var palette := 0: set = set_palette
 
 func _ready():
 	set_palette()

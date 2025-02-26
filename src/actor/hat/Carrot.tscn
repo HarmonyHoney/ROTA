@@ -9,7 +9,7 @@ _data = [ Vector2( 0, 1 ), 0.0, -0.5, 0, 1, Vector2( 1, 0.5 ), -0.5, 0.0, 1, 0 ]
 
 [node name="Line2D" type="Line2D" parent="."]
 position = Vector2( 0, 13 )
-points = PoolVector2Array( 5, 0, 25, 0 )
+points = PackedVector2Array( 5, 0, 25, 0 )
 width_curve = SubResource( 1 )
 default_color = Color( 1, 0.686275, 0, 1 )
 begin_cap_mode = 2

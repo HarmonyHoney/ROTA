@@ -11,33 +11,33 @@ __meta__ = {
 }
 
 [node name="panel" type="MarginContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
+offset_right = 1024.0
+offset_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="panel"]
-margin_top = 293.0
-margin_right = 1024.0
-margin_bottom = 307.0
+offset_top = 293.0
+offset_right = 1024.0
+offset_bottom = 307.0
 
 [node name="container" type="VBoxContainer" parent="panel"]
-margin_right = 1024.0
-margin_bottom = 600.0
+offset_right = 1024.0
+offset_bottom = 600.0
 
 [node name="SDK instructions" type="RichTextLabel" parent="panel/container"]
-margin_right = 1024.0
-margin_bottom = 135.0
-rect_clip_content = false
+offset_right = 1024.0
+offset_bottom = 135.0
+clip_contents = false
 bbcode_enabled = true
-bbcode_text = "[color=red]This plugin requires the Steam SDK, you must already be a Steam partner to obtain the SDK (Valve's rules, not mine sorry).[/color]
+text = "[color=red]This plugin requires the Steam SDK, you must already be a Steam partner to obtain the SDK (Valve's rules, not mine sorry).[/color]
 
 [b]Setup:[/b]
 1. Enter your Steam App ID [color=gray](the number next to your Steam title on the Steamworks page or the number in the store page url)[/color].
 2. Download the Steam SDK at [url=open_sdk_page]https://partner.steamgames.com/downloads/steamworks_sdk.zip[/url].
 3. Unzip the Steam SDK into any directory on your computer [color=gray](you will not need the SDK once setup is complete)[/color].
 4. Enter the directory path where you unzipped the Steam SDK [color=gray](e.g. \"C:\\Users\\gaben\\Downloads\\sdk\")[/color].
-5. Click \"Import from SDK Directory\".
+5. Click \"Import from SDK DirAccess\".
 "
 text = "This plugin requires the Steam SDK, you must already be a Steam partner to obtain the SDK (Valve's rules, not mine sorry).
 
@@ -46,126 +46,126 @@ Setup:
 2. Download the Steam SDK at https://partner.steamgames.com/downloads/steamworks_sdk.zip.
 3. Unzip the Steam SDK into any directory on your computer (you will not need the SDK once setup is complete).
 4. Enter the directory path where you unzipped the Steam SDK (e.g. \"C:\\Users\\gaben\\Downloads\\sdk\").
-5. Click \"Import from SDK Directory\".
+5. Click \"Import from SDK DirAccess\".
 "
 fit_content_height = true
 scroll_active = false
 
 [node name="disable" type="HBoxContainer" parent="panel/container"]
-margin_top = 139.0
-margin_right = 1024.0
-margin_bottom = 163.0
+offset_top = 139.0
+offset_right = 1024.0
+offset_bottom = 163.0
 size_flags_horizontal = 3
 
 [node name="title" type="Label" parent="panel/container/disable"]
-margin_right = 510.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 24 )
+offset_right = 510.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
 text = "Disable Steam Integration (all Steam calls will return or yield null)"
 valign = 1
 
 [node name="input" type="CheckBox" parent="panel/container/disable"]
-margin_left = 514.0
-margin_right = 1024.0
-margin_bottom = 24.0
+offset_left = 514.0
+offset_right = 1024.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="app_id" type="HBoxContainer" parent="panel/container"]
-margin_top = 167.0
-margin_right = 1024.0
-margin_bottom = 191.0
+offset_top = 167.0
+offset_right = 1024.0
+offset_bottom = 191.0
 size_flags_horizontal = 3
 
 [node name="title" type="Label" parent="panel/container/app_id"]
-margin_right = 510.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 24 )
+offset_right = 510.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
 text = "Steam App ID (must be a valid id in your steam library)"
 valign = 1
 
 [node name="input" type="LineEdit" parent="panel/container/app_id"]
-margin_left = 514.0
-margin_right = 1024.0
-margin_bottom = 24.0
+offset_left = 514.0
+offset_right = 1024.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 text = "1435470"
 placeholder_text = "1435470"
 caret_blink = true
-caret_blink_speed = 0.5
+caret_blink_interval = 0.5
 
 [node name="sdk_dir" type="HBoxContainer" parent="panel/container"]
-margin_top = 195.0
-margin_right = 1024.0
-margin_bottom = 219.0
+offset_top = 195.0
+offset_right = 1024.0
+offset_bottom = 219.0
 size_flags_horizontal = 3
 
 [node name="title" type="Label" parent="panel/container/sdk_dir"]
-margin_right = 510.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 24 )
+offset_right = 510.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
-text = "SDK Directory"
+text = "SDK DirAccess"
 valign = 1
 
 [node name="input" type="LineEdit" parent="panel/container/sdk_dir"]
-margin_left = 514.0
-margin_right = 1024.0
-margin_bottom = 24.0
+offset_left = 514.0
+offset_right = 1024.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 text = "/home/sam/work/godot-steam-api/lib/steam-sdk"
 placeholder_text = "C:\\Users\\gaben\\Downloads\\sdk"
 caret_blink = true
-caret_blink_speed = 0.5
+caret_blink_interval = 0.5
 
 [node name="HSeparator" type="HSeparator" parent="panel/container"]
-margin_top = 223.0
-margin_right = 1024.0
-margin_bottom = 227.0
+offset_top = 223.0
+offset_right = 1024.0
+offset_bottom = 227.0
 
 [node name="sdk_status" type="HBoxContainer" parent="panel/container"]
-margin_top = 231.0
-margin_right = 1024.0
-margin_bottom = 255.0
+offset_top = 231.0
+offset_right = 1024.0
+offset_bottom = 255.0
 
 [node name="FindSDK" type="Button" parent="panel/container/sdk_status"]
-margin_right = 482.0
-margin_bottom = 24.0
+offset_right = 482.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
-text = "Import from SDK Directory"
+text = "Import from SDK DirAccess"
 
 [node name="VSeparator" type="VSeparator" parent="panel/container/sdk_status"]
-margin_left = 486.0
-margin_right = 490.0
-margin_bottom = 24.0
+offset_left = 486.0
+offset_right = 490.0
+offset_bottom = 24.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="title" type="Label" parent="panel/container/sdk_status"]
-margin_left = 494.0
-margin_right = 537.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 24 )
+offset_left = 494.0
+offset_right = 537.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 0, 24 )
 text = "Status:"
 valign = 1
 
 [node name="status" type="RichTextLabel" parent="panel/container/sdk_status"]
-margin_left = 541.0
-margin_right = 1024.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 24 )
+offset_left = 541.0
+offset_right = 1024.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 0, 24 )
 size_flags_horizontal = 3
 bbcode_enabled = true
-bbcode_text = "[center][color=red]No files imported[/color][/center]"
+text = "[center][color=red]No files imported[/color][/center]"
 text = "No files imported"
 fit_content_height = true
 scroll_active = false
 
-[node name="warning" type="PopupDialog" parent="panel"]
-margin_right = 1024.0
-margin_bottom = 600.0
+[node name="warning" type="Popup" parent="panel"]
+offset_right = 1024.0
+offset_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -179,12 +179,12 @@ __meta__ = {
 }
 
 [node name="Label" type="RichTextLabel" parent="panel/warning/container"]
-margin_right = 1024.0
-margin_bottom = 15.0
+offset_right = 1024.0
+offset_bottom = 15.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 bbcode_enabled = true
-bbcode_text = "[center][b]Error[/b][/center]"
+text = "[center][b]Error[/b][/center]"
 text = "Error"
 fit_content_height = true
 scroll_active = false
@@ -193,9 +193,9 @@ __meta__ = {
 }
 
 [node name="error_text" type="Label" parent="panel/warning/container"]
-margin_top = 19.0
-margin_right = 1024.0
-margin_bottom = 600.0
+offset_top = 19.0
+offset_right = 1024.0
+offset_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 align = 1

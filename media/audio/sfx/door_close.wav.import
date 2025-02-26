@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/door_close.wav-b89d9b6a71e6e5abfb4cd76a175469bb.sample"
+type="AudioStreamWAV"
+uid="uid://biujcwhtskona"
+path="res://.godot/imported/door_close.wav-b89d9b6a71e6e5abfb4cd76a175469bb.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/door_close.wav"
-dest_files=[ "res://.import/door_close.wav-b89d9b6a71e6e5abfb4cd76a175469bb.sample" ]
+dest_files=["res://.godot/imported/door_close.wav-b89d9b6a71e6e5abfb4cd76a175469bb.sample"]
 
 [params]
 

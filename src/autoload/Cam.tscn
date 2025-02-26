@@ -12,7 +12,7 @@ shader_param/aspect = 0.5625
 
 [node name="Cam" type="Camera2D" groups=["game_camera"]]
 process_priority = 50
-rotating = true
+ignore_rotation = false # reversed "rotating" for Camera2D
 current = true
 script = ExtResource( 1 )
 
@@ -21,6 +21,6 @@ layer = 5
 
 [node name="ColorRect" type="ColorRect" parent="RadialBlur"]
 material = SubResource( 2 )
-margin_left = 1.0
-margin_right = 1281.0
-margin_bottom = 720.0
+offset_left = 1.0
+offset_right = 1281.0
+offset_bottom = 720.0

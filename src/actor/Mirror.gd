@@ -1,34 +1,34 @@
 extends Node2D
 
-onready var arrow := $Arrow
-export var dir := 0
-export var door_path : NodePath
-onready var door_node := get_node_or_null(door_path)
-onready var p = Shared.player
-onready var back_rect : Rect2 = $Back.get_rect()
-onready var rig := $Back/Center/Rig
-onready var rig_ease := EaseMover.new()
-onready var stage := $Stage
-onready var sky_mat : ShaderMaterial = $Back.material
-onready var sky_pal : Array = Clouds.sky_pal.duplicate()
+@onready var arrow := $Arrow
+@export var dir := 0
+@export var door_path : NodePath
+@onready var door_node := get_node_or_null(door_path)
+@onready var p = Shared.player
+@onready var back_rect : Rect2 = $Back.get_rect()
+@onready var rig := $Back/Center/Rig
+@onready var rig_ease := EaseMover.new()
+@onready var stage := $Stage
+@onready var sky_mat : ShaderMaterial = $Back.material
+@onready var sky_pal : Array = Clouds.sky_pal.duplicate()
 
 var from := []
 var to := []
-onready var lights := get_tree().get_nodes_in_group("light")
+@onready var lights := get_tree().get_nodes_in_group("light")
 
 var dist := Vector2.ZERO
-export var offset := Vector2(100, 0)
+@export var offset := Vector2(100, 0)
 var dir_x := 1.0
-export var hide_distance := 50.0
+@export var hide_distance := 50.0
 
 func _ready():
-	MenuMakeover.connect("opened", self, "closed")
+	MenuMakeover.connect("opened", Callable(self, "closed"))
 	
 	arrow.dir = posmod(dir, 4)
 	rig.global_rotation = 0
 	rig_ease.clock = rig_ease.time
 	
-	yield(get_tree().create_timer(3.0), "timeout")
+	await get_tree().create_timer(3.0).timeout
 	
 	create_rig()
 
@@ -50,7 +50,7 @@ func _process(delta):
 	var sf = Clouds.step_frac
 	
 	for i in 2:
-		sky_mat.set_shader_param("col" + str(i + 1), sky_pal[sky_step - 2 - i].linear_interpolate(sky_pal[sky_step - 1 - i], sf))
+		sky_mat.set_shader_parameter("col" + str(i + 1), sky_pal[sky_step - 2 - i].lerp(sky_pal[sky_step - 1 - i], sf))
 	
 	# animate
 	for i in from.size():
@@ -91,8 +91,8 @@ func create_rig():
 	for n in ["Back", "Front"]:
 		for i in Shared.get_all_children(s.get_node("Root/Body/Hair" + n)):
 			for c in ["scale_x", "turn_angle"]:
-				if i.has_method(c) and !p.is_connected(c, i, c):
-					p.connect(c, i, c)
+				if i.has_method(c) and !p.is_connected(c, Callable(i, c)):
+					p.connect(c, Callable(i, c))
 
 func _on_Arrow_open():
 	MenuMakeover.is_open = true

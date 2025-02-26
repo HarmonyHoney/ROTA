@@ -1,8 +1,8 @@
-tool
+@tool
 extends TileMap
 
-onready var auto = get_child(0)
-export var detail := 0 setget set_tileset
+@onready var auto = get_child(0)
+@export var detail := 0: set = set_tileset
 
 var sets = [preload("res://src/stage/tileset/TileSet0.tres"),preload("res://src/stage/tileset/TileSet1.tres"),
 preload("res://src/stage/tileset/TileSet2.tres"),preload("res://src/stage/tileset/TileSet3.tres"),
@@ -23,10 +23,10 @@ func set_tileset(arg := detail):
 			auto.update()
 
 func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_coord=Vector2()):
-	.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
+	super.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
 	
 	# larger range while in game
-	var n = 1 if Engine.editor_hint else 2
+	var n = 1 if Engine.is_editor_hint() else 2
 	
 	# set tile range
 	for _x in range(x - n, x + n):

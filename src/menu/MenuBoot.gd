@@ -1,9 +1,9 @@
 extends MenuBase
 
-export var sub_path : NodePath
-onready var main_menu = get_node_or_null(sub_path)
-onready var player = Shared.player
-onready var title_mat : ShaderMaterial = $Map/Title.material
+@export var sub_path : NodePath
+@onready var main_menu = get_node_or_null(sub_path)
+@onready var player = Shared.player
+@onready var title_mat : ShaderMaterial = $Map/Title.material
 
 func _ready():
 	UI.keys.show = true
@@ -16,7 +16,7 @@ func _ready():
 	
 	player.spr_easy.show = false
 	if Wipe.is_wipe:
-		yield(Wipe, "complete")
+		await Wipe.complete
 	player.spr_easy.show = true
 
 func _exit_tree():
@@ -28,5 +28,5 @@ func accept():
 	sub_menu(main_menu)
 
 func _process(delta):
-	title_mat.set_shader_param("shadow_angle", -Clouds.day_frac)
+	title_mat.set_shader_parameter("shadow_angle", -Clouds.day_frac)
 	

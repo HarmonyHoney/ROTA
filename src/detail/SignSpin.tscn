@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://media/image/UI/btn_x.png" type="Texture" id=1]
+[ext_resource path="res://media/image/UI/btn_x.png" type="Texture2D" id=1]
 [ext_resource path="res://src/menu/options/Key.tscn" type="PackedScene" id=2]
-[ext_resource path="res://media/image/UI/key_up.png" type="Texture" id=3]
+[ext_resource path="res://media/image/UI/key_up.png" type="Texture2D" id=3]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 1 )
@@ -27,26 +27,26 @@ modulate = Color( 0.898039, 0.615686, 0.341176, 1 )
 
 [node name="Panel2" type="Panel" parent="Panels"]
 modulate = Color( 0.9, 0.9, 0.9, 1 )
-margin_left = -12.5
-margin_top = -100.0
-margin_right = 12.5
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 2 )
+offset_left = -12.5
+offset_top = -100.0
+offset_right = 12.5
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="Panels"]
-margin_left = -75.0
-margin_top = -150.0
-margin_right = 75.0
-margin_bottom = -50.0
-custom_styles/panel = SubResource( 1 )
+offset_left = -75.0
+offset_top = -150.0
+offset_right = 75.0
+offset_bottom = -50.0
+theme_override_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Btn" type="Sprite" parent="."]
+[node name="Btn" type="Sprite2D" parent="."]
 visible = false
 position = Vector2( -40, -100 )
 scale = Vector2( 0.24, 0.24 )
@@ -56,14 +56,14 @@ texture = ExtResource( 1 )
 position = Vector2( 7.5, -100 )
 
 [node name="Fill" type="Line2D" parent="Plus"]
-points = PoolVector2Array( 0, -10, 0, 10 )
+points = PackedVector2Array( 0, -10, 0, 10 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Fill2" type="Line2D" parent="Plus"]
 rotation = 1.57079
-points = PoolVector2Array( 0, -10, 0, 10 )
+points = PackedVector2Array( 0, -10, 0, 10 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -72,29 +72,29 @@ end_cap_mode = 2
 position = Vector2( 45, -100 )
 scale = Vector2( 0.18, 0.18 )
 
-[node name="Up" type="Sprite" parent="Keys"]
+[node name="Up" type="Sprite2D" parent="Keys"]
 position = Vector2( 0, -110 )
 texture = ExtResource( 3 )
 
-[node name="Down" type="Sprite" parent="Keys"]
+[node name="Down" type="Sprite2D" parent="Keys"]
 position = Vector2( 0, 110 )
 rotation = -3.14159
 texture = ExtResource( 3 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-margin_left = -90.0
-margin_top = -150.0
-margin_right = 10.0
-margin_bottom = -50.0
+offset_left = -90.0
+offset_top = -150.0
+offset_right = 10.0
+offset_bottom = -50.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Key" parent="CenterContainer" instance=ExtResource( 2 )]
-margin_left = 25.0
-margin_top = 25.0
-margin_right = 75.0
-margin_bottom = 75.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 75.0
+offset_bottom = 75.0
 text = "C"
 action = "grab"
 is_connect = true

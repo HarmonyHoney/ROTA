@@ -1,8 +1,8 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var area := $Area2D
-onready var image := $Sprites
-onready var image_root := $Sprites/Root
+@onready var area := $Area2D
+@onready var image := $Sprites
+@onready var image_root := $Sprites/Root
 
 var joy := Vector2.ZERO
 var joy_last := Vector2.ZERO
@@ -10,18 +10,18 @@ var btn_jump := false
 var jump_ease := EaseMover.new(0.15)
 var is_jump := false
 
-export var move_speed := 350.0
-export var move_accel := 0.3
-export var move_damp := 0.08
-export var jump_speed := 620.0
-export var hit_speed := 900.0
+@export var move_speed := 350.0
+@export var move_accel := 0.3
+@export var move_damp := 0.08
+@export var jump_speed := 620.0
+@export var hit_speed := 900.0
 var room_size := Vector2(600, 600)
-export var gravity := 1500.0
-export var term_vel := 4000.0
-export var squish_jump := Vector2(0.5, 1.5)
-export var squish_land := Vector2(1.4, 0.6)
-export var land_time := 0.25
-export var land_vel := 250.0
+@export var gravity := 1500.0
+@export var term_vel := 4000.0
+@export var squish_jump := Vector2(0.5, 1.5)
+@export var squish_land := Vector2(1.4, 0.6)
+@export var land_time := 0.25
+@export var land_vel := 250.0
 var squish_ease := EaseMover.new(0.3)
 
 var vel := Vector2.ZERO
@@ -39,7 +39,7 @@ var unpause_tick := 0.0
 var is_unpause := false
 
 func _ready():
-	MenuPause.connect("opened", self, "pause")
+	MenuPause.connect("opened", Callable(self, "pause"))
 	
 	for i in get_tree().get_nodes_in_group("arcade"):
 		arcade = i
@@ -68,7 +68,7 @@ func _physics_process(delta):
 	if is_floor and air_clock > 0.0:
 		var s = min(vel_last.y, land_vel) / land_vel
 		
-		squish_ease.from = Vector2.ONE.linear_interpolate(squish_land, ease(s, 2.2))
+		squish_ease.from = Vector2.ONE.lerp(squish_land, ease(s, 2.2))
 		squish_ease.clock = 0.0
 	
 	air_clock = 0.0 if is_floor else air_clock + delta
@@ -114,7 +114,9 @@ func _physics_process(delta):
 				squish_ease.clock = 0.0
 	
 	vel_last = vel
-	vel = move_and_slide(vel)
+	set_velocity(vel)
+	move_and_slide()
+	vel = velocity
 	
 	
 	position.x = wrapf(position.x, -room_size.x, room_size.x)

@@ -10,18 +10,18 @@ func act():
 	Cam.target_node = null
 	
 	if Wipe.is_wipe:
-		yield(Wipe, "complete")
+		await Wipe.complete
 	if !p.spr_easy.is_complete:
-		yield(p, "show_up")
+		await p.show_up
 	
 	Cam.pan(g.global_position)
-	yield(Cam, "pan_complete")
+	await Cam.pan_complete
 	
 	g.shine()
-	yield(get_tree().create_timer(0.8), "timeout")
+	await get_tree().create_timer(0.8).timeout
 	
 	Cam.pan(p.global_position)
-	yield(Cam, "pan_complete")
+	await Cam.pan_complete
 	
 	Cam.target_node = p
 	Cutscene.is_playing = false

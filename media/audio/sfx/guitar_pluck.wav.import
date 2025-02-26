@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/guitar_pluck.wav-776ac609dc92063db46c95eab9764199.sample"
+type="AudioStreamWAV"
+uid="uid://ccos65byc8vs8"
+path="res://.godot/imported/guitar_pluck.wav-776ac609dc92063db46c95eab9764199.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/guitar_pluck.wav"
-dest_files=[ "res://.import/guitar_pluck.wav-776ac609dc92063db46c95eab9764199.sample" ]
+dest_files=["res://.godot/imported/guitar_pluck.wav-776ac609dc92063db46c95eab9764199.sample"]
 
 [params]
 

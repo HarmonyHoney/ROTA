@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/bell1.wav-f26864f7fa4298f6cd67fb6188ba7fee.sample"
+type="AudioStreamWAV"
+uid="uid://bfvdbwefn6ome"
+path="res://.godot/imported/bell1.wav-f26864f7fa4298f6cd67fb6188ba7fee.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/bell1.wav"
-dest_files=[ "res://.import/bell1.wav-f26864f7fa4298f6cd67fb6188ba7fee.sample" ]
+dest_files=["res://.godot/imported/bell1.wav-f26864f7fa4298f6cd67fb6188ba7fee.sample"]
 
 [params]
 

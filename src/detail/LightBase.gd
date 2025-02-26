@@ -2,14 +2,14 @@ extends Node2D
 
 var t := 0.0
 
-export var time_scale := 1.5
-export var sin_scale := 0.1
+@export var time_scale := 1.5
+@export var sin_scale := 0.1
 
-export var is_night := false
+@export var is_night := false
 var night_ease := EaseMover.new(4.0)
 var night_min := 0.3
 
-onready var start_scale := scale
+@onready var start_scale := scale
 
 func _ready():
 	if is_night:

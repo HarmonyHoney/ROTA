@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=1]
+[ext_resource path="res://media/font/profile/OptionsItem.tres" type="FontFile" id=1]
 [ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=2]
 [ext_resource path="res://src/menu/options/scroll/Color.gd" type="Script" id=3]
 
 [node name="Color" type="Control" groups=["color"]]
-margin_right = 800.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 70, 70 )
+offset_right = 800.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2( 70, 70 )
 script = ExtResource( 3 )
 is_loop = true
 count = 17
@@ -16,7 +16,7 @@ count = 17
 anchor_right = 0.5
 anchor_bottom = 1.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Color"
 valign = 1
 
@@ -27,44 +27,44 @@ alignment = 2
 
 [node name="Circle" type="Control" parent="HBoxContainer"]
 modulate = Color( 0, 1, 0, 1 )
-margin_left = 434.0
-margin_right = 504.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 70, 70 )
+offset_left = 434.0
+offset_right = 504.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2( 70, 70 )
 script = ExtResource( 2 )
 radius = 30.0
 
 [node name="Circle2" type="Control" parent="HBoxContainer"]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 508.0
-margin_right = 578.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 70, 70 )
+offset_left = 508.0
+offset_right = 578.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2( 70, 70 )
 script = ExtResource( 2 )
 radius = 30.0
 
 [node name="Circle3" type="Control" parent="HBoxContainer"]
 modulate = Color( 0, 0, 1, 1 )
-margin_left = 582.0
-margin_right = 652.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 70, 70 )
+offset_left = 582.0
+offset_right = 652.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2( 70, 70 )
 script = ExtResource( 2 )
 radius = 30.0
 
 [node name="Circle4" type="Control" parent="HBoxContainer"]
-margin_left = 656.0
-margin_right = 726.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 70, 70 )
+offset_left = 656.0
+offset_right = 726.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2( 70, 70 )
 script = ExtResource( 2 )
 radius = 30.0
 
 [node name="Circle5" type="Control" parent="HBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 730.0
-margin_right = 800.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 70, 70 )
+offset_left = 730.0
+offset_right = 800.0
+offset_bottom = 70.0
+custom_minimum_size = Vector2( 70, 70 )
 script = ExtResource( 2 )
 radius = 30.0

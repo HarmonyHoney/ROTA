@@ -1,24 +1,24 @@
 extends MenuBase
 
-onready var control := $Center/Control
+@onready var control := $Center/Control
 
-onready var prompt_ease := EaseMover.new()
+@onready var prompt_ease := EaseMover.new()
 var is_prompt := false
-onready var prompt_key := $Center/Control/Prompt/VBoxContainer/Key
-onready var prompt_timer_label := $Center/Control/Prompt/VBoxContainer/Timer
+@onready var prompt_key := $Center/Control/Prompt/VBoxContainer/Key
+@onready var prompt_timer_label := $Center/Control/Prompt/VBoxContainer/Timer
 var prompt_clock := 0.0
 var prompt_time := 5.0
 var is_button := false
 
-onready var key = preload("res://src/menu/options/Key.tscn")
+@onready var key = preload("res://src/menu/options/Key.tscn")
 
-export var is_gamepad := false
+@export var is_gamepad := false
 
-onready var header := $Center/Control/Header
-onready var header_back := $Center/Control/Header/Back
-onready var header_ease := EaseMover.new(0.2)
-onready var header_track := $Center/Control/Menu/List/Spacer
-onready var title_label := $Center/Control/Menu/List/Title
+@onready var header := $Center/Control/Header
+@onready var header_back := $Center/Control/Header/Back
+@onready var header_ease := EaseMover.new(0.2)
+@onready var header_track := $Center/Control/Menu/List/Spacer
+@onready var title_label := $Center/Control/Menu/List/Title
 
 var defaults := {}
 
@@ -38,7 +38,7 @@ func _input(event):
 		elif event.is_pressed() and is_type(event) and !event.is_action("ui_end") and !event.is_echo():
 			assign_key(items[cursor].action, event)
 			is_prompt = false
-			get_tree().set_input_as_handled()
+			get_viewport().set_input_as_handled()
 			audio_accept()
 	# clear key
 	elif event.is_action_pressed("ui_end"):
@@ -62,10 +62,10 @@ func _process(delta):
 	#if !is_open: return
 	
 	# header position
-	header.rect_global_position.y = clamp(header_track.rect_global_position.y, 30, 1280)
+	header.global_position.y = clamp(header_track.global_position.y, 30, 1280)
 	
 	# header back
-	header_ease.show = header.rect_global_position.y == 30
+	header_ease.show = header.global_position.y == 30
 	header_back.modulate.a = header_ease.count(delta)
 
 func accept():
@@ -75,7 +75,7 @@ func accept():
 		is_prompt = true
 		prompt_key.text = items[cursor].text
 		prompt_clock = prompt_time
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 func open():
 	# create keys
@@ -107,7 +107,7 @@ func clear_row(row := 0):
 		var action = items[row].action
 		
 		var list = []
-		for i in InputMap.get_action_list(action):
+		for i in InputMap.action_get_events(action):
 			if is_type(i):
 				list.append(i)
 		
@@ -134,7 +134,7 @@ func assign_key(action, event):
 	
 	# keep action size to 4 events of type
 	var list = []
-	for i in InputMap.get_action_list(action):
+	for i in InputMap.action_get_events(action):
 		if is_type(i):
 			list.append(i)
 	
@@ -153,9 +153,9 @@ func create_keys(row):
 		for i in r.get_node("Keys").get_children():
 			i.queue_free()
 		
-		for i in InputMap.get_action_list(action):
+		for i in InputMap.action_get_events(action):
 			if is_type(i):
-				var k = key.instance()
+				var k = key.instantiate()
 				r.get_node("Keys").add_child(k)
 				
 				draw_key(k, i)
@@ -169,7 +169,7 @@ func is_type(event):
 
 func reset_to_defaults():
 	for action in InputMap.get_actions():
-		for event in InputMap.get_action_list(action):
+		for event in InputMap.action_get_events(action):
 			if is_type(event):
 				InputMap.action_erase_event(action, event)
 	

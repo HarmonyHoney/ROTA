@@ -1,22 +1,22 @@
-tool
+@tool
 extends Node2D
 class_name Arrow
 
-export var dir := 0 setget set_dir
-export var is_turn := false
-export var col_show := false setget set_col_show
-export var col_size := Vector2(40, 50) setget set_col_size
-export var col_pos := Vector2(0, 0) setget set_col_pos
-export var image_show := false setget set_image_show
-export var image_pos := Vector2(0, -95) setget set_image_pos
+@export var dir := 0: set = set_dir
+@export var is_turn := false
+@export var col_show := false: set = set_col_show
+@export var col_size := Vector2(40, 50): set = set_col_size
+@export var col_pos := Vector2(0, 0): set = set_col_pos
+@export var image_show := false: set = set_image_show
+@export var image_pos := Vector2(0, -95): set = set_image_pos
 
-onready var image := $Image
-onready var col_shape := $CollisionShape2D
+@onready var image := $Image
+@onready var col_shape := $CollisionShape2D
 
 var player = null
 var body = null
 var is_active := false
-export var is_locked := false
+@export var is_locked := false
 
 var arrow_easy := EaseMover.new(0.3)
 var open_easy := EaseMover.new()
@@ -30,13 +30,13 @@ func _ready():
 	set_col_pos()
 	set_image_pos()
 	
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	
 	self.image_show = false
 	player = Shared.player
 
 func _physics_process(delta):
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	
 	# activate
 	try_active()
@@ -48,7 +48,7 @@ func _physics_process(delta):
 	open_easy.show = Input.is_action_pressed("up") and arrow_easy.show and player != null and !player.is_hold and player.dir == dir and player.is_floor
 
 func _process(delta):
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	arrow_easy.count(delta)
 	open_easy.count(delta)
 	

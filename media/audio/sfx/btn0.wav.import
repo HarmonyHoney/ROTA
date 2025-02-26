@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/btn0.wav-cc43b0baff08c93f0425b3a99180aac5.sample"
+type="AudioStreamWAV"
+uid="uid://cfrk4gbo08lkh"
+path="res://.godot/imported/btn0.wav-cc43b0baff08c93f0425b3a99180aac5.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/btn0.wav"
-dest_files=[ "res://.import/btn0.wav-cc43b0baff08c93f0425b3a99180aac5.sample" ]
+dest_files=["res://.godot/imported/btn0.wav-cc43b0baff08c93f0425b3a99180aac5.sample"]
 
 [params]
 

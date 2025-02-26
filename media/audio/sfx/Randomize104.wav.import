@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Randomize104.wav-b5b016037977d9b4c1497f5b651ce912.sample"
+type="AudioStreamWAV"
+uid="uid://3guwi6xpsv15"
+path="res://.godot/imported/Randomize104.wav-b5b016037977d9b4c1497f5b651ce912.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/Randomize104.wav"
-dest_files=[ "res://.import/Randomize104.wav-b5b016037977d9b4c1497f5b651ce912.sample" ]
+dest_files=["res://.godot/imported/Randomize104.wav-b5b016037977d9b4c1497f5b651ce912.sample"]
 
 [params]
 

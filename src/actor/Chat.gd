@@ -1,18 +1,18 @@
-tool
+@tool
 extends Node2D
 
-onready var bubble := $Bubble
-onready var label_back := $Bubble/Center/Back
-onready var label := $Bubble/Center/Label
-onready var rect := $Bubble/Rect
-onready var triangle := $Bubble/Triangle
-onready var shadows := $Bubble/Shadow.get_children()
+@onready var bubble := $Bubble
+@onready var label_back := $Bubble/Center/Back
+@onready var label := $Bubble/Center/Label
+@onready var rect := $Bubble/Rect
+@onready var triangle := $Bubble/Triangle
+@onready var shadows := $Bubble/Shadow.get_children()
 
-export (String, MULTILINE) var dialog := "I do adore the flowers" setget set_dialog
-export var is_editor := false
-export var is_show := false setget set_is_show
-export var panel_grow := Vector2(20, 17)
-export var show_range := Vector2(-10, -45)
+@export var dialog := "I do adore the flowers": set = set_dialog
+@export var is_editor := false
+@export var is_show := false: set = set_is_show
+@export var panel_grow := Vector2(20, 17)
+@export var show_range := Vector2(-10, -45)
 var panel_min := Vector2(35, 55)
 
 var cursor := 0
@@ -29,14 +29,14 @@ var key_up := false
 var key_hold := false
 
 func _ready():
-	Shared.connect("scene_before", self, "scene")
+	Shared.connect("scene_before", Callable(self, "scene"))
 
 func scene():
 	is_show = false
 	show_easy.clock = 0.0
 
 func _process(delta):
-	if Engine.editor_hint and !is_editor: return
+	if Engine.is_editor_hint() and !is_editor: return
 	
 	var s = show_easy.count(delta, is_show)
 	if s != last_s:
@@ -68,10 +68,10 @@ func _process(delta):
 				label_back.visible_characters = cursor + 1
 				label_back.modulate.a = 0
 				
-				if !Engine.editor_hint and (cursor - 1 == 0 or dialog[cursor - 1] == " "):
+				if !Engine.is_editor_hint() and (cursor - 1 == 0 or dialog[cursor - 1] == " "):
 					Audio.play("menu_cancel", 0.75, 1.5)
 		
-		elif (is_instance_valid(arrow) and !arrow.is_active and !Engine.editor_hint) or (key_up and !key_hold):
+		elif (is_instance_valid(arrow) and !arrow.is_active and !Engine.is_editor_hint()) or (key_up and !key_hold):
 			is_show = false
 		
 		elif read_clock < read_time:
@@ -102,10 +102,10 @@ func set_dialog(arg := dialog):
 
 func set_is_show(arg := is_show):
 	is_show = arg
-	if is_show and Engine.editor_hint:
+	if is_show and Engine.is_editor_hint():
 		set_dialog()
 
-func open(_dialog := dialog, _arrow := arrow, _gt := global_transform):
+func open(_dialog := dialog, _arrow = arrow, _gt := global_transform):
 	if is_show: return
 	is_show = true
 	key_hold = true

@@ -1,4 +1,4 @@
-tool
+@tool
 extends Control
 
 signal disable
@@ -14,9 +14,9 @@ func _ready():
 func copy_file_from_steam_sdk_(base_path:String, file_name:String) -> void:
 	print(settings.sdk_dir + base_path + file_name)
 	if not File.new().file_exists("res://addons/steam_api/%s" % file_name):
-		var res := Directory.new().copy(settings.sdk_dir + base_path + file_name, "res://addons/steam_api/%s" % file_name)
+		var res := DirAccess.new().copy(settings.sdk_dir + base_path + file_name, "res://addons/steam_api/%s" % file_name)
 		if res != OK:
-			popup_error("Failed to copy %s. Steam integration will not work. Did you set the 'SDK Directory' correctly?" % file_name)
+			popup_error("Failed to copy %s. Steam integration will not work. Did you set the 'SDK DirAccess' correctly?" % file_name)
 
 static func exe_path_() -> String:
 	return OS.get_executable_path().get_base_dir()
@@ -76,7 +76,7 @@ func check_status():
 		else:
 			status = "[color=#ffa500]Partially complete, missing: %s[/color]" % String(missing)
 	status = "[center]%s[/center]" % status
-	$panel/container/sdk_status/status.bbcode_text = status
+	$panel/container/sdk_status/status.text = status
 
 func _on_app_id_focus_exited():
 	save_settings()
@@ -87,7 +87,8 @@ func _on_sdk_dir_focus_exited():
 func save_settings():
 	settings.app_id = $panel/container/app_id/input.text
 	settings.sdk_dir = $panel/container/sdk_dir/input.text
-	ResourceSaver.save(settings_path, settings)
+	# ResourceSaver.save(settings_path, settings)
+	ResourceSaver.save(settings, settings_path)
 
 func _on_disable_pressed():
 	settings.disable = $panel/container/disable/input.pressed

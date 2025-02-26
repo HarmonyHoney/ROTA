@@ -2,9 +2,9 @@
 
 [ext_resource path="res://src/arcade/maps/1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/arcade/ArcadeGame.gd" type="Script" id=2]
-[ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://media/font/mini-wakuwaku.otf" type="FontFile" id=3]
 [ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=4]
-[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=5]
+[ext_resource path="res://media/image/box/box-100.png" type="Texture2D" id=5]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 4 )
@@ -17,7 +17,7 @@ shader_param/start_offset = Vector2( 0.5, 0.5 )
 shader_param/radius = 0.126
 shader_param/width = 0.0
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 size = 170
 outline_size = 17
 outline_color = Color( 0, 0, 0, 1 )
@@ -40,10 +40,10 @@ zoom = Vector2( 1.1, 1.1 )
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="UI"]
-margin_right = 1200.0
-margin_bottom = 1200.0
+offset_right = 1200.0
+offset_bottom = 1200.0
 
-[node name="Wipe" type="Sprite" parent="UI/Control"]
+[node name="Wipe" type="Sprite2D" parent="UI/Control"]
 material = SubResource( 2 )
 texture = ExtResource( 5 )
 centered = false
@@ -57,20 +57,20 @@ anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Center" type="CenterContainer" parent="UI/Control"]
-margin_left = 600.0
-margin_top = 600.0
-margin_right = 600.0
-margin_bottom = 600.0
+offset_left = 600.0
+offset_top = 600.0
+offset_right = 600.0
+offset_bottom = 600.0
 use_top_left = true
 
 [node name="Label" type="Label" parent="UI/Control/Center"]
-margin_left = -119.0
-margin_top = -100.0
-margin_right = 119.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 200, 200 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 1 )
+offset_left = -119.0
+offset_top = -100.0
+offset_right = 119.0
+offset_bottom = 100.0
+custom_minimum_size = Vector2( 200, 200 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = SubResource( 1 )
 text = "15"
 align = 1
 valign = 1

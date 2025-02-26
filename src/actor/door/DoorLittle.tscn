@@ -6,7 +6,7 @@
 [ext_resource path="res://src/actor/Clock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/actor/Gem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=6]
-[ext_resource path="res://media/image/box/round_rect100.png" type="Texture" id=7]
+[ext_resource path="res://media/image/box/round_rect100.png" type="Texture2D" id=7]
 [ext_resource path="res://src/shader/door.gdshader" type="Shader" id=8]
 [ext_resource path="res://src/detail/Visible.gd" type="Script" id=9]
 
@@ -24,7 +24,7 @@ shader_param/ring_offset = -1.0
 [node name="Door" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
-[node name="Visible" type="VisibilityNotifier2D" parent="." index="0"]
+[node name="Visible" type="VisibleOnScreenNotifier2D" parent="." index="0"]
 visible = false
 modulate = Color( 1, 0, 0, 1 )
 rect = Rect2( -40, -45, 80, 100 )
@@ -38,7 +38,7 @@ material = SubResource( 1 )
 position = Vector2( 0, 5 )
 texture = ExtResource( 7 )
 texture_offset = Vector2( 50, 50 )
-polygon = PoolVector2Array( 40, 50, -40, 50, -40, -30, -39.0211, -36.1803, -36.1803, -41.7557, -31.7557, -46.1803, -26.1803, -49.0211, -20, -50, 20, -50, 26.1803, -49.0211, 31.7557, -46.1803, 36.1803, -41.7557, 39.0211, -36.1803, 40, -30 )
+polygon = PackedVector2Array( 40, 50, -40, 50, -40, -30, -39.0211, -36.1803, -36.1803, -41.7557, -31.7557, -46.1803, -26.1803, -49.0211, -20, -50, 20, -50, 26.1803, -49.0211, 31.7557, -46.1803, 36.1803, -41.7557, 39.0211, -36.1803, 40, -30 )
 script = ExtResource( 2 )
 size = Vector2( 40, 50 )
 radius = Plane( 0, 0, 20, 20 )
@@ -50,7 +50,7 @@ position = Vector2( -40, 0 )
 [node name="Knob" type="Polygon2D" parent="Sprites/Open" index="0"]
 modulate = Color( 1, 1, 0, 1 )
 position = Vector2( 65, 25 )
-polygon = PoolVector2Array( 7.5, 0, 6.49519, 3.75, 3.75, 6.49519, -3.27835e-07, 7.5, -3.75, 6.49519, -6.49519, 3.75, -7.5, -6.55671e-07, -6.49519, -3.75, -3.75, -6.49519, 8.94366e-08, -7.5, 3.75, -6.49519, 6.49519, -3.75 )
+polygon = PackedVector2Array( 7.5, 0, 6.49519, 3.75, 3.75, 6.49519, -3.27835e-07, 7.5, -3.75, 6.49519, -6.49519, 3.75, -7.5, -6.55671e-07, -6.49519, -3.75, -3.75, -6.49519, 8.94366e-08, -7.5, 3.75, -6.49519, 6.49519, -3.75 )
 script = ExtResource( 6 )
 radius = 7.5
 points = 12

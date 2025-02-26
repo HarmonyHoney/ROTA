@@ -1,12 +1,12 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var dir_x := 0.0
 
-export var speed := 100.0
+@export var speed := 100.0
 
 var room_size := Vector2(600, 600)
 
-onready var image := $Sprites
+@onready var image := $Sprites
 var spr_list := []
 
 var walk_clock := 0.0
@@ -26,7 +26,7 @@ func _ready():
 	delta_scale = arcade.delta_scale
 	
 	randomize()
-	speed *=  1.0 + rand_range(-0.1, 0.1)
+	speed *=  1.0 + randf_range(-0.1, 0.1)
 	if dir_x == 0.0:
 		dir_x = -1.0 if randf() < 0.5 else 1.0
 	

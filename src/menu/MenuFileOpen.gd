@@ -1,10 +1,10 @@
 extends MenuBase
 
-export var sub_path : NodePath
-onready var delete_menu = get_node_or_null(sub_path)
+@export var sub_path : NodePath
+@onready var delete_menu = get_node_or_null(sub_path)
 
-export var demo_path : NodePath
-onready var demo_menu = get_node_or_null(demo_path)
+@export var demo_path : NodePath
+@onready var demo_menu = get_node_or_null(demo_path)
 
 func accept():
 	if cursor == 0:

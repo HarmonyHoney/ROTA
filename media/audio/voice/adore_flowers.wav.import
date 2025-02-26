@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/adore_flowers.wav-51bc2b1ffe9881dafbc9f5e545b84580.sample"
+type="AudioStreamWAV"
+uid="uid://cnog1mshlqqwl"
+path="res://.godot/imported/adore_flowers.wav-51bc2b1ffe9881dafbc9f5e545b84580.sample"
 
 [deps]
 
 source_file="res://media/audio/voice/adore_flowers.wav"
-dest_files=[ "res://.import/adore_flowers.wav-51bc2b1ffe9881dafbc9f5e545b84580.sample" ]
+dest_files=["res://.godot/imported/adore_flowers.wav-51bc2b1ffe9881dafbc9f5e545b84580.sample"]
 
 [params]
 

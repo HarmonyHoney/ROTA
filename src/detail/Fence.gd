@@ -1,12 +1,12 @@
-tool
+@tool
 extends Node2D
 
-export var length := 3 setget set_length
-export var is_offset := false setget set_offset
+@export var length := 3: set = set_length
+@export var is_offset := false: set = set_offset
 
 var width := 100
 
-onready var sprite := $Sprite
+@onready var sprite := $Sprite2D
 
 func _ready():
 	set_length()

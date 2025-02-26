@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/doorknob.wav-19c9dabe04ff5a4df54aca84c0ce0c22.sample"
+type="AudioStreamWAV"
+uid="uid://x7w056tg30bt"
+path="res://.godot/imported/doorknob.wav-19c9dabe04ff5a4df54aca84c0ce0c22.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/doorknob.wav"
-dest_files=[ "res://.import/doorknob.wav-19c9dabe04ff5a4df54aca84c0ce0c22.sample" ]
+dest_files=["res://.godot/imported/doorknob.wav-19c9dabe04ff5a4df54aca84c0ce0c22.sample"]
 
 [params]
 

@@ -1,4 +1,4 @@
-tool
+@tool
 extends TileMap
 
 var spike_scene = preload("res://src/actor/Spike.tscn")
@@ -6,12 +6,12 @@ var spike_scene = preload("res://src/actor/Spike.tscn")
 var spikes = {}
 
 func _ready():
-	yield(get_parent(), "ready")
+	await get_parent().ready
 	tile_set.tile_set_modulate(0, Color(0, 0, 0, 0))
 	make_tiles()
 
 func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_coord=Vector2()):
-	.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
+	super.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
 	
 	remove_spike(x, y)
 	
@@ -19,7 +19,7 @@ func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_
 		set_spike(Vector2(x, y))
 
 func rot(vec = Vector2.ZERO, dir = 0):
-	return vec.rotated(deg2rad(dir * 90)).round()
+	return vec.rotated(deg_to_rad(dir * 90)).round()
 
 func make_tiles():
 	spikes = {}
@@ -39,7 +39,7 @@ func remove_spike(x : int, y : int):
 
 func set_spike(i : Vector2):
 	# instance spike
-	var s = spike_scene.instance()
+	var s = spike_scene.instantiate()
 	add_child(s)
 	spikes[str(i.x) + "," + str(i.y)] = s
 	

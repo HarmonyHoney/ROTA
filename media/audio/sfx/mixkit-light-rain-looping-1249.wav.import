@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/mixkit-light-rain-looping-1249.wav-a6620c0f6ad8f536e3d2308b8ff0bb94.sample"
+type="AudioStreamWAV"
+uid="uid://cya33ybaxd37n"
+path="res://.godot/imported/mixkit-light-rain-looping-1249.wav-a6620c0f6ad8f536e3d2308b8ff0bb94.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/mixkit-light-rain-looping-1249.wav"
-dest_files=[ "res://.import/mixkit-light-rain-looping-1249.wav-a6620c0f6ad8f536e3d2308b8ff0bb94.sample" ]
+dest_files=["res://.godot/imported/mixkit-light-rain-looping-1249.wav-a6620c0f6ad8f536e3d2308b8ff0bb94.sample"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://media/image/details/snowman.svg" type="Texture" id=1]
+[ext_resource path="res://media/image/details/snowman.svg" type="Texture2D" id=1]
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=2]
 [ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/detail/Visible.gd" type="Script" id=4]
@@ -16,7 +16,7 @@ add_vel = 1.0
 weight = 3.0
 audio_path = NodePath("Audio/Hit")
 
-[node name="Visible" type="VisibilityNotifier2D" parent="."]
+[node name="Visible" type="VisibleOnScreenNotifier2D" parent="."]
 visible = false
 modulate = Color( 1, 0, 0, 1 )
 rect = Rect2( -150, -620, 300, 650 )
@@ -25,7 +25,7 @@ node_path = NodePath("..")
 
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="Snowman" type="Sprite" parent="Sprites"]
+[node name="Snowman" type="Sprite2D" parent="Sprites"]
 position = Vector2( 0, -325 )
 texture = ExtResource( 1 )
 

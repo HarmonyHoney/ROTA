@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/fallout0.wav-e74bb38d9f533e3709984f56f25a25bf.sample"
+type="AudioStreamWAV"
+uid="uid://p2wk4ehrs5rg"
+path="res://.godot/imported/fallout0.wav-e74bb38d9f533e3709984f56f25a25bf.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/fallout0.wav"
-dest_files=[ "res://.import/fallout0.wav-e74bb38d9f533e3709984f56f25a25bf.sample" ]
+dest_files=["res://.godot/imported/fallout0.wav-e74bb38d9f533e3709984f56f25a25bf.sample"]
 
 [params]
 

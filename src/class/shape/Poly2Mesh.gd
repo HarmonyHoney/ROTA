@@ -1,17 +1,17 @@
-tool
+@tool
 extends Node2D
 
-export var is_act := false setget set_is_act
-export var array_mesh : ArrayMesh
+@export var is_act := false: set = set_is_act
+@export var array_mesh : ArrayMesh
 
-export var polygon_path : NodePath = "." setget set_polygon_path
-onready var polygon_node : Polygon2D = get_node_or_null(polygon_path)
-export var mesh_path : NodePath = "." setget set_mesh_path
-onready var mesh_node = get_node_or_null(mesh_path)
+@export var polygon_path : NodePath = ".": set = set_polygon_path
+@onready var polygon_node : Polygon2D = get_node_or_null(polygon_path)
+@export var mesh_path : NodePath = ".": set = set_mesh_path
+@onready var mesh_node = get_node_or_null(mesh_path)
 
 func set_is_act(arg := is_act):
 	is_act = arg
-	if is_act and Engine.editor_hint:
+	if is_act and Engine.is_editor_hint():
 		act()
 
 func set_polygon_path(arg := polygon_path):
@@ -34,7 +34,7 @@ func act():
 	
 	for i in gs:
 		var n = posmod(i + 1, gs)
-		var tri = PoolVector3Array([Vector3.ZERO, Vector3(gon[i].x, gon[i].y, 0), Vector3(gon[n].x, gon[n].y, 0)])
+		var tri = PackedVector3Array([Vector3.ZERO, Vector3(gon[i].x, gon[i].y, 0), Vector3(gon[n].x, gon[n].y, 0)])
 		st.add_triangle_fan(tri)
 	
 	array_mesh = st.commit()

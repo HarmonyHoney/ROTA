@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://media/font/profile/OptionsItem.tres" type="DynamicFont" id=1]
+[ext_resource path="res://media/font/profile/OptionsItem.tres" type="FontFile" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
 [ext_resource path="res://src/menu/options/scroll/Volume.gd" type="Script" id=3]
 
 [node name="Volume" type="Control"]
-margin_right = 1080.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 80 )
+offset_right = 1080.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 0, 80 )
 script = ExtResource( 3 )
 count = 10
 
@@ -15,7 +15,7 @@ count = 10
 anchor_right = 0.5
 anchor_bottom = 1.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Volume"
 valign = 1
 __meta__ = {
@@ -26,9 +26,9 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 25.0
+offset_left = 25.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "< 5 >"
 align = 2
 valign = 1

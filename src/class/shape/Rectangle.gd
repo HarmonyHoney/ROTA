@@ -1,15 +1,20 @@
-tool
+@tool
 extends PolyShape
 
-export var size := Vector2.ONE * 50 setget set_size
-export var rect_offset := Vector2.ZERO setget set_offset
-export var radius := Plane(0, -1, -1, -1) setget set_radius
-export var points := 8 setget set_points
+@export var size := Vector2.ONE * 50: set = set_size
+@export var rect_offset := Vector2.ZERO: set = set_offset
+@export var radius := Plane(0, -1, -1, -1): set = set_radius
+@export var points := 8: set = set_points
 
 var vertex_merge := 0.05
 
 func _draw():
-	if !is_poly and gon.size() > 2: draw_colored_polygon(gon, Color.white, PoolVector2Array(), null, null, true)
+	if !is_poly and gon.size() > 2: draw_colored_polygon(
+		gon, 
+		Color.WHITE,
+		PackedVector2Array(), 
+		null
+	)
  
 func shape():
 	gon = []

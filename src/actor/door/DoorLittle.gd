@@ -1,23 +1,23 @@
-tool
+@tool
 extends Door
 
-onready var sprites := $Sprites
-onready var open := $Sprites/Open
-onready var door_mat : ShaderMaterial = $Sprites/Door.material
+@onready var sprites := $Sprites
+@onready var open := $Sprites/Open
+@onready var door_mat : ShaderMaterial = $Sprites/Door.material
 
-onready var gem := $Sprites/Open/Gem
-onready var gem_fill := $Sprites/Open/Gem/Fill
+@onready var gem := $Sprites/Open/Gem
+@onready var gem_fill := $Sprites/Open/Gem/Fill
 var is_gem := false
 var gem_easy := EaseMover.new()
 
-onready var clock := $Sprites/Open/Clock
+@onready var clock := $Sprites/Open/Clock
 var is_clock := false
 var clock_easy := EaseMover.new()
 
 func _ready():
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	
-	arrow.connect("activate", self, "activate")
+	arrow.connect("activate", Callable(self, "activate"))
 	
 	var m = scene_path.lstrip(Shared.worlds_path).rstrip(".tscn")
 	clock.visible = Shared.goals.has(m) and Shared.goals[m] > 0 and Shared.speedruns.has(m) and Shared.goals[m] < Shared.speedruns[m]
@@ -28,14 +28,14 @@ func _ready():
 	elif Shared.goals.has(m):
 		gem_color(2)
 	
-	door_mat.set_shader_param("line", 1.0)
+	door_mat.set_shader_parameter("line", 1.0)
 
 func _process(delta):
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	
 	if open_close:
 		var s = open_count(delta)
-		door_mat.set_shader_param("line", lerp(0.9, 0.1, s))
+		door_mat.set_shader_parameter("line", lerp(0.9, 0.1, s))
 		
 		var o = 1.0 - s
 		open.scale.x = o
@@ -43,8 +43,8 @@ func _process(delta):
 		
 	elif is_gem:
 		gem_easy.count(delta)
-		gem.color = colors[1].linear_interpolate(colors[2], gem_easy.smooth())
-		gem_fill.color = colors[0].linear_interpolate(colors[3], gem_easy.smooth())
+		gem.color = colors[1].lerp(colors[2], gem_easy.smooth())
+		gem_fill.color = colors[0].lerp(colors[3], gem_easy.smooth())
 		if gem_easy.clock == 0 or gem_easy.is_complete:
 			is_gem = false
 		
@@ -65,7 +65,7 @@ func activate():
 
 func on_enter():
 	Shared.collect_gem()
-	door_mat.set_shader_param("ring_offset", -door_mat.get_shader_param("ring_offset"))
+	door_mat.set_shader_parameter("ring_offset", -door_mat.get_shader_parameter("ring_offset"))
 
 func gem_color(arg := 0):
 	gem.color = colors[arg]

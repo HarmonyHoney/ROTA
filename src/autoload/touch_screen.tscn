@@ -1,35 +1,35 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/autoload/touch_screen.gd" type="Script" id=1]
-[ext_resource path="res://media/image/UI/magnify.png" type="Texture" id=2]
+[ext_resource path="res://media/image/UI/magnify.png" type="Texture2D" id=2]
 [ext_resource path="res://src/menu/round_button.gd" type="Script" id=3]
 [ext_resource path="res://src/menu/button_modulate.gd" type="Script" id=4]
-[ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=5]
-[ext_resource path="res://media/image/UI/hand.png" type="Texture" id=6]
-[ext_resource path="res://src/shader/outline2D_outer.shader" type="Shader" id=7]
+[ext_resource path="res://media/font/mini-wakuwaku.otf" type="FontFile" id=5]
+[ext_resource path="res://media/image/UI/hand.png" type="Texture2D" id=6]
+[ext_resource path="res://src/shader/outline2D_outer.gdshader" type="Shader" id=7]
 [ext_resource path="res://src/class/shape/Circle.gd" type="Script" id=8]
-[ext_resource path="res://media/image/UI/boot.png" type="Texture" id=9]
+[ext_resource path="res://media/image/UI/boot.png" type="Texture2D" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=13]
-points = PoolVector2Array( 7.07107, 7.07107, 9.2388, 3.82683, 10, 0, 9.2388, -3.82683, 7.07107, -7.07107, 353.553, -353.553, 461.94, -191.342, 500, 0, 461.94, 191.342, 353.553, 353.553 )
+points = PackedVector2Array( 7.07107, 7.07107, 9.2388, 3.82683, 10, 0, 9.2388, -3.82683, 7.07107, -7.07107, 353.553, -353.553, 461.94, -191.342, 500, 0, 461.94, 191.342, 353.553, 353.553 )
 
 [sub_resource type="ConvexPolygonShape2D" id=14]
-points = PoolVector2Array( -7.07107, 7.07107, -3.82683, 9.2388, -4.37114e-07, 10, 3.82683, 9.2388, 7.07107, 7.07107, 353.553, 353.553, 191.342, 461.94, -2.18557e-05, 500, -191.342, 461.94, -353.553, 353.553 )
+points = PackedVector2Array( -7.07107, 7.07107, -3.82683, 9.2388, -4.37114e-07, 10, 3.82683, 9.2388, 7.07107, 7.07107, 353.553, 353.553, 191.342, 461.94, -2.18557e-05, 500, -191.342, 461.94, -353.553, 353.553 )
 
 [sub_resource type="ConvexPolygonShape2D" id=15]
-points = PoolVector2Array( -7.07107, -7.07107, -9.2388, -3.82683, -10, -8.74228e-07, -9.2388, 3.82683, -7.07107, 7.07107, -353.553, 353.553, -461.94, 191.342, -500, -4.37114e-05, -461.94, -191.342, -353.553, -353.553 )
+points = PackedVector2Array( -7.07107, -7.07107, -9.2388, -3.82683, -10, -8.74228e-07, -9.2388, 3.82683, -7.07107, 7.07107, -353.553, 353.553, -461.94, 191.342, -500, -4.37114e-05, -461.94, -191.342, -353.553, -353.553 )
 
 [sub_resource type="ConvexPolygonShape2D" id=16]
-points = PoolVector2Array( 7.07107, -7.07107, 3.82684, -9.23879, 1.19249e-07, -10, -3.82684, -9.2388, -7.07107, -7.07107, -353.553, -353.553, -191.342, -461.94, 5.96244e-06, -500, 191.342, -461.94, 353.553, -353.553 )
+points = PackedVector2Array( 7.07107, -7.07107, 3.82684, -9.23879, 1.19249e-07, -10, -3.82684, -9.2388, -7.07107, -7.07107, -353.553, -353.553, -191.342, -461.94, 5.96244e-06, -500, 191.342, -461.94, 353.553, -353.553 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 75.0
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="FontFile" id=6]
 size = 64
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
-extra_spacing_bottom = -4
+spacing_bottom = -4
 font_data = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=11]
@@ -49,35 +49,35 @@ shader_param/line_thickness = 4.0
 radius = 100.0
 
 [node name="TouchScreen" type="CanvasLayer"]
-pause_mode = 2
+process_mode = 3
 layer = 19
 script = ExtResource( 1 )
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = -20.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
 
 [node name="HBoxLeft" type="HBoxContainer" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
 [node name="DPad" type="Control" parent="Control/HBoxLeft"]
-margin_top = 380.0
-margin_right = 300.0
-margin_bottom = 680.0
-rect_min_size = Vector2( 300, 300 )
+offset_top = 380.0
+offset_right = 300.0
+offset_bottom = 680.0
+custom_minimum_size = Vector2( 300, 300 )
 size_flags_vertical = 8
 
 [node name="Buttons" type="Control" parent="Control/HBoxLeft/DPad"]
-margin_left = 150.0
-margin_top = 150.0
-margin_right = 150.0
-margin_bottom = 150.0
+offset_left = 150.0
+offset_top = 150.0
+offset_right = 150.0
+offset_bottom = 150.0
 
 [node name="0" type="TouchScreenButton" parent="Control/HBoxLeft/DPad/Buttons"]
 shape = SubResource( 13 )
@@ -94,7 +94,7 @@ poly_deadzone = 10.0
 [node name="Polygon2D" type="Polygon2D" parent="Control/HBoxLeft/DPad/Buttons/0"]
 modulate = Color( 1, 1, 1, 0.5 )
 position = Vector2( 5, 0 )
-polygon = PoolVector2Array( 7.07107, 7.07107, 9.2388, 3.82683, 10, 0, 9.2388, -3.82683, 7.07107, -7.07107, 98.9949, -98.9949, 121.244, -70, 135.23, -36.2347, 140, 0, 135.23, 36.2347, 121.244, 70, 98.9949, 98.9949 )
+polygon = PackedVector2Array( 7.07107, 7.07107, 9.2388, 3.82683, 10, 0, 9.2388, -3.82683, 7.07107, -7.07107, 98.9949, -98.9949, 121.244, -70, 135.23, -36.2347, 140, 0, 135.23, 36.2347, 121.244, 70, 98.9949, 98.9949 )
 script = ExtResource( 4 )
 button_path = NodePath("..")
 idle_color = Color( 1, 1, 1, 0.501961 )
@@ -115,7 +115,7 @@ poly_deadzone = 10.0
 [node name="Polygon2D" type="Polygon2D" parent="Control/HBoxLeft/DPad/Buttons/1"]
 modulate = Color( 1, 1, 1, 0.5 )
 position = Vector2( -2.18557e-07, 5 )
-polygon = PoolVector2Array( -7.07107, 7.07107, -3.82683, 9.2388, -4.37114e-07, 10, 3.82683, 9.2388, 7.07107, 7.07107, 98.9949, 98.9949, 70, 121.244, 36.2347, 135.23, -6.11959e-06, 140, -36.2347, 135.23, -70, 121.244, -98.9949, 98.9949 )
+polygon = PackedVector2Array( -7.07107, 7.07107, -3.82683, 9.2388, -4.37114e-07, 10, 3.82683, 9.2388, 7.07107, 7.07107, 98.9949, 98.9949, 70, 121.244, 36.2347, 135.23, -6.11959e-06, 140, -36.2347, 135.23, -70, 121.244, -98.9949, 98.9949 )
 script = ExtResource( 4 )
 button_path = NodePath("..")
 idle_color = Color( 1, 1, 1, 0.501961 )
@@ -136,7 +136,7 @@ poly_deadzone = 10.0
 [node name="Polygon2D" type="Polygon2D" parent="Control/HBoxLeft/DPad/Buttons/2"]
 modulate = Color( 1, 1, 1, 0.5 )
 position = Vector2( -5, -4.37114e-07 )
-polygon = PoolVector2Array( -7.07107, -7.07107, -9.2388, -3.82683, -10, -8.74228e-07, -9.2388, 3.82683, -7.07107, 7.07107, -98.9949, 98.9949, -121.244, 70, -135.23, 36.2347, -140, -1.22392e-05, -135.23, -36.2347, -121.244, -70, -98.995, -98.9949 )
+polygon = PackedVector2Array( -7.07107, -7.07107, -9.2388, -3.82683, -10, -8.74228e-07, -9.2388, 3.82683, -7.07107, 7.07107, -98.9949, 98.9949, -121.244, 70, -135.23, 36.2347, -140, -1.22392e-05, -135.23, -36.2347, -121.244, -70, -98.995, -98.9949 )
 script = ExtResource( 4 )
 button_path = NodePath("..")
 idle_color = Color( 1, 1, 1, 0.501961 )
@@ -157,7 +157,7 @@ poly_deadzone = 10.0
 [node name="Polygon2D" type="Polygon2D" parent="Control/HBoxLeft/DPad/Buttons/3"]
 modulate = Color( 1, 1, 1, 0.5 )
 position = Vector2( 5.96244e-08, -5 )
-polygon = PoolVector2Array( 7.07107, -7.07107, 3.82684, -9.23879, 1.19249e-07, -10, -3.82684, -9.2388, -7.07107, -7.07107, -98.995, -98.9949, -70, -121.244, -36.2347, -135.23, 1.66948e-06, -140, 36.2347, -135.23, 70, -121.244, 98.9949, -98.995 )
+polygon = PackedVector2Array( 7.07107, -7.07107, 3.82684, -9.23879, 1.19249e-07, -10, -3.82684, -9.2388, -7.07107, -7.07107, -98.995, -98.9949, -70, -121.244, -36.2347, -135.23, 1.66948e-06, -140, 36.2347, -135.23, 70, -121.244, 98.9949, -98.995 )
 script = ExtResource( 4 )
 button_path = NodePath("..")
 idle_color = Color( 1, 1, 1, 0.501961 )
@@ -165,22 +165,22 @@ idle_color = Color( 1, 1, 1, 0.501961 )
 [node name="HBoxRight" type="HBoxContainer" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 alignment = 2
 
 [node name="C" type="CenterContainer" parent="Control/HBoxRight"]
-margin_left = 940.0
-margin_top = 530.0
-margin_right = 1090.0
-margin_bottom = 680.0
-rect_min_size = Vector2( 150, 150 )
+offset_left = 940.0
+offset_top = 530.0
+offset_right = 1090.0
+offset_bottom = 680.0
+custom_minimum_size = Vector2( 150, 150 )
 size_flags_vertical = 8
 
 [node name="Control" type="Control" parent="Control/HBoxRight/C"]
-margin_left = 75.0
-margin_top = 75.0
-margin_right = 75.0
-margin_bottom = 75.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 75.0
+offset_bottom = 75.0
 
 [node name="Button" type="TouchScreenButton" parent="Control/HBoxRight/C/Control"]
 physics_interpolation_mode = 1
@@ -198,41 +198,41 @@ idle_color = Color( 1, 1, 1, 0.156863 )
 
 [node name="Poly" type="Polygon2D" parent="Control/HBoxRight/C/Control"]
 modulate = Color( 1, 1, 1, 0.156863 )
-polygon = PoolVector2Array( 70, 0, 64.6716, 26.7878, 49.4975, 49.4975, 26.7878, 64.6716, -3.0598e-06, 70, -26.7878, 64.6716, -49.4975, 49.4975, -64.6716, 26.7878, -70, -6.11959e-06, -64.6716, -26.7878, -49.4975, -49.4975, -26.7878, -64.6716, 8.34742e-07, -70, 26.7879, -64.6716, 49.4975, -49.4975, 64.6716, -26.7878 )
+polygon = PackedVector2Array( 70, 0, 64.6716, 26.7878, 49.4975, 49.4975, 26.7878, 64.6716, -3.0598e-06, 70, -26.7878, 64.6716, -49.4975, 49.4975, -64.6716, 26.7878, -70, -6.11959e-06, -64.6716, -26.7878, -49.4975, -49.4975, -26.7878, -64.6716, 8.34742e-07, -70, 26.7879, -64.6716, 49.4975, -49.4975, 64.6716, -26.7878 )
 script = ExtResource( 8 )
 is_baked = false
 radius = 70.0
 
 [node name="Key" type="Label" parent="Control/HBoxRight/C/Control"]
 modulate = Color( 1, 0, 0.301961, 1 )
-margin_left = -75.0
-margin_top = -75.0
-margin_right = 75.0
-margin_bottom = 75.0
-custom_fonts/font = SubResource( 6 )
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+theme_override_fonts/font = SubResource( 6 )
 text = "c"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="Sprite" type="Sprite" parent="Control/HBoxRight/C/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="Control/HBoxRight/C/Control"]
 material = SubResource( 11 )
 scale = Vector2( -0.45, 0.45 )
 texture = ExtResource( 6 )
 
 [node name="X" type="CenterContainer" parent="Control/HBoxRight"]
-margin_left = 1090.0
-margin_top = 530.0
-margin_right = 1240.0
-margin_bottom = 680.0
-rect_min_size = Vector2( 150, 150 )
+offset_left = 1090.0
+offset_top = 530.0
+offset_right = 1240.0
+offset_bottom = 680.0
+custom_minimum_size = Vector2( 150, 150 )
 size_flags_vertical = 8
 
 [node name="Control" type="Control" parent="Control/HBoxRight/X"]
-margin_left = 75.0
-margin_top = 75.0
-margin_right = 75.0
-margin_bottom = 75.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 75.0
+offset_bottom = 75.0
 
 [node name="Button" type="TouchScreenButton" parent="Control/HBoxRight/X/Control"]
 modulate = Color( 1, 1, 1, 0.156863 )
@@ -249,24 +249,24 @@ idle_color = Color( 1, 1, 1, 0.156863 )
 
 [node name="Poly" type="Polygon2D" parent="Control/HBoxRight/X/Control"]
 modulate = Color( 1, 1, 1, 0.156863 )
-polygon = PoolVector2Array( 70, 0, 64.6716, 26.7878, 49.4975, 49.4975, 26.7878, 64.6716, -3.0598e-06, 70, -26.7878, 64.6716, -49.4975, 49.4975, -64.6716, 26.7878, -70, -6.11959e-06, -64.6716, -26.7878, -49.4975, -49.4975, -26.7878, -64.6716, 8.34742e-07, -70, 26.7879, -64.6716, 49.4975, -49.4975, 64.6716, -26.7878 )
+polygon = PackedVector2Array( 70, 0, 64.6716, 26.7878, 49.4975, 49.4975, 26.7878, 64.6716, -3.0598e-06, 70, -26.7878, 64.6716, -49.4975, 49.4975, -64.6716, 26.7878, -70, -6.11959e-06, -64.6716, -26.7878, -49.4975, -49.4975, -26.7878, -64.6716, 8.34742e-07, -70, 26.7879, -64.6716, 49.4975, -49.4975, 64.6716, -26.7878 )
 script = ExtResource( 8 )
 is_baked = false
 radius = 70.0
 
 [node name="Key" type="Label" parent="Control/HBoxRight/X/Control"]
 modulate = Color( 0, 0.894118, 0.211765, 1 )
-margin_left = -75.0
-margin_top = -75.0
-margin_right = 75.0
-margin_bottom = 75.0
-custom_fonts/font = SubResource( 6 )
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+theme_override_fonts/font = SubResource( 6 )
 text = "x"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="Sprite" type="Sprite" parent="Control/HBoxRight/X/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="Control/HBoxRight/X/Control"]
 material = SubResource( 12 )
 scale = Vector2( -0.45, 0.45 )
 texture = ExtResource( 9 )
@@ -274,21 +274,21 @@ texture = ExtResource( 9 )
 [node name="HBoxTop" type="HBoxContainer" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 alignment = 2
 
 [node name="Z" type="CenterContainer" parent="Control/HBoxTop"]
-margin_left = 940.0
-margin_right = 1090.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 150, 150 )
+offset_left = 940.0
+offset_right = 1090.0
+offset_bottom = 150.0
+custom_minimum_size = Vector2( 150, 150 )
 size_flags_vertical = 0
 
 [node name="Control" type="Control" parent="Control/HBoxTop/Z"]
-margin_left = 75.0
-margin_top = 75.0
-margin_right = 75.0
-margin_bottom = 75.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 75.0
+offset_bottom = 75.0
 
 [node name="Button" type="TouchScreenButton" parent="Control/HBoxTop/Z/Control"]
 physics_interpolation_mode = 1
@@ -306,40 +306,40 @@ idle_color = Color( 1, 1, 1, 0.156863 )
 
 [node name="Poly" type="Polygon2D" parent="Control/HBoxTop/Z/Control"]
 modulate = Color( 1, 1, 1, 0.156863 )
-polygon = PoolVector2Array( 70, 0, 64.6716, 26.7878, 49.4975, 49.4975, 26.7878, 64.6716, -3.0598e-06, 70, -26.7878, 64.6716, -49.4975, 49.4975, -64.6716, 26.7878, -70, -6.11959e-06, -64.6716, -26.7878, -49.4975, -49.4975, -26.7878, -64.6716, 8.34742e-07, -70, 26.7879, -64.6716, 49.4975, -49.4975, 64.6716, -26.7878 )
+polygon = PackedVector2Array( 70, 0, 64.6716, 26.7878, 49.4975, 49.4975, 26.7878, 64.6716, -3.0598e-06, 70, -26.7878, 64.6716, -49.4975, 49.4975, -64.6716, 26.7878, -70, -6.11959e-06, -64.6716, -26.7878, -49.4975, -49.4975, -26.7878, -64.6716, 8.34742e-07, -70, 26.7879, -64.6716, 49.4975, -49.4975, 64.6716, -26.7878 )
 script = ExtResource( 8 )
 is_baked = false
 radius = 70.0
 
-[node name="Sprite" type="Sprite" parent="Control/HBoxTop/Z/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="Control/HBoxTop/Z/Control"]
 scale = Vector2( 0.419533, 0.419533 )
 texture = ExtResource( 2 )
 
 [node name="Key" type="Label" parent="Control/HBoxTop/Z/Control"]
 visible = false
 modulate = Color( 1, 0, 0.301961, 1 )
-margin_left = -75.0
-margin_top = -75.0
-margin_right = 75.0
-margin_bottom = 75.0
-custom_fonts/font = SubResource( 6 )
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+theme_override_fonts/font = SubResource( 6 )
 text = "c"
 align = 1
 valign = 1
 uppercase = true
 
 [node name="Pause" type="CenterContainer" parent="Control/HBoxTop"]
-margin_left = 1090.0
-margin_right = 1240.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 150, 150 )
+offset_left = 1090.0
+offset_right = 1240.0
+offset_bottom = 150.0
+custom_minimum_size = Vector2( 150, 150 )
 size_flags_vertical = 0
 
 [node name="Control" type="Control" parent="Control/HBoxTop/Pause"]
-margin_left = 75.0
-margin_top = 75.0
-margin_right = 75.0
-margin_bottom = 75.0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 75.0
+offset_bottom = 75.0
 
 [node name="Button" type="TouchScreenButton" parent="Control/HBoxTop/Pause/Control"]
 modulate = Color( 1, 1, 1, 0.156863 )
@@ -356,22 +356,22 @@ idle_color = Color( 1, 1, 1, 0.156863 )
 
 [node name="Poly" type="Polygon2D" parent="Control/HBoxTop/Pause/Control"]
 modulate = Color( 1, 1, 1, 0.156863 )
-polygon = PoolVector2Array( 70, 0, 64.6716, 26.7878, 49.4975, 49.4975, 26.7878, 64.6716, -3.0598e-06, 70, -26.7878, 64.6716, -49.4975, 49.4975, -64.6716, 26.7878, -70, -6.11959e-06, -64.6716, -26.7878, -49.4975, -49.4975, -26.7878, -64.6716, 8.34742e-07, -70, 26.7879, -64.6716, 49.4975, -49.4975, 64.6716, -26.7878 )
+polygon = PackedVector2Array( 70, 0, 64.6716, 26.7878, 49.4975, 49.4975, 26.7878, 64.6716, -3.0598e-06, 70, -26.7878, 64.6716, -49.4975, 49.4975, -64.6716, 26.7878, -70, -6.11959e-06, -64.6716, -26.7878, -49.4975, -49.4975, -26.7878, -64.6716, 8.34742e-07, -70, 26.7879, -64.6716, 49.4975, -49.4975, 64.6716, -26.7878 )
 script = ExtResource( 8 )
 is_baked = false
 radius = 70.0
 
 [node name="Control" type="Control" parent="Control/HBoxTop/Pause/Control"]
-rect_scale = Vector2( 7, 7 )
+scale = Vector2( 7, 7 )
 
 [node name="ColorRect" type="ColorRect" parent="Control/HBoxTop/Pause/Control/Control"]
-margin_left = -5.0
-margin_top = -6.0
-margin_right = -1.0
-margin_bottom = 6.0
+offset_left = -5.0
+offset_top = -6.0
+offset_right = -1.0
+offset_bottom = 6.0
 
 [node name="ColorRect2" type="ColorRect" parent="Control/HBoxTop/Pause/Control/Control"]
-margin_left = 1.0
-margin_top = -6.0
-margin_right = 5.0
-margin_bottom = 6.0
+offset_left = 1.0
+offset_top = -6.0
+offset_right = 5.0
+offset_bottom = 6.0

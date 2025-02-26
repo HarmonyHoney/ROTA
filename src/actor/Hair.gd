@@ -1,17 +1,17 @@
-tool
+@tool
 extends Node2D
 
-export var width := 50.0 setget set_width
-export var end_scale := 0.75 setget set_end
-export var length = 25.0
-export var sitting_angle = 15.0
-export var point_count := 3 setget set_points
-export var vertices := 16 setget set_vertices
-export var gravity = 190.0
-export var is_scale_x := true
-export var is_stiff := false
-export var dir_x := 1
-export var offset_angle := 0.0
+@export var width := 50.0: set = set_width
+@export var end_scale := 0.75: set = set_end
+@export var length = 25.0
+@export var sitting_angle = 15.0
+@export var point_count := 3: set = set_points
+@export var vertices := 16: set = set_vertices
+@export var gravity = 190.0
+@export var is_scale_x := true
+@export var is_stiff := false
+@export var dir_x := 1
+@export var offset_angle := 0.0
 
 var gons = []
 var last_pos := Vector2.ZERO
@@ -20,7 +20,7 @@ var hair_end := Vector2.ZERO
 func _ready():
 	u()
 	
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	
 	if !is_stiff: is_stiff = abs(sitting_angle) > 90.0
 
@@ -42,7 +42,7 @@ func u():
 
 func _process(delta):
 	# angle
-	var a = deg2rad((sitting_angle * dir_x)) + offset_angle
+	var a = deg_to_rad((sitting_angle * dir_x)) + offset_angle
 	if is_stiff: a += global_rotation - offset_angle
 	
 	# movement + gravity

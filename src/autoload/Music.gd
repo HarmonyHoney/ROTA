@@ -1,16 +1,16 @@
 extends AudioStreamPlayer
 
-export (Array, AudioStream) var ost = []
+@export var ost = [] # (Array, AudioStream)
 
 var last_song := -1
 var array = []
 
-export var wait_range := Vector2(10, 90)
+@export var wait_range := Vector2(10, 90)
 var wait_clock := 0.0
 var wait_time := 10.0
 
 func _ready():
-	connect("finished", self, "finished")
+	connect("finished", Callable(self, "finished"))
 	randomize()
 	wait_clock = 4.0
 
@@ -21,10 +21,10 @@ func _physics_process(delta):
 			play_song()
 
 func finished():
-	wait_clock = rand_range(wait_range.x, wait_range.y)
+	wait_clock = randf_range(wait_range.x, wait_range.y)
 
 func play_song():
-	if array.empty():
+	if array.is_empty():
 		array = range(ost.size())
 		array.erase(last_song)
 		array.shuffle()

@@ -20,7 +20,7 @@ throw_vel = Vector2( 500, -200 )
 shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PoolVector2Array( 10, 0, 8.66025, 5, 5, 8.66025, -4.37114e-07, 10, -5, 8.66025, -8.66025, 5, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5 )
+polygon = PackedVector2Array( 10, 0, 8.66025, 5, 5, 8.66025, -4.37114e-07, 10, -5, 8.66025, -8.66025, 5, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5 )
 script = ExtResource( 1 )
 is_baked = false
 radius = 10.0

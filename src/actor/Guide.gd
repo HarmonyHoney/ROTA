@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var sprite := $Sprite
+@onready var sprite := $Sprite2D
 
 var box : Box = null
 var is_deploy := false
@@ -13,7 +13,7 @@ var _delta := 1.0 / 60.0
 func _ready():
 	visible = false
 	
-	Shared.connect("scene_changed", self, "set_box")
+	Shared.connect("scene_changed", Callable(self, "set_box"))
 
 func _process(delta):
 	_delta = delta
@@ -30,8 +30,8 @@ func place():
 	
 	visible = easy.clock > 0
 	if visible:
-		sprite.material.set_shader_param("scale_x", easy.smooth())
-		sprite.material.set_shader_param("scale_y", easy.smooth())
+		sprite.material.set_shader_parameter("scale_x", easy.smooth())
+		sprite.material.set_shader_parameter("scale_y", easy.smooth())
 		
 		if is_instance_valid(box):
 			rotation = box.sprite.rotation

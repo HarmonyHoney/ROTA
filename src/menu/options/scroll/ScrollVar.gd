@@ -1,8 +1,8 @@
 extends Scroll
 
-export var var_name := "shadow_enabled"
-export var is_frac := false
-export var is_int := false
+@export var var_name := "shadow_enabled"
+@export var is_frac := false
+@export var is_int := false
 
 func _ready():
 	cursor = clamp(int(Shared.get(var_name)), 0.0, list.size() - 1)

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/teleport.wav-22a7152e24700684c263e3163320d8c2.sample"
+type="AudioStreamWAV"
+uid="uid://blwa4rqpg2bow"
+path="res://.godot/imported/teleport.wav-22a7152e24700684c263e3163320d8c2.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/teleport.wav"
-dest_files=[ "res://.import/teleport.wav-22a7152e24700684c263e3163320d8c2.sample" ]
+dest_files=["res://.godot/imported/teleport.wav-22a7152e24700684c263e3163320d8c2.sample"]
 
 [params]
 

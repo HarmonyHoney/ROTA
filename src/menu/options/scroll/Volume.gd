@@ -1,7 +1,7 @@
 extends Scroll
 
-export var bus := 0
-onready var audio := $Audio
+@export var bus := 0
+@onready var audio := $Audio
 
 func _ready():
 	count = 10
@@ -11,5 +11,5 @@ func _ready():
 
 func set_value():
 	Shared.set_volume(bus, cursor * 10)
-	audio.pitch_scale = rand_range(0.5, 1.5)
+	audio.pitch_scale = randf_range(0.5, 1.5)
 	audio.play()

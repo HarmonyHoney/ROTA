@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/crate_move.wav-eb749e66efe2cff1156ee3e8ecfd75a3.sample"
+type="AudioStreamWAV"
+uid="uid://ydi8lidgt5se"
+path="res://.godot/imported/crate_move.wav-eb749e66efe2cff1156ee3e8ecfd75a3.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/crate_move.wav"
-dest_files=[ "res://.import/crate_move.wav-eb749e66efe2cff1156ee3e8ecfd75a3.sample" ]
+dest_files=["res://.godot/imported/crate_move.wav-eb749e66efe2cff1156ee3e8ecfd75a3.sample"]
 
 [params]
 

@@ -1,7 +1,7 @@
 extends MenuBase
 
-export var open_path : NodePath
-onready var open_menu = get_node_or_null(open_path)
+@export var open_path : NodePath
+@onready var open_menu = get_node_or_null(open_path)
 
 func open():
 	cursor = 1

@@ -1,8 +1,8 @@
-tool
+@tool
 extends Node2D
 
-export var is_var := false setget set_is_var
-export var circle_size := 10.0 setget set_circle
+@export var is_var := false: set = set_is_var
+@export var circle_size := 10.0: set = set_circle
 
 func set_is_var(arg):
 	is_var = arg
@@ -13,4 +13,4 @@ func set_circle(arg):
 	update()
 
 func _draw():
-	draw_circle(Vector2.ZERO, circle_size, Color.white)
+	draw_circle(Vector2.ZERO, circle_size, Color.WHITE)

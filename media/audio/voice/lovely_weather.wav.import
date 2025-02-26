@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/lovely_weather.wav-ceac5095ba666ad4d5b7ec821c6c8d61.sample"
+type="AudioStreamWAV"
+uid="uid://b6nh7pycrote2"
+path="res://.godot/imported/lovely_weather.wav-ceac5095ba666ad4d5b7ec821c6c8d61.sample"
 
 [deps]
 
 source_file="res://media/audio/voice/lovely_weather.wav"
-dest_files=[ "res://.import/lovely_weather.wav-ceac5095ba666ad4d5b7ec821c6c8d61.sample" ]
+dest_files=["res://.godot/imported/lovely_weather.wav-ceac5095ba666ad4d5b7ec821c6c8d61.sample"]
 
 [params]
 

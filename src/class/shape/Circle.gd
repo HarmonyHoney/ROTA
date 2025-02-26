@@ -1,12 +1,12 @@
-tool
+@tool
 extends PolyShape
 
-export var radius := 50.0 setget set_radius
-export var circle_offset := Vector2.ZERO setget set_offset
-export var points := 16 setget set_points
+@export var radius := 50.0: set = set_radius
+@export var circle_offset := Vector2.ZERO: set = set_offset
+@export var points := 16: set = set_points
 
 func _draw():
-	if !is_poly and gon.size() > 2: draw_colored_polygon(gon, Color.white, PoolVector2Array(), null, null, true)
+	if !is_poly and gon.size() > 2: draw_colored_polygon(gon, Color.WHITE, PackedVector2Array(), null)
 
 func shape():
 	gon = []

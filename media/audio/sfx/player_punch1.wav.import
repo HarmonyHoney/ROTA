@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/player_punch1.wav-0c9b3716d47bcf981442165cd222b279.sample"
+type="AudioStreamWAV"
+uid="uid://bwd6wjldvfrqr"
+path="res://.godot/imported/player_punch1.wav-0c9b3716d47bcf981442165cd222b279.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/player_punch1.wav"
-dest_files=[ "res://.import/player_punch1.wav-0c9b3716d47bcf981442165cd222b279.sample" ]
+dest_files=["res://.godot/imported/player_punch1.wav-0c9b3716d47bcf981442165cd222b279.sample"]
 
 [params]
 

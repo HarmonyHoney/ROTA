@@ -1,25 +1,25 @@
 extends Node2D
 
-onready var cam := $Camera2D
-onready var map_node := $Map
-onready var center_node := $UI/Control/Center
-onready var label_node := $UI/Control/Center/Label
-onready var wipe_mat : ShaderMaterial = $UI/Control/Wipe.material
+@onready var cam := $Camera2D
+@onready var map_node := $Map
+@onready var center_node := $UI/Control/Center
+@onready var label_node := $UI/Control/Center/Label
+@onready var wipe_mat : ShaderMaterial = $UI/Control/Wipe.material
 
 
-export var tile_size := 12.0
+@export var tile_size := 12.0
 
-export(String, DIR) var folder := ""
-onready var maps : Array = Shared.list_all_files(folder)
-export var map := 0 setget set_map
+@export var folder := "" # (String, DIR)
+@onready var maps : Array = Shared.list_all_files(folder)
+@export var map := 0: set = set_map
 var map_ease := EaseMover.new(1.0, 0.01)
 
 var candies := []
 
-export var room_size := 600.0
+@export var room_size := 600.0
 
-export var wrap_cam = 0
-export var cam_speed := 100.0
+@export var wrap_cam = 0
+@export var cam_speed := 100.0
 var wrap_angle = 0.0
 var delta_scale := 1.0
 
@@ -29,13 +29,13 @@ var is_unpause := false
 
 var candy_scene := load("res://src/arcade/Candy.tscn")
 
-onready var music : AudioStreamPlayer = Audio.dict["music_arcade"]
+@onready var music : AudioStreamPlayer = Audio.dict["music_arcade"]
 
 func _ready():
-	MenuPause.connect("opened", self, "pause")
+	MenuPause.connect("opened", Callable(self, "pause"))
 	scene()
 	Audio.play("arcade_boot")
-	yield(get_tree().create_timer(1.0), "timeout")
+	await get_tree().create_timer(1.0).timeout
 	music.play()
 	
 	shuffle_maps()
@@ -60,11 +60,11 @@ func _physics_process(delta):
 	if !map_ease.is_last:
 		cam.zoom = Vector2.ONE * lerp(1.1, 3.0, s)
 		cam.position = map_ease.from_lerp_to(s)
-		center_node.rect_scale = Vector2.ONE * lerp(0.0, 2.5, s)
-		wipe_mat.set_shader_param("radius", lerp(0.71, 0.0, ease(1.0 - f, 0.17)))
+		center_node.scale = Vector2.ONE * lerp(0.0, 2.5, s)
+		wipe_mat.set_shader_parameter("radius", lerp(0.71, 0.0, ease(1.0 - f, 0.17)))
 		
 		if map_ease.is_complete:
-			yield(get_tree(), "physics_frame")
+			await get_tree().physics_frame
 			scene()
 	
 	if wrap_cam > 0:
@@ -121,7 +121,7 @@ func scene():
 	#print("wrap_cam: ", wrap_cam, " cam_speed: ", cam_speed, " delta_scale : ", delta_scale)
 	
 	randomize()
-	wrap_angle = lerp(0.0, TAU, (randi() % 3) / 4.0) + (0.0 if wrap_cam < 2 else deg2rad(45.0))
+	wrap_angle = lerp(0.0, TAU, (randi() % 3) / 4.0) + (0.0 if wrap_cam < 2 else deg_to_rad(45.0))
 	#print(rad2deg(wrap_angle))
 	
 	map_ease.from = Vector2.ZERO
@@ -134,7 +134,7 @@ func scene():
 	
 	var goto = map % maps.size()
 	if goto == 0: shuffle_maps()
-	var m = load(maps[goto]).instance()
+	var m = load(maps[goto]).instantiate()
 	map_node.add_child(m)
 	
 	for i in m.get_children():
@@ -143,12 +143,12 @@ func scene():
 		if i.is_in_group("back"):
 			i.visible = false
 	
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	
 	if wrap_cam > 2:
 		var g = get_tree().get_nodes_in_group("candy")
 		for i in g:
-			var d = candy_scene.instance()
+			var d = candy_scene.instantiate()
 			d.position = i.position
 			i.get_parent().add_child(d)
 			d.dir_x = -i.dir_x

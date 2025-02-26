@@ -1,28 +1,29 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://btvhbupi5prtp"]
 
-[ext_resource path="res://src/autoload/Wipe.gd" type="Script" id=1]
-[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
-[ext_resource path="res://src/shader/wipe.gdshader" type="Shader" id=3]
+[ext_resource type="Script" path="res://src/autoload/Wipe.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cfh246jt0rtam" path="res://media/image/box/box-100.png" id="2"]
+[ext_resource type="Shader" path="res://src/shader/wipe.gdshader" id="3"]
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 3 )
-shader_param/inside = Color( 1, 1, 1, 1 )
-shader_param/line = Color( 0, 0, 0, 1 )
-shader_param/outside = Color( 0, 0, 0, 0 )
-shader_param/scale = 2.0
-shader_param/offset = Vector2( 0.2, -0.2 )
-shader_param/start_offset = Vector2( 0.5, 0.5 )
-shader_param/radius = 0.356
-shader_param/width = 0.0
+[sub_resource type="ShaderMaterial" id="2"]
+shader = ExtResource("3")
+shader_parameter/inside = Color(1, 1, 1, 1)
+shader_parameter/line = Color(0, 0, 0, 1)
+shader_parameter/outside = Color(0, 0, 0, 0)
+shader_parameter/scale = 2.0
+shader_parameter/offset = Vector2(0.2, -0.2)
+shader_parameter/start_offset = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.356
+shader_parameter/width = 0.0
 
 [node name="Wipe" type="CanvasLayer"]
-pause_mode = 2
+process_mode = 3
 layer = 99
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-material = SubResource( 2 )
+material = SubResource("2")
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 2 )
+texture = ExtResource("2")
 stretch_mode = 2

@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://media/image/white_square_100x.png" type="Texture" id=1]
+[ext_resource path="res://media/image/white_square_100x.png" type="Texture2D" id=1]
 [ext_resource path="res://src/actor/Chat.gd" type="Script" id=2]
-[ext_resource path="res://media/font/mini-wakuwaku.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://media/font/mini-wakuwaku.otf" type="FontFile" id=3]
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=4]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="FontFile" id=3]
 size = 40
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
@@ -29,13 +29,13 @@ position = Vector2( 7, 10 )
 [node name="Triangle" type="Polygon2D" parent="Bubble/Shadow"]
 position = Vector2( 0, 37.5 )
 scale = Vector2( 1e-05, 1e-05 )
-polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
+polygon = PackedVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
 
 [node name="Rect" type="Polygon2D" parent="Bubble/Shadow"]
 texture = ExtResource( 1 )
 texture_offset = Vector2( 0, 50 )
 texture_scale = Vector2( 0, 1 )
-polygon = PoolVector2Array( 59, 0, 58.0598, 8.34453, 55.2863, 16.2706, 50.8187, 23.3809, 44.8809, 29.3187, 37.7706, 33.7863, 29.8445, 36.5598, 21.5, 37.5, -21.5, 37.5, -29.8445, 36.5598, -37.7706, 33.7863, -44.8809, 29.3187, -50.8187, 23.3809, -55.2863, 16.2706, -58.0598, 8.34453, -59, -3.27835e-06, -58.0598, -8.34453, -55.2863, -16.2706, -50.8187, -23.3809, -44.8809, -29.3187, -37.7706, -33.7863, -29.8445, -36.5598, -21.5, -37.5, 21.5, -37.5, 29.8445, -36.5598, 37.7706, -33.7863, 44.8809, -29.3187, 50.8187, -23.3809, 55.2863, -16.2706, 58.0598, -8.34453 )
+polygon = PackedVector2Array( 59, 0, 58.0598, 8.34453, 55.2863, 16.2706, 50.8187, 23.3809, 44.8809, 29.3187, 37.7706, 33.7863, 29.8445, 36.5598, 21.5, 37.5, -21.5, 37.5, -29.8445, 36.5598, -37.7706, 33.7863, -44.8809, 29.3187, -50.8187, 23.3809, -55.2863, 16.2706, -58.0598, 8.34453, -59, -3.27835e-06, -58.0598, -8.34453, -55.2863, -16.2706, -50.8187, -23.3809, -44.8809, -29.3187, -37.7706, -33.7863, -29.8445, -36.5598, -21.5, -37.5, 21.5, -37.5, 29.8445, -36.5598, 37.7706, -33.7863, 44.8809, -29.3187, 50.8187, -23.3809, 55.2863, -16.2706, 58.0598, -8.34453 )
 script = ExtResource( 4 )
 is_baked = false
 size = Vector2( 59, 37.5 )
@@ -44,43 +44,43 @@ radius = Plane( -2, -1, -1, -1 )
 [node name="Triangle" type="Polygon2D" parent="Bubble"]
 position = Vector2( 0, 37.5 )
 scale = Vector2( 1e-05, 1e-05 )
-polygon = PoolVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
+polygon = PackedVector2Array( -21.5, 0, 21.5, 0, 0, 40 )
 
 [node name="Rect" type="Polygon2D" parent="Bubble"]
 texture = ExtResource( 1 )
 texture_offset = Vector2( 0, 50 )
 texture_scale = Vector2( 0, 1 )
-polygon = PoolVector2Array( 59, 0, 58.0598, 8.34453, 55.2863, 16.2706, 50.8187, 23.3809, 44.8809, 29.3187, 37.7706, 33.7863, 29.8445, 36.5598, 21.5, 37.5, -21.5, 37.5, -29.8445, 36.5598, -37.7706, 33.7863, -44.8809, 29.3187, -50.8187, 23.3809, -55.2863, 16.2706, -58.0598, 8.34453, -59, -3.27835e-06, -58.0598, -8.34453, -55.2863, -16.2706, -50.8187, -23.3809, -44.8809, -29.3187, -37.7706, -33.7863, -29.8445, -36.5598, -21.5, -37.5, 21.5, -37.5, 29.8445, -36.5598, 37.7706, -33.7863, 44.8809, -29.3187, 50.8187, -23.3809, 55.2863, -16.2706, 58.0598, -8.34453 )
+polygon = PackedVector2Array( 59, 0, 58.0598, 8.34453, 55.2863, 16.2706, 50.8187, 23.3809, 44.8809, 29.3187, 37.7706, 33.7863, 29.8445, 36.5598, 21.5, 37.5, -21.5, 37.5, -29.8445, 36.5598, -37.7706, 33.7863, -44.8809, 29.3187, -50.8187, 23.3809, -55.2863, 16.2706, -58.0598, 8.34453, -59, -3.27835e-06, -58.0598, -8.34453, -55.2863, -16.2706, -50.8187, -23.3809, -44.8809, -29.3187, -37.7706, -33.7863, -29.8445, -36.5598, -21.5, -37.5, 21.5, -37.5, 29.8445, -36.5598, 37.7706, -33.7863, 44.8809, -29.3187, 50.8187, -23.3809, 55.2863, -16.2706, 58.0598, -8.34453 )
 script = ExtResource( 4 )
 is_baked = false
 size = Vector2( 59, 37.5 )
 radius = Plane( -2, -1, -1, -1 )
 
 [node name="Center" type="CenterContainer" parent="Bubble"]
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 use_top_left = true
 
 [node name="Back" type="Label" parent="Bubble/Center"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = -39.0
-margin_top = -21.0
-margin_right = 39.0
-margin_bottom = 20.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 3 )
+offset_left = -39.0
+offset_top = -21.0
+offset_right = 39.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = SubResource( 3 )
 text = "aaa"
 align = 1
 valign = 2
 percent_visible = 1.33333
 
 [node name="Label" type="Label" parent="Bubble/Center"]
-margin_left = -39.0
-margin_top = -21.0
-margin_right = 39.0
-margin_bottom = 20.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 3 )
+offset_left = -39.0
+offset_top = -21.0
+offset_right = 39.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = SubResource( 3 )
 text = "aaa"
 align = 1
 valign = 2

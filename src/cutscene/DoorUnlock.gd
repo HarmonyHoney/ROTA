@@ -1,12 +1,12 @@
 extends Node
 
-onready var gem := $Gem
-onready var gems_node := $Gems
-onready var gems := []
+@onready var gem := $Gem
+@onready var gems_node := $Gems
+@onready var gems := []
 
-export var radius := 150.0
-export var turn_speed := 3.0
-export var turn_sign := 1.0
+@export var radius := 150.0
+@export var turn_speed := 3.0
+@export var turn_sign := 1.0
 
 var player
 var door
@@ -17,7 +17,7 @@ var time := 10.0
 var step := 0
 signal done
 
-export var gem_offset := 0.2
+@export var gem_offset := 0.2
 var gem_time := 1.0
 
 var gem_last := 0.0
@@ -68,7 +68,7 @@ func _physics_process(delta):
 		
 		var a = (TAU * (float(i) / float(gem_count))) + ((clock + under) * turn_speed)
 		var pos = Vector2(0, radius * (1.0 - shrink)).rotated(a * turn_sign)
-		gems[i].position = gems_node.to_local(Shared.player.global_position).linear_interpolate(pos, frac)
+		gems[i].position = gems_node.to_local(Shared.player.global_position).lerp(pos, frac)
 		gems[i].scale = Vector2.ONE * ease(frac - shrink, 0.5)
 	
 	gem.scale = Vector2.ONE * lerp(0.0, 2.5, smoothstep(0.0, 1.0, shrink))
@@ -81,7 +81,7 @@ func _physics_process(delta):
 			Clouds.day_scale = lerp(speedy, 1.0, smoothstep(0.0, 1.0, (clock - gem_shrink.x) / 1.0))
 		2:
 			var se = socket_ease.count(delta)
-			gem.global_position = gems_node.global_position.linear_interpolate(socket_pos, se)
+			gem.global_position = gems_node.global_position.lerp(socket_pos, se)
 		3:
 			var w = ease(abs(wrapf(click_ease.count(delta, click_ease.show, false) * 2.0, -1.0, 1.0)), -5.0)
 			gem.scale = Vector2.ONE * lerp(2.5, 2.2, w)
@@ -123,7 +123,7 @@ func act(d):
 	socket_pos = door.global_position + Shared.rot(Vector2(0, -10), door.dir)
 	
 	Cam.target_node = null
-	Cam.target_pos = door.global_position.linear_interpolate(gems_node.global_position, 2.0 / 3.0)
+	Cam.target_pos = door.global_position.lerp(gems_node.global_position, 2.0 / 3.0)
 	Cam.start_zoom(0)
 	
 	gem_count = door.gem_count
@@ -149,7 +149,7 @@ func act(d):
 	player.joy = Vector2(sign(dist.x) if dist.x else player.dir_x, 0)
 	
 	set_physics_process(true)
-	yield(self, "done")
+	await self.done
 	
 	Cam.target_node = player
 	Cutscene.is_playing = false

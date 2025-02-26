@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/jump3.wav-7f0e5d8502386dd44526dfd87ac26ac8.sample"
+type="AudioStreamWAV"
+uid="uid://bgxg2vq7ih4hu"
+path="res://.godot/imported/jump3.wav-7f0e5d8502386dd44526dfd87ac26ac8.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/jump3.wav"
-dest_files=[ "res://.import/jump3.wav-7f0e5d8502386dd44526dfd87ac26ac8.sample" ]
+dest_files=["res://.godot/imported/jump3.wav-7f0e5d8502386dd44526dfd87ac26ac8.sample"]
 
 [params]
 

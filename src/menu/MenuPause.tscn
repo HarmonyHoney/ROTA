@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://media/font/profile/PauseItem.tres" type="DynamicFont" id=2]
+[ext_resource path="res://media/font/profile/PauseItem.tres" type="FontFile" id=2]
 [ext_resource path="res://src/menu/DemoShow.gd" type="Script" id=3]
 [ext_resource path="res://src/menu/MenuPause.gd" type="Script" id=4]
 [ext_resource path="res://src/shader/fade_x.gdshader" type="Shader" id=5]
@@ -22,7 +22,7 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [node name="PauseMenu" type="CanvasLayer"]
-pause_mode = 2
+process_mode = 3
 layer = 6
 script = ExtResource( 4 )
 items_path = NodePath("Control/List/Items")
@@ -39,23 +39,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="List" type="Control" parent="Control"]
-margin_right = 1280.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 1280, 720 )
+offset_right = 1280.0
+offset_bottom = 720.0
+custom_minimum_size = Vector2( 1280, 720 )
 
 [node name="BG" type="ColorRect" parent="Control/List"]
 modulate = Color( 0, 0, 0, 0.8 )
 material = SubResource( 5 )
-margin_left = 443.0
-margin_right = 837.0
-margin_bottom = 720.0
+offset_left = 443.0
+offset_right = 837.0
+offset_bottom = 720.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="Cursor" type="Panel" parent="Control/List"]
 modulate = Color( 0.658824, 0, 0, 1 )
-margin_right = 100.0
-margin_bottom = 50.0
-custom_styles/panel = SubResource( 4 )
+offset_right = 100.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource( 4 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -63,17 +63,17 @@ __meta__ = {
 [node name="Items" type="VBoxContainer" parent="Control/List"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 15
+theme_override_constants/separation = 15
 alignment = 1
 
 [node name="Resume" type="Label" parent="Control/List/Items"]
-margin_left = 546.0
-margin_top = 169.0
-margin_right = 733.0
-margin_bottom = 220.0
+offset_left = 546.0
+offset_top = 169.0
+offset_right = 733.0
+offset_bottom = 220.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "Resume"
 align = 1
 valign = 1
@@ -82,13 +82,13 @@ __meta__ = {
 }
 
 [node name="Reset" type="Label" parent="Control/List/Items"]
-margin_left = 569.0
-margin_top = 235.0
-margin_right = 710.0
-margin_bottom = 286.0
+offset_left = 569.0
+offset_top = 235.0
+offset_right = 710.0
+offset_bottom = 286.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "Reset"
 align = 1
 valign = 1
@@ -97,13 +97,13 @@ __meta__ = {
 }
 
 [node name="Hub" type="Label" parent="Control/List/Items"]
-margin_left = 503.0
-margin_top = 301.0
-margin_right = 776.0
-margin_bottom = 352.0
+offset_left = 503.0
+offset_top = 301.0
+offset_right = 776.0
+offset_bottom = 352.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "Exit Stage"
 align = 1
 valign = 1
@@ -112,13 +112,13 @@ __meta__ = {
 }
 
 [node name="Options" type="Label" parent="Control/List/Items"]
-margin_left = 539.0
-margin_top = 367.0
-margin_right = 740.0
-margin_bottom = 418.0
+offset_left = 539.0
+offset_top = 367.0
+offset_right = 740.0
+offset_bottom = 418.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "Options"
 align = 1
 valign = 1
@@ -127,13 +127,13 @@ __meta__ = {
 }
 
 [node name="Store" type="Label" parent="Control/List/Items"]
-margin_left = 496.0
-margin_top = 433.0
-margin_right = 784.0
-margin_bottom = 484.0
+offset_left = 496.0
+offset_top = 433.0
+offset_right = 784.0
+offset_bottom = 484.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "Store Page"
 align = 1
 valign = 1
@@ -143,13 +143,13 @@ __meta__ = {
 }
 
 [node name="Exit" type="Label" parent="Control/List/Items"]
-margin_left = 499.0
-margin_top = 499.0
-margin_right = 781.0
-margin_bottom = 550.0
+offset_left = 499.0
+offset_top = 499.0
+offset_right = 781.0
+offset_bottom = 550.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "Main Menu"
 align = 1
 valign = 1

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/portal0.wav-6938cb4953aef29a3321c670b70bf343.sample"
+type="AudioStreamWAV"
+uid="uid://crd6a18u6katv"
+path="res://.godot/imported/portal0.wav-6938cb4953aef29a3321c670b70bf343.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/portal0.wav"
-dest_files=[ "res://.import/portal0.wav-6938cb4953aef29a3321c670b70bf343.sample" ]
+dest_files=["res://.godot/imported/portal0.wav-6938cb4953aef29a3321c670b70bf343.sample"]
 
 [params]
 

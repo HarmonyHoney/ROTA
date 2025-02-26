@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://media/image/box/box_both.png" type="Texture" id=1]
+[ext_resource path="res://media/image/box/box_both.png" type="Texture2D" id=1]
 [ext_resource path="res://src/actor/Box.gd" type="Script" id=2]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=3]
 [ext_resource path="res://media/audio/sfx/hit10.wav" type="AudioStream" id=4]
@@ -19,7 +19,7 @@ extents = Vector2( 30, 30 )
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 49.9, 49.9 )
 
-[node name="Box" type="KinematicBody2D" groups=["box"]]
+[node name="Box" type="CharacterBody2D" groups=["box"]]
 process_priority = -5
 position = Vector2( 50, 50 )
 z_index = 30
@@ -35,7 +35,7 @@ shape = SubResource( 2 )
 
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="Box" type="Sprite" parent="Sprites"]
+[node name="Box" type="Sprite2D" parent="Sprites"]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 

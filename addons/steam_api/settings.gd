@@ -1,5 +1,5 @@
 extends Resource
 
-export(bool) var disable:bool
-export(String) var app_id:String
-export(String) var sdk_dir:String
+@export var disable: bool
+@export var app_id: String
+@export var sdk_dir: String

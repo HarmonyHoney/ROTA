@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/bamblong1.wav-ccac8dcb8c007526db4e021b12e03f85.sample"
+type="AudioStreamWAV"
+uid="uid://dr1dpjf0mkgy8"
+path="res://.godot/imported/bamblong1.wav-ccac8dcb8c007526db4e021b12e03f85.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/bamblong1.wav"
-dest_files=[ "res://.import/bamblong1.wav-ccac8dcb8c007526db4e021b12e03f85.sample" ]
+dest_files=["res://.godot/imported/bamblong1.wav-ccac8dcb8c007526db4e021b12e03f85.sample"]
 
 [params]
 

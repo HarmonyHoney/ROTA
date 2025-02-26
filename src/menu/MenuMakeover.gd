@@ -1,20 +1,20 @@
 extends MenuBase
 
-onready var palette : PoolColorArray = Shared.player.palette
+@onready var palette : PackedColorArray = Shared.player.palette
 var player
-onready var hair_fronts : int = Shared.player.hair_fronts.size()
-onready var hair_backs : int = Shared.player.hair_backs.size()
+@onready var hair_fronts : int = Shared.player.hair_fronts.size()
+@onready var hair_backs : int = Shared.player.hair_backs.size()
 
 var pale = [3,2,2,1,0,16]
 
-onready var arrows := $Center/Control/Dialog/Arrows.get_children()
-export var arrow_margin := Vector2.ZERO
+@onready var arrows := $Center/Control/Dialog/Arrows.get_children()
+@export var arrow_margin := Vector2.ZERO
 
 func row():
 	if !arrows: return
 	var c = items[cursor]
-	arrows[0].rect_position = c.rect_position - Vector2(30, 0) + (arrow_margin * Vector2(-1, 1))
-	arrows[1].rect_position = c.rect_position + Vector2(c.rect_size.x, 0) + arrow_margin
+	arrows[0].position = c.position - Vector2(30, 0) + (arrow_margin * Vector2(-1, 1))
+	arrows[1].position = c.position + Vector2(c.size.x, 0) + arrow_margin
 	
 	for i in arrows:
 		i.visible = cursor < items.size() - 1

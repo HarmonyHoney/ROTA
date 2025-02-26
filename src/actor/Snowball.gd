@@ -1,19 +1,19 @@
 extends Area2D
 
-export var dir := 0
-export var snow_gravity := Vector2(0, 120)
-export var throw_vel := Vector2(500, -50)
-export var velocity := Vector2.ZERO
+@export var dir := 0
+@export var snow_gravity := Vector2(0, 120)
+@export var throw_vel := Vector2(500, -50)
+@export var velocity := Vector2.ZERO
 var term_vel := 1000
 
-onready var polygon := $Polygon2D
-onready var audio_hit := $Audio/Hit
-onready var audio_throw := $Audio/Throw
+@onready var polygon := $Polygon2D
+@onready var audio_hit := $Audio/Hit
+@onready var audio_throw := $Audio/Throw
 
 var is_hit := false
 var is_out := false
 var lifetime := 0.0
-export var life_range := Vector2(0.1, 10.0)
+@export var life_range := Vector2(0.1, 10.0)
 
 var throw_easy := EaseMover.new(0.1)
 var hit_easy := EaseMover.new()
@@ -51,7 +51,7 @@ func rot(vec : Vector2, _dir := dir) -> Vector2:
 	return vec
 
 func area_entered(area):
-	if lifetime > life_range.x and (!area.get_collision_layer_bit(4) or area.get_collision_layer_bit(6)):
+	if lifetime > life_range.x and (!area.get_collision_layer_value(4) or area.get_collision_layer_value(6)):
 		hit()
 
 func body_entered(body):

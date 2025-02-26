@@ -1,21 +1,21 @@
 extends Control
 
-export var slot := 0
+@export var slot := 0
 
-onready var new_game := $NewGame
-onready var items := $Items
+@onready var new_game := $NewGame
+@onready var items := $Items
 
-onready var gem_label := $Items/Goals/Gems/Label
-onready var clocks := $Items/Goals/Clocks
-onready var clock_label := $Items/Goals/Clocks/Label
-onready var time_label := $Items/Time/Label
+@onready var gem_label := $Items/Goals/Gems/Label
+@onready var clocks := $Items/Goals/Clocks
+@onready var clock_label := $Items/Goals/Clocks/Label
+@onready var time_label := $Items/Time/Label
 
 var is_new := true
 
 func _ready():
 	set_card()
 	
-	Shared.connect("slot_erased", self, "slot_erased")
+	Shared.connect("slot_erased", Callable(self, "slot_erased"))
 
 func set_card():
 	var d = Shared.save_dict

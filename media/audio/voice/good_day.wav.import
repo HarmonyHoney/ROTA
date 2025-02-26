@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/good_day.wav-34d196ebddf86e3f52ef7a3e0f6b492b.sample"
+type="AudioStreamWAV"
+uid="uid://dexwl55scojdw"
+path="res://.godot/imported/good_day.wav-34d196ebddf86e3f52ef7a3e0f6b492b.sample"
 
 [deps]
 
 source_file="res://media/audio/voice/good_day.wav"
-dest_files=[ "res://.import/good_day.wav-34d196ebddf86e3f52ef7a3e0f6b492b.sample" ]
+dest_files=["res://.godot/imported/good_day.wav-34d196ebddf86e3f52ef7a3e0f6b492b.sample"]
 
 [params]
 

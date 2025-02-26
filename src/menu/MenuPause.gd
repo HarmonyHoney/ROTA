@@ -1,10 +1,10 @@
 extends MenuBase
 
-onready var hub_label := $Control/List/Items/Hub
+@onready var hub_label := $Control/List/Items/Hub
 var is_paused := false
 
 func _ready():
-	Wipe.connect("complete", self, "wipe_complete")
+	Wipe.connect("complete", Callable(self, "wipe_complete"))
 
 func _input(event):
 	if Wipe.is_wipe: return
@@ -40,7 +40,7 @@ func wipe_complete(arg):
 		fade_ease.clock = 0
 
 func set_open(arg := is_open, is_audio := true):
-	.set_open(arg)
+	super.set_open(arg)
 	is_paused = is_open
 	
 	#get_tree().paused = is_open

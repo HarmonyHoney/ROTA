@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/crate_land.wav-ab508f90730200b3fbea6441fb7862ad.sample"
+type="AudioStreamWAV"
+uid="uid://ds73w2j0ha51b"
+path="res://.godot/imported/crate_land.wav-ab508f90730200b3fbea6441fb7862ad.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/crate_land.wav"
-dest_files=[ "res://.import/crate_land.wav-ab508f90730200b3fbea6441fb7862ad.sample" ]
+dest_files=["res://.godot/imported/crate_land.wav-ab508f90730200b3fbea6441fb7862ad.sample"]
 
 [params]
 

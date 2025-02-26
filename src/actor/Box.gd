@@ -1,26 +1,26 @@
-tool
-extends KinematicBody2D
+@tool
+extends CharacterBody2D
 class_name Box
 
-onready var collision_shape : CollisionShape2D = $CollisionShape2D
-onready var push_areas : Array = $PushAreas.get_children()
-onready var area_respawn := $RespawnArea
-onready var area := $Area2D
-onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
+@onready var collision_shape : CollisionShape2D = $CollisionShape2D
+@onready var push_areas : Array = $PushAreas.get_children()
+@onready var area_respawn := $RespawnArea
+@onready var area := $Area2D
+@onready var collision_sprite : CollisionShape2D = $Area2D/CollisionSprite
 
-onready var sprite : Node2D = $Sprites
-onready var box_sprite : Sprite = $Sprites/Box
+@onready var sprite : Node2D = $Sprites
+@onready var box_sprite : Sprite2D = $Sprites/Box
 
-onready var audio_move := $Audio/Move
-onready var audio_land := $Audio/Land
-onready var audio_fallout := $Audio/Fallout
-onready var audio_respawn := $Audio/Respawn
+@onready var audio_move := $Audio/Move
+@onready var audio_land := $Audio/Land
+@onready var audio_fallout := $Audio/Fallout
+@onready var audio_respawn := $Audio/Respawn
 
-export var dir := 0 setget set_dir
+@export var dir := 0: set = set_dir
 var dir_last := 0
 
 var can_push := true
-export var can_spin := true setget set_can_spin
+@export var can_spin := true: set = set_can_spin
 
 var tex_push = preload("res://media/image/box/box_push.png")
 var tex_both = preload("res://media/image/box/box_both.png")
@@ -44,28 +44,28 @@ var is_turn := false
 
 var pickup_angle := 12.0
 
-onready var push_ease := EaseMover.new(0.2)
-onready var turn_ease := EaseMover.new(0.2)
-onready var respawn_ease := EaseMover.new(1.0)
-onready var pickup_ease := EaseMover.new(0.2)
+@onready var push_ease := EaseMover.new(0.2)
+@onready var turn_ease := EaseMover.new(0.2)
+@onready var respawn_ease := EaseMover.new(1.0)
+@onready var pickup_ease := EaseMover.new(0.2)
 
-var velocity := 0.0
-export var start_velocity := 100.0
-export var gravity := 200.0
+var the_velocity = 0.0
+@export var start_velocity := 100.0
+@export var gravity := 200.0
 var is_move := false
 
 func _enter_tree():
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	Shared.boxes.append(self)
 
 func _exit_tree():
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	Shared.boxes.erase(self)
 
 func _ready():
 	set_can_spin()
 	
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	
 	turn_ease.clock = 99
 	
@@ -81,7 +81,7 @@ func _ready():
 	last_floor = is_floor
 
 func _physics_process(delta):
-	if Engine.editor_hint: return
+	if Engine.is_editor_hint(): return
 	
 	if is_respawn:
 		if respawn_ease.is_complete and area_respawn.get_overlapping_bodies().size() == 0:
@@ -109,7 +109,7 @@ func _physics_process(delta):
 				move_count += 1
 			
 			is_move = true
-			velocity = start_velocity
+			the_velocity = start_velocity
 			
 			Audio.play(audio_move, 0.7, 1.3)
 
@@ -120,9 +120,9 @@ func _process(delta):
 	elif is_push:
 		var s = push_ease.count(delta)
 		# lerp sprite and update collision_sprite
-		sprite.position = move_from.linear_interpolate(Vector2.ZERO, s)
+		sprite.position = move_from.lerp(Vector2.ZERO, s)
 		collision_sprite.position = sprite.position
-		sprite.rotation = lerp_angle(turn_to + deg2rad(12 * -push_x), turn_to, abs(0.5 - s) * 2.0)
+		sprite.rotation = lerp_angle(turn_to + deg_to_rad(12 * -push_x), turn_to, abs(0.5 - s) * 2.0)
 		if push_ease.is_complete:
 			is_push = false
 	
@@ -159,12 +159,12 @@ func set_dir(arg := dir):
 	
 	if is_instance_valid(sprite):
 		turn_from = sprite.rotation
-	turn_to = deg2rad(dir * 90)
+	turn_to = deg_to_rad(dir * 90)
 	if turn_ease:
 		turn_ease.clock = 0.0
 	is_turn = true
 	
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		$Sprites.rotation = turn_to
 
 func set_can_spin(arg := can_spin):
@@ -195,7 +195,7 @@ func test_tile(check_dir := dir, distance := 1) -> bool:
 	
 	if !result:
 		var check_pos = global_position + vec
-		check_pos = Vector2(stepify(check_pos.x, 50), stepify(check_pos.y, 50))
+		check_pos = Vector2(snapped(check_pos.x, 50), snapped(check_pos.y, 50))
 		
 		for i in Shared.boxes:
 			if i != self:
@@ -208,7 +208,7 @@ func test_tile(check_dir := dir, distance := 1) -> bool:
 func move_tile(move_dir := dir, distance := 1):
 	var last_pos = global_position
 	global_position += rot(Vector2.DOWN * distance * tile, move_dir)
-	global_position = Vector2(stepify(global_position.x, 50), stepify(global_position.y, 50))
+	global_position = Vector2(snapped(global_position.x, 50), snapped(global_position.y, 50))
 	#print(name, ": ", last_pos, " - ", position)
 	
 	# move sprite
@@ -271,4 +271,3 @@ func fall_out():
 
 func pickup():
 	pickup_ease.clock = 0.0
-

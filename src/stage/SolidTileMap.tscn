@@ -1,15 +1,15 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/stage/SolidTileMap.gd" type="Script" id=1]
-[ext_resource path="res://media/image/box/box-100.png" type="Texture" id=2]
+[ext_resource path="res://media/image/box/box-100.png" type="Texture2D" id=2]
 [ext_resource path="res://src/stage/tileset/TileSet0.tres" type="TileSet" id=3]
 [ext_resource path="res://src/shader/add_color.gdshader" type="Shader" id=4]
 
 [sub_resource type="OccluderPolygon2D" id=5]
-polygon = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
+polygon = PackedVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
+points = PackedVector2Array( 100, 100, 0, 100, 0, 0, 100, 0 )
 
 [sub_resource type="TileSet" id=2]
 0/name = "rect-100.png 0"

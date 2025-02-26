@@ -1,9 +1,9 @@
 extends Node2D
 
-onready var player = Shared.player
-onready var node_joy := $CanvasLayer/Center/Control/Cabinet/Controls/Joystick
-onready var node_a := $CanvasLayer/Center/Control/Cabinet/Controls/Button/Control/Node2D
-onready var node_b := $CanvasLayer/Center/Control/Cabinet/Controls/Button2/Control/Node2D
+@onready var player = Shared.player
+@onready var node_joy := $CanvasLayer/Center/Control/Cabinet/Controls/Joystick
+@onready var node_a := $CanvasLayer/Center/Control/Cabinet/Controls/Button/Control/Node2D
+@onready var node_b := $CanvasLayer/Center/Control/Cabinet/Controls/Button2/Control/Node2D
 
 var joy := Vector2.ZERO
 var btn_a := false
@@ -11,7 +11,7 @@ var btn_b := false
 var is_unpause := false
 
 func _ready():
-	MenuPause.connect("opened", self, "pause")
+	MenuPause.connect("opened", Callable(self, "pause"))
 	
 	player.is_input = false
 	Cam.target_node = null
@@ -33,7 +33,7 @@ func _physics_process(delta):
 		btn_a = a and !m
 		btn_b = b and !m
 	
-	node_joy.rotation = lerp(node_joy.rotation, joy.x * deg2rad(15), delta * 30.0)
+	node_joy.rotation = lerp(node_joy.rotation, joy.x * deg_to_rad(15), delta * 30.0)
 	node_a.position.y = lerp(node_a.position.y, float(btn_a) * 20, delta * 30.0)
 	node_b.position.y = lerp(node_b.position.y, float(btn_b) * 20, delta * 30.0)
 

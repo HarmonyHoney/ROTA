@@ -1,8 +1,8 @@
-tool
+@tool
 extends Control
 
-export var action := ""
-export var text := "Label" setget set_text
+@export var action := ""
+@export var text := "Label": set = set_text
 
 func _ready():
 	$Label.text = text

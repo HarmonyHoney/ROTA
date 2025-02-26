@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/shine_sparkle.wav-14e44b5dedc57f9d46cfd717e9fe80c7.sample"
+type="AudioStreamWAV"
+uid="uid://dqa5l8n44tk0v"
+path="res://.godot/imported/shine_sparkle.wav-14e44b5dedc57f9d46cfd717e9fe80c7.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/shine_sparkle.wav"
-dest_files=[ "res://.import/shine_sparkle.wav-14e44b5dedc57f9d46cfd717e9fe80c7.sample" ]
+dest_files=["res://.godot/imported/shine_sparkle.wav-14e44b5dedc57f9d46cfd717e9fe80c7.sample"]
 
 [params]
 

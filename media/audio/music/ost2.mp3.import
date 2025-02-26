@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/ost2.mp3-1f6a35d1818eca4fc286e0435a49e43d.mp3str"
+uid="uid://bhnh21q1empro"
+path="res://.godot/imported/ost2.mp3-1f6a35d1818eca4fc286e0435a49e43d.mp3str"
 
 [deps]
 
 source_file="res://media/audio/music/ost2.mp3"
-dest_files=[ "res://.import/ost2.mp3-1f6a35d1818eca4fc286e0435a49e43d.mp3str" ]
+dest_files=["res://.godot/imported/ost2.mp3-1f6a35d1818eca4fc286e0435a49e43d.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,14 +2,14 @@ extends Camera2D
 
 signal turning(angle)
 
-var target_node setget set_target_node
-onready var target_pos := global_position
-var is_rotating := true
+var target_node : set = set_target_node
+@onready var target_pos := global_position
+var is_ignoring_rotation := true
 var is_moving := true
-export var move_speed := 4.8
+@export var move_speed := 4.8
 
 var screen_size := Vector2(1280, 720)
-export var turn_offset := Vector2.ZERO
+@export var turn_offset := Vector2.ZERO
 
 var turn_ease := EaseMover.new()
 var turn_from := 0.0
@@ -22,8 +22,8 @@ var zoom_ease := EaseMover.new()
 var zoom_from := 1.0
 var zoom_to := 1.0
 
-export var zoom_min := 1.33
-export var zoom_max := 2.5
+@export var zoom_min := 1.33
+@export var zoom_max := 2.5
 
 var zoom_step := 0
 var zoom_steps := 2
@@ -35,13 +35,13 @@ var pan_ease := EaseMover.new(1.0)
 signal pan_complete
 signal moved
 
-onready var radial_canvas := $RadialBlur
-onready var radial_blur := $RadialBlur/ColorRect
+@onready var radial_canvas := $RadialBlur
+@onready var radial_blur := $RadialBlur/ColorRect
 var is_blur := false
 var blur_scale = 1.0
 
 func _enter_tree():
-	Shared.connect("scene_changed", self, "scene_changed")
+	Shared.connect("scene_changed", Callable(self, "scene_changed"))
 
 func _ready():
 	zoom = Vector2.ONE * zoom_min
@@ -59,14 +59,14 @@ func _process(delta):
 			is_zoom = false
 	
 	# rotation
-	if is_rotating:
+	if is_ignoring_rotation:
 		if turn_ease.clock < turn_ease.time:
 			rotation = lerp_angle(turn_from, turn_to, turn_ease.count(delta))
 			emit_signal("turning", rotation)
 			if true and radial_blur:
 				var w = abs(wrapf(turn_ease.smooth() * 2.0, -1.0, 1.0))
 				var t = lerp_angle(turn_from, turn_to, 1.0) - turn_from
-				radial_blur.material.set_shader_param("blur_angle", t * blur_scale * delta * w)
+				radial_blur.material.set_shader_parameter("blur_angle", t * blur_scale * delta * w)
 			
 	
 	if is_pan:
@@ -82,14 +82,14 @@ func _process(delta):
 		
 		# position
 		if is_moving:
-			global_position = global_position.linear_interpolate(target_pos + turn_offset.rotated(rotation), move_speed * delta)
+			global_position = global_position.lerp(target_pos + turn_offset.rotated(rotation), move_speed * delta)
 	
 	emit_signal("moved")
 
 func set_target_node(arg):
-	if is_instance_valid(target_node) and target_node.has_signal("turn_cam"): target_node.disconnect("turn_cam", self, "turn")
+	if is_instance_valid(target_node) and target_node.has_signal("turn_cam"): target_node.disconnect("turn_cam", Callable(self, "turn"))
 	target_node = arg
-	if is_instance_valid(target_node) and target_node.has_signal("turn_cam"): target_node.connect("turn_cam", self, "turn")
+	if is_instance_valid(target_node) and target_node.has_signal("turn_cam"): target_node.connect("turn_cam", Callable(self, "turn"))
 	
 
 func turn(arg):
@@ -150,4 +150,4 @@ func blur(arg):
 	blur_scale = [0.0, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0, 70.0][a]
 	var bsteps = [1.0, 3.0, 4.0, 8.0, 8.0, 8.0, 12.0, 20.0][a]
 	if radial_blur:
-		radial_blur.material.set_shader_param("steps", bsteps)
+		radial_blur.material.set_shader_parameter("steps", bsteps)

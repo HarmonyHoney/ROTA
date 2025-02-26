@@ -2,12 +2,12 @@
 
 [ext_resource path="res://src/detail/Spring.gd" type="Script" id=1]
 [ext_resource path="res://src/class/shape/Rectangle.gd" type="Script" id=2]
-[ext_resource path="res://media/image/details/candle.png" type="Texture" id=3]
+[ext_resource path="res://media/image/details/candle.png" type="Texture2D" id=3]
 [ext_resource path="res://media/audio/sfx/btn0.wav" type="AudioStream" id=4]
-[ext_resource path="res://media/image/box/round_rect400.png" type="Texture" id=5]
+[ext_resource path="res://media/image/box/round_rect400.png" type="Texture2D" id=5]
 [ext_resource path="res://src/shader/circle_fade.gdshader" type="Shader" id=6]
 [ext_resource path="res://src/detail/LightBase.gd" type="Script" id=7]
-[ext_resource path="res://media/image/details/flame.png" type="Texture" id=8]
+[ext_resource path="res://media/image/details/flame.png" type="Texture2D" id=8]
 [ext_resource path="res://src/detail/Visible.gd" type="Script" id=9]
 
 [sub_resource type="ShaderMaterial" id=3]
@@ -27,7 +27,7 @@ add_vel = 4.0
 weight = 4.0
 audio_path = NodePath("Audio/Hit")
 
-[node name="Visible" type="VisibilityNotifier2D" parent="."]
+[node name="Visible" type="VisibleOnScreenNotifier2D" parent="."]
 visible = false
 modulate = Color( 1, 0, 0, 1 )
 rect = Rect2( -100, -166.5, 200, 200 )
@@ -36,7 +36,7 @@ node_path = NodePath("..")
 
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="Sprite" type="Sprite" parent="Sprites"]
+[node name="Sprite2D" type="Sprite2D" parent="Sprites"]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, -200 )
@@ -46,12 +46,12 @@ position = Vector2( 0, -66.5 )
 script = ExtResource( 7 )
 is_night = true
 
-[node name="Flame" type="Sprite" parent="Sprites/Scale"]
+[node name="Flame" type="Sprite2D" parent="Sprites/Scale"]
 position = Vector2( 0, -9 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 8 )
 
-[node name="Light" type="Sprite" parent="Sprites/Scale" groups=["light"]]
+[node name="Light3D" type="Sprite2D" parent="Sprites/Scale" groups=["light"]]
 modulate = Color( 1, 1, 0.439216, 0.14902 )
 material = SubResource( 3 )
 position = Vector2( 0, 0.5 )
@@ -63,7 +63,7 @@ texture = ExtResource( 5 )
 [node name="Wick" type="Polygon2D" parent="Sprites"]
 position = Vector2( 0, -65 )
 color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 3, 3.6, 2.15061, 5.65061, 0.0999998, 6.5, -0.1, 6.5, -2.15061, 5.65061, -3, 3.6, -3, -3.6, -2.15061, -5.65061, -0.0999999, -6.5, 0.0999999, -6.5, 2.15061, -5.65061, 3, -3.6 )
+polygon = PackedVector2Array( 3, 3.6, 2.15061, 5.65061, 0.0999998, 6.5, -0.1, 6.5, -2.15061, 5.65061, -3, 3.6, -3, -3.6, -2.15061, -5.65061, -0.0999999, -6.5, 0.0999999, -6.5, 2.15061, -5.65061, 3, -3.6 )
 script = ExtResource( 2 )
 size = Vector2( 3, 6.5 )
 radius = Plane( -2, -1, -1, -1 )

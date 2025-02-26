@@ -1,13 +1,13 @@
-tool
+@tool
 extends PolyShape
 
-export var width := 8.5 setget set_width
-export var length := 17.0 setget set_length
-export var points := 5 setget set_points
-export var offset := Vector2.ZERO setget set_offset
+@export var width := 8.5: set = set_width
+@export var length := 17.0: set = set_length
+@export var points := 5: set = set_points
+@export var offset := Vector2.ZERO: set = set_offset
 
 func _draw():
-	if !is_poly and gon.size() > 2: draw_colored_polygon(gon, Color.white, PoolVector2Array(), null, null, true)
+	if !is_poly and gon.size() > 2: draw_colored_polygon(gon, Color.WHITE, PackedVector2Array(), null, null, true)
  
 func shape():
 	gon = []

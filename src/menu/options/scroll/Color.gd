@@ -1,8 +1,8 @@
 extends Scroll
 
-export (String, "hair", "skin", "fit", "eye") var part := "hair"
+@export var part := "hair" # (String, "hair", "skin", "fit", "eye")
 
-onready var swatch := $HBoxContainer.get_children()
+@onready var swatch := $HBoxContainer.get_children()
 
 func _ready():
 	count = Shared.player.palette.size() - 1

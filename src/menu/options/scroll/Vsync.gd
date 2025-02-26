@@ -1,8 +1,8 @@
 extends Scroll
 
 func _ready():
-	cursor = int(OS.vsync_enabled)
+	cursor = int((DisplayServer.window_get_vsync_mode() != DisplayServer.VSYNC_DISABLED))
 	set_label()
 
 func set_value():
-	OS.vsync_enabled = bool(cursor)
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if (bool(cursor)) else DisplayServer.VSYNC_DISABLED)

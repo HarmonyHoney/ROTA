@@ -11,7 +11,7 @@ extents = Vector2( 20, 34 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 20, 34 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource( 3 )
 jump_speed = 630.0
@@ -40,7 +40,7 @@ scale = Vector2( 0.7, 0.7 )
 
 [node name="Head" type="Polygon2D" parent="Sprites/Root/Body"]
 position = Vector2( -6.10352e-05, -20.0001 )
-polygon = PoolVector2Array( 30, 0, 27.7164, 11.4805, 21.2132, 21.2132, 11.4805, 27.7164, -1.31134e-06, 30, -11.4805, 27.7164, -21.2132, 21.2132, -27.7164, 11.4805, -30, -2.62268e-06, -27.7164, -11.4805, -21.2132, -21.2132, -11.4805, -27.7164, 3.57746e-07, -30, 11.4805, -27.7164, 21.2132, -21.2132, 27.7164, -11.4805 )
+polygon = PackedVector2Array( 30, 0, 27.7164, 11.4805, 21.2132, 21.2132, 11.4805, 27.7164, -1.31134e-06, 30, -11.4805, 27.7164, -21.2132, 21.2132, -27.7164, 11.4805, -30, -2.62268e-06, -27.7164, -11.4805, -21.2132, -21.2132, -11.4805, -27.7164, 3.57746e-07, -30, 11.4805, -27.7164, 21.2132, -21.2132, 27.7164, -11.4805 )
 script = ExtResource( 2 )
 is_baked = false
 radius = 30.0
@@ -48,7 +48,7 @@ radius = 30.0
 [node name="EyeL" type="Polygon2D" parent="Sprites/Root/Body/Head"]
 position = Vector2( -15, 0 )
 color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
+polygon = PackedVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
 script = ExtResource( 1 )
 is_baked = false
 size = Vector2( 7, 12 )
@@ -58,7 +58,7 @@ points = 4
 [node name="EyeR" type="Polygon2D" parent="Sprites/Root/Body/Head"]
 position = Vector2( 15, 0 )
 color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
+polygon = PackedVector2Array( 7, 5, 6.06218, 8.5, 3.5, 11.0622, -3.0598e-07, 12, -3.5, 11.0622, -6.06218, 8.5, -7, 5, -7, -5, -6.06218, -8.5, -3.5, -11.0622, 8.34742e-08, -12, 3.5, -11.0622, 6.06218, -8.5, 7, -5 )
 script = ExtResource( 1 )
 is_baked = false
 size = Vector2( 7, 12 )
@@ -70,7 +70,7 @@ position = Vector2( -6.10352e-05, 4.99993 )
 
 [node name="Left" type="Polygon2D" parent="Sprites/Root/Body/Legs"]
 rotation = 0.523598
-polygon = PoolVector2Array( 10, 40, 8.66025, 45, 5, 48.6603, -4.37114e-07, 50, -5, 48.6603, -8.66025, 45, -10, 40, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5, 10, 1.74846e-06 )
+polygon = PackedVector2Array( 10, 40, 8.66025, 45, 5, 48.6603, -4.37114e-07, 50, -5, 48.6603, -8.66025, 45, -10, 40, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5, 10, 1.74846e-06 )
 script = ExtResource( 1 )
 is_baked = false
 size = Vector2( 10, 30 )
@@ -81,7 +81,7 @@ points = 4
 [node name="Middle" type="Polygon2D" parent="Sprites/Root/Body/Legs"]
 visible = false
 position = Vector2( 0, 18 )
-polygon = PoolVector2Array( 10, 10, -10, 10, -10, -10, 10, -10 )
+polygon = PackedVector2Array( 10, 10, -10, 10, -10, -10, 10, -10 )
 script = ExtResource( 1 )
 is_baked = false
 size = Vector2( 10, 10 )
@@ -89,7 +89,7 @@ points = 4
 
 [node name="Right" type="Polygon2D" parent="Sprites/Root/Body/Legs"]
 rotation = -0.523598
-polygon = PoolVector2Array( 10, 40, 8.66025, 45, 5, 48.6603, -4.37114e-07, 50, -5, 48.6603, -8.66025, 45, -10, 40, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5, 10, 1.74846e-06 )
+polygon = PackedVector2Array( 10, 40, 8.66025, 45, 5, 48.6603, -4.37114e-07, 50, -5, 48.6603, -8.66025, 45, -10, 40, -10, -8.74228e-07, -8.66025, -5, -5, -8.66025, 1.19249e-07, -10, 5, -8.66025, 8.66025, -5, 10, 1.74846e-06 )
 script = ExtResource( 1 )
 is_baked = false
 size = Vector2( 10, 30 )

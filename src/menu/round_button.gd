@@ -1,19 +1,19 @@
-tool
+@tool
 extends TouchScreenButton
 
-export var angle := 0.0 setget set_angle
-export var radius := 60.0 setget set_radius
-export var points := 5 setget set_points
-export var deadzone := 3.0 setget set_deadzone
-export var dead_points := 5 setget set_dead_points
+@export var angle := 0.0: set = set_angle
+@export var radius := 60.0: set = set_radius
+@export var points := 5: set = set_points
+@export var deadzone := 3.0: set = set_deadzone
+@export var dead_points := 5: set = set_dead_points
 
-export var poly_path : NodePath = ""
-onready var poly : Polygon2D = get_node_or_null(poly_path)
-export var poly_offset := 5.0 setget set_poly_offset
-export var poly_radius := 50.0 setget set_poly_radius
-export var poly_points := 5 setget set_poly_points
-export var poly_deadzone := 3.0 setget set_poly_deadzone
-export var poly_dead_points := 5 setget set_poly_dead_points
+@export var poly_path : NodePath = ""
+@onready var poly : Polygon2D = get_node_or_null(poly_path)
+@export var poly_offset := 5.0: set = set_poly_offset
+@export var poly_radius := 50.0: set = set_poly_radius
+@export var poly_points := 5: set = set_poly_points
+@export var poly_deadzone := 3.0: set = set_poly_deadzone
+@export var poly_dead_points := 5: set = set_poly_dead_points
 
 func set_radius(arg := radius):
 	radius = arg
@@ -66,14 +66,14 @@ func act():
 func poly_act():
 	if is_instance_valid(poly):
 		poly.polygon = make_shape(poly_radius, poly_points, poly_deadzone, poly_dead_points)
-		poly.position = Vector2(poly_offset, 0).rotated(deg2rad(angle))
+		poly.position = Vector2(poly_offset, 0).rotated(deg_to_rad(angle))
 
 func make_shape(_radius := radius, _points := points, _deadzone := deadzone, _dead_points := dead_points, _angle := angle):
-	var vec = PoolVector2Array()
+	var vec = PackedVector2Array()
 	
 	for x in [[_dead_points, _deadzone, -1], [_points, _radius, 1]]:
 		for y in x[0]:
 			var f = y / float(x[0] - 1)
-			vec.append(Vector2(x[1], 0).rotated(deg2rad(_angle + (lerp(-45, 45, f) * x[2]))))
+			vec.append(Vector2(x[1], 0).rotated(deg_to_rad(_angle + (lerp(-45, 45, f) * x[2]))))
 	
 	return vec

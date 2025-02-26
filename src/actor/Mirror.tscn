@@ -23,11 +23,11 @@ image_pos = Vector2( 0, -170 )
 
 [node name="Back" type="ColorRect" parent="."]
 material = SubResource( 5 )
-margin_left = -75.0
-margin_top = -100.0
-margin_right = 75.0
-margin_bottom = 100.0
-rect_clip_content = true
+offset_left = -75.0
+offset_top = -100.0
+offset_right = 75.0
+offset_bottom = 100.0
+clip_contents = true
 
 [node name="Center" type="Node2D" parent="Back"]
 position = Vector2( 75, 100 )
@@ -38,7 +38,7 @@ z_index = 2
 
 [node name="Border" type="Line2D" parent="."]
 position = Vector2( -75, -100 )
-points = PoolVector2Array( -7, 200, -7, -7, 157, -7, 157, 200 )
+points = PackedVector2Array( -7, 200, -7, -7, 157, -7, 157, 200 )
 width = 15.0
 default_color = Color( 1, 1, 0, 1 )
 joint_mode = 2
@@ -51,7 +51,7 @@ light_mask = 0
 material = SubResource( 5 )
 z_index = 45
 z_as_relative = false
-polygon = PoolVector2Array( 75, 100, -75, 100, -75, -100, 75, -100 )
+polygon = PackedVector2Array( 75, 100, -75, 100, -75, -100, 75, -100 )
 script = ExtResource( 4 )
 size = Vector2( 75, 100 )
 

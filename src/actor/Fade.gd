@@ -1,7 +1,7 @@
 extends CanvasItem
 
 var fade = EaseMover.new()
-export var is_demo := false
+@export var is_demo := false
 
 func _ready():
 	visible = Shared.is_demo if is_demo else true

@@ -1,4 +1,4 @@
 extends Resource
 class_name SaveDict
 
-export var dict : Dictionary = {}
+@export var dict : Dictionary = {}

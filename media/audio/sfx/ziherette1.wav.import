@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/ziherette1.wav-cf7f1e5bfffe66f8af3d934d69aa4386.sample"
+type="AudioStreamWAV"
+uid="uid://wwx3tietxcyq"
+path="res://.godot/imported/ziherette1.wav-cf7f1e5bfffe66f8af3d934d69aa4386.sample"
 
 [deps]
 
 source_file="res://media/audio/sfx/ziherette1.wav"
-dest_files=[ "res://.import/ziherette1.wav-cf7f1e5bfffe66f8af3d934d69aa4386.sample" ]
+dest_files=["res://.godot/imported/ziherette1.wav-cf7f1e5bfffe66f8af3d934d69aa4386.sample"]
 
 [params]
 
