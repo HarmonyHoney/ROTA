@@ -101,7 +101,7 @@ dye = {
 }
 hairstyle_front = 3
 is_npc = true
-lines = [ "Hey cutie! ;P", "Have  you tried turning it off and on again?", "Breathe in, breathe out", "It's so cozy between these trees", "I'ts nice to catch a break and relax", "I feel calm.", "I found a big worm here yesterday!", "Let the trees breathe into you", "Nature takes care of you <3" ]
+lines = [ "Hey cutie! ;P", "Have  you tried turning it off and on again?", "Breathe in, breathe out", "It's so cozy between these trees", "It's nice to catch a break and relax", "I feel calm.", "I found a big worm here yesterday!", "Let the trees breathe into you", "Nature takes care of you <3" ]
 greeting = 0
 
 [node name="NPC3" parent="Actors" instance=ExtResource( 5 )]
