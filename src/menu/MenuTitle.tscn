@@ -12,7 +12,7 @@
 [ext_resource path="res://src/detail/FlowerPetals.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/detail/Candle.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/detail/Lamppost.tscn" type="PackedScene" id=12]
-[ext_resource path="res://media/image/UI/hhoney_logo.svg" type="Texture" id=13]
+[ext_resource path="res://media/image/UI/harmony-monroe-white.png" type="Texture" id=13]
 [ext_resource path="res://src/menu/MenuFile.gd" type="Script" id=14]
 [ext_resource path="res://src/menu/MenuTitle.gd" type="Script" id=15]
 [ext_resource path="res://src/menu/MenuFileDelete.gd" type="Script" id=16]
@@ -108,7 +108,7 @@ use_filter = true
 extra_spacing_bottom = -20
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=26]
 size = 40
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
@@ -613,7 +613,7 @@ margin_bottom = -15.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 21 )
-text = "Patch 6"
+text = "Patch 7"
 align = 1
 valign = 2
 
@@ -671,7 +671,7 @@ margin_top = 205.0
 margin_right = 512.0
 margin_bottom = 236.0
 custom_fonts/font = SubResource( 6 )
-text = "hhoney.net   "
+text = "harmonymonroe.com   "
 align = 2
 valign = 1
 
@@ -875,7 +875,7 @@ script = ExtResource( 3 )
 [node name="Title" type="Sprite" parent="Map"]
 process_priority = 1
 material = SubResource( 25 )
-position = Vector2( 1800, 650 )
+position = Vector2( 1800, 640 )
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 19 )
 
@@ -895,17 +895,15 @@ __meta__ = {
 }
 
 [node name="Demo" type="Label" parent="Map"]
-visible = false
 margin_left = 1500.0
-margin_top = 700.0
+margin_top = 690.0
 margin_right = 2100.0
-margin_bottom = 800.0
-custom_colors/font_color = Color( 0.55, 0.55, 0.55, 1 )
-custom_fonts/font = SubResource( 5 )
-text = "DEMO"
+margin_bottom = 790.0
+custom_colors/font_color = Color( 0.25098, 0.25098, 0.25098, 1 )
+custom_fonts/font = SubResource( 26 )
+text = "BEND GRAVITY"
 align = 1
 valign = 1
-script = ExtResource( 22 )
 
 [node name="Details" type="Node2D" parent="Map"]
 

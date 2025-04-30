@@ -159,7 +159,7 @@ run/main_scene="res://src/menu/Splash.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="ROTA-Harmony"
 config/project_settings_override="user://override.cfg"
-boot_splash/image="res://media/image/UI/title_splash.png"
+boot_splash/image="res://media/image/UI/harmony-monroe-square-white.png"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://media/image/icon/icon256.png"
 config/windows_native_icon="res://media/image/icon/rota.ico"
@@ -185,7 +185,7 @@ Steam="*res://addons/steam_api/steam.gd"
 
 window/size/width=1280
 window/size/height=720
-window/size/borderless=true
+window/size/fullscreen=true
 window/size/test_width=1920
 window/size/test_height=1080
 window/stretch/mode="2d"
