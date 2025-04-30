@@ -153,8 +153,8 @@ _global_script_class_icons={
 [application]
 
 config/name="ROTA"
-config/description="ROTA by Harmony Honey
-hhoney.net"
+config/description="ROTA by Harmony Honey Monroe
+harmonymonroe.com"
 run/main_scene="res://src/menu/Splash.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="ROTA-Harmony"
