@@ -1,0 +1,13 @@
+# EditorConfig <http://EditorConfig.org>
+root = true
+
+[*]
+charset = utf-8
+
+[*.{gd,dialogue}]
+indent_style = tab
+indent_size = 4
+
+[*.{yaml,yml,xml}]
+indent_style = space
+indent_size = 2
