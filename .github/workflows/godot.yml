@@ -8,7 +8,7 @@ on:
 
 env:
   GODOT_VERSION: 3.6
-  EXPORT_NAME: rota-linux
+  EXPORT_NAME: rota-ci
 
 jobs:
   export:
@@ -53,4 +53,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          gh release upload '${{ github.ref_name }}' ${{ env.EXPORT_NAME }}.pck --repo '${{ github.repository }}'
+          mv '${{ env.EXPORT_NAME }}.pck' '${{ env.EXPORT_NAME }}-${{ github.ref_name }}.pck'
+          gh release upload '${{ github.ref_name }}' '${{ env.EXPORT_NAME }}-${{ github.ref_name }}.pck' --repo '${{ github.repository }}'
