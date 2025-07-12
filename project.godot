@@ -152,8 +152,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ROTA"
-config/description="ROTA by Harmony Honey Monroe
+config/name="ROTA: Bend Gravity"
+config/description="ROTA: Bend Gravity by Harmony Monroe
 harmonymonroe.com"
 run/main_scene="res://src/menu/Splash.tscn"
 config/use_custom_user_dir=true
