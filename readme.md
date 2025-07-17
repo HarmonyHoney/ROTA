@@ -1,11 +1,11 @@
-# ![icon](media/image/icon/icon48.png) ROTA
+# ![icon](media/image/icon/icon48.png) ROTA: Bend Gravity
 Made with [Godot Engine](https://github.com/godotengine/godot) 3.6 / Gravity Bending Puzzle Platformer 
 
 Available for Linux, Windows, Mac, Web & Android !
 
-Play free on [store.steampowered.com/app/1993830/ROTA/](https://store.steampowered.com/app/1993830/ROTA/)
+Play on Steam [store.steampowered.com/app/1993830/ROTA/](https://store.steampowered.com/app/1993830/ROTA/)
 
-Full Game on [hhoneysoftware.itch.io/rota](https://hhoneysoftware.itch.io/rota) (:
+Play on itch.io [harmonymonroe.itch.io/rota](https://harmonymonroe.itch.io/rota) (:
 
 ![main_capsule](media/image/assets/main_capsule.png)
 
