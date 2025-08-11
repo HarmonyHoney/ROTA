@@ -82,6 +82,7 @@ margin_bottom = 150.0
 [node name="0" type="TouchScreenButton" parent="Control/HBoxLeft/DPad/Buttons"]
 shape = SubResource( 13 )
 shape_centered = false
+passby_press = true
 action = "ui_right"
 script = ExtResource( 3 )
 radius = 500.0
@@ -90,6 +91,7 @@ poly_path = NodePath("Polygon2D")
 poly_radius = 140.0
 poly_points = 7
 poly_deadzone = 10.0
+secondary_action = "right"
 
 [node name="Polygon2D" type="Polygon2D" parent="Control/HBoxLeft/DPad/Buttons/0"]
 modulate = Color( 1, 1, 1, 0.5 )
@@ -102,6 +104,7 @@ idle_color = Color( 1, 1, 1, 0.501961 )
 [node name="1" type="TouchScreenButton" parent="Control/HBoxLeft/DPad/Buttons"]
 shape = SubResource( 14 )
 shape_centered = false
+passby_press = true
 action = "ui_down"
 script = ExtResource( 3 )
 angle = 90.0
@@ -111,6 +114,7 @@ poly_path = NodePath("Polygon2D")
 poly_radius = 140.0
 poly_points = 7
 poly_deadzone = 10.0
+secondary_action = "down"
 
 [node name="Polygon2D" type="Polygon2D" parent="Control/HBoxLeft/DPad/Buttons/1"]
 modulate = Color( 1, 1, 1, 0.5 )
@@ -123,6 +127,7 @@ idle_color = Color( 1, 1, 1, 0.501961 )
 [node name="2" type="TouchScreenButton" parent="Control/HBoxLeft/DPad/Buttons"]
 shape = SubResource( 15 )
 shape_centered = false
+passby_press = true
 action = "ui_left"
 script = ExtResource( 3 )
 angle = 180.0
@@ -132,6 +137,7 @@ poly_path = NodePath("Polygon2D")
 poly_radius = 140.0
 poly_points = 7
 poly_deadzone = 10.0
+secondary_action = "left"
 
 [node name="Polygon2D" type="Polygon2D" parent="Control/HBoxLeft/DPad/Buttons/2"]
 modulate = Color( 1, 1, 1, 0.5 )
@@ -144,6 +150,7 @@ idle_color = Color( 1, 1, 1, 0.501961 )
 [node name="3" type="TouchScreenButton" parent="Control/HBoxLeft/DPad/Buttons"]
 shape = SubResource( 16 )
 shape_centered = false
+passby_press = true
 action = "ui_up"
 script = ExtResource( 3 )
 angle = 270.0
@@ -153,6 +160,7 @@ poly_path = NodePath("Polygon2D")
 poly_radius = 140.0
 poly_points = 7
 poly_deadzone = 10.0
+secondary_action = "up"
 
 [node name="Polygon2D" type="Polygon2D" parent="Control/HBoxLeft/DPad/Buttons/3"]
 modulate = Color( 1, 1, 1, 0.5 )
@@ -187,6 +195,7 @@ physics_interpolation_mode = 1
 modulate = Color( 1, 1, 1, 0.156863 )
 shape = SubResource( 3 )
 shape_centered = false
+passby_press = true
 action = "ui_cancel"
 visibility_mode = 1
 script = ExtResource( 4 )
@@ -195,6 +204,7 @@ __meta__ = {
 }
 color_path = NodePath("../Poly")
 idle_color = Color( 1, 1, 1, 0.156863 )
+secondary_action = "grab"
 
 [node name="Poly" type="Polygon2D" parent="Control/HBoxRight/C/Control"]
 modulate = Color( 1, 1, 1, 0.156863 )
@@ -238,6 +248,7 @@ margin_bottom = 75.0
 modulate = Color( 1, 1, 1, 0.156863 )
 shape = SubResource( 4 )
 shape_centered = false
+passby_press = true
 action = "ui_accept"
 visibility_mode = 1
 script = ExtResource( 4 )
@@ -246,6 +257,7 @@ __meta__ = {
 }
 color_path = NodePath("../Poly")
 idle_color = Color( 1, 1, 1, 0.156863 )
+secondary_action = "jump"
 
 [node name="Poly" type="Polygon2D" parent="Control/HBoxRight/X/Control"]
 modulate = Color( 1, 1, 1, 0.156863 )
@@ -295,6 +307,7 @@ physics_interpolation_mode = 1
 modulate = Color( 1, 1, 1, 0.156863 )
 shape = SubResource( 3 )
 shape_centered = false
+passby_press = true
 action = "zoom"
 visibility_mode = 1
 script = ExtResource( 4 )
@@ -345,6 +358,7 @@ margin_bottom = 75.0
 modulate = Color( 1, 1, 1, 0.156863 )
 shape = SubResource( 5 )
 shape_centered = false
+passby_press = true
 action = "ui_pause"
 visibility_mode = 1
 script = ExtResource( 4 )
