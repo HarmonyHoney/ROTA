@@ -7,9 +7,17 @@ sdk: org.freedesktop.Sdk
 command: godot-runner
 finish-args:
 - --share=ipc
-- --socket=x11
 - --socket=pulseaudio
+
+# Wayland support not added until Godot Engine 4.3
+- --socket=x11
+
+# Currently necessary for controller support
 - --device=all
+
+# Necessary to inhibit idle (screensaver/suspend) when using a controller
+- --talk-name=org.freedesktop.ScreenSaver
+
 modules:
 - name: rota
   buildsystem: simple
