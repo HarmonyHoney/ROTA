@@ -1,5 +1,5 @@
 # ![icon](media/image/icon/icon48.png) ROTA: Bend Gravity
-Made with [Godot Engine](https://github.com/godotengine/godot) 3.6 / Gravity Bending Puzzle Platformer 
+Made with [Godot Engine](https://github.com/godotengine/godot) 3.6.1 / Gravity Bending Puzzle Platformer 
 
 Available for Linux, Windows, Mac, Web & Android !
 
