@@ -12,8 +12,6 @@ func fill_items():
 				i.visible = Shared.light_enabled > 0
 			if i.is_in_group("shadow") and i.visible:
 				i.visible = Shared.shadow_enabled > 0
-			if i.is_in_group("touch"):
-				i.visible = TouchScreen.visible
 	
 	.fill_items()
 

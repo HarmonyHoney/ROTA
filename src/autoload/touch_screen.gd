@@ -22,6 +22,12 @@ func _ready():
 	yield(Shared, "scene_changed")
 	visible = Shared.is_touch or ((OS.has_touchscreen_ui_hint() and OS.get_name() == "HTML5") or OS.get_name() == "Android")
 
+func _input(event):
+	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		visible = true
+	elif event is InputEventKey or event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		visible = Shared.is_touch
+
 func show_keys(arg_arrows := true, arg_c := true, arg_x := true, arg_pause := false, arg_passby := false):
 	right.visible = arg_arrows
 	keys[0].visible = arg_c
