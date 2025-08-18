@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://src/autoload/Audio.gd" type="Script" id=1]
 [ext_resource path="res://media/audio/sfx/coin1.wav" type="AudioStream" id=2]
@@ -34,11 +34,14 @@
 [ext_resource path="res://media/audio/sfx/zap0.wav" type="AudioStream" id=32]
 [ext_resource path="res://media/audio/music/arcade2.mp3" type="AudioStream" id=33]
 [ext_resource path="res://media/audio/sfx/oneup1.wav" type="AudioStream" id=34]
+[ext_resource path="res://media/audio/music/ost6.mp3" type="AudioStream" id=35]
+[ext_resource path="res://media/audio/music/ost5.mp3" type="AudioStream" id=36]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
 script = ExtResource( 1 )
-ost = [ ExtResource( 21 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 23 ) ]
+ost = [ ExtResource( 21 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 36 ), ExtResource( 35 ) ]
+wait_range = Vector2( 2, 5 )
 
 [node name="Music" type="Node" parent="."]
 

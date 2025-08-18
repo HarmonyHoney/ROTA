@@ -522,6 +522,23 @@ func physics_frame():
 func _process(delta):
 	if Engine.editor_hint: return
 	
+	# squash squish and stretch
+	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, squish_ease.count(delta))
+	
+	# blink anim
+	if blink_clock < blink_time:
+		blink_clock += delta
+	else:
+		var be = blink_ease.count(delta)
+		spr_eyes.scale.y = lerp(1.0, 0.1, be)
+		if be == 1.0:
+			blink_ease.show = false
+		elif be == 0.0:
+			blink_ease.show = true
+			blink_clock = 0.0
+			blink_time = rand_range(blink_range.x, blink_range.y)
+	
+	# death animation
 	if is_dead:
 		sprites.position += rot(velocity) * delta
 		sprites.rotate(deg2rad(240) * -dir_x * delta)
@@ -529,12 +546,13 @@ func _process(delta):
 		
 		if dead_clock < dead_time:
 			dead_clock += delta
-			if dead_clock > dead_time:
+			if dead_clock >= dead_time:
 				Cutscene.is_playing = false
 				Shared.reset()
 		
 		return
 	
+	# grow and shrink in and out of scene
 	if spr_easy.is_less or !spr_easy.show:
 		var sec = spr_easy.count(delta, spr_easy.show and !Wipe.is_intro)
 		var dp = to_local(door_exit.global_position) if is_instance_valid(door_exit) else rot(Vector2(0, -25))
@@ -603,22 +621,6 @@ func _process(delta):
 			var r = lerp_angle(turn_from, turn_to, s)
 			sprites.rotation = r
 			emit_signal("turn_angle", r)
-	
-	# squash squish and stretch
-	sprites.scale = squish_from.linear_interpolate(Vector2.ONE, squish_ease.count(delta))
-	
-	# blink anim
-	if blink_clock < blink_time:
-		blink_clock += delta
-	else:
-		var be = blink_ease.count(delta)
-		spr_eyes.scale.y = lerp(1.0, 0.1, be)
-		if be == 1.0:
-			blink_ease.show = false
-		elif be == 0.0:
-			blink_ease.show = true
-			blink_clock = 0.0
-			blink_time = rand_range(blink_range.x, blink_range.y)
 
 ### Set Get
 

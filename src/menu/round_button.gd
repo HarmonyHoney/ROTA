@@ -15,6 +15,8 @@ export var poly_points := 5 setget set_poly_points
 export var poly_deadzone := 3.0 setget set_poly_deadzone
 export var poly_dead_points := 5 setget set_poly_dead_points
 
+export var secondary_action := ""
+
 func set_radius(arg := radius):
 	radius = arg
 	act()
@@ -58,6 +60,16 @@ func set_poly_dead_points(arg := poly_dead_points):
 func _ready():
 	act()
 	poly_act()
+	connect("pressed", self, "press")
+	connect("released", self, "release")
+
+func press():
+	if secondary_action != "":
+		Input.action_press(secondary_action)
+
+func release():
+	if secondary_action != "":
+		Input.action_release(secondary_action)
 
 func act():
 	shape = ConvexPolygonShape2D.new()

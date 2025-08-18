@@ -256,6 +256,7 @@ script = ExtResource( 24 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+list = PoolStringArray( "TOGGLE", "ALWAYS" )
 is_refill = true
 var_name = "is_touch"
 
@@ -274,11 +275,11 @@ anchor_bottom = 1.0
 margin_left = 25.0
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 2 )
-text = "< OFF >"
+text = "< TOGGLE >"
 align = 2
 valign = 1
 
-[node name="X" type="Control" parent="Control/Menu/List" groups=["touch"]]
+[node name="X" type="Control" parent="Control/Menu/List"]
 margin_top = 510.0
 margin_right = 640.0
 margin_bottom = 580.0
@@ -311,7 +312,7 @@ text = "< 2 >"
 align = 2
 valign = 1
 
-[node name="Y" type="Control" parent="Control/Menu/List" groups=["touch"]]
+[node name="Y" type="Control" parent="Control/Menu/List"]
 margin_top = 580.0
 margin_right = 640.0
 margin_bottom = 650.0
