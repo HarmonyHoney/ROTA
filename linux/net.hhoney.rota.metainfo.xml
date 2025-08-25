@@ -23,7 +23,7 @@
   <id>net.hhoney.rota</id>
   <launchable type="desktop-id">net.hhoney.rota.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>Unlicense</project_license>
+  <project_license>MIT</project_license>
   <content_rating type="oars-1.1"></content_rating>
   <url type="homepage">https://hhoney.net</url>
   <url type="bugtracker">https://github.com/HarmonyHoney/ROTA/issues</url>
