@@ -1,4 +1,15 @@
 <releases>
+  <release version="2025.08.18" date="2025-08-18">
+    <description>
+      <p>Soundtrack Update</p>
+      <ul>
+        <li>Two new songs have been added to ROTA</li>
+        <li>Touch-screen bugfixes</li>
+        <li>Player animation fixes</li>
+        <li>Added a Sign to puzzle 1-5 showing the Zoom instructions</li>
+      </ul>
+    </description>
+  </release>
   <release version="2025.04.29" date="2025-04-29">
     <description>
       <p>Updated logos, credits</p>
