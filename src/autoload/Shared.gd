@@ -99,7 +99,8 @@ var player
 var door_in
 var goal
 var is_arcade := false
-var is_title := false
+var is_title := true
+var is_hub := false
 
 var save_slot := -1
 var save_dict := {0: {}, 1: {}, 2: {}}
@@ -226,16 +227,18 @@ func _physics_process(delta):
 		auto_save_clock = 0.0
 		save_data()
 
-	# recorded time
-	save_time_frames += 1
-	save_time = float(save_time_frames) / float(Engine.iterations_per_second)
-	if !get_tree().paused and !Wipe.is_wipe and !Cutscene.is_playing and player.spr_easy.is_complete:
-		map_clock_frames += 1
-		map_clock = float(map_clock_frames) / float(Engine.iterations_per_second)
-	
-	# clock label
-	UI.clock_file.text = time_string(save_time, clock_decimals)
-	UI.clock_map.text = time_string(map_clock, clock_decimals)
+	if not is_title:
+		# recorded time
+		save_time_frames += 1
+		Autosplitter.set_frames(save_time_frames)
+		save_time = float(save_time_frames) / float(Engine.iterations_per_second)
+		if !get_tree().paused and !Wipe.is_wipe and !Cutscene.is_playing and player.spr_easy.is_complete:
+			map_clock_frames += 1
+			map_clock = float(map_clock_frames) / float(Engine.iterations_per_second)
+		
+		# clock label
+		UI.clock_file.text = time_string(save_time, clock_decimals)
+		UI.clock_map.text = time_string(map_clock, clock_decimals)
 	
 func _process(_delta):
 	# arrows
@@ -291,6 +294,10 @@ func change_scene():
 		map_name = csfn.right(worlds_path.length()).replace(".tscn", "") if csfn.begins_with(worlds_path) else ""
 		is_arcade = "arcade" in csfn
 		is_title = csfn == title_path
+		is_hub = ("hub" in map_name) or ("start" in map_name) or ("end" in map_name)
+		Autosplitter.set_map_name(map_name)
+		Autosplitter.set_title(is_title)
+		Autosplitter.set_hub(is_hub)
 		get_tree().change_scene(next_scene)
 		Cam.reset_zoom()
 	
@@ -313,7 +320,7 @@ func change_scene():
 				break
 		if is_instance_valid(door_in): break
 	
-	speedrun_goal(csfn, map_name != "" and not "hub" in map_name)
+	speedrun_goal(csfn, map_name != "" and not is_hub)
 	
 	set_boundary()
 	TouchScreen.set_game(map_name != "" or is_arcade)
@@ -670,6 +677,7 @@ func load_slot(arg := 0):
 		elif s.has("time"):
 			save_time = s["time"]
 			save_time_frames = s["time"] * Engine.iterations_per_second
+		Autosplitter.set_frames(save_time_frames)
 		
 		maps_visited = s["maps_visited"].duplicate() if s.has("maps_visited") else []
 		
@@ -684,6 +692,7 @@ func load_slot(arg := 0):
 		clock_rank = 0
 		UI.rank_text(clock_rank, false)
 		save_time_frames = 0
+		Autosplitter.set_frames(save_time_frames)
 		save_time = 0.0
 		maps_visited = []
 	
