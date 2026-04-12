@@ -48,6 +48,7 @@ func cheat_code(cheat):
 	if "konami" in cheat:
 		is_collected = true
 		Shared.map_clock = 99
+		Shared.map_clock_frames = Shared.map_clock * Engine.iterations_per_second
 		Audio.play("gem_collect")
 
 func shine(is_audio := true):

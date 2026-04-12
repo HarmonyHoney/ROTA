@@ -105,7 +105,9 @@ var save_slot := -1
 var save_dict := {0: {}, 1: {}, 2: {}}
 signal slot_erased(arg)
 var save_time := 0.0
+var save_time_frames := 0
 var map_clock := 0.0
+var map_clock_frames := 0
 var auto_save_clock := 0.0
 var auto_save_time := 60.0
 
@@ -224,16 +226,18 @@ func _physics_process(delta):
 		auto_save_clock = 0.0
 		save_data()
 
-func _process(delta):
 	# recorded time
-	save_time += delta
+	save_time_frames += 1
+	save_time = float(save_time_frames) / float(Engine.iterations_per_second)
 	if !get_tree().paused and !Wipe.is_wipe and !Cutscene.is_playing and player.spr_easy.is_complete:
-		map_clock += delta
+		map_clock_frames += 1
+		map_clock = float(map_clock_frames) / float(Engine.iterations_per_second)
 	
 	# clock label
 	UI.clock_file.text = time_string(save_time, clock_decimals)
 	UI.clock_map.text = time_string(map_clock, clock_decimals)
 	
+func _process(_delta):
 	# arrows
 	if is_instance_valid(arrow_track):
 		arrow.modulate.a = arrow_track.arrow_easy.smooth()
@@ -297,6 +301,7 @@ func change_scene():
 	save_data()
 	try_achievement()
 	map_clock = 0.0
+	map_clock_frames = 0
 	
 	yield(get_tree(), "idle_frame")
 	
@@ -602,7 +607,8 @@ func save_data():
 	
 	var s = save_dict[save_slot]
 	
-	s["time"] = int(save_time)
+	s["time_frames"] = int(save_time_frames)
+	s["time"] = int(save_time) # Backwards compatibility with old game versions
 	if "worlds" in csfn and "worlds" in last_scene:
 		s["csfn"] = csfn
 		s["last_scene"] = last_scene
@@ -614,7 +620,7 @@ func save_data():
 	s["maps_visited"] = maps_visited.duplicate()
 	
 	for i in s.keys():
-		if not i in "time, csfn, last_scene, goals, dye, hair, maps_visited":
+		if not i in "time, time_frames, csfn, last_scene, goals, dye, hair, maps_visited":
 			s.erase(i)
 	
 	file_save_json("user://save_data.json", save_dict)
@@ -658,8 +664,12 @@ func load_slot(arg := 0):
 		clock_rank = collect_clocks()
 		UI.rank_text(clock_rank, false)
 		
-		if s.has("time"):
+		if s.has("time_frames"):
+			save_time_frames = s["time_frames"]
+			save_time = float(save_time_frames) / float(Engine.iterations_per_second)
+		elif s.has("time"):
 			save_time = s["time"]
+			save_time_frames = s["time"] * Engine.iterations_per_second
 		
 		maps_visited = s["maps_visited"].duplicate() if s.has("maps_visited") else []
 		
@@ -673,6 +683,7 @@ func load_slot(arg := 0):
 		UI.gem_text(gem_count, false)
 		clock_rank = 0
 		UI.rank_text(clock_rank, false)
+		save_time_frames = 0
 		save_time = 0.0
 		maps_visited = []
 	
@@ -812,7 +823,7 @@ func try_achievement():
 		if clock_rank > 49:
 			achieve("clock50")
 	
-	if csfn == end_path and save_time < 3600:
+	if csfn == end_path and save_time_frames < 3600 * 60:
 		achieve("speedrun")
 
 func achieve(arg := ""):
