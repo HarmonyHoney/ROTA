@@ -109,6 +109,8 @@ var save_time := 0.0
 var save_time_frames := 0
 var map_clock := 0.0
 var map_clock_frames := 0
+var final_time := 0.0
+var final_time_frames := 0
 var auto_save_clock := 0.0
 var auto_save_time := 60.0
 
@@ -237,7 +239,10 @@ func _physics_process(delta):
 			map_clock = float(map_clock_frames) / float(Engine.iterations_per_second)
 		
 		# clock label
-		UI.clock_file.text = time_string(save_time, clock_decimals)
+		if final_time_frames > 0:
+			UI.clock_file.text = "%s Final Time" % [time_string(final_time, clock_decimals)]
+		else:
+			UI.clock_file.text = time_string(save_time, clock_decimals)
 		UI.clock_map.text = time_string(map_clock, clock_decimals)
 	
 func _process(_delta):
@@ -832,8 +837,15 @@ func try_achievement():
 		if clock_rank > 49:
 			achieve("clock50")
 	
-	if csfn == end_path and save_time_frames < 3600 * 60:
-		achieve("speedrun")
+	if csfn == end_path:
+		final_time_frames = save_time_frames
+		final_time = float(final_time_frames) / float(Engine.iterations_per_second)
+		if save_time_frames < 3600 * 60:
+			achieve("speedrun")
+	else:
+		final_time_frames = 0
+		final_time = 0.0
+	Autosplitter.set_final_time(final_time_frames)
 
 func achieve(arg := ""):
 	if arg != "" and Steam.is_init():
