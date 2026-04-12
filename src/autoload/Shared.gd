@@ -436,12 +436,12 @@ func speedrun_goal(scene_path := csfn, _show := true):
 		UI.clock_best.visible = goals.has(m)
 		if UI.clock_best.visible:
 			var g = goals[m]
-			UI.clock_best.text = "Best: " + time_string(g, 2)
+			UI.clock_best.text = "Best: " + time_string(g, clock_decimals)
 			UI.clock_best.modulate = clock_best_color[int(goals[m] > 0 and goals[m] < speedruns[m])]
 		
 		UI.clock_goal.visible = speedruns.has(m)
 		if UI.clock_goal.visible:
-			UI.clock_goal.text = "Goal: " + time_string(speedruns[m], 2)
+			UI.clock_goal.text = "Goal: " + time_string(speedruns[m], clock_decimals)
 
 ### Options
 
