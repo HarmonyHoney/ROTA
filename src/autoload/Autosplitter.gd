@@ -4,9 +4,9 @@ extends Node
 
 #  0-15 - Header         - 16 bytes - String literal which we can scan for
 # 16-23 - Iteration rate -  8 bytes - Engine.iterations_per_second
-# 24-31 - Frames         -  8 bytes - Integer number of frames of the in-game timer
+# 24-31 - Time           -  8 bytes - The value of the in-game save timer (in frames)
 # 32-47 - Map name       - 16 bytes - The current map according to Shared.map_name
-# 48-55 - Final time     -  8 bytes - The final time of the speedrun (when completed)
+# 48-55 - Final time     -  8 bytes - The final time of the speedrun (in frames) when completed, 0 otherwise
 # 56    - Is title       -  1 byte  - Are we on the title screen?
 # 57    - Is hub         -  1 byte  - Are we in a hub world?
 
@@ -40,7 +40,7 @@ func _init() -> void:
 	set_title(true)
 
 
-func set_frames(count: int) -> void:
+func set_time(count: int) -> void:
 	_write_int64(24, count)
 
 func set_map_name(map: String) -> void:

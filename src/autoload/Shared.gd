@@ -229,7 +229,7 @@ func _physics_process(delta):
 	if not is_title:
 		# recorded time
 		save_time += 1
-		Autosplitter.set_frames(save_time)
+		Autosplitter.set_time(save_time)
 		if !get_tree().paused and !Wipe.is_wipe and !Cutscene.is_playing and player.spr_easy.is_complete:
 			map_clock += 1
 		
@@ -685,7 +685,7 @@ func load_slot(arg := 0):
 			save_time = s["time_frames"]
 		elif s.has("time"):
 			save_time = s["time"] * Engine.iterations_per_second
-		Autosplitter.set_frames(save_time)
+		Autosplitter.set_time(save_time)
 		
 		maps_visited = s["maps_visited"].duplicate() if s.has("maps_visited") else []
 		
@@ -700,7 +700,7 @@ func load_slot(arg := 0):
 		clock_rank = 0
 		UI.rank_text(clock_rank, false)
 		save_time = 0
-		Autosplitter.set_frames(save_time)
+		Autosplitter.set_time(save_time)
 		maps_visited = []
 	
 	return wipe_scene(next_scene, last_scene)
