@@ -30,7 +30,7 @@ func set_card():
 		
 		# time
 		if d[slot].has("time_frames"):
-			time_label.text = Shared.time_string(float(d[slot]["time_frames"]) / float(Engine.iterations_per_second), 0, true)
+			time_label.text = Shared.time_string2(d[slot]["time_frames"], 0, true)
 		else:
 			time_label.text = Shared.time_string(d[slot]["time"], 0, true)
 	else:
