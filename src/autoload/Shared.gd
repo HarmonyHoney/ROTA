@@ -214,6 +214,7 @@ func _input(event):
 					MenuMakeover.is_open = !MenuMakeover.is_open
 				"add_gem":
 					gem_count += 1
+					Autosplitter.set_gems(gem_count)
 					UI.gem_text(gem_count)
 				"reset":
 					reset()
@@ -428,9 +429,11 @@ func collect_gem():
 		if is_collect or is_faster:
 			goals[map_name] = map_time
 			gem_count = goals.size()
+			Autosplitter.set_gems(gem_count)
 			
 			var last_clock = clock_rank
 			clock_rank = collect_clocks()
+			Autosplitter.set_clocks(clock_rank)
 			var is_clock = clock_rank > last_clock
 			save_data()
 			
@@ -676,9 +679,11 @@ func load_slot(arg := 0):
 		
 		# gems
 		gem_count = goals.size()
+		Autosplitter.set_gems(gem_count)
 		UI.gem_text(gem_count, false)
 		
 		clock_rank = collect_clocks()
+		Autosplitter.set_clocks(clock_rank)
 		UI.rank_text(clock_rank, false)
 		
 		if s.has("time_frames"):
@@ -696,8 +701,10 @@ func load_slot(arg := 0):
 		last_scene = start_path
 		goals = {}
 		gem_count = 0
+		Autosplitter.set_gems(gem_count)
 		UI.gem_text(gem_count, false)
 		clock_rank = 0
+		Autosplitter.set_clocks(clock_rank)
 		UI.rank_text(clock_rank, false)
 		save_time = 0
 		Autosplitter.set_time(save_time)

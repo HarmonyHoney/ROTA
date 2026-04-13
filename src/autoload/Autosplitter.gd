@@ -3,7 +3,9 @@ extends Node
 # Scannable chunk of memory with a known layout, to be used to drive a LiveSplit autosplitter
 
 #  0-15 - Header         - 16 bytes - String literal which we can scan for
-# 16-23 - Iteration rate -  8 bytes - Engine.iterations_per_second
+# 16-19 - Iteration rate -  4 bytes - Engine.iterations_per_second
+# 20-21 - Gem count      -  2 bytes - How many gems have been earned
+# 22-23 - Clock count    -  2 bytes - How many clocks have been earned
 # 24-31 - Time           -  8 bytes - The value of the in-game save timer (in frames)
 # 32-47 - Map name       - 16 bytes - The current map according to Shared.map_name
 # 48-55 - Final time     -  8 bytes - The final time of the speedrun (in frames) when completed, 0 otherwise
@@ -34,20 +36,26 @@ func _init() -> void:
 	buf.set(14, ord(':'))
 
 	# Write iteration rate, shouldn't change
-	_write_int64(16, Engine.iterations_per_second)
+	_write_int(16, Engine.iterations_per_second, 4)
 	
 	# We start on the title
 	set_title(true)
 
 
+func set_gems(count: int) -> void:
+	_write_int(20, count, 2)
+
+func set_clocks(count: int) -> void:
+	_write_int(22, count, 2)
+
 func set_time(count: int) -> void:
-	_write_int64(24, count)
+	_write_int(24, count, 8)
 
 func set_map_name(map: String) -> void:
 	_write_string(32, map, 16)
 
 func set_final_time(frame_count: int) -> void:
-	_write_int64(48, frame_count)
+	_write_int(48, frame_count, 8)
 
 func set_title(is_title: bool) -> void:
 	buf.set(56, 1 if is_title else 0)
@@ -56,9 +64,9 @@ func set_hub(is_hub: bool) -> void:
 	buf.set(57, 1 if is_hub else 0)
 
 
-# Writes a 64 bit integer into the buffer at the given index
-func _write_int64(idx: int, val: int) -> void:
-	for i in range(8):
+# Writes an N byte integer into the buffer at the given index
+func _write_int(idx: int, val: int, byte_count: int) -> void:
+	for i in range(byte_count):
 		var byte := (val >> (i * 8)) & 0xFF
 		buf.set(idx + i, byte)
 
