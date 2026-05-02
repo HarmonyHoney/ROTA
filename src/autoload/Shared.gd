@@ -235,11 +235,11 @@ func _physics_process(delta):
 			map_clock += 1
 		
 		# clock label
-		if final_time > 0:
-			UI.clock_file.text = "%s Final Time" % [time_string2(final_time, clock_decimals)]
-		else:
-			UI.clock_file.text = time_string2(save_time, clock_decimals)
+		UI.clock_file.text = time_string2(save_time, clock_decimals)
 		UI.clock_map.text = time_string2(map_clock, clock_decimals)
+		if final_time > 0:
+			# Always show at least 2 so we can get an accurate final time
+			UI.clock_speedrun.text = time_string2(final_time, clock_decimals if clock_decimals >= 2 else 2) + "\nSpeedrun Time"
 	
 func _process(_delta):
 	# arrows
@@ -296,6 +296,7 @@ func change_scene():
 	arrow.modulate.a = 0.0
 	
 	emit_signal("scene_before")
+	var prev_csfn := csfn
 	
 	is_reload = next_scene == csfn
 	if is_reload:
@@ -319,6 +320,13 @@ func change_scene():
 	save_data()
 	try_achievement()
 	map_clock = 0
+	
+	if csfn == end_path:
+		if !(prev_csfn in [title_path, end_path]):
+			final_time = save_time
+	else:
+		final_time = 0
+	Autosplitter.set_final_time(final_time)
 	
 	yield(get_tree(), "idle_frame")
 	
@@ -846,13 +854,8 @@ func try_achievement():
 		if clock_rank > 49:
 			achieve("clock50")
 	
-	if csfn == end_path:
-		final_time = save_time
-		if save_time < 3600 * 60:
-			achieve("speedrun")
-	else:
-		final_time = 0
-	Autosplitter.set_final_time(final_time)
+	if csfn == end_path and save_time < 3600 * Engine.iterations_per_second:
+		achieve("speedrun")
 
 func achieve(arg := ""):
 	if arg != "" and Steam.is_init():
