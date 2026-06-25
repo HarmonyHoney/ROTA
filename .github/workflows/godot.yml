@@ -46,13 +46,10 @@ jobs:
 
       - name: Export PCK file
         run: |
-          cd export
-
           # Tell Godot Engine to be self-contained
-          touch ._sc_
+          touch export/._sc_
 
-          # NOTE: export filename is relative to the project path
-          ./godot --no-window --path=.. --export-pack "Linux/X11" ./export/${EXPORT_NAME}.pck
+          export/godot --no-window --path=. --export-pack "Linux/X11" export/${EXPORT_NAME}.pck
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7.0.1
