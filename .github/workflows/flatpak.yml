@@ -13,11 +13,11 @@ jobs:
   flatpak:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-24.08
+      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-25.08
       options: --privileged
     steps:
-    - uses: actions/checkout@v4
-    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+    - uses: actions/checkout@v7.0.0
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.7
       with:
         bundle: rota.flatpak
         manifest-path: linux/net.hhoney.rota.yml
