@@ -52,7 +52,7 @@ jobs:
           touch ._sc_
 
           # NOTE: export filename is relative to the project path
-          ./godot --no-window --path=./project.godot --export-pack "Linux/X11" ./export/${EXPORT_NAME}.pck
+          ./godot --no-window --path=.. --export-pack "Linux/X11" ./export/${EXPORT_NAME}.pck
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7.0.1
