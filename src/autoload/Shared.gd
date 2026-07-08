@@ -99,13 +99,15 @@ var player
 var door_in
 var goal
 var is_arcade := false
-var is_title := false
+var is_title := true
+var is_hub := false
 
 var save_slot := -1
 var save_dict := {0: {}, 1: {}, 2: {}}
 signal slot_erased(arg)
-var save_time := 0.0
-var map_clock := 0.0
+var save_time := 0
+var map_clock := 0
+var final_time := 0
 var auto_save_clock := 0.0
 var auto_save_time := 60.0
 
@@ -212,6 +214,7 @@ func _input(event):
 					MenuMakeover.is_open = !MenuMakeover.is_open
 				"add_gem":
 					gem_count += 1
+					Autosplitter.set_gems(gem_count)
 					UI.gem_text(gem_count)
 				"reset":
 					reset()
@@ -224,16 +227,21 @@ func _physics_process(delta):
 		auto_save_clock = 0.0
 		save_data()
 
-func _process(delta):
-	# recorded time
-	save_time += delta
-	if !get_tree().paused and !Wipe.is_wipe and !Cutscene.is_playing and player.spr_easy.is_complete:
-		map_clock += delta
+	if not is_title:
+		# recorded time
+		save_time += 1
+		Autosplitter.set_time(save_time)
+		if !get_tree().paused and !Wipe.is_wipe and !Cutscene.is_playing and player.spr_easy.is_complete:
+			map_clock += 1
+		
+		# clock label
+		UI.clock_file.text = time_string2(save_time, clock_decimals)
+		UI.clock_map.text = time_string2(map_clock, clock_decimals)
+		if final_time > 0:
+			# Always show at least 2 so we can get an accurate final time
+			UI.clock_speedrun.text = time_string2(final_time, clock_decimals if clock_decimals >= 2 else 2) + "\nSpeedrun Time"
 	
-	# clock label
-	UI.clock_file.text = time_string(save_time, clock_decimals)
-	UI.clock_map.text = time_string(map_clock, clock_decimals)
-	
+func _process(_delta):
 	# arrows
 	if is_instance_valid(arrow_track):
 		arrow.modulate.a = arrow_track.arrow_easy.smooth()
@@ -244,6 +252,16 @@ func time_string(t := 0.0, dec = 2, is_min := false, is_hour := false):
 	var s_hour = str(int(t) / 3600) + ":" if is_hour or t > 3600 else ""
 	var s_min = str((int(t) / 60) % 60).pad_zeros(2 if s_hour else 0) + ":" if is_min or t > 60 else ""
 	var s_sec = str(fmod(t, 60)).pad_zeros(2).pad_decimals(dec)
+	
+	return s_hour + s_min + s_sec
+
+func time_string2(t := 0, dec = 2, is_min := false, is_hour := false):
+	# same as above but use integer frames to not lose precision
+	var mins := t / (60 * Engine.iterations_per_second)
+	var secs := float(t % (60 * Engine.iterations_per_second)) / Engine.iterations_per_second
+	var s_hour = str(mins / 60) + ":" if is_hour or mins > 60 else ""
+	var s_min = str(mins % 60).pad_zeros(2 if s_hour else 0) + ":" if is_min or mins > 0 else ""
+	var s_sec = str(secs).pad_zeros(2).pad_decimals(dec)
 	
 	return s_hour + s_min + s_sec
 
@@ -278,6 +296,7 @@ func change_scene():
 	arrow.modulate.a = 0.0
 	
 	emit_signal("scene_before")
+	var prev_csfn := csfn
 	
 	is_reload = next_scene == csfn
 	if is_reload:
@@ -287,6 +306,10 @@ func change_scene():
 		map_name = csfn.right(worlds_path.length()).replace(".tscn", "") if csfn.begins_with(worlds_path) else ""
 		is_arcade = "arcade" in csfn
 		is_title = csfn == title_path
+		is_hub = ("hub" in map_name) or ("start" in map_name) or ("end" in map_name)
+		Autosplitter.set_map_name(map_name)
+		Autosplitter.set_title(is_title)
+		Autosplitter.set_hub(is_hub)
 		get_tree().change_scene(next_scene)
 		Cam.reset_zoom()
 	
@@ -296,7 +319,14 @@ func change_scene():
 	
 	save_data()
 	try_achievement()
-	map_clock = 0.0
+	map_clock = 0
+	
+	if csfn == end_path:
+		if !(prev_csfn in [title_path, end_path]):
+			final_time = save_time
+	else:
+		final_time = 0
+	Autosplitter.set_final_time(final_time)
 	
 	yield(get_tree(), "idle_frame")
 	
@@ -308,7 +338,7 @@ func change_scene():
 				break
 		if is_instance_valid(door_in): break
 	
-	speedrun_goal(csfn, map_name != "" and not "hub" in map_name)
+	speedrun_goal(csfn, map_name != "" and not is_hub)
 	
 	set_boundary()
 	TouchScreen.set_game(map_name != "" or is_arcade)
@@ -401,14 +431,17 @@ func collect_gem():
 		goal.turn_x = Shared.player.dir_x
 		
 		var is_collect = !goals.has(map_name)
-		var is_faster = !is_collect and map_clock < goals[map_name]
+		var map_time = float(map_clock) / float(Engine.iterations_per_second)
+		var is_faster = !is_collect and map_time < goals[map_name]
 		
 		if is_collect or is_faster:
-			goals[map_name] = map_clock
+			goals[map_name] = map_time
 			gem_count = goals.size()
+			Autosplitter.set_gems(gem_count)
 			
 			var last_clock = clock_rank
 			clock_rank = collect_clocks()
+			Autosplitter.set_clocks(clock_rank)
 			var is_clock = clock_rank > last_clock
 			save_data()
 			
@@ -431,12 +464,12 @@ func speedrun_goal(scene_path := csfn, _show := true):
 		UI.clock_best.visible = goals.has(m)
 		if UI.clock_best.visible:
 			var g = goals[m]
-			UI.clock_best.text = "Best: " + time_string(g, 2)
+			UI.clock_best.text = "Best: " + time_string(g, clock_decimals)
 			UI.clock_best.modulate = clock_best_color[int(goals[m] > 0 and goals[m] < speedruns[m])]
 		
 		UI.clock_goal.visible = speedruns.has(m)
 		if UI.clock_goal.visible:
-			UI.clock_goal.text = "Goal: " + time_string(speedruns[m], 2)
+			UI.clock_goal.text = "Goal: " + time_string(speedruns[m], clock_decimals)
 
 ### Options
 
@@ -602,7 +635,8 @@ func save_data():
 	
 	var s = save_dict[save_slot]
 	
-	s["time"] = int(save_time)
+	s["time_frames"] = save_time
+	s["time"] = save_time / Engine.iterations_per_second # Backwards compatibility with old game versions
 	if "worlds" in csfn and "worlds" in last_scene:
 		s["csfn"] = csfn
 		s["last_scene"] = last_scene
@@ -614,7 +648,7 @@ func save_data():
 	s["maps_visited"] = maps_visited.duplicate()
 	
 	for i in s.keys():
-		if not i in "time, csfn, last_scene, goals, dye, hair, maps_visited":
+		if not i in "time, time_frames, csfn, last_scene, goals, dye, hair, maps_visited":
 			s.erase(i)
 	
 	file_save_json("user://save_data.json", save_dict)
@@ -653,13 +687,18 @@ func load_slot(arg := 0):
 		
 		# gems
 		gem_count = goals.size()
+		Autosplitter.set_gems(gem_count)
 		UI.gem_text(gem_count, false)
 		
 		clock_rank = collect_clocks()
+		Autosplitter.set_clocks(clock_rank)
 		UI.rank_text(clock_rank, false)
 		
-		if s.has("time"):
-			save_time = s["time"]
+		if s.has("time_frames"):
+			save_time = s["time_frames"]
+		elif s.has("time"):
+			save_time = s["time"] * Engine.iterations_per_second
+		Autosplitter.set_time(save_time)
 		
 		maps_visited = s["maps_visited"].duplicate() if s.has("maps_visited") else []
 		
@@ -670,10 +709,13 @@ func load_slot(arg := 0):
 		last_scene = start_path
 		goals = {}
 		gem_count = 0
+		Autosplitter.set_gems(gem_count)
 		UI.gem_text(gem_count, false)
 		clock_rank = 0
+		Autosplitter.set_clocks(clock_rank)
 		UI.rank_text(clock_rank, false)
-		save_time = 0.0
+		save_time = 0
+		Autosplitter.set_time(save_time)
 		maps_visited = []
 	
 	return wipe_scene(next_scene, last_scene)
@@ -812,7 +854,7 @@ func try_achievement():
 		if clock_rank > 49:
 			achieve("clock50")
 	
-	if csfn == end_path and save_time < 3600:
+	if csfn == end_path and save_time < 3600 * Engine.iterations_per_second:
 		achieve("speedrun")
 
 func achieve(arg := ""):

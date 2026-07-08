@@ -21,6 +21,7 @@ var keys = EaseMover.new()
 onready var clock := $Center/Control/Clock
 onready var clock_file := $Center/Control/Clock/File
 onready var clock_map := $Center/Control/Clock/Map
+onready var clock_speedrun := $Center/Control/Clock/Speedrun
 onready var clock_down := $Center/Control/Clock/Down
 onready var clock_best := $Center/Control/Clock/Down/Best
 onready var clock_goal := $Center/Control/Clock/Down/Goal
@@ -66,12 +67,12 @@ func _process(delta):
 func scene_changed(override := false):
 	up.clock = 0.0
 	var m = Shared.map_name != "" or override
-	var h = "hub" in Shared.map_name
 	var b = Shared.clock_show == Shared.SPEED.BOTH
 	var t = Shared.clock_show == Shared.SPEED.TRADE
-	clock_file.visible = m and ((t and h) or (b or Shared.clock_show == Shared.SPEED.FILE))
-	clock_map.visible = m and !h and (t or b or Shared.clock_show == Shared.SPEED.MAP)
-	clock_ease.show = m and !h and Shared.clock_show > 0
+	clock_file.visible = m and ((t and Shared.is_hub) or (b or Shared.clock_show == Shared.SPEED.FILE))
+	clock_map.visible = m and !Shared.is_hub and (t or b or Shared.clock_show == Shared.SPEED.MAP)
+	clock_speedrun.visible = Shared.final_time > 0 and (b or Shared.clock_show == Shared.SPEED.FILE)
+	clock_ease.show = m and !Shared.is_hub and Shared.clock_show > 0
 
 func menu_keys(accept := "", cancel := ""):
 	var c = $Center/Control/Keys/List.get_children()

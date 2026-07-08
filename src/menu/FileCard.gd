@@ -20,7 +20,7 @@ func _ready():
 func set_card():
 	var d = Shared.save_dict
 	
-	if d.has(slot) and d[slot].has("goals") and d[slot].has("time"):
+	if d.has(slot) and d[slot].has("goals") and (d[slot].has("time_frames") or d[slot].has("time")):
 		is_new = false
 		
 		var gt = d[slot]["goals"].size()
@@ -29,7 +29,10 @@ func set_card():
 		clocks.visible = clock_label.text != "0"
 		
 		# time
-		time_label.text = Shared.time_string(d[slot]["time"], 0, true)
+		if d[slot].has("time_frames"):
+			time_label.text = Shared.time_string2(d[slot]["time_frames"], 0, true)
+		else:
+			time_label.text = Shared.time_string(d[slot]["time"], 0, true)
 	else:
 		is_new = true
 	

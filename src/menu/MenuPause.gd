@@ -49,7 +49,7 @@ func set_open(arg := is_open, is_audio := true):
 	
 	# setup items
 	if is_open:
-		hub_label.visible = !("hub" in Shared.csfn or "start" in Shared.csfn) and "hub" in Shared.last_scene
+		hub_label.visible = !Shared.is_hub and "hub" in Shared.last_scene
 		hub_label.text = "Exit Arcade" if Shared.is_arcade else "Exit Stage"
 		
 		items = []
@@ -61,6 +61,6 @@ func set_open(arg := is_open, is_audio := true):
 		Audio.play("menu_pause", 1.0 if is_open else 0.75)
 
 func back_to_hub():
-	if !("hub" in Shared.csfn) and "hub" in Shared.last_scene:
+	if !Shared.is_hub and "hub" in Shared.last_scene:
 		Shared.wipe_scene(Shared.last_scene)
 

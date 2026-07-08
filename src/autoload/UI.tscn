@@ -276,6 +276,21 @@ text = "3:57"
 [node name="Spacer" type="Control" parent="Center/Control/Clock"]
 margin_top = 110.0
 margin_right = 600.0
+margin_bottom = 161.0
+rect_min_size = Vector2( 0, 51 )
+
+[node name="Speedrun" type="Label" parent="Center/Control/Clock"]
+modulate = Color( 1, 0.95, 0.95, 1 )
+margin_top = 165.0
+margin_right = 600.0
+margin_bottom = 270.0
+theme = ExtResource( 1 )
+text = "1:48:02
+Speedrun Time"
+
+[node name="Spacer2" type="Control" parent="Center/Control/Clock"]
+margin_top = 274.0
+margin_right = 600.0
 margin_bottom = 570.0
 size_flags_vertical = 3
 
